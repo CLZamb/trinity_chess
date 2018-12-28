@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/test.cpp
+test.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/test.h
+iostream
+-
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/test.h
+
