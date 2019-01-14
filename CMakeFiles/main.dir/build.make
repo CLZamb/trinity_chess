@@ -70,36 +70,261 @@ CMakeFiles/main.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/main.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/main.cpp -o CMakeFiles/main.dir/main.cpp.s
 
-CMakeFiles/main.dir/logic/test.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/logic/test.cpp.o: logic/test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/logic/test.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/logic/test.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/logic/test.cpp
+CMakeFiles/main.dir/logic/board.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/logic/board.cpp.o: logic/board.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/logic/board.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/logic/board.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp
 
-CMakeFiles/main.dir/logic/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/logic/test.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/logic/test.cpp > CMakeFiles/main.dir/logic/test.cpp.i
+CMakeFiles/main.dir/logic/board.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/logic/board.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp > CMakeFiles/main.dir/logic/board.cpp.i
 
-CMakeFiles/main.dir/logic/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/test.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/test.cpp -o CMakeFiles/main.dir/logic/test.cpp.s
+CMakeFiles/main.dir/logic/board.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/board.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp -o CMakeFiles/main.dir/logic/board.cpp.s
+
+CMakeFiles/main.dir/logic/box.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/logic/box.cpp.o: logic/box.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/logic/box.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/logic/box.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.cpp
+
+CMakeFiles/main.dir/logic/box.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/logic/box.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.cpp > CMakeFiles/main.dir/logic/box.cpp.i
+
+CMakeFiles/main.dir/logic/box.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/box.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.cpp -o CMakeFiles/main.dir/logic/box.cpp.s
+
+CMakeFiles/main.dir/logic/position.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/logic/position.cpp.o: logic/position.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/logic/position.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/logic/position.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.cpp
+
+CMakeFiles/main.dir/logic/position.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/logic/position.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.cpp > CMakeFiles/main.dir/logic/position.cpp.i
+
+CMakeFiles/main.dir/logic/position.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/position.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.cpp -o CMakeFiles/main.dir/logic/position.cpp.s
+
+CMakeFiles/main.dir/logic/player.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/logic/player.cpp.o: logic/player.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/logic/player.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/logic/player.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.cpp
+
+CMakeFiles/main.dir/logic/player.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/logic/player.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.cpp > CMakeFiles/main.dir/logic/player.cpp.i
+
+CMakeFiles/main.dir/logic/player.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/player.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.cpp -o CMakeFiles/main.dir/logic/player.cpp.s
+
+CMakeFiles/main.dir/logic/movement.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/logic/movement.cpp.o: logic/movement.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/logic/movement.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/logic/movement.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp
+
+CMakeFiles/main.dir/logic/movement.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/logic/movement.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp > CMakeFiles/main.dir/logic/movement.cpp.i
+
+CMakeFiles/main.dir/logic/movement.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/movement.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp -o CMakeFiles/main.dir/logic/movement.cpp.s
+
+CMakeFiles/main.dir/display/display.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/display/display.cpp.o: display/display.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main.dir/display/display.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/display/display.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/display/display.cpp
+
+CMakeFiles/main.dir/display/display.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/display/display.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/display/display.cpp > CMakeFiles/main.dir/display/display.cpp.i
+
+CMakeFiles/main.dir/display/display.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/display/display.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/display/display.cpp -o CMakeFiles/main.dir/display/display.cpp.s
+
+CMakeFiles/main.dir/general/game.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/game.cpp.o: general/game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/main.dir/general/game.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/game.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/game.cpp
+
+CMakeFiles/main.dir/general/game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/game.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/game.cpp > CMakeFiles/main.dir/general/game.cpp.i
+
+CMakeFiles/main.dir/general/game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/game.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/game.cpp -o CMakeFiles/main.dir/general/game.cpp.s
+
+CMakeFiles/main.dir/general/input.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/input.cpp.o: general/input.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/main.dir/general/input.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/input.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/input.cpp
+
+CMakeFiles/main.dir/general/input.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/input.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/input.cpp > CMakeFiles/main.dir/general/input.cpp.i
+
+CMakeFiles/main.dir/general/input.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/input.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/input.cpp -o CMakeFiles/main.dir/general/input.cpp.s
+
+CMakeFiles/main.dir/general/messages.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/messages.cpp.o: general/messages.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/main.dir/general/messages.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/messages.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/messages.cpp
+
+CMakeFiles/main.dir/general/messages.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/messages.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/messages.cpp > CMakeFiles/main.dir/general/messages.cpp.i
+
+CMakeFiles/main.dir/general/messages.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/messages.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/messages.cpp -o CMakeFiles/main.dir/general/messages.cpp.s
+
+CMakeFiles/main.dir/general/pieces/bishop.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/pieces/bishop.cpp.o: general/pieces/bishop.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/main.dir/general/pieces/bishop.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/pieces/bishop.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/bishop.cpp
+
+CMakeFiles/main.dir/general/pieces/bishop.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/pieces/bishop.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/bishop.cpp > CMakeFiles/main.dir/general/pieces/bishop.cpp.i
+
+CMakeFiles/main.dir/general/pieces/bishop.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/pieces/bishop.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/bishop.cpp -o CMakeFiles/main.dir/general/pieces/bishop.cpp.s
+
+CMakeFiles/main.dir/general/pieces/king.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/pieces/king.cpp.o: general/pieces/king.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/main.dir/general/pieces/king.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/pieces/king.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/king.cpp
+
+CMakeFiles/main.dir/general/pieces/king.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/pieces/king.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/king.cpp > CMakeFiles/main.dir/general/pieces/king.cpp.i
+
+CMakeFiles/main.dir/general/pieces/king.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/pieces/king.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/king.cpp -o CMakeFiles/main.dir/general/pieces/king.cpp.s
+
+CMakeFiles/main.dir/general/pieces/knight.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/pieces/knight.cpp.o: general/pieces/knight.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/main.dir/general/pieces/knight.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/pieces/knight.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/knight.cpp
+
+CMakeFiles/main.dir/general/pieces/knight.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/pieces/knight.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/knight.cpp > CMakeFiles/main.dir/general/pieces/knight.cpp.i
+
+CMakeFiles/main.dir/general/pieces/knight.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/pieces/knight.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/knight.cpp -o CMakeFiles/main.dir/general/pieces/knight.cpp.s
+
+CMakeFiles/main.dir/general/pieces/pawn.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/pieces/pawn.cpp.o: general/pieces/pawn.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/main.dir/general/pieces/pawn.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/pieces/pawn.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/pawn.cpp
+
+CMakeFiles/main.dir/general/pieces/pawn.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/pieces/pawn.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/pawn.cpp > CMakeFiles/main.dir/general/pieces/pawn.cpp.i
+
+CMakeFiles/main.dir/general/pieces/pawn.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/pieces/pawn.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/pawn.cpp -o CMakeFiles/main.dir/general/pieces/pawn.cpp.s
+
+CMakeFiles/main.dir/general/pieces/piece.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/pieces/piece.cpp.o: general/pieces/piece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/main.dir/general/pieces/piece.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/pieces/piece.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/piece.cpp
+
+CMakeFiles/main.dir/general/pieces/piece.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/pieces/piece.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/piece.cpp > CMakeFiles/main.dir/general/pieces/piece.cpp.i
+
+CMakeFiles/main.dir/general/pieces/piece.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/pieces/piece.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/piece.cpp -o CMakeFiles/main.dir/general/pieces/piece.cpp.s
+
+CMakeFiles/main.dir/general/pieces/queen.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/pieces/queen.cpp.o: general/pieces/queen.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/main.dir/general/pieces/queen.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/pieces/queen.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/queen.cpp
+
+CMakeFiles/main.dir/general/pieces/queen.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/pieces/queen.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/queen.cpp > CMakeFiles/main.dir/general/pieces/queen.cpp.i
+
+CMakeFiles/main.dir/general/pieces/queen.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/pieces/queen.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/queen.cpp -o CMakeFiles/main.dir/general/pieces/queen.cpp.s
+
+CMakeFiles/main.dir/general/pieces/rook.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/general/pieces/rook.cpp.o: general/pieces/rook.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/main.dir/general/pieces/rook.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/general/pieces/rook.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/rook.cpp
+
+CMakeFiles/main.dir/general/pieces/rook.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/general/pieces/rook.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/rook.cpp > CMakeFiles/main.dir/general/pieces/rook.cpp.i
+
+CMakeFiles/main.dir/general/pieces/rook.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/general/pieces/rook.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/rook.cpp -o CMakeFiles/main.dir/general/pieces/rook.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/main.cpp.o" \
-"CMakeFiles/main.dir/logic/test.cpp.o"
+"CMakeFiles/main.dir/logic/board.cpp.o" \
+"CMakeFiles/main.dir/logic/box.cpp.o" \
+"CMakeFiles/main.dir/logic/position.cpp.o" \
+"CMakeFiles/main.dir/logic/player.cpp.o" \
+"CMakeFiles/main.dir/logic/movement.cpp.o" \
+"CMakeFiles/main.dir/display/display.cpp.o" \
+"CMakeFiles/main.dir/general/game.cpp.o" \
+"CMakeFiles/main.dir/general/input.cpp.o" \
+"CMakeFiles/main.dir/general/messages.cpp.o" \
+"CMakeFiles/main.dir/general/pieces/bishop.cpp.o" \
+"CMakeFiles/main.dir/general/pieces/king.cpp.o" \
+"CMakeFiles/main.dir/general/pieces/knight.cpp.o" \
+"CMakeFiles/main.dir/general/pieces/pawn.cpp.o" \
+"CMakeFiles/main.dir/general/pieces/piece.cpp.o" \
+"CMakeFiles/main.dir/general/pieces/queen.cpp.o" \
+"CMakeFiles/main.dir/general/pieces/rook.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-main: CMakeFiles/main.dir/main.cpp.o
-main: CMakeFiles/main.dir/logic/test.cpp.o
-main: CMakeFiles/main.dir/build.make
-main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main"
+bin/main: CMakeFiles/main.dir/main.cpp.o
+bin/main: CMakeFiles/main.dir/logic/board.cpp.o
+bin/main: CMakeFiles/main.dir/logic/box.cpp.o
+bin/main: CMakeFiles/main.dir/logic/position.cpp.o
+bin/main: CMakeFiles/main.dir/logic/player.cpp.o
+bin/main: CMakeFiles/main.dir/logic/movement.cpp.o
+bin/main: CMakeFiles/main.dir/display/display.cpp.o
+bin/main: CMakeFiles/main.dir/general/game.cpp.o
+bin/main: CMakeFiles/main.dir/general/input.cpp.o
+bin/main: CMakeFiles/main.dir/general/messages.cpp.o
+bin/main: CMakeFiles/main.dir/general/pieces/bishop.cpp.o
+bin/main: CMakeFiles/main.dir/general/pieces/king.cpp.o
+bin/main: CMakeFiles/main.dir/general/pieces/knight.cpp.o
+bin/main: CMakeFiles/main.dir/general/pieces/pawn.cpp.o
+bin/main: CMakeFiles/main.dir/general/pieces/piece.cpp.o
+bin/main: CMakeFiles/main.dir/general/pieces/queen.cpp.o
+bin/main: CMakeFiles/main.dir/general/pieces/rook.cpp.o
+bin/main: CMakeFiles/main.dir/build.make
+bin/main: CMakeFiles/main.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable bin/main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/main.dir/build: main
+CMakeFiles/main.dir/build: bin/main
 
 .PHONY : CMakeFiles/main.dir/build
 

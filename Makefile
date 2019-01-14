@@ -123,32 +123,437 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-logic/test.o: logic/test.cpp.o
+display/display.o: display/display.cpp.o
 
-.PHONY : logic/test.o
+.PHONY : display/display.o
 
 # target to build an object file
-logic/test.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/test.cpp.o
-.PHONY : logic/test.cpp.o
+display/display.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/display.cpp.o
+.PHONY : display/display.cpp.o
 
-logic/test.i: logic/test.cpp.i
+display/display.i: display/display.cpp.i
 
-.PHONY : logic/test.i
+.PHONY : display/display.i
 
 # target to preprocess a source file
-logic/test.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/test.cpp.i
-.PHONY : logic/test.cpp.i
+display/display.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/display.cpp.i
+.PHONY : display/display.cpp.i
 
-logic/test.s: logic/test.cpp.s
+display/display.s: display/display.cpp.s
 
-.PHONY : logic/test.s
+.PHONY : display/display.s
 
 # target to generate assembly for a file
-logic/test.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/test.cpp.s
-.PHONY : logic/test.cpp.s
+display/display.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/display.cpp.s
+.PHONY : display/display.cpp.s
+
+general/game.o: general/game.cpp.o
+
+.PHONY : general/game.o
+
+# target to build an object file
+general/game.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/game.cpp.o
+.PHONY : general/game.cpp.o
+
+general/game.i: general/game.cpp.i
+
+.PHONY : general/game.i
+
+# target to preprocess a source file
+general/game.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/game.cpp.i
+.PHONY : general/game.cpp.i
+
+general/game.s: general/game.cpp.s
+
+.PHONY : general/game.s
+
+# target to generate assembly for a file
+general/game.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/game.cpp.s
+.PHONY : general/game.cpp.s
+
+general/input.o: general/input.cpp.o
+
+.PHONY : general/input.o
+
+# target to build an object file
+general/input.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/input.cpp.o
+.PHONY : general/input.cpp.o
+
+general/input.i: general/input.cpp.i
+
+.PHONY : general/input.i
+
+# target to preprocess a source file
+general/input.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/input.cpp.i
+.PHONY : general/input.cpp.i
+
+general/input.s: general/input.cpp.s
+
+.PHONY : general/input.s
+
+# target to generate assembly for a file
+general/input.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/input.cpp.s
+.PHONY : general/input.cpp.s
+
+general/messages.o: general/messages.cpp.o
+
+.PHONY : general/messages.o
+
+# target to build an object file
+general/messages.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/messages.cpp.o
+.PHONY : general/messages.cpp.o
+
+general/messages.i: general/messages.cpp.i
+
+.PHONY : general/messages.i
+
+# target to preprocess a source file
+general/messages.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/messages.cpp.i
+.PHONY : general/messages.cpp.i
+
+general/messages.s: general/messages.cpp.s
+
+.PHONY : general/messages.s
+
+# target to generate assembly for a file
+general/messages.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/messages.cpp.s
+.PHONY : general/messages.cpp.s
+
+general/pieces/bishop.o: general/pieces/bishop.cpp.o
+
+.PHONY : general/pieces/bishop.o
+
+# target to build an object file
+general/pieces/bishop.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/bishop.cpp.o
+.PHONY : general/pieces/bishop.cpp.o
+
+general/pieces/bishop.i: general/pieces/bishop.cpp.i
+
+.PHONY : general/pieces/bishop.i
+
+# target to preprocess a source file
+general/pieces/bishop.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/bishop.cpp.i
+.PHONY : general/pieces/bishop.cpp.i
+
+general/pieces/bishop.s: general/pieces/bishop.cpp.s
+
+.PHONY : general/pieces/bishop.s
+
+# target to generate assembly for a file
+general/pieces/bishop.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/bishop.cpp.s
+.PHONY : general/pieces/bishop.cpp.s
+
+general/pieces/king.o: general/pieces/king.cpp.o
+
+.PHONY : general/pieces/king.o
+
+# target to build an object file
+general/pieces/king.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/king.cpp.o
+.PHONY : general/pieces/king.cpp.o
+
+general/pieces/king.i: general/pieces/king.cpp.i
+
+.PHONY : general/pieces/king.i
+
+# target to preprocess a source file
+general/pieces/king.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/king.cpp.i
+.PHONY : general/pieces/king.cpp.i
+
+general/pieces/king.s: general/pieces/king.cpp.s
+
+.PHONY : general/pieces/king.s
+
+# target to generate assembly for a file
+general/pieces/king.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/king.cpp.s
+.PHONY : general/pieces/king.cpp.s
+
+general/pieces/knight.o: general/pieces/knight.cpp.o
+
+.PHONY : general/pieces/knight.o
+
+# target to build an object file
+general/pieces/knight.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/knight.cpp.o
+.PHONY : general/pieces/knight.cpp.o
+
+general/pieces/knight.i: general/pieces/knight.cpp.i
+
+.PHONY : general/pieces/knight.i
+
+# target to preprocess a source file
+general/pieces/knight.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/knight.cpp.i
+.PHONY : general/pieces/knight.cpp.i
+
+general/pieces/knight.s: general/pieces/knight.cpp.s
+
+.PHONY : general/pieces/knight.s
+
+# target to generate assembly for a file
+general/pieces/knight.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/knight.cpp.s
+.PHONY : general/pieces/knight.cpp.s
+
+general/pieces/pawn.o: general/pieces/pawn.cpp.o
+
+.PHONY : general/pieces/pawn.o
+
+# target to build an object file
+general/pieces/pawn.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pawn.cpp.o
+.PHONY : general/pieces/pawn.cpp.o
+
+general/pieces/pawn.i: general/pieces/pawn.cpp.i
+
+.PHONY : general/pieces/pawn.i
+
+# target to preprocess a source file
+general/pieces/pawn.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pawn.cpp.i
+.PHONY : general/pieces/pawn.cpp.i
+
+general/pieces/pawn.s: general/pieces/pawn.cpp.s
+
+.PHONY : general/pieces/pawn.s
+
+# target to generate assembly for a file
+general/pieces/pawn.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pawn.cpp.s
+.PHONY : general/pieces/pawn.cpp.s
+
+general/pieces/piece.o: general/pieces/piece.cpp.o
+
+.PHONY : general/pieces/piece.o
+
+# target to build an object file
+general/pieces/piece.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/piece.cpp.o
+.PHONY : general/pieces/piece.cpp.o
+
+general/pieces/piece.i: general/pieces/piece.cpp.i
+
+.PHONY : general/pieces/piece.i
+
+# target to preprocess a source file
+general/pieces/piece.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/piece.cpp.i
+.PHONY : general/pieces/piece.cpp.i
+
+general/pieces/piece.s: general/pieces/piece.cpp.s
+
+.PHONY : general/pieces/piece.s
+
+# target to generate assembly for a file
+general/pieces/piece.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/piece.cpp.s
+.PHONY : general/pieces/piece.cpp.s
+
+general/pieces/queen.o: general/pieces/queen.cpp.o
+
+.PHONY : general/pieces/queen.o
+
+# target to build an object file
+general/pieces/queen.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/queen.cpp.o
+.PHONY : general/pieces/queen.cpp.o
+
+general/pieces/queen.i: general/pieces/queen.cpp.i
+
+.PHONY : general/pieces/queen.i
+
+# target to preprocess a source file
+general/pieces/queen.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/queen.cpp.i
+.PHONY : general/pieces/queen.cpp.i
+
+general/pieces/queen.s: general/pieces/queen.cpp.s
+
+.PHONY : general/pieces/queen.s
+
+# target to generate assembly for a file
+general/pieces/queen.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/queen.cpp.s
+.PHONY : general/pieces/queen.cpp.s
+
+general/pieces/rook.o: general/pieces/rook.cpp.o
+
+.PHONY : general/pieces/rook.o
+
+# target to build an object file
+general/pieces/rook.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/rook.cpp.o
+.PHONY : general/pieces/rook.cpp.o
+
+general/pieces/rook.i: general/pieces/rook.cpp.i
+
+.PHONY : general/pieces/rook.i
+
+# target to preprocess a source file
+general/pieces/rook.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/rook.cpp.i
+.PHONY : general/pieces/rook.cpp.i
+
+general/pieces/rook.s: general/pieces/rook.cpp.s
+
+.PHONY : general/pieces/rook.s
+
+# target to generate assembly for a file
+general/pieces/rook.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/rook.cpp.s
+.PHONY : general/pieces/rook.cpp.s
+
+logic/board.o: logic/board.cpp.o
+
+.PHONY : logic/board.o
+
+# target to build an object file
+logic/board.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/board.cpp.o
+.PHONY : logic/board.cpp.o
+
+logic/board.i: logic/board.cpp.i
+
+.PHONY : logic/board.i
+
+# target to preprocess a source file
+logic/board.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/board.cpp.i
+.PHONY : logic/board.cpp.i
+
+logic/board.s: logic/board.cpp.s
+
+.PHONY : logic/board.s
+
+# target to generate assembly for a file
+logic/board.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/board.cpp.s
+.PHONY : logic/board.cpp.s
+
+logic/box.o: logic/box.cpp.o
+
+.PHONY : logic/box.o
+
+# target to build an object file
+logic/box.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/box.cpp.o
+.PHONY : logic/box.cpp.o
+
+logic/box.i: logic/box.cpp.i
+
+.PHONY : logic/box.i
+
+# target to preprocess a source file
+logic/box.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/box.cpp.i
+.PHONY : logic/box.cpp.i
+
+logic/box.s: logic/box.cpp.s
+
+.PHONY : logic/box.s
+
+# target to generate assembly for a file
+logic/box.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/box.cpp.s
+.PHONY : logic/box.cpp.s
+
+logic/movement.o: logic/movement.cpp.o
+
+.PHONY : logic/movement.o
+
+# target to build an object file
+logic/movement.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/movement.cpp.o
+.PHONY : logic/movement.cpp.o
+
+logic/movement.i: logic/movement.cpp.i
+
+.PHONY : logic/movement.i
+
+# target to preprocess a source file
+logic/movement.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/movement.cpp.i
+.PHONY : logic/movement.cpp.i
+
+logic/movement.s: logic/movement.cpp.s
+
+.PHONY : logic/movement.s
+
+# target to generate assembly for a file
+logic/movement.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/movement.cpp.s
+.PHONY : logic/movement.cpp.s
+
+logic/player.o: logic/player.cpp.o
+
+.PHONY : logic/player.o
+
+# target to build an object file
+logic/player.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/player.cpp.o
+.PHONY : logic/player.cpp.o
+
+logic/player.i: logic/player.cpp.i
+
+.PHONY : logic/player.i
+
+# target to preprocess a source file
+logic/player.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/player.cpp.i
+.PHONY : logic/player.cpp.i
+
+logic/player.s: logic/player.cpp.s
+
+.PHONY : logic/player.s
+
+# target to generate assembly for a file
+logic/player.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/player.cpp.s
+.PHONY : logic/player.cpp.s
+
+logic/position.o: logic/position.cpp.o
+
+.PHONY : logic/position.o
+
+# target to build an object file
+logic/position.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/position.cpp.o
+.PHONY : logic/position.cpp.o
+
+logic/position.i: logic/position.cpp.i
+
+.PHONY : logic/position.i
+
+# target to preprocess a source file
+logic/position.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/position.cpp.i
+.PHONY : logic/position.cpp.i
+
+logic/position.s: logic/position.cpp.s
+
+.PHONY : logic/position.s
+
+# target to generate assembly for a file
+logic/position.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/position.cpp.s
+.PHONY : logic/position.cpp.s
 
 main.o: main.cpp.o
 
@@ -186,9 +591,54 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
-	@echo "... logic/test.o"
-	@echo "... logic/test.i"
-	@echo "... logic/test.s"
+	@echo "... display/display.o"
+	@echo "... display/display.i"
+	@echo "... display/display.s"
+	@echo "... general/game.o"
+	@echo "... general/game.i"
+	@echo "... general/game.s"
+	@echo "... general/input.o"
+	@echo "... general/input.i"
+	@echo "... general/input.s"
+	@echo "... general/messages.o"
+	@echo "... general/messages.i"
+	@echo "... general/messages.s"
+	@echo "... general/pieces/bishop.o"
+	@echo "... general/pieces/bishop.i"
+	@echo "... general/pieces/bishop.s"
+	@echo "... general/pieces/king.o"
+	@echo "... general/pieces/king.i"
+	@echo "... general/pieces/king.s"
+	@echo "... general/pieces/knight.o"
+	@echo "... general/pieces/knight.i"
+	@echo "... general/pieces/knight.s"
+	@echo "... general/pieces/pawn.o"
+	@echo "... general/pieces/pawn.i"
+	@echo "... general/pieces/pawn.s"
+	@echo "... general/pieces/piece.o"
+	@echo "... general/pieces/piece.i"
+	@echo "... general/pieces/piece.s"
+	@echo "... general/pieces/queen.o"
+	@echo "... general/pieces/queen.i"
+	@echo "... general/pieces/queen.s"
+	@echo "... general/pieces/rook.o"
+	@echo "... general/pieces/rook.i"
+	@echo "... general/pieces/rook.s"
+	@echo "... logic/board.o"
+	@echo "... logic/board.i"
+	@echo "... logic/board.s"
+	@echo "... logic/box.o"
+	@echo "... logic/box.i"
+	@echo "... logic/box.s"
+	@echo "... logic/movement.o"
+	@echo "... logic/movement.i"
+	@echo "... logic/movement.s"
+	@echo "... logic/player.o"
+	@echo "... logic/player.i"
+	@echo "... logic/player.s"
+	@echo "... logic/position.o"
+	@echo "... logic/position.i"
+	@echo "... logic/position.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

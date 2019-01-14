@@ -7,13 +7,14 @@
  * this file. If not, please write to: , or visit :
  */
 
-#include "logic/test.h"
+#include "general/game.h"
 #include <iostream>
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
-  cout << "Testing" << endl;
-  testing();
+int main(/*int argc, char *argv[]*/) {
+  Game game;
+  game.start();
+
   return 0;
 }
