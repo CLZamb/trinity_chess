@@ -3,11 +3,9 @@
 Board::Board() {}
 Board::~Board() {
   // Free each array and sub-array
-  for (int i = 0; i < 8; ++i) {
-    for (int j = 0; j < 8; ++j) {
+  for (int i = 0; i < 8; ++i)
+    for (int j = 0; j < 8; ++j)
       delete board[i][j];
-    }
-  }
 
   std::cout << "~Board() is executed";
 }
@@ -52,26 +50,22 @@ void Board::setPiecesOnBoard() {
   }
 }
 
-void Board::movePiece(Position from, Position to) {
-  Box *fromBox = getBoxAtPos(from);
-  Piece *tempPiece = fromBox->getPiece();
-
-  setPieceAtPos(tempPiece, to);
-  fromBox->removePiece();
-}
-
 bool Board::isValidPosition(Position pos) {
   return (pos.getPositionX() >= 0) && (pos.getPositionX() < 8) &&
          (pos.getPositionY() >= 0) && (pos.getPositionY() < 8);
 }
 
-Piece *Board::getPieceAtPos(Position pos) { getBoxAtPos(pos)->getPiece(); }
+Piece *Board::getPieceAtPos(Position pos) {
+  return getBoxAtPos(pos)->getPiece();
+}
 
 void Board::setPieceAtPos(Piece *piece, Position pos) {
   getBoxAtPos(pos)->setPiece(piece);
 }
 
 Piece *Board::createPiece(std::string pieceType, Player *player) {
+  cout << player << endl;
+
   Piece *piece = nullptr;
   if (pieceType == "pawn")
     piece = new Pawn(player);
@@ -91,16 +85,8 @@ Piece *Board::createPiece(std::string pieceType, Player *player) {
   return piece;
 }
 
-
 Box *Board::getBoxAtPos(Position pos) {
   unsigned int row = pos.getPositionRow(), col = pos.getPositionColumn();
-  // because boxes is a 1d vector we can access by
-  // multiplying the row size + 1 time the x(row) plus column
-  // i.e accessing (0, 0) should be (0 * 8) + 0 = 0
-  // ex: accessing (1, 1) should be (1 * 8) + 1 = 9
-  // [  0,  1,  2,  3,  4,  5,  6, 7]
-  // [  8,  9, 10, 11, 12, 13, 14, 15]
-  // std::cout << (x * 8) + y << std::endl;
   return board[row][col];
 }
 
@@ -134,6 +120,7 @@ void Board::print() {
       std::cout << "┃" << '\n';
     }
   }
+
   cout << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           "━━━━━━┃"
        << endl;
@@ -143,29 +130,4 @@ void Board::print() {
   cout << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           "━━━━━━━━━━━┛"
        << endl;
-}
-
-bool Board::isValidMove(Player *playerSide, Position from, Position to) {
-  Box *fromBox = getBoxAtPos(from);
-  Box *destinationBox = getBoxAtPos(to);
-  Piece *currentPiece = fromBox->getPiece();
-
-  if (!currentPiece || !currentPiece->getOwner())
-    return false;
-
-  if (!isValidPosition(from) || !isValidPosition(to))
-    return false;
-
-  if (!fromBox->hasPiece() || destinationBox->hasPiece())
-    return false;
-
-  if (!currentPiece->isValidMove(from, to))
-    return false;
-
-  if (!(playerSide == currentPiece->getOwner())) {
-    std::cout << "wrong player side\n";
-    return false;
-  }
-
-  return true;
 }

@@ -3,25 +3,26 @@
 #include "board.h"
 #include "input.h"
 #include "messages.h"
+#include "movement.h"
 #include <vector>
 
 class Game {
 private:
+  Board m_board;
+  Messages m_messages;
   Display *pBoardDisplay;
   Display *pMessagesDisplay;
   // Display *pScoreDisplay;
-  Player *playerTurn;
   Player player1{"white"}, player2{"black"};
+  Player *playerTurn = &player1;
 
-  Board m_board;
-  Messages m_messages;
+  Movement movementController{&m_board, &playerTurn};
   std::vector<Piece *> allPieces;
-  bool isCheckMate = false;
   std::string input;
+  bool isCheckMate = false;
   Input playerInput;
   Position from, to;
   int getOption();
-  bool isValidMove(Position, Position);
 
 public:
   Game();

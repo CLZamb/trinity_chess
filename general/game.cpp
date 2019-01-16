@@ -5,15 +5,17 @@ Game::~Game() {}
 void Game::initializeMembers() {
   this->pMessagesDisplay = &this->m_messages;
   this->pBoardDisplay = &this->m_board;
+  player1.setOpponent(&player2);
+  player2.setOpponent(&player1);
 }
 
 void Game::start() {
   printMessage("welcome");
   std::cin.get();
   printMessage("start");
+
   switch (getOption()) {
   case 1:
-    playerTurn = &player1;
     //  create boxes and set the pieces on those boxes
     m_board.initialize(&player1, &player2);
     pBoardDisplay->print();
@@ -41,20 +43,20 @@ void Game::play() {
 
     std::getline(std::cin, input);
     playerInput.getPlayerNextMove(input);
-
     if (!playerInput.isValidInput())
       continue;
 
     if (input == "quit" || input == "close" || input == "exit") {
-      printMessage("gameOver");
       break;
     }
 
     from = playerInput.getPosFrom();
     to = playerInput.getPosTo();
 
-    if (isValidMove(from, to)) {
-      m_board.movePiece(from, to);
+    cout << playerTurn << " playerTurn " << endl;
+
+    if (movementController.isValidMove(from, to)) {
+      movementController.movePiece(from, to);
       pBoardDisplay->print();
       changeTurn();
     } else {
@@ -80,8 +82,4 @@ void Game::changeTurn() {
     playerTurn = &player2;
   else if (playerTurn == &player2)
     playerTurn = &player1;
-}
-
-bool Game::isValidMove(Position from, Position to) {
-  return m_board.isValidMove(playerTurn, from, to);
 }

@@ -17,7 +17,7 @@ public:
   virtual ~Pawn();
   box *getDrawingA();
   box *getDrawingB();
-  bool isValidMove(Position, Position);
+  bool checkMove(Position, Position);
 };
 
 #endif /* PAWN_H */

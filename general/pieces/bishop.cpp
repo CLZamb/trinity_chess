@@ -4,7 +4,7 @@ Bishop::~Bishop() {}
 
 box *Bishop::getDrawingA() { return &bishopA; }
 box *Bishop::getDrawingB() { return &bishopB; }
-bool Bishop::isValidMove(Position from, Position to) {
+bool Bishop::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
   int dy = abs(from.getPositionY() - to.getPositionY());
 

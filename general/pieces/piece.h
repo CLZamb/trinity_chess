@@ -12,6 +12,8 @@ class Piece {
 private:
 protected:
   Player *pPlayer;
+  bool capturing = false;
+  bool knight = false;
 
 public:
   Position pos;
@@ -20,11 +22,14 @@ public:
 
   virtual box *getDrawingA() { return nullptr; }
   virtual box *getDrawingB() { return nullptr; }
-  virtual bool isValidMove(Position, Position) { return false; }
+  virtual bool checkMove(Position, Position) { return false; }
 
   Position *getPosition();
   // void pieceDrawing();
   Player *getOwner() { return pPlayer; }
+  bool isCapturing() { return capturing; }
+  bool isKnight() { return knight; }
+  void setCapturingState(bool capturing) { this->capturing = capturing; }
 };
 
 #endif /* PIECE_H */

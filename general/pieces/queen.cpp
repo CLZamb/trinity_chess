@@ -5,7 +5,7 @@ Queen::~Queen() {}
 box *Queen::getDrawingA() { return &queenA; }
 box *Queen::getDrawingB() { return &queenB; }
 
-bool Queen::isValidMove(Position from, Position to) {
+bool Queen::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
   int dy = abs(from.getPositionY() - to.getPositionY());
 

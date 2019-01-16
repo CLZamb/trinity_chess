@@ -23,26 +23,29 @@ private:
   // static Board *m_mainBoard;
   Box *board[8][8];
   box wBox, bBox;
-  Player *player1, *player2;
+  // Input input;
+  char side = 'w';
 
   void createBoardBoxes();
   void createBoxBases();
   void setPiecesOnBoard();
-  void setPieceAtPos(Piece *piece, Position pos);
-  bool isValidPosition(Position pos);
   Piece *createPiece(std::string, Player *);
-  Box *getBoxAtPos(Position);
 
 public:
   Board();
   ~Board();
+  Player *player1, *player2, *playerTurn;
 
-  bool isValidMove(Player *, Position, Position);
+  void setPieceAtPos(Piece *piece, Position pos);
+  Box *getBoxAtPos(Position);
+  string getTurn();
   void initialize(Player *, Player *);
-  void movePiece(Position from, Position to);
+  void setTurn(char side);
   // print Board
   void print();
   void changeTurn();
+
+  bool isValidPosition(Position pos);
   Piece *getPieceAtPos(Position);
 };
 

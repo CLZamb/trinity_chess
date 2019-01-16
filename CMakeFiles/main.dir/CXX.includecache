@@ -6,41 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/game.cpp
-game.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/game.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/pawn.cpp
+pawn.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/pawn.h
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/game.h
-board.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/board.h
-input.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/input.h
-messages.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/messages.h
-vector
--
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/pawn.h
+boxStruct.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/boxStruct.h
+piece.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/piece.h
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/input.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/piece.h
+boxStruct.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/boxStruct.h
+player.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/player.h
 position.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/position.h
-iostream
--
-ostream
--
-regex
--
-string
--
-vector
--
-
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/messages.h
-display.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/display.h
-
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp
-board.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/position.h
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
 box.h
@@ -66,13 +48,15 @@ piece.h
 iostream
 -
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.h
-iostream
--
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp
+movement.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/main.cpp
-general/game.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/general/game.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
+board.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.h
 iostream
 -
 
@@ -143,30 +127,6 @@ boxStruct.h
 general/pieces/boxStruct.h
 piece.h
 general/pieces/piece.h
-
-logic/board.h
-box.h
-logic/box.h
-display.h
-logic/display.h
-piecesheaders.h
-logic/piecesheaders.h
-position.h
-logic/position.h
-iostream
--
-string
--
-vector
--
-
-logic/box.h
-boxStruct.h
-logic/boxStruct.h
-piece.h
-logic/piece.h
-iostream
--
 
 logic/player.h
 string

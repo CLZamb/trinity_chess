@@ -6,7 +6,7 @@ King::~King() {}
 box *King::getDrawingA() { return &kingA; }
 box *King::getDrawingB() { return &kingB; }
 
-bool King::isValidMove(Position from, Position to) {
+bool King::checkMove(Position from, Position to) {
   int dx = abs(to.getPositionX() - to.getPositionX());
   int dy = abs(from.getPositionY() - from.getPositionY());
 

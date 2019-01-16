@@ -5,7 +5,7 @@ Rook::~Rook() {}
 box *Rook::getDrawingA() { return &rookA; }
 box *Rook::getDrawingB() { return &rookB; }
 
-bool Rook::isValidMove(Position from, Position to) {
+bool Rook::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
   int dy = abs(from.getPositionY() - to.getPositionY());
 

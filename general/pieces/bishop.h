@@ -15,7 +15,7 @@ public:
   virtual ~Bishop();
   box *getDrawingA();
   box *getDrawingB();
-  bool isValidMove(Position, Position);
+  bool checkMove(Position, Position);
 };
 
 #endif /* BISHOP_H */

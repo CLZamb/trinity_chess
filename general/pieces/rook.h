@@ -14,7 +14,7 @@ public:
   virtual ~Rook();
   box *getDrawingA();
   box *getDrawingB();
-  bool isValidMove(Position, Position);
+  bool checkMove(Position, Position);
 };
 
 #endif /* ROOK_H */

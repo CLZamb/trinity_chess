@@ -9,11 +9,11 @@ private:
   static box queenB;
 
 public:
-  explicit Queen(Player* side);
+  explicit Queen(Player *side);
   virtual ~Queen();
   box *getDrawingA();
   box *getDrawingB();
-  bool isValidMove(Position, Position);
+  bool checkMove(Position, Position);
 };
 
 #endif /* QUEEN_H */

@@ -10,11 +10,11 @@ private:
   static box kingB;
 
 public:
-  explicit King(Player* side);
+  explicit King(Player *side);
   virtual ~King();
   box *getDrawingA();
   box *getDrawingB();
-  bool isValidMove(Position, Position);
+  bool checkMove(Position, Position);
 };
 
 #endif /* KING_H */

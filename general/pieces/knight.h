@@ -14,7 +14,7 @@ public:
   virtual ~Knight();
   box *getDrawingA();
   box *getDrawingB();
-  bool isValidMove(Position, Position);
+  bool checkMove(Position, Position);
 };
 
 #endif /* KNIGHT_H */

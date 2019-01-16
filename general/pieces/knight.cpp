@@ -1,14 +1,15 @@
 #include "knight.h"
-Knight::Knight(Player *side) : Piece(side) {}
+Knight::Knight(Player *side) : Piece(side) { knight = true; }
 
 Knight::~Knight() {}
 
 box *Knight::getDrawingA() { return &knightA; }
 box *Knight::getDrawingB() { return &knightB; }
 
-bool Knight::isValidMove(Position from, Position to) {
+bool Knight::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
   int dy = abs(from.getPositionY() - to.getPositionY());
+
   if (dx == 2 && dy == 1)
     return true;
 
