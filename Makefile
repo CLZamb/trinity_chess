@@ -447,33 +447,6 @@ logic/board.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/board.cpp.s
 .PHONY : logic/board.cpp.s
 
-logic/box.o: logic/box.cpp.o
-
-.PHONY : logic/box.o
-
-# target to build an object file
-logic/box.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/box.cpp.o
-.PHONY : logic/box.cpp.o
-
-logic/box.i: logic/box.cpp.i
-
-.PHONY : logic/box.i
-
-# target to preprocess a source file
-logic/box.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/box.cpp.i
-.PHONY : logic/box.cpp.i
-
-logic/box.s: logic/box.cpp.s
-
-.PHONY : logic/box.s
-
-# target to generate assembly for a file
-logic/box.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/box.cpp.s
-.PHONY : logic/box.cpp.s
-
 logic/movement.o: logic/movement.cpp.o
 
 .PHONY : logic/movement.o
@@ -555,6 +528,33 @@ logic/position.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/position.cpp.s
 .PHONY : logic/position.cpp.s
 
+logic/square.o: logic/square.cpp.o
+
+.PHONY : logic/square.o
+
+# target to build an object file
+logic/square.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/square.cpp.o
+.PHONY : logic/square.cpp.o
+
+logic/square.i: logic/square.cpp.i
+
+.PHONY : logic/square.i
+
+# target to preprocess a source file
+logic/square.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/square.cpp.i
+.PHONY : logic/square.cpp.i
+
+logic/square.s: logic/square.cpp.s
+
+.PHONY : logic/square.s
+
+# target to generate assembly for a file
+logic/square.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/square.cpp.s
+.PHONY : logic/square.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -627,9 +627,6 @@ help:
 	@echo "... logic/board.o"
 	@echo "... logic/board.i"
 	@echo "... logic/board.s"
-	@echo "... logic/box.o"
-	@echo "... logic/box.i"
-	@echo "... logic/box.s"
 	@echo "... logic/movement.o"
 	@echo "... logic/movement.i"
 	@echo "... logic/movement.s"
@@ -639,6 +636,9 @@ help:
 	@echo "... logic/position.o"
 	@echo "... logic/position.i"
 	@echo "... logic/position.s"
+	@echo "... logic/square.o"
+	@echo "... logic/square.i"
+	@echo "... logic/square.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

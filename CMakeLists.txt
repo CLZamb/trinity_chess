@@ -22,8 +22,8 @@ set(SOURCE_FILES
   main.cpp
   logic/board.h
   logic/board.cpp
-  logic/box.h
-  logic/box.cpp
+  logic/square.h
+  logic/square.cpp
   logic/position.h
   logic/position.cpp
   logic/player.h

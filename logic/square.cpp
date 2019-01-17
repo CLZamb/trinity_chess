@@ -1,12 +1,12 @@
-#include "box.h"
+#include "square.h"
 
-Box::Box(box *baseDrawing, bool blackBox, Position pos)
+Square::Square(box *baseDrawing, bool blackBox, Position pos)
     : pBaseDrawing(baseDrawing), pCurrentDrawing(baseDrawing), currentPos(pos),
       blackBox(blackBox) {}
 
-Box::~Box() {}
+Square::~Square() {}
 
-void Box::setPiece(Piece *piece) {
+void Square::setPiece(Piece *piece) {
   occupied = true;
   this->pPiece = piece;
   *this->pPiece->getPosition() = currentPos;
@@ -17,15 +17,22 @@ void Box::setPiece(Piece *piece) {
     pCurrentDrawing = pPiece->getDrawingA();
 }
 
-void Box::removePiece() {
+Piece *Square::removePiece() {
+  Piece *removedPiece = pPiece;
+  pPiece = nullptr;
+
+  return removedPiece;
+}
+
+void Square::clearSquare() {
   occupied = false;
   pCurrentDrawing = pBaseDrawing;
   pPiece = nullptr;
 }
 
-box *Box::getCurrentDrawing() { return pCurrentDrawing; }
-Piece *Box::getPiece() { return this->pPiece; }
-bool Box::isBlackBox() { return blackBox; }
+box *Square::getCurrentDrawing() { return pCurrentDrawing; }
+Piece *Square::getPiece() { return this->pPiece; }
+bool Square::isBlackBox() { return blackBox; }
 
 // Implementation of [] operator.  This function must return a
 // refernce as array element can be put on left side

@@ -16,10 +16,10 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/queen.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/general/pieces/queen.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/rook.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/general/pieces/rook.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/board.cpp.o"
-  "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/box.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/movement.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/player.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/position.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/square.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/square.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/main.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")

@@ -14,17 +14,24 @@ void Movement::movePiece(Position startPos, Position destination) {
     return;
   }
 
+  Piece *capturedPiece = m_board->getSquareAtPos(destination)->removePiece();
+  if (capturedPiece) {
+    if (capturedPiece->isKing())
+      checkmate = true;
+
+    m_board->saveCapturedPiece(capturedPiece);
+  }
+
   m_board->setPieceAtPos(currentPiece, destination);
-  m_board->getBoxAtPos(startPos)->removePiece();
-  currentPiece->setCapturingState(false);
+  m_board->getSquareAtPos(startPos)->clearSquare();
 }
 
 bool Movement::isValidMove(Position from, Position to) {
   if (!m_board->isValidPosition(from) || !m_board->isValidPosition(to))
     return false;
 
-  Piece *currentPiece = m_board->getBoxAtPos(from)->getPiece();
-  Box *destinationBox = m_board->getBoxAtPos(to);
+  Piece *currentPiece = m_board->getSquareAtPos(from)->getPiece();
+  Square *destinationSquare = m_board->getSquareAtPos(to);
   Player *opponent = (*m_currentPlayerTurn)->getOpponent();
 
   if (!currentPiece || !currentPiece->getOwner() || !opponent)
@@ -32,12 +39,12 @@ bool Movement::isValidMove(Position from, Position to) {
 
   // check that the pieces being use belongs to the current player turn
   if (*m_currentPlayerTurn != currentPiece->getOwner()) {
-    std::cout << "wrong player side\n";
+    std::cout << "Piece at that position does not belong the current player\n";
     return false;
   }
 
-  if (destinationBox->hasPiece()) {
-    if (destinationBox->getPiece()->getOwner() == opponent)
+  if (destinationSquare->hasPiece()) {
+    if (destinationSquare->getPiece()->getOwner() == opponent)
       currentPiece->setCapturingState(true);
     else
       return false;
@@ -54,24 +61,41 @@ bool Movement::isValidMove(Position from, Position to) {
 }
 
 bool Movement::hasCollision(Position from, Position to) {
-  int dx = abs(from.getPositionX() - to.getPositionX());
-  int dy = abs(from.getPositionY() - to.getPositionY());
-  Position temPos = from;
-  int sign = 0;
+  int fromX = from.getPositionX();
+  int fromY = from.getPositionY();
+  int toX = to.getPositionX();
+  int toY = to.getPositionY();
 
-  if (dx == 0 && dy > 0) {
-    sign = (from.getPositionY() - to.getPositionY()) > 0 ? -1 : 1;
+  int dx = abs(fromX - toX);
+  int dy = abs(fromY - toY);
+
+  bool diagonal = dx > 0 && dy > 0;
+  bool horizontal = dx > 0 && dy == 0;
+  bool vertical = dx == 0 && dy > 0;
+
+  int signY = (fromY - toY) > 0 ? -1 : 1;
+  int signX = (fromX - toX) > 0 ? -1 : 1;
+
+  Position temPos = from;
+
+  if (vertical) {
     for (int i = 1; i < dy; ++i) {
-      std::cout << sign;
-      std::cout << i << std::endl;
-      temPos.setPositionY(from.getPositionY() + (sign * i));
-      if (m_board->getBoxAtPos(temPos)->hasPiece())
+      temPos.setPositionY(fromY + (signY * i));
+      if (m_board->getSquareAtPos(temPos)->hasPiece())
         return true;
     }
-  } else if (dx > 0 && dy == 0) {
-    std::cout << "horizontal \n";
-  } else if (dx > 0 && dy > 0) {
-    std::cout << "diagonal \n";
+  } else if (horizontal) {
+    for (int i = 1; i < dx; ++i) {
+      temPos.setPositionX(fromX + (signX * i));
+      if (m_board->getSquareAtPos(temPos)->hasPiece())
+        return true;
+    }
+  } else if (diagonal) {
+    for (int i = 1; i < dy; ++i) {
+      temPos.setPosition(fromX + (signX * i), fromY + (signY * i));
+      if (m_board->getSquareAtPos(temPos)->hasPiece())
+        return true;
+    }
   }
 
   return false;

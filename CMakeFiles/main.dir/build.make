@@ -83,18 +83,18 @@ CMakeFiles/main.dir/logic/board.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/board.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp -o CMakeFiles/main.dir/logic/board.cpp.s
 
-CMakeFiles/main.dir/logic/box.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/logic/box.cpp.o: logic/box.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/logic/box.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/logic/box.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.cpp
+CMakeFiles/main.dir/logic/square.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/logic/square.cpp.o: logic/square.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/logic/square.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/logic/square.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject/logic/square.cpp
 
-CMakeFiles/main.dir/logic/box.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/logic/box.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.cpp > CMakeFiles/main.dir/logic/box.cpp.i
+CMakeFiles/main.dir/logic/square.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/logic/square.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject/logic/square.cpp > CMakeFiles/main.dir/logic/square.cpp.i
 
-CMakeFiles/main.dir/logic/box.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/box.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.cpp -o CMakeFiles/main.dir/logic/box.cpp.s
+CMakeFiles/main.dir/logic/square.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/logic/square.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject/logic/square.cpp -o CMakeFiles/main.dir/logic/square.cpp.s
 
 CMakeFiles/main.dir/logic/position.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/logic/position.cpp.o: logic/position.cpp
@@ -282,7 +282,7 @@ CMakeFiles/main.dir/general/pieces/rook.cpp.s: cmake_force
 main_OBJECTS = \
 "CMakeFiles/main.dir/main.cpp.o" \
 "CMakeFiles/main.dir/logic/board.cpp.o" \
-"CMakeFiles/main.dir/logic/box.cpp.o" \
+"CMakeFiles/main.dir/logic/square.cpp.o" \
 "CMakeFiles/main.dir/logic/position.cpp.o" \
 "CMakeFiles/main.dir/logic/player.cpp.o" \
 "CMakeFiles/main.dir/logic/movement.cpp.o" \
@@ -303,7 +303,7 @@ main_EXTERNAL_OBJECTS =
 
 bin/main: CMakeFiles/main.dir/main.cpp.o
 bin/main: CMakeFiles/main.dir/logic/board.cpp.o
-bin/main: CMakeFiles/main.dir/logic/box.cpp.o
+bin/main: CMakeFiles/main.dir/logic/square.cpp.o
 bin/main: CMakeFiles/main.dir/logic/position.cpp.o
 bin/main: CMakeFiles/main.dir/logic/player.cpp.o
 bin/main: CMakeFiles/main.dir/logic/movement.cpp.o

@@ -1,5 +1,5 @@
 #include "king.h"
-King::King(Player *side) : Piece(side) {}
+King::King(Player *side) : Piece(side) { king = true; }
 
 King::~King() {}
 

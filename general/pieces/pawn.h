@@ -9,6 +9,7 @@
 
 class Pawn : public Piece {
 private:
+  bool firstMove = true;
   static box pawnA;
   static box pawnB;
 

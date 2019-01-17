@@ -7,18 +7,22 @@ Board::~Board() {
     for (int j = 0; j < 8; ++j)
       delete board[i][j];
 
+  for (Piece *iter : capturedPieces)
+    delete iter;
+  capturedPieces.clear();
+
   std::cout << "~Board() is executed";
 }
 
 void Board::initialize(Player *player1, Player *player2) {
   this->player1 = player1;
   this->player2 = player2;
-  createBoardBoxes();
+  createBoardSquares();
   setPiecesOnBoard();
 }
 
-void Board::createBoardBoxes() {
-  createBoxBases();
+void Board::createBoardSquares() {
+  createSquareBases();
   // Input input;
   char boxColor = 'w';
 
@@ -27,10 +31,10 @@ void Board::createBoardBoxes() {
     for (int col = 0; col < 8; ++col) {
       if (boxColor == 'b') {
         boxColor = 'w';
-        board[row][col] = new Box(&wBox, false, Position(row, col));
+        board[row][col] = new Square(&wBox, false, Position(row, col));
       } else {
         boxColor = 'b';
-        board[row][col] = new Box(&bBox, true, Position(row, col));
+        board[row][col] = new Square(&bBox, true, Position(row, col));
       }
     }
     boxColor = boxColor == 'b' ? 'w' : 'b';
@@ -56,17 +60,16 @@ bool Board::isValidPosition(Position pos) {
 }
 
 Piece *Board::getPieceAtPos(Position pos) {
-  return getBoxAtPos(pos)->getPiece();
+  return getSquareAtPos(pos)->getPiece();
 }
 
 void Board::setPieceAtPos(Piece *piece, Position pos) {
-  getBoxAtPos(pos)->setPiece(piece);
+  getSquareAtPos(pos)->setPiece(piece);
 }
 
 Piece *Board::createPiece(std::string pieceType, Player *player) {
-  cout << player << endl;
-
   Piece *piece = nullptr;
+
   if (pieceType == "pawn")
     piece = new Pawn(player);
   else if (pieceType == "rook")
@@ -85,12 +88,12 @@ Piece *Board::createPiece(std::string pieceType, Player *player) {
   return piece;
 }
 
-Box *Board::getBoxAtPos(Position pos) {
+Square *Board::getSquareAtPos(Position pos) {
   unsigned int row = pos.getPositionRow(), col = pos.getPositionColumn();
   return board[row][col];
 }
 
-void Board::createBoxBases() {
+void Board::createSquareBases() {
   int sizeBox = sizeof(char[box::charsSize]);
   for (int i = 0; i < box::rowSize; ++i) {
     snprintf(wBox.content[i], sizeBox, "%s", "░░░░░░░░░");
@@ -124,10 +127,14 @@ void Board::print() {
   cout << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           "━━━━━━┃"
        << endl;
-  cout << " ┃    A        B        C        D       E         F        G       "
+  cout << " ┃    A        B        C        D        E        F        G       "
           " H    ┃"
        << endl;
   cout << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           "━━━━━━━━━━━┛"
        << endl;
+}
+
+void Board::saveCapturedPiece(Piece *capturedPiece) {
+  capturedPieces.push_back(capturedPiece);
 }

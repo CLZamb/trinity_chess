@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include "box.h"
 #include "display.h"
 #include "piecesheaders.h"
 #include "position.h"
+#include "square.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -21,29 +21,28 @@
 class Board : public Display {
 private:
   // static Board *m_mainBoard;
-  Box *board[8][8];
+  Square *board[8][8] = {{nullptr}};
+
   box wBox, bBox;
   // Input input;
-  char side = 'w';
 
-  void createBoardBoxes();
-  void createBoxBases();
+  void createBoardSquares();
+  void createSquareBases();
   void setPiecesOnBoard();
   Piece *createPiece(std::string, Player *);
+  std::vector<Piece *> capturedPieces;
 
 public:
   Board();
   ~Board();
   Player *player1, *player2, *playerTurn;
 
-  void setPieceAtPos(Piece *piece, Position pos);
-  Box *getBoxAtPos(Position);
-  string getTurn();
+  Square *getSquareAtPos(Position);
   void initialize(Player *, Player *);
-  void setTurn(char side);
+  void setPieceAtPos(Piece *piece, Position pos);
+  void saveCapturedPiece(Piece *);
   // print Board
   void print();
-  void changeTurn();
 
   bool isValidPosition(Position pos);
   Piece *getPieceAtPos(Position);

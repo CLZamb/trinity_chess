@@ -19,10 +19,10 @@ CMakeFiles/main.dir/general/game.cpp.o: general/pieces/piecesheaders.h
 CMakeFiles/main.dir/general/game.cpp.o: general/pieces/queen.h
 CMakeFiles/main.dir/general/game.cpp.o: general/pieces/rook.h
 CMakeFiles/main.dir/general/game.cpp.o: logic/board.h
-CMakeFiles/main.dir/general/game.cpp.o: logic/box.h
 CMakeFiles/main.dir/general/game.cpp.o: logic/movement.h
 CMakeFiles/main.dir/general/game.cpp.o: logic/player.h
 CMakeFiles/main.dir/general/game.cpp.o: logic/position.h
+CMakeFiles/main.dir/general/game.cpp.o: logic/square.h
 
 CMakeFiles/main.dir/general/input.cpp.o: general/input.cpp
 CMakeFiles/main.dir/general/input.cpp.o: general/input.h
@@ -82,8 +82,8 @@ CMakeFiles/main.dir/general/pieces/rook.cpp.o: logic/position.h
 
 CMakeFiles/main.dir/logic/board.cpp.o: logic/board.cpp
 CMakeFiles/main.dir/logic/board.cpp.o: logic/board.h
-CMakeFiles/main.dir/logic/board.cpp.o: logic/box.h
 CMakeFiles/main.dir/logic/board.cpp.o: logic/position.h
+CMakeFiles/main.dir/logic/board.cpp.o: logic/square.h
 CMakeFiles/main.dir/logic/board.cpp.o: display/display.h
 CMakeFiles/main.dir/logic/board.cpp.o: general/boxStruct.h
 CMakeFiles/main.dir/logic/board.cpp.o: general/pieces/bishop.h
@@ -96,18 +96,11 @@ CMakeFiles/main.dir/logic/board.cpp.o: general/pieces/queen.h
 CMakeFiles/main.dir/logic/board.cpp.o: general/pieces/rook.h
 CMakeFiles/main.dir/logic/board.cpp.o: logic/player.h
 
-CMakeFiles/main.dir/logic/box.cpp.o: logic/box.cpp
-CMakeFiles/main.dir/logic/box.cpp.o: logic/box.h
-CMakeFiles/main.dir/logic/box.cpp.o: general/boxStruct.h
-CMakeFiles/main.dir/logic/box.cpp.o: general/pieces/piece.h
-CMakeFiles/main.dir/logic/box.cpp.o: logic/player.h
-CMakeFiles/main.dir/logic/box.cpp.o: logic/position.h
-
 CMakeFiles/main.dir/logic/movement.cpp.o: logic/board.h
-CMakeFiles/main.dir/logic/movement.cpp.o: logic/box.h
 CMakeFiles/main.dir/logic/movement.cpp.o: logic/movement.cpp
 CMakeFiles/main.dir/logic/movement.cpp.o: logic/movement.h
 CMakeFiles/main.dir/logic/movement.cpp.o: logic/position.h
+CMakeFiles/main.dir/logic/movement.cpp.o: logic/square.h
 CMakeFiles/main.dir/logic/movement.cpp.o: display/display.h
 CMakeFiles/main.dir/logic/movement.cpp.o: general/boxStruct.h
 CMakeFiles/main.dir/logic/movement.cpp.o: general/pieces/bishop.h
@@ -126,12 +119,19 @@ CMakeFiles/main.dir/logic/player.cpp.o: logic/player.h
 CMakeFiles/main.dir/logic/position.cpp.o: logic/position.cpp
 CMakeFiles/main.dir/logic/position.cpp.o: logic/position.h
 
-CMakeFiles/main.dir/main.cpp.o: general/game.h
-CMakeFiles/main.dir/main.cpp.o: general/input.h
-CMakeFiles/main.dir/main.cpp.o: general/messages.h
+CMakeFiles/main.dir/logic/square.cpp.o: logic/square.cpp
+CMakeFiles/main.dir/logic/square.cpp.o: logic/square.h
+CMakeFiles/main.dir/logic/square.cpp.o: general/boxStruct.h
+CMakeFiles/main.dir/logic/square.cpp.o: general/pieces/piece.h
+CMakeFiles/main.dir/logic/square.cpp.o: logic/player.h
+CMakeFiles/main.dir/logic/square.cpp.o: logic/position.h
+
 CMakeFiles/main.dir/main.cpp.o: main.cpp
 CMakeFiles/main.dir/main.cpp.o: display/display.h
 CMakeFiles/main.dir/main.cpp.o: general/boxStruct.h
+CMakeFiles/main.dir/main.cpp.o: general/game.h
+CMakeFiles/main.dir/main.cpp.o: general/input.h
+CMakeFiles/main.dir/main.cpp.o: general/messages.h
 CMakeFiles/main.dir/main.cpp.o: general/pieces/bishop.h
 CMakeFiles/main.dir/main.cpp.o: general/pieces/king.h
 CMakeFiles/main.dir/main.cpp.o: general/pieces/knight.h
@@ -141,8 +141,8 @@ CMakeFiles/main.dir/main.cpp.o: general/pieces/piecesheaders.h
 CMakeFiles/main.dir/main.cpp.o: general/pieces/queen.h
 CMakeFiles/main.dir/main.cpp.o: general/pieces/rook.h
 CMakeFiles/main.dir/main.cpp.o: logic/board.h
-CMakeFiles/main.dir/main.cpp.o: logic/box.h
 CMakeFiles/main.dir/main.cpp.o: logic/movement.h
 CMakeFiles/main.dir/main.cpp.o: logic/player.h
 CMakeFiles/main.dir/main.cpp.o: logic/position.h
+CMakeFiles/main.dir/main.cpp.o: logic/square.h
 

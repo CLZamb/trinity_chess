@@ -29,6 +29,7 @@ void Game::start() {
     break;
   default:
     std::cout << "Wrong Input try again" << std::endl;
+    break;
   }
 }
 
@@ -53,16 +54,17 @@ void Game::play() {
     from = playerInput.getPosFrom();
     to = playerInput.getPosTo();
 
-    cout << playerTurn << " playerTurn " << endl;
-
     if (movementController.isValidMove(from, to)) {
       movementController.movePiece(from, to);
+      isCheckMate = movementController.getCheckmate();
       pBoardDisplay->print();
       changeTurn();
     } else {
       std::cout << "invalid move, try again\n";
     }
   }
+  if (isCheckMate)
+    std::cout << "checkmate\n";
 }
 
 int Game::getOption() {

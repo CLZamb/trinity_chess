@@ -1,5 +1,5 @@
-#ifndef BOX_H
-#define BOX_H
+#ifndef SQUARE_H
+#define SQUARE_H
 
 #include "boxStruct.h"
 #include "piece.h"
@@ -7,7 +7,7 @@
 
 #pragma once
 
-class Box {
+class Square {
 private:
   box *pBaseDrawing;
   box *pCurrentDrawing /* = (box *)malloc(sizeof(box))*/;
@@ -17,15 +17,16 @@ private:
   bool blackBox;
 
 public:
-  Box(box *, bool, Position);
-  virtual ~Box();
+  Square(box *, bool, Position);
+  virtual ~Square();
 
   void setPiece(Piece *piece);
-  void removePiece();
+  void clearSquare();
+  bool hasPiece() { return occupied; }
   bool isBlackBox();
+  Piece *removePiece();
   Piece *getPiece();
   box *getCurrentDrawing();
-  bool hasPiece() { return occupied; }
 };
 
-#endif /* BOX_H */
+#endif /* SQUARE_H */

@@ -14,6 +14,7 @@ protected:
   Player *pPlayer;
   bool capturing = false;
   bool knight = false;
+  bool king = false;
 
 public:
   Position pos;
@@ -29,6 +30,7 @@ public:
   Player *getOwner() { return pPlayer; }
   bool isCapturing() { return capturing; }
   bool isKnight() { return knight; }
+  bool isKing() { return king; }
   void setCapturingState(bool capturing) { this->capturing = capturing; }
 };
 

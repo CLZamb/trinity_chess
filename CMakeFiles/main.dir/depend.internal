@@ -20,10 +20,10 @@ CMakeFiles/main.dir/general/game.cpp.o
  general/pieces/queen.h
  general/pieces/rook.h
  logic/board.h
- logic/box.h
  logic/movement.h
  logic/player.h
  logic/position.h
+ logic/square.h
 CMakeFiles/main.dir/general/input.cpp.o
  /Users/cristofher/Desktop/practice/c++/ChessProject/general/input.cpp
  /Users/cristofher/Desktop/practice/c++/ChessProject/general/input.h
@@ -83,8 +83,8 @@ CMakeFiles/main.dir/general/pieces/rook.cpp.o
 CMakeFiles/main.dir/logic/board.cpp.o
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
- /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.h
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.h
+ /Users/cristofher/Desktop/practice/c++/ChessProject/logic/square.h
  display/display.h
  general/boxStruct.h
  general/pieces/bishop.h
@@ -96,19 +96,12 @@ CMakeFiles/main.dir/logic/board.cpp.o
  general/pieces/queen.h
  general/pieces/rook.h
  logic/player.h
-CMakeFiles/main.dir/logic/box.cpp.o
- /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.cpp
- /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.h
- general/boxStruct.h
- general/pieces/piece.h
- logic/player.h
- logic/position.h
 CMakeFiles/main.dir/logic/movement.cpp.o
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
- /Users/cristofher/Desktop/practice/c++/ChessProject/logic/box.h
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.h
+ /Users/cristofher/Desktop/practice/c++/ChessProject/logic/square.h
  display/display.h
  general/boxStruct.h
  general/pieces/bishop.h
@@ -126,13 +119,20 @@ CMakeFiles/main.dir/logic/player.cpp.o
 CMakeFiles/main.dir/logic/position.cpp.o
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.cpp
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.h
+CMakeFiles/main.dir/logic/square.cpp.o
+ /Users/cristofher/Desktop/practice/c++/ChessProject/logic/square.cpp
+ /Users/cristofher/Desktop/practice/c++/ChessProject/logic/square.h
+ general/boxStruct.h
+ general/pieces/piece.h
+ logic/player.h
+ logic/position.h
 CMakeFiles/main.dir/main.cpp.o
- /Users/cristofher/Desktop/practice/c++/ChessProject/general/game.h
- /Users/cristofher/Desktop/practice/c++/ChessProject/general/input.h
- /Users/cristofher/Desktop/practice/c++/ChessProject/general/messages.h
  /Users/cristofher/Desktop/practice/c++/ChessProject/main.cpp
  display/display.h
  general/boxStruct.h
+ general/game.h
+ general/input.h
+ general/messages.h
  general/pieces/bishop.h
  general/pieces/king.h
  general/pieces/knight.h
@@ -142,7 +142,7 @@ CMakeFiles/main.dir/main.cpp.o
  general/pieces/queen.h
  general/pieces/rook.h
  logic/board.h
- logic/box.h
  logic/movement.h
  logic/player.h
  logic/position.h
+ logic/square.h

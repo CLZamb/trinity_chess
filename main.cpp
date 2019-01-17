@@ -7,7 +7,7 @@
  * this file. If not, please write to: , or visit :
  */
 
-#include "general/game.h"
+#include "game.h"
 #include <iostream>
 
 using namespace std;
