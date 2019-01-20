@@ -6,14 +6,16 @@
 
 class Rook : public Piece {
 private:
-  static box rookA;
-  static box rookB;
+  static box rookWhiteBoxP2;
+  static box rookWhiteBoxP1;
+  static box rookBlackBoxP2;
+  static box rookBlackBoxP1;
 
 public:
   explicit Rook(Player *side);
   virtual ~Rook();
-  box *getDrawingA();
-  box *getDrawingB();
+  box *getDrawingWSquare();
+  box *getDrawingBSquare();
   bool checkMove(Position, Position);
 };
 

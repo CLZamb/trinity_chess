@@ -10,14 +10,16 @@
 class Pawn : public Piece {
 private:
   bool firstMove = true;
-  static box pawnA;
-  static box pawnB;
+  static box PawnWhiteBoxP2;
+  static box PawnWhiteBoxP1;
+  static box PawnBlackBoxP2;
+  static box PawnBlackBoxP1;
 
 public:
   explicit Pawn(Player *side);
   virtual ~Pawn();
-  box *getDrawingA();
-  box *getDrawingB();
+  box *getDrawingWSquare();
+  box *getDrawingBSquare();
   bool checkMove(Position, Position);
 };
 

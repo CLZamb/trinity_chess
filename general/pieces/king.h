@@ -6,14 +6,16 @@
 
 class King : public Piece {
 private:
-  static box kingA;
-  static box kingB;
+  static box kingWhiteBoxP1;
+  static box kingWhiteBoxP2;
+  static box kingBlackBoxP1;
+  static box kingBlackBoxP2;
 
 public:
   explicit King(Player *side);
   virtual ~King();
-  box *getDrawingA();
-  box *getDrawingB();
+  box *getDrawingWSquare();
+  box *getDrawingBSquare();
   bool checkMove(Position, Position);
 };
 

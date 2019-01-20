@@ -2,8 +2,18 @@
 Rook::Rook(Player *side) : Piece(side) {}
 Rook::~Rook() {}
 
-box *Rook::getDrawingA() { return &rookA; }
-box *Rook::getDrawingB() { return &rookB; }
+box *Rook::getDrawingWSquare() {
+  if (pPlayer->getColor() == "black")
+    return &rookWhiteBoxP2;
+  else
+    return &rookWhiteBoxP1;
+}
+box *Rook::getDrawingBSquare() {
+  if (pPlayer->getColor() == "black")
+    return &rookBlackBoxP2;
+  else
+    return &rookBlackBoxP1;
+}
 
 bool Rook::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
@@ -19,18 +29,34 @@ bool Rook::checkMove(Position from, Position to) {
   return false;
 }
 
-box Rook::rookA = {{
-    {"░░░░░░░░░"},
-    {"░░▅░▅░▅░░"},
-    {"░░▝███▘░░"},
-    {"░░▅███▅░░"},
-    {"░░░░░░░░░"},
+box Rook::rookWhiteBoxP2 = {{
+    {"\033[7m█████████\033[0m"},
+    {"\033[7m██▀█▀█▀██\033[0m"},
+    {"\033[7m██▙   ▟██\033[0m"},
+    {"\033[7m██▀   ▀██\033[0m"},
+    {"\033[7m█████████\033[0m"},
 }};
 
-box Rook::rookB = {{
+box Rook::rookBlackBoxP2 = {{
     {"█████████"},
     {"██▀█▀█▀██"},
     {"██▙   ▟██"},
     {"██▀   ▀██"},
     {"█████████"},
+}};
+
+box Rook::rookWhiteBoxP1 = {{
+    {"\033[7m\033[1;37m█████████\033[0m"},
+    {"\033[7m\033[1;37m██▀█▀█▀██\033[0m"},
+    {"\033[7m\033[1;37m██▙   ▟██\033[0m"},
+    {"\033[7m\033[1;37m██▀   ▀██\033[0m"},
+    {"\033[7m\033[1;37m█████████\033[0m"},
+}};
+
+box Rook::rookBlackBoxP1 = {{
+    {"\033[1;37m█████████\033[0m"},
+    {"\033[1;37m██▀█▀█▀██\033[0m"},
+    {"\033[1;37m██▙   ▟██\033[0m"},
+    {"\033[1;37m██▀   ▀██\033[0m"},
+    {"\033[1;37m█████████\033[0m"},
 }};

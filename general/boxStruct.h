@@ -3,7 +3,7 @@
 
 struct box {
   static const int rowSize = 5 /*rows*/;
-  static const int charsSize = (9 /*characters*/ * 4 /*bytes*/);
+  static const int charsSize = (11 /*characters*/ * 4 /*bytes*/);
   char content[rowSize][charsSize];
 };
 

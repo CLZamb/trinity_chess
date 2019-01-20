@@ -6,14 +6,16 @@
 
 class Knight : public Piece {
 private:
-  static box knightA;
-  static box knightB;
+  static box knightWhiteBoxP2;
+  static box knightWhiteBoxP1;
+  static box knightBlackBoxP1;
+  static box knightBlackBoxP2;
 
 public:
-  explicit Knight(Player* side);
+  explicit Knight(Player *side);
   virtual ~Knight();
-  box *getDrawingA();
-  box *getDrawingB();
+  box *getDrawingWSquare();
+  box *getDrawingBSquare();
   bool checkMove(Position, Position);
 };
 

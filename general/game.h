@@ -14,7 +14,7 @@ private:
   Display *pMessagesDisplay;
   // Display *pScoreDisplay;
   Player player1{"white"}, player2{"black"};
-  Player *playerTurn = &player1;
+  Player *playerTurn = &player2;
 
   Movement movementController{&m_board, &playerTurn};
   std::vector<Piece *> allPieces;

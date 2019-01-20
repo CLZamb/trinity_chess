@@ -5,14 +5,16 @@
 
 class Queen : public Piece {
 private:
-  static box queenA;
-  static box queenB;
+  static box queenWhiteBoxP1;
+  static box queenWhiteBoxP2;
+  static box queenBlackBoxP1;
+  static box queenBlackBoxP2;
 
 public:
   explicit Queen(Player *side);
   virtual ~Queen();
-  box *getDrawingA();
-  box *getDrawingB();
+  box *getDrawingWSquare();
+  box *getDrawingBSquare();
   bool checkMove(Position, Position);
 };
 

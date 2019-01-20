@@ -4,8 +4,20 @@ Pawn::Pawn(Player *side) : Piece(side) {}
 
 Pawn::~Pawn() {}
 
-box *Pawn::getDrawingA() { return &pawnA; }
-box *Pawn::getDrawingB() { return &pawnB; }
+box *Pawn::getDrawingWSquare() {
+  if (pPlayer->getColor() == "black")
+    return &PawnWhiteBoxP2;
+  else
+    return &PawnWhiteBoxP1;
+}
+
+box *Pawn::getDrawingBSquare() {
+  if (pPlayer->getColor() == "black")
+    return &PawnBlackBoxP2;
+  else
+    return &PawnBlackBoxP1;
+}
+
 bool Pawn::checkMove(Position from, Position to) {
   // row    = y = a...h ->
   // column = x = 0...7 ^
@@ -47,18 +59,34 @@ bool Pawn::checkMove(Position from, Position to) {
   std::cout << "Pawn Illegal Move\n";
   return false;
 }
-box Pawn::pawnA = {{
-    {"░░░░░░░░░"},
-    {"░░░⬤ ░░░░"},
-    {"░░░▟▙░░░░"},
-    {"░░▀▀▀▀░░░"},
-    {"░░░░░░░░░"},
+box Pawn::PawnWhiteBoxP2 = {{
+    {"\033[7m█████████\033[0m"},
+    {"\033[7m███( )███\033[0m"},
+    {"\033[7m███▛ ▜███\033[0m"},
+    {"\033[7m██▛   ▜██\033[0m"},
+    {"\033[7m█████████\033[0m"},
 }};
 
-box Pawn::pawnB = {{
+box Pawn::PawnBlackBoxP2 = {{
     {"█████████"},
-    {"███⬤ ████"},
-    {"███▘▝████"},
-    {"██▄▄▄▄███"},
+    {"███( )███"},
+    {"███▛ ▜███"},
+    {"██▛   ▜██"},
     {"█████████"},
+}};
+
+box Pawn::PawnWhiteBoxP1 = {{
+    {"\033[7m\033[1;37m█████████\033[0m"},
+    {"\033[7m\033[1;37m███( )███\033[0m"},
+    {"\033[7m\033[1;37m███▛ ▜███\033[0m"},
+    {"\033[7m\033[1;37m██▀   ▀██\033[0m"},
+    {"\033[7m\033[1;37m█████████\033[0m"},
+}};
+
+box Pawn::PawnBlackBoxP1 = {{
+    {"\033[1;37m█████████\033[0m"},
+    {"\033[1;37m███( )███\033[0m"},
+    {"\033[1;37m███▛ ▜███\033[0m"},
+    {"\033[1;37m██▀   ▀██\033[0m"},
+    {"\033[1;37m█████████\033[0m"},
 }};

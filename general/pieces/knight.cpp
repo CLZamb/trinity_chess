@@ -3,8 +3,18 @@ Knight::Knight(Player *side) : Piece(side) { knight = true; }
 
 Knight::~Knight() {}
 
-box *Knight::getDrawingA() { return &knightA; }
-box *Knight::getDrawingB() { return &knightB; }
+box *Knight::getDrawingWSquare() {
+  if (pPlayer->getColor() == "black")
+    return &knightWhiteBoxP2;
+  else
+    return &knightWhiteBoxP1;
+}
+box *Knight::getDrawingBSquare() {
+  if (pPlayer->getColor() == "black")
+    return &knightBlackBoxP2;
+  else
+    return &knightBlackBoxP1;
+}
 
 bool Knight::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
@@ -19,24 +29,35 @@ bool Knight::checkMove(Position from, Position to) {
   std::cout << "Illegal Move\n";
   return false;
 }
-// ████▀▛▜███
-// ██▀    ▜██
-// ██▆▇   ▜██
-// ██▀    ▀██
-// ██████████
-//
-box Knight::knightA = {{
-    {"███▀▛▜███"},
-    {"██▀   ▜██"},
-    {"██▆▇   ▜█"},
-    {"██▀    ▀█"},
+
+box Knight::knightWhiteBoxP2 = {{
+    {"\033[7m█████████\033[0m"},
+    {"\033[7m████ █ ██\033[0m"},
+    {"\033[7m██     ██\033[0m"},
+    {"\033[7m████   ██\033[0m"},
+    {"\033[7m█████████\033[0m"},
+}};
+
+box Knight::knightBlackBoxP2 = {{
+    {"█████████"},
+    {"████ █ ██"},
+    {"██     ██"},
+    {"████   ██"},
     {"█████████"},
 }};
 
-box Knight::knightB = {{
-    {"███▀▛▜███"},
-    {"██▀   ▜██"},
-    {"██▆▇   ▜█"},
-    {"██▀    ▀█"},
-    {"█████████"},
+box Knight::knightWhiteBoxP1 = {{
+    {"\033[7m\033[1;37m█████████\033[0m"},
+    {"\033[7m\033[1;37m████ █ ██\033[0m"},
+    {"\033[7m\033[1;37m██     ██\033[0m"},
+    {"\033[7m\033[1;37m████   ██\033[0m"},
+    {"\033[7m\033[1;37m█████████\033[0m"},
+}};
+
+box Knight::knightBlackBoxP1 = {{
+    {"\033[1;37m█████████\033[0m"},
+    {"\033[1;37m████ █ ██\033[0m"},
+    {"\033[1;37m██     ██\033[0m"},
+    {"\033[1;37m████   ██\033[0m"},
+    {"\033[1;37m█████████\033[0m"},
 }};

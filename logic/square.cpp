@@ -12,9 +12,9 @@ void Square::setPiece(Piece *piece) {
   *this->pPiece->getPosition() = currentPos;
 
   if (blackBox)
-    pCurrentDrawing = pPiece->getDrawingB();
+    pCurrentDrawing = pPiece->getDrawingBSquare();
   else
-    pCurrentDrawing = pPiece->getDrawingA();
+    pCurrentDrawing = pPiece->getDrawingWSquare();
 }
 
 Piece *Square::removePiece() {

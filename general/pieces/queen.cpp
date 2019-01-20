@@ -2,8 +2,18 @@
 Queen::Queen(Player *side) : Piece(side) {}
 Queen::~Queen() {}
 
-box *Queen::getDrawingA() { return &queenA; }
-box *Queen::getDrawingB() { return &queenB; }
+box *Queen::getDrawingWSquare() {
+  if (pPlayer->getColor() == "black")
+    return &queenWhiteBoxP2;
+  else
+    return &queenWhiteBoxP1;
+}
+box *Queen::getDrawingBSquare() {
+  if (pPlayer->getColor() == "black")
+    return &queenBlackBoxP2;
+  else
+    return &queenBlackBoxP1;
+}
 
 bool Queen::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
@@ -20,18 +30,34 @@ bool Queen::checkMove(Position from, Position to) {
   return false;
 }
 
-box Queen::queenA = {{
-    {"░░░░░░░░░"},
-    {"░░█░█░█░░"},
-    {"░░█████░░"},
-    {"░░█████░░"},
-    {"░░░░░░░░░"},
+box Queen::queenWhiteBoxP2 = {{
+    {"\033[7m█████████\033[0m"},
+    {"\033[7m██ █ █ ██\033[0m"},
+    {"\033[7m██     ██\033[0m"},
+    {"\033[7m██     ██\033[0m"},
+    {"\033[7m█████████\033[0m"},
 }};
 
-box Queen::queenB = {{
+box Queen::queenBlackBoxP2 = {{
     {"█████████"},
     {"██ █ █ ██"},
     {"██     ██"},
     {"██     ██"},
     {"█████████"},
+}};
+
+box Queen::queenWhiteBoxP1 = {{
+    {"\033[7m\033[1;37m█████████\033[0m"},
+    {"\033[7m\033[1;37m██ █ █ ██\033[0m"},
+    {"\033[7m\033[1;37m██     ██\033[0m"},
+    {"\033[7m\033[1;37m██     ██\033[0m"},
+    {"\033[7m\033[1;37m█████████\033[0m"},
+}};
+
+box Queen::queenBlackBoxP1 = {{
+    {"\033[1;37m█████████\033[0m"},
+    {"\033[1;37m██ █ █ ██\033[0m"},
+    {"\033[1;37m██     ██\033[0m"},
+    {"\033[1;37m██     ██\033[0m"},
+    {"\033[1;37m█████████\033[0m"},
 }};

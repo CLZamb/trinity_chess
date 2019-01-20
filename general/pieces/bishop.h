@@ -7,14 +7,16 @@
 
 class Bishop : public Piece {
 private:
-  static box bishopA;
-  static box bishopB;
+  static box bishopBlackBoxP1;
+  static box bishopBlackBoxP2;
+  static box bishopWhiteBoxP1;
+  static box bishopWhiteBoxP2;
 
 public:
-  explicit Bishop(Player* side);
+  explicit Bishop(Player *side);
   virtual ~Bishop();
-  box *getDrawingA();
-  box *getDrawingB();
+  box *getDrawingWSquare();
+  box *getDrawingBSquare();
   bool checkMove(Position, Position);
 };
 
