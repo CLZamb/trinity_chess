@@ -2,20 +2,23 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #pragma once
+#include "input.h"
 #include <string>
 
 class Player {
-private:
-  std::string colorSide;
+protected:
+  std::string colorPieces;
   Player *opponent = nullptr;
+  Input playerInput;
 
 public:
   Player();
   explicit Player(std::string);
   virtual ~Player();
   void remainingPieces();
-  std::string getColor() { return colorSide; }
   void setOpponent(Player *opponent) { this->opponent = opponent; }
+  virtual Input *getPlayerNextMove();
+  std::string getColorPieces() { return colorPieces; }
   Player *getOpponent() { return opponent; }
 };
 

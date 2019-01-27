@@ -1,19 +1,15 @@
 #include "rook.h"
-Rook::Rook(Player *side) : Piece(side) {}
-Rook::~Rook() {}
+Rook::Rook(Player *side) : Piece(side) {
+  if (pPlayer->getColorPieces() == "black") {
+    pieceCurrentBlackBox = &rookBlackBoxP2;
+    pieceCurrentWhiteBox = &rookWhiteBoxP2;
+  } else {
+    pieceCurrentBlackBox = &rookBlackBoxP1;
+    pieceCurrentWhiteBox = &rookWhiteBoxP1;
+  }
+}
 
-box *Rook::getDrawingWSquare() {
-  if (pPlayer->getColor() == "black")
-    return &rookWhiteBoxP2;
-  else
-    return &rookWhiteBoxP1;
-}
-box *Rook::getDrawingBSquare() {
-  if (pPlayer->getColor() == "black")
-    return &rookBlackBoxP2;
-  else
-    return &rookBlackBoxP1;
-}
+Rook::~Rook() {}
 
 bool Rook::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());

@@ -23,7 +23,6 @@ void Board::initialize(Player *player1, Player *player2) {
 
 void Board::createBoardSquares() {
   createSquareBases();
-  // Input input;
   char boxColor = 'w';
 
   // need to be ordered upside down
@@ -42,15 +41,22 @@ void Board::createBoardSquares() {
 }
 
 void Board::setPiecesOnBoard() {
-  int firstRow = 0, secondRow = 1, seventhRow = 6, eightRow = 7;
+  PieceFactory piecefactory;
+
+  char columns[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
   string piecesSeq[8] = {"rook", "knight", "bishop", "queen",
                          "king", "bishop", "knight", "rook"};
-  for (int i = 0; i < 8; ++i) {
-    setPieceAtPos(createPiece(piecesSeq[i], player1), Position(i, eightRow));
-    setPieceAtPos(createPiece("pawn", player1), Position(i, seventhRow));
 
-    setPieceAtPos(createPiece("pawn", player2), Position(i, secondRow));
-    setPieceAtPos(createPiece(piecesSeq[i], player2), Position(i, firstRow));
+  for (int i = 0; i < 8; ++i) {
+    setPieceAtPos(piecefactory.createPiece(piecesSeq[i], player2),
+                  Position(columns[i], '8'));
+    setPieceAtPos(piecefactory.createPiece("pawn", player2),
+                  Position(columns[i], '7'));
+
+    setPieceAtPos(piecefactory.createPiece("pawn", player1),
+                  Position(columns[i], '2'));
+    setPieceAtPos(piecefactory.createPiece(piecesSeq[i], player1),
+                  Position(columns[i], '1'));
   }
 }
 
@@ -67,25 +73,8 @@ void Board::setPieceAtPos(Piece *piece, Position pos) {
   getSquareAtPos(pos)->setPiece(piece);
 }
 
-Piece *Board::createPiece(std::string pieceType, Player *player) {
-  Piece *piece = nullptr;
-
-  if (pieceType == "pawn")
-    piece = new Pawn(player);
-  else if (pieceType == "rook")
-    piece = new Rook(player);
-  else if (pieceType == "queen")
-    piece = new Queen(player);
-  else if (pieceType == "king")
-    piece = new King(player);
-  else if (pieceType == "bishop")
-    piece = new Bishop(player);
-  else if (pieceType == "knight")
-    piece = new Knight(player);
-  else
-    std::cout << "Piece " << pieceType << " not created" << std::endl;
-
-  return piece;
+void Board::saveCapturedPiece(Piece *capturedPiece) {
+  capturedPieces.push_back(capturedPiece);
 }
 
 Square *Board::getSquareAtPos(Position pos) {
@@ -102,19 +91,19 @@ void Board::createSquareBases() {
 }
 
 void Board::print() {
-  // before exiting print lower border
+  system(CLEAR);
   cout << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           "━━━━━━┓"
        << endl;
 
-  // need to be ordered upside down so that the bottom begins at row 0
+  // need to be print upside down so that the bottom begins at row 0
   for (int row = 7; row >= 0; --row) {
     for (int k = 0; k < box::rowSize; ++k) {
-      //  print left border
       if (((k + 1) % 3) == 0)
-        // print row number
+        // print row number and left border
         std::cout << row + 1 << "┃";
       else
+        //  print left border
         std::cout << ' ' << "┃";
 
       for (int col = 0; col < 8; ++col)
@@ -133,8 +122,4 @@ void Board::print() {
   cout << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           "━━━━━━━━━━━┛"
        << endl;
-}
-
-void Board::saveCapturedPiece(Piece *capturedPiece) {
-  capturedPieces.push_back(capturedPiece);
 }

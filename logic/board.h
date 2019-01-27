@@ -4,38 +4,30 @@
 
 #pragma once
 
-#include "display.h"
-#include "piecesheaders.h"
+#include "Idisplay.h"
+#include "piece.h"
+#include "pieceFactory.h"
 #include "position.h"
 #include "square.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
-/*
- * @class take care of the position
- * on the board  such that the board konws
- * every position aviliable and what position can be used
- * and where are all the pieces
- * o*/
-class Board : public Display {
+class Board : public IDisplay {
 private:
-  // static Board *m_mainBoard;
   Square *board[8][8] = {{nullptr}};
 
+  Player *player1, *player2;
   box wBox, bBox;
-  // Input input;
 
   void createBoardSquares();
   void createSquareBases();
   void setPiecesOnBoard();
-  Piece *createPiece(std::string, Player *);
   std::vector<Piece *> capturedPieces;
 
 public:
   Board();
   ~Board();
-  Player *player1, *player2, *playerTurn;
 
   Square *getSquareAtPos(Position);
   void initialize(Player *, Player *);

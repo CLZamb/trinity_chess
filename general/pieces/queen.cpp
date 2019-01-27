@@ -1,19 +1,15 @@
 #include "queen.h"
-Queen::Queen(Player *side) : Piece(side) {}
-Queen::~Queen() {}
+Queen::Queen(Player *side) : Piece(side) {
+  if (pPlayer->getColorPieces() == "black") {
+    pieceCurrentBlackBox = &queenBlackBoxP2;
+    pieceCurrentWhiteBox = &queenWhiteBoxP2;
+  } else {
+    pieceCurrentBlackBox = &queenBlackBoxP1;
+    pieceCurrentWhiteBox = &queenWhiteBoxP1;
+  }
+}
 
-box *Queen::getDrawingWSquare() {
-  if (pPlayer->getColor() == "black")
-    return &queenWhiteBoxP2;
-  else
-    return &queenWhiteBoxP1;
-}
-box *Queen::getDrawingBSquare() {
-  if (pPlayer->getColor() == "black")
-    return &queenBlackBoxP2;
-  else
-    return &queenBlackBoxP1;
-}
+Queen::~Queen() {}
 
 bool Queen::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());

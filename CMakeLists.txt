@@ -28,17 +28,19 @@ set(SOURCE_FILES
   logic/position.cpp
   logic/player.h
   logic/player.cpp
+  logic/AiPlayer.h
+  logic/AiPlayer.cpp
   logic/movement.h
   logic/movement.cpp
-  display/display.h
-  display/display.cpp
+  display/Idisplay.h
+  display/Idisplay.cpp
+  display/boxStruct.h
   general/game.h
   general/game.cpp
   general/input.h
   general/input.cpp
   general/messages.h
   general/messages.cpp
-  general/boxStruct.h
   general/pieces/piecesheaders.h
   general/pieces/bishop.h
   general/pieces/bishop.cpp
@@ -54,6 +56,8 @@ set(SOURCE_FILES
   general/pieces/queen.cpp
   general/pieces/rook.h
   general/pieces/rook.cpp
+  general/pieces/pieceFactory.h
+  general/pieces/pieceFactory.cpp
   )
 
 set(

@@ -1,19 +1,16 @@
 #include "bishop.h"
-Bishop::Bishop(Player *side) : Piece(side) {}
+Bishop::Bishop(Player *side) : Piece(side) {
+  if (pPlayer->getColorPieces() == "black") {
+    pieceCurrentBlackBox = &bishopBlackBoxP2;
+    pieceCurrentWhiteBox = &bishopWhiteBoxP2;
+  } else {
+    pieceCurrentBlackBox = &bishopBlackBoxP1;
+    pieceCurrentWhiteBox = &bishopWhiteBoxP1;
+  }
+}
+
 Bishop::~Bishop() {}
 
-box *Bishop::getDrawingWSquare() {
-  if (pPlayer->getColor() == "black")
-    return &bishopWhiteBoxP2;
-  else
-    return &bishopWhiteBoxP1;
-}
-box *Bishop::getDrawingBSquare() {
-  if (pPlayer->getColor() == "black")
-    return &bishopBlackBoxP2;
-  else
-    return &bishopBlackBoxP1;
-}
 bool Bishop::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
   int dy = abs(from.getPositionY() - to.getPositionY());

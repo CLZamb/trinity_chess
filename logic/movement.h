@@ -16,6 +16,7 @@ public:
   bool isValidMove(Position from, Position to);
   bool hasCollision(Position from, Position to);
   bool getCheckmate() { return checkmate; }
+  void generateMove();
 };
 
 #endif /* MOVEMENT_H */

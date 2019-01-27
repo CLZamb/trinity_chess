@@ -8,16 +8,15 @@
 class Bishop : public Piece {
 private:
   static box bishopBlackBoxP1;
-  static box bishopBlackBoxP2;
   static box bishopWhiteBoxP1;
+  static box bishopBlackBoxP2;
   static box bishopWhiteBoxP2;
 
 public:
   explicit Bishop(Player *side);
   virtual ~Bishop();
-  box *getDrawingWSquare();
-  box *getDrawingBSquare();
   bool checkMove(Position, Position);
+  std::string getPieceType() { return "bishop"; }
 };
 
 #endif /* BISHOP_H */

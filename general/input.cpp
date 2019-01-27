@@ -3,14 +3,15 @@
 Input::Input() {}
 Input::~Input() {}
 
-void Input::getPlayerNextMove(std::string playerInput) {
+void Input::getNextMove(std::string playerInput) {
   this->playerInput = playerInput;
-  const std::regex r("(\\w\\w)");
-  vector<std::string> positions = scan(playerInput, r);
+
+  vector<std::string> positions = scan(playerInput, std::regex("(\\w\\w)"));
 
   if (positions.size() == 2) {
-    fromPos = positions[0];
-    toPos = positions[1];
+    std::string from = positions[0], to = positions[1];
+    fromPos.setPosition(from[0], from[1]);
+    toPos.setPosition(to[0], to[1]);
     validInput = true;
   } else {
     std::cout << "Wrong Input try again" << std::endl;
@@ -18,7 +19,7 @@ void Input::getPlayerNextMove(std::string playerInput) {
   }
 }
 
-vector<std::string> Input::scan(std::string str, std::regex reg) {
+vector<std::string> Input::scan(std::string str, const std::regex reg) {
   vector<std::string> results;
   std::smatch matches;
   // std::cout << std::boolalpha;
@@ -30,28 +31,7 @@ vector<std::string> Input::scan(std::string str, std::regex reg) {
   return results;
 }
 
-/*! \enum RowPosition
- *
- *  Detailed description
- */
-
-Position Input::getPosFrom() {
-  int x = fromPos[0] - 'a';
-  int y = fromPos[1] - '1';
-  return Position(x, y);
-}
-
-Position Input::getPosTo() {
-  int x = toPos[0] - 'a';
-  int y = toPos[1] - '1';
-  return Position(x, y);
-}
-
-bool Input::equals(std::string other) { return !playerInput.compare(other); }
-
+Position Input::getPosFrom() { return fromPos; }
+Position Input::getPosTo() { return toPos; }
 bool Input::isValidInput() { return validInput; }
-
-ostream &operator<<(ostream &outputStream, const Input &p) {
-  outputStream << p.fromPos;
-  return outputStream;
-}
+std::string Input::toString() { return this->playerInput; }

@@ -14,9 +14,8 @@ private:
 public:
   explicit King(Player *side);
   virtual ~King();
-  box *getDrawingWSquare();
-  box *getDrawingBSquare();
   bool checkMove(Position, Position);
+  std::string getPieceType() { return "king"; }
 };
 
 #endif /* KING_H */

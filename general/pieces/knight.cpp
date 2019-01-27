@@ -1,20 +1,15 @@
 #include "knight.h"
-Knight::Knight(Player *side) : Piece(side) { knight = true; }
+Knight::Knight(Player *side) : Piece(side) {
+  if (pPlayer->getColorPieces() == "black") {
+    pieceCurrentBlackBox = &knightBlackBoxP2;
+    pieceCurrentWhiteBox = &knightWhiteBoxP2;
+  } else {
+    pieceCurrentBlackBox = &knightBlackBoxP1;
+    pieceCurrentWhiteBox = &knightWhiteBoxP1;
+  }
+}
 
 Knight::~Knight() {}
-
-box *Knight::getDrawingWSquare() {
-  if (pPlayer->getColor() == "black")
-    return &knightWhiteBoxP2;
-  else
-    return &knightWhiteBoxP1;
-}
-box *Knight::getDrawingBSquare() {
-  if (pPlayer->getColor() == "black")
-    return &knightBlackBoxP2;
-  else
-    return &knightBlackBoxP1;
-}
 
 bool Knight::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
@@ -33,7 +28,7 @@ bool Knight::checkMove(Position from, Position to) {
 box Knight::knightWhiteBoxP2 = {{
     {"\033[7m█████████\033[0m"},
     {"\033[7m████ █ ██\033[0m"},
-    {"\033[7m██     ██\033[0m"},
+    {"\033[7m███    ██\033[0m"},
     {"\033[7m████   ██\033[0m"},
     {"\033[7m█████████\033[0m"},
 }};
@@ -41,7 +36,7 @@ box Knight::knightWhiteBoxP2 = {{
 box Knight::knightBlackBoxP2 = {{
     {"█████████"},
     {"████ █ ██"},
-    {"██     ██"},
+    {"███    ██"},
     {"████   ██"},
     {"█████████"},
 }};
@@ -49,7 +44,7 @@ box Knight::knightBlackBoxP2 = {{
 box Knight::knightWhiteBoxP1 = {{
     {"\033[7m\033[1;37m█████████\033[0m"},
     {"\033[7m\033[1;37m████ █ ██\033[0m"},
-    {"\033[7m\033[1;37m██     ██\033[0m"},
+    {"\033[7m\033[1;37m███    ██\033[0m"},
     {"\033[7m\033[1;37m████   ██\033[0m"},
     {"\033[7m\033[1;37m█████████\033[0m"},
 }};
@@ -57,7 +52,7 @@ box Knight::knightWhiteBoxP1 = {{
 box Knight::knightBlackBoxP1 = {{
     {"\033[1;37m█████████\033[0m"},
     {"\033[1;37m████ █ ██\033[0m"},
-    {"\033[1;37m██     ██\033[0m"},
+    {"\033[1;37m███    ██\033[0m"},
     {"\033[1;37m████   ██\033[0m"},
     {"\033[1;37m█████████\033[0m"},
 }};

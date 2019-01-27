@@ -13,6 +13,11 @@ void Position::setPosition(int x, int y) {
   m_positionY = y;
 }
 
+void Position::setPosition(char x, char y) {
+  m_positionX = tolower(x) - 'a';
+  m_positionY = tolower(y) - '1';
+}
+
 void Position::setPositionX(int x) { this->m_positionX = x; }
 void Position::setPositionY(int y) { this->m_positionY = y; }
 

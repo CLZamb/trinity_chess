@@ -10,7 +10,7 @@
 class Square {
 private:
   box *pBaseDrawing;
-  box *pCurrentDrawing /* = (box *)malloc(sizeof(box))*/;
+  box *pCurrentDrawing;
   Position currentPos;
   Piece *pPiece = nullptr;
   bool occupied = false;

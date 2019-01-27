@@ -1,21 +1,15 @@
 #include "king.h"
-King::King(Player *side) : Piece(side) { king = true; }
+King::King(Player *side) : Piece(side) {
+  if (pPlayer->getColorPieces() == "black") {
+    pieceCurrentBlackBox = &kingBlackBoxP2;
+    pieceCurrentWhiteBox = &kingWhiteBoxP2;
+  } else {
+    pieceCurrentBlackBox = &kingBlackBoxP1;
+    pieceCurrentWhiteBox = &kingWhiteBoxP1;
+  }
+}
 
 King::~King() {}
-
-box *King::getDrawingWSquare() {
-  if (pPlayer->getColor() == "black")
-    return &kingWhiteBoxP2;
-  else
-    return &kingWhiteBoxP1;
-}
-
-box *King::getDrawingBSquare() {
-  if (pPlayer->getColor() == "black")
-    return &kingBlackBoxP2;
-  else
-    return &kingBlackBoxP1;
-}
 
 bool King::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());

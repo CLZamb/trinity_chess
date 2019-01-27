@@ -14,9 +14,8 @@ private:
 public:
   explicit Knight(Player *side);
   virtual ~Knight();
-  box *getDrawingWSquare();
-  box *getDrawingBSquare();
   bool checkMove(Position, Position);
+  std::string getPieceType() { return "knight"; }
 };
 
 #endif /* KNIGHT_H */

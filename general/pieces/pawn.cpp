@@ -1,22 +1,18 @@
 #include "pawn.h"
 
-Pawn::Pawn(Player *side) : Piece(side) {}
+Pawn::Pawn(Player *side) : Piece(side) {
+  if (pPlayer->getColorPieces() == "black") {
+    pieceCurrentBlackBox = &PawnBlackBoxP2;
+    pieceCurrentWhiteBox = &PawnWhiteBoxP2;
+    oneSpaceForward = -1;
+  } else {
+    pieceCurrentBlackBox = &PawnBlackBoxP1;
+    pieceCurrentWhiteBox = &PawnWhiteBoxP1;
+    oneSpaceForward = 1;
+  }
+}
 
 Pawn::~Pawn() {}
-
-box *Pawn::getDrawingWSquare() {
-  if (pPlayer->getColor() == "black")
-    return &PawnWhiteBoxP2;
-  else
-    return &PawnWhiteBoxP1;
-}
-
-box *Pawn::getDrawingBSquare() {
-  if (pPlayer->getColor() == "black")
-    return &PawnBlackBoxP2;
-  else
-    return &PawnBlackBoxP1;
-}
 
 bool Pawn::checkMove(Position from, Position to) {
   // row    = y = a...h ->
@@ -24,13 +20,7 @@ bool Pawn::checkMove(Position from, Position to) {
   int dx = abs(from.getPositionX() - to.getPositionX());
   int y = from.getPositionY();
   int y2 = to.getPositionY();
-  int nextY = 0;
-
-  if (pPlayer->getColor() == "black") {
-    nextY = y + 1;
-  } else {
-    nextY = y - 1;
-  }
+  int nextY = y + oneSpaceForward;
 
   if (isCapturing()) {
     capturing = false;
@@ -44,11 +34,7 @@ bool Pawn::checkMove(Position from, Position to) {
   }
 
   if (firstMove) {
-    if (pPlayer->getColor() == "black") {
-      nextY++;
-    } else {
-      nextY--;
-    }
+    nextY = nextY + oneSpaceForward;
     if (nextY == y2 && dx == 0) {
       firstMove = false;
       return true;
@@ -59,6 +45,7 @@ bool Pawn::checkMove(Position from, Position to) {
   std::cout << "Pawn Illegal Move\n";
   return false;
 }
+
 box Pawn::PawnWhiteBoxP2 = {{
     {"\033[7m█████████\033[0m"},
     {"\033[7m███( )███\033[0m"},

@@ -16,7 +16,7 @@ void Movement::movePiece(Position startPos, Position destination) {
 
   Piece *capturedPiece = m_board->getSquareAtPos(destination)->removePiece();
   if (capturedPiece) {
-    if (capturedPiece->isKing())
+    if (capturedPiece->getPieceType() == "king")
       checkmate = true;
 
     m_board->saveCapturedPiece(capturedPiece);
@@ -53,7 +53,7 @@ bool Movement::isValidMove(Position from, Position to) {
   if (!currentPiece->checkMove(from, to))
     return false;
 
-  if (!currentPiece->isKnight())
+  if (currentPiece->getPieceType() != "knight")
     if (hasCollision(from, to))
       return false;
 
@@ -63,36 +63,37 @@ bool Movement::isValidMove(Position from, Position to) {
 bool Movement::hasCollision(Position from, Position to) {
   int fromX = from.getPositionX();
   int fromY = from.getPositionY();
+
   int toX = to.getPositionX();
   int toY = to.getPositionY();
 
   int dx = abs(fromX - toX);
   int dy = abs(fromY - toY);
 
-  bool diagonal = dx > 0 && dy > 0;
-  bool horizontal = dx > 0 && dy == 0;
   bool vertical = dx == 0 && dy > 0;
+  bool horizontal = dx > 0 && dy == 0;
+  bool diagonal = dx > 0 && dy > 0;
 
-  int signY = (fromY - toY) > 0 ? -1 : 1;
-  int signX = (fromX - toX) > 0 ? -1 : 1;
+  int dirY = (fromY - toY) > 0 ? -1 /*down*/ : 1 /*up*/;
+  int dirX = (fromX - toX) > 0 ? -1 /*left*/ : 1 /*right*/;
 
   Position temPos = from;
 
   if (vertical) {
     for (int i = 1; i < dy; ++i) {
-      temPos.setPositionY(fromY + (signY * i));
+      temPos.setPositionY(fromY + (dirY * i));
       if (m_board->getSquareAtPos(temPos)->hasPiece())
         return true;
     }
   } else if (horizontal) {
     for (int i = 1; i < dx; ++i) {
-      temPos.setPositionX(fromX + (signX * i));
+      temPos.setPositionX(fromX + (dirX * i));
       if (m_board->getSquareAtPos(temPos)->hasPiece())
         return true;
     }
   } else if (diagonal) {
     for (int i = 1; i < dy; ++i) {
-      temPos.setPosition(fromX + (signX * i), fromY + (signY * i));
+      temPos.setPosition(fromX + (dirX * i), fromY + (dirY * i));
       if (m_board->getSquareAtPos(temPos)->hasPiece())
         return true;
     }
@@ -100,3 +101,10 @@ bool Movement::hasCollision(Position from, Position to) {
 
   return false;
 }
+/*
+ * moveGenerator(board, list)
+ *  loop all pieces
+ *    -> Slider loop each dir add move
+ *      -> addMove list->moves[list->count] = move; list->count++;
+ * */
+void Movement::generateMove() {}

@@ -13,9 +13,8 @@ private:
 public:
   explicit Queen(Player *side);
   virtual ~Queen();
-  box *getDrawingWSquare();
-  box *getDrawingBSquare();
   bool checkMove(Position, Position);
+  std::string getPieceType() { return "queen"; }
 };
 
 #endif /* QUEEN_H */

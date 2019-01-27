@@ -1,8 +1,8 @@
 #ifndef MESSAGES_H
 #define MESSAGES_H
-#include "display.h"
+#include "Idisplay.h"
 
-class Messages : public Display {
+class Messages : public IDisplay {
 private:
 public:
   Messages();
@@ -13,7 +13,6 @@ public:
   static char *gameOver;
   static string m_nextMessage;
   void print();
-  // void rabiit():
 };
 
 #endif /* MESSAGES_H */

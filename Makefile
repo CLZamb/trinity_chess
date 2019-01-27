@@ -123,32 +123,32 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-display/display.o: display/display.cpp.o
+display/Idisplay.o: display/Idisplay.cpp.o
 
-.PHONY : display/display.o
+.PHONY : display/Idisplay.o
 
 # target to build an object file
-display/display.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/display.cpp.o
-.PHONY : display/display.cpp.o
+display/Idisplay.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/Idisplay.cpp.o
+.PHONY : display/Idisplay.cpp.o
 
-display/display.i: display/display.cpp.i
+display/Idisplay.i: display/Idisplay.cpp.i
 
-.PHONY : display/display.i
+.PHONY : display/Idisplay.i
 
 # target to preprocess a source file
-display/display.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/display.cpp.i
-.PHONY : display/display.cpp.i
+display/Idisplay.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/Idisplay.cpp.i
+.PHONY : display/Idisplay.cpp.i
 
-display/display.s: display/display.cpp.s
+display/Idisplay.s: display/Idisplay.cpp.s
 
-.PHONY : display/display.s
+.PHONY : display/Idisplay.s
 
 # target to generate assembly for a file
-display/display.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/display.cpp.s
-.PHONY : display/display.cpp.s
+display/Idisplay.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/Idisplay.cpp.s
+.PHONY : display/Idisplay.cpp.s
 
 general/game.o: general/game.cpp.o
 
@@ -366,6 +366,33 @@ general/pieces/piece.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/piece.cpp.s
 .PHONY : general/pieces/piece.cpp.s
 
+general/pieces/pieceFactory.o: general/pieces/pieceFactory.cpp.o
+
+.PHONY : general/pieces/pieceFactory.o
+
+# target to build an object file
+general/pieces/pieceFactory.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pieceFactory.cpp.o
+.PHONY : general/pieces/pieceFactory.cpp.o
+
+general/pieces/pieceFactory.i: general/pieces/pieceFactory.cpp.i
+
+.PHONY : general/pieces/pieceFactory.i
+
+# target to preprocess a source file
+general/pieces/pieceFactory.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pieceFactory.cpp.i
+.PHONY : general/pieces/pieceFactory.cpp.i
+
+general/pieces/pieceFactory.s: general/pieces/pieceFactory.cpp.s
+
+.PHONY : general/pieces/pieceFactory.s
+
+# target to generate assembly for a file
+general/pieces/pieceFactory.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pieceFactory.cpp.s
+.PHONY : general/pieces/pieceFactory.cpp.s
+
 general/pieces/queen.o: general/pieces/queen.cpp.o
 
 .PHONY : general/pieces/queen.o
@@ -419,6 +446,33 @@ general/pieces/rook.s: general/pieces/rook.cpp.s
 general/pieces/rook.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/rook.cpp.s
 .PHONY : general/pieces/rook.cpp.s
+
+logic/AiPlayer.o: logic/AiPlayer.cpp.o
+
+.PHONY : logic/AiPlayer.o
+
+# target to build an object file
+logic/AiPlayer.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/AiPlayer.cpp.o
+.PHONY : logic/AiPlayer.cpp.o
+
+logic/AiPlayer.i: logic/AiPlayer.cpp.i
+
+.PHONY : logic/AiPlayer.i
+
+# target to preprocess a source file
+logic/AiPlayer.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/AiPlayer.cpp.i
+.PHONY : logic/AiPlayer.cpp.i
+
+logic/AiPlayer.s: logic/AiPlayer.cpp.s
+
+.PHONY : logic/AiPlayer.s
+
+# target to generate assembly for a file
+logic/AiPlayer.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/AiPlayer.cpp.s
+.PHONY : logic/AiPlayer.cpp.s
 
 logic/board.o: logic/board.cpp.o
 
@@ -591,9 +645,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
-	@echo "... display/display.o"
-	@echo "... display/display.i"
-	@echo "... display/display.s"
+	@echo "... display/Idisplay.o"
+	@echo "... display/Idisplay.i"
+	@echo "... display/Idisplay.s"
 	@echo "... general/game.o"
 	@echo "... general/game.i"
 	@echo "... general/game.s"
@@ -618,12 +672,18 @@ help:
 	@echo "... general/pieces/piece.o"
 	@echo "... general/pieces/piece.i"
 	@echo "... general/pieces/piece.s"
+	@echo "... general/pieces/pieceFactory.o"
+	@echo "... general/pieces/pieceFactory.i"
+	@echo "... general/pieces/pieceFactory.s"
 	@echo "... general/pieces/queen.o"
 	@echo "... general/pieces/queen.i"
 	@echo "... general/pieces/queen.s"
 	@echo "... general/pieces/rook.o"
 	@echo "... general/pieces/rook.i"
 	@echo "... general/pieces/rook.s"
+	@echo "... logic/AiPlayer.o"
+	@echo "... logic/AiPlayer.i"
+	@echo "... logic/AiPlayer.s"
 	@echo "... logic/board.o"
 	@echo "... logic/board.i"
 	@echo "... logic/board.s"

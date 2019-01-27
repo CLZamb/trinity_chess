@@ -9,6 +9,7 @@
 
 class Pawn : public Piece {
 private:
+  int oneSpaceForward = 0;
   bool firstMove = true;
   static box PawnWhiteBoxP2;
   static box PawnWhiteBoxP1;
@@ -18,9 +19,8 @@ private:
 public:
   explicit Pawn(Player *side);
   virtual ~Pawn();
-  box *getDrawingWSquare();
-  box *getDrawingBSquare();
   bool checkMove(Position, Position);
+  std::string getPieceType() { return "pawn"; }
 };
 
 #endif /* PAWN_H */
