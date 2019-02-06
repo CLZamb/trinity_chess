@@ -177,33 +177,6 @@ general/game.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/game.cpp.s
 .PHONY : general/game.cpp.s
 
-general/input.o: general/input.cpp.o
-
-.PHONY : general/input.o
-
-# target to build an object file
-general/input.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/input.cpp.o
-.PHONY : general/input.cpp.o
-
-general/input.i: general/input.cpp.i
-
-.PHONY : general/input.i
-
-# target to preprocess a source file
-general/input.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/input.cpp.i
-.PHONY : general/input.cpp.i
-
-general/input.s: general/input.cpp.s
-
-.PHONY : general/input.s
-
-# target to generate assembly for a file
-general/input.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/input.cpp.s
-.PHONY : general/input.cpp.s
-
 general/messages.o: general/messages.cpp.o
 
 .PHONY : general/messages.o
@@ -582,33 +555,6 @@ logic/position.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/position.cpp.s
 .PHONY : logic/position.cpp.s
 
-logic/square.o: logic/square.cpp.o
-
-.PHONY : logic/square.o
-
-# target to build an object file
-logic/square.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/square.cpp.o
-.PHONY : logic/square.cpp.o
-
-logic/square.i: logic/square.cpp.i
-
-.PHONY : logic/square.i
-
-# target to preprocess a source file
-logic/square.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/square.cpp.i
-.PHONY : logic/square.cpp.i
-
-logic/square.s: logic/square.cpp.s
-
-.PHONY : logic/square.s
-
-# target to generate assembly for a file
-logic/square.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/square.cpp.s
-.PHONY : logic/square.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -651,9 +597,6 @@ help:
 	@echo "... general/game.o"
 	@echo "... general/game.i"
 	@echo "... general/game.s"
-	@echo "... general/input.o"
-	@echo "... general/input.i"
-	@echo "... general/input.s"
 	@echo "... general/messages.o"
 	@echo "... general/messages.i"
 	@echo "... general/messages.s"
@@ -696,9 +639,6 @@ help:
 	@echo "... logic/position.o"
 	@echo "... logic/position.i"
 	@echo "... logic/position.s"
-	@echo "... logic/square.o"
-	@echo "... logic/square.i"
-	@echo "... logic/square.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

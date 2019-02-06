@@ -1,13 +1,16 @@
 #ifndef AIPLAYER_H
 #define AIPLAYER_H
-#include "player.h"
+#include "movement.h"
 
 class AiPlayer : public Player {
+private:
+  Movement::MoveGenerator *moveGenerator;
+
 public:
-  explicit AiPlayer(std::string);
+  explicit AiPlayer(std::string, Movement::MoveGenerator *generator);
   virtual ~AiPlayer();
 
-  Input *getPlayerNextMove() override;
+  std::string getPlayerNextMove() override;
 };
 
 #endif /* AIPLAYER_H */

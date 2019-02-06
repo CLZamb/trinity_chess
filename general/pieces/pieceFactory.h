@@ -5,14 +5,21 @@
 
 class PieceFactory {
 private:
+  PiecesSetPtr allPieces;
+  PiecesSetPtr blackPieces;
+  PiecesSetPtr whitePieces;
+  PiecesSetPtr nullPieces = {nullptr};
+
 public:
-  Piece *createPiece(std::string pieceType, Player *player);
-  Piece *createBishop(Player *player);
-  Piece *createKing(Player *player);
-  Piece *createKnight(Player *player);
-  Piece *createPawn(Player *player);
-  Piece *createQueen(Player *player);
-  Piece *createRook(Player *player);
+  Piece *createPiece(std::string type, std::string color, Position pos);
+  PiecesSetPtr getPieces(std::string);
+
+  Piece *createBishop(std::string colorPiece);
+  Piece *createKing(std::string colorPiece);
+  Piece *createKnight(std::string colorPiece);
+  Piece *createPawn(std::string colorPiece, Position pos);
+  Piece *createQueen(std::string colorPiece);
+  Piece *createRook(std::string colorPiece);
   PieceFactory() {}
   virtual ~PieceFactory() {}
 };

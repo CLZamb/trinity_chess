@@ -1,18 +1,26 @@
 #include "pawn.h"
 
-Pawn::Pawn(Player *side) : Piece(side) {
-  if (pPlayer->getColorPieces() == "black") {
+Pawn::Pawn(std::string pieceColor, Position initalPos)
+    : Piece(pieceColor), initial(initalPos) {
+  if (pieceColor == "black") {
+    value = -10;
     pieceCurrentBlackBox = &PawnBlackBoxP2;
     pieceCurrentWhiteBox = &PawnWhiteBoxP2;
-    oneSpaceForward = -1;
+    oneSpaceForward = DOWN;
   } else {
+    value = 10;
     pieceCurrentBlackBox = &PawnBlackBoxP1;
     pieceCurrentWhiteBox = &PawnWhiteBoxP1;
-    oneSpaceForward = 1;
+    oneSpaceForward = UP;
   }
 }
 
 Pawn::~Pawn() {}
+
+bool Pawn::isFirstMove() {
+  return ((initial.getPositionY() == pos.getPositionX()) &&
+          (initial.getPositionX() == pos.getPositionY()));
+}
 
 bool Pawn::checkMove(Position from, Position to) {
   // row    = y = a...h ->
@@ -28,22 +36,41 @@ bool Pawn::checkMove(Position from, Position to) {
       return true;
 
   } else if (nextY == y2 && dx == 0) {
-    if (firstMove)
-      firstMove = false;
     return true;
-  }
-
-  if (firstMove) {
+  } else if (isFirstMove()) {
     nextY = nextY + oneSpaceForward;
-    if (nextY == y2 && dx == 0) {
-      firstMove = false;
+    if (nextY == y2 && dx == 0)
       return true;
-    }
   }
 
   // the diference should be 1 on the y axis and
-  std::cout << "Pawn Illegal Move\n";
+  // std::cout << "Pawn Illegal Move\n";
   return false;
+}
+
+void Pawn::possibleMoves(std::vector<std::string> &allMoves) {
+  int X[3] = {0, LEFT, RIGHT};
+  int Y[3] = {oneSpaceForward, oneSpaceForward, oneSpaceForward};
+
+  std::string movestr;
+  std::string currentpos;
+
+  currentpos = pos.getCharPositionY();
+  currentpos += pos.getCharPositionX();
+
+  for (int i = 0; i < 3; i++) {
+    movestr = currentpos;
+    movestr += pos.getCharPositionY() + X[i];
+    movestr += pos.getCharPositionX() + Y[i];
+    allMoves.push_back(movestr);
+  }
+
+  if (isFirstMove()) {
+    movestr = currentpos;
+    movestr += pos.getCharPositionY();
+    movestr += pos.getCharPositionX() + oneSpaceForward + oneSpaceForward;
+    allMoves.push_back(movestr);
+  }
 }
 
 box Pawn::PawnWhiteBoxP2 = {{

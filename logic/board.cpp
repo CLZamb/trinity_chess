@@ -6,12 +6,6 @@ Board::~Board() {
   for (int i = 0; i < 8; ++i)
     for (int j = 0; j < 8; ++j)
       delete board[i][j];
-
-  for (Piece *iter : capturedPieces)
-    delete iter;
-  capturedPieces.clear();
-
-  std::cout << "~Board() is executed";
 }
 
 void Board::initialize(Player *player1, Player *player2) {
@@ -43,26 +37,32 @@ void Board::createBoardSquares() {
 void Board::setPiecesOnBoard() {
   PieceFactory piecefactory;
 
-  char columns[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-  string piecesSeq[8] = {"rook", "knight", "bishop", "queen",
-                         "king", "bishop", "knight", "rook"};
+  std::vector<std::pair<std::string, std::string>> piecesPos = {
+      // player2 pieces - pieces color "black"
+      {"rook", "a8"}, {"knight", "b8"}, {"bishop", "c8"}, {"queen", "d8"},
+      {"king", "e8"}, {"bishop", "f8"}, {"knight", "g8"}, {"rook", "h8"},
+      {"pawn", "a7"}, {"pawn", "b7"},   {"pawn", "c7"},   {"pawn", "d7"},
+      {"pawn", "e7"}, {"pawn", "f7"},   {"pawn", "g7"},   {"pawn", "h7"},
 
-  for (int i = 0; i < 8; ++i) {
-    setPieceAtPos(piecefactory.createPiece(piecesSeq[i], player2),
-                  Position(columns[i], '8'));
-    setPieceAtPos(piecefactory.createPiece("pawn", player2),
-                  Position(columns[i], '7'));
+      {"pawn", "a2"}, {"pawn", "b2"},   {"pawn", "c2"},   {"pawn", "d2"},
+      {"pawn", "e2"}, {"pawn", "f2"},   {"pawn", "g2"},   {"pawn", "h2"},
+      {"rook", "a1"}, {"knight", "b1"}, {"bishop", "c1"}, {"queen", "d1"},
+      {"king", "e1"}, {"bishop", "f1"}, {"knight", "g1"}, {"rook", "h1"},
+      // player1 pieces - pieces color "white"
+  };
 
-    setPieceAtPos(piecefactory.createPiece("pawn", player1),
-                  Position(columns[i], '2'));
-    setPieceAtPos(piecefactory.createPiece(piecesSeq[i], player1),
-                  Position(columns[i], '1'));
+  for (int p2 = 0, p1 = 16; p2 < 16 && p1 < 32; p2++, p1++) {
+    setPieceAtPos(piecefactory.createPiece(piecesPos[p2].first, "black",
+                                           Position(piecesPos[p2].second)),
+                  Position(piecesPos[p2].second));
+
+    setPieceAtPos(piecefactory.createPiece(piecesPos[p1].first, "white",
+                                           Position(piecesPos[p1].second)),
+                  Position(piecesPos[p1].second));
   }
-}
 
-bool Board::isValidPosition(Position pos) {
-  return (pos.getPositionX() >= 0) && (pos.getPositionX() < 8) &&
-         (pos.getPositionY() >= 0) && (pos.getPositionY() < 8);
+  player1->setPieces(piecefactory.getPieces("white"));
+  player2->setPieces(piecefactory.getPieces("black"));
 }
 
 Piece *Board::getPieceAtPos(Position pos) {
@@ -70,17 +70,17 @@ Piece *Board::getPieceAtPos(Position pos) {
 }
 
 void Board::setPieceAtPos(Piece *piece, Position pos) {
+  if (!piece)
+    return;
   getSquareAtPos(pos)->setPiece(piece);
 }
 
-void Board::saveCapturedPiece(Piece *capturedPiece) {
-  capturedPieces.push_back(capturedPiece);
-}
-
-Square *Board::getSquareAtPos(Position pos) {
+Board::Square *Board::getSquareAtPos(Position pos) {
   unsigned int row = pos.getPositionRow(), col = pos.getPositionColumn();
   return board[row][col];
 }
+
+void Board::clearSquareAt(Position pos) { getSquareAtPos(pos)->clearSquare(); }
 
 void Board::createSquareBases() {
   int sizeBox = sizeof(char[box::charsSize]);
@@ -90,9 +90,12 @@ void Board::createSquareBases() {
   }
 }
 
+bool Board::isPieceAt(Position pos) { return getSquareAtPos(pos)->hasPiece(); }
+
 void Board::print() {
   system(CLEAR);
-  cout << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  cout << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          "━━"
           "━━━━━━┓"
        << endl;
 
@@ -113,13 +116,43 @@ void Board::print() {
     }
   }
 
-  cout << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  cout << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          "━━"
           "━━━━━━┃"
        << endl;
-  cout << " ┃    A        B        C        D        E        F        G       "
+  cout << " ┃    A        B        C        D        E        F        G     "
+          "  "
           " H    ┃"
        << endl;
   cout << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           "━━━━━━━━━━━┛"
        << endl;
 }
+
+Board::Square::Square(box *baseDrawing, bool blackBox, Position pos)
+    : pBaseDrawing(baseDrawing), pCurrentDrawing(baseDrawing), squarePos(pos),
+      blackBox(blackBox) {}
+
+Board::Square::~Square() {}
+
+void Board::Square::setPiece(Piece *piece) {
+  occupied = true;
+  Position pos = squarePos;
+  this->pPiece = piece;
+  this->pPiece->setPosition(squarePos);
+
+  if (blackBox)
+    pCurrentDrawing = pPiece->getDrawingBSquare();
+  else
+    pCurrentDrawing = pPiece->getDrawingWSquare();
+}
+
+void Board::Square::clearSquare() {
+  pCurrentDrawing = pBaseDrawing;
+  occupied = false;
+  pPiece = nullptr;
+}
+
+box *Board::Square::getCurrentDrawing() { return pCurrentDrawing; }
+Piece *Board::Square::getPiece() { return this->pPiece; }
+bool Board::Square::isBlackBox() { return blackBox; }

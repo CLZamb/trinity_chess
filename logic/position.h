@@ -3,7 +3,7 @@
 #define POSITION_H
 #pragma once
 
-#include <iostream>
+#include <string>
 
 /*
  * @class take care of the position
@@ -11,10 +11,17 @@
  * every position aviliable and what position can be used
  * and where are all the pieces
  * o*/
+
+#define DOWN -1
+#define UP 1
+#define LEFT -1
+#define RIGHT 1
+
 struct Position {
   explicit Position(int x = 0, int y = 0) : m_positionX(x), m_positionY(y) {}
   explicit Position(char x, char y)
       : m_positionX(tolower(x) - 'a'), m_positionY(tolower(y) - '1') {}
+  explicit Position(std::string pos);
   virtual ~Position();
 
   void setPosition(int x, int y);
@@ -26,7 +33,8 @@ struct Position {
   int getPositionY() { return m_positionY; }
   int getPositionColumn() { return m_positionX; }
   int getPositionRow() { return m_positionY; }
-  Position getPosition() { return *this; }
+  char getCharPositionX();
+  char getCharPositionY();
   void operator=(const Position pos);
 
   int m_positionX;

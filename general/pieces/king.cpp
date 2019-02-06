@@ -1,9 +1,11 @@
 #include "king.h"
-King::King(Player *side) : Piece(side) {
-  if (pPlayer->getColorPieces() == "black") {
+King::King(std::string pieceColor) : Piece(pieceColor) {
+  if (pieceColor == "black") {
+    value = -900;
     pieceCurrentBlackBox = &kingBlackBoxP2;
     pieceCurrentWhiteBox = &kingWhiteBoxP2;
   } else {
+    value = 900;
     pieceCurrentBlackBox = &kingBlackBoxP1;
     pieceCurrentWhiteBox = &kingWhiteBoxP1;
   }
@@ -23,7 +25,20 @@ bool King::checkMove(Position from, Position to) {
   return false;
 }
 
-#define SH_FG_GREEN "\033[0;32m"
+void King::possibleMoves(std::vector<std::string> &allMoves) {
+  int X[8] = {0, 0, -1, 1, -1, 1, -1, 1};
+  int Y[8] = {1, -1, 0, 0, 1, 1, -1, -1};
+
+  currentpos = pos.getCharPositionY();
+  currentpos += pos.getCharPositionX();
+
+  for (int i = 0; i < 8; i++) {
+    movestr = currentpos;
+    movestr += pos.getCharPositionY() + X[i];
+    movestr += pos.getCharPositionX() + Y[i];
+    allMoves.push_back(movestr);
+  }
+}
 
 box King::kingWhiteBoxP2 = {{
     {"░░▁ ✜ ▁░░"},

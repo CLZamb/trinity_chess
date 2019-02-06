@@ -1,7 +1,6 @@
 #ifndef KNIGHT_H
 #define KNIGHT_H
 
-#include "boxStruct.h"
 #include "piece.h"
 
 class Knight : public Piece {
@@ -12,10 +11,11 @@ private:
   static box knightBlackBoxP2;
 
 public:
-  explicit Knight(Player *side);
+  explicit Knight(std::string pieceColor);
   virtual ~Knight();
   bool checkMove(Position, Position);
   std::string getPieceType() { return "knight"; }
+  void possibleMoves(std::vector<std::string> &);
 };
 
 #endif /* KNIGHT_H */

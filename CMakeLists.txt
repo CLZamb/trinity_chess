@@ -22,8 +22,6 @@ set(SOURCE_FILES
   main.cpp
   logic/board.h
   logic/board.cpp
-  logic/square.h
-  logic/square.cpp
   logic/position.h
   logic/position.cpp
   logic/player.h
@@ -37,8 +35,6 @@ set(SOURCE_FILES
   display/boxStruct.h
   general/game.h
   general/game.cpp
-  general/input.h
-  general/input.cpp
   general/messages.h
   general/messages.cpp
   general/pieces/piecesheaders.h

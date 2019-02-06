@@ -1,13 +1,14 @@
 #include "AiPlayer.h"
 
-AiPlayer::AiPlayer(std::string s) : Player(s) {
+AiPlayer::AiPlayer(std::string side, Movement::MoveGenerator *generator)
+    : Player(side), moveGenerator(generator) {
   std::cout << "created a AiPlayer" << std::endl;
 }
 AiPlayer::~AiPlayer() {}
 
-Input *AiPlayer::getPlayerNextMove() {
-  std::string input = "a7 a6";
+std::string AiPlayer::getPlayerNextMove() {
+  std::string input = "quit";
   std::cout << "Thinking...\n";
-  playerInput.getNextMove(input);
-  return &playerInput;
+  input = moveGenerator->getBestMove();
+  return input;
 }
