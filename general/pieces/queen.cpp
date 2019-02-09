@@ -1,11 +1,11 @@
 #include "queen.h"
 Queen::Queen(std::string pieceColor) : Piece(pieceColor) {
   if (pieceColor == "black") {
-    value = -90;
+    value = 90;
     pieceCurrentBlackBox = &queenBlackBoxP2;
     pieceCurrentWhiteBox = &queenWhiteBoxP2;
   } else {
-    value = 90;
+    value = -90;
     pieceCurrentBlackBox = &queenBlackBoxP1;
     pieceCurrentWhiteBox = &queenWhiteBoxP1;
   }

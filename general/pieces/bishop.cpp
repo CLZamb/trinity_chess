@@ -1,11 +1,11 @@
 #include "bishop.h"
 Bishop::Bishop(std::string pieceColor) : Piece(pieceColor) {
   if (pieceColor == "black") {
-    value = -30;
+    value = 30;
     pieceCurrentBlackBox = &bishopBlackBoxP2;
     pieceCurrentWhiteBox = &bishopWhiteBoxP2;
   } else {
-    value = 30;
+    value = -30;
     pieceCurrentBlackBox = &bishopBlackBoxP1;
     pieceCurrentWhiteBox = &bishopWhiteBoxP1;
   }

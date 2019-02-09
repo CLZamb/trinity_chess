@@ -29,7 +29,15 @@ movement.h
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
 board.h
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
+algorithm
+-
+functional
+-
+map
+-
 regex
+-
+set
 -
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.h

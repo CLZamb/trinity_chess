@@ -5,7 +5,7 @@ Movement::Movement(Board *board, Player **turn)
 
 Movement::~Movement() {}
 
-void Movement::movePiece(std::string strMove) {
+void Movement::movePiece(string strMove) {
   Move playerMove(strMove);
   Position start = playerMove.getPosFrom();
   Position end = playerMove.getPosTo();
@@ -14,7 +14,7 @@ void Movement::movePiece(std::string strMove) {
   Piece *piece = takePiece(start);
   m_board->setPieceAtPos(piece, end);
 
-  prevMoves.push_back(History{piece, capturedPiece, start, end});
+  prevMoves.push_back(Move(piece, capturedPiece, start, end));
   changeTurn();
 }
 
@@ -49,23 +49,23 @@ void Movement::undoLastMove() {
     return;
   }
 
-  History temp = prevMoves.back();
-  if (temp.capturedPiece) {
-    // if (temp.capturedPiece->getPieceType() == "king")
-    //   checkmate = false;
-    m_board->setPieceAtPos(temp.capturedPiece, temp.end);
-    temp.capturedPiece->setCapturedState(false);
+  Move lastMove = prevMoves.back();
+  if (lastMove.capturedPiece) {
+    m_board->setPieceAtPos(lastMove.capturedPiece, lastMove.to);
+    lastMove.capturedPiece->setCapturedState(false);
+    if (lastMove.capturedPiece->getPieceType() == "king")
+      checkmate = false;
   } else {
-    m_board->clearSquareAt(temp.end);
+    m_board->clearSquareAt(lastMove.to);
   }
 
-  m_board->setPieceAtPos(temp.piece, temp.start);
+  m_board->setPieceAtPos(lastMove.piece, lastMove.from);
   prevMoves.pop_back();
   // changeTurn
   changeTurn();
 }
 
-bool Movement::isValidMove(std::string strMove) {
+bool Movement::isValidMove(string strMove) {
   // changeit to validate move
   Move playerMove(strMove);
   if (!playerMove.isValidInput())
@@ -159,23 +159,21 @@ bool Movement::isValidPosition(Position pos) {
   return (pos.getPositionX() >= 0) && (pos.getPositionX() < 8) &&
          (pos.getPositionY() >= 0) && (pos.getPositionY() < 8);
 }
-/*
- * moveGenerator(board, list)
- *  loop all pieces
- *    -> Slider loop each dir add move
- *      -> addMove list->moves[list->count] = move; list->count++;
- * */
 
-std::string Movement::MoveGenerator::getBestMove() {
-  std::vector<std::string> allmoves;
-  getPossibleMoves(allmoves);
-  std::string *bestMove;
+/*
+ * (* Initial call for Player A's root node *)
+ *  negamax(rootNode, depth, −∞, +∞, 1)
+ * */
+string Movement::MoveGenerator::getBestMove() {
+  vector<string> moves;
+  getPossibleMoves(moves);
+  sortMoves(moves);
+  string *bestMove;
   int bestScore = INT_MIN;
   int score;
-  for (std::vector<std::string>::iterator mv = allmoves.begin();
-       mv != allmoves.end(); mv++) {
+  for (vector<string>::iterator mv = moves.begin(); mv != moves.end(); mv++) {
     movement->movePiece(*mv);
-    score = -negamax(4, INT_MIN + 1, INT_MAX);
+    score = -negamax(3, INT_MIN + 1, INT_MAX, -1);
     movement->undoLastMove();
     if (score > bestScore) {
       bestMove = &*mv;
@@ -186,16 +184,54 @@ std::string Movement::MoveGenerator::getBestMove() {
   if (!bestMove)
     return "quit";
 
-  if (allmoves.empty())
+  if (moves.empty())
     return "quit";
-
-  movement->checkmate = false;
 
   return *bestMove;
 }
+/**
+ function negamax( depth, α, β, color)
+   if depth = 0 or node is a terminal node then
+   return color × the heuristic value of node
 
-void Movement::MoveGenerator::getPossibleMoves(
-    std::vector<std::string> &moves) {
+  childNodes := generateMoves(node)
+  childNodes := orderMoves(childNodes)
+  value := −∞
+  foreach child in childNodes do
+    value := max(value, −negamax(child, depth − 1, −β, −α, −color))
+    α := max(α, value)
+    if α ≥ β then
+      break (* cut-off *)
+  return value
+ **/
+int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
+                                     int color) {
+  if (movement->checkmate || depth == 0)
+    return color * evaluateBoard();
+
+  vector<string> allmoves;
+  getPossibleMoves(allmoves);
+
+  if (allmoves.size() == 0)
+    return color * evaluateBoard();
+
+  sortMoves(allmoves);
+  int value = INT_MIN;
+  for (vector<string>::iterator it = allmoves.begin(); it != allmoves.end();
+       it++) {
+    movement->movePiece(*it);
+    value = std::max(value, -negamax(depth - 1, -beta, -alpha, -color));
+    movement->undoLastMove();
+    alpha = std::max(alpha, value);
+
+    if (alpha >= beta)
+      break;
+  }
+
+  return value;
+}
+
+void Movement::MoveGenerator::getPossibleMoves(vector<string> &moves) {
   PiecesSetPtr playerPieces = (*movement->m_currentPlayerTurn)->getPieces();
 
   for (Piece *it : playerPieces) {
@@ -203,8 +239,7 @@ void Movement::MoveGenerator::getPossibleMoves(
       it->possibleMoves(moves);
   }
 
-  for (std::vector<std::string>::iterator it = moves.begin();
-       it != moves.end();) {
+  for (vector<string>::iterator it = moves.begin(); it != moves.end();) {
     if (!movement->isValidMove(*it))
       moves.erase(it);
     else
@@ -233,55 +268,66 @@ int Movement::MoveGenerator::evaluateBoard() {
   return value;
 }
 
-/* Negamax algorithm
-  int negaMax( int depth ) {
-     if ( depth == 0 ) return evaluate();
-     int max = -oo;
-     for ( all moves)  {
-     score = -negaMax( depth - 1 );
-     if( score > max )
-     max = score;
-     }
-     return max;
+struct cmp {
+  template <typename T> bool operator()(const T &l, const T &r) const {
+    if (l.second != r.second)
+      return l.second > r.second;
+
+    return l.first > r.first;
   }
- * */
+};
 
-int Movement::MoveGenerator::negamax(int depth, int alpha, int beta) {
-  if (movement->checkmate || depth == 0)
-    return evaluateBoard();
+struct cmpneg {
+  template <typename T> bool operator()(const T &l, const T &r) const {
+    if (l.second != r.second)
+      return l.second < r.second;
 
-  std::vector<std::string> allmoves;
-  getPossibleMoves(allmoves);
+    return l.first < r.first;
+  }
+};
 
-  if (allmoves.size() == 0)
-    return evaluateBoard();
-
-  for (std::vector<std::string>::iterator it = allmoves.begin();
-       it != allmoves.end(); it++) {
-    movement->movePiece(*it);
-    int val = -negamax(depth - 1, -beta, -alpha);
+void Movement::MoveGenerator::sortMoves(vector<string> &allmoves) {
+  int value = 0;
+  for (auto i : allmoves) {
+    movement->movePiece(i);
+    value = evaluateBoard();
+    temp.insert({i, value});
     movement->undoLastMove();
-
-    if (val >= beta)
-      return val;
-
-    if (val > alpha)
-      alpha = val;
   }
 
-  return alpha;
+  if ((*movement->m_currentPlayerTurn)->getColorPieces() == "black") {
+    std::set<std::pair<string, int>, cmpneg> setOfMoves(temp.begin(),
+                                                        temp.end());
+    allmoves.clear();
+    // Iterate over a set using range base for loop
+    // It will display the items in sorted order of values
+    for (auto const &element : setOfMoves)
+      allmoves.push_back(element.first);
+
+  } else {
+    std::set<std::pair<string, int>, cmp> setOfMoves(temp.begin(), temp.end());
+    allmoves.clear();
+    // Iterate over a set using range base for loop
+    // It will display the items in sorted order of values
+    //
+    for (auto const &element : setOfMoves)
+      allmoves.push_back(element.first);
+  }
+  temp.clear();
 }
 
 Movement::Move::Move() {}
-Movement::Move::Move(std::string nextMove) { setNextMove(nextMove); }
+Movement::Move::Move(string nextMove) { setNextMove(nextMove); }
+Movement::Move::Move(Piece *piece, Piece *capturedPiece, Position start,
+                     Position end)
+    : from(start), to(end), piece(piece), capturedPiece(capturedPiece) {}
 Movement::Move::~Move() {}
 
-void Movement::Move::setNextMove(std::string playerInput) {
-  std::vector<std::string> positions =
-      scan(playerInput, std::regex("(\\w\\w)"));
+void Movement::Move::setNextMove(string playerInput) {
+  vector<string> positions = scan(playerInput, std::regex("(\\w\\w)"));
 
   if (positions.size() == 2) {
-    std::string from = positions[0], to = positions[1];
+    string from = positions[0], to = positions[1];
     fromPos.setPosition(from[0], from[1]);
     toPos.setPosition(to[0], to[1]);
     validInput = true;
@@ -290,11 +336,9 @@ void Movement::Move::setNextMove(std::string playerInput) {
   }
 }
 
-std::vector<std::string> Movement::Move::scan(std::string str,
-                                              const std::regex reg) {
-  std::vector<std::string> results;
+vector<string> Movement::Move::scan(string str, const std::regex reg) {
+  vector<string> results;
   std::smatch matches;
-  // std::cout << std::boolalpha;
   while (std::regex_search(str, matches, reg)) {
     results.push_back(matches.str(1));
     str = matches.suffix().str();

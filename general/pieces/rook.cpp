@@ -1,11 +1,11 @@
 #include "rook.h"
 Rook::Rook(std::string pieceColor) : Piece(pieceColor) {
   if (pieceColor == "black") {
-    value = -50;
+    value = 50;
     pieceCurrentBlackBox = &rookBlackBoxP2;
     pieceCurrentWhiteBox = &rookWhiteBoxP2;
   } else {
-    value = 50;
+    value = -50;
     pieceCurrentBlackBox = &rookBlackBoxP1;
     pieceCurrentWhiteBox = &rookWhiteBoxP1;
   }

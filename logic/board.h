@@ -14,9 +14,11 @@
 
 class Board : public IDisplay {
 private:
+  PieceFactory piecefactory;
   Player *player1, *player2;
-  box wBox, bBox;
+  box wSquare, bSquare;
 
+  void addToBoard(string type, string position, string color);
   void createBoardSquares();
   void createSquareBases();
   void setPiecesOnBoard();

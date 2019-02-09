@@ -1,11 +1,11 @@
 #include "king.h"
 King::King(std::string pieceColor) : Piece(pieceColor) {
   if (pieceColor == "black") {
-    value = -900;
+    value = 2000;
     pieceCurrentBlackBox = &kingBlackBoxP2;
     pieceCurrentWhiteBox = &kingWhiteBoxP2;
   } else {
-    value = 900;
+    value = -2000;
     pieceCurrentBlackBox = &kingBlackBoxP1;
     pieceCurrentWhiteBox = &kingWhiteBoxP1;
   }

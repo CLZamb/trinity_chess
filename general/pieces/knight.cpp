@@ -1,11 +1,11 @@
 #include "knight.h"
 Knight::Knight(std::string pieceColor) : Piece(pieceColor) {
   if (pieceColor == "black") {
-    value = -30;
+    value = 30;
     pieceCurrentBlackBox = &knightBlackBoxP2;
     pieceCurrentWhiteBox = &knightWhiteBoxP2;
   } else {
-    value = 30;
+    value = -30;
     pieceCurrentBlackBox = &knightBlackBoxP1;
     pieceCurrentWhiteBox = &knightWhiteBoxP1;
   }

@@ -17,27 +17,25 @@ void Board::initialize(Player *player1, Player *player2) {
 
 void Board::createBoardSquares() {
   createSquareBases();
-  char boxColor = 'w';
+  char squareColor = 'w';
 
   // need to be ordered upside down
   for (int row = 7; row >= 0; --row) {
     for (int col = 0; col < 8; ++col) {
-      if (boxColor == 'b') {
-        boxColor = 'w';
-        board[row][col] = new Square(&wBox, false, Position(row, col));
+      if (squareColor == 'b') {
+        squareColor = 'w';
+        board[row][col] = new Square(&wSquare, false, Position(row, col));
       } else {
-        boxColor = 'b';
-        board[row][col] = new Square(&bBox, true, Position(row, col));
+        squareColor = 'b';
+        board[row][col] = new Square(&bSquare, true, Position(row, col));
       }
     }
-    boxColor = boxColor == 'b' ? 'w' : 'b';
+    squareColor = squareColor == 'b' ? 'w' : 'b';
   }
 }
 
 void Board::setPiecesOnBoard() {
-  PieceFactory piecefactory;
-
-  std::vector<std::pair<std::string, std::string>> piecesPos = {
+  std::vector<std::pair<std::string, std::string>> piecesSeq = {
       // player2 pieces - pieces color "black"
       {"rook", "a8"}, {"knight", "b8"}, {"bishop", "c8"}, {"queen", "d8"},
       {"king", "e8"}, {"bishop", "f8"}, {"knight", "g8"}, {"rook", "h8"},
@@ -52,17 +50,17 @@ void Board::setPiecesOnBoard() {
   };
 
   for (int p2 = 0, p1 = 16; p2 < 16 && p1 < 32; p2++, p1++) {
-    setPieceAtPos(piecefactory.createPiece(piecesPos[p2].first, "black",
-                                           Position(piecesPos[p2].second)),
-                  Position(piecesPos[p2].second));
-
-    setPieceAtPos(piecefactory.createPiece(piecesPos[p1].first, "white",
-                                           Position(piecesPos[p1].second)),
-                  Position(piecesPos[p1].second));
+    addToBoard(piecesSeq[p2].first, piecesSeq[p2].second, "black");
+    addToBoard(piecesSeq[p1].first, piecesSeq[p1].second, "white");
   }
 
   player1->setPieces(piecefactory.getPieces("white"));
   player2->setPieces(piecefactory.getPieces("black"));
+}
+
+void Board::addToBoard(string type, string position, string color) {
+  Position pos(position);
+  setPieceAtPos(piecefactory.createPiece(type, color, pos), pos);
 }
 
 Piece *Board::getPieceAtPos(Position pos) {
@@ -85,8 +83,8 @@ void Board::clearSquareAt(Position pos) { getSquareAtPos(pos)->clearSquare(); }
 void Board::createSquareBases() {
   int sizeBox = sizeof(char[box::charsSize]);
   for (int i = 0; i < box::rowSize; ++i) {
-    snprintf(wBox.content[i], sizeBox, "%s", "░░░░░░░░░");
-    snprintf(bBox.content[i], sizeBox, "%s", "█████████");
+    snprintf(wSquare.content[i], sizeBox, "%s", "░░░░░░░░░");
+    snprintf(bSquare.content[i], sizeBox, "%s", "█████████");
   }
 }
 

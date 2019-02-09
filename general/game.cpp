@@ -70,8 +70,11 @@ void Game::play() {
       std::cout << "invalid move, try again\n";
     }
   }
-  if (isCheckMate)
+  if (isCheckMate) {
     std::cout << "checkmate\n";
+    std::cout << "Player " << playerTurn->getOpponent()->getColorPieces()
+              << " won ";
+  }
 }
 
 void Game::printMessage(string message) {

@@ -3,12 +3,12 @@
 Pawn::Pawn(std::string pieceColor, Position initalPos)
     : Piece(pieceColor), initial(initalPos) {
   if (pieceColor == "black") {
-    value = -10;
+    value = 10;
     pieceCurrentBlackBox = &PawnBlackBoxP2;
     pieceCurrentWhiteBox = &PawnWhiteBoxP2;
     oneSpaceForward = DOWN;
   } else {
-    value = 10;
+    value = -10;
     pieceCurrentBlackBox = &PawnBlackBoxP1;
     pieceCurrentWhiteBox = &PawnWhiteBoxP1;
     oneSpaceForward = UP;
