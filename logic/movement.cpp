@@ -19,8 +19,6 @@ void Movement::movePiece(Move pmove) {
   m_board->make_move(piece, from, to);
   prevMoves.push_back(pmove);
   changeTurn();
-
-  std::cout << "Score is" << m_board->evalPosition()  << std::endl;
 }
 
 void Movement::changeTurn() {
