@@ -45,19 +45,21 @@ int Game::getOption() {
 
 void Game::play() {
   bool isCheckMate = false;
-  std::string playerMove;
+  Move playerMove;
   // clear input buffer
   std::cin.clear();
   std::cin.ignore();
 
+  int counter = 0;
   while (!isCheckMate) {
     pBoardDisplay->print();
     playerMove = playerTurn->getPlayerNextMove();
 
-    if (playerMove == "quit" || playerMove == "close" || playerMove == "exit")
+    if (playerMove.m_input == "quit" || playerMove.m_input == "close" ||
+        playerMove.m_input == "exit")
       break;
 
-    if (playerMove == "undo") {
+    if (playerMove.m_input == "undo") {
       movementController.undoLastMove();
       continue;
     }
@@ -65,9 +67,13 @@ void Game::play() {
     if (movementController.isValidMove(playerMove)) {
       movementController.movePiece(playerMove);
       isCheckMate = movementController.getCheckmate();
+      counter = 0;
     } else {
-      std::cout << playerMove << std::endl;
+      if (counter == 4) break;
+      std::cout << playerMove.getFrom()
+        << " " << playerMove.getTo() << std::endl;
       std::cout << "invalid move, try again\n";
+      counter++;
     }
   }
   if (isCheckMate) {

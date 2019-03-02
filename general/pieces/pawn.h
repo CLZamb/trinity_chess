@@ -12,14 +12,11 @@ private:
   static box PawnWhiteBoxP1;
   static box PawnBlackBoxP2;
   static box PawnBlackBoxP1;
-  Position initial;
   bool isFirstMove();
 
 public:
-  explicit Pawn(std::string pieceColor, Position initialPos);
+  explicit Pawn(std::string pieceColor, U64);
   virtual ~Pawn();
-  bool checkMove(Position, Position);
-  void possibleMoves(std::vector<std::string> &);
   std::string getPieceType() { return "pawn"; }
 };
 

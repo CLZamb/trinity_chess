@@ -1,10 +1,13 @@
 #include "king.h"
-King::King(std::string pieceColor) : Piece(pieceColor) {
+King::King(std::string pieceColor, U64 bb)
+  : Piece(pieceColor, bb) {
   if (pieceColor == "black") {
+    m_piece_type = bK;
     value = 2000;
     pieceCurrentBlackBox = &kingBlackBoxP2;
     pieceCurrentWhiteBox = &kingWhiteBoxP2;
   } else {
+    m_piece_type = wK;
     value = -2000;
     pieceCurrentBlackBox = &kingBlackBoxP1;
     pieceCurrentWhiteBox = &kingWhiteBoxP1;
@@ -12,33 +15,6 @@ King::King(std::string pieceColor) : Piece(pieceColor) {
 }
 
 King::~King() {}
-
-bool King::checkMove(Position from, Position to) {
-  int dx = abs(from.getPositionX() - to.getPositionX());
-  int dy = abs(from.getPositionY() - to.getPositionY());
-
-  if (dx == 1 || dy == 1)
-    if (dx < 2 && dy < 2)
-      return true;
-
-  std::cout << "Illegal Move\n";
-  return false;
-}
-
-void King::possibleMoves(std::vector<std::string> &allMoves) {
-  int X[8] = {0, 0, -1, 1, -1, 1, -1, 1};
-  int Y[8] = {1, -1, 0, 0, 1, 1, -1, -1};
-
-  currentpos = pos.getCharPositionY();
-  currentpos += pos.getCharPositionX();
-
-  for (int i = 0; i < 8; i++) {
-    movestr = currentpos;
-    movestr += pos.getCharPositionY() + X[i];
-    movestr += pos.getCharPositionX() + Y[i];
-    allMoves.push_back(movestr);
-  }
-}
 
 box King::kingWhiteBoxP2 = {{
     {"░░▁ ✜ ▁░░"},

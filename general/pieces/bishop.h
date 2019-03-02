@@ -10,19 +10,11 @@ private:
   static box bishopWhiteBoxP1;
   static box bishopBlackBoxP2;
   static box bishopWhiteBoxP2;
-  std::string movestr;
-  std::string currentpos;
-  char i;
-  char j;
-  char x;
-  char y;
 
 public:
-  explicit Bishop(std::string pieceColor);
+  explicit Bishop(std::string pieceColor, U64);
   virtual ~Bishop();
-  bool checkMove(Position, Position);
   std::string getPieceType() { return "bishop"; }
-  void possibleMoves(std::vector<std::string> &);
 };
 
 #endif /* BISHOP_H */

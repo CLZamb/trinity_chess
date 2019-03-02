@@ -20,6 +20,7 @@ include_directories(${DIRECTORY}
 
 set(SOURCE_FILES
   main.cpp
+  defs.h
   logic/board.h
   logic/board.cpp
   logic/position.h
@@ -30,6 +31,9 @@ set(SOURCE_FILES
   logic/AiPlayer.cpp
   logic/movement.h
   logic/movement.cpp
+  logic/move.h
+  logic/bitboard.h
+  logic/bitboard.cpp
   display/Idisplay.h
   display/Idisplay.cpp
   display/boxStruct.h
@@ -52,8 +56,8 @@ set(SOURCE_FILES
   general/pieces/queen.cpp
   general/pieces/rook.h
   general/pieces/rook.cpp
-  general/pieces/pieceFactory.h
-  general/pieces/pieceFactory.cpp
+  # general/pieces/pieceFactory.h
+  # general/pieces/pieceFactory.cpp
   )
 
 set(

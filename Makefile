@@ -339,33 +339,6 @@ general/pieces/piece.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/piece.cpp.s
 .PHONY : general/pieces/piece.cpp.s
 
-general/pieces/pieceFactory.o: general/pieces/pieceFactory.cpp.o
-
-.PHONY : general/pieces/pieceFactory.o
-
-# target to build an object file
-general/pieces/pieceFactory.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pieceFactory.cpp.o
-.PHONY : general/pieces/pieceFactory.cpp.o
-
-general/pieces/pieceFactory.i: general/pieces/pieceFactory.cpp.i
-
-.PHONY : general/pieces/pieceFactory.i
-
-# target to preprocess a source file
-general/pieces/pieceFactory.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pieceFactory.cpp.i
-.PHONY : general/pieces/pieceFactory.cpp.i
-
-general/pieces/pieceFactory.s: general/pieces/pieceFactory.cpp.s
-
-.PHONY : general/pieces/pieceFactory.s
-
-# target to generate assembly for a file
-general/pieces/pieceFactory.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pieceFactory.cpp.s
-.PHONY : general/pieces/pieceFactory.cpp.s
-
 general/pieces/queen.o: general/pieces/queen.cpp.o
 
 .PHONY : general/pieces/queen.o
@@ -446,6 +419,33 @@ logic/AiPlayer.s: logic/AiPlayer.cpp.s
 logic/AiPlayer.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/AiPlayer.cpp.s
 .PHONY : logic/AiPlayer.cpp.s
+
+logic/bitboard.o: logic/bitboard.cpp.o
+
+.PHONY : logic/bitboard.o
+
+# target to build an object file
+logic/bitboard.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/bitboard.cpp.o
+.PHONY : logic/bitboard.cpp.o
+
+logic/bitboard.i: logic/bitboard.cpp.i
+
+.PHONY : logic/bitboard.i
+
+# target to preprocess a source file
+logic/bitboard.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/bitboard.cpp.i
+.PHONY : logic/bitboard.cpp.i
+
+logic/bitboard.s: logic/bitboard.cpp.s
+
+.PHONY : logic/bitboard.s
+
+# target to generate assembly for a file
+logic/bitboard.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/bitboard.cpp.s
+.PHONY : logic/bitboard.cpp.s
 
 logic/board.o: logic/board.cpp.o
 
@@ -615,9 +615,6 @@ help:
 	@echo "... general/pieces/piece.o"
 	@echo "... general/pieces/piece.i"
 	@echo "... general/pieces/piece.s"
-	@echo "... general/pieces/pieceFactory.o"
-	@echo "... general/pieces/pieceFactory.i"
-	@echo "... general/pieces/pieceFactory.s"
 	@echo "... general/pieces/queen.o"
 	@echo "... general/pieces/queen.i"
 	@echo "... general/pieces/queen.s"
@@ -627,6 +624,9 @@ help:
 	@echo "... logic/AiPlayer.o"
 	@echo "... logic/AiPlayer.i"
 	@echo "... logic/AiPlayer.s"
+	@echo "... logic/bitboard.o"
+	@echo "... logic/bitboard.i"
+	@echo "... logic/bitboard.s"
 	@echo "... logic/board.o"
 	@echo "... logic/board.i"
 	@echo "... logic/board.s"

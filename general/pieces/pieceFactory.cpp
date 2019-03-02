@@ -1,11 +1,10 @@
 #include "pieceFactory.h"
 
-Piece *PieceFactory::createPiece(std::string type, std::string color,
-                                 Position pos) {
+Piece *PieceFactory::createPiece(std::string type, std::string color) {
   Piece *piece = nullptr;
 
   if (type == "pawn")
-    piece = createPawn(color, pos);
+    piece = createPawn(color);
   else if (type == "rook")
     piece = createRook(color);
   else if (type == "queen")
@@ -48,8 +47,8 @@ Piece *PieceFactory::createKing(std::string colorPiece) {
 Piece *PieceFactory::createKnight(std::string colorPiece) {
   return new Knight(colorPiece);
 }
-Piece *PieceFactory::createPawn(std::string colorPiece, Position initial) {
-  return new Pawn(colorPiece, initial);
+Piece *PieceFactory::createPawn(std::string colorPiece) {
+  return new Pawn(colorPiece);
 }
 Piece *PieceFactory::createQueen(std::string colorPiece) {
   return new Queen(colorPiece);

@@ -10,14 +10,11 @@ private:
   static box kingBlackBoxP1;
   static box kingBlackBoxP2;
   std::string movestr;
-  std::string currentpos;
 
 public:
-  explicit King(std::string pieceColor);
+  explicit King(std::string pieceColor, U64);
   virtual ~King();
-  bool checkMove(Position, Position);
   std::string getPieceType() { return "king"; }
-  void possibleMoves(std::vector<std::string> &);
 };
 
 #endif /* KING_H */

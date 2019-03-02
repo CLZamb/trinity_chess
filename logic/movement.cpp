@@ -5,33 +5,36 @@ Movement::Movement(Board *board, Player **turn)
 
 Movement::~Movement() {}
 
-void Movement::movePiece(string strMove) {
-  Move playerMove(strMove);
-  Position start = playerMove.getPosFrom();
-  Position end = playerMove.getPosTo();
+void Movement::movePiece(Move pmove) {
+  // Position start = playerMove.getPosFrom();
+  // Position end = playerMove.getPosTo();
+  unsigned int from = pmove.getFrom();
+  unsigned int to = pmove.getTo();
 
-  Piece *capturedPiece = capturePiece(end);
-  Piece *piece = takePiece(start);
-  m_board->setPieceAtPos(piece, end);
-
-  prevMoves.push_back(Move(piece, capturedPiece, start, end));
+  Piece *capturedPiece = capturePiece(to);
+  Piece *piece = takePiece(from);
+  if (capturedPiece) {
+    pmove.setCapturePiece(capturedPiece->getTypeAndColor());
+  }
+  m_board->make_move(piece, from, to);
+  prevMoves.push_back(pmove);
   changeTurn();
+
+  std::cout << "Score is" << m_board->evalPosition()  << std::endl;
 }
 
 void Movement::changeTurn() {
   (*m_currentPlayerTurn) = (*m_currentPlayerTurn)->getOpponent();
 }
 
-Piece *Movement::takePiece(Position startSquare) {
+Piece *Movement::takePiece(int startSquare) {
   Piece *piece = m_board->getPieceAtPos(startSquare);
-  if (!piece)
-    return nullptr;
+  assert(piece != nullptr);
 
-  m_board->clearSquareAt(startSquare);
   return piece;
 }
 
-Piece *Movement::capturePiece(Position endSquare) {
+Piece *Movement::capturePiece(int endSquare) {
   Piece *piece = m_board->getPieceAtPos(endSquare);
   if (!piece)
     return nullptr;
@@ -39,7 +42,7 @@ Piece *Movement::capturePiece(Position endSquare) {
   if (piece->getPieceType() == "king")
     checkmate = true;
 
-  piece->setCapturedState(true);
+  m_board->capture_piece(piece, endSquare);
   return piece;
 }
 
@@ -50,32 +53,28 @@ void Movement::undoLastMove() {
   }
 
   Move lastMove = prevMoves.back();
-  if (lastMove.capturedPiece) {
-    m_board->setPieceAtPos(lastMove.capturedPiece, lastMove.to);
-    lastMove.capturedPiece->setCapturedState(false);
-    if (lastMove.capturedPiece->getPieceType() == "king")
-      checkmate = false;
-  } else {
-    m_board->clearSquareAt(lastMove.to);
+
+  unsigned int from = lastMove.getFrom();
+  unsigned int to = lastMove.getTo();
+  unsigned int pieceCaptured = lastMove.getCapturedPiece();
+
+  Piece *piece = takePiece(to);
+  m_board->make_move(piece, to, from);
+  if (pieceCaptured) {
+    if ((pieceCaptured == bK)|| (pieceCaptured == wK)) checkmate = false;
+    m_board->undo_move(pieceCaptured, to);
   }
 
-  m_board->setPieceAtPos(lastMove.piece, lastMove.from);
   prevMoves.pop_back();
-  // changeTurn
   changeTurn();
 }
 
-bool Movement::isValidMove(string strMove) {
-  // changeit to validate move
-  Move playerMove(strMove);
-  if (!playerMove.isValidInput())
+bool Movement::isValidMove(Move pmove) {
+  if (!pmove.getValidMove())
     return false;
 
-  Position from = playerMove.getPosFrom();
-  Position to = playerMove.getPosTo();
-
-  if (!isValidPosition(from) || !isValidPosition(to))
-    return false;
+  int from = pmove.getFrom();
+  int to = pmove.getTo();
 
   Piece *currentPiece = m_board->getPieceAtPos(from);
   Player *opponent = (*m_currentPlayerTurn)->getOpponent();
@@ -102,94 +101,53 @@ bool Movement::isValidMove(string strMove) {
       return false;
   }
 
-  if (!currentPiece->checkMove(from, to))
-    return false;
-
-  if (currentPiece->getPieceType() != "knight")
-    if (hasCollision(from, to))
+  if (!checkMove(currentPiece, from, to))
       return false;
 
   return true;
 }
 
-bool Movement::hasCollision(Position from, Position to) {
-  int fromX = from.getPositionX();
-  int fromY = from.getPositionY();
+bool Movement::checkMove(Piece* currentPiece, int from, int to) {
+  U64 non_attack_moves = m_board->getNonAttackMoves(currentPiece, SquareIndices(from));
+  U64 attacks = m_board->getPieceAttacks(currentPiece, SquareIndices(from));
+  U64 occ = ~m_board->getOwnPiecesOcc(currentPiece->getColorPiece());
 
-  int toX = to.getPositionX();
-  int toY = to.getPositionY();
+  U64 all_moves = (attacks | non_attack_moves) & occ;
 
-  int dx = abs(fromX - toX);
-  int dy = abs(fromY - toY);
-
-  bool vertical = dx == 0 && dy > 0;
-  bool horizontal = dx > 0 && dy == 0;
-  bool diagonal = dx > 0 && dy > 0;
-
-  int dirY = (fromY - toY) > 0 ? DOWN : UP;
-  int dirX = (fromX - toX) > 0 ? LEFT : RIGHT;
-
-  Position temPos = from;
-
-  // Pending
-  if (vertical) {
-    for (int i = 1; i < dy; ++i) {
-      temPos.setPositionY(fromY + (dirY * i));
-      if (m_board->getSquareAtPos(temPos)->hasPiece())
-        return true;
-    }
-  } else if (horizontal) {
-    for (int i = 1; i < dx; ++i) {
-      temPos.setPositionX(fromX + (dirX * i));
-      if (m_board->getSquareAtPos(temPos)->hasPiece())
-        return true;
-    }
-  } else if (diagonal) {
-    for (int i = 1; i < dy; ++i) {
-      temPos.setPosition(fromX + (dirX * i), fromY + (dirY * i));
-      if (m_board->getSquareAtPos(temPos)->hasPiece())
-        return true;
-    }
-  }
-
-  return false;
+  U64 pieceLoc = ONE << to;
+  return all_moves & pieceLoc;
 }
 
-bool Movement::isValidPosition(Position pos) {
-  return (pos.getPositionX() >= 0) && (pos.getPositionX() < 8) &&
-         (pos.getPositionY() >= 0) && (pos.getPositionY() < 8);
-}
-
-/*
- * (* Initial call for Player A's root node *)
- *  negamax(rootNode, depth, −∞, +∞, 1)
- * */
-string Movement::MoveGenerator::getBestMove() {
-  vector<string> moves;
-  getPossibleMoves(moves);
-  sortMoves(moves);
-  string *bestMove;
+Move Movement::MoveGenerator::getBestMove() {
+  MoveList m_legalMoves;
+  getPossibleMoves(&m_legalMoves);
+  Move bestMove;
   int bestScore = INT_MIN;
   int score;
-  for (vector<string>::iterator mv = moves.begin(); mv != moves.end(); mv++) {
-    movement->movePiece(*mv);
-    score = -negamax(3, INT_MIN + 1, INT_MAX, -1);
-    movement->undoLastMove();
-    if (score > bestScore) {
-      bestMove = &*mv;
-      bestScore = score;
-    }
+
+  for (const Move& mv : m_legalMoves) {
+     movement->movePiece(mv);
+     score = -negamax(4, INT_MIN + 1, INT_MAX, -1);
+     movement->undoLastMove();
+     if (score > bestScore) {
+       bestMove = mv;
+       bestScore = score;
+     }
   }
 
-  if (!bestMove)
-    return "quit";
+  if (m_legalMoves.empty()) {
+    bestMove.m_validMove = false;
+    bestMove.m_input = "quit";
+    return bestMove;
+  }
 
-  if (moves.empty())
-    return "quit";
-
-  return *bestMove;
+  bestMove.m_validMove = true;
+  bestMove.m_input = "";
+  return bestMove;
 }
+
 /**
+ negamax algorithm
  function negamax( depth, α, β, color)
    if depth = 0 or node is a terminal node then
    return color × the heuristic value of node
@@ -203,23 +161,23 @@ string Movement::MoveGenerator::getBestMove() {
     if α ≥ β then
       break (* cut-off *)
   return value
- **/
+ */
+
 int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
                                      int color) {
   if (movement->checkmate || depth == 0)
     return color * evaluateBoard();
 
-  vector<string> allmoves;
-  getPossibleMoves(allmoves);
+  MoveList m_legalMoves;
+  getPossibleMoves(&m_legalMoves);
 
-  if (allmoves.size() == 0)
+  if (m_legalMoves.size() == 0)
     return color * evaluateBoard();
 
-  sortMoves(allmoves);
   int value = INT_MIN;
-  for (vector<string>::iterator it = allmoves.begin(); it != allmoves.end();
-       it++) {
-    movement->movePiece(*it);
+
+  for (const Move& mv : m_legalMoves) {
+    movement->movePiece(mv);
     value = std::max(value, -negamax(depth - 1, -beta, -alpha, -color));
     movement->undoLastMove();
     alpha = std::max(alpha, value);
@@ -231,122 +189,12 @@ int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
   return value;
 }
 
-void Movement::MoveGenerator::getPossibleMoves(vector<string> &moves) {
-  PiecesSetPtr playerPieces = (*movement->m_currentPlayerTurn)->getPieces();
-
-  for (Piece *it : playerPieces) {
-    if (!it->isCaptured())
-      it->possibleMoves(moves);
-  }
-
-  for (vector<string>::iterator it = moves.begin(); it != moves.end();) {
-    if (!movement->isValidMove(*it))
-      moves.erase(it);
-    else
-      ++it;
-  }
+void Movement::MoveGenerator::getPossibleMoves(MoveList* legalMoves) {
+  std::string colorPieces = (*movement->m_currentPlayerTurn)->getColorPieces();
+  movement->m_board->generateAllMoves(colorPieces, legalMoves);
 }
 
 int Movement::MoveGenerator::evaluateBoard() {
   // TODO(ME) : add bonus and movilty so that it determines the advantange
-  int value = 0;
-
-  PiecesSetPtr p1Pieces = (*movement->m_currentPlayerTurn)->getPieces();
-  PiecesSetPtr p2Pieces =
-      (*movement->m_currentPlayerTurn)->getOpponent()->getPieces();
-
-  for (Piece *it : p1Pieces) {
-    if (!it->isCaptured())
-      value += it->getValue();
-  }
-
-  for (Piece *it : p2Pieces) {
-    if (!it->isCaptured())
-      value += it->getValue();
-  }
-
-  return value;
+  return movement->m_board->evalPosition();;
 }
-
-struct cmp {
-  template <typename T> bool operator()(const T &l, const T &r) const {
-    if (l.second != r.second)
-      return l.second > r.second;
-
-    return l.first > r.first;
-  }
-};
-
-struct cmpneg {
-  template <typename T> bool operator()(const T &l, const T &r) const {
-    if (l.second != r.second)
-      return l.second < r.second;
-
-    return l.first < r.first;
-  }
-};
-
-void Movement::MoveGenerator::sortMoves(vector<string> &allmoves) {
-  int value = 0;
-  for (auto i : allmoves) {
-    movement->movePiece(i);
-    value = evaluateBoard();
-    temp.insert({i, value});
-    movement->undoLastMove();
-  }
-
-  if ((*movement->m_currentPlayerTurn)->getColorPieces() == "black") {
-    std::set<std::pair<string, int>, cmpneg> setOfMoves(temp.begin(),
-                                                        temp.end());
-    allmoves.clear();
-    // Iterate over a set using range base for loop
-    // It will display the items in sorted order of values
-    for (auto const &element : setOfMoves)
-      allmoves.push_back(element.first);
-
-  } else {
-    std::set<std::pair<string, int>, cmp> setOfMoves(temp.begin(), temp.end());
-    allmoves.clear();
-    // Iterate over a set using range base for loop
-    // It will display the items in sorted order of values
-    //
-    for (auto const &element : setOfMoves)
-      allmoves.push_back(element.first);
-  }
-  temp.clear();
-}
-
-Movement::Move::Move() {}
-Movement::Move::Move(string nextMove) { setNextMove(nextMove); }
-Movement::Move::Move(Piece *piece, Piece *capturedPiece, Position start,
-                     Position end)
-    : from(start), to(end), piece(piece), capturedPiece(capturedPiece) {}
-Movement::Move::~Move() {}
-
-void Movement::Move::setNextMove(string playerInput) {
-  vector<string> positions = scan(playerInput, std::regex("(\\w\\w)"));
-
-  if (positions.size() == 2) {
-    string from = positions[0], to = positions[1];
-    fromPos.setPosition(from[0], from[1]);
-    toPos.setPosition(to[0], to[1]);
-    validInput = true;
-  } else {
-    validInput = false;
-  }
-}
-
-vector<string> Movement::Move::scan(string str, const std::regex reg) {
-  vector<string> results;
-  std::smatch matches;
-  while (std::regex_search(str, matches, reg)) {
-    results.push_back(matches.str(1));
-    str = matches.suffix().str();
-  }
-
-  return results;
-}
-
-Position Movement::Move::getPosFrom() { return fromPos; }
-Position Movement::Move::getPosTo() { return toPos; }
-bool Movement::Move::isValidInput() { return validInput; }

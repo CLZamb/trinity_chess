@@ -5,39 +5,43 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "../defs.h"
 
 class Piece {
-private:
-protected:
+ protected:
+  U64 SetMask[64];
+  U64 ClearMask[64];
   std::string m_colorPiece;
   bool capturing = false;
-  bool captured = false;
   int value = 0;
+  U64 m_bbPiece;
+  Piecetype m_piece_type = EMPTY;
 
-public:
-  Position pos;
+ public:
   box *pieceCurrentBlackBox = nullptr;
   box *pieceCurrentWhiteBox = nullptr;
 
-  explicit Piece(std::string c);
+  explicit Piece(std::string c, U64 bb);
   virtual ~Piece();
 
   virtual box *getDrawingBSquare() { return pieceCurrentBlackBox; }
   virtual box *getDrawingWSquare() { return pieceCurrentWhiteBox; }
-  virtual bool checkMove(Position, Position) { return false; }
   virtual std::string getPieceType() { return ""; }
-  virtual void possibleMoves(std::vector<std::string> &){};
   virtual int getValue() { return value; }
+  virtual Piecetype getTypeAndColor() { return m_piece_type; }
 
-  void setPosition(Position pos);
-  Position *getPosition();
+  box *getDrawingSquare(char c) { return (c == 'w') ? pieceCurrentBlackBox : pieceCurrentWhiteBox; }
+
   std::string getColorPiece();
   bool isCapturing() { return capturing; }
-  bool isCaptured() { return captured; }
   void setCapturingState(bool capturing) { this->capturing = capturing; }
-  void setCapturedState(bool captured) { this->captured = captured; }
+  void make_move(int from, int to) {
+    CLRBIT(m_bbPiece, from);
+    SETBIT(m_bbPiece, to);
+  }
+  U64 getPieceBB();
+  void clearBit(int pos) { CLRBIT(m_bbPiece, pos); }
+  void setBit(int pos) { SETBIT(m_bbPiece, pos); }
 };
-
-typedef std::vector<Piece *> PiecesSetPtr;
 
 #endif /* PIECE_H */

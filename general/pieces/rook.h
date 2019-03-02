@@ -11,16 +11,11 @@ private:
   static box rookBlackBoxP1;
   std::string movestr;
   std::string currentpos;
-  char i;
-  char x;
-  char y;
 
 public:
-  explicit Rook(std::string pieceColor);
+  explicit Rook(std::string pieceColor, U64);
   virtual ~Rook();
-  bool checkMove(Position, Position);
-  std::string getPieceType() { return "queen"; }
-  void possibleMoves(std::vector<std::string> &);
+  std::string getPieceType() { return "rook"; }
 };
 
 #endif /* ROOK_H */

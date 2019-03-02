@@ -6,11 +6,33 @@
 
 #IncludeRegexTransform: 
 
+/Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
+cstdint
+-
+limits
+-
+iostream
+-
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.cpp
+bitboard.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
+string
+-
+../defs.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
+piecesheaders.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/piecesheaders.h
+move.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/move.h
+
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
 Idisplay.h
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/Idisplay.h
-pieceFactory.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/pieceFactory.h
+bitboard.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
 player.h
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.h
 iostream
@@ -20,6 +42,12 @@ string
 utility
 -
 vector
+-
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/move.h
+../defs.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
+iostream
 -
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp
@@ -35,15 +63,17 @@ functional
 -
 map
 -
-regex
--
 set
 -
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.h
+move.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/move.h
 iostream
 -
 piece.h
+-
+regex
 -
 string
 -
@@ -83,10 +113,8 @@ string
 -
 vector
 -
-
-general/pieces/pieceFactory.h
-piecesheaders.h
-general/pieces/piecesheaders.h
+../defs.h
+general/defs.h
 
 general/pieces/piecesheaders.h
 bishop.h

@@ -1,9 +1,17 @@
 #include "piece.h"
 
-Piece::Piece(std::string pieceColor) : m_colorPiece(pieceColor) {}
+Piece::Piece(std::string pieceColor, U64 bb)
+  : m_colorPiece(pieceColor), m_bbPiece(bb) {
+    for (int i = 0; i < 64; ++i) {
+      SetMask[i] = 0ULL;
+      ClearMask[i] = 0ULL;
+    }
+
+    for (int i = 0; i < 64; ++i) {
+      SetMask[i] |= (1ULL << i);
+      ClearMask[i] = ~SetMask[i];
+    }
+  }
 Piece::~Piece() {}
-
-Position *Piece::getPosition() { return &pos; }
-
 std::string Piece::getColorPiece() { return m_colorPiece; }
-void Piece::setPosition(Position pos) { this->pos = pos; }
+U64 Piece::getPieceBB() { return m_bbPiece; }

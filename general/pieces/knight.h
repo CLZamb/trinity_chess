@@ -11,11 +11,9 @@ private:
   static box knightBlackBoxP2;
 
 public:
-  explicit Knight(std::string pieceColor);
+  explicit Knight(std::string pieceColor, U64);
   virtual ~Knight();
-  bool checkMove(Position, Position);
   std::string getPieceType() { return "knight"; }
-  void possibleMoves(std::vector<std::string> &);
 };
 
 #endif /* KNIGHT_H */

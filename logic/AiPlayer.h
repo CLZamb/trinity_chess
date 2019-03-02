@@ -10,7 +10,7 @@ public:
   explicit AiPlayer(std::string, Movement::MoveGenerator *generator);
   virtual ~AiPlayer();
 
-  std::string getPlayerNextMove() override;
+  Move getPlayerNextMove() override;
 };
 
 #endif /* AIPLAYER_H */
