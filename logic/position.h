@@ -12,11 +12,6 @@
  * and where are all the pieces
  * o*/
 
-#define DOWN -1
-#define UP 1
-#define LEFT -1
-#define RIGHT 1
-
 struct Position {
   explicit Position(int x = 0, int y = 0) : m_positionX(x), m_positionY(y) {}
   explicit Position(char x, char y)

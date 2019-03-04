@@ -12,38 +12,34 @@ using std::vector;
 
 class Movement {
 private:
-  Board *m_board;
-  Player **m_currentPlayerTurn = nullptr;
+  Board* m_board;
+  Player** pp_cur_player_turn = nullptr;
   bool checkmate;
-  bool isValidPosition(Position pos);
-  bool checkMove(Piece* currentPiece, int from, int to);
-  Piece *takePiece(int pos);
-  Piece *capturePiece(int pos);
-  void capturePiece(Piece *capturedPiece);
-  vector<Move> prevMoves;
+  bool check_move(Piece*, int from, int to);
+  Piece* take_piece(int pos);
+  Piece* capture_piece(int pos);
+  vector<Move> prev_moves;
 
 public:
-  Movement(Board *, Player **turn);
+  Movement(Board*, Player** turn);
   virtual ~Movement();
-  void movePiece(Move newmove);
-  void undoLastMove();
-  bool isValidMove(Move newmove);
-  bool getCheckmate() { return checkmate; }
-  void generateMove();
-  void changeTurn();
+  void move_piece(Move);
+  void undo_last_move();
+  void change_turn();
+  bool is_valid_move(Move);
+  bool get_checkmate();
 
   class MoveGenerator {
     private:
       std::map<Move, int> temp;
-      Movement *movement;
-      string bestMove = "quit";
+      Movement* movement;
       int negamax(int, int, int, int);
 
     public:
-      MoveGenerator(Movement *movement) : movement(movement) {}
-      Move getBestMove();
-      void getPossibleMoves(MoveList*);
-      int evaluateBoard();
+      MoveGenerator(Movement* movement) : movement(movement) {}
+      Move get_best_move();
+      void generate_moves(MoveList*);
+      int evaluate_board();
   };
 };
 

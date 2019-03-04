@@ -1,31 +1,31 @@
 #include "game.h"
 Game::Game() {}
-Game::~Game() { delete pPlayer2; }
+Game::~Game() { delete p_player2; }
 
 void Game::start() {
-  printMessage("welcome");
+  print_message("welcome");
   std::cin.get();
-  printMessage("start");
-  int option = getOption();
+  print_message("start");
+  int option = get_option();
   switch (option) {
   case 1:
   case 2:
     // create squares and set the pieces on those squares
     if (option == 1) {
       // Player vs Player
-      pPlayer2 = new Player("black");
+      p_player2 = new Player(BLACK);
     } else if (option == 2) {
       // Player vs CPU
-      Movement::MoveGenerator aiMoveGenerator(&movementController);
-      pPlayer2 = new AiPlayer("black", &aiMoveGenerator);
+      Movement::MoveGenerator AI_move_generator(&movement_controller);
+      p_player2 = new AiPlayer(BLACK, &AI_move_generator);
     }
-    m_board.initialize(&player1, pPlayer2);
-    pPlayer2->setOpponent(&player1);
-    player1.setOpponent(pPlayer2);
+    m_board._init(&m_player1, p_player2);
+    p_player2->set_opponent(&m_player1);
+    m_player1.set_opponent(p_player2);
     play();
     break;
   case 3:
-    printMessage("gameOver");
+    print_message("gameOver");
     break;
   case 4:
     std::cout << "Credits" << std::endl;
@@ -36,7 +36,7 @@ void Game::start() {
   }
 }
 
-int Game::getOption() {
+int Game::get_option() {
   std::cout << "\t\tchoose one of the options (1-4): ";
   int input;
   std::cin >> input;
@@ -44,49 +44,52 @@ int Game::getOption() {
 }
 
 void Game::play() {
-  bool isCheckMate = false;
-  Move playerMove;
+  bool is_checkMate = false;
+  Move player_move;
   // clear input buffer
   std::cin.clear();
   std::cin.ignore();
 
   int counter = 0;
-  while (!isCheckMate) {
-    pBoardDisplay->print();
-    playerMove = playerTurn->getPlayerNextMove();
+  while (!is_checkMate) {
+    p_board_display->print();
+    player_move = p_player_turn->get_next_move();
 
-    if (playerMove.m_input == "quit" || playerMove.m_input == "close" ||
-        playerMove.m_input == "exit")
+    if (player_move.get_str_input() == "quit" ||
+        player_move.get_str_input() == "close" ||
+        player_move.get_str_input() == "exit")
       break;
 
-    if (playerMove.m_input == "undo") {
-      movementController.undoLastMove();
+    if (player_move.get_str_input() == "undo") {
+      movement_controller.undo_last_move();
       continue;
     }
 
-    if (movementController.isValidMove(playerMove)) {
-      movementController.movePiece(playerMove);
-      isCheckMate = movementController.getCheckmate();
+    if (movement_controller.is_valid_move(player_move)) {
+      movement_controller.move_piece(player_move);
+      is_checkMate = movement_controller.get_checkmate();
       counter = 0;
     } else {
+      // avoiding infinite loop
       if (counter == 4) break;
-      std::cout << playerMove.getFrom()
-        << " " << playerMove.getTo() << std::endl;
+      std::cout << player_move.get_str_input() << std::endl;
       std::cout << "invalid move, try again\n";
       counter++;
     }
   }
-  if (isCheckMate) {
+
+  if (is_checkMate) {
     std::cout << "checkmate\n";
-    std::cout << "Player " << playerTurn->getOpponent()->getColorPieces()
-              << " won ";
+    std::cout << "Player "
+      << (p_player_turn->has_black_pieces()? "white" : "black")
+      << " won.";
   }
 }
 
-void Game::printMessage(string message) {
+void Game::print_message(string message) {
   system(CLEAR);
   Messages::m_nextMessage = message;
-  pMessagesDisplay->print();
+  p_message_display->print();
 }
 
-void Game::changeTurn() { playerTurn = playerTurn->getOpponent(); }
+void Game::change_turn() { p_player_turn = p_player_turn->get_opponent(); }

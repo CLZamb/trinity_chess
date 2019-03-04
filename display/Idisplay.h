@@ -10,7 +10,6 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
-using std::vector;
 #ifdef _WIN32
 #define CLEAR "cls"
 #else

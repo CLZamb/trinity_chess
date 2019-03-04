@@ -5,15 +5,15 @@
 
 class Knight : public Piece {
 private:
-  static box knightWhiteBoxP2;
-  static box knightWhiteBoxP1;
-  static box knightBlackBoxP1;
-  static box knightBlackBoxP2;
+  static box knight_w_sq_p2;
+  static box knight_b_sq_p2;
+  static box knight_w_sq_p1;
+  static box knight_b_sq_p1;
 
 public:
-  explicit Knight(std::string pieceColor, U64);
+  explicit Knight(bool black, U64);
   virtual ~Knight();
-  std::string getPieceType() { return "knight"; }
+  std::string get_type();
 };
 
 #endif /* KNIGHT_H */

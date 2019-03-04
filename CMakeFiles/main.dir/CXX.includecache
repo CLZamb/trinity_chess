@@ -14,15 +14,17 @@ limits
 iostream
 -
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.cpp
-bitboard.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/AiPlayer.cpp
+AiPlayer.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/AiPlayer.h
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/AiPlayer.h
+movement.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
 string
 -
-../defs.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
 piecesheaders.h
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/piecesheaders.h
 move.h
@@ -49,10 +51,6 @@ vector
 /Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
 iostream
 -
-
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp
-movement.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
 board.h
@@ -105,8 +103,6 @@ general/pieces/piece.h
 general/pieces/piece.h
 boxStruct.h
 general/pieces/boxStruct.h
-position.h
-general/pieces/position.h
 iostream
 -
 string
@@ -139,8 +135,4 @@ general/pieces/piece.h
 general/pieces/rook.h
 piece.h
 general/pieces/piece.h
-
-logic/position.h
-string
--
 

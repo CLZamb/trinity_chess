@@ -2,7 +2,6 @@
 #define BITBOARD_H
 
 #include <string>
-#include "../defs.h"
 #include "piecesheaders.h"
 #include "move.h"
 
@@ -11,12 +10,12 @@ typedef std::vector<Move> MoveList;
 using std::string;
 
 struct ExtMove {
-  Move move;
+  Move m_move;
   int value;
 
-  operator Move() const { return move; }
-  void operator=(Move m) { move = m; }
-  void add(Move m) { move = m; }
+  operator Move() const { return m_move; }
+  void operator=(Move m) { m_move = m; }
+  void add(Move m) { m_move = m; }
 
   // Inhibit unwanted implicit conversions to Move
   // with an ambiguity that yields to a compile error.
@@ -33,35 +32,31 @@ class Bitboard {
      int shift;  // shift right
    };
 
-    U64 whitePawn_Attacks[64];
-    U64 blackPawn_Attacks[64];
-    U64 King_Attacks[64];
-    U64 Knight_Attacks[64];
+    U64 m_w_pawn_attacks[64];
+    U64 m_b_pawn_attacks[64];
+    U64 m_knight_attacks[64];
+    U64 m_king_attacks[64];
 
-    U64 blackPawn_non_Attacks[64];
-    U64 whitePawn_non_Attacks[64];
+    U64 m_b_pawn_non_attacks[64];
+    U64 m_w_pawn_non_attacks[64];
 
-    U64 rookOccupancy[64][4096];
-    U64 bishopOccupancy[64][512];
-    U64 Bishop_Table[64][512];
-    U64 Rook_Table[64][4096];
+    U64 m_rook_occupancy[64][4096];
+    U64 m_bishop_occupancy[64][512];
+    U64 m_bishop_table[64][512];
+    U64 m_rook_table[64][4096];
 
-    SMagic mRookTbl[Squareend];
-    SMagic mBishopTbl[Squareend];
+    SMagic m_rook_tbl[Squareend];
+    SMagic m_bishop_tbl[Squareend];
 
     U64 SetMask[64];
     U64 ClearMask[64];
     U64 Enpessant[2];
-    U64 notHFile = 0x7f7f7f7f7f7f7f7f;
-    U64 notGHFile = 0x3f3f3f3f3f3f3f3f;
-    U64 notAFile = 0xfefefefefefefefe;
-    U64 notABFile = 0xfcfcfcfcfcfcfcfc;
-    int boardScore = 0;
+    int board_score = 0;
     // U64 pieces[13];
     // box *boardBB[64] = {nullptr};
 
     int CountBits(U64);
-    int Popbit(U64 *);
+    int Popbit(U64*);
     void _init_tables(int);
     void _init_slider_masks_shifs_occupancies(int);
     void _init_nonsliders_attacks();
@@ -70,60 +65,60 @@ class Bitboard {
     U64 ratt(int sq, U64 block);
     U64 bmask(int sq);
     U64 rmask(int sq);
-    int pop_1st_bit(U64 *bb);
+    int pop_1st_bit(U64* bb);
     int count_1s(U64 b);
-    U64 setOccupancy(int index, int bits, U64 m);
-    U64 pawnMask(int sq, int side);
-    U64 kingMask(int sq);
-    U64 knightMask(int sq);
-    U64 pawnNonAttack(int sq, int side);
-    void gen_all_pawn_moves(string side, MoveList *);
-    void gen_all_piece_moves(Piece* piece, MoveList *moveList);
+    U64 set_occupancy(int index, int bits, U64 m);
+    U64 pawn_mask(int sq, int side);
+    U64 knight_mask(int sq);
+    U64 king_mask(int sq);
+    U64 pawn_non_attack(int sq, int side);
+    void gen_all_pawn_moves(Piece* piece, MoveList*);
+    void gen_all_piece_moves(Piece* piece, MoveList* moveList);
 
  public:
     Bitboard();
     virtual ~Bitboard();
     void _init();
 
-    U64& getAllWhitePos();
-    U64& getAllBlackPos();
-    U64 getPiecesBB(int pieceType);
-    U64 bishopAttacks(U64 occ, SquareIndices);
-    U64 rookAttacks(U64 occ, SquareIndices);
-    U64 queenAttacks(U64 occ, SquareIndices);
-    U64 getPieceAttacks(Piece *p, SquareIndices);
-    U64 getNonAttackMoves(Piece *p, SquareIndices);
-    void generateAllMoves(string side, MoveList*);
-    void setBitAtWhitePieces(int pos);
-    void setBitAtBlackPieces(int pos);
-    void clearBitAtWhitePieces(int pos);
-    void clearBitAtBlackPieces(int pos);
+    U64& get_all_w_bitboard();
+    U64& get_all_b_bitboard();
+    U64 get_Pieces_BB(int piece_type);
+    U64 bishop_attacks(U64 occ, SquareIndices);
+    U64 rook_attacks(U64 occ, SquareIndices);
+    U64 queen_attacks(U64 occ, SquareIndices);
+    U64 get_piece_attacks(Piece* p, SquareIndices);
+    U64 get_non_attack_moves(Piece* p, SquareIndices);
+    void generate_all_moves(bool side, MoveList*);
+    void set_bit_at_w_pieces(int pos);
+    void set_bit_at_b_pieces(int pos);
+    void clear_bit_at_w_pieces(int pos);
+    void clear_bit_at_b_pieces(int pos);
     void move(Piece* p, int f, int t);
     void capture_piece(Piece* piece, int pos);
-    int evaluateBoard();
     void add_value(int value);
+    int evaluate_board();
 
-    Bishop blackBishop{"black", BISHOPSTART & ALLBLACKSTART};
-    Bishop whiteBishop{"white", BISHOPSTART & ALLWHITESTART};
+    Bishop m_b_bishop{BLACK, BISHOPSTART & ALLBLACKSTART};
+    Bishop m_w_bishop{WHITE, BISHOPSTART & ALLWHITESTART};
 
-    King blackKing{"black", KINGSTART & ALLBLACKSTART};
-    King whiteKing{"white", KINGSTART & ALLWHITESTART};
+    King m_b_king{BLACK, KINGSTART & ALLBLACKSTART};
+    King m_w_king{WHITE, KINGSTART & ALLWHITESTART};
 
-    Knight blackKnigth{"black", KNIGHTSTART & ALLBLACKSTART};
-    Knight whiteKnigth{"white", KNIGHTSTART & ALLWHITESTART};
+    Knight m_b_knigth{BLACK, KNIGHTSTART & ALLBLACKSTART};
+    Knight m_w_knigth{WHITE, KNIGHTSTART & ALLWHITESTART};
 
-    Queen blackQueen{"black", QUEENSTART & ALLBLACKSTART};
-    Queen whiteQueen{"white", QUEENSTART & ALLWHITESTART};
+    Queen m_b_queen{BLACK, QUEENSTART & ALLBLACKSTART};
+    Queen m_w_queen{WHITE, QUEENSTART & ALLWHITESTART};
 
-    Rook blackRook{"black", ROOKSTART & ALLBLACKSTART};
-    Rook whiteRook{"white", ROOKSTART & ALLWHITESTART};
+    Rook m_b_rook{BLACK, ROOKSTART & ALLBLACKSTART};
+    Rook m_w_rook{WHITE, ROOKSTART & ALLWHITESTART};
 
-    Pawn blackPawn{"black", PAWNSTART & ALLBLACKSTART};
-    Pawn whitePawn{"white", PAWNSTART & ALLWHITESTART};
+    Pawn m_b_pawn{BLACK, PAWNSTART & ALLBLACKSTART};
+    Pawn m_w_pawn{WHITE, PAWNSTART & ALLWHITESTART};
 
-    U64 m_allWhitePieces = ALLWHITESTART;
-    U64 m_allBlackPieces = ALLBLACKSTART;
-    U64 m_allPieces = ALLWHITESTART|ALLBLACKSTART;
+    U64 m_all_w_pieces = ALLWHITESTART;
+    U64 m_all_b_pieces = ALLBLACKSTART;
+    U64 m_all_pieces = ALLWHITESTART|ALLBLACKSTART;
 };
 
 #endif /* BITBOARD_H */

@@ -4,17 +4,17 @@ Messages::Messages() {}
 
 void Messages::print() {
   if (m_nextMessage == "welcome")
-    cout << welcomeMessage;
+    cout << p_welcome_message;
   else if (m_nextMessage == "start")
-    cout << startMessage;
+    cout << p_start_message;
   else if (m_nextMessage == "gameOver")
-    cout << gameOver;
+    cout << p_game_over;
   else
     cout << "nothing to print" << endl;
 }
 
 string Messages::m_nextMessage = "";
-char *Messages::welcomeMessage =
+char* Messages::p_welcome_message =
     "\n\n\n\n"
     "\t\t**********************************************************************"
     "************\n "
@@ -81,7 +81,7 @@ char *Messages::welcomeMessage =
     "\t\t**********************************************************************"
     "***********\n ";
 
-char *Messages::startMessage =
+char *Messages::p_start_message =
     "\n\n\n\n"
     "\t\t**********************************************************************"
     "***********\n "
@@ -148,7 +148,7 @@ char *Messages::startMessage =
     "\t\t**********************************************************************"
     "***********\n ";
 
-char *Messages::gameOver =
+char *Messages::p_game_over =
     "   ███████████████████████████████████████████████████████████\n"
     "   ███████████████████████████████████████████████████████████\n"
     "   ███████████████████████████████████████████████████████████\n"

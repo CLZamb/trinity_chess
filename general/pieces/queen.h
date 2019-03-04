@@ -4,15 +4,15 @@
 
 class Queen : public Piece {
 private:
-  static box queenWhiteBoxP1;
-  static box queenWhiteBoxP2;
-  static box queenBlackBoxP1;
-  static box queenBlackBoxP2;
+  static box queen_w_sq_p2;
+  static box queen_b_sq_p2;
+  static box queen_w_sq_p1;
+  static box queen_b_sq_p1;
 
 public:
-  explicit Queen(std::string pieceColor, U64);
+  explicit Queen(bool black, U64);
   virtual ~Queen();
-  std::string getPieceType() { return "queen"; }
+  std::string get_type();
 };
 
 #endif /* QUEEN_H */

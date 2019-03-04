@@ -13,76 +13,58 @@
 #include <vector>
 
 class Board : public IDisplay {
-private:
-  // PieceFactory piecefactory;
-  Player *player1, *player2;
+ private:
+  Player* player1, *player2;
   box wSquare, bSquare;
   Bitboard m_bb;
 
-  void addToBoard(string type, int position, string color);
-  void createBoardSquares();
-  void createSquareBases();
-  void setPiecesOnBoard();
+  void add_to_board(string type, int position, string color);
+  void create_board_squares();
+  void create_square_bases();
+  void set_pieces_on_board();
+  std::string get_str_type(int type);
 
   class Square {
-    private:
-      box *pBaseDrawing;
-      box *pCurrentDrawing;
-      const int squarePos;
-      Piece *pPiece = nullptr;
-      bool occupied = false;
-      bool blackBox;
+   private:
+      box* p_base_drawing;
+      box* p_cur_drawing;
+      Piece* p_piece = nullptr;
+      bool m_occupied = false;
+      bool m_black_box;
 
-    public:
-      Square(box *, bool, int position);
+   public:
+      Square(box*, bool);
       virtual ~Square();
 
-      char* getContent(int i);
-      void setPiece(Piece *piece);
-      void clearSquare();
-      bool hasPiece() { return occupied; }
-      bool isBlackBox();
-      Piece *getPiece();
-      box *getCurrentDrawing();
+      char* get_content(int i);
+      void set_piece(Piece* piece);
+      void clear_square();
+      bool has_piece();
+      bool is_black_box();
+      Piece* get_piece();
+      box* get_current_drawing();
   };
 
-  Square *board[64] = {nullptr};
+  Square* p_board[64] = {nullptr};
 
-public:
+ public:
   Board();
   ~Board();
 
-  Square *getSquareAtPos(int pos);
-  U64 rookAttacks(U64 occ, SquareIndices sq) { return m_bb.rookAttacks(occ, sq); }
-  U64 getPieceAttacks(Piece *piece, SquareIndices from);
-  U64 getNonAttackMoves(Piece *piece, SquareIndices from);
-  bool isPieceAt(int pos);
-  void initialize(Player *, Player *);
-  void clearSquareAt(int pos);
-  void saveCapturedPiece(Piece *);
-  void make_move(Piece*, int from, int to);
-  std::string get_str_type(int type);
-  // print Board
+  void _init(Player*, Player*);
   void print();
-
-  Piece *getPieceAtPos(int);
-  U64 getPiecesBB(int pieceType);
-  U64 getOwnPiecesOcc(std::string side) {
-    if (side == "black")
-      return m_bb.m_allBlackPieces;
-
-    return  m_bb.m_allWhitePieces;
-  }
-
-  U64 getAllWhitePieces() { return m_bb.m_allWhitePieces; }
-  U64 getAllBlackPieces() { return m_bb.m_allBlackPieces; }
-  void generateAllMoves(std::string side, MoveList *moveList) {
-    return m_bb.generateAllMoves(side, moveList);
-  }
-
+  void generate_all_moves(bool side, MoveList* moveList);
+  void make_move(Piece*, int from, int to);
   void undo_move(int pieceType, int pos);
   void capture_piece(Piece* p, int pos);
-  int evalPosition() { return m_bb.evaluateBoard(); }
+  int get_board_score();
+  U64 get_piece_attacks(Piece* piece, int from);
+  U64 get_non_attack_moves(Piece* piece, int from);
+  U64 get_own_pieces_occ(bool is_black);
+  U64 get_all_w_pieces();
+  U64 get_all_b_pieces();
+  Square* get_square_at_pos(int pos);
+  Piece* get_piece_at_pos(int);
 };
 
 #endif /* BOARD_H */

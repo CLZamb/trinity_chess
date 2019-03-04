@@ -1,23 +1,23 @@
 #include "player.h"
 
-Player::Player(std::string c) : m_colorPieces(c) {}
+Player::Player(bool has_black_pieces) : m_black_pieces(has_black_pieces) {}
 Player::~Player() {}
 
-Move Player::getPlayerNextMove() {
+Move Player::get_next_move() {
   std::string input;
   std::cout << "move piece ie: (a7 a6), to end the game type "
                "\"close, quite or exit\""
-            << "\nis player " << this->m_colorPieces << " turn"
+            << "\nis player " << (m_black_pieces? "black": "white") << " turn"
             << "\n>> ";
   std::getline(std::cin, input);
-  setNextMove(input);
-  return m_Move;
+  set_next_move(input);
+  return m_move;
 }
 
-void Player::setNextMove(string playerInput) {
-  vector<string> positions;
+void Player::set_next_move(string input) {
+  vector<string> list_pos;
   try {
-    positions = scan(playerInput, std::regex("([a-h][1-8])"));
+    list_pos = scan(input, std::regex("([a-h][1-8])"));
   } catch (std::regex_error &e) {
     if (e.code() == std::regex_constants::error_badrepeat)
       std::cerr << "Repeat was not preceded by a valid regular expression.\n";
@@ -25,23 +25,21 @@ void Player::setNextMove(string playerInput) {
       std::cerr << "Regex exception .\n";
   }
 
-  if (positions.size() == 2) {
-    int fromFile = positions[0][0] - 'a';
-    int fromRank = (positions[0][1] - '1') * 8;
-    int toFile = positions[1][0] - 'a';
-    int toRank = (positions[1][1] - '1') * 8;
-    int from = fromFile + fromRank;
-    int to = toFile + toRank;
+  if (list_pos.size() == 2) {
+    int from = convert_to_int_pos(list_pos[0][0], list_pos[0][1]);
+    int to = convert_to_int_pos(list_pos[1][0] , list_pos[1][1]);
 
-    m_Move.m_validMove = true;
-    m_Move.setValidMove(true);
-    m_Move.setMove(from, to, 0);
+    m_move.set_valid_move(true);
+    m_move.set_move(from, to, 0);
   } else {
-    m_Move.m_validMove = false;
-    m_Move.setValidMove(false);
+    m_move.set_valid_move(false);
   }
 
-  m_Move.m_input = playerInput;
+  m_move.set_str_input(input);
+}
+
+int Player::convert_to_int_pos(char file, char rank) {
+  return (file - 'a') + ((rank - '1')*8);
 }
 
 vector<string> Player::scan(string str, const std::regex reg) {
@@ -53,3 +51,8 @@ vector<string> Player::scan(string str, const std::regex reg) {
   }
   return results;
 }
+
+void Player::set_opponent(Player* opponent) { this->p_opponent = opponent; }
+bool Player::has_black_pieces() { return m_black_pieces; }
+bool Player::is_valid_move() { return is_valid_input; }
+Player* Player::get_opponent() { return p_opponent; }

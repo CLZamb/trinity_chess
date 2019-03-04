@@ -1,7 +1,6 @@
 #ifndef PIECE_H
 #define PIECE_H
 #include "boxStruct.h"
-#include "position.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,37 +10,28 @@ class Piece {
  protected:
   U64 SetMask[64];
   U64 ClearMask[64];
-  std::string m_colorPiece;
-  bool capturing = false;
-  int value = 0;
-  U64 m_bbPiece;
-  Piecetype m_piece_type = EMPTY;
+  U64 m_bitboard;
+  Piecetype m_type = EMPTY;
+  box* p_cur_b_sq_drawing = nullptr;
+  box* p_cur_w_sq_drawing = nullptr;
+  bool black = false;
+  int m_value = 0;
 
  public:
-  box *pieceCurrentBlackBox = nullptr;
-  box *pieceCurrentWhiteBox = nullptr;
-
-  explicit Piece(std::string c, U64 bb);
+  explicit Piece(bool is_black, U64 bb);
   virtual ~Piece();
+  box* get_drawing_square(bool is_black);
+  virtual box* get_drawing_B_square();
+  virtual box* get_drawing_W_square();
+  virtual Piecetype get_type_and_color();
+  virtual std::string get_type();
+  virtual int get_value();
+  void clear_bit(int pos);
+  void set_bit(int pos);
+  void make_move(int from, int to);
 
-  virtual box *getDrawingBSquare() { return pieceCurrentBlackBox; }
-  virtual box *getDrawingWSquare() { return pieceCurrentWhiteBox; }
-  virtual std::string getPieceType() { return ""; }
-  virtual int getValue() { return value; }
-  virtual Piecetype getTypeAndColor() { return m_piece_type; }
-
-  box *getDrawingSquare(char c) { return (c == 'w') ? pieceCurrentBlackBox : pieceCurrentWhiteBox; }
-
-  std::string getColorPiece();
-  bool isCapturing() { return capturing; }
-  void setCapturingState(bool capturing) { this->capturing = capturing; }
-  void make_move(int from, int to) {
-    CLRBIT(m_bbPiece, from);
-    SETBIT(m_bbPiece, to);
-  }
-  U64 getPieceBB();
-  void clearBit(int pos) { CLRBIT(m_bbPiece, pos); }
-  void setBit(int pos) { SETBIT(m_bbPiece, pos); }
+  U64 get_bitboard();
+  bool is_black();
 };
 
 #endif /* PIECE_H */

@@ -1,4 +1,3 @@
-
 #ifndef BISHOP_H
 #define BISHOP_H
 
@@ -6,15 +5,15 @@
 
 class Bishop : public Piece {
 private:
-  static box bishopBlackBoxP1;
-  static box bishopWhiteBoxP1;
-  static box bishopBlackBoxP2;
-  static box bishopWhiteBoxP2;
+  static box bishop_b_sq_p1;
+  static box bishop_w_sq_p1;
+  static box bishop_b_sq_p2;
+  static box bishop_w_sq_p2;
 
 public:
-  explicit Bishop(std::string pieceColor, U64);
+  explicit Bishop(bool black, U64);
   virtual ~Bishop();
-  std::string getPieceType() { return "bishop"; }
+  std::string get_type();
 };
 
 #endif /* BISHOP_H */

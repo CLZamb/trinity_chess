@@ -6,18 +6,15 @@
 #include "piece.h"
 
 class Pawn : public Piece {
-private:
-  int oneSpaceForward = 0;
-  static box PawnWhiteBoxP2;
-  static box PawnWhiteBoxP1;
-  static box PawnBlackBoxP2;
-  static box PawnBlackBoxP1;
-  bool isFirstMove();
+ private:
+    static box pawn_w_sq_p2;
+    static box pawn_b_sq_p2;
+    static box pawn_w_sq_p1;
+    static box pawn_b_sq_p1;
 
-public:
-  explicit Pawn(std::string pieceColor, U64);
-  virtual ~Pawn();
-  std::string getPieceType() { return "pawn"; }
+ public:
+    explicit Pawn(bool black, U64);
+    virtual ~Pawn();
+    std::string get_type();
 };
-
 #endif /* PAWN_H */

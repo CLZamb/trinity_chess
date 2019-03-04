@@ -8,9 +8,9 @@ public:
   Messages();
   ~Messages() {}
 
-  static char *welcomeMessage;
-  static char *startMessage;
-  static char *gameOver;
+  static char* p_welcome_message;
+  static char* p_start_message;
+  static char* p_game_over;
   static string m_nextMessage;
   void print();
 };

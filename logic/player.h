@@ -12,24 +12,26 @@ using std::string;
 using std::vector;
 
 class Player {
+private:
+  int convert_to_int_pos(char file, char rank);
+  void set_next_move(string input);
+  vector<string> scan(string, const std::regex);
+
 protected:
-  bool validInput;
-  vector<string> scan(std::string, const std::regex);
-  void setNextMove(string playerInput);
-  std::string m_colorPieces;
-  Player *opponentPtr = nullptr;
-  std::string m_nextMove;
-  Move m_Move;
+  Player* p_opponent = nullptr;
+  Move m_move;
+  bool is_valid_input;
+  bool m_black_pieces;
 
 public:
   Player();
-  explicit Player(std::string colorPieces);
+  explicit Player(bool has_black_pieces);
   virtual ~Player();
-  void setOpponent(Player *opponent) { this->opponentPtr = opponent; }
-  virtual Move getPlayerNextMove();
-  std::string getColorPieces() { return m_colorPieces; }
-  Player *getOpponent() { return opponentPtr; }
-  bool isValidMove() { return validInput; }
+  virtual Move get_next_move();
+  void set_opponent(Player* opponent);
+  bool has_black_pieces();
+  bool is_valid_move();
+  Player* get_opponent();
 };
 
 #endif /* PLAYER_H */

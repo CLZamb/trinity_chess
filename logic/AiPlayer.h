@@ -4,13 +4,13 @@
 
 class AiPlayer : public Player {
 private:
-  Movement::MoveGenerator *moveGenerator;
+  Movement::MoveGenerator* p_move_generator;
 
 public:
-  explicit AiPlayer(std::string, Movement::MoveGenerator *generator);
+  explicit AiPlayer(bool has_black_pieces, Movement::MoveGenerator* p_generator);
   virtual ~AiPlayer();
 
-  Move getPlayerNextMove() override;
+  Move get_next_move() override;
 };
 
 #endif /* AIPLAYER_H */
