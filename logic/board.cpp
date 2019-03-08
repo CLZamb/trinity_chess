@@ -79,10 +79,6 @@ std::string toString(std::ostream &str) {
 }
 
 void Board::print() {
-  // TODO(me) make an impovement in the array
-  // example obtain the bitboard as
-  // pieces["blackPawns",  'b');
-
   system(CLEAR);
   std::stringstream os;
   os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

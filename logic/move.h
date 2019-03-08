@@ -3,7 +3,6 @@
 #include "../defs.h"
 #include <iostream>
 /*
-  change it to 0x3f because it only uses 63 moves
   0000 0000 0000 0000 0000 0011 1111 -> From 0x3F
   0000 0000 0000 0000 1111 1100 0000 -> To >> 6, 0x3F
   0000 0000 0000 1111 0000 0000 0000 -> Captured >> 12, 0xF
@@ -20,12 +19,6 @@ class Move {
   Move(unsigned int from, unsigned int to, unsigned int captured) {
     m_move = (from & 0x3f) | ((to & 0x3f) << 6) | ((captured & 0xf) << 12);
   }
-
-  // void operator=(Move a) {
-  //   m_move = a.m_move;
-  //   m_input = a.m_input;
-  //   m_validMove = a.m_validMove;
-  // }
 
   unsigned int get_from() const { return m_move & 0x3f; }
   unsigned int get_to() const { return (m_move >> 6) & 0x3f; }
