@@ -61,7 +61,7 @@ void Game::play() {
       break;
 
     if (player_move.get_str_input() == "undo") {
-      movement_controller.undo_last_move(true);
+      movement_controller.undo_last_move();
       continue;
     }
 

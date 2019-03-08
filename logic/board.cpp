@@ -62,13 +62,6 @@ void Board::add_to_board(int type, int position) {
   get_square_at_pos(position)->set_piece(m_bb.get_piece(type));
 }
 
-Piece* Board::get_piece_at_pos(int pos) {
-  if (!get_square_at_pos(pos))
-    return nullptr;
-
-  return get_square_at_pos(pos)->get_piece();
-}
-
 Board::Square* Board::get_square_at_pos(int pos) { return p_board[pos]; }
 
 void Board::create_square_bases() {
@@ -141,50 +134,35 @@ int Board::get_piece_at(int pos) {
   return m_bb.get_piece_at_pos(pos);
 }
 
-void Board::make_move(int piece, int from, int to, bool real_move /* false */) {
-  if (!Valid_piece(piece)) {
-    std::cout << "piece not recognize: " << piece <<  " " << std::endl;
-    assert(Valid_piece(piece));
-  }
+void Board::move_piece_to_square(int piece, int from, int to) {
+  move_squares(m_bb.get_piece(piece), from, to);
+  move_piece_bits(piece, from, to);
+}
 
-  if (real_move)
-    move_squares(m_bb.get_piece(piece), from, to);
-
+void Board::move_piece_bits(int piece, int from, int to) {
   m_bb.move(piece, from, to);
 }
 
 void Board::capture_piece(int piece_captured, int pos) {
-  if (!Valid_piece(piece_captured)) {
-    std::cout << "piece not recognize: " << piece_captured <<  " " << std::endl;
-    assert(Valid_piece(piece_captured));
-  }
-
   m_bb.capture_piece(piece_captured, pos);
 }
 
-void Board::undo_move(int last_move, bool real_move  /* false */) {
-  unsigned int from = Get_from_sq(last_move);
-  unsigned int to = Get_to_sq(last_move);
-  unsigned int piece = Get_piece(last_move);
-  unsigned int piece_captured = Get_captured(last_move);
+void Board::undo_square_move(int piece, int piece_captured, int from, int to) {
+  move_squares(m_bb.get_piece(piece), from, to);
+  if (piece_captured)
+    add_to_board(piece_captured, from);
+}
 
-  if (!Valid_piece(piece)) {
-    std::cout << "piece not recognize: " << piece <<  " " << std::endl;
-    assert(Valid_piece(piece));
-  }
+Piece* Board::get_piece_at_square(int pos) {
+  if (!get_square_at_pos(pos))
+    return nullptr;
 
-  if (real_move)
-    move_squares(m_bb.get_piece(piece), to, from);
+  return get_square_at_pos(pos)->get_piece();
+}
 
-  m_bb.move(piece, to, from, true);
-
-  if (!Valid_piece(piece_captured))
-    return;
-
-  if (real_move)
-    add_to_board(piece_captured, to);
-
-  m_bb.put_piece_back(piece_captured, to);
+void Board::undo_move(int piece, int piece_captured, int from, int to) {
+  m_bb.move(piece, from, to);
+  m_bb.put_piece_back(piece_captured, from);
 }
 
 void Board::move_squares(Piece* piece, int from, int to) {

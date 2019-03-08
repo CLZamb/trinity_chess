@@ -16,8 +16,8 @@ private:
   Player** pp_cur_player_turn = nullptr;
   bool checkmate;
   bool check_move(Piece*, int from, int to);
-  Piece* take_piece(int pos);
-  Piece* capture_piece(int pos);
+  int take_piece(int pos);
+  int capture_piece(int pos);
   int get_type_capture_piece(int pos);
   unsigned int get_from_sq(int);
   unsigned int get_to_sq(int);
@@ -29,8 +29,9 @@ public:
   Movement(Board*, Player** turn);
   virtual ~Movement();
   void move_piece(Move);
-  void try_move_piece(int move);
-  void undo_last_move(bool real_move = false);
+  void move_piece_bits(int* move);
+  void undo_last_bitboard_move(int last_move);
+  void undo_last_move();
   void change_turn();
   bool is_valid_move(Move);
   bool get_checkmate();

@@ -54,8 +54,10 @@ class Board : public IDisplay {
   void _init(Player*, Player*);
   void print();
   void generate_all_moves(bool side, MoveList* moveList);
-  void make_move(int type, int from, int to, bool real_move = false);
-  void undo_move(int last_move, bool real_move = false);
+  void move_piece_to_square(int piece, int from, int to);
+  void move_piece_bits(int type, int from, int to);
+  void undo_move(int piece, int piece_captured, int from, int to);
+  void undo_square_move(int piece, int piece_captured, int from, int to);
   void move_squares(Piece*, int from, int to);
   void capture_piece(int type, int pos);
   int get_board_score();
@@ -64,7 +66,7 @@ class Board : public IDisplay {
   U64 get_non_attack_moves(int type, int from);
   U64 get_own_pieces_occ(bool is_black);
   Square* get_square_at_pos(int pos);
-  Piece* get_piece_at_pos(int);
+  Piece* get_piece_at_square(int);
 };
 
 #endif /* BOARD_H */

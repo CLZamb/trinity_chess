@@ -449,28 +449,31 @@ void Bitboard::set_bit_at_player_pieces(bool is_black, int pos) {
   SETBIT(m_all_pieces, pos);
 }
 
-void Bitboard::move(int type, int from, int to, bool undo /* false */ ) {
-  m_pieces[type]->make_move(from, to);
-  clear_bit_at_player_pieces(IS_BLACK(type), from);
-  set_bit_at_player_pieces(IS_BLACK(type), to);
-  // if (undo)
-  //   board_score -= pieces_score[type][to];
-  // else
-  //   board_score += pieces_score[type][to];
+void Bitboard::move(int piece, int from, int to) {
+  if (!piece)
+    return;
+
+  m_pieces[piece]->make_move(from, to);
+  clear_bit_at_player_pieces(IS_BLACK(piece), from);
+  set_bit_at_player_pieces(IS_BLACK(piece), to);
 }
 
 U64 Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
 U64 Bitboard::get_all_b_bitboard() { return m_all_b_pieces; }
 
 void Bitboard::capture_piece(int piece, int pos) {
-  m_pieces[piece]->clear_bit(pos);
+  if (!piece)
+    return;
 
+  m_pieces[piece]->clear_bit(pos);
   clear_bit_at_player_pieces(IS_BLACK(piece), pos);
 }
 
 void Bitboard::put_piece_back(int piece_captured, int pos) {
-  m_pieces[piece_captured]->set_bit(pos);
+  if (!piece_captured)
+    return;
 
+  m_pieces[piece_captured]->set_bit(pos);
   set_bit_at_player_pieces(IS_BLACK(piece_captured), pos);
 }
 

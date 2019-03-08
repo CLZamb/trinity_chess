@@ -22,6 +22,12 @@ piecesheaders.h
 move.h
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/move.h
 
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp
+board.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
+sstream
+-
+
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
 Idisplay.h
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/Idisplay.h
@@ -42,22 +48,6 @@ vector
 ../defs.h
 /Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
 iostream
--
-
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp
-movement.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
-
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
-board.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
-algorithm
--
-functional
--
-map
--
-set
 -
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.h

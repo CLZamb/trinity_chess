@@ -115,7 +115,7 @@ class Bitboard {
     U64 get_non_attack_moves(int type, SquareIndices);
     void generate_all_moves(bool side, MoveList*);
     void clear_bit_at_player_pieces(bool is_black, int pos);
-    void move(int type, int f, int t, bool undo = false);
+    void move(int type, int f, int t);
     void capture_piece(int type, int pos);
     void put_piece_back(int type, int pos);
     int evaluate_board();
