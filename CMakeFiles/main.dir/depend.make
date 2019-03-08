@@ -145,9 +145,6 @@ CMakeFiles/main.dir/logic/player.cpp.o: logic/player.h
 CMakeFiles/main.dir/logic/player.cpp.o: display/boxStruct.h
 CMakeFiles/main.dir/logic/player.cpp.o: general/pieces/piece.h
 
-CMakeFiles/main.dir/logic/position.cpp.o: logic/position.cpp
-CMakeFiles/main.dir/logic/position.cpp.o: logic/position.h
-
 CMakeFiles/main.dir/main.cpp.o: main.cpp
 CMakeFiles/main.dir/main.cpp.o: defs.h
 CMakeFiles/main.dir/main.cpp.o: display/Idisplay.h

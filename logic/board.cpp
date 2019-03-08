@@ -38,44 +38,28 @@ void Board::create_board_squares() {
 }
 
 void Board::set_pieces_on_board() {
-  std::vector<std::pair<std::string, int>> piecesSeq = {
+  std::vector<std::pair<int, int>> piecesSeq = {
       // player2 pieces - pieces color "black"
-      {"rook", A8}, {"knight", B8}, {"bishop", C8}, {"queen", D8},
-      {"king", E8}, {"bishop", F8}, {"knight", G8}, {"rook", H8},
-      {"pawn", A7}, {"pawn", B7}, {"pawn", C7}, {"pawn", D7},
-      {"pawn", E7}, {"pawn", F7}, {"pawn", G7}, {"pawn", H7},
+      {bR, A8}, {bN, B8}, {bB, C8}, {bQ, D8},
+      {bK, E8}, {bB, F8}, {bN, G8}, {bR, H8},
+      {bP, A7}, {bP, B7}, {bP, C7}, {bP, D7},
+      {bP, E7}, {bP, F7}, {bP, G7}, {bP, H7},
       //
-      {"pawn", A2}, {"pawn", B2}, {"pawn", C2}, {"pawn", D2},
-      {"pawn", E2}, {"pawn", F2}, {"pawn", G2}, {"pawn", H2},
-      {"rook", A1}, {"knight", B1}, {"bishop", C1}, {"queen", D1},
-      {"king", E1}, {"bishop", F1}, {"knight", G1}, {"rook", H1},
+      {wP, A2}, {wP, B2}, {wP, C2}, {wP, D2},
+      {wP, E2}, {wP, F2}, {wP, G2}, {wP, H2},
+      {wR, A1}, {wN, B1}, {wB, C1}, {wQ, D1},
+      {wK, E1}, {wB, F1}, {wN, G1}, {wR, H1},
       // player1 pieces - pieces color "white"
      };
 
   for (int p2 = 0, p1 = 16; p2 < 16 && p1 < 32; p2++, p1++) {
-    add_to_board(piecesSeq[p2].first, piecesSeq[p2].second, "black");
-    add_to_board(piecesSeq[p1].first, piecesSeq[p1].second, "white");
+    add_to_board(piecesSeq[p2].first, piecesSeq[p2].second);
+    add_to_board(piecesSeq[p1].first, piecesSeq[p1].second);
   }
 }
 
-void Board::add_to_board(string type, int position, string color) {
-  Piece* piece = nullptr;
-  if (type == "pawn")
-    piece = color == "black"? &m_bb.m_b_pawn : &m_bb.m_w_pawn;
-  else if (type == "rook")
-    piece = color == "black"? &m_bb.m_b_rook : &m_bb.m_w_rook;
-  else if (type == "queen")
-    piece = color == "black"? &m_bb.m_b_queen : &m_bb.m_w_queen;
-  else if (type == "king")
-    piece = color == "black"? &m_bb.m_b_king : &m_bb.m_w_king;
-  else if (type == "bishop")
-    piece = color == "black"? &m_bb.m_b_bishop : &m_bb.m_w_bishop;
-  else if (type == "knight")
-    piece = color == "black"? &m_bb.m_b_knigth : &m_bb.m_w_knigth;
-  else
-    std::cout << "Piece " << type << " not created" << std::endl;
-
-  get_square_at_pos(position)->set_piece(piece);
+void Board::add_to_board(int type, int position) {
+  get_square_at_pos(position)->set_piece(m_bb.get_piece(type));
 }
 
 Piece* Board::get_piece_at_pos(int pos) {
@@ -116,7 +100,7 @@ void Board::print() {
   for (int row = 7; row >= 0; --row) {
     for (int k = 0; k < box::row_size; ++k) {
       // left border
-      if ((((k + 1) % 3)) == 0)
+      if (!((k + 1) % 3))
         os << row + 1 << "┃";
       else
         os << ' ' << "┃";
@@ -145,80 +129,80 @@ void Board::print() {
 }
 
 // U64 Board::getPiecesBB(int pieceType) { return m_bb.getPiecesBB(pieceType); }
-U64 Board::get_piece_attacks(Piece* piece, int from) {
-  return m_bb.get_piece_attacks(piece, SquareIndices(from));
+U64 Board::get_piece_attacks(int type, int from) {
+  return m_bb.get_piece_attacks(type, SquareIndices(from));
 }
 
-U64 Board::get_non_attack_moves(Piece* piece, int from) {
-  return m_bb.get_non_attack_moves(piece, SquareIndices(from));
+U64 Board::get_non_attack_moves(int type, int from) {
+  return m_bb.get_non_attack_moves(type, SquareIndices(from));
 }
 
-void Board::make_move(Piece* p, int from, int to) {
-  if (!p)
+int Board::get_piece_at(int pos) {
+  return m_bb.get_piece_at_pos(pos);
+}
+
+void Board::make_move(int piece, int from, int to, bool real_move /* false */) {
+  if (!Valid_piece(piece)) {
+    std::cout << "piece not recognize: " << piece <<  " " << std::endl;
+    assert(Valid_piece(piece));
+  }
+
+  if (real_move)
+    move_squares(m_bb.get_piece(piece), from, to);
+
+  m_bb.move(piece, from, to);
+}
+
+void Board::capture_piece(int piece_captured, int pos) {
+  if (!Valid_piece(piece_captured)) {
+    std::cout << "piece not recognize: " << piece_captured <<  " " << std::endl;
+    assert(Valid_piece(piece_captured));
+  }
+
+  m_bb.capture_piece(piece_captured, pos);
+}
+
+void Board::undo_move(int last_move, bool real_move  /* false */) {
+  unsigned int from = Get_from_sq(last_move);
+  unsigned int to = Get_to_sq(last_move);
+  unsigned int piece = Get_piece(last_move);
+  unsigned int piece_captured = Get_captured(last_move);
+
+  if (!Valid_piece(piece)) {
+    std::cout << "piece not recognize: " << piece <<  " " << std::endl;
+    assert(Valid_piece(piece));
+  }
+
+  if (real_move)
+    move_squares(m_bb.get_piece(piece), to, from);
+
+  m_bb.move(piece, to, from, true);
+
+  if (!Valid_piece(piece_captured))
     return;
 
+  if (real_move)
+    add_to_board(piece_captured, to);
+
+  m_bb.put_piece_back(piece_captured, to);
+}
+
+void Board::move_squares(Piece* piece, int from, int to) {
+  assert(piece);
+  assert(get_square_at_pos(from));
+  assert(get_square_at_pos(to));
+
   get_square_at_pos(from)->clear_square();
-  get_square_at_pos(to)->set_piece(p);
-  m_bb.move(p, from, to);
-}
-
-void Board::capture_piece(Piece* p, int pos) {
-  m_bb.capture_piece(p, pos);
-}
-
-std::string Board::get_str_type(int type) {
-  switch (type) {
-    case wP:
-    case bP:
-      return "pawn";
-    case wR:
-    case bR:
-      return "rook";
-    case wN:
-    case bN:
-      return "knight";
-    case wB:
-    case bB:
-      return "bishop";
-    case wQ:
-    case bQ:
-      return "queen";
-    case wK:
-    case bK:
-      return "king";
-    default:
-      return "";
-      break;
-  }
-}
-
-void Board::undo_move(int pieceType, int pos) {
-  std::string color;
-  std::string type = get_str_type(pieceType);
-
-  if (pieceType > 0 && pieceType < 7) {
-    color = "black";
-    m_bb.set_bit_at_b_pieces(pos);
-  } else {
-    color = "white";
-    m_bb.set_bit_at_w_pieces(pos);
-  }
-
-  add_to_board(type, pos, color);
-  Piece* piece = get_square_at_pos(pos)->get_piece();
-  piece->set_bit(pos);
-  m_bb.add_value(piece->get_value());
+  get_square_at_pos(to)->set_piece(piece);
 }
 
 U64 Board::get_own_pieces_occ(bool is_black) {
   if (is_black)
-    return m_bb.m_all_b_pieces;
+    return m_bb.get_all_b_bitboard();
 
-  return  m_bb.m_all_w_pieces;
+  return  m_bb.get_all_w_bitboard();
 }
 
-U64 Board::get_all_w_pieces() { return m_bb.m_all_w_pieces; }
-U64 Board::get_all_b_pieces() { return m_bb.m_all_b_pieces; }
 void Board::generate_all_moves(bool side, MoveList* moveList) {
   return m_bb.generate_all_moves(side, moveList);
 }
@@ -247,5 +231,4 @@ void Board::Square::clear_square() {
 box* Board::Square::get_current_drawing() { return p_cur_drawing; }
 Piece* Board::Square::get_piece() { return this->p_piece; }
 bool Board::Square::is_black_box() { return m_black_box; }
-bool Board::Square::has_piece() { return m_occupied; }
 char* Board::Square::get_content(int i) { return p_cur_drawing->content[i]; }

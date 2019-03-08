@@ -14,14 +14,6 @@ limits
 iostream
 -
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/AiPlayer.cpp
-AiPlayer.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/AiPlayer.h
-
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/AiPlayer.h
-movement.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
-
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
 string
 -
@@ -51,6 +43,10 @@ vector
 /Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
 iostream
 -
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp
+movement.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
 board.h

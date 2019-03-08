@@ -17,8 +17,9 @@ class Board : public IDisplay {
   Player* player1, *player2;
   box wSquare, bSquare;
   Bitboard m_bb;
+  Move test;
 
-  void add_to_board(string type, int position, string color);
+  void add_to_board(int type, int position);
   void create_board_squares();
   void create_square_bases();
   void set_pieces_on_board();
@@ -39,7 +40,6 @@ class Board : public IDisplay {
       char* get_content(int i);
       void set_piece(Piece* piece);
       void clear_square();
-      bool has_piece();
       bool is_black_box();
       Piece* get_piece();
       box* get_current_drawing();
@@ -54,15 +54,15 @@ class Board : public IDisplay {
   void _init(Player*, Player*);
   void print();
   void generate_all_moves(bool side, MoveList* moveList);
-  void make_move(Piece*, int from, int to);
-  void undo_move(int pieceType, int pos);
-  void capture_piece(Piece* p, int pos);
+  void make_move(int type, int from, int to, bool real_move = false);
+  void undo_move(int last_move, bool real_move = false);
+  void move_squares(Piece*, int from, int to);
+  void capture_piece(int type, int pos);
   int get_board_score();
-  U64 get_piece_attacks(Piece* piece, int from);
-  U64 get_non_attack_moves(Piece* piece, int from);
+  int get_piece_at(int pos);
+  U64 get_piece_attacks(int type, int from);
+  U64 get_non_attack_moves(int type, int from);
   U64 get_own_pieces_occ(bool is_black);
-  U64 get_all_w_pieces();
-  U64 get_all_b_pieces();
   Square* get_square_at_pos(int pos);
   Piece* get_piece_at_pos(int);
 };

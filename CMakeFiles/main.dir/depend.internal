@@ -145,9 +145,6 @@ CMakeFiles/main.dir/logic/player.cpp.o
  /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.h
  display/boxStruct.h
  general/pieces/piece.h
-CMakeFiles/main.dir/logic/position.cpp.o
- /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.cpp
- /Users/cristofher/Desktop/practice/c++/ChessProject/logic/position.h
 CMakeFiles/main.dir/main.cpp.o
  /Users/cristofher/Desktop/practice/c++/ChessProject/main.cpp
  defs.h

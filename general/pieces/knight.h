@@ -13,7 +13,6 @@ private:
 public:
   explicit Knight(bool black, U64);
   virtual ~Knight();
-  std::string get_type();
 };
 
 #endif /* KNIGHT_H */

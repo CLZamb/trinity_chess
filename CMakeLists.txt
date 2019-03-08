@@ -23,8 +23,6 @@ set(SOURCE_FILES
   defs.h
   logic/board.h
   logic/board.cpp
-  logic/position.h
-  logic/position.cpp
   logic/player.h
   logic/player.cpp
   logic/AiPlayer.h
@@ -56,8 +54,6 @@ set(SOURCE_FILES
   general/pieces/queen.cpp
   general/pieces/rook.h
   general/pieces/rook.cpp
-  # general/pieces/pieceFactory.h
-  # general/pieces/pieceFactory.cpp
   )
 
 set(

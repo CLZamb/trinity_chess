@@ -13,7 +13,6 @@ private:
 public:
   explicit Rook(bool black, U64);
   virtual ~Rook();
-  std::string get_type();
 };
 
 #endif /* ROOK_H */

@@ -10,7 +10,43 @@ void Bitboard::_init() {
   _init_slider_masks_shifs_occupancies(Rook);
   _init_tables(Bishop);
   _init_tables(Rook);
+  _init_pieces();
+  _init_pieces_table_values();
 }
+
+void Bitboard::_init_pieces() {
+  m_pieces[EMPTY] = nullptr;
+  m_pieces[bP] = &m_b_pawn;
+  m_pieces[bR] = &m_b_rook;
+  m_pieces[bN] = &m_b_knigth;
+  m_pieces[bB] = &m_b_bishop;
+  m_pieces[bQ] = &m_b_queen;
+  m_pieces[bK] = &m_b_king;
+  m_pieces[wP] = &m_w_pawn;
+  m_pieces[wR] = &m_w_rook;
+  m_pieces[wN] = &m_w_knigth;
+  m_pieces[wB] = &m_w_bishop;
+  m_pieces[wQ] = &m_w_queen;
+  m_pieces[wK] = &m_w_king;
+}
+
+void Bitboard::_init_pieces_table_values() {
+  for (int i = 0; i < 64; ++i) {
+    pieces_score[bP][i] = PawnTable[i];
+    pieces_score[bR][i] = RookTable[i];
+    pieces_score[bN][i] = KnightTable[i];
+    pieces_score[bB][i] = BishopTable[i];
+    pieces_score[bQ][i] = QueenTable[i];
+
+    pieces_score[wP][i] = -PawnTable[MIRROR64[i]];
+    pieces_score[wR][i] = -RookTable[MIRROR64[i]];
+    pieces_score[wN][i] = -KnightTable[MIRROR64[i]];
+    pieces_score[wB][i] = -BishopTable[MIRROR64[i]];
+    pieces_score[wQ][i] = -QueenTable[MIRROR64[i]];
+  }
+}
+
+Piece* Bitboard::get_piece(int type) { return m_pieces[type]; }
 
 void Bitboard::_init_nonsliders_attacks() {
   int sq;
@@ -184,16 +220,16 @@ U64 Bitboard::pawn_mask(int sq, int side) {
   U64 fromSq = ONE << sq;
 
   if (side == WHITE) {
-    if (fromSq << 7 & not_H_file)
+    if (fromSq << 7 & NOT_H_FILE)
       result |= fromSq << 7;
 
-    if (fromSq << 9 & not_A_file)
+    if (fromSq << 9 & NOT_A_FILE)
       result |= fromSq << 9;
   } else {
-    if (fromSq >> 7 & not_A_file)
+    if (fromSq >> 7 & NOT_A_FILE)
       result |= fromSq >> 7;
 
-    if (fromSq >> 9 & not_H_file)
+    if (fromSq >> 9 & NOT_H_FILE)
       result |= fromSq >> 9;
   }
 
@@ -204,17 +240,17 @@ U64 Bitboard::king_mask(int sq) {
   U64 result = 0ULL;
   U64 fromSq = ONE << sq;
 
-  if (fromSq >> 1 & not_H_file)
-    result |= fromSq >> 1 & not_H_file;
+  if (fromSq >> 1 & NOT_H_FILE)
+    result |= fromSq >> 1 & NOT_H_FILE;
 
-  if (fromSq << 1 & not_A_file)
-    result |= fromSq << 1 & not_A_file;
+  if (fromSq << 1 & NOT_A_FILE)
+    result |= fromSq << 1 & NOT_A_FILE;
 
-  if (fromSq >> 7 & not_A_file)
-    result |= fromSq >> 7 & not_A_file;
+  if (fromSq >> 7 & NOT_A_FILE)
+    result |= fromSq >> 7 & NOT_A_FILE;
 
-  if (fromSq << 7 & not_H_file)
-    result |= fromSq << 7 & not_H_file;
+  if (fromSq << 7 & NOT_H_FILE)
+    result |= fromSq << 7 & NOT_H_FILE;
 
   if (fromSq >> 8)
     result |= fromSq >> 8;
@@ -222,11 +258,11 @@ U64 Bitboard::king_mask(int sq) {
   if (fromSq << 8)
     result |= fromSq << 8;
 
-  if (fromSq >> 9 & not_H_file)
-    result |= fromSq >> 9 & not_H_file;
+  if (fromSq >> 9 & NOT_H_FILE)
+    result |= fromSq >> 9 & NOT_H_FILE;
 
-  if (fromSq << 9 & not_A_file)
-    result |= fromSq << 9 & not_A_file;
+  if (fromSq << 9 & NOT_A_FILE)
+    result |= fromSq << 9 & NOT_A_FILE;
 
   return result;
 }
@@ -235,29 +271,29 @@ U64 Bitboard::knight_mask(int sq) {
   U64 result = 0ULL;
   U64 fromSq = ONE << sq;
 
-  if (fromSq >> 17 & not_H_file)
-    result |= fromSq >> 17 & not_H_file;
+  if (fromSq >> 17 & NOT_H_FILE)
+    result |= fromSq >> 17 & NOT_H_FILE;
 
-  if (fromSq >> 15 & not_A_file)
-    result |= fromSq >> 15 & not_A_file;
+  if (fromSq >> 15 & NOT_A_FILE)
+    result |= fromSq >> 15 & NOT_A_FILE;
 
-  if (fromSq >> 10 & not_GH_file)
-    result |= fromSq >> 10 & not_GH_file;
+  if (fromSq >> 10 & NOT_GH_FILE)
+    result |= fromSq >> 10 & NOT_GH_FILE;
 
-  if (fromSq >> 6 & not_AB_file)
-    result |= fromSq >> 6 & not_AB_file;
+  if (fromSq >> 6 & NOT_AB_FILE)
+    result |= fromSq >> 6 & NOT_AB_FILE;
 
-  if (fromSq << 17 & not_A_file)
-    result |= fromSq << 17 & not_A_file;
+  if (fromSq << 17 & NOT_A_FILE)
+    result |= fromSq << 17 & NOT_A_FILE;
 
-  if (fromSq << 15 & not_H_file)
-    result |= fromSq << 15 & not_H_file;
+  if (fromSq << 15 & NOT_H_FILE)
+    result |= fromSq << 15 & NOT_H_FILE;
 
-  if (fromSq << 10 & not_AB_file)
-    result |= fromSq << 10 & not_AB_file;
+  if (fromSq << 10 & NOT_AB_FILE)
+    result |= fromSq << 10 & NOT_AB_FILE;
 
-  if (fromSq << 6 & not_GH_file)
-    result |= fromSq << 6 & not_GH_file;
+  if (fromSq << 6 & NOT_GH_FILE)
+    result |= fromSq << 6 & NOT_GH_FILE;
 
   return result;
 }
@@ -327,116 +363,142 @@ void Bitboard::_init_tables(int isRook) {
   }
 }
 
-U64 Bitboard::get_non_attack_moves(Piece* piece, SquareIndices from) {
-  if (piece->get_type() != "pawn")
-    return BLANK;
-
-  if (piece->is_black())
+U64 Bitboard::get_non_attack_moves(int type, SquareIndices from) {
+  if (type == bP)
     return m_b_pawn_non_attacks[from] & ~m_all_pieces;
 
-  return m_w_pawn_non_attacks[from] & ~m_all_pieces;
+  if (type == wP)
+    return m_w_pawn_non_attacks[from] & ~m_all_pieces;
+
+  return BLANK;
 }
 
-U64 Bitboard::get_piece_attacks(Piece* piece, SquareIndices from) {
-  string type = piece->get_type();
-
-  if (type == "pawn") {
-    if (piece->is_black())
+U64 Bitboard::get_piece_attacks(int type, SquareIndices from) {
+  switch (type) {
+    case bP:
       return m_b_pawn_attacks[from] & m_all_w_pieces;
-
-    return m_w_pawn_attacks[from] & m_all_b_pieces;
-  } else if (type == "rook")
-    return rook_attacks(m_all_pieces, from);
-  else if (type == "queen")
-    return queen_attacks(m_all_pieces, from);
-  else if (type == "king")
-    return m_king_attacks[from];
-  else if (type == "bishop")
-    return bishop_attacks(m_all_pieces, from);
-  else if (type == "knight")
-    return m_knight_attacks[from];
-  else
-    return ZERO;
-}
-
-void Bitboard::gen_all_pawn_moves(Piece* piece, MoveList* moveList) {
-  U64 origin_bitboard = BLANK, dest_bitboard = BLANK;
-  int i = 0;
-
-  origin_bitboard = piece->get_bitboard();
-  while (origin_bitboard) {
-    i = pop_1st_bit(&origin_bitboard);
-    dest_bitboard = get_piece_attacks(piece, SquareIndices(i));
-    dest_bitboard |= get_non_attack_moves(piece, SquareIndices(i));
-    while (dest_bitboard)
-      moveList->push_back(Move(i, pop_1st_bit(&dest_bitboard), 0));
+    case wP:
+      return m_w_pawn_attacks[from] & m_all_b_pieces;
+    case bR:
+    case wR:
+      return rook_attacks(m_all_pieces, from);
+    case bQ:
+    case wQ:
+      return queen_attacks(m_all_pieces, from);
+    case bK:
+    case wK:
+      return m_king_attacks[from];
+    case bB:
+    case wB:
+      return bishop_attacks(m_all_pieces, from);
+    case bN:
+    case wN:
+      return m_knight_attacks[from];
+    default:
+      return ZERO;
   }
 }
 
-void Bitboard::gen_all_piece_moves(Piece* piece, MoveList* moveList) {
+void Bitboard::gen_all_pawn_moves(int type, MoveList* moveList) {
   U64 origin_bitboard = BLANK, dest_bitboard = BLANK;
-  int i = 0;
+  int from = 0;
 
-  origin_bitboard = piece->get_bitboard();
+  origin_bitboard = m_pieces[type]->get_bitboard();
   while (origin_bitboard) {
-    i = pop_1st_bit(&origin_bitboard);
-    dest_bitboard = get_piece_attacks(piece, SquareIndices(i));
+    from = pop_1st_bit(&origin_bitboard);
+    dest_bitboard = get_piece_attacks(type, SquareIndices(from));
+    dest_bitboard |= get_non_attack_moves(type, SquareIndices(from));
     while (dest_bitboard)
-      moveList->push_back(Move(i, pop_1st_bit(&dest_bitboard), 0));
+       moveList->push_back(
+         (from) | (pop_1st_bit(&dest_bitboard) << 6) | ((type & 0xf) << 17));
+  }
+}
+
+void Bitboard::gen_all_piece_moves(int type, MoveList* moveList) {
+  U64 origin_bitboard = BLANK, dest_bitboard = BLANK;
+  int from = 0;
+
+  origin_bitboard = m_pieces[type]->get_bitboard();
+  while (origin_bitboard) {
+    from = pop_1st_bit(&origin_bitboard);
+    dest_bitboard =
+      get_piece_attacks(type, SquareIndices(from));
+      dest_bitboard &= ~(IS_BLACK(type) ? m_all_b_pieces : m_all_w_pieces);
+    while (dest_bitboard)
+      moveList->push_back(
+         (from) | (pop_1st_bit(&dest_bitboard) << 6) | ((type & 0xf) << 17));
   }
 }
 
 void Bitboard::generate_all_moves(bool has_black_pieces, MoveList* moveList) {
-  gen_all_piece_moves(has_black_pieces? &m_b_knigth : &m_w_knigth, moveList);
-  gen_all_pawn_moves(has_black_pieces? &m_b_pawn : &m_w_pawn, moveList);
-  gen_all_piece_moves(has_black_pieces? &m_b_rook : &m_w_rook, moveList);
-  gen_all_piece_moves(has_black_pieces? &m_b_bishop : &m_w_bishop, moveList);
-  gen_all_piece_moves(has_black_pieces? &m_b_queen : &m_w_queen, moveList);
-  gen_all_piece_moves(has_black_pieces? &m_b_king : &m_w_king, moveList);
+  gen_all_piece_moves(has_black_pieces? bN : wN, moveList);
+  gen_all_pawn_moves(has_black_pieces? bP : wP, moveList);
+  gen_all_piece_moves(has_black_pieces? bR : wR, moveList);
+  gen_all_piece_moves(has_black_pieces? bB : wB, moveList);
+  gen_all_piece_moves(has_black_pieces? bQ : wQ, moveList);
+  gen_all_piece_moves(has_black_pieces? bK : wK, moveList);
 }
 
-void Bitboard::set_bit_at_w_pieces(int pos) {
-  SETBIT(m_all_w_pieces, pos);
-  SETBIT(m_all_pieces, pos);
-}
-
-void Bitboard::set_bit_at_b_pieces(int pos) {
-  SETBIT(m_all_b_pieces, pos);
-  SETBIT(m_all_pieces, pos);
-}
-
-void Bitboard::clear_bit_at_w_pieces(int pos) {
-  CLRBIT(m_all_w_pieces, pos);
+void Bitboard::clear_bit_at_player_pieces(bool is_black, int pos) {
+  CLRBIT(is_black ? m_all_b_pieces : m_all_w_pieces, pos);
   CLRBIT(m_all_pieces, pos);
 }
 
-void Bitboard::clear_bit_at_b_pieces(int pos) {
-  CLRBIT(m_all_b_pieces, pos);
-  CLRBIT(m_all_pieces, pos);
+void Bitboard::set_bit_at_player_pieces(bool is_black, int pos) {
+  SETBIT(is_black ? m_all_b_pieces : m_all_w_pieces, pos);
+  SETBIT(m_all_pieces, pos);
 }
 
-void Bitboard::move(Piece* piece, int from, int to) {
-  piece->make_move(from, to);
-  if (piece->is_black()) {
-    clear_bit_at_b_pieces(from);
-    set_bit_at_b_pieces(to);
-  } else {
-    clear_bit_at_w_pieces(from);
-    set_bit_at_w_pieces(to);
+void Bitboard::move(int type, int from, int to, bool undo /* false */ ) {
+  m_pieces[type]->make_move(from, to);
+  clear_bit_at_player_pieces(IS_BLACK(type), from);
+  set_bit_at_player_pieces(IS_BLACK(type), to);
+  // if (undo)
+  //   board_score -= pieces_score[type][to];
+  // else
+  //   board_score += pieces_score[type][to];
+}
+
+U64 Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
+U64 Bitboard::get_all_b_bitboard() { return m_all_b_pieces; }
+
+void Bitboard::capture_piece(int piece, int pos) {
+  m_pieces[piece]->clear_bit(pos);
+
+  clear_bit_at_player_pieces(IS_BLACK(piece), pos);
+}
+
+void Bitboard::put_piece_back(int piece_captured, int pos) {
+  m_pieces[piece_captured]->set_bit(pos);
+
+  set_bit_at_player_pieces(IS_BLACK(piece_captured), pos);
+}
+
+int Bitboard::evaluate_board() {
+  board_score = 0;
+  U64 piece_bitboard = BLANK;
+  int pos = 0;
+  for (int pce = bP; pce <= wK; ++pce) {
+    board_score +=
+      (count_1s(m_pieces[pce]->get_bitboard()) * m_pieces[pce]->get_value());
+
+    piece_bitboard = m_pieces[pce]->get_bitboard();
+    while (piece_bitboard) {
+      pos = pop_1st_bit(&piece_bitboard);
+      board_score += pieces_score[pce][pos];
+    }
   }
+
+  return board_score;
 }
 
-U64& Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
-U64& Bitboard::get_all_b_bitboard() { return m_all_b_pieces; }
-void Bitboard::capture_piece(Piece* piece, int pos) {
-  piece->clear_bit(pos);
-  if (piece->is_black())
-    clear_bit_at_b_pieces(pos);
-  else
-    clear_bit_at_w_pieces(pos);
+int Bitboard::get_piece_at_pos(int pos) {
+  U64 square = ONE << pos;
 
-  board_score -= piece->get_value();
+  for (int piece = bP; piece <= wK; ++piece) {
+    if (square & m_pieces[piece]->get_bitboard())
+      return piece;
+  }
+
+  return 0;
 }
-
-void Bitboard::add_value(int value) { board_score += value; }
-int Bitboard::evaluate_board() { return board_score; }

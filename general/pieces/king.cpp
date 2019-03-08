@@ -3,19 +3,18 @@ King::King(bool black, U64 bb)
   : Piece(black, bb) {
   if (black) {
     m_type = bK;
-    m_value = 2000;
     p_cur_w_sq_drawing = &king_w_sq_p2;
     p_cur_b_sq_drawing = &king_b_sq_p2;
+    m_value = 2000;
   } else {
     m_type = wK;
-    m_value = -2000;
     p_cur_w_sq_drawing = &king_w_sq_p1;
     p_cur_b_sq_drawing = &king_b_sq_p1;
+    m_value = -2000;
   }
 }
 
 King::~King() {}
-std::string King::get_type() { return "king"; }
 
 box King::king_w_sq_p2 = {{
     {"░░▁ ✜ ▁░░"},

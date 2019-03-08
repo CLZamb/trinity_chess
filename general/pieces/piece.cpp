@@ -22,7 +22,6 @@ box* Piece::get_drawing_square(bool  white) {
 }
 
 Piecetype Piece::get_type_and_color() { return m_type; }
-std::string Piece::get_type() { return ""; }
 bool Piece::is_black() { return black; }
 int Piece::get_value() { return m_value; }
 

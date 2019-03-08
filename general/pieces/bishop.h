@@ -13,7 +13,6 @@ private:
 public:
   explicit Bishop(bool black, U64);
   virtual ~Bishop();
-  std::string get_type();
 };
 
 #endif /* BISHOP_H */

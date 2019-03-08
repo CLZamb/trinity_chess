@@ -15,6 +15,5 @@ class Pawn : public Piece {
  public:
     explicit Pawn(bool black, U64);
     virtual ~Pawn();
-    std::string get_type();
 };
 #endif /* PAWN_H */

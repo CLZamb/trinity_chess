@@ -12,7 +12,6 @@ private:
 public:
   explicit Queen(bool black, U64);
   virtual ~Queen();
-  std::string get_type();
 };
 
 #endif /* QUEEN_H */

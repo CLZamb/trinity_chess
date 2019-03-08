@@ -24,7 +24,6 @@ class Piece {
   virtual box* get_drawing_B_square();
   virtual box* get_drawing_W_square();
   virtual Piecetype get_type_and_color();
-  virtual std::string get_type();
   virtual int get_value();
   void clear_bit(int pos);
   void set_bit(int pos);

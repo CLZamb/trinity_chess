@@ -2,19 +2,18 @@
 Rook::Rook(bool black, U64 bb) : Piece(black, bb) {
   if (black) {
     m_type = bR;
-    m_value = 50;
     p_cur_w_sq_drawing = &rook_w_sq_p2;
     p_cur_b_sq_drawing = &rook_b_sq_p2;
+    m_value = 50;
   } else {
     m_type = wR;
-    m_value = -50;
     p_cur_w_sq_drawing = &rook_w_sq_p1;
     p_cur_b_sq_drawing = &rook_b_sq_p1;
+    m_value = -50;
   }
 }
 
 Rook::~Rook() {}
-std::string Rook::get_type() { return "rook"; }
 
 box Rook::rook_w_sq_p2 = {{
     {"\033[7m█████████\033[0m"},

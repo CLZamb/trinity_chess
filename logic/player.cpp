@@ -30,7 +30,7 @@ void Player::set_next_move(string input) {
     int to = convert_to_int_pos(list_pos[1][0] , list_pos[1][1]);
 
     m_move.set_valid_move(true);
-    m_move.set_move(from, to, 0);
+    m_move.set_move(from, to);
   } else {
     m_move.set_valid_move(false);
   }

@@ -528,33 +528,6 @@ logic/player.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/player.cpp.s
 .PHONY : logic/player.cpp.s
 
-logic/position.o: logic/position.cpp.o
-
-.PHONY : logic/position.o
-
-# target to build an object file
-logic/position.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/position.cpp.o
-.PHONY : logic/position.cpp.o
-
-logic/position.i: logic/position.cpp.i
-
-.PHONY : logic/position.i
-
-# target to preprocess a source file
-logic/position.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/position.cpp.i
-.PHONY : logic/position.cpp.i
-
-logic/position.s: logic/position.cpp.s
-
-.PHONY : logic/position.s
-
-# target to generate assembly for a file
-logic/position.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/position.cpp.s
-.PHONY : logic/position.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -636,9 +609,6 @@ help:
 	@echo "... logic/player.o"
 	@echo "... logic/player.i"
 	@echo "... logic/player.s"
-	@echo "... logic/position.o"
-	@echo "... logic/position.i"
-	@echo "... logic/position.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

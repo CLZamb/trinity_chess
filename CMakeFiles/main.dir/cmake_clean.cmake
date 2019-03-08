@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/main.cpp.o"
   "CMakeFiles/main.dir/logic/board.cpp.o"
-  "CMakeFiles/main.dir/logic/position.cpp.o"
   "CMakeFiles/main.dir/logic/player.cpp.o"
   "CMakeFiles/main.dir/logic/AiPlayer.cpp.o"
   "CMakeFiles/main.dir/logic/movement.cpp.o"

@@ -13,7 +13,6 @@ private:
 public:
   explicit King(bool black, U64);
   virtual ~King();
-  std::string get_type();
 };
 
 #endif /* KING_H */
