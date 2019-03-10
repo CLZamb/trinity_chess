@@ -460,6 +460,7 @@ void Bitboard::move(int piece, int from, int to) {
 
 U64 Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
 U64 Bitboard::get_all_b_bitboard() { return m_all_b_pieces; }
+U64 Bitboard::get_all_pieces_bitboard() const { return m_all_pieces; }
 
 void Bitboard::capture_piece(int piece, int pos) {
   if (!piece)

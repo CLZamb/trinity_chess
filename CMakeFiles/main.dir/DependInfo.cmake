@@ -15,10 +15,13 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/queen.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/general/pieces/queen.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces/rook.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/general/pieces/rook.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/AiPlayer.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/AiPlayer.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/Transposition_table_entry.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/Transposition_table_entry.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/ZobristKey.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/ZobristKey.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/bitboard.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/board.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/movement.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/player.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject/logic/transposition_table.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/logic/transposition_table.cpp.o"
   "/Users/cristofher/Desktop/practice/c++/ChessProject/main.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")

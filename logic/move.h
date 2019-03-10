@@ -24,8 +24,8 @@ class Move {
   unsigned int get_to() const { return (m_move >> 6) & 0x3f; }
   unsigned int get_captured_piece() const { return (m_move >> 12) & 0xf; }
   unsigned int get_piece() const { return (m_move >> 17) & 0xf; }
-  bool is_en_pessand() const { (m_move >> 16) & 0x1; }
 
+  bool is_en_pessand() const { (m_move >> 16) & 0x1; }
   void set_to(unsigned int to) {
     m_move &= ~0x3f;
     m_move |= (to & 0x3f) << 6;
@@ -45,6 +45,9 @@ class Move {
   }
 
   void set_capture_piece(unsigned int piece) {
+    if (!piece)
+      return;
+
     m_move |= ((piece & 0xf) << 12);
   }
 
@@ -53,9 +56,8 @@ class Move {
   }
 
   void set_valid_move(bool v) { m_valid_move = v; }
-  bool is_valid_move() { return m_valid_move; }
 
-  bool is_capture() const { return (m_move & CAPTURE_FLAG) != 0; }
+  bool is_valid_move() { return m_valid_move; }
 
   unsigned int get_butterfly_index() const { return m_move & 0x0fff; }
   bool operator==(Move a) const {
@@ -73,13 +75,7 @@ class Move {
  private:
   std::string m_input = "quit";
   bool m_valid_move = false;
-  // int m_piece;
-  // int m_capturedPiece;
-  // char m_piece_promoted_to;
-  // bool m_castle;
-  // bool m_en_passant;
   unsigned int m_move; // or short or template type
-  int CAPTURE_FLAG;
 };
 
 #endif /* MOVE_H */

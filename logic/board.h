@@ -19,10 +19,11 @@ class Board : public IDisplay {
   Bitboard m_bb;
   Move test;
 
-  void add_to_board(int type, int position);
+  void add_to_board(int piece, int position);
+  void set_all_pieces_on_board();
+
   void create_board_squares();
   void create_square_bases();
-  void set_pieces_on_board();
   std::string get_str_type(int type);
 
   class Square {
@@ -53,18 +54,19 @@ class Board : public IDisplay {
 
   void _init(Player*, Player*);
   void print();
+  void undo_square_move(int piece, int piece_captured, int from, int to);
   void generate_all_moves(bool side, MoveList* moveList);
   void move_piece_to_square(int piece, int from, int to);
+  void move_squares(Piece*, int from, int to);
   void move_piece_bits(int type, int from, int to);
   void undo_move(int piece, int piece_captured, int from, int to);
-  void undo_square_move(int piece, int piece_captured, int from, int to);
-  void move_squares(Piece*, int from, int to);
   void capture_piece(int type, int pos);
   int get_board_score();
   int get_piece_at(int pos);
   U64 get_piece_attacks(int type, int from);
   U64 get_non_attack_moves(int type, int from);
   U64 get_own_pieces_occ(bool is_black);
+  U64 get_all_pieces_bitboard() const;
   Square* get_square_at_pos(int pos);
   Piece* get_piece_at_square(int);
 };

@@ -6,6 +6,8 @@
 #include <functional>
 #include <map>
 #include <set>
+#include "ZobristKey.h"
+#include "Transposition_table.h"
 
 using std::string;
 using std::vector;
@@ -14,15 +16,12 @@ class Movement {
 private:
   Board* m_board;
   Player** pp_cur_player_turn = nullptr;
+  ZobristKey m_zkey;
+  TTable m_table;
   bool checkmate;
   bool check_move(Piece*, int from, int to);
   int take_piece(int pos);
   int capture_piece(int pos);
-  int get_type_capture_piece(int pos);
-  unsigned int get_from_sq(int);
-  unsigned int get_to_sq(int);
-  unsigned int get_captured(int);
-  unsigned int get_piece(int);
   vector<unsigned int> prev_moves;
 
 public:
@@ -47,7 +46,6 @@ public:
       explicit MoveGenerator(Movement* movement) : movement(movement) {}
       Move get_best_move();
       void generate_moves(MoveList*);
-      void order_moves(MoveList*);
       int evaluate_board();
   };
 };

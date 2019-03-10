@@ -420,6 +420,60 @@ logic/AiPlayer.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/AiPlayer.cpp.s
 .PHONY : logic/AiPlayer.cpp.s
 
+logic/Transposition_table_entry.o: logic/Transposition_table_entry.cpp.o
+
+.PHONY : logic/Transposition_table_entry.o
+
+# target to build an object file
+logic/Transposition_table_entry.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/Transposition_table_entry.cpp.o
+.PHONY : logic/Transposition_table_entry.cpp.o
+
+logic/Transposition_table_entry.i: logic/Transposition_table_entry.cpp.i
+
+.PHONY : logic/Transposition_table_entry.i
+
+# target to preprocess a source file
+logic/Transposition_table_entry.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/Transposition_table_entry.cpp.i
+.PHONY : logic/Transposition_table_entry.cpp.i
+
+logic/Transposition_table_entry.s: logic/Transposition_table_entry.cpp.s
+
+.PHONY : logic/Transposition_table_entry.s
+
+# target to generate assembly for a file
+logic/Transposition_table_entry.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/Transposition_table_entry.cpp.s
+.PHONY : logic/Transposition_table_entry.cpp.s
+
+logic/ZobristKey.o: logic/ZobristKey.cpp.o
+
+.PHONY : logic/ZobristKey.o
+
+# target to build an object file
+logic/ZobristKey.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/ZobristKey.cpp.o
+.PHONY : logic/ZobristKey.cpp.o
+
+logic/ZobristKey.i: logic/ZobristKey.cpp.i
+
+.PHONY : logic/ZobristKey.i
+
+# target to preprocess a source file
+logic/ZobristKey.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/ZobristKey.cpp.i
+.PHONY : logic/ZobristKey.cpp.i
+
+logic/ZobristKey.s: logic/ZobristKey.cpp.s
+
+.PHONY : logic/ZobristKey.s
+
+# target to generate assembly for a file
+logic/ZobristKey.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/ZobristKey.cpp.s
+.PHONY : logic/ZobristKey.cpp.s
+
 logic/bitboard.o: logic/bitboard.cpp.o
 
 .PHONY : logic/bitboard.o
@@ -528,6 +582,33 @@ logic/player.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/player.cpp.s
 .PHONY : logic/player.cpp.s
 
+logic/transposition_table.o: logic/transposition_table.cpp.o
+
+.PHONY : logic/transposition_table.o
+
+# target to build an object file
+logic/transposition_table.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/transposition_table.cpp.o
+.PHONY : logic/transposition_table.cpp.o
+
+logic/transposition_table.i: logic/transposition_table.cpp.i
+
+.PHONY : logic/transposition_table.i
+
+# target to preprocess a source file
+logic/transposition_table.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/transposition_table.cpp.i
+.PHONY : logic/transposition_table.cpp.i
+
+logic/transposition_table.s: logic/transposition_table.cpp.s
+
+.PHONY : logic/transposition_table.s
+
+# target to generate assembly for a file
+logic/transposition_table.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/transposition_table.cpp.s
+.PHONY : logic/transposition_table.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -597,6 +678,12 @@ help:
 	@echo "... logic/AiPlayer.o"
 	@echo "... logic/AiPlayer.i"
 	@echo "... logic/AiPlayer.s"
+	@echo "... logic/Transposition_table_entry.o"
+	@echo "... logic/Transposition_table_entry.i"
+	@echo "... logic/Transposition_table_entry.s"
+	@echo "... logic/ZobristKey.o"
+	@echo "... logic/ZobristKey.i"
+	@echo "... logic/ZobristKey.s"
 	@echo "... logic/bitboard.o"
 	@echo "... logic/bitboard.i"
 	@echo "... logic/bitboard.s"
@@ -609,6 +696,9 @@ help:
 	@echo "... logic/player.o"
 	@echo "... logic/player.i"
 	@echo "... logic/player.s"
+	@echo "... logic/transposition_table.o"
+	@echo "... logic/transposition_table.i"
+	@echo "... logic/transposition_table.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

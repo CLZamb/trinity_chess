@@ -32,6 +32,12 @@ set(SOURCE_FILES
   logic/move.h
   logic/bitboard.h
   logic/bitboard.cpp
+  logic/transposition_table.h
+  logic/transposition_table.cpp
+  logic/Transposition_table_entry.h
+  logic/Transposition_table_entry.cpp
+  logic/ZobristKey.h
+  logic/ZobristKey.cpp
   display/Idisplay.h
   display/Idisplay.cpp
   display/boxStruct.h

@@ -107,6 +107,7 @@ class Bitboard {
 
     U64 get_all_w_bitboard();
     U64 get_all_b_bitboard();
+    U64 get_all_pieces_bitboard() const;
     U64 get_Pieces_BB(int piece_type);
     U64 bishop_attacks(U64 occ, SquareIndices);
     U64 rook_attacks(U64 occ, SquareIndices);

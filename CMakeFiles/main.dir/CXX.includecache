@@ -14,6 +14,24 @@ limits
 iostream
 -
 
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/Transposition_table.h
+ZobristKey.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/ZobristKey.h
+Transposition_table_entry.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/Transposition_table_entry.h
+unordered_map
+-
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/Transposition_table_entry.h
+random
+-
+
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/ZobristKey.h
+random
+-
+../defs.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
+
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
 string
 -
@@ -59,6 +77,10 @@ map
 -
 set
 -
+ZobristKey.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/ZobristKey.h
+Transposition_table.h
+/Users/cristofher/Desktop/practice/c++/ChessProject/logic/Transposition_table.h
 
 /Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.h
 move.h

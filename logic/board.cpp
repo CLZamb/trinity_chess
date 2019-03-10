@@ -13,7 +13,7 @@ void Board::_init(Player* player1, Player* player2) {
   this->player1 = player1;
   this->player2 = player2;
   create_board_squares();
-  set_pieces_on_board();
+  set_all_pieces_on_board();
 }
 
 void Board::create_board_squares() {
@@ -37,20 +37,28 @@ void Board::create_board_squares() {
   }
 }
 
-void Board::set_pieces_on_board() {
+void Board::create_square_bases() {
+  int sizeBox = sizeof(char[box::char_size]);
+  for (int i = 0; i < box::row_size; ++i) {
+    snprintf(wSquare.content[i], sizeBox, "%s", "░░░░░░░░░");
+    snprintf(bSquare.content[i], sizeBox, "%s", "█████████");
+  }
+}
+
+void Board::set_all_pieces_on_board() {
   std::vector<std::pair<int, int>> piecesSeq = {
-      // player2 pieces - pieces color "black"
-      {bR, A8}, {bN, B8}, {bB, C8}, {bQ, D8},
-      {bK, E8}, {bB, F8}, {bN, G8}, {bR, H8},
-      {bP, A7}, {bP, B7}, {bP, C7}, {bP, D7},
-      {bP, E7}, {bP, F7}, {bP, G7}, {bP, H7},
-      //
-      {wP, A2}, {wP, B2}, {wP, C2}, {wP, D2},
-      {wP, E2}, {wP, F2}, {wP, G2}, {wP, H2},
-      {wR, A1}, {wN, B1}, {wB, C1}, {wQ, D1},
-      {wK, E1}, {wB, F1}, {wN, G1}, {wR, H1},
-      // player1 pieces - pieces color "white"
-     };
+    // player2 pieces - pieces color "black"
+    {bR, A8}, {bN, B8}, {bB, C8}, {bQ, D8},
+    {bK, E8}, {bB, F8}, {bN, G8}, {bR, H8},
+    {bP, A7}, {bP, B7}, {bP, C7}, {bP, D7},
+    {bP, E7}, {bP, F7}, {bP, G7}, {bP, H7},
+    //
+    {wP, A2}, {wP, B2}, {wP, C2}, {wP, D2},
+    {wP, E2}, {wP, F2}, {wP, G2}, {wP, H2},
+    {wR, A1}, {wN, B1}, {wB, C1}, {wQ, D1},
+    {wK, E1}, {wB, F1}, {wN, G1}, {wR, H1},
+    // player1 pieces - pieces color "white"
+  };
 
   for (int p2 = 0, p1 = 16; p2 < 16 && p1 < 32; p2++, p1++) {
     add_to_board(piecesSeq[p2].first, piecesSeq[p2].second);
@@ -62,15 +70,15 @@ void Board::add_to_board(int type, int position) {
   get_square_at_pos(position)->set_piece(m_bb.get_piece(type));
 }
 
-Board::Square* Board::get_square_at_pos(int pos) { return p_board[pos]; }
+void Board::move_squares(Piece* piece, int from, int to) {
+  if (!piece || !get_square_at_pos(from) || !get_square_at_pos(to))
+    return;
 
-void Board::create_square_bases() {
-  int sizeBox = sizeof(char[box::char_size]);
-  for (int i = 0; i < box::row_size; ++i) {
-    snprintf(wSquare.content[i], sizeBox, "%s", "░░░░░░░░░");
-    snprintf(bSquare.content[i], sizeBox, "%s", "█████████");
-  }
+  get_square_at_pos(from)->clear_square();
+  get_square_at_pos(to)->set_piece(piece);
 }
+
+Board::Square* Board::get_square_at_pos(int pos) { return p_board[pos]; }
 
 std::string toString(std::ostream &str) {
   std::ostringstream ss;
@@ -117,7 +125,26 @@ void Board::print() {
   cout << toString(os);
 }
 
-// U64 Board::getPiecesBB(int pieceType) { return m_bb.getPiecesBB(pieceType); }
+Piece* Board::get_piece_at_square(int pos) {
+  if (!get_square_at_pos(pos))
+    return nullptr;
+
+  return get_square_at_pos(pos)->get_piece();
+}
+
+void Board::move_piece_to_square(int piece, int from, int to) {
+  move_squares(m_bb.get_piece(piece), from, to);
+  move_piece_bits(piece, from, to);
+}
+
+void Board::generate_all_moves(bool side, MoveList* moveList) {
+  return m_bb.generate_all_moves(side, moveList);
+}
+
+U64 Board::get_all_pieces_bitboard() const {
+  return m_bb.get_all_pieces_bitboard();
+}
+
 U64 Board::get_piece_attacks(int type, int from) {
   return m_bb.get_piece_attacks(type, SquareIndices(from));
 }
@@ -130,11 +157,6 @@ int Board::get_piece_at(int pos) {
   return m_bb.get_piece_at_pos(pos);
 }
 
-void Board::move_piece_to_square(int piece, int from, int to) {
-  move_squares(m_bb.get_piece(piece), from, to);
-  move_piece_bits(piece, from, to);
-}
-
 void Board::move_piece_bits(int piece, int from, int to) {
   m_bb.move(piece, from, to);
 }
@@ -145,15 +167,9 @@ void Board::capture_piece(int piece_captured, int pos) {
 
 void Board::undo_square_move(int piece, int piece_captured, int from, int to) {
   move_squares(m_bb.get_piece(piece), from, to);
+
   if (piece_captured)
     add_to_board(piece_captured, from);
-}
-
-Piece* Board::get_piece_at_square(int pos) {
-  if (!get_square_at_pos(pos))
-    return nullptr;
-
-  return get_square_at_pos(pos)->get_piece();
 }
 
 void Board::undo_move(int piece, int piece_captured, int from, int to) {
@@ -161,24 +177,11 @@ void Board::undo_move(int piece, int piece_captured, int from, int to) {
   m_bb.put_piece_back(piece_captured, from);
 }
 
-void Board::move_squares(Piece* piece, int from, int to) {
-  assert(piece);
-  assert(get_square_at_pos(from));
-  assert(get_square_at_pos(to));
-
-  get_square_at_pos(from)->clear_square();
-  get_square_at_pos(to)->set_piece(piece);
-}
-
 U64 Board::get_own_pieces_occ(bool is_black) {
   if (is_black)
     return m_bb.get_all_b_bitboard();
 
   return  m_bb.get_all_w_bitboard();
-}
-
-void Board::generate_all_moves(bool side, MoveList* moveList) {
-  return m_bb.generate_all_moves(side, moveList);
 }
 
 int Board::get_board_score() { return m_bb.evaluate_board(); }
