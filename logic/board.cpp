@@ -158,11 +158,15 @@ int Board::get_piece_at(int pos) {
 }
 
 void Board::move_piece_bits(int piece, int from, int to) {
-  m_bb.move(piece, from, to);
+  m_bb.make_move_bb(piece, from, to);
 }
 
-void Board::capture_piece(int piece_captured, int pos) {
-  m_bb.capture_piece(piece_captured, pos);
+void Board::update_killers(Move mv) {
+  m_bb.update_killers(mv);
+}
+
+void Board::capture_piece(int piece, int piece_captured, int pos) {
+  m_bb.capture_piece(piece, piece_captured, pos);
 }
 
 void Board::undo_square_move(int piece, int piece_captured, int from, int to) {
@@ -173,8 +177,7 @@ void Board::undo_square_move(int piece, int piece_captured, int from, int to) {
 }
 
 void Board::undo_move(int piece, int piece_captured, int from, int to) {
-  m_bb.move(piece, from, to);
-  m_bb.put_piece_back(piece_captured, from);
+  m_bb.undo_move(piece, piece_captured, from, to);
 }
 
 U64 Board::get_own_pieces_occ(bool is_black) {
@@ -185,6 +188,9 @@ U64 Board::get_own_pieces_occ(bool is_black) {
 }
 
 int Board::get_board_score() { return m_bb.evaluate_board(); }
+U64 Board::get_piece_bitboard(int piece) const {
+  return m_bb.get_piece_bitboard(piece);
+}
 
 Board::Square::Square(box* baseDrawing, bool blackBox)
     : p_base_drawing(baseDrawing), p_cur_drawing(baseDrawing),

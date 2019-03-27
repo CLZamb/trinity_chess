@@ -75,6 +75,8 @@ enum Piecetype : int {
   EMPTY, bP, bR, bN, bB, bQ, bK, wP, wR, wN, wB, wQ, wK
 };
 
+static const int VictimScore[13] =
+{ 0, 10, 40, 20, 30, 50, 60, 10, 40, 20, 30, 50, 60};
 /**
  * @brief An empty bitboard. (ie. the number 0)
  */
@@ -98,11 +100,11 @@ constexpr bool is_ok(SquareIndices s) {
 }
 
 constexpr bool IS_BLACK(int type) {
-  return type > 0 && type < 7;
+  return type > EMPTY && type < 7;
 }
 
 constexpr bool Valid_piece(int pieceType) {
-  return (pieceType > 0) && (pieceType < 13);
+  return (pieceType > EMPTY) && (pieceType < 13);
 }
 
 constexpr int MAX_MOVES = 256;
@@ -136,6 +138,7 @@ constexpr unsigned int Get_captured(int move) {
 constexpr unsigned int Get_piece(int move) {
   return (move >> 17) & 0xf;
 }
+
 
 const U64 RookMagic[64] = {
   0x2380004000201080ULL, 0x2040100020004001ULL, 0x180086002100080ULL, 0x4080048008021000ULL,
@@ -209,14 +212,14 @@ static const int BBits[64] = {
 };
 
 static const int KnightTable[64] = {
-  -10, -8, -6, -6, -6, -6, -8, -10,
-  -8, -4, 0, 0, 0, 0, -4, -8,
-  -6, 0, 2, 3, 3, 2, 0, -6,
-  -6, 1, 3, 4, 4, 3, 1, -6,
-  -6, 0, 3, 4, 4, 3, 0, -6,
-  -6, 1, 2, 3, 3, 2, 1, -6,
-  -8, -4, 0, 1, 1, 0, -4, -8,
-  -10, -8, -6, -6, -6, -6, -8, -10,
+  -10, -2, -3, -3, -3, -3, -2, -10,
+  -4, -2, 0, 0, 0, 0, -2, -2,
+  -3, 0, 2, 3, 3, 2, 0, -3,
+  -3, 1, 3, 4, 4, 3, 1, -3,
+  -3, 0, 3, 4, 4, 3, 0, -3,
+  -3, 1, 2, 3, 3, 2, 1, -3,
+  -4, -2, 0, 1, 1, 0, -2, -2,
+  -10, -4, -3, -3, -3, -3, -4, -10,
 };
 
 static const int PawnTable[64] = {
@@ -240,7 +243,7 @@ static const int BishopTable[64] = {
   -2, 1, 0, 0, 0, 0, 1, -2,
   -4, -2, -2, -2, -2, -2, -2, -4,
 };
-//
+
 static const int RookTable[64] = {
   0, 0, 0, 0, 0, 0, 0, 0,
   1, 2, 2, 2, 2, 2, 2, 1,

@@ -24,6 +24,8 @@ public:
   U64 get_zobrist_key() const;
   void XOR_piece(int piece, unsigned int index);
   void move_piece(int piece, unsigned int from , unsigned int to);
+  void capture_piece(int capture, unsigned int to);
+  void undo_move(int piece, int capture, unsigned int from, unsigned int to);
 	bool operator==(const ZobristKey&);
 	void change_turn();
 };

@@ -24,15 +24,16 @@ ZobristKey::ZobristKey(Board* board, bool black_to_move) {
   if (black_to_move)
     m_key ^= BLACK_TO_MOVE_KEY;
 
-  U64 all_pieces_bitBoard = board->get_all_pieces_bitboard();
   U64 square = BLANK;
-
-  for (int pce = bP; pce <= wK; ++pce)
+  U64 piece_bitboard = BLANK;
+  for (int pce = bP; pce <= wK; ++pce) {
+    piece_bitboard = board->get_piece_bitboard(pce);
     for (int SqIndex = Squarebegin; SqIndex < Squareend; ++SqIndex) {
       square = ONE << SqIndex;
-      if (square & all_pieces_bitBoard)
+      if (square & piece_bitboard)
         XOR_piece(pce, SqIndex);
     }
+  }
 }
 
 ZobristKey::~ZobristKey() {}
@@ -44,6 +45,17 @@ void ZobristKey::XOR_piece(int piece, unsigned int index) {
 void ZobristKey::move_piece(int piece, unsigned int from, unsigned int to) {
   XOR_piece(piece, from);
   XOR_piece(piece, to);
+}
+
+void ZobristKey::capture_piece(int piece, unsigned int pos) {
+  XOR_piece(piece, pos);
+}
+
+void ZobristKey::undo_move(
+    int piece, int captured, unsigned int from, unsigned int to) {
+  XOR_piece(piece, from);
+  XOR_piece(piece, to);
+  XOR_piece(captured, from);
 }
 
 bool ZobristKey::operator==(const ZobristKey& other) {

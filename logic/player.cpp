@@ -3,7 +3,7 @@
 Player::Player(bool has_black_pieces) : m_black_pieces(has_black_pieces) {}
 Player::~Player() {}
 
-Move Player::get_next_move() {
+PlayerMove Player::get_next_move() {
   std::string input;
   std::cout << "move piece ie: (a7 a6), to end the game type "
                "\"close, quite or exit\""
@@ -11,7 +11,7 @@ Move Player::get_next_move() {
             << "\n>> ";
   std::getline(std::cin, input);
   set_next_move(input);
-  return m_move;
+  return m_pl_move;
 }
 
 void Player::set_next_move(string input) {
@@ -29,13 +29,13 @@ void Player::set_next_move(string input) {
     int from = convert_to_int_pos(list_pos[0][0], list_pos[0][1]);
     int to = convert_to_int_pos(list_pos[1][0] , list_pos[1][1]);
 
-    m_move.set_valid_move(true);
+    m_pl_move.valid_input = true;
     m_move.set_move(from, to);
   } else {
-    m_move.set_valid_move(false);
+    m_pl_move.valid_input = false;
   }
 
-  m_move.set_str_input(input);
+  m_pl_move.set_move(m_move, input);
 }
 
 int Player::convert_to_int_pos(char file, char rank) {

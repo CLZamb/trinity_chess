@@ -10,7 +10,7 @@ public:
   explicit AiPlayer(bool has_black_pieces, Movement::MoveGenerator* p_generator);
   virtual ~AiPlayer();
 
-  Move get_next_move() override;
+  PlayerMove get_next_move() override;
 };
 
 #endif /* AIPLAYER_H */

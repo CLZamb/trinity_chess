@@ -1,4 +1,4 @@
-# Install script for directory: /Users/cristofher/Desktop/practice/c++/ChessProject
+# Install script for directory: /Users/cristofher/desktop/practice/c++/ChessProject
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/cristofher/Desktop/practice/c++/ChessProject/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/cristofher/desktop/practice/c++/ChessProject/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

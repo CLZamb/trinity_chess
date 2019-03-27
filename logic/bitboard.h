@@ -5,23 +5,9 @@
 #include "piecesheaders.h"
 #include "move.h"
 
-typedef std::vector<int> MoveList;
-
 using std::string;
 
-struct ExtMove {
-  Move m_move;
-  int value;
-
-  operator Move() const { return m_move; }
-  void operator=(Move m) { m_move = m; }
-  void add(Move m) { m_move = m; }
-
-  // Inhibit unwanted implicit conversions to Move
-  // with an ambiguity that yields to a compile error.
-  // operator float() const = delete;
-};
-
+typedef std::vector<Move> MoveList;
 
 class Bitboard {
  private:
@@ -32,8 +18,12 @@ class Bitboard {
       int shift;  // shift right
     };
 
+    int ply = 0;
     int board_score = 0;
     int pieces_score[13][64] = {{0}};
+    int MvvLvaScores[13][13];
+    static const int MAXDEPTH = 64;
+    Move killers[2][MAXDEPTH];
 
     SMagic m_rook_tbl[Squareend];
     SMagic m_bishop_tbl[Squareend];
@@ -87,9 +77,15 @@ class Bitboard {
     void _init_pieces_table_values();
     void _init_slider_masks_shifs_occupancies(int);
     void _init_tables(int);
+    void _init_MvvLva();
     void gen_all_pawn_moves(int type, MoveList*);
     void gen_all_piece_moves(int type, MoveList* moveList);
+    void gen_all_captured_moves(U64 dest, Move mv, MoveList* moveList);
+    void gen_all_quiet_moves(U64 dest, Move mv, MoveList* moveList);
     void set_bit_at_player_pieces(bool is_black, int pos);
+    void add_quiet_move(Move quiet_move, MoveList* move_list);
+    void add_captured_move(Move capture_move, MoveList* move_list);
+    void add_en_pessant_move(Move ep_move, MoveList* move_list);
     U64 batt(int sq, U64 block);
     U64 ratt(int sq, U64 block);
     U64 bmask(int sq);
@@ -108,6 +104,7 @@ class Bitboard {
     U64 get_all_w_bitboard();
     U64 get_all_b_bitboard();
     U64 get_all_pieces_bitboard() const;
+    U64 get_piece_bitboard(int piece) const;
     U64 get_Pieces_BB(int piece_type);
     U64 bishop_attacks(U64 occ, SquareIndices);
     U64 rook_attacks(U64 occ, SquareIndices);
@@ -117,8 +114,11 @@ class Bitboard {
     void generate_all_moves(bool side, MoveList*);
     void clear_bit_at_player_pieces(bool is_black, int pos);
     void move(int type, int f, int t);
-    void capture_piece(int type, int pos);
-    void put_piece_back(int type, int pos);
+    void capture_piece(int piece, int captured, int pos);
+    void put_piece_back(int piece, int captured, int pos);
+    void update_killers(Move mv);
+    void make_move_bb(int piece, int from, int to);
+    void undo_move(int piece, int piece_captured, int from, int to);
     int evaluate_board();
     int get_piece_at_pos(int pos);
     Piece* get_piece(int type);

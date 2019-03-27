@@ -60,13 +60,15 @@ class Board : public IDisplay {
   void move_squares(Piece*, int from, int to);
   void move_piece_bits(int type, int from, int to);
   void undo_move(int piece, int piece_captured, int from, int to);
-  void capture_piece(int type, int pos);
+  void capture_piece(int piece, int captured, int pos);
+  void update_killers(Move mv);
   int get_board_score();
   int get_piece_at(int pos);
   U64 get_piece_attacks(int type, int from);
   U64 get_non_attack_moves(int type, int from);
   U64 get_own_pieces_occ(bool is_black);
   U64 get_all_pieces_bitboard() const;
+  U64 get_piece_bitboard(int piece) const;
   Square* get_square_at_pos(int pos);
   Piece* get_piece_at_square(int);
 };

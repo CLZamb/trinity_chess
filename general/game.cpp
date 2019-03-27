@@ -45,7 +45,7 @@ int Game::get_option() {
 
 void Game::play() {
   bool is_checkMate = false;
-  Move player_move;
+  PlayerMove player_move;
   // clear input buffer
   std::cin.clear();
   std::cin.ignore();
@@ -55,29 +55,30 @@ void Game::play() {
     p_board_display->print();
     player_move = p_player_turn->get_next_move();
 
-    if (player_move.get_str_input() == "quit" ||
-        player_move.get_str_input() == "close" ||
-        player_move.get_str_input() == "exit")
-      break;
+    if (player_move.m_input == "quit" ||
+        player_move.m_input == "close" ||
+        player_move.m_input == "exit")
+      return;
 
-    if (player_move.get_str_input() == "undo") {
+    if (player_move.m_input == "undo") {
       movement_controller.undo_last_move();
       continue;
     }
 
-    if (movement_controller.is_valid_move(player_move)) {
-      movement_controller.move_piece(player_move);
+    if (movement_controller.is_valid_move(player_move.m_move)) {
+      movement_controller.move_piece(player_move.m_move);
       is_checkMate = movement_controller.get_checkmate();
       counter = 0;
     } else {
       // avoiding infinite loop
       if (counter == 4) break;
-      std::cout << player_move.get_str_input() << std::endl;
+      std::cout << player_move.m_input << std::endl;
       std::cout << "invalid move, try again\n";
       counter++;
     }
   }
 
+  p_board_display->print();
   if (is_checkMate) {
     std::cout << "checkmate\n";
     std::cout << "Player "

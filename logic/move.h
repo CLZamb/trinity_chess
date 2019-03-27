@@ -16,66 +16,70 @@ class Move {
  public:
   Move() {}
   explicit Move(int m) : m_move(m) { }
-  Move(unsigned int from, unsigned int to, unsigned int captured) {
-    m_move = (from & 0x3f) | ((to & 0x3f) << 6) | ((captured & 0xf) << 12);
+  Move(int m, int sc) : m_move(m), m_score(sc) {}
+  Move(unsigned int from, unsigned int to, unsigned int type) {
+    m_move = (from & 0x3f) | ((to & 0x3f) << 6) | ((type & 0xf) << 17);
   }
 
+  unsigned int get_move() { return m_move; }
   unsigned int get_from() const { return m_move & 0x3f; }
   unsigned int get_to() const { return (m_move >> 6) & 0x3f; }
   unsigned int get_captured_piece() const { return (m_move >> 12) & 0xf; }
   unsigned int get_piece() const { return (m_move >> 17) & 0xf; }
-
-  bool is_en_pessand() const { (m_move >> 16) & 0x1; }
+  unsigned int get_score() const { return m_score; }
+  // bool is_en_pessand() const { (m_move >> 16) & 0x1; }
   void set_to(unsigned int to) {
-    m_move &= ~0x3f;
+    m_move &= ~0xfc0;
     m_move |= (to & 0x3f) << 6;
+    assert(to == ((m_move >> 6) & 0x3f));
   }
 
   void set_from(unsigned int from) {
     m_move &= ~0x3f;
     m_move |= (from & 0x3f);
+    assert(from == (m_move & 0x3f));
   }
 
-  void set_move(unsigned int from, unsigned int to, unsigned int captured) {
-    m_move = (from & 0x3f) | ((to & 0x3f) << 6) | ((captured & 0xf) << 12);
+  void set_move(unsigned int from, unsigned int to, unsigned int type) {
+    m_move = (from & 0x3f) | ((to & 0x3f) << 6) | ((type & 0xf) << 17);
   }
 
   void set_move(unsigned int from, unsigned int to) {
     m_move = (from & 0x3f) | ((to & 0x3f) << 6);
   }
 
+  void set_move(unsigned int m) { m_move = m; }
+
   void set_capture_piece(unsigned int piece) {
+    assert(piece);
     if (!piece)
       return;
 
+    m_move &= ~0xf000;
     m_move |= ((piece & 0xf) << 12);
+    assert(piece == ((m_move >> 12) & 0xf));
   }
 
   void set_piece(unsigned int piece) {
+    m_move &= ~0x1e0000;
     m_move |= ((piece & 0xf) << 17);
+
+    assert(piece == ((m_move >> 17) & 0xf));
   }
 
-  void set_valid_move(bool v) { m_valid_move = v; }
+  void set_score(int score) { m_score = score; }
 
-  bool is_valid_move() { return m_valid_move; }
-
-  unsigned int get_butterfly_index() const { return m_move & 0x0fff; }
   bool operator==(Move a) const {
     return (m_move & 0xffff) == (a.m_move & 0xffff);
   }
+
   bool operator!=(Move a) const {
     return (m_move & 0xffff) != (a.m_move & 0xffff);
   }
 
-  unsigned short as_short() const { return (unsigned short)m_move; }
-  std::string get_str_input() { return m_input; }
-  void set_str_input(std::string input) { m_input = input; }
-  unsigned int get_uint_move() const { return m_move; }
-
  private:
-  std::string m_input = "quit";
-  bool m_valid_move = false;
-  unsigned int m_move; // or short or template type
+  unsigned int m_move = 0; // or short or template type
+  int m_score = 0;
 };
 
 #endif /* MOVE_H */

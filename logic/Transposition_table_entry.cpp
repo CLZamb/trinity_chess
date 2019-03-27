@@ -1,6 +1,6 @@
 #include "Transposition_table_entry.h"
 
-int TTEntry::get_best_move() const {
+Move* TTEntry::get_best_move() const {
   return m_best_move;
 }
 

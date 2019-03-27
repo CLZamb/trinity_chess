@@ -7,7 +7,7 @@
 #include <map>
 #include <set>
 #include "ZobristKey.h"
-#include "Transposition_table.h"
+#include "transposition_table.h"
 
 using std::string;
 using std::vector;
@@ -28,8 +28,8 @@ public:
   Movement(Board*, Player** turn);
   virtual ~Movement();
   void move_piece(Move);
-  void move_piece_bits(int* move);
-  void undo_last_bitboard_move(int last_move);
+  void move_piece_bits(Move*);
+  void undo_last_bitboard_move(Move last_move);
   void undo_last_move();
   void change_turn();
   bool is_valid_move(Move);
@@ -37,19 +37,20 @@ public:
 
   class MoveGenerator {
    private:
-      std::map<int, int> move_map;
-
-      Movement* movement;
-      int negamax(int, int, int, int);
+     Movement* movement;
+     Board* m_board;
+     int negamax(int, int, int, int);
+     void pick_next_move(int index, MoveList*);
+     int is_repeated_move(const int& depth, int* alpha, int* beta);
+     TTEntry::Flag get_flag(int alpha, int orig_alpha, int beta);
 
    public:
-      explicit MoveGenerator(Movement* movement) : movement(movement) {}
+      explicit MoveGenerator(Movement* movement);
       Move get_best_move();
       void generate_moves(MoveList*);
       int evaluate_board();
+      void testing_zobrist_1();
   };
 };
-
-// typedef vector<Movement::Move> MoveSet;
 
 #endif /* MOVEMENT_H */
