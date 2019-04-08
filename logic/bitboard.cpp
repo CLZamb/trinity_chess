@@ -508,7 +508,7 @@ void Bitboard::make_move_bb(int piece, int from, int to) {
 
 void Bitboard::undo_move(int piece, int piece_captured, int from, int to) {
   move(piece, from, to);
-  put_piece_back(piece, piece_captured, from);
+  put_piece_back(piece_captured, from);
   ply--;
 }
 
@@ -527,7 +527,7 @@ U64 Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
 U64 Bitboard::get_all_b_bitboard() { return m_all_b_pieces; }
 U64 Bitboard::get_all_pieces_bitboard() const { return m_all_pieces; }
 
-void Bitboard::capture_piece(int piece, int captured, int pos) {
+void Bitboard::capture_piece(int captured, int pos) {
   if (!captured)
     return;
 
@@ -538,7 +538,7 @@ void Bitboard::capture_piece(int piece, int captured, int pos) {
   board_score -= pieces_score[captured][pos];
 }
 
-void Bitboard::put_piece_back(int piece, int captured, int pos) {
+void Bitboard::put_piece_back(int captured, int pos) {
   if (!captured)
     return;
 
@@ -574,13 +574,18 @@ void Bitboard::update_killers(Move mv) {
   killers[0][ply] = mv;
 }
 
+
+void Bitboard::update_search_history(int piece, int to, int depth) {
+  search_history[piece][to] += depth;
+}
+
 void Bitboard::add_quiet_move(Move quiet_mv, MoveList* move_list) {
   if (killers[0][ply] == quiet_mv) {
     quiet_mv.set_score(900000);
   } else if (killers[1][ply] == quiet_mv) {
     quiet_mv.set_score(800000);
   } else {
-    quiet_mv.set_score(0);
+    quiet_mv.set_score(search_history[quiet_mv.get_piece()][quiet_mv.get_to()]);
   }
 
   move_list->push_back(quiet_mv);

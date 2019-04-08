@@ -12,7 +12,7 @@ Movement::~Movement() {}
 bool Movement::get_checkmate() { return checkmate; }
 
 int Movement::take_piece(int startSquare) {
-  return m_board->get_piece_at(startSquare);
+ return m_board->get_piece_at(startSquare);
 }
 
 void Movement::change_turn() {
@@ -36,9 +36,12 @@ void Movement::move_piece(Move move) {
 
   m_board->capture_piece(piece, captured_piece, to);
   m_board->move_piece_to_square(piece, from, to);
+  m_zkey.move_piece(piece, from, to);
 
-  if (captured_piece)
+  if (captured_piece) {
     move.set_capture_piece(captured_piece);
+    m_zkey.capture_piece(captured_piece, to);
+  }
 
   move.set_piece(piece);
   prev_moves.push_back(move.get_move());
@@ -98,6 +101,7 @@ void Movement::undo_last_move() {
 
   m_board->undo_move(piece, piece_captured, to, from);
   m_board->undo_square_move(piece, piece_captured, to, from);
+  m_zkey.undo_move(piece, piece_captured, to, from);
   change_turn();
 }
 
@@ -140,41 +144,10 @@ bool Movement::check_move(Piece* piece, int from, int to) {
   return all_moves & pieceLoc;
 }
 
-void Movement::MoveGenerator::testing_zobrist_1() {
-  U64 test_h_1 = movement->m_zkey.get_zobrist_key();
-  Move move;
-  move.set_from(B7);
-  move.set_to(B5);
-  move.set_piece(bP);
-  movement->move_piece_bits(&move);
-  movement->undo_last_bitboard_move(move);
-  U64 test_h_2 = movement->m_zkey.get_zobrist_key();
-  assert(test_h_1 == test_h_2);
-
-  movement->move_piece(move);
-  movement->change_turn();
-
-  test_h_1 = movement->m_zkey.get_zobrist_key();
-  move.set_from(B5);
-  move.set_to(A4);
-  move.set_piece(bP);
-  movement->move_piece_bits(&move);
-  movement->undo_last_bitboard_move(move);
-  m_board->print();
-  test_h_2 = movement->m_zkey.get_zobrist_key();
-
-  m_board->print();
-  assert(test_h_1 == test_h_2);
-  exit(1);
-}
-
 Movement::MoveGenerator::MoveGenerator(Movement* movement)
   : movement(movement), m_board(movement->m_board) {}
 
-static int nodes = 0;
-
 Move Movement::MoveGenerator::get_best_move() {
-  nodes = 0;
   MoveList m_legalMoves;
   generate_moves(&m_legalMoves);
   int best_move = 0;
@@ -187,7 +160,7 @@ Move Movement::MoveGenerator::get_best_move() {
   for (Move& mv : m_legalMoves) {
     pick_next_move(counter++, &m_legalMoves);
     movement->move_piece_bits(&mv);
-    score = -negamax(4, INT_MIN + 1, INT_MAX, -1);
+    score = -negamax(5, INT_MIN + 1, INT_MAX, -1);
     movement->undo_last_bitboard_move(mv);
     if (score > best_score) {
       best_move = mv.get_move();
@@ -201,7 +174,6 @@ Move Movement::MoveGenerator::get_best_move() {
     << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
     << " ms" << endl;
 
-  std::cout << nodes << std::endl;
   Move best(best_move);
   if ((!best_move) || (m_legalMoves.empty()))
     return best;
@@ -231,10 +203,11 @@ int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
   if (movement->checkmate || depth == 0)
     return color * evaluate_board();
 
-  // int orig_alpha = alpha;
-  // int repeated = is_repeated_move(depth, &alpha, &beta);
-  // if (repeated)
-  //   return repeated;
+  int orig_alpha = alpha;
+
+  int repeated = is_repeated_move(depth, &alpha, &beta);
+  if (repeated)
+    return repeated;
 
   MoveList m_legalMoves;
 
@@ -245,51 +218,52 @@ int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
 
   int value = INT_MIN;
   int counter = 0;
-  // Move* best_move = &m_legalMoves.at(0);
+  Move* best_move = &m_legalMoves.at(0);
   for (Move& mv : m_legalMoves) {
     pick_next_move(counter++, &m_legalMoves);
     movement->move_piece_bits(&mv);
     value = std::max(value, -negamax(depth - 1, -beta, -alpha, -color));
     movement->undo_last_bitboard_move(mv);
 
-    nodes++;
     if (value > alpha) {
       alpha = value;
-      // best_move = &mv;
+      best_move = &mv;
+      if (!(mv.get_captured_piece()))
+        m_board->update_search_history(mv.get_piece(), mv.get_to(), depth);
     }
 
     if (alpha >= beta) {
-      if (!(&mv && mv.get_captured_piece())) {
+      best_move = &mv;
+      if (!(mv.get_captured_piece()))
         m_board->update_killers(mv);
-      }
       break;
     }
   }
 
-  // TTEntry::Flag flag = get_flag(alpha, orig_alpha, beta);
-  // movement->m_table.set(
-  //     movement->m_zkey, TTEntry(best_move, alpha, depth, flag));
+  TTEntry::Flag flag = get_flag(alpha, orig_alpha, beta);
+  movement->m_table.set(
+      movement->m_zkey, TTEntry(best_move, value, depth, flag));
 
-  return alpha;
+  return value;
 }
 
 int Movement::MoveGenerator::is_repeated_move(
     const int &depth, int* alpha, int* beta) {
   const TTEntry* entry = movement->m_table.get_entry(movement->m_zkey);
-  if (entry && (entry->get_depth() >= depth)) {
+  if ((entry) && (entry->get_depth() >= depth)) {
     switch (entry->get_flag()) {
-      case TTable::EXACT:
+      case TTEntry::EXACT:
         return entry->get_score();
-      case TTable::UPPER_BOUND:
-        *beta = std::min(*beta, entry->get_score());
-        break;
-      case TTable::LOWER_BOUND:
+      case TTEntry::LOWER_BOUND:
         *alpha = std::max(*alpha, entry->get_score());
+        break;
+      case TTEntry::UPPER_BOUND:
+        *beta = std::min(*beta, entry->get_score());
         break;
     }
 
     if (*alpha >= *beta)
-      return *alpha;
+      return entry->get_score();
   }
 
   return 0;
@@ -297,21 +271,20 @@ int Movement::MoveGenerator::is_repeated_move(
 
 TTEntry::Flag Movement::MoveGenerator::get_flag(
     int alpha, int orig_alpha, int beta) {
-  TTEntry::Flag flag = TTEntry::EXACT;
 
   if (alpha <= orig_alpha) {
-    flag = TTEntry::UPPER_BOUND;
+    return TTEntry::UPPER_BOUND;
   } else if (alpha >= beta) {
-    flag = TTEntry::LOWER_BOUND;
+    return TTEntry::LOWER_BOUND;
   }
 
-  return flag;
+  return TTEntry::EXACT;
 }
 
 void Movement::MoveGenerator::pick_next_move(int index, MoveList* moves) {
   int best_so_far = index;
-  int best_score = 0;
-  for (int i = index; i < moves->size(); ++i) {
+  unsigned int best_score = 0;
+  for (unsigned int i = index; i < moves->size(); ++i) {
     if (moves->at(i).get_score() > best_score) {
       best_score = moves->at(i).get_score();
       best_so_far = i;

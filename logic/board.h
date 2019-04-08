@@ -62,6 +62,7 @@ class Board : public IDisplay {
   void undo_move(int piece, int piece_captured, int from, int to);
   void capture_piece(int piece, int captured, int pos);
   void update_killers(Move mv);
+  void update_search_history(int piece, int to, int depth);
   int get_board_score();
   int get_piece_at(int pos);
   U64 get_piece_attacks(int type, int from);

@@ -11,11 +11,10 @@ void TTable::set(ZobristKey key, TTEntry entry) {
 const TTEntry* TTable::get_entry(const ZobristKey &key) const {
   auto got = m_table.find(key.get_zobrist_key());
 
-  if (got != m_table.end()) {
+  if (got != m_table.end())
     return &m_table.at(key.get_zobrist_key());
-  } else {
-    return nullptr;
-  }
+
+  return nullptr;
 }
 
 void TTable::clear() { m_table.clear(); }

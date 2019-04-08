@@ -165,8 +165,12 @@ void Board::update_killers(Move mv) {
   m_bb.update_killers(mv);
 }
 
+void Board::update_search_history(int piece, int to, int depth) {
+  m_bb.update_search_history(piece, to, depth);
+}
+
 void Board::capture_piece(int piece, int piece_captured, int pos) {
-  m_bb.capture_piece(piece, piece_captured, pos);
+  m_bb.capture_piece(piece_captured, pos);
 }
 
 void Board::undo_square_move(int piece, int piece_captured, int from, int to) {

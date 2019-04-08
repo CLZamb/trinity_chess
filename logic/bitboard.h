@@ -22,6 +22,7 @@ class Bitboard {
     int board_score = 0;
     int pieces_score[13][64] = {{0}};
     int MvvLvaScores[13][13];
+    int search_history[13][64] = {{0}};
     static const int MAXDEPTH = 64;
     Move killers[2][MAXDEPTH];
 
@@ -114,9 +115,10 @@ class Bitboard {
     void generate_all_moves(bool side, MoveList*);
     void clear_bit_at_player_pieces(bool is_black, int pos);
     void move(int type, int f, int t);
-    void capture_piece(int piece, int captured, int pos);
-    void put_piece_back(int piece, int captured, int pos);
+    void capture_piece(int captured, int pos);
+    void put_piece_back(int captured, int pos);
     void update_killers(Move mv);
+    void update_search_history(int piece, int to, int depth);
     void make_move_bb(int piece, int from, int to);
     void undo_move(int piece, int piece_captured, int from, int to);
     int evaluate_board();

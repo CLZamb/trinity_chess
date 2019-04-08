@@ -49,7 +49,6 @@ public:
       Move get_best_move();
       void generate_moves(MoveList*);
       int evaluate_board();
-      void testing_zobrist_1();
   };
 };
 
