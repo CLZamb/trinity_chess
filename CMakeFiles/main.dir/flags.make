@@ -6,5 +6,5 @@ CXX_FLAGS =  -stdlib=libc++ -std=c++11   -Wall -Wextra -Wpedantic -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/cristofher/Desktop/practice/c++/ChessProject/logic -I/Users/cristofher/Desktop/practice/c++/ChessProject/display -I/Users/cristofher/Desktop/practice/c++/ChessProject/general -I/Users/cristofher/Desktop/practice/c++/ChessProject/general/pieces 
+CXX_INCLUDES = -I/Users/cristofher/desktop/practice/c++/ChessProject/logic -I/Users/cristofher/desktop/practice/c++/ChessProject/display -I/Users/cristofher/desktop/practice/c++/ChessProject/general -I/Users/cristofher/desktop/practice/c++/ChessProject/general/pieces 
 

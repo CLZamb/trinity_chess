@@ -10,7 +10,7 @@ AiPlayer::~AiPlayer() {}
 
 PlayerMove AiPlayer::get_next_move() {
   std::cout << "Thinking...\n";
-  m_move = p_move_generator->get_best_move();
+  m_move = p_move_generator->search_best_move();
   // p_move_generator->testing_zobrist_1();
   m_pl_move.set_move(m_move);
   m_pl_move.set_ply_input(m_move.get_move() ? "" : "quit");

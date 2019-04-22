@@ -147,32 +147,64 @@ bool Movement::check_move(Piece* piece, int from, int to) {
 Movement::MoveGenerator::MoveGenerator(Movement* movement)
   : movement(movement), m_board(movement->m_board) {}
 
-Move Movement::MoveGenerator::get_best_move() {
+bool Movement::MoveGenerator::time_out() {
+  m_elapsed =
+    std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - m_start).count();
+
+  if (m_elapsed >= (m_time_allocated)) return true;
+
+  return false;
+}
+
+Move Movement::MoveGenerator::search_best_move() {
+  m_start = std::chrono::steady_clock::now();
+  Move best_move;
+  m_stop = false;
+
+  for (int currDepth = 1; ;currDepth++) {
+    best_move = root_negamax(currDepth);
+    m_elapsed =
+      std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - m_start).count();
+
+    if (m_stop)
+      break;
+
+    if (m_elapsed >= (m_time_allocated/2)) break;
+  }
+
+  auto end = std::chrono::steady_clock::now();
+
+  cout << "Elapsed time in milliseconds : "
+    << std::chrono::duration_cast<std::chrono::milliseconds>(end - m_start).count()
+    << " ms" << endl;
+
+  return best_move;
+}
+
+Move Movement::MoveGenerator::root_negamax(int cur_depth) {
   MoveList m_legalMoves;
   generate_moves(&m_legalMoves);
   int best_move = 0;
   int best_score = INT_MIN;
   int score;
 
-  auto start = std::chrono::steady_clock::now();
-
   int counter = 0;
   for (Move& mv : m_legalMoves) {
     pick_next_move(counter++, &m_legalMoves);
     movement->move_piece_bits(&mv);
-    score = -negamax(5, INT_MIN + 1, INT_MAX, -1);
+    score = -negamax(cur_depth, INT_MIN + 1, INT_MAX, -1);
     movement->undo_last_bitboard_move(mv);
+
+    if (m_stop || time_out()) {
+      m_stop = true;
+      break;
+    }
+
     if (score > best_score) {
       best_move = mv.get_move();
       best_score = score;
     }
   }
-
-  auto end = std::chrono::steady_clock::now();
-
-  cout << "Elapsed time in milliseconds : "
-    << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-    << " ms" << endl;
 
   Move best(best_move);
   if ((!best_move) || (m_legalMoves.empty()))
@@ -200,6 +232,12 @@ Move Movement::MoveGenerator::get_best_move() {
 */
 int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
                                      int color) {
+
+  if (m_stop || time_out()) {
+    m_stop = true;
+    return color * evaluate_board();
+  }
+
   if (movement->checkmate || depth == 0)
     return color * evaluate_board();
 

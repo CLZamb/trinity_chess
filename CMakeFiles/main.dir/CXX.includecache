@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
+/Users/cristofher/desktop/practice/c++/ChessProject/defs.h
 cstdint
 -
 limits
@@ -14,33 +14,33 @@ limits
 iostream
 -
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/Transposition_table_entry.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/Transposition_table_entry.h
 random
 -
 move.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/move.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/move.h
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/ZobristKey.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/ZobristKey.h
 random
 -
 ../defs.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
+/Users/cristofher/desktop/practice/c++/ChessProject/defs.h
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/bitboard.h
 string
 -
 piecesheaders.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/piecesheaders.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/piecesheaders.h
 move.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/move.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/move.h
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/board.h
 Idisplay.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/Idisplay.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/Idisplay.h
 bitboard.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/bitboard.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/bitboard.h
 player.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/player.h
 iostream
 -
 string
@@ -50,21 +50,21 @@ utility
 vector
 -
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/move.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/move.h
 ../defs.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/defs.h
+/Users/cristofher/desktop/practice/c++/ChessProject/defs.h
 iostream
 -
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.cpp
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/movement.cpp
 movement.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/movement.h
 chrono
 -
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/movement.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/movement.h
 board.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/board.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/board.h
 algorithm
 -
 functional
@@ -74,13 +74,13 @@ map
 set
 -
 ZobristKey.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/ZobristKey.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/ZobristKey.h
 transposition_table.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/transposition_table.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/transposition_table.h
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/player.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/player.h
 move.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/move.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/move.h
 iostream
 -
 piece.h
@@ -90,11 +90,11 @@ regex
 string
 -
 
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/transposition_table.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/transposition_table.h
 ZobristKey.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/ZobristKey.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/ZobristKey.h
 Transposition_table_entry.h
-/Users/cristofher/Desktop/practice/c++/ChessProject/logic/Transposition_table_entry.h
+/Users/cristofher/desktop/practice/c++/ChessProject/logic/Transposition_table_entry.h
 unordered_map
 -
 

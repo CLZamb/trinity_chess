@@ -39,14 +39,20 @@ public:
    private:
      Movement* movement;
      Board* m_board;
+     bool m_stop = false;
+     std::chrono::time_point<std::chrono::steady_clock> m_start;
+     int m_time_allocated = 4000;
+     int m_elapsed = 0;
      int negamax(int, int, int, int);
+     bool time_out();
      void pick_next_move(int index, MoveList*);
      int is_repeated_move(const int& depth, int* alpha, int* beta);
      TTEntry::Flag get_flag(int alpha, int orig_alpha, int beta);
 
    public:
       explicit MoveGenerator(Movement* movement);
-      Move get_best_move();
+      Move root_negamax(int cur_depth);
+      Move search_best_move();
       void generate_moves(MoveList*);
       int evaluate_board();
   };
