@@ -18,7 +18,7 @@ private:
   Player** pp_cur_player_turn = nullptr;
   ZobristKey m_zkey;
   TTable m_table;
-  bool checkmate;
+  bool checkmate = false;
   bool check_move(Piece*, int from, int to);
   int take_piece(int pos);
   int capture_piece(int pos);
