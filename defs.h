@@ -109,20 +109,6 @@ constexpr bool Valid_piece(int pieceType) {
 
 constexpr int MAX_MOVES = 256;
 
-constexpr void printBitboard(const U64 bitboard) {
-  for (int row = 7; row >= 0; --row) {
-    for (int col = 0; col <= 7; ++col) {
-      if (bitboard & (1ULL << ((row * 8) + col))) {
-        std::cout << "1 ";
-      } else {
-        std::cout << "0 ";
-      }
-    }
-    std::cout << std::endl;
-  }
-  std::cout  << std::endl;
-}
-
 constexpr unsigned int Get_from_sq(int move) {
   return move & 0x3f;
 }

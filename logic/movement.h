@@ -8,6 +8,8 @@
 #include <set>
 #include "ZobristKey.h"
 #include "transposition_table.h"
+#include <chrono>
+#include <climits>
 
 using std::string;
 using std::vector;
