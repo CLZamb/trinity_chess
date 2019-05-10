@@ -34,11 +34,12 @@ void Movement::move_piece(Move move) {
   unsigned int piece = take_piece(from);
   unsigned int captured_piece = capture_piece(to);
 
-  m_board->capture_piece(piece, captured_piece, to);
+  m_board->capture_piece(captured_piece, to);
   m_board->move_piece_to_square(piece, from, to);
   m_zkey.move_piece(piece, from, to);
 
   if (captured_piece) {
+    assert(captured_piece);
     move.set_capture_piece(captured_piece);
     m_zkey.capture_piece(captured_piece, to);
   }
@@ -58,9 +59,11 @@ void Movement::move_piece_bits(Move* move) {
     if ((captured_piece == bK)|| (captured_piece == wK))
       checkmate = true;
 
-    m_board->capture_piece(piece, captured_piece, to);
+    m_board->capture_piece(captured_piece, to);
     m_zkey.capture_piece(captured_piece, to);
 
+
+    assert(captured_piece);
     move->set_capture_piece(captured_piece);
   }
 

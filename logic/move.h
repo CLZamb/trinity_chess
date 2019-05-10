@@ -1,8 +1,8 @@
 #ifndef MOVE_H
 #define MOVE_H
-#include "../defs.h"
 #include <iostream>
 #include <cassert>
+#include "../defs.h"
 /*
   0000 0000 0000 0000 0000 0011 1111 -> From 0x3F
   0000 0000 0000 0000 1111 1100 0000 -> To >> 6, 0x3F

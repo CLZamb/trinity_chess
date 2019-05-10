@@ -30,6 +30,7 @@ class Piece {
   void make_move(int from, int to);
 
   U64 get_bitboard();
+  void clear_bitboard();
   bool is_black();
 };
 

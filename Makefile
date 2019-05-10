@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.14.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.14.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.14.2/bin/cmake -E remove -f
+RM = /usr/local/Cellar/cmake/3.14.3/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject
+CMAKE_SOURCE_DIR = /Users/cristofher/desktop/practice/c++/ChessProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject
+CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.14.2/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.14.3/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.14.2/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.14.3/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles /Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject/CMakeFiles /Users/cristofher/desktop/practice/c++/ChessProject/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -528,6 +528,33 @@ logic/board.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/board.cpp.s
 .PHONY : logic/board.cpp.s
 
+logic/magic_bitboard.o: logic/magic_bitboard.cpp.o
+
+.PHONY : logic/magic_bitboard.o
+
+# target to build an object file
+logic/magic_bitboard.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/magic_bitboard.cpp.o
+.PHONY : logic/magic_bitboard.cpp.o
+
+logic/magic_bitboard.i: logic/magic_bitboard.cpp.i
+
+.PHONY : logic/magic_bitboard.i
+
+# target to preprocess a source file
+logic/magic_bitboard.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/magic_bitboard.cpp.i
+.PHONY : logic/magic_bitboard.cpp.i
+
+logic/magic_bitboard.s: logic/magic_bitboard.cpp.s
+
+.PHONY : logic/magic_bitboard.s
+
+# target to generate assembly for a file
+logic/magic_bitboard.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/logic/magic_bitboard.cpp.s
+.PHONY : logic/magic_bitboard.cpp.s
+
 logic/movement.o: logic/movement.cpp.o
 
 .PHONY : logic/movement.o
@@ -690,6 +717,9 @@ help:
 	@echo "... logic/board.o"
 	@echo "... logic/board.i"
 	@echo "... logic/board.s"
+	@echo "... logic/magic_bitboard.o"
+	@echo "... logic/magic_bitboard.i"
+	@echo "... logic/magic_bitboard.s"
 	@echo "... logic/movement.o"
 	@echo "... logic/movement.i"
 	@echo "... logic/movement.s"

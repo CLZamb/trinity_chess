@@ -27,6 +27,8 @@ set(SOURCE_FILES
   logic/player.cpp
   logic/AiPlayer.h
   logic/AiPlayer.cpp
+  logic/magic_bitboard.h
+  logic/magic_bitboard.cpp
   logic/movement.h
   logic/movement.cpp
   logic/move.h

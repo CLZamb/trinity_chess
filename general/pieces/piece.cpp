@@ -31,3 +31,5 @@ void Piece::make_move(int from, int to) {
   CLRBIT(m_bitboard, from);
   SETBIT(m_bitboard, to);
 }
+
+void Piece::clear_bitboard() { m_bitboard = BLANK; }
