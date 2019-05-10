@@ -34,34 +34,29 @@ class Bitboard {
     U64 m_w_pawn_non_attacks[64];
 
     U64 Enpessant[2];
-    U64 SetMask[64];
-    U64 ClearMask[64];
 
-    Piece* m_pieces[13];
-
-    Bishop m_b_bishop{BLACK, BISHOPSTART & ALLBLACKSTART};
-    Bishop m_w_bishop{WHITE, BISHOPSTART & ALLWHITESTART};
-
-    King m_b_king{BLACK, KINGSTART & ALLBLACKSTART};
-    King m_w_king{WHITE, KINGSTART & ALLWHITESTART};
-
-    Knight m_b_knigth{BLACK, KNIGHTSTART & ALLBLACKSTART};
-    Knight m_w_knigth{WHITE, KNIGHTSTART & ALLWHITESTART};
-
-    Queen m_b_queen{BLACK, QUEENSTART & ALLBLACKSTART};
-    Queen m_w_queen{WHITE, QUEENSTART & ALLWHITESTART};
-
-    Rook m_b_rook{BLACK, ROOKSTART & ALLBLACKSTART};
-    Rook m_w_rook{WHITE, ROOKSTART & ALLWHITESTART};
-
-    Pawn m_b_pawn{BLACK, PAWNSTART & ALLBLACKSTART};
-    Pawn m_w_pawn{WHITE, PAWNSTART & ALLWHITESTART};
+    Piece* m_pieces[13] {
+      nullptr, // EMPTY 0
+      // black pieces
+      new Pawn(BLACK, PAWNSTART & ALLBLACKSTART), // bP 1
+      new Rook(BLACK, ROOKSTART & ALLBLACKSTART), // bR 2
+      new Knight(BLACK, KNIGHTSTART & ALLBLACKSTART), // bN 3
+      new Bishop(BLACK, BISHOPSTART & ALLBLACKSTART), // bB 4
+      new Queen(BLACK, QUEENSTART & ALLBLACKSTART), // bQ 5
+      new King(BLACK, KINGSTART & ALLBLACKSTART), // bK 6
+      // white pieces
+      new Pawn(WHITE, PAWNSTART & ALLWHITESTART), // wP 7
+      new Rook(WHITE, ROOKSTART & ALLWHITESTART), // wR 8
+      new Knight(WHITE, KNIGHTSTART & ALLWHITESTART), // wN 9
+      new Bishop(WHITE, BISHOPSTART & ALLWHITESTART), // wB 10
+      new Queen(WHITE, QUEENSTART & ALLWHITESTART), // wQ 11
+      new King(WHITE, KINGSTART & ALLWHITESTART), // wK 12
+    };
 
     int pop_1st_bit(U64* bb);
     int count_1s(U64 b);
     void _init_bitmasks();
     void _init_nonsliders_attacks();
-    void _init_pieces();
     void _init_pieces_table_values();
     void _init_slider_masks_shifs_occupancies(int);
     void _init_tables(int);
@@ -93,9 +88,6 @@ class Bitboard {
     U64 get_all_pieces_bitboard() const;
     U64 get_piece_bitboard(int piece) const;
     U64 get_Pieces_BB(int piece_type);
-    // U64 bishop_attacks(U64 occ, SquareIndices);
-    // U64 rook_attacks(U64 occ, SquareIndices);
-    U64 queen_attacks(U64 occ, SquareIndices);
     U64 get_piece_attacks(int type, SquareIndices);
     U64 get_non_attack_moves(int type, SquareIndices);
     void generate_all_moves(bool side, MoveList*);

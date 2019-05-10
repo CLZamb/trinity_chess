@@ -1,12 +1,16 @@
 #include "magic_bitboard.h"
 #include "../defs.h"
 
+// extern declaration in defs.h
+U64 SetMask[64];
+U64 ClearMask[64];
+// define in magic_bitboard.cpp - _init_bitmasks()
+
 MagicBitboard::MagicBitboard() {
   int Rook = 1, Bishop = 0;
   _init_bitmasks();
   _init_slider_masks_shifs_occupancies(Bishop);
   _init_slider_masks_shifs_occupancies(Rook);
-  // _init_nonsliders_attacks();
   _init_tables(Bishop);
   _init_tables(Rook);
 }

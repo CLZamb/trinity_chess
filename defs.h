@@ -87,11 +87,11 @@ const U64 ZERO = U64(0);
  */
 const U64 ONE = U64(1);
 
-/* MACROS */
+// MACROS
 #define CLRBIT(bb,sq) ((bb) &= ClearMask[(sq)])
 #define SETBIT(bb,sq) ((bb) |= SetMask[(sq)])
 
-/* GLOBALS */
+// GLOBALS
 extern U64 SetMask[64];
 extern U64 ClearMask[64];
 

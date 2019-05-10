@@ -56,7 +56,7 @@ void Board::parser_fen(string fen) {
   };
 
   m_bb.reset_all_pieces_bitboard();
-  for (int i = 0; i < fen.length() && square < SquareEnd; ++i) {
+  for (unsigned int i = 0; i < fen.length() && square < SquareEnd; ++i) {
     char_piece = fen[i];
     piece_int = piece_map[char_piece];
     if (piece_int) {

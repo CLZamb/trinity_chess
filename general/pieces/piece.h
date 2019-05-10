@@ -8,8 +8,6 @@
 
 class Piece {
  protected:
-  U64 SetMask[64];
-  U64 ClearMask[64];
   U64 m_bitboard;
   Piecetype m_type = EMPTY;
   box* p_cur_b_sq_drawing = nullptr;

@@ -1,9 +1,10 @@
 #include "bitboard.h"
-Bitboard::Bitboard() {
-  _init_pieces();
-}
+Bitboard::Bitboard() {}
 
-Bitboard::~Bitboard() {}
+Bitboard::~Bitboard() {
+  for (int i = EMPTY; i <= wK; i++)
+    delete m_pieces[i];
+}
 
 void Bitboard::_init() {
   _init_MvvLva();
@@ -12,28 +13,11 @@ void Bitboard::_init() {
 }
 
 void Bitboard::reset_all_pieces_bitboard() {
-  // clear bitboard
   for (int piece = bP; piece <= wK; ++piece) {
     m_pieces[piece]->clear_bitboard();
   }
 
   m_all_w_pieces = m_all_b_pieces = m_all_pieces = BLANK;
-}
-
-void Bitboard::_init_pieces() {
-  m_pieces[EMPTY] = nullptr;
-  m_pieces[bP] = &m_b_pawn;
-  m_pieces[bR] = &m_b_rook;
-  m_pieces[bN] = &m_b_knigth;
-  m_pieces[bB] = &m_b_bishop;
-  m_pieces[bQ] = &m_b_queen;
-  m_pieces[bK] = &m_b_king;
-  m_pieces[wP] = &m_w_pawn;
-  m_pieces[wR] = &m_w_rook;
-  m_pieces[wN] = &m_w_knigth;
-  m_pieces[wB] = &m_w_bishop;
-  m_pieces[wQ] = &m_w_queen;
-  m_pieces[wK] = &m_w_king;
 }
 
 void Bitboard::_init_pieces_table_values() {
