@@ -1,24 +1,29 @@
 #include "board.h"
 #include <sstream>
 
-Board::Board() {}
+Board::Board() {
+  // pieces_start_pos = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2";
+}
+
 Board::~Board() {
   // Free each array and sub-array
   for (int i = 0; i < 64; ++i)
     delete p_board[i];
 }
 
-void Board::_init(Player* player1, Player* player2) {
+void Board::_init() {
   m_bb._init();
-  this->player1 = player1;
-  this->player2 = player2;
   create_board_squares();
-  pieces_start_pos = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2";
   parser_fen(pieces_start_pos);
 }
 
+void Board::set_players(Player* player1, Player* player2) {
+  this->player1 = player1;
+  this->player2 = player2;
+}
+
 void Board::create_board_squares() {
-  create_square_bases();
+  create_squares_drawing();
   char squareColor = 'w';
 
   int position = 0;
@@ -38,7 +43,7 @@ void Board::create_board_squares() {
   }
 }
 
-void Board::create_square_bases() {
+void Board::create_squares_drawing() {
   int sizeBox = sizeof(char[box::char_size]);
   for (int i = 0; i < box::row_size; ++i) {
     snprintf(wSquare.content[i], sizeBox, "%s", "░░░░░░░░░");
@@ -61,7 +66,7 @@ void Board::parser_fen(string fen) {
     piece_int = piece_map[char_piece];
     if (piece_int) {
       m_bb.set_piece_at_pos(piece_int, square);
-      add_to_board(piece_map[char_piece], square++);
+      add_to_board(piece_int, square++);
 
     } else if (is_number(char_piece)) {
       square += (char_piece - '0');

@@ -6,51 +6,55 @@ void Game::start() {
   print_message("welcome");
   std::cin.get();
   print_message("start");
-  int option = get_option();
-  switch (option) {
-  case 1:
-  case 2:
-    // create squares and set the pieces on those squares
-    if (option == 1) {
+
+  switch (get_option()) {
+    case 1:
       // Player vs Player
-      p_player2 = new Player(BLACK);
-    } else if (option == 2) {
+      set_players();
+      play();
+    case 2:
       // Player vs CPU
-      Movement::MoveGenerator AI_move_generator(&movement_controller);
-      p_player2 = new AiPlayer(BLACK, &AI_move_generator);
-    }
-    m_board._init(&m_player1, p_player2);
-    p_player2->set_opponent(&m_player1);
-    m_player1.set_opponent(p_player2);
-    play();
-    break;
-  case 3:
-    print_message("gameOver");
-    break;
-  case 4:
-    std::cout << "Credits" << std::endl;
-    break;
-  default:
-    std::cout << "Invalid Input:" << std::endl;
-    break;
+      set_players(true);
+      play();
+      break;
+    case 3:
+      print_message("gameOver");
+      break;
+    case 4:
+      std::cout << "Credits" << std::endl;
+      break;
+    default:
+      std::cout << "Invalid Input:" << std::endl;
+      break;
   }
+}
+
+void Game::set_players(bool is_cpu /*false*/) {
+  if (is_cpu)
+    p_player2 = new AiPlayer(BLACK, &movement_controller);
+  else
+    p_player2 = new Player(BLACK);
+
+  m_board.set_players(&m_player1, p_player2);
+  p_player2->set_opponent(&m_player1);
+  m_player1.set_opponent(p_player2);
 }
 
 int Game::get_option() {
   std::cout << "\t\tchoose one of the options (1-4): ";
   int input;
   std::cin >> input;
+  std::cin.clear();
+  std::cin.ignore();
   return input;
 }
 
 void Game::play() {
-  bool is_checkMate = false;
+  m_board._init();
   PlayerMove player_move;
   // clear input buffer
-  std::cin.clear();
-  std::cin.ignore();
-
   int counter = 0;
+  bool is_checkMate = false;
   while (!is_checkMate) {
     p_board_display->print();
     player_move = p_player_turn->get_next_move();

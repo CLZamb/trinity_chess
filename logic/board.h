@@ -17,8 +17,8 @@ using std::map;
 
 class Board : public IDisplay {
  private:
-
-  string pieces_start_pos = "";
+  // default fen
+  string pieces_start_pos = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
   Player* player1, *player2;
   box wSquare, bSquare;
   Bitboard m_bb;
@@ -27,7 +27,7 @@ class Board : public IDisplay {
   void add_to_board(int piece, int position);
   void parser_fen(string fen);
   void create_board_squares();
-  void create_square_bases();
+  void create_squares_drawing();
   std::string get_str_type(int type);
   bool is_number(char c);
   bool is_piecetype(char c, map<char, int> pieces);
@@ -58,7 +58,8 @@ class Board : public IDisplay {
   Board();
   ~Board();
 
-  void _init(Player*, Player*);
+  void _init();
+  void set_players(Player* player1, Player* player2);
   void print();
   void undo_square_move(int piece, int piece_captured, int from, int to);
   void generate_all_moves(bool side, MoveList* moveList);

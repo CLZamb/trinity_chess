@@ -6,6 +6,10 @@ U64 SetMask[64];
 U64 ClearMask[64];
 // define in magic_bitboard.cpp - _init_bitmasks()
 
+// Magic_Bitboards() computes all rook and bishop attacks at startup. Magic
+// bitboards are used to look up attacks of sliding pieces. As a reference see
+// www.chessprogramming.org/Magic_Bitboards. In particular, here we use the so
+// called "fancy" approach.
 MagicBitboard::MagicBitboard() {
   int Rook = 1, Bishop = 0;
   _init_bitmasks();

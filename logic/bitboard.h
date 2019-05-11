@@ -7,6 +7,7 @@
 #include "magic_bitboard.h"
 
 using std::string;
+#define TOTAL_SQ 64
 
 typedef std::vector<Move> MoveList;
 
@@ -14,16 +15,16 @@ class Bitboard {
  private:
     int ply = 0;
     int board_score = 0;
-    int pieces_score[13][64] = {{0}};
+    int pieces_score[13][TOTAL_SQ] = {{0}};
     int MvvLvaScores[13][13];
-    int search_history[13][64] = {{0}};
+    int search_history[13][TOTAL_SQ] = {{0}};
     static const int MAXDEPTH = 64;
     Move killers[2][MAXDEPTH];
     MagicBitboard magic_bb;
 
     U64 m_all_w_pieces = ALLWHITESTART;
     U64 m_all_b_pieces = ALLBLACKSTART;
-    U64 m_all_pieces = ALLWHITESTART|ALLBLACKSTART;
+    U64 m_occupied = ALLWHITESTART|ALLBLACKSTART;
 
     U64 m_w_pawn_attacks[64];
     U64 m_b_pawn_attacks[64];
@@ -36,21 +37,21 @@ class Bitboard {
     U64 Enpessant[2];
 
     Piece* m_pieces[13] {
-      nullptr, // EMPTY 0
+      nullptr,  // EMPTY 0
       // black pieces
-      new Pawn(BLACK, PAWNSTART & ALLBLACKSTART), // bP 1
-      new Rook(BLACK, ROOKSTART & ALLBLACKSTART), // bR 2
-      new Knight(BLACK, KNIGHTSTART & ALLBLACKSTART), // bN 3
-      new Bishop(BLACK, BISHOPSTART & ALLBLACKSTART), // bB 4
-      new Queen(BLACK, QUEENSTART & ALLBLACKSTART), // bQ 5
-      new King(BLACK, KINGSTART & ALLBLACKSTART), // bK 6
+      new Pawn(BLACK, PAWNSTART & ALLBLACKSTART),  // bP 1
+      new Rook(BLACK, ROOKSTART & ALLBLACKSTART),  // bR 2
+      new Knight(BLACK, KNIGHTSTART & ALLBLACKSTART),  // bN 3
+      new Bishop(BLACK, BISHOPSTART & ALLBLACKSTART),  // bB 4
+      new Queen(BLACK, QUEENSTART & ALLBLACKSTART),  // bQ 5
+      new King(BLACK, KINGSTART & ALLBLACKSTART),  // bK 6
       // white pieces
-      new Pawn(WHITE, PAWNSTART & ALLWHITESTART), // wP 7
-      new Rook(WHITE, ROOKSTART & ALLWHITESTART), // wR 8
-      new Knight(WHITE, KNIGHTSTART & ALLWHITESTART), // wN 9
-      new Bishop(WHITE, BISHOPSTART & ALLWHITESTART), // wB 10
-      new Queen(WHITE, QUEENSTART & ALLWHITESTART), // wQ 11
-      new King(WHITE, KINGSTART & ALLWHITESTART), // wK 12
+      new Pawn(WHITE, PAWNSTART & ALLWHITESTART),  // wP 7
+      new Rook(WHITE, ROOKSTART & ALLWHITESTART),  // wR 8
+      new Knight(WHITE, KNIGHTSTART & ALLWHITESTART),  // wN 9
+      new Bishop(WHITE, BISHOPSTART & ALLWHITESTART),  // wB 10
+      new Queen(WHITE, QUEENSTART & ALLWHITESTART),  // wQ 11
+      new King(WHITE, KINGSTART & ALLWHITESTART),  // wK 12
     };
 
     int pop_1st_bit(U64* bb);
@@ -65,7 +66,6 @@ class Bitboard {
     void gen_all_piece_moves(int type, MoveList* moveList);
     void gen_all_captured_moves(U64 dest, Move mv, MoveList* moveList);
     void gen_all_quiet_moves(U64 dest, Move mv, MoveList* moveList);
-    // void set_bit_at_player_pieces(bool is_black, int pos);
     void add_quiet_move(Move quiet_move, MoveList* move_list);
     void add_captured_move(Move capture_move, MoveList* move_list);
     void add_en_pessant_move(Move ep_move, MoveList* move_list);

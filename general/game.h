@@ -12,7 +12,6 @@ private:
   Messages m_messages;
   IDisplay* p_board_display = &m_board;
   IDisplay* p_message_display = &m_messages;
-  // Display *pScoreDisplay;
   Player m_player1{WHITE};
   Player* p_player2 = nullptr, *p_player_turn = &m_player1;
   Movement movement_controller{&m_board, &p_player_turn};
@@ -20,6 +19,7 @@ private:
   int get_option();
   void print_message(string);
   void change_turn();
+  void set_players(bool is_cpu = false);
   void play();
 
 public:

@@ -17,7 +17,7 @@ void Bitboard::reset_all_pieces_bitboard() {
     m_pieces[piece]->clear_bitboard();
   }
 
-  m_all_w_pieces = m_all_b_pieces = m_all_pieces = BLANK;
+  m_all_w_pieces = m_all_b_pieces = m_occupied = BLANK;
 }
 
 void Bitboard::_init_pieces_table_values() {
@@ -39,12 +39,10 @@ void Bitboard::_init_pieces_table_values() {
 void Bitboard::_init_MvvLva() {
   int Attacker;
   int Victim;
-  for (Attacker = bP; Attacker <= wK; ++Attacker) {
-    for (Victim = bP; Victim <= wK; ++Victim) {
+  for (Attacker = bP; Attacker <= wK; ++Attacker)
+    for (Victim = bP; Victim <= wK; ++Victim)
       MvvLvaScores[Victim][Attacker] =
         VictimScore[Victim] + 6 - (VictimScore[Attacker] / 10);
-    }
-  }
 }
 
 Piece* Bitboard::get_piece(int type) {
@@ -178,18 +176,21 @@ U64 Bitboard::get_piece_bitboard(int type) const {
 
 U64 Bitboard::get_piece_attacks(int type, SquareIndices from) {
   switch (type) {
+    case bP:
+    case wP:
+      return get_pawn_attacks(type, from);
     case bR:
     case wR:
-      return magic_bb.rook_attacks(m_all_pieces, from);
+      return magic_bb.rook_attacks(m_occupied, from);
     case bQ:
     case wQ:
-      return magic_bb.queen_attacks(m_all_pieces, from);
+      return magic_bb.queen_attacks(m_occupied, from);
     case bK:
     case wK:
       return m_king_attacks[from];
     case bB:
     case wB:
-      return magic_bb.bishop_attacks(m_all_pieces, from);
+      return magic_bb.bishop_attacks(m_occupied, from);
     case bN:
     case wN:
       return m_knight_attacks[from];
@@ -238,9 +239,9 @@ U64 Bitboard::get_non_attack_moves(int type, SquareIndices from) {
   if (type != bP && type != wP) return BLANK;
 
   if (type == bP)
-    return m_b_pawn_non_attacks[from] & ~m_all_pieces;
+    return m_b_pawn_non_attacks[from] & ~m_occupied;
 
-  return m_w_pawn_non_attacks[from] & ~m_all_pieces;
+  return m_w_pawn_non_attacks[from] & ~m_occupied;
 }
 
 void Bitboard::gen_all_piece_moves(int type, MoveList* moveList) {
@@ -285,16 +286,11 @@ void Bitboard::gen_all_quiet_moves(U64 dest, Move mv, MoveList* moveList) {
 }
 
 void Bitboard::generate_all_moves(bool has_black_pieces, MoveList* moveList) {
-  // gen_all_knight_moves;
   gen_all_piece_moves(has_black_pieces? bN : wN, moveList);
   gen_all_pawn_moves(has_black_pieces? bP : wP, moveList);
-  // gen_all_bishop_moves;
   gen_all_piece_moves(has_black_pieces? bB : wB, moveList);
-  // gen_all_rook_moves;
   gen_all_piece_moves(has_black_pieces? bR : wR, moveList);
-  // gen_all_queen_moves;
   gen_all_piece_moves(has_black_pieces? bQ : wQ, moveList);
-  // gen_all_king_moves;
   gen_all_piece_moves(has_black_pieces? bK : wK, moveList);
 }
 
@@ -305,12 +301,12 @@ void Bitboard::set_piece_at_pos(int piece, int square) {
 
 void Bitboard::clear_bit_at_player_pieces(bool is_black, int pos) {
   CLRBIT(is_black ? m_all_b_pieces : m_all_w_pieces, pos);
-  CLRBIT(m_all_pieces, pos);
+  CLRBIT(m_occupied, pos);
 }
 
 void Bitboard::set_bit_at_player_pieces(bool is_black, int pos) {
   SETBIT(is_black ? m_all_b_pieces : m_all_w_pieces, pos);
-  SETBIT(m_all_pieces, pos);
+  SETBIT(m_occupied, pos);
 }
 
 void Bitboard::make_move_bb(int piece, int from, int to) {
@@ -337,7 +333,7 @@ void Bitboard::move(int piece, int from, int to) {
 
 U64 Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
 U64 Bitboard::get_all_b_bitboard() { return m_all_b_pieces; }
-U64 Bitboard::get_all_pieces_bitboard() const { return m_all_pieces; }
+U64 Bitboard::get_all_pieces_bitboard() const { return m_occupied; }
 
 void Bitboard::capture_piece(int captured, int pos) {
   if (!captured)
