@@ -1,5 +1,6 @@
 #ifndef PIECE_H
 #define PIECE_H
+#include "drawings.hpp"
 #include "boxStruct.h"
 #include <iostream>
 #include <string>

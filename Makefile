@@ -150,6 +150,33 @@ display/Idisplay.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/Idisplay.cpp.s
 .PHONY : display/Idisplay.cpp.s
 
+display/drawings.o: display/drawings.cpp.o
+
+.PHONY : display/drawings.o
+
+# target to build an object file
+display/drawings.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/drawings.cpp.o
+.PHONY : display/drawings.cpp.o
+
+display/drawings.i: display/drawings.cpp.i
+
+.PHONY : display/drawings.i
+
+# target to preprocess a source file
+display/drawings.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/drawings.cpp.i
+.PHONY : display/drawings.cpp.i
+
+display/drawings.s: display/drawings.cpp.s
+
+.PHONY : display/drawings.s
+
+# target to generate assembly for a file
+display/drawings.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/display/drawings.cpp.s
+.PHONY : display/drawings.cpp.s
+
 general/game.o: general/game.cpp.o
 
 .PHONY : general/game.o
@@ -675,6 +702,9 @@ help:
 	@echo "... display/Idisplay.o"
 	@echo "... display/Idisplay.i"
 	@echo "... display/Idisplay.s"
+	@echo "... display/drawings.o"
+	@echo "... display/drawings.i"
+	@echo "... display/drawings.s"
 	@echo "... general/game.o"
 	@echo "... general/game.i"
 	@echo "... general/game.s"

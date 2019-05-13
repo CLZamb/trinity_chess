@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/cristofher/desktop/practice/c++/ChessProject/display/Idisplay.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject/CMakeFiles/main.dir/display/Idisplay.cpp.o"
+  "/Users/cristofher/desktop/practice/c++/ChessProject/display/drawings.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject/CMakeFiles/main.dir/display/drawings.cpp.o"
   "/Users/cristofher/desktop/practice/c++/ChessProject/general/game.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject/CMakeFiles/main.dir/general/game.cpp.o"
   "/Users/cristofher/desktop/practice/c++/ChessProject/general/messages.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject/CMakeFiles/main.dir/general/messages.cpp.o"
   "/Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/bishop.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject/CMakeFiles/main.dir/general/pieces/bishop.cpp.o"

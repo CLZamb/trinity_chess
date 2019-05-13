@@ -21,6 +21,11 @@ include_directories(${DIRECTORY}
 set(SOURCE_FILES
   main.cpp
   defs.h
+  display/Idisplay.h
+  display/Idisplay.cpp
+  display/boxStruct.h
+  display/drawings.hpp
+  display/drawings.cpp
   logic/board.h
   logic/board.cpp
   logic/player.h
@@ -40,9 +45,6 @@ set(SOURCE_FILES
   logic/Transposition_table_entry.cpp
   logic/ZobristKey.h
   logic/ZobristKey.cpp
-  display/Idisplay.h
-  display/Idisplay.cpp
-  display/boxStruct.h
   general/game.h
   general/game.cpp
   general/messages.h

@@ -8,6 +8,7 @@
 
 using std::string;
 #define TOTAL_SQ 64
+#define MAXDEPTH 64
 
 typedef std::vector<Move> MoveList;
 
@@ -18,7 +19,6 @@ class Bitboard {
     int pieces_score[13][TOTAL_SQ] = {{0}};
     int MvvLvaScores[13][13];
     int search_history[13][TOTAL_SQ] = {{0}};
-    static const int MAXDEPTH = 64;
     Move killers[2][MAXDEPTH];
     MagicBitboard magic_bb;
 

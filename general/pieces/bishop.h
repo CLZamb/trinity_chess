@@ -5,10 +5,8 @@
 
 class Bishop : public Piece {
 private:
-  static box bishop_b_sq_p1;
-  static box bishop_w_sq_p1;
-  static box bishop_b_sq_p2;
-  static box bishop_w_sq_p2;
+  IDrawing* w_sq_drawing = new PieceDrawing("bishop");
+  IDrawing* b_sq_drawing = new PieceDrawing("bishop");
 
 public:
   explicit Bishop(bool black, U64);

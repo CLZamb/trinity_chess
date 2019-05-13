@@ -4,6 +4,10 @@
 CMakeFiles/main.dir/display/Idisplay.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/display/Idisplay.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/display/Idisplay.h
+CMakeFiles/main.dir/display/drawings.cpp.o
+ /Users/cristofher/desktop/practice/c++/ChessProject/display/boxStruct.h
+ /Users/cristofher/desktop/practice/c++/ChessProject/display/drawings.cpp
+ /Users/cristofher/desktop/practice/c++/ChessProject/display/drawings.hpp
 CMakeFiles/main.dir/general/game.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/game.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/game.h
@@ -11,6 +15,7 @@ CMakeFiles/main.dir/general/game.cpp.o
  defs.h
  display/Idisplay.h
  display/boxStruct.h
+ display/drawings.hpp
  general/pieces/bishop.h
  general/pieces/king.h
  general/pieces/knight.h
@@ -39,41 +44,48 @@ CMakeFiles/main.dir/general/pieces/bishop.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
  defs.h
  display/boxStruct.h
+ display/drawings.hpp
 CMakeFiles/main.dir/general/pieces/king.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/king.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/king.h
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
  defs.h
  display/boxStruct.h
+ display/drawings.hpp
 CMakeFiles/main.dir/general/pieces/knight.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/knight.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/knight.h
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
  defs.h
  display/boxStruct.h
+ display/drawings.hpp
 CMakeFiles/main.dir/general/pieces/pawn.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/pawn.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/pawn.h
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
  defs.h
  display/boxStruct.h
+ display/drawings.hpp
 CMakeFiles/main.dir/general/pieces/piece.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
  defs.h
  display/boxStruct.h
+ display/drawings.hpp
 CMakeFiles/main.dir/general/pieces/queen.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/queen.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/queen.h
  defs.h
  display/boxStruct.h
+ display/drawings.hpp
 CMakeFiles/main.dir/general/pieces/rook.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/rook.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/rook.h
  defs.h
  display/boxStruct.h
+ display/drawings.hpp
 CMakeFiles/main.dir/logic/AiPlayer.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/defs.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/AiPlayer.cpp
@@ -89,6 +101,7 @@ CMakeFiles/main.dir/logic/AiPlayer.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/transposition_table.h
  display/Idisplay.h
  display/boxStruct.h
+ display/drawings.hpp
  general/pieces/bishop.h
  general/pieces/king.h
  general/pieces/knight.h
@@ -113,6 +126,7 @@ CMakeFiles/main.dir/logic/ZobristKey.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/player.h
  display/Idisplay.h
  display/boxStruct.h
+ display/drawings.hpp
  general/pieces/bishop.h
  general/pieces/king.h
  general/pieces/knight.h
@@ -128,6 +142,7 @@ CMakeFiles/main.dir/logic/bitboard.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/magic_bitboard.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/move.h
  display/boxStruct.h
+ display/drawings.hpp
  general/pieces/bishop.h
  general/pieces/king.h
  general/pieces/knight.h
@@ -146,6 +161,7 @@ CMakeFiles/main.dir/logic/board.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/player.h
  display/Idisplay.h
  display/boxStruct.h
+ display/drawings.hpp
  general/pieces/bishop.h
  general/pieces/king.h
  general/pieces/knight.h
@@ -172,6 +188,7 @@ CMakeFiles/main.dir/logic/movement.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/transposition_table.h
  display/Idisplay.h
  display/boxStruct.h
+ display/drawings.hpp
  general/pieces/bishop.h
  general/pieces/king.h
  general/pieces/knight.h
@@ -186,6 +203,7 @@ CMakeFiles/main.dir/logic/player.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/player.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/player.h
  display/boxStruct.h
+ display/drawings.hpp
  general/pieces/piece.h
 CMakeFiles/main.dir/logic/transposition_table.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/defs.h
@@ -199,6 +217,7 @@ CMakeFiles/main.dir/main.cpp.o
  defs.h
  display/Idisplay.h
  display/boxStruct.h
+ display/drawings.hpp
  general/game.h
  general/messages.h
  general/pieces/bishop.h
