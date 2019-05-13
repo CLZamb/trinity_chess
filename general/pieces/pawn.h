@@ -7,7 +7,7 @@
 
 class Pawn : public Piece {
  private:
-  IDrawing* w_sq_drawing = new PieceDrawing("pawn");
+  IDrawing* w_sq_drawing = new WhiteSquare(new PieceDrawing("pawn"));
   IDrawing* b_sq_drawing = new PieceDrawing("pawn");
 
  public:

@@ -5,7 +5,7 @@
 
 class Rook : public Piece {
 private:
-  IDrawing* w_sq_drawing = new PieceDrawing("rook");
+  IDrawing* w_sq_drawing = new WhiteSquare(new PieceDrawing("rook"));
   IDrawing* b_sq_drawing = new PieceDrawing("rook");
 
 public:

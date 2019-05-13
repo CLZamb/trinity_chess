@@ -4,7 +4,7 @@
 
 class Queen : public Piece {
 private:
-  IDrawing* w_sq_drawing = new PieceDrawing("queen");
+  IDrawing* w_sq_drawing = new WhiteSquare(new PieceDrawing("queen"));
   IDrawing* b_sq_drawing = new PieceDrawing("queen");
 
 public:

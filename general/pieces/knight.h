@@ -5,7 +5,7 @@
 
 class Knight : public Piece {
 private:
-  IDrawing* w_sq_drawing = new PieceDrawing("knight");
+  IDrawing* w_sq_drawing = new WhiteSquare(new PieceDrawing("knight"));
   IDrawing* b_sq_drawing = new PieceDrawing("knight");
 
 public:

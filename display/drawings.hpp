@@ -109,7 +109,7 @@ class BlackSquare : public IDrawing {
   }
   virtual ~BlackSquare() {}
   box* drawing() {
-    modifier(BG_TEST, drawing_ptr->drawing());
+    modifier(BG_B_BLACK, drawing_ptr->drawing());
     return drawing_ptr->drawing();
   }
 };
