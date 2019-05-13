@@ -5,8 +5,8 @@
 
 class King : public Piece {
 private:
-  IDrawing* king_w_sq = new PieceDrawing("king");
-  IDrawing* king_b_sq = new PieceDrawing("king");
+  IDrawing* w_sq_drawing = new PieceDrawing("king");
+  IDrawing* b_sq_drawing = new PieceDrawing("king");
 
 public:
   explicit King(bool black, U64);

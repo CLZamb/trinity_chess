@@ -5,10 +5,8 @@
 
 class Knight : public Piece {
 private:
-  static box knight_w_sq_p2;
-  static box knight_b_sq_p2;
-  static box knight_w_sq_p1;
-  static box knight_b_sq_p1;
+  IDrawing* w_sq_drawing = new PieceDrawing("knight");
+  IDrawing* b_sq_drawing = new PieceDrawing("knight");
 
 public:
   explicit Knight(bool black, U64);

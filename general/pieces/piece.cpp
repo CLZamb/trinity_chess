@@ -23,7 +23,7 @@ box* Piece::get_drawing_square(bool  white) {
 
 Piecetype Piece::get_type_and_color() { return m_type; }
 bool Piece::is_black() { return black; }
-int Piece::get_value() { return m_value; }
+int Piece::get_value() { return black ? m_value : -m_value; }
 
 void Piece::clear_bit(int pos) { CLRBIT(m_bitboard, pos); }
 void Piece::set_bit(int pos) { SETBIT(m_bitboard, pos); }

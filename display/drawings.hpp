@@ -16,7 +16,6 @@ struct IDrawing {
     FG_WHITE    = 37,
     FG_DEFAULT  = 39,
     BG_DEFAULT  = 49,
-    BG_TEST     = 100,
   };
   virtual box* drawing() = 0;
   virtual ~IDrawing() {}
@@ -39,26 +38,28 @@ struct IDrawing {
 class PieceDrawing : public IDrawing {
  private:
     static const map<std::string, box> piece_drawing;
-    box drawing_ptr;
+    box m_drawing;
  public:
     explicit PieceDrawing(std::string piece) {
-      drawing_ptr = piece_drawing.at(piece);
+      if (piece_drawing.find(piece) == piece_drawing.end()) throw "invalid key";
+
+      m_drawing = piece_drawing.at(piece);
 
       const int column_size = box::char_size;
       int sizeBox = sizeof(char[column_size]);
       char temp[column_size];
       for (int i = 0; i < box::row_size; ++i) {
-        snprintf(temp, column_size, "%s", drawing_ptr.content[i]);
+        snprintf(temp, column_size, "%s", m_drawing.content[i]);
         snprintf(
-            drawing_ptr.content[i], sizeBox,
+            m_drawing.content[i], sizeBox,
             "%s%s",
             temp, "\033[0m");
       }
     }
     virtual ~PieceDrawing() {}
 
-    box* drawing() override { return &drawing_ptr; }
-    void set_drawing(box* newBox) { drawing_ptr = *newBox; }
+    box* drawing() override { return &m_drawing; }
+    void set_drawing(box* newBox) { m_drawing = *newBox; }
 };
 
 

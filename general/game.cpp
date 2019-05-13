@@ -44,6 +44,7 @@ int Game::get_option() {
   std::cout << "\t\tchoose one of the options (1-4): ";
   int input;
   std::cin >> input;
+  // clear input buffer
   std::cin.clear();
   std::cin.ignore();
   return input;
@@ -51,10 +52,11 @@ int Game::get_option() {
 
 void Game::play() {
   m_board._init();
+
   PlayerMove player_move;
-  // clear input buffer
   int counter = 0;
   bool is_checkMate = false;
+
   while (!is_checkMate) {
     p_board_display->print();
     player_move = p_player_turn->get_next_move();

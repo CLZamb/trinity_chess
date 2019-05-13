@@ -4,10 +4,8 @@
 
 class Queen : public Piece {
 private:
-  static box queen_w_sq_p2;
-  static box queen_b_sq_p2;
-  static box queen_w_sq_p1;
-  static box queen_b_sq_p1;
+  IDrawing* w_sq_drawing = new PieceDrawing("queen");
+  IDrawing* b_sq_drawing = new PieceDrawing("queen");
 
 public:
   explicit Queen(bool black, U64);
