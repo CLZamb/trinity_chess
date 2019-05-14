@@ -2,7 +2,7 @@
 
 Bishop::Bishop(bool black, U64 bb)
   : Piece(black, bb) {
-  m_value = 30;
+  m_value = 90;
 
   if (black) {
     m_type = bB;

@@ -235,7 +235,6 @@ Move Movement::MoveGenerator::root_negamax(int cur_depth) {
 */
 int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
                                      int color) {
-
   if (m_stop || time_out()) {
     m_stop = true;
     return color * evaluate_board();

@@ -2,7 +2,7 @@
 #include <sstream>
 
 Board::Board() {
-  // pieces_start_pos = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2";
+  pieces_start_pos = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2";
 }
 
 Board::~Board() {
@@ -44,11 +44,8 @@ void Board::create_board_squares() {
 }
 
 void Board::create_squares_drawing() {
-  int sizeBox = sizeof(char[box::char_size]);
-  for (int i = 0; i < box::row_size; ++i) {
-    snprintf(wSquare.content[i], sizeBox, "%s", "░░░░░░░░░");
-    snprintf(bSquare.content[i], sizeBox, "%s", "█████████");
-  }
+  wSquare = *PieceDrawing("BaseWhiteSquare").drawing();
+  bSquare = *PieceDrawing("BaseBlackSquare").drawing();
 }
 
 void Board::parser_fen(string fen) {
