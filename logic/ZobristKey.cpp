@@ -15,7 +15,7 @@ void ZobristKey::_init() {
   uniform_int_distribution<U64> dis;
   BLACK_TO_MOVE_KEY = dis(gen);
   for (int pce = bP; pce <= wK; ++pce)
-    for (int SqIndex = Squarebegin; SqIndex < Squareend; ++SqIndex)
+    for (int SqIndex = Squarebegin; SqIndex < SquareEnd; ++SqIndex)
       m_piece_keys[pce][SqIndex] = dis(gen);
 }
 
@@ -28,7 +28,7 @@ ZobristKey::ZobristKey(Board* board, bool black_to_move) {
   U64 piece_bitboard = BLANK;
   for (int pce = bP; pce <= wK; ++pce) {
     piece_bitboard = board->get_piece_bitboard(pce);
-    for (int SqIndex = Squarebegin; SqIndex < Squareend; ++SqIndex) {
+    for (int SqIndex = Squarebegin; SqIndex < SquareEnd; ++SqIndex) {
       square = ONE << SqIndex;
       if (square & piece_bitboard)
         XOR_piece(pce, SqIndex);

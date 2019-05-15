@@ -21,12 +21,19 @@ include_directories(${DIRECTORY}
 set(SOURCE_FILES
   main.cpp
   defs.h
+  display/Idisplay.h
+  display/Idisplay.cpp
+  display/boxStruct.h
+  display/drawings.hpp
+  display/drawings.cpp
   logic/board.h
   logic/board.cpp
   logic/player.h
   logic/player.cpp
   logic/AiPlayer.h
   logic/AiPlayer.cpp
+  logic/magic_bitboard.h
+  logic/magic_bitboard.cpp
   logic/movement.h
   logic/movement.cpp
   logic/move.h
@@ -38,28 +45,12 @@ set(SOURCE_FILES
   logic/Transposition_table_entry.cpp
   logic/ZobristKey.h
   logic/ZobristKey.cpp
-  display/Idisplay.h
-  display/Idisplay.cpp
-  display/boxStruct.h
   general/game.h
   general/game.cpp
   general/messages.h
   general/messages.cpp
-  general/pieces/piecesheaders.h
-  general/pieces/bishop.h
-  general/pieces/bishop.cpp
-  general/pieces/king.h
-  general/pieces/king.cpp
-  general/pieces/knight.h
-  general/pieces/knight.cpp
-  general/pieces/pawn.h
-  general/pieces/pawn.cpp
   general/pieces/piece.h
   general/pieces/piece.cpp
-  general/pieces/queen.h
-  general/pieces/queen.cpp
-  general/pieces/rook.h
-  general/pieces/rook.cpp
   )
 
 set(

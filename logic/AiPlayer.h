@@ -7,7 +7,7 @@ private:
   Movement::MoveGenerator* p_move_generator;
 
 public:
-  explicit AiPlayer(bool has_black_pieces, Movement::MoveGenerator* p_generator);
+  explicit AiPlayer(bool has_black_pieces, Movement* movement_controller);
   virtual ~AiPlayer();
 
   PlayerMove get_next_move() override;

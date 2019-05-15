@@ -11,48 +11,53 @@
 #include <string>
 #include <utility> // std::pair, std::make_pair
 #include <vector>
+#include <map>
+
+using std::map;
 
 class Board : public IDisplay {
  private:
+  // default fen
+  string pieces_start_pos = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
   Player* player1, *player2;
   box wSquare, bSquare;
   Bitboard m_bb;
   Move test;
 
   void add_to_board(int piece, int position);
-  void set_all_pieces_on_board();
-
+  void parser_fen(string fen);
   void create_board_squares();
-  void create_square_bases();
+  void create_squares_drawing();
   std::string get_str_type(int type);
+  bool is_number(char c);
+  bool is_piecetype(char c, map<char, int> pieces);
 
   class Square {
    private:
-      box* p_base_drawing;
-      box* p_cur_drawing;
+      box* p_base_drawing = nullptr;
+      box* p_cur_drawing = nullptr;
       Piece* p_piece = nullptr;
-      bool m_occupied = false;
-      bool m_black_box;
+      bool m_is_black_square = false;
 
    public:
       Square(box*, bool);
       virtual ~Square();
 
-      char* get_content(int i);
+      char* at(int i);
       void set_piece(Piece* piece);
       void clear_square();
-      bool is_black_box();
+      bool is_black_square();
       Piece* get_piece();
       box* get_current_drawing();
   };
-
   Square* p_board[64] = {nullptr};
 
  public:
   Board();
   ~Board();
 
-  void _init(Player*, Player*);
+  void _init();
+  void set_players(Player* player1, Player* player2);
   void print();
   void undo_square_move(int piece, int piece_captured, int from, int to);
   void generate_all_moves(bool side, MoveList* moveList);
@@ -60,7 +65,7 @@ class Board : public IDisplay {
   void move_squares(Piece*, int from, int to);
   void move_piece_bits(int type, int from, int to);
   void undo_move(int piece, int piece_captured, int from, int to);
-  void capture_piece(int piece, int captured, int pos);
+  void capture_piece(int captured, int pos);
   void update_killers(Move mv);
   void update_search_history(int piece, int to, int depth);
   int get_board_score();

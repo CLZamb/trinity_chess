@@ -1,23 +1,29 @@
 #include "board.h"
 #include <sstream>
 
-Board::Board() {}
+Board::Board() {
+  pieces_start_pos = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2";
+}
+
 Board::~Board() {
   // Free each array and sub-array
   for (int i = 0; i < 64; ++i)
     delete p_board[i];
 }
 
-void Board::_init(Player* player1, Player* player2) {
+void Board::_init() {
   m_bb._init();
+  create_board_squares();
+  parser_fen(pieces_start_pos);
+}
+
+void Board::set_players(Player* player1, Player* player2) {
   this->player1 = player1;
   this->player2 = player2;
-  create_board_squares();
-  set_all_pieces_on_board();
 }
 
 void Board::create_board_squares() {
-  create_square_bases();
+  create_squares_drawing();
   char squareColor = 'w';
 
   int position = 0;
@@ -37,33 +43,36 @@ void Board::create_board_squares() {
   }
 }
 
-void Board::create_square_bases() {
-  int sizeBox = sizeof(char[box::char_size]);
-  for (int i = 0; i < box::row_size; ++i) {
-    snprintf(wSquare.content[i], sizeBox, "%s", "░░░░░░░░░");
-    snprintf(bSquare.content[i], sizeBox, "%s", "█████████");
+void Board::create_squares_drawing() {
+  wSquare = *PieceDrawing("BaseWhiteSquare").drawing();
+  bSquare = *PieceDrawing("BaseBlackSquare").drawing();
+}
+
+void Board::parser_fen(string fen) {
+  char char_piece = ' ';
+  int square = A1;
+  int piece_int;
+  static std::map <char, int> piece_map = {
+    {'P', bP}, {'R', bR}, {'N', bN}, {'B', bB}, {'Q', bQ}, {'K', bK},
+    {'p', wP}, {'r', wR}, {'n', wN}, {'b', wB}, {'q', wQ}, {'k', wK},
+  };
+
+  m_bb.reset_all_pieces_bitboard();
+  for (unsigned int i = 0; i < fen.length() && square < SquareEnd; ++i) {
+    char_piece = fen[i];
+    piece_int = piece_map[char_piece];
+    if (piece_int) {
+      m_bb.set_piece_at_pos(piece_int, square);
+      add_to_board(piece_int, square++);
+
+    } else if (is_number(char_piece)) {
+      square += (char_piece - '0');
+    }
   }
 }
 
-void Board::set_all_pieces_on_board() {
-  std::vector<std::pair<int, int>> piecesSeq = {
-    // player2 pieces - pieces color "black"
-    {bR, A8}, {bN, B8}, {bB, C8}, {bQ, D8},
-    {bK, E8}, {bB, F8}, {bN, G8}, {bR, H8},
-    {bP, A7}, {bP, B7}, {bP, C7}, {bP, D7},
-    {bP, E7}, {bP, F7}, {bP, G7}, {bP, H7},
-    //
-    {wP, A2}, {wP, B2}, {wP, C2}, {wP, D2},
-    {wP, E2}, {wP, F2}, {wP, G2}, {wP, H2},
-    {wR, A1}, {wN, B1}, {wB, C1}, {wQ, D1},
-    {wK, E1}, {wB, F1}, {wN, G1}, {wR, H1},
-    // player1 pieces - pieces color "white"
-  };
-
-  for (int p2 = 0, p1 = 16; p2 < 16 && p1 < 32; p2++, p1++) {
-    add_to_board(piecesSeq[p2].first, piecesSeq[p2].second);
-    add_to_board(piecesSeq[p1].first, piecesSeq[p1].second);
-  }
+bool Board::is_number(char c) {
+  return c >= '0' && c <= '8';
 }
 
 void Board::add_to_board(int type, int position) {
@@ -101,8 +110,9 @@ void Board::print() {
         os << row + 1 << "┃";
       else
         os << ' ' << "┃";
+
       for (int col = 0; col < 8; col++) {
-        os << p_board[(row * 8) + col]->get_content(k);
+        os << p_board[(row * 8) + col]->at(k);
       }
       // right border
       os << "┃" << '\n';
@@ -169,7 +179,7 @@ void Board::update_search_history(int piece, int to, int depth) {
   m_bb.update_search_history(piece, to, depth);
 }
 
-void Board::capture_piece(int piece, int piece_captured, int pos) {
+void Board::capture_piece(int piece_captured, int pos) {
   m_bb.capture_piece(piece_captured, pos);
 }
 
@@ -198,24 +208,21 @@ U64 Board::get_piece_bitboard(int piece) const {
 
 Board::Square::Square(box* baseDrawing, bool blackBox)
     : p_base_drawing(baseDrawing), p_cur_drawing(baseDrawing),
-      m_black_box(blackBox) {}
+      m_is_black_square(blackBox) {}
 
 Board::Square::~Square() {}
 
 void Board::Square::set_piece(Piece* piece) {
-  m_occupied = true;
   this->p_piece = piece;
-  p_cur_drawing = m_black_box ?
-    p_piece->get_drawing_B_square() : p_piece->get_drawing_W_square();
+  p_cur_drawing = piece->get_drawing(m_is_black_square);
 }
 
 void Board::Square::clear_square() {
   p_cur_drawing = p_base_drawing;
-  m_occupied = false;
   p_piece = nullptr;
 }
 
 box* Board::Square::get_current_drawing() { return p_cur_drawing; }
 Piece* Board::Square::get_piece() { return this->p_piece; }
-bool Board::Square::is_black_box() { return m_black_box; }
-char* Board::Square::get_content(int i) { return p_cur_drawing->content[i]; }
+bool Board::Square::is_black_square() { return m_is_black_square; }
+char* Board::Square::at(int i) { return p_cur_drawing->content[i]; }
