@@ -13,9 +13,10 @@ Piece::~Piece() {
 
 void Piece::create_piece_drawing(Piecetype pct) {
   static const map<Piecetype, std::string> piece_drawing {
-    {bP, "pawn"}, {bR, "rook"}, {bN, "knight"}, {bB, "bishop"}, {bQ, "queen"},
-      {bK, "king"}, {wP, "pawn"}, {wR, "rook"}, {wN, "knight"}, {wB, "bishop"},
-      {wQ, "queen"}, {wK, "king"}
+    {bP, "pawn"}, {bR, "rook"}, {bN, "knight"},
+    {bB, "bishop"}, {bQ, "queen"}, {bK, "king"},
+    {wP, "pawn"}, {wR, "rook"}, {wN, "knight"},
+    {wB, "bishop"}, {wQ, "queen"}, {wK, "king"}
   };
 
   b_sq_drawing = new PieceDrawing(piece_drawing.at(pct));

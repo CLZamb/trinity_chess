@@ -63,14 +63,14 @@ using std::map;
    ║ 35       ║  MAGENTA                       ║  FG CODE ║
    ║ 36       ║  CYAN                          ║  FG CODE ║
    ║ 37       ║  WHITE                         ║  FG CODE ║
-   ║ 30:1     ║  BRIGHT BLACK                  ║  FG CODE ║
-   ║ 31:1     ║  BRIGHT RED                    ║  FG CODE ║
-   ║ 32:1     ║  BRIGHT GREEN                  ║  FG CODE ║
-   ║ 33:1     ║  BRIGHT YELLOW                 ║  FG CODE ║
-   ║ 34:1     ║  BRIGHT BLUE                   ║  FG CODE ║
-   ║ 35:1     ║  BRIGHT MAGENTA                ║  FG CODE ║
-   ║ 36:1     ║  BRIGHT CYAN                   ║  FG CODE ║
-   ║ 37:1     ║  BRIGHT WHITE                  ║  FG CODE ║
+   ║ 90       ║  BRIGHT BLACK                  ║  FG CODE ║
+   ║ 91       ║  BRIGHT RED                    ║  FG CODE ║
+   ║ 92       ║  BRIGHT GREEN                  ║  FG CODE ║
+   ║ 93       ║  BRIGHT YELLOW                 ║  FG CODE ║
+   ║ 94       ║  BRIGHT BLUE                   ║  FG CODE ║
+   ║ 95       ║  BRIGHT MAGENTA                ║  FG CODE ║
+   ║ 96       ║  BRIGHT CYAN                   ║  FG CODE ║
+   ║ 97       ║  BRIGHT WHITE                  ║  FG CODE ║
    ║ 40       ║  BLACK                         ║  BG CODE ║
    ║ 41       ║  RED                           ║  BG CODE ║                                                                      ║
    ║ 42       ║  GREEN                         ║  BG CODE ║
