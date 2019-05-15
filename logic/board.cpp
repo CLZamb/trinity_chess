@@ -110,8 +110,9 @@ void Board::print() {
         os << row + 1 << "┃";
       else
         os << ' ' << "┃";
+
       for (int col = 0; col < 8; col++) {
-        os << p_board[(row * 8) + col]->get_content(k);
+        os << p_board[(row * 8) + col]->at(k);
       }
       // right border
       os << "┃" << '\n';
@@ -207,24 +208,21 @@ U64 Board::get_piece_bitboard(int piece) const {
 
 Board::Square::Square(box* baseDrawing, bool blackBox)
     : p_base_drawing(baseDrawing), p_cur_drawing(baseDrawing),
-      m_black_box(blackBox) {}
+      m_is_black_square(blackBox) {}
 
 Board::Square::~Square() {}
 
 void Board::Square::set_piece(Piece* piece) {
-  m_occupied = true;
   this->p_piece = piece;
-  p_cur_drawing = m_black_box ?
-    p_piece->get_drawing_B_square() : p_piece->get_drawing_W_square();
+  p_cur_drawing = piece->get_drawing(m_is_black_square);
 }
 
 void Board::Square::clear_square() {
   p_cur_drawing = p_base_drawing;
-  m_occupied = false;
   p_piece = nullptr;
 }
 
 box* Board::Square::get_current_drawing() { return p_cur_drawing; }
 Piece* Board::Square::get_piece() { return this->p_piece; }
-bool Board::Square::is_black_box() { return m_black_box; }
-char* Board::Square::get_content(int i) { return p_cur_drawing->content[i]; }
+bool Board::Square::is_black_square() { return m_is_black_square; }
+char* Board::Square::at(int i) { return p_cur_drawing->content[i]; }

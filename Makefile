@@ -231,114 +231,6 @@ general/messages.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/messages.cpp.s
 .PHONY : general/messages.cpp.s
 
-general/pieces/bishop.o: general/pieces/bishop.cpp.o
-
-.PHONY : general/pieces/bishop.o
-
-# target to build an object file
-general/pieces/bishop.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/bishop.cpp.o
-.PHONY : general/pieces/bishop.cpp.o
-
-general/pieces/bishop.i: general/pieces/bishop.cpp.i
-
-.PHONY : general/pieces/bishop.i
-
-# target to preprocess a source file
-general/pieces/bishop.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/bishop.cpp.i
-.PHONY : general/pieces/bishop.cpp.i
-
-general/pieces/bishop.s: general/pieces/bishop.cpp.s
-
-.PHONY : general/pieces/bishop.s
-
-# target to generate assembly for a file
-general/pieces/bishop.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/bishop.cpp.s
-.PHONY : general/pieces/bishop.cpp.s
-
-general/pieces/king.o: general/pieces/king.cpp.o
-
-.PHONY : general/pieces/king.o
-
-# target to build an object file
-general/pieces/king.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/king.cpp.o
-.PHONY : general/pieces/king.cpp.o
-
-general/pieces/king.i: general/pieces/king.cpp.i
-
-.PHONY : general/pieces/king.i
-
-# target to preprocess a source file
-general/pieces/king.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/king.cpp.i
-.PHONY : general/pieces/king.cpp.i
-
-general/pieces/king.s: general/pieces/king.cpp.s
-
-.PHONY : general/pieces/king.s
-
-# target to generate assembly for a file
-general/pieces/king.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/king.cpp.s
-.PHONY : general/pieces/king.cpp.s
-
-general/pieces/knight.o: general/pieces/knight.cpp.o
-
-.PHONY : general/pieces/knight.o
-
-# target to build an object file
-general/pieces/knight.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/knight.cpp.o
-.PHONY : general/pieces/knight.cpp.o
-
-general/pieces/knight.i: general/pieces/knight.cpp.i
-
-.PHONY : general/pieces/knight.i
-
-# target to preprocess a source file
-general/pieces/knight.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/knight.cpp.i
-.PHONY : general/pieces/knight.cpp.i
-
-general/pieces/knight.s: general/pieces/knight.cpp.s
-
-.PHONY : general/pieces/knight.s
-
-# target to generate assembly for a file
-general/pieces/knight.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/knight.cpp.s
-.PHONY : general/pieces/knight.cpp.s
-
-general/pieces/pawn.o: general/pieces/pawn.cpp.o
-
-.PHONY : general/pieces/pawn.o
-
-# target to build an object file
-general/pieces/pawn.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pawn.cpp.o
-.PHONY : general/pieces/pawn.cpp.o
-
-general/pieces/pawn.i: general/pieces/pawn.cpp.i
-
-.PHONY : general/pieces/pawn.i
-
-# target to preprocess a source file
-general/pieces/pawn.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pawn.cpp.i
-.PHONY : general/pieces/pawn.cpp.i
-
-general/pieces/pawn.s: general/pieces/pawn.cpp.s
-
-.PHONY : general/pieces/pawn.s
-
-# target to generate assembly for a file
-general/pieces/pawn.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/pawn.cpp.s
-.PHONY : general/pieces/pawn.cpp.s
-
 general/pieces/piece.o: general/pieces/piece.cpp.o
 
 .PHONY : general/pieces/piece.o
@@ -365,60 +257,6 @@ general/pieces/piece.s: general/pieces/piece.cpp.s
 general/pieces/piece.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/piece.cpp.s
 .PHONY : general/pieces/piece.cpp.s
-
-general/pieces/queen.o: general/pieces/queen.cpp.o
-
-.PHONY : general/pieces/queen.o
-
-# target to build an object file
-general/pieces/queen.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/queen.cpp.o
-.PHONY : general/pieces/queen.cpp.o
-
-general/pieces/queen.i: general/pieces/queen.cpp.i
-
-.PHONY : general/pieces/queen.i
-
-# target to preprocess a source file
-general/pieces/queen.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/queen.cpp.i
-.PHONY : general/pieces/queen.cpp.i
-
-general/pieces/queen.s: general/pieces/queen.cpp.s
-
-.PHONY : general/pieces/queen.s
-
-# target to generate assembly for a file
-general/pieces/queen.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/queen.cpp.s
-.PHONY : general/pieces/queen.cpp.s
-
-general/pieces/rook.o: general/pieces/rook.cpp.o
-
-.PHONY : general/pieces/rook.o
-
-# target to build an object file
-general/pieces/rook.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/rook.cpp.o
-.PHONY : general/pieces/rook.cpp.o
-
-general/pieces/rook.i: general/pieces/rook.cpp.i
-
-.PHONY : general/pieces/rook.i
-
-# target to preprocess a source file
-general/pieces/rook.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/rook.cpp.i
-.PHONY : general/pieces/rook.cpp.i
-
-general/pieces/rook.s: general/pieces/rook.cpp.s
-
-.PHONY : general/pieces/rook.s
-
-# target to generate assembly for a file
-general/pieces/rook.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/general/pieces/rook.cpp.s
-.PHONY : general/pieces/rook.cpp.s
 
 logic/AiPlayer.o: logic/AiPlayer.cpp.o
 
@@ -711,27 +549,9 @@ help:
 	@echo "... general/messages.o"
 	@echo "... general/messages.i"
 	@echo "... general/messages.s"
-	@echo "... general/pieces/bishop.o"
-	@echo "... general/pieces/bishop.i"
-	@echo "... general/pieces/bishop.s"
-	@echo "... general/pieces/king.o"
-	@echo "... general/pieces/king.i"
-	@echo "... general/pieces/king.s"
-	@echo "... general/pieces/knight.o"
-	@echo "... general/pieces/knight.i"
-	@echo "... general/pieces/knight.s"
-	@echo "... general/pieces/pawn.o"
-	@echo "... general/pieces/pawn.i"
-	@echo "... general/pieces/pawn.s"
 	@echo "... general/pieces/piece.o"
 	@echo "... general/pieces/piece.i"
 	@echo "... general/pieces/piece.s"
-	@echo "... general/pieces/queen.o"
-	@echo "... general/pieces/queen.i"
-	@echo "... general/pieces/queen.s"
-	@echo "... general/pieces/rook.o"
-	@echo "... general/pieces/rook.i"
-	@echo "... general/pieces/rook.s"
 	@echo "... logic/AiPlayer.o"
 	@echo "... logic/AiPlayer.i"
 	@echo "... logic/AiPlayer.s"

@@ -4,7 +4,7 @@
 #include "boxStruct.h"
 #include <string>
 #include <map>
-#include <ostream>
+#include <iostream>
 
 using std::map;
 /*
@@ -152,25 +152,21 @@ class PieceDrawing : public IDrawing {
 };
 
 
-class Player2Comp : public IDrawing {
+class Player2 : public IDrawing {
   IDrawing *drawing_ptr;
  public:
-  explicit Player2Comp(IDrawing* drawing) {
-    this->drawing_ptr = drawing;
-  }
-  virtual ~Player2Comp() {}
-  box* drawing() {
-    return drawing_ptr->drawing();
-  }
+  explicit Player2(IDrawing* drawing) : drawing_ptr(drawing) {}
+  virtual ~Player2() {}
+
+  box* drawing() { return drawing_ptr->drawing(); }
 };
 
 class Player1 : public IDrawing {
   IDrawing *drawing_ptr;
  public:
-  explicit Player1(IDrawing* drawing) {
-    this->drawing_ptr = drawing;
-  }
+  explicit Player1(IDrawing* drawing) : drawing_ptr(drawing) {}
   virtual ~Player1() {}
+
   box* drawing() {
     prepend_modifier(modifier(FG_WHITE), drawing_ptr->drawing());
     return drawing_ptr->drawing();
@@ -180,10 +176,9 @@ class Player1 : public IDrawing {
 class WhiteSquare : public IDrawing {
   IDrawing *drawing_ptr;
  public:
-  explicit WhiteSquare(IDrawing* drawing) {
-    this->drawing_ptr = drawing;
-  }
+  explicit WhiteSquare(IDrawing* drawing) : drawing_ptr(drawing) {}
   virtual ~WhiteSquare() {}
+
   box* drawing() {
     prepend_modifier(modifier(BG_INVERSE), drawing_ptr->drawing());
     return drawing_ptr->drawing();
@@ -193,10 +188,9 @@ class WhiteSquare : public IDrawing {
 class BlackSquare : public IDrawing {
   IDrawing *drawing_ptr;
  public:
-  explicit BlackSquare(IDrawing* drawing) {
-    this->drawing_ptr = drawing;
-  }
+  explicit BlackSquare(IDrawing* drawing) : drawing_ptr(drawing) {}
   virtual ~BlackSquare() {}
+
   box* drawing() {
     prepend_modifier(modifier(BG_B_BLACK), drawing_ptr->drawing());
     return drawing_ptr->drawing();

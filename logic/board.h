@@ -34,24 +34,22 @@ class Board : public IDisplay {
 
   class Square {
    private:
-      box* p_base_drawing;
-      box* p_cur_drawing;
+      box* p_base_drawing = nullptr;
+      box* p_cur_drawing = nullptr;
       Piece* p_piece = nullptr;
-      bool m_occupied = false;
-      bool m_black_box;
+      bool m_is_black_square = false;
 
    public:
       Square(box*, bool);
       virtual ~Square();
 
-      char* get_content(int i);
+      char* at(int i);
       void set_piece(Piece* piece);
       void clear_square();
-      bool is_black_box();
+      bool is_black_square();
       Piece* get_piece();
       box* get_current_drawing();
   };
-
   Square* p_board[64] = {nullptr};
 
  public:

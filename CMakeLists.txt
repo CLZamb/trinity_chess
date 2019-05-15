@@ -49,21 +49,8 @@ set(SOURCE_FILES
   general/game.cpp
   general/messages.h
   general/messages.cpp
-  general/pieces/piecesheaders.h
-  general/pieces/bishop.h
-  general/pieces/bishop.cpp
-  general/pieces/king.h
-  general/pieces/king.cpp
-  general/pieces/knight.h
-  general/pieces/knight.cpp
-  general/pieces/pawn.h
-  general/pieces/pawn.cpp
   general/pieces/piece.h
   general/pieces/piece.cpp
-  general/pieces/queen.h
-  general/pieces/queen.cpp
-  general/pieces/rook.h
-  general/pieces/rook.cpp
   )
 
 set(

@@ -16,14 +16,7 @@ CMakeFiles/main.dir/general/game.cpp.o
  display/Idisplay.h
  display/boxStruct.h
  display/drawings.hpp
- general/pieces/bishop.h
- general/pieces/king.h
- general/pieces/knight.h
- general/pieces/pawn.h
  general/pieces/piece.h
- general/pieces/piecesheaders.h
- general/pieces/queen.h
- general/pieces/rook.h
  logic/AiPlayer.h
  logic/Transposition_table_entry.h
  logic/ZobristKey.h
@@ -38,51 +31,9 @@ CMakeFiles/main.dir/general/messages.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/messages.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/messages.h
  display/Idisplay.h
-CMakeFiles/main.dir/general/pieces/bishop.cpp.o
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/bishop.cpp
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/bishop.h
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
- defs.h
- display/boxStruct.h
- display/drawings.hpp
-CMakeFiles/main.dir/general/pieces/king.cpp.o
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/king.cpp
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/king.h
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
- defs.h
- display/boxStruct.h
- display/drawings.hpp
-CMakeFiles/main.dir/general/pieces/knight.cpp.o
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/knight.cpp
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/knight.h
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
- defs.h
- display/boxStruct.h
- display/drawings.hpp
-CMakeFiles/main.dir/general/pieces/pawn.cpp.o
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/pawn.cpp
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/pawn.h
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
- defs.h
- display/boxStruct.h
- display/drawings.hpp
 CMakeFiles/main.dir/general/pieces/piece.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
- defs.h
- display/boxStruct.h
- display/drawings.hpp
-CMakeFiles/main.dir/general/pieces/queen.cpp.o
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/queen.cpp
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/queen.h
- defs.h
- display/boxStruct.h
- display/drawings.hpp
-CMakeFiles/main.dir/general/pieces/rook.cpp.o
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/piece.h
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/rook.cpp
- /Users/cristofher/desktop/practice/c++/ChessProject/general/pieces/rook.h
  defs.h
  display/boxStruct.h
  display/drawings.hpp
@@ -102,14 +53,7 @@ CMakeFiles/main.dir/logic/AiPlayer.cpp.o
  display/Idisplay.h
  display/boxStruct.h
  display/drawings.hpp
- general/pieces/bishop.h
- general/pieces/king.h
- general/pieces/knight.h
- general/pieces/pawn.h
  general/pieces/piece.h
- general/pieces/piecesheaders.h
- general/pieces/queen.h
- general/pieces/rook.h
 CMakeFiles/main.dir/logic/Transposition_table_entry.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/defs.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/Transposition_table_entry.cpp
@@ -127,49 +71,28 @@ CMakeFiles/main.dir/logic/ZobristKey.cpp.o
  display/Idisplay.h
  display/boxStruct.h
  display/drawings.hpp
- general/pieces/bishop.h
- general/pieces/king.h
- general/pieces/knight.h
- general/pieces/pawn.h
  general/pieces/piece.h
- general/pieces/piecesheaders.h
- general/pieces/queen.h
- general/pieces/rook.h
 CMakeFiles/main.dir/logic/bitboard.cpp.o
- /Users/cristofher/desktop/practice/c++/ChessProject/defs.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/bitboard.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/bitboard.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/magic_bitboard.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/move.h
+ defs.h
  display/boxStruct.h
  display/drawings.hpp
- general/pieces/bishop.h
- general/pieces/king.h
- general/pieces/knight.h
- general/pieces/pawn.h
  general/pieces/piece.h
- general/pieces/piecesheaders.h
- general/pieces/queen.h
- general/pieces/rook.h
 CMakeFiles/main.dir/logic/board.cpp.o
- /Users/cristofher/desktop/practice/c++/ChessProject/defs.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/bitboard.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/board.cpp
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/board.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/magic_bitboard.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/move.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/player.h
+ defs.h
  display/Idisplay.h
  display/boxStruct.h
  display/drawings.hpp
- general/pieces/bishop.h
- general/pieces/king.h
- general/pieces/knight.h
- general/pieces/pawn.h
  general/pieces/piece.h
- general/pieces/piecesheaders.h
- general/pieces/queen.h
- general/pieces/rook.h
 CMakeFiles/main.dir/logic/magic_bitboard.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/defs.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/magic_bitboard.cpp
@@ -189,14 +112,7 @@ CMakeFiles/main.dir/logic/movement.cpp.o
  display/Idisplay.h
  display/boxStruct.h
  display/drawings.hpp
- general/pieces/bishop.h
- general/pieces/king.h
- general/pieces/knight.h
- general/pieces/pawn.h
  general/pieces/piece.h
- general/pieces/piecesheaders.h
- general/pieces/queen.h
- general/pieces/rook.h
 CMakeFiles/main.dir/logic/player.cpp.o
  /Users/cristofher/desktop/practice/c++/ChessProject/defs.h
  /Users/cristofher/desktop/practice/c++/ChessProject/logic/move.h
@@ -220,14 +136,7 @@ CMakeFiles/main.dir/main.cpp.o
  display/drawings.hpp
  general/game.h
  general/messages.h
- general/pieces/bishop.h
- general/pieces/king.h
- general/pieces/knight.h
- general/pieces/pawn.h
  general/pieces/piece.h
- general/pieces/piecesheaders.h
- general/pieces/queen.h
- general/pieces/rook.h
  logic/AiPlayer.h
  logic/Transposition_table_entry.h
  logic/ZobristKey.h

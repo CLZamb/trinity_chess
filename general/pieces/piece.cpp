@@ -1,35 +1,52 @@
 #include "piece.h"
 
-Piece::Piece(bool is_black, U64 bb) : m_bitboard(bb), black(is_black) {
-    for (int i = 0; i < 64; ++i) {
-      SetMask[i] = 0ULL;
-      ClearMask[i] = 0ULL;
-    }
+Piece::Piece(Piecetype pct, U64 bb) :
+  m_bitboard(bb), m_type(pct), black(IS_BLACK(pct)) {
+  create_piece_drawing(pct);
+  set_score(pct);
+}
 
-    for (int i = 0; i < 64; ++i) {
-      SetMask[i] |= (1ULL << i);
-      ClearMask[i] = ~SetMask[i];
-    }
+Piece::~Piece() {
+  delete b_sq_drawing;
+  delete w_sq_drawing;
+}
+
+void Piece::create_piece_drawing(Piecetype pct) {
+  static const map<Piecetype, std::string> piece_drawing {
+    {bP, "pawn"}, {bR, "rook"}, {bN, "knight"}, {bB, "bishop"}, {bQ, "queen"},
+      {bK, "king"}, {wP, "pawn"}, {wR, "rook"}, {wN, "knight"}, {wB, "bishop"},
+      {wQ, "queen"}, {wK, "king"}
+  };
+
+  b_sq_drawing = new PieceDrawing(piece_drawing.at(pct));
+  w_sq_drawing = new WhiteSquare(new PieceDrawing(piece_drawing.at(pct)));
+
+  if (!black) {
+    b_sq_drawing = new Player1(b_sq_drawing);
+    w_sq_drawing = new Player1(w_sq_drawing);
   }
 
-Piece::~Piece() {}
+  p_b_sq_drawing = b_sq_drawing->drawing();
+  p_w_sq_drawing = w_sq_drawing->drawing();
+}
+
+void Piece::set_score(Piecetype pct) {
+  static const map<Piecetype, int> piece_drawing {
+    {bP, 10}, {bR, 50}, {bN, 30}, {bB, 30}, {bQ, 90}, {bK, 2000},
+    {wP, -10}, {wR, -50}, {wN, -30}, {wB, -30}, {wQ, -90}, {wK, -2000}
+  };
+
+  m_value = piece_drawing.at(pct);
+}
 
 U64 Piece::get_bitboard() { return m_bitboard; }
-box* Piece::get_drawing_B_square() { return p_cur_b_sq_drawing; }
-box* Piece::get_drawing_W_square() { return p_cur_w_sq_drawing; }
-box* Piece::get_drawing_square(bool  white) {
-  return white ? p_cur_b_sq_drawing : p_cur_w_sq_drawing;
+box* Piece::get_drawing(bool is_black_square) {
+  return is_black_square ? p_b_sq_drawing : p_w_sq_drawing;
 }
-
 Piecetype Piece::get_type_and_color() { return m_type; }
 bool Piece::is_black() { return black; }
-int Piece::get_value() { return black ? m_value : -m_value; }
-
+int Piece::get_value() { return m_value; }
 void Piece::clear_bit(int pos) { CLRBIT(m_bitboard, pos); }
 void Piece::set_bit(int pos) { SETBIT(m_bitboard, pos); }
-void Piece::make_move(int from, int to) {
-  CLRBIT(m_bitboard, from);
-  SETBIT(m_bitboard, to);
-}
-
+void Piece::make_move(int from, int to) { clear_bit(from); set_bit(to); }
 void Piece::clear_bitboard() { m_bitboard = BLANK; }

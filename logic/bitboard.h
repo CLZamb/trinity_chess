@@ -2,7 +2,7 @@
 #define BITBOARD_H
 
 #include <string>
-#include "piecesheaders.h"
+#include "piece.h"
 #include "move.h"
 #include "magic_bitboard.h"
 
@@ -39,19 +39,19 @@ class Bitboard {
     Piece* m_pieces[13] {
       nullptr,  // EMPTY 0
       // black pieces
-      new Pawn(BLACK, PAWNSTART & ALLBLACKSTART),  // bP 1
-      new Rook(BLACK, ROOKSTART & ALLBLACKSTART),  // bR 2
-      new Knight(BLACK, KNIGHTSTART & ALLBLACKSTART),  // bN 3
-      new Bishop(BLACK, BISHOPSTART & ALLBLACKSTART),  // bB 4
-      new Queen(BLACK, QUEENSTART & ALLBLACKSTART),  // bQ 5
-      new King(BLACK, KINGSTART & ALLBLACKSTART),  // bK 6
+      new Piece(bP, PAWNSTART & ALLBLACKSTART),
+      new Piece(bR, ROOKSTART & ALLBLACKSTART),
+      new Piece(bN, KNIGHTSTART & ALLBLACKSTART),
+      new Piece(bB, BISHOPSTART & ALLBLACKSTART),
+      new Piece(bQ, QUEENSTART & ALLBLACKSTART),
+      new Piece(bK, KINGSTART & ALLBLACKSTART),
       // white pieces
-      new Pawn(WHITE, PAWNSTART & ALLWHITESTART),  // wP 7
-      new Rook(WHITE, ROOKSTART & ALLWHITESTART),  // wR 8
-      new Knight(WHITE, KNIGHTSTART & ALLWHITESTART),  // wN 9
-      new Bishop(WHITE, BISHOPSTART & ALLWHITESTART),  // wB 10
-      new Queen(WHITE, QUEENSTART & ALLWHITESTART),  // wQ 11
-      new King(WHITE, KINGSTART & ALLWHITESTART),  // wK 12
+      new Piece(wP, PAWNSTART & ALLWHITESTART),
+      new Piece(wR, ROOKSTART & ALLWHITESTART),
+      new Piece(wN, KNIGHTSTART & ALLWHITESTART),
+      new Piece(wB, BISHOPSTART & ALLWHITESTART),
+      new Piece(wQ, QUEENSTART & ALLWHITESTART),
+      new Piece(wK, KINGSTART & ALLWHITESTART),
     };
 
     int pop_1st_bit(U64* bb);
