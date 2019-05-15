@@ -19,6 +19,11 @@ chess engine written in C++11
     - [History heuristic](https://www.chessprogramming.org/History_Heuristic)
 - Other
     - [Zobrist hashing](https://www.chessprogramming.org/Zobrist_Hashing) / [Transposition table](https://en.wikipedia.org/wiki/Transposition_table)
+
+# Trinity Engine
+
+[![demo](https://asciinema.org/a/246302.svg)](https://asciinema.org/a/246302?autoplay=1)
+
 ## License
 MIT License
 
