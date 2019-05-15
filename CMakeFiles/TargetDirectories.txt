@@ -1,3 +1,0 @@
-/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/rebuild_cache.dir
-/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/edit_cache.dir
-/Users/cristofher/Desktop/practice/c++/ChessProject/CMakeFiles/main.dir
