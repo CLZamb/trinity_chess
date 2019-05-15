@@ -110,26 +110,30 @@ struct IDrawing {
   void prepend_modifier(std::string mod, box* drawing) {
     const int column_size = box::char_size;
     int sizeBox = sizeof(char[column_size]);
-    char temp[column_size];
+    char prev_copy[column_size];
+    const char* char_mod = mod.c_str();
+
     for (int i = 0; i < box::row_size; ++i) {
-      snprintf(temp, column_size, "%s", drawing->content[i]);
+      snprintf(prev_copy, column_size, "%s", drawing->content[i]);
       snprintf(
           drawing->content[i], sizeBox,
           "%s%s",
-          mod.c_str(), temp);
+          char_mod, prev_copy);
     }
   }
 
   void append_modifier(std::string mod, box* drawing) {
     const int column_size = box::char_size;
     int sizeBox = sizeof(char[column_size]);
-    char temp[column_size];
+    char prev_copy[column_size];
+    const char* char_mod = mod.c_str();
+
     for (int i = 0; i < box::row_size; ++i) {
-      snprintf(temp, column_size, "%s", drawing->content[i]);
+      snprintf(prev_copy, column_size, "%s", drawing->content[i]);
       snprintf(
           drawing->content[i], sizeBox,
           "%s%s",
-          temp, mod.c_str());
+          prev_copy, char_mod);
     }
   }
 };
