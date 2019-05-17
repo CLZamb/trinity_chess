@@ -4,12 +4,8 @@
 #include "Transposition_table_entry.h"
 #include <unordered_map>
 
-class TTable
-{
-private:
-  std::unordered_map<U64, TTEntry> m_table;
-
-public:
+class TTable {
+ public:
   enum Flag {
     EXACT,
     LOWER_BOUND,
@@ -20,6 +16,9 @@ public:
   void set(ZobristKey, TTEntry);
   const TTEntry *get_entry(const ZobristKey &) const;
   void clear();
+
+ private:
+  std::unordered_map<U64, TTEntry> m_table;
 };
 
 #endif /* TRANSPOSITION_TABLE_H */

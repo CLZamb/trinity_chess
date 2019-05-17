@@ -104,7 +104,7 @@ void Board::print() {
 
   // need to be print upside down so that the bottom begins at row 0
   for (int row = 7; row >= 0; --row) {
-    for (int k = 0; k < box::row_size; ++k) {
+    for (int k = 0; k < box::kRowSize; ++k) {
       // left border
       if (!((k + 1) % 3))
         os << row + 1 << "┃";

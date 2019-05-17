@@ -1,38 +1,67 @@
 #ifndef BITBOARD_H
 #define BITBOARD_H
 
+#include <vector>
 #include <string>
-#include "piece.h"
 #include "move.h"
+#include "piece.h"
 #include "magic_bitboard.h"
 
 using std::string;
-#define TOTAL_SQ 64
-#define MAXDEPTH 64
 
 typedef std::vector<Move> MoveList;
 
 class Bitboard {
+ public:
+    Bitboard();
+    virtual ~Bitboard();
+    void _init();
+
+    U64 get_all_w_bitboard();
+    U64 get_all_b_bitboard();
+    U64 get_all_pieces_bitboard() const;
+    U64 get_piece_bitboard(int piece) const;
+    U64 get_Pieces_BB(int piece_type);
+    U64 get_piece_attacks(int type, SquareIndices);
+    U64 get_non_attack_moves(int type, SquareIndices);
+    void generate_all_moves(bool side, MoveList*);
+    void clear_bit_at_player_pieces(bool is_black, int pos);
+    void move(int type, int f, int t);
+    void capture_piece(int captured, int pos);
+    void put_piece_back(int captured, int pos);
+    void update_killers(Move mv);
+    void update_search_history(int piece, int to, int depth);
+    void make_move_bb(int piece, int from, int to);
+    void undo_move(int piece, int piece_captured, int from, int to);
+    void set_bit_at_player_pieces(bool is_black, int pos);
+    void reset_all_pieces_bitboard();
+    void set_piece_at_pos(int piece, int pos);
+    int evaluate_board();
+    int get_piece_at_pos(int pos);
+    Piece* get_piece(int type);
+
  private:
+    static const int kTotal_sqs = 64;
+    static const int kMaxDepth = 64;
     int ply = 0;
     int board_score = 0;
-    int pieces_score[13][TOTAL_SQ] = {{0}};
+    int pieces_score[13][kTotal_sqs] = {{0}};
     int MvvLvaScores[13][13];
-    int search_history[13][TOTAL_SQ] = {{0}};
-    Move killers[2][MAXDEPTH];
+    int search_history[13][kTotal_sqs] = {{0}};
+    Move killers[2][kMaxDepth];
     MagicBitboard magic_bb;
 
     U64 m_all_w_pieces = ALLWHITESTART;
     U64 m_all_b_pieces = ALLBLACKSTART;
     U64 m_occupied = ALLWHITESTART|ALLBLACKSTART;
 
-    U64 m_w_pawn_attacks[64];
-    U64 m_b_pawn_attacks[64];
-    U64 m_knight_attacks[64];
-    U64 m_king_attacks[64];
+    U64 m_w_pawn_attacks[kTotal_sqs];
+    U64 m_b_pawn_attacks[kTotal_sqs];
+    U64 m_knight_attacks[kTotal_sqs];
+    U64 m_king_attacks[kTotal_sqs];
 
-    U64 m_b_pawn_non_attacks[64];
-    U64 m_w_pawn_non_attacks[64];
+    U64 m_b_pawn_non_attacks[kTotal_sqs];
+    U64 m_w_pawn_non_attacks[kTotal_sqs];
 
     U64 Enpessant[2];
 
@@ -77,34 +106,6 @@ class Bitboard {
     U64 knight_mask(int sq);
     U64 king_mask(int sq);
     U64 pawn_non_attack(int sq, int side);
-
- public:
-    Bitboard();
-    virtual ~Bitboard();
-    void _init();
-
-    U64 get_all_w_bitboard();
-    U64 get_all_b_bitboard();
-    U64 get_all_pieces_bitboard() const;
-    U64 get_piece_bitboard(int piece) const;
-    U64 get_Pieces_BB(int piece_type);
-    U64 get_piece_attacks(int type, SquareIndices);
-    U64 get_non_attack_moves(int type, SquareIndices);
-    void generate_all_moves(bool side, MoveList*);
-    void clear_bit_at_player_pieces(bool is_black, int pos);
-    void move(int type, int f, int t);
-    void capture_piece(int captured, int pos);
-    void put_piece_back(int captured, int pos);
-    void update_killers(Move mv);
-    void update_search_history(int piece, int to, int depth);
-    void make_move_bb(int piece, int from, int to);
-    void undo_move(int piece, int piece_captured, int from, int to);
-    void set_bit_at_player_pieces(bool is_black, int pos);
-    void reset_all_pieces_bitboard();
-    void set_piece_at_pos(int piece, int pos);
-    int evaluate_board();
-    int get_piece_at_pos(int pos);
-    Piece* get_piece(int type);
 };
 
 #endif /* BITBOARD_H */

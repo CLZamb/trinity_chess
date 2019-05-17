@@ -9,13 +9,7 @@ using std::random_device;
 using std::mt19937_64;
 using std::uniform_int_distribution;
 
-class ZobristKey
-{
-private:
-	U64 m_key = BLANK;
-  static U64 m_piece_keys[13][64];
-  static U64 BLACK_TO_MOVE_KEY;
-
+class ZobristKey {
 public:
   ZobristKey();
   ZobristKey(Board* , bool black_to_move);
@@ -26,8 +20,13 @@ public:
   void move_piece(int piece, unsigned int from , unsigned int to);
   void capture_piece(int capture, unsigned int to);
   void undo_move(int piece, int capture, unsigned int from, unsigned int to);
-	bool operator==(const ZobristKey&);
-	void change_turn();
+  bool operator==(const ZobristKey&);
+  void change_turn();
+
+ private:
+  U64 m_key = BLANK;
+  static U64 m_piece_keys[13][64];
+  static U64 BLACK_TO_MOVE_KEY;
 };
 
 #endif /* ZOBRISTKEY_H */

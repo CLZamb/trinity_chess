@@ -3,16 +3,17 @@
 #include "Idisplay.h"
 
 class Messages : public IDisplay {
-private:
 public:
   Messages();
   ~Messages() {}
 
-  static char* p_welcome_message;
-  static char* p_start_message;
-  static char* p_game_over;
-  static string m_nextMessage;
   void print();
+
+  static string m_nextMessage;
+private:
+  static const char* p_welcome_message;
+  static const char* p_start_message;
+  static const char* p_game_over;
 };
 
 #endif /* MESSAGES_H */

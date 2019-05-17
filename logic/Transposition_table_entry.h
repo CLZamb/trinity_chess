@@ -6,7 +6,11 @@
 
 class TTEntry {
  public:
-  enum Flag { UPPER_BOUND, EXACT, LOWER_BOUND };
+  enum Flag {
+    UPPER_BOUND,
+    EXACT,
+    LOWER_BOUND
+  };
 
   TTEntry(Move* best, int score, int depth, Flag flag) :
     m_best_move(best), m_score(score),  m_depth(depth), m_flag(flag) {}
