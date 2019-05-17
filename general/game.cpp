@@ -12,6 +12,7 @@ void Game::start() {
       // Player vs Player
       set_players();
       play();
+      break;
     case 2:
       // Player vs CPU
       set_players(true);

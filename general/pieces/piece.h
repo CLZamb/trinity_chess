@@ -22,14 +22,14 @@ class Piece {
   U64 get_bitboard();
 
  private:
-  bool black = false;
-  int m_value = 0;
   U64 m_bitboard = BLANK;
   Piecetype m_type = EMPTY;
   box* p_b_sq_drawing = nullptr;
   box* p_w_sq_drawing = nullptr;
   IDrawing* w_sq_drawing = nullptr;
   IDrawing* b_sq_drawing = nullptr;
+  bool black = false;
+  int m_value = 0;
 };
 
 #endif /* PIECE_H */

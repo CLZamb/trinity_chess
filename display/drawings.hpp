@@ -94,11 +94,12 @@ class IDrawing {
   enum Code {
     BG_NORMAL   = 0,
     BG_INVERSE  = 7,
-    BG_B_BLACK  = 90,
     FG_GREEN    = 32,
     FG_WHITE    = 37,
     FG_DEFAULT  = 39,
     BG_DEFAULT  = 49,
+    BG_B_BLACK  = 90,
+    BG_B_WHITE    = 97,
   };
 
   virtual box* drawing() = 0;
@@ -174,7 +175,7 @@ class Player1 : public IDrawing {
   virtual ~Player1() {}
 
   box* drawing() {
-    prepend_modifier(modifier(FG_WHITE), drawing_ptr->drawing());
+    prepend_modifier(modifier(BG_B_WHITE), drawing_ptr->drawing());
     return drawing_ptr->drawing();
   }
 };
