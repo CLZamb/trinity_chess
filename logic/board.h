@@ -16,9 +16,35 @@
 using std::map;
 
 class Board : public IDisplay {
+ public:
+  Board();
+  ~Board();
+
+  void _init();
+  void set_players(Player* player1, Player* player2);
+  void print();
+  void undo_square_move(int piece, int piece_captured, int from, int to);
+  void generate_all_moves(bool side, MoveList* moveList);
+  void move_piece_to_square(int piece, int from, int to);
+  void move_squares(Piece*, int from, int to);
+  void move_piece_bits(int type, int from, int to);
+  void undo_move(int piece, int piece_captured, int from, int to);
+  void capture_piece(int captured, int pos);
+  void update_killers(Move mv);
+  void update_search_history(int piece, int to, int depth);
+  int get_board_score();
+  int get_piece_at(int pos);
+  U64 get_piece_attacks(int type, int from);
+  U64 get_non_attack_moves(int type, int from);
+  U64 get_own_pieces_occ(bool is_black);
+  U64 get_all_pieces_bitboard() const;
+  U64 get_piece_bitboard(int piece) const;
+  Piece* get_piece_at_square(int);
+
  private:
   // default fen
-  string pieces_start_pos = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+  string pieces_start_pos =
+    "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
   Player* player1, *player2;
   box wSquare, bSquare;
   Bitboard m_bb;
@@ -51,32 +77,7 @@ class Board : public IDisplay {
       box* get_current_drawing();
   };
   Square* p_board[64] = {nullptr};
-
- public:
-  Board();
-  ~Board();
-
-  void _init();
-  void set_players(Player* player1, Player* player2);
-  void print();
-  void undo_square_move(int piece, int piece_captured, int from, int to);
-  void generate_all_moves(bool side, MoveList* moveList);
-  void move_piece_to_square(int piece, int from, int to);
-  void move_squares(Piece*, int from, int to);
-  void move_piece_bits(int type, int from, int to);
-  void undo_move(int piece, int piece_captured, int from, int to);
-  void capture_piece(int captured, int pos);
-  void update_killers(Move mv);
-  void update_search_history(int piece, int to, int depth);
-  int get_board_score();
-  int get_piece_at(int pos);
-  U64 get_piece_attacks(int type, int from);
-  U64 get_non_attack_moves(int type, int from);
-  U64 get_own_pieces_occ(bool is_black);
-  U64 get_all_pieces_bitboard() const;
-  U64 get_piece_bitboard(int piece) const;
   Square* get_square_at_pos(int pos);
-  Piece* get_piece_at_square(int);
 };
 
 #endif /* BOARD_H */

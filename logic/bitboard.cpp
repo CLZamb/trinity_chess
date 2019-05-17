@@ -382,7 +382,6 @@ void Bitboard::update_killers(Move mv) {
   killers[0][ply] = mv;
 }
 
-
 void Bitboard::update_search_history(int piece, int to, int depth) {
   search_history[piece][to] += depth;
 }

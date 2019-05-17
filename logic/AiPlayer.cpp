@@ -4,7 +4,7 @@ AiPlayer::AiPlayer(bool has_black_pieces, Movement* movement_controller) :
   Player(has_black_pieces),
   p_move_generator(new Movement::MoveGenerator(movement_controller))
 {
-  m_pl_move.m_input = "";
+  m_pl_move.set_ply_input("");
 }
 
 AiPlayer::~AiPlayer() {

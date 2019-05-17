@@ -61,24 +61,24 @@ void Game::play() {
     p_board_display->print();
     player_move = p_player_turn->get_next_move();
 
-    if (player_move.m_input == "quit" ||
-        player_move.m_input == "close" ||
-        player_move.m_input == "exit")
+    if (player_move.get_input() == "quit" ||
+        player_move.get_input() == "close" ||
+        player_move.get_input() == "exit")
       return;
 
-    if (player_move.m_input == "undo") {
+    if (player_move.get_input() == "undo") {
       movement_controller.undo_last_move();
       continue;
     }
 
-    if (movement_controller.is_valid_move(player_move.m_move)) {
-      movement_controller.move_piece(player_move.m_move);
+    if (movement_controller.is_valid_move(player_move.get_move())) {
+      movement_controller.move_piece(player_move.get_move());
       is_checkMate = movement_controller.get_checkmate();
       counter = 0;
     } else {
       // avoiding infinite loop
       if (counter == 4) break;
-      std::cout << player_move.m_input << std::endl;
+      std::cout << player_move.get_input() << std::endl;
       std::cout << "invalid move, try again\n";
       counter++;
     }

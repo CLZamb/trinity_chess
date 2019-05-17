@@ -7,7 +7,13 @@
 #include <vector>
 
 class Game {
-private:
+ public:
+  Game();
+  virtual ~Game();
+
+  void start();
+
+ private:
   Board m_board;
   Messages m_messages;
   IDisplay* p_board_display = &m_board;
@@ -21,12 +27,6 @@ private:
   void change_turn();
   void set_players(bool is_cpu = false);
   void play();
-
-public:
-  Game();
-  virtual ~Game();
-
-  void start();
 };
 
 #endif /* GAME_H */

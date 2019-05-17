@@ -89,7 +89,8 @@ using std::map;
    ║ 107      ║  BRIGHT WHITE                  ║  BG CODE ║
    ╚══════════╩════════════════════════════════╩══════════╝
    */
-struct IDrawing {
+class IDrawing {
+ public:
   enum Code {
     BG_NORMAL   = 0,
     BG_INVERSE  = 7,
@@ -99,6 +100,7 @@ struct IDrawing {
     FG_DEFAULT  = 39,
     BG_DEFAULT  = 49,
   };
+
   virtual box* drawing() = 0;
   virtual ~IDrawing() {}
 
@@ -108,28 +110,32 @@ struct IDrawing {
   }
 
   void prepend_modifier(std::string mod, box* drawing) {
-    const int column_size = box::char_size;
-    int sizeBox = sizeof(char[column_size]);
-    char temp[column_size];
-    for (int i = 0; i < box::row_size; ++i) {
-      snprintf(temp, column_size, "%s", drawing->content[i]);
+    const int kColumnSize = box::kCharSize;
+    int sizeBox = sizeof(char[kColumnSize]);
+    char prev_copy[kColumnSize];
+    const char* char_mod = mod.c_str();
+
+    for (int i = 0; i < box::kRowSize; ++i) {
+      snprintf(prev_copy, kColumnSize, "%s", drawing->content[i]);
       snprintf(
           drawing->content[i], sizeBox,
           "%s%s",
-          mod.c_str(), temp);
+          char_mod, prev_copy);
     }
   }
 
   void append_modifier(std::string mod, box* drawing) {
-    const int column_size = box::char_size;
-    int sizeBox = sizeof(char[column_size]);
-    char temp[column_size];
-    for (int i = 0; i < box::row_size; ++i) {
-      snprintf(temp, column_size, "%s", drawing->content[i]);
+    const int kColumnSize = box::kCharSize;
+    int sizeBox = sizeof(char[kColumnSize]);
+    char prev_copy[kColumnSize];
+    const char* char_mod = mod.c_str();
+
+    for (int i = 0; i < box::kRowSize; ++i) {
+      snprintf(prev_copy, kColumnSize, "%s", drawing->content[i]);
       snprintf(
           drawing->content[i], sizeBox,
           "%s%s",
-          temp, mod.c_str());
+          prev_copy, char_mod);
     }
   }
 };

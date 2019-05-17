@@ -29,10 +29,10 @@ void Player::set_next_move(string input) {
     int from = convert_to_int_pos(list_pos[0][0], list_pos[0][1]);
     int to = convert_to_int_pos(list_pos[1][0] , list_pos[1][1]);
 
-    m_pl_move.valid_input = true;
+    m_pl_move.set_valid(true);
     m_move.set_move(from, to);
   } else {
-    m_pl_move.valid_input = false;
+    m_pl_move.set_valid(false);
   }
 
   m_pl_move.set_move(m_move, input);
