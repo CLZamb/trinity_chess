@@ -2,18 +2,20 @@
 
 Messages::Messages() {}
 
+// default
+Msg Messages::m_nextMessage = No_message;
+
 void Messages::print() {
-  if (m_nextMessage == "welcome")
-    cout << p_welcome_message;
-  else if (m_nextMessage == "start")
-    cout << p_start_message;
-  else if (m_nextMessage == "gameOver")
-    cout << p_game_over;
-  else
-    cout << "nothing to print" << endl;
+  switch (m_nextMessage) {
+    case Welcome: cout << p_welcome_message; break;
+    case Start: cout << p_start_message; break;
+    case GameOver: cout << p_game_over; break;
+    default:
+      cout << "nothing to print" << endl;
+    break;
+  }
 }
 
-string Messages::m_nextMessage = "";
 const char* Messages::p_welcome_message =
 reinterpret_cast<const char*>
 (

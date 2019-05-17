@@ -23,7 +23,7 @@ class Game {
   Movement movement_controller{&m_board, &p_player_turn};
 
   int get_option();
-  void print_message(string);
+  void print_message(Msg);
   void change_turn();
   void set_players(bool is_cpu = false);
   void play();

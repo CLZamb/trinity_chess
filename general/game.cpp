@@ -3,9 +3,9 @@ Game::Game() {}
 Game::~Game() { delete p_player2; }
 
 void Game::start() {
-  print_message("welcome");
+  print_message(Welcome);
   std::cin.get();
-  print_message("start");
+  print_message(Start);
 
   switch (get_option()) {
     case 1:
@@ -18,7 +18,7 @@ void Game::start() {
       play();
       break;
     case 3:
-      print_message("gameOver");
+      print_message(GameOver);
       break;
     case 4:
       std::cout << "Credits" << std::endl;
@@ -93,7 +93,7 @@ void Game::play() {
   }
 }
 
-void Game::print_message(string message) {
+void Game::print_message(Msg message) {
   system(CLEAR);
   Messages::m_nextMessage = message;
   p_message_display->print();

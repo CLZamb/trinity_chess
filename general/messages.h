@@ -2,6 +2,13 @@
 #define MESSAGES_H
 #include "Idisplay.h"
 
+enum Msg : int {
+  No_message,
+  Welcome,
+  Start,
+  GameOver
+};
+
 class Messages : public IDisplay {
 public:
   Messages();
@@ -9,7 +16,7 @@ public:
 
   void print();
 
-  static string m_nextMessage;
+  static Msg m_nextMessage;
 private:
   static const char* p_welcome_message;
   static const char* p_start_message;
