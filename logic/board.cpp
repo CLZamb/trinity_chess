@@ -44,8 +44,8 @@ void Board::create_board_squares() {
 }
 
 void Board::create_squares_drawing() {
-  wSquare = *PieceDrawing("BaseWhiteSquare").drawing();
-  bSquare = *PieceDrawing("BaseBlackSquare").drawing();
+  wSquare = *PieceDrawing("BaseWhiteSquare").get_drawing();
+  bSquare = *PieceDrawing("BaseBlackSquare").get_drawing();
 }
 
 void Board::parser_fen(string fen) {
@@ -98,10 +98,7 @@ std::string toString(std::ostream &str) {
 void Board::print() {
   system(CLEAR);
   std::stringstream os;
-  os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        "━━━━┓"
-     << endl;
-
+  os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
   // need to be print upside down so that the bottom begins at row 0
   for (int row = 7; row >= 0; --row) {
     for (int k = 0; k < box::kRowSize; ++k) {
@@ -119,18 +116,9 @@ void Board::print() {
     }
   }
 
-  os << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        "━━"
-        "━━━━┃"
-     << endl;
-  os << " ┃    A        B        C        D        E        F        G       "
-        "H "
-        "    ┃"
-     << endl;
-  os << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        "━━"
-        "━━━━┛"
-     << endl;
+  os << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃" << endl;
+  os << " ┃    A        B        C        D        E        F        G       H     ┃" << endl;
+  os << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
 
   cout << toString(os);
 }

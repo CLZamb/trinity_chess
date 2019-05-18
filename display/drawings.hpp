@@ -89,119 +89,78 @@ using std::map;
    ║ 107      ║  BRIGHT WHITE                  ║  BG CODE ║
    ╚══════════╩════════════════════════════════╩══════════╝
    */
-class IDrawing {
+
+class PieceDrawingMod {
  public:
-  enum Code {
-    BG_NORMAL   = 0,
-    BG_INVERSE  = 7,
-    FG_GREEN    = 32,
-    FG_WHITE    = 37,
-    FG_DEFAULT  = 39,
-    BG_DEFAULT  = 49,
-    BG_B_BLACK  = 90,
-    BG_B_WHITE    = 97,
-  };
+    enum Code {
+      BG_NORMAL   = 0,
+      BG_INVERSE  = 7,
+      FG_BLACK    = 30,
+      FG_GREEN    = 32,
+      FG_WHITE    = 97,
+      FG_DEFAULT  = 39,
+      BG_DEFAULT  = 49,
+      BG_B_BLACK  = 40,
+      BG_B_WHITE  = 47,
+    };
 
-  virtual box* drawing() = 0;
-  virtual ~IDrawing() {}
+    PieceDrawingMod() {}
+    ~PieceDrawingMod() {}
 
- protected:
-  std::string modifier(const Code mod) {
-    return "\033[" + std::to_string(mod) + "m";
-  }
-
-  void prepend_modifier(std::string mod, box* drawing) {
-    const int kColumnSize = box::kCharSize;
-    int sizeBox = sizeof(char[kColumnSize]);
-    char prev_copy[kColumnSize];
-    const char* char_mod = mod.c_str();
-
-    for (int i = 0; i < box::kRowSize; ++i) {
-      snprintf(prev_copy, kColumnSize, "%s", drawing->content[i]);
-      snprintf(
-          drawing->content[i], sizeBox,
-          "%s%s",
-          char_mod, prev_copy);
+    std::string modifier_to_str(const Code mod) {
+      return "\033[" + std::to_string(mod) + "m";
     }
-  }
 
-  void append_modifier(std::string mod, box* drawing) {
-    const int kColumnSize = box::kCharSize;
-    int sizeBox = sizeof(char[kColumnSize]);
-    char prev_copy[kColumnSize];
-    const char* char_mod = mod.c_str();
+    void append(Code c, box* drawing) {
+      char_mod = modifier_to_str(c).c_str();
 
-    for (int i = 0; i < box::kRowSize; ++i) {
-      snprintf(prev_copy, kColumnSize, "%s", drawing->content[i]);
-      snprintf(
-          drawing->content[i], sizeBox,
-          "%s%s",
-          prev_copy, char_mod);
+      for (int i = 0; i < box::kRowSize; ++i) {
+        snprintf(prev_copy, kColumnSize, "%s", drawing->content[i]);
+        snprintf(
+            drawing->content[i], kSizebox,
+            "%s%s",
+            prev_copy, char_mod);
+      }
     }
-  }
+    void prepend(Code c, box* drawing) {
+      char_mod = modifier_to_str(c).c_str();
+
+      for (int i = 0; i < box::kRowSize; ++i) {
+        snprintf(prev_copy, kColumnSize, "%s", drawing->content[i]);
+        snprintf(
+            drawing->content[i], kSizebox,
+            "%s%s",
+            char_mod, prev_copy);
+      }
+    }
+
+ private:
+    static const int kColumnSize = box::kCharSize;
+    static const int kSizebox = sizeof(char[kColumnSize]);
+    char prev_copy[kColumnSize];
+    const char* char_mod;
 };
 
-class PieceDrawing : public IDrawing {
- private:
-    static const map<std::string, box> piece_drawing;
-    box m_drawing;
+
+class PieceDrawing {
  public:
     explicit PieceDrawing(std::string piece) {
       if (piece_drawing.find(piece) == piece_drawing.end()) throw "invalid key";
 
       m_drawing = piece_drawing.at(piece);
-      append_modifier(modifier(BG_NORMAL), &m_drawing);
+      piece_mod.append(PieceDrawingMod::BG_NORMAL, &m_drawing);
     }
     virtual ~PieceDrawing() {}
 
-    box* drawing() override { return &m_drawing; }
+    box* get_drawing() { return &m_drawing; }
     void set_drawing(box* newBox) { m_drawing = *newBox; }
-};
-
-
-class Player2 : public IDrawing {
-  IDrawing *drawing_ptr;
- public:
-  explicit Player2(IDrawing* drawing) : drawing_ptr(drawing) {}
-  virtual ~Player2() {}
-
-  box* drawing() { return drawing_ptr->drawing(); }
-};
-
-class Player1 : public IDrawing {
-  IDrawing *drawing_ptr;
- public:
-  explicit Player1(IDrawing* drawing) : drawing_ptr(drawing) {}
-  virtual ~Player1() {}
-
-  box* drawing() {
-    prepend_modifier(modifier(BG_B_WHITE), drawing_ptr->drawing());
-    return drawing_ptr->drawing();
-  }
-};
-
-class WhiteSquare : public IDrawing {
-  IDrawing *drawing_ptr;
- public:
-  explicit WhiteSquare(IDrawing* drawing) : drawing_ptr(drawing) {}
-  virtual ~WhiteSquare() {}
-
-  box* drawing() {
-    prepend_modifier(modifier(BG_INVERSE), drawing_ptr->drawing());
-    return drawing_ptr->drawing();
-  }
-};
-
-class BlackSquare : public IDrawing {
-  IDrawing *drawing_ptr;
- public:
-  explicit BlackSquare(IDrawing* drawing) : drawing_ptr(drawing) {}
-  virtual ~BlackSquare() {}
-
-  box* drawing() {
-    prepend_modifier(modifier(BG_B_BLACK), drawing_ptr->drawing());
-    return drawing_ptr->drawing();
-  }
+    void addModifier(PieceDrawingMod::Code c) {
+      piece_mod.prepend(c, &m_drawing);
+    }
+ private:
+    static const map<std::string, box> piece_drawing;
+    box m_drawing;
+    PieceDrawingMod piece_mod;
 };
 
 #endif /* DRAWINGS_H */

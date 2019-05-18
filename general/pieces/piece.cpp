@@ -20,15 +20,16 @@ void Piece::create_piece_drawing(Piecetype pct) {
   };
 
   b_sq_drawing = new PieceDrawing(piece_drawing.at(pct));
-  w_sq_drawing = new WhiteSquare(new PieceDrawing(piece_drawing.at(pct)));
+  w_sq_drawing = new PieceDrawing(piece_drawing.at(pct));
+  w_sq_drawing->addModifier(PieceDrawingMod::BG_INVERSE);
 
-  if (!black) {
-    b_sq_drawing = new Player1(b_sq_drawing);
-    w_sq_drawing = new Player1(w_sq_drawing);
+  if (black) {
+    // b_sq_drawing->addModifier(PieceDrawingMod::BG_B_BLACK);
+    // w_sq_drawing->addModifier(PieceDrawingMod::BG_B_BLACK);
+  } else {
+    b_sq_drawing->addModifier(PieceDrawingMod::FG_WHITE);
+    w_sq_drawing->addModifier(PieceDrawingMod::FG_WHITE);
   }
-
-  p_b_sq_drawing = b_sq_drawing->drawing();
-  p_w_sq_drawing = w_sq_drawing->drawing();
 }
 
 void Piece::set_score(Piecetype pct) {
@@ -42,7 +43,8 @@ void Piece::set_score(Piecetype pct) {
 
 U64 Piece::get_bitboard() { return m_bitboard; }
 box* Piece::get_drawing(bool is_black_square) {
-  return is_black_square ? p_b_sq_drawing : p_w_sq_drawing;
+  return is_black_square ?
+    b_sq_drawing->get_drawing() : w_sq_drawing->get_drawing();
 }
 Piecetype Piece::get_type_and_color() { return m_type; }
 bool Piece::is_black() { return black; }
