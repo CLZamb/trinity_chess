@@ -24,8 +24,8 @@ void Piece::create_piece_drawing(Piecetype pct) {
   w_sq_drawing->addModifier(PieceDrawingMod::BG_INVERSE);
 
   if (black) {
-    // b_sq_drawing->addModifier(PieceDrawingMod::BG_B_BLACK);
-    // w_sq_drawing->addModifier(PieceDrawingMod::BG_B_BLACK);
+    b_sq_drawing->addModifier(PieceDrawingMod::BG_B_BLACK);
+    w_sq_drawing->addModifier(PieceDrawingMod::BG_B_BLACK);
   } else {
     b_sq_drawing->addModifier(PieceDrawingMod::FG_WHITE);
     w_sq_drawing->addModifier(PieceDrawingMod::FG_WHITE);

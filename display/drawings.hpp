@@ -115,29 +115,23 @@ class PieceDrawingMod {
       char_mod = modifier_to_str(c).c_str();
 
       for (int i = 0; i < box::kRowSize; ++i) {
-        snprintf(prev_copy, kColumnSize, "%s", drawing->content[i]);
-        snprintf(
-            drawing->content[i], kSizebox,
-            "%s%s",
-            prev_copy, char_mod);
+        box::copy(temp_copy, drawing->content[i]);
+        box::copy(drawing->content[i], temp_copy, char_mod);
       }
     }
     void prepend(Code c, box* drawing) {
       char_mod = modifier_to_str(c).c_str();
 
       for (int i = 0; i < box::kRowSize; ++i) {
-        snprintf(prev_copy, kColumnSize, "%s", drawing->content[i]);
-        snprintf(
-            drawing->content[i], kSizebox,
-            "%s%s",
-            char_mod, prev_copy);
+        box::copy(temp_copy, drawing->content[i]);
+        box::copy(drawing->content[i], char_mod, temp_copy);
       }
     }
 
  private:
     static const int kColumnSize = box::kCharSize;
     static const int kSizebox = sizeof(char[kColumnSize]);
-    char prev_copy[kColumnSize];
+    char temp_copy[kColumnSize];
     const char* char_mod;
 };
 
