@@ -32,14 +32,14 @@ void Board::create_board_squares() {
     for (int col = 0; col < 8; ++col) {
       position = row * 8 + col;
       if (squareColor == 'b') {
-        squareColor = 'w';
-        p_board[position] = new Square(&wSquare, false);
-      } else {
-        squareColor = 'b';
         p_board[position] = new Square(&bSquare, true);
+        squareColor = 'w';
+      } else {
+        p_board[position] = new Square(&wSquare, false);
+        squareColor = 'b';
       }
     }
-    squareColor = squareColor == 'b' ? 'w' : 'b';
+    squareColor = (squareColor == 'b') ? 'w' : 'b';
   }
 }
 
