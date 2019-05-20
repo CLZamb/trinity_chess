@@ -49,8 +49,8 @@ class Movement::MoveGenerator {
 		int evaluate_board();
 
  private:
-		Movement* movement;
-		Board* m_board;
+		Movement* movement = nullptr;
+    Board* m_board = nullptr;
 		bool has_black_pieces = false;
 		bool m_stop = false;
 		int best_move = 0;
@@ -59,7 +59,7 @@ class Movement::MoveGenerator {
 		int side = 0;
 		int counter = 0;
 		std::chrono::time_point<std::chrono::steady_clock> m_start;
-		int m_time_allocated = 1000;
+		int m_time_allocated = 4000;
 		int m_elapsed = 0;
 		int negamax(int, int, int, int);
 		bool time_out();

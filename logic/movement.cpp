@@ -164,6 +164,7 @@ Move Movement::MoveGenerator::search_best_move() {
   Move best_move;
   m_stop = false;
   has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
+  side = has_black_pieces ? 1 : -1;
 
   int total_depth = 0;
   for (int currDepth = 1;  ; currDepth++) {
@@ -192,14 +193,13 @@ Move Movement::MoveGenerator::search_best_move() {
 Move Movement::MoveGenerator::root_negamax(int cur_depth) {
   MoveList m_legalMoves;
   generate_moves(&m_legalMoves);
-  best_move = score = side = 0;
-  best_score = INT_MIN;
-  side = has_black_pieces ? 1 : -1;
+  best_move = 0;
+  score = best_score = INT_MIN;
   counter = 0;
   for (Move& mv : m_legalMoves) {
     pick_next_move(counter++, &m_legalMoves);
     movement->move_piece_bits(&mv);
-    score = -negamax(cur_depth, INT_MIN + 1, INT_MAX, side);
+    score = negamax(cur_depth, INT_MIN + 1, INT_MAX, side);
     movement->undo_last_bitboard_move(mv);
 
     if (m_stop || time_out()) {
@@ -286,9 +286,9 @@ int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
 
   TTEntry::Flag flag = get_flag(alpha, orig_alpha, beta);
   movement->m_table.set(
-      movement->m_zkey, TTEntry(best_move, value, depth, flag));
+      movement->m_zkey, TTEntry(best_move, alpha, depth, flag));
 
-  return value;
+  return alpha;
 }
 
 int Movement::MoveGenerator::is_repeated_move(
@@ -339,9 +339,10 @@ void Movement::MoveGenerator::pick_next_move(int index, MoveList* moves) {
 }
 
 void Movement::MoveGenerator::generate_moves(MoveList* legalMoves) {
+  has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
   m_board->generate_all_moves(has_black_pieces, legalMoves);
 }
 
 int Movement::MoveGenerator::evaluate_board() {
-  return m_board->get_board_score();
+  return m_board->evaluate_board();
 }

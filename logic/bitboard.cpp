@@ -327,8 +327,6 @@ void Bitboard::move(int piece, int from, int to) {
   m_pieces[piece]->make_move(from, to);
   clear_bit_at_player_pieces(IS_BLACK(piece), from);
   set_bit_at_player_pieces(IS_BLACK(piece), to);
-  // board_score -= pieces_score[piece][from];
-  // board_score += pieces_score[piece][to];
 }
 
 U64 Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
@@ -341,9 +339,6 @@ void Bitboard::capture_piece(int captured, int pos) {
 
   m_pieces[captured]->clear_bit(pos);
   clear_bit_at_player_pieces(IS_BLACK(captured), pos);
-
-  board_score += m_pieces[captured]->get_value();
-  // board_score += pieces_score[captured][pos];
 }
 
 void Bitboard::put_piece_back(int captured, int pos) {
@@ -352,12 +347,24 @@ void Bitboard::put_piece_back(int captured, int pos) {
 
   m_pieces[captured]->set_bit(pos);
   set_bit_at_player_pieces(IS_BLACK(captured), pos);
-
-  // board_score += pieces_score[captured][pos];
-  board_score -= m_pieces[captured]->get_value();
 }
 
 int Bitboard::evaluate_board() {
+  board_score = 0;
+  U64 piece_bitboard = BLANK;
+  int pos = 0;
+
+  for (int pce = bP; pce <= wK; ++pce) {
+    piece_bitboard = m_pieces[pce]->get_bitboard();
+    board_score +=
+      (magic_bb.count_1s(m_pieces[pce]->get_bitboard()) * m_pieces[pce]->get_value());
+
+    piece_bitboard = m_pieces[pce]->get_bitboard();
+    while (piece_bitboard) {
+      pos = magic_bb.pop_1st_bit(&piece_bitboard);
+      board_score += pieces_score[pce][pos];
+    }
+  }
   return board_score;
 }
 

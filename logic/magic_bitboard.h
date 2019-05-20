@@ -30,7 +30,6 @@ class MagicBitboard
     U64 bmask(int sq);
     U64 rmask(int sq);
     U64 set_occupancy(int index, int bits, U64 m);
-    int count_1s(U64 b);
     void _init_bitmasks();
     void _init_slider_masks_shifs_occupancies(int isRook);
     void _init_tables(int isRook);
@@ -43,6 +42,7 @@ class MagicBitboard
     U64 bishop_attacks(U64 occ, SquareIndices sq);
     U64 queen_attacks(U64 occ, SquareIndices sq);
     int pop_1st_bit(U64* bb);
+    int count_1s(U64 b);
 };
 
 #endif /* MAGIC_BITBOARD_H */

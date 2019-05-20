@@ -32,7 +32,7 @@ class Board : public IDisplay {
   void capture_piece(int captured, int pos);
   void update_killers(Move mv);
   void update_search_history(int piece, int to, int depth);
-  int get_board_score();
+  int evaluate_board();
   int get_piece_at(int pos);
   U64 get_piece_attacks(int type, int from);
   U64 get_non_attack_moves(int type, int from);

@@ -192,7 +192,7 @@ U64 Board::get_own_pieces_occ(bool is_black) {
   return  m_bb.get_all_w_bitboard();
 }
 
-int Board::get_board_score() { return m_bb.evaluate_board(); }
+int Board::evaluate_board() { return m_bb.evaluate_board(); }
 U64 Board::get_piece_bitboard(int piece) const {
   return m_bb.get_piece_bitboard(piece);
 }
