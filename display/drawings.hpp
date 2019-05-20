@@ -90,7 +90,7 @@ using std::map;
    ╚══════════╩════════════════════════════════╩══════════╝
    */
 
-class PieceDrawingMod {
+class DrawingMod {
  public:
     enum Code {
       BG_NORMAL   = 0,
@@ -104,8 +104,8 @@ class PieceDrawingMod {
       BG_B_WHITE  = 47,
     };
 
-    PieceDrawingMod() {}
-    ~PieceDrawingMod() {}
+    DrawingMod() {}
+    ~DrawingMod() {}
 
     std::string modifier_to_str(const Code mod) {
       return "\033[" + std::to_string(mod) + "m";
@@ -142,19 +142,19 @@ class PieceDrawing {
       if (piece_drawing.find(piece) == piece_drawing.end()) throw "invalid key";
 
       m_drawing = piece_drawing.at(piece);
-      piece_mod.append(PieceDrawingMod::BG_NORMAL, &m_drawing);
+      piece_mod.append(DrawingMod::BG_NORMAL, &m_drawing);
     }
     virtual ~PieceDrawing() {}
 
     box* get_drawing() { return &m_drawing; }
     void set_drawing(box* newBox) { m_drawing = *newBox; }
-    void addModifier(PieceDrawingMod::Code c) {
+    void addModifier(DrawingMod::Code c) {
       piece_mod.prepend(c, &m_drawing);
     }
  private:
     static const map<std::string, box> piece_drawing;
     box m_drawing;
-    PieceDrawingMod piece_mod;
+    DrawingMod piece_mod;
 };
 
 #endif /* DRAWINGS_H */

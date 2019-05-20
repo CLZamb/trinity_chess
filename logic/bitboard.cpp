@@ -327,8 +327,8 @@ void Bitboard::move(int piece, int from, int to) {
   m_pieces[piece]->make_move(from, to);
   clear_bit_at_player_pieces(IS_BLACK(piece), from);
   set_bit_at_player_pieces(IS_BLACK(piece), to);
-  board_score -= pieces_score[piece][from];
-  board_score += pieces_score[piece][to];
+  // board_score -= pieces_score[piece][from];
+  // board_score += pieces_score[piece][to];
 }
 
 U64 Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
@@ -342,8 +342,8 @@ void Bitboard::capture_piece(int captured, int pos) {
   m_pieces[captured]->clear_bit(pos);
   clear_bit_at_player_pieces(IS_BLACK(captured), pos);
 
-  board_score -= m_pieces[captured]->get_value();
-  board_score -= pieces_score[captured][pos];
+  board_score += m_pieces[captured]->get_value();
+  // board_score += pieces_score[captured][pos];
 }
 
 void Bitboard::put_piece_back(int captured, int pos) {
@@ -353,8 +353,8 @@ void Bitboard::put_piece_back(int captured, int pos) {
   m_pieces[captured]->set_bit(pos);
   set_bit_at_player_pieces(IS_BLACK(captured), pos);
 
-  board_score += pieces_score[captured][pos];
-  board_score += m_pieces[captured]->get_value();
+  // board_score += pieces_score[captured][pos];
+  board_score -= m_pieces[captured]->get_value();
 }
 
 int Bitboard::evaluate_board() {

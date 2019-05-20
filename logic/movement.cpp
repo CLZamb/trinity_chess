@@ -163,8 +163,10 @@ Move Movement::MoveGenerator::search_best_move() {
   m_start = std::chrono::steady_clock::now();
   Move best_move;
   m_stop = false;
+  has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
 
-  for (int currDepth = 1; ;currDepth++) {
+  int total_depth = 0;
+  for (int currDepth = 1;  ; currDepth++) {
     best_move = root_negamax(currDepth);
     m_elapsed =
       std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - m_start).count();
@@ -173,8 +175,11 @@ Move Movement::MoveGenerator::search_best_move() {
       break;
 
     if (m_elapsed >= (m_time_allocated/2)) break;
+    total_depth = currDepth;
   }
 
+  std::cout << "cur value "<< evaluate_board() << std::endl;
+  std::cout << total_depth  << std::endl;
   auto end = std::chrono::steady_clock::now();
 
   cout << "Elapsed time in milliseconds : "
@@ -187,15 +192,14 @@ Move Movement::MoveGenerator::search_best_move() {
 Move Movement::MoveGenerator::root_negamax(int cur_depth) {
   MoveList m_legalMoves;
   generate_moves(&m_legalMoves);
-  int best_move = 0;
-  int best_score = INT_MIN;
-  int score;
-
-  int counter = 0;
+  best_move = score = side = 0;
+  best_score = INT_MIN;
+  side = has_black_pieces ? 1 : -1;
+  counter = 0;
   for (Move& mv : m_legalMoves) {
     pick_next_move(counter++, &m_legalMoves);
     movement->move_piece_bits(&mv);
-    score = -negamax(cur_depth, INT_MIN + 1, INT_MAX, -1);
+    score = -negamax(cur_depth, INT_MIN + 1, INT_MAX, side);
     movement->undo_last_bitboard_move(mv);
 
     if (m_stop || time_out()) {
@@ -335,11 +339,9 @@ void Movement::MoveGenerator::pick_next_move(int index, MoveList* moves) {
 }
 
 void Movement::MoveGenerator::generate_moves(MoveList* legalMoves) {
-  bool has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
   m_board->generate_all_moves(has_black_pieces, legalMoves);
 }
 
 int Movement::MoveGenerator::evaluate_board() {
-  // TODO(ME) : add bonus and movilty so that it determines the advantange
   return m_board->get_board_score();
 }
