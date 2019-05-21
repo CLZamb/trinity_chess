@@ -15,14 +15,13 @@
 
 using std::map;
 
-class Board : public IDisplay {
+class Board {
  public:
   Board();
   ~Board();
 
   void _init();
   void set_players(Player* player1, Player* player2);
-  void print();
   void undo_square_move(int piece, int piece_captured, int from, int to);
   void generate_all_moves(bool side, MoveList* moveList);
   void move_piece_to_square(int piece, int from, int to);
@@ -40,6 +39,8 @@ class Board : public IDisplay {
   U64 get_all_pieces_bitboard() const;
   U64 get_piece_bitboard(int piece) const;
   Piece* get_piece_at_square(int);
+
+  friend std::ostream& operator<<(std::ostream& os, const Board& b);
 
  private:
   // default fen

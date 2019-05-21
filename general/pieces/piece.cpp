@@ -35,8 +35,8 @@ void Piece::create_piece_drawing(Piecetype pct) {
 
 void Piece::set_score(Piecetype pct) {
   static const map<Piecetype, int> piece_drawing {
-		{bP, 10}, {bR, 50}, {bN, 30}, {bB, 30}, {bQ, 90}, {bK, 2000},
-    {wP, -10}, {wR, -50}, {wN, -30}, {wB, -30}, {wQ, -90}, {wK, -2000}
+    {bP, 100}, {bR, 500}, {bN, 300}, {bB, 300}, {bQ, 900}, {bK, 2000},
+    {wP, -100}, {wR, -500}, {wN, -300}, {wB, -300}, {wQ, -900}, {wK, -2000}
   };
 
   m_value = piece_drawing.at(pct);

@@ -95,10 +95,9 @@ std::string toString(std::ostream &str) {
   return ss.str();
 }
 
-void Board::print() {
+std::ostream& operator<<(std::ostream& os, const Board& board) {
   system(CLEAR);
-  std::stringstream ss;
-  ss << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << "\n";
+  os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n";
   // need to be print upside down so that the bottom begins at row 0
   // for each board row
   for (int row = 7; row >= 0; --row) {
@@ -106,24 +105,24 @@ void Board::print() {
     for (int k = 0; k < box::kRowSize; ++k) {
       // left border
       if ((k + 1) % 3)
-        ss << ' ';
+        os << ' ';
       else
-        ss << row + 1;
+        os << row + 1;
 
-      ss << "┃";
+      os << "┃";
       // for each board column
       for (int col = 0; col < 8; col++) {
-        ss << p_board[(row * 8) + col]->at(k);
+        os << board.p_board[(row * 8) + col]->at(k);
       }
-      ss << "┃" << '\n';
+      os << "┃\n";
       // right border
     }
   }
-  ss << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃" << "\n";
-  ss << " ┃    A        B        C        D        E        F        G       H     ┃" << "\n";
-  ss << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
-
-  cout << toString(ss);
+  os
+  << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃\n"
+  << " ┃    A        B        C        D        E        F        G       H     ┃\n"
+  << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+  return os;
 }
 
 Piece* Board::get_piece_at_square(int pos) {

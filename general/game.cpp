@@ -59,7 +59,7 @@ void Game::play() {
   bool is_checkMate = false;
 
   while (!is_checkMate) {
-    p_board_display->print();
+    cout << m_board;
     player_move = p_player_turn->get_next_move();
 
     if (player_move.get_input() == "quit" ||
@@ -85,7 +85,7 @@ void Game::play() {
     }
   }
 
-  p_board_display->print();
+  std::cout << m_board << std::endl;
   if (is_checkMate) {
     std::cout << "checkmate\n";
     std::cout << "Player "

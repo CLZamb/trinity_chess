@@ -179,8 +179,8 @@ Move Movement::MoveGenerator::search_best_move() {
     total_depth = currDepth;
   }
 
-  std::cout << "cur value "<< evaluate_board() << std::endl;
-  std::cout << total_depth  << std::endl;
+  std::cout << "board value: "<< evaluate_board() << std::endl;
+  std::cout << "depth: : " << total_depth  << std::endl;
   auto end = std::chrono::steady_clock::now();
 
   cout << "Elapsed time in milliseconds : "
