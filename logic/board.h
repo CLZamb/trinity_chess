@@ -46,6 +46,7 @@ class Board {
   // default fen
   string pieces_start_pos =
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
   Player* player1, *player2;
   box wSquare, bSquare;
   Bitboard m_bb;
@@ -59,26 +60,28 @@ class Board {
   bool is_number(char c);
   bool is_piecetype(char c, map<char, int> pieces);
 
-  class Square {
-   private:
-      box* p_base_drawing = nullptr;
-      box* p_cur_drawing = nullptr;
-      Piece* p_piece = nullptr;
-      bool m_is_black_square = false;
-
-   public:
-      Square(box*, bool);
-      virtual ~Square();
-
-      char* at(int i);
-      void set_piece(Piece* piece);
-      void clear_square();
-      bool is_black_square();
-      Piece* get_piece();
-      box* get_current_drawing();
-  };
+  class Square;
   Square* p_board[64] = {nullptr};
   Square* get_square_at_pos(int pos);
+};
+
+class Board::Square {
+ private:
+    box* p_base_drawing = nullptr;
+    box* p_cur_drawing = nullptr;
+    Piece* p_piece = nullptr;
+    bool m_is_black_square = false;
+
+ public:
+    Square(box*, bool);
+    virtual ~Square();
+
+    char* at(int i);
+    void set_piece(Piece* piece);
+    void clear_square();
+    bool is_black_square();
+    Piece* get_piece();
+    box* get_current_drawing();
 };
 
 #endif /* BOARD_H */

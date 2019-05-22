@@ -18,6 +18,7 @@ class Movement {
  public:
     Movement(Board*, Player** turn);
     virtual ~Movement();
+    void _init(bool black_to_move);
     void move_piece(Move);
     void move_piece_bits(Move*);
     void undo_last_bitboard_move(Move last_move);

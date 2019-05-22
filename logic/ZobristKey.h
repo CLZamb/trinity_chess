@@ -10,9 +10,9 @@ using std::mt19937_64;
 using std::uniform_int_distribution;
 
 class ZobristKey {
-public:
+ public:
   ZobristKey();
-  ZobristKey(Board* , bool black_to_move);
+  ZobristKey(Board*, bool black_to_move);
   virtual ~ZobristKey();
   static void _init();
   U64 get_zobrist_key() const;
@@ -23,7 +23,7 @@ public:
   bool operator==(const ZobristKey&);
   void change_turn();
 
- private:
+  private:
   U64 m_key = BLANK;
   static U64 m_piece_keys[13][64];
   static U64 BLACK_TO_MOVE_KEY;

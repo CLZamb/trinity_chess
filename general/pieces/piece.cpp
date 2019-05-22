@@ -21,7 +21,6 @@ void Piece::create_piece_drawing(Piecetype pct) {
 
   b_sq_drawing = new PieceDrawing(piece_drawing.at(pct));
   w_sq_drawing = new PieceDrawing(piece_drawing.at(pct));
-
   b_sq_drawing->addModifier(DrawingMod::BG_INVERSE);
 
   if (black) {

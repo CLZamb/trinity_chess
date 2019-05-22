@@ -8,7 +8,6 @@
 typedef uint64_t U64;
 
 const int INF = std::numeric_limits<int>::max();
-const int WHITE = 0, BLACK = 1;
 
 const U64 PAWNSTART =
 0b0000000011111111000000000000000000000000000000001111111100000000;
@@ -75,6 +74,23 @@ enum Piecetype : int {
   EMPTY, bP, bR, bN, bB, bQ, bK, wP, wR, wN, wB, wQ, wK
 };
 
+enum Playertype : int {
+  HUMAN, CPU
+};
+
+enum OPTION : int {
+  PLAYER_VS_PLAYER = 1,
+  PLAYER_VS_CPU,
+  CPU_VS_CPU,
+  EXIT,
+  CREDITS
+};
+
+enum PieceColor : int {
+  WHITE, BLACK
+};
+
+
 static const int VictimScore[13] =
 { 0, 10, 40, 20, 30, 50, 60, 10, 40, 20, 30, 50, 60};
 /**
@@ -87,13 +103,17 @@ const U64 ZERO = U64(0);
  */
 const U64 ONE = U64(1);
 
-// MACROS
-#define CLRBIT(bb,sq) ((bb) &= ClearMask[(sq)])
-#define SETBIT(bb,sq) ((bb) |= SetMask[(sq)])
-
 // GLOBALS
 extern U64 SetMask[64];
 extern U64 ClearMask[64];
+
+constexpr void CLRBIT(U64& bb, int sq) {
+  bb &= ClearMask[sq];
+}
+
+constexpr void SETBIT(U64& bb, int sq) {
+  bb |= SetMask[sq];
+}
 
 constexpr bool is_ok(SquareIndices s) {
   return s >= A1 && s <= H8;

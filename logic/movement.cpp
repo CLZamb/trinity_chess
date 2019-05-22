@@ -2,12 +2,14 @@
 #include <chrono>
 
 Movement::Movement(Board* board, Player** turn)
-    : m_board(board), pp_cur_player_turn(turn) {
-      ZobristKey::_init();
-      m_zkey = ZobristKey(board, (*turn)->has_black_pieces());
-    }
+    : m_board(board), pp_cur_player_turn(turn) {}
 
 Movement::~Movement() {}
+
+void Movement::_init(bool initial_turn) {
+  ZobristKey::_init();
+  m_zkey = ZobristKey(m_board, initial_turn);
+}
 
 bool Movement::get_checkmate() { return checkmate; }
 

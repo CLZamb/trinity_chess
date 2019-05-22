@@ -5,6 +5,7 @@
 enum Msg : int {
   No_message,
   Welcome,
+  ChooseColor,
   Start,
   GameOver
 };
@@ -21,6 +22,7 @@ private:
   static const char* p_welcome_message;
   static const char* p_start_message;
   static const char* p_game_over;
+  static const char* p_choose_color_message;
 };
 
 #endif /* MESSAGES_H */

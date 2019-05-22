@@ -1,27 +1,35 @@
 #include "game.h"
 Game::Game() {}
-Game::~Game() { delete p_player2; }
+Game::~Game() {
+  if (p_player1)
+    delete p_player1;
+
+  if (p_player2)
+    delete p_player2;
+}
 
 void Game::start() {
   print_message(Welcome);
   std::cin.get();
   print_message(Start);
 
-  switch (get_option()) {
-    case 1:
-      // Player vs Player
-      set_players();
+  switch (get_option(PLAYER_VS_PLAYER, CREDITS)) {
+    case PLAYER_VS_PLAYER:
+      set_players(HUMAN, HUMAN);
       play();
       break;
-    case 2:
-      // Player vs CPU
-      set_players(true);
+    case PLAYER_VS_CPU:
+      set_players(HUMAN, CPU);
       play();
       break;
-    case 3:
+    case CPU_VS_CPU:
+      set_players(CPU, CPU);
+      play();
+      break;
+    case EXIT:
       print_message(GameOver);
       break;
-    case 4:
+    case CREDITS:
       std::cout << "Credits" << std::endl;
       break;
     default:
@@ -30,19 +38,25 @@ void Game::start() {
   }
 }
 
-void Game::set_players(bool is_cpu /*false*/) {
-  if (is_cpu)
-    p_player2 = new AiPlayer(BLACK, &movement_controller);
-  else
-    p_player2 = new Player(BLACK);
+void Game::set_players(Playertype p1, Playertype p2) {
+  p_player1 =
+    p1 == HUMAN ?
+    new Player(WHITE) :
+    new AiPlayer(WHITE, &movement_controller);
 
-  m_board.set_players(&m_player1, p_player2);
-  p_player2->set_opponent(&m_player1);
-  m_player1.set_opponent(p_player2);
+  p_player2 =
+    p2 == HUMAN ?
+    new Player(BLACK) :
+    new AiPlayer(BLACK, &movement_controller);
+
+  p_player_turn = p_player1;
+  m_board.set_players(p_player1, p_player2);
+  p_player2->set_opponent(p_player1);
+  p_player1->set_opponent(p_player2);
 }
 
-int Game::get_option() {
-  std::cout << "\t\tchoose one of the options (1-4): ";
+int Game::get_option(int from, int to) {
+  std::cout << "\t\tchoose one of the options ("<< from << "-" << to << "): ";
   int input;
   std::cin >> input;
   // clear input buffer
@@ -53,12 +67,14 @@ int Game::get_option() {
 
 void Game::play() {
   m_board._init();
+  movement_controller._init(p_player_turn->has_black_pieces());
 
   PlayerMove player_move;
   int counter = 0;
   bool is_checkMate = false;
 
   while (!is_checkMate) {
+    // print board
     cout << m_board;
     player_move = p_player_turn->get_next_move();
 

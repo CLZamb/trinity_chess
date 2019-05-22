@@ -10,22 +10,20 @@ class Game {
  public:
   Game();
   virtual ~Game();
-
   void start();
 
  private:
   Board m_board;
   Messages m_messages;
   IDisplay* p_message_display = &m_messages;
-  // Player m_player1{WHITE};
-  Player* p_player2 = nullptr, *p_player_turn = &m_player1;
+  Player* p_player1 = nullptr, *p_player2 = nullptr;
+  Player* p_player_turn = nullptr;
   Movement movement_controller{&m_board, &p_player_turn};
-  AiPlayer m_player1{WHITE, &movement_controller};
 
-  int get_option();
+  int get_option(int from, int to);
   void print_message(Msg);
   void change_turn();
-  void set_players(bool is_cpu = false);
+  void set_players(Playertype p1, Playertype p2);
   void play();
 };
 

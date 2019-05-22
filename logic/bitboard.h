@@ -68,7 +68,7 @@ class Bitboard {
     Piece* m_pieces[13] {
       nullptr,  // EMPTY 0
       // black pieces
-      new Piece(bP, PAWNSTART & ALLBLACKSTART),
+      new Piece(bP, PAWNSTART & ALLBLACKSTART),  // 1
       new Piece(bR, ROOKSTART & ALLBLACKSTART),
       new Piece(bN, KNIGHTSTART & ALLBLACKSTART),
       new Piece(bB, BISHOPSTART & ALLBLACKSTART),
@@ -80,7 +80,7 @@ class Bitboard {
       new Piece(wN, KNIGHTSTART & ALLWHITESTART),
       new Piece(wB, BISHOPSTART & ALLWHITESTART),
       new Piece(wQ, QUEENSTART & ALLWHITESTART),
-      new Piece(wK, KINGSTART & ALLWHITESTART),
+      new Piece(wK, KINGSTART & ALLWHITESTART),  // 12
     };
 
     int pop_1st_bit(U64* bb);
