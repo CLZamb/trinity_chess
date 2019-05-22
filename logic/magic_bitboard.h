@@ -25,16 +25,16 @@ class MagicBitboard
     U64 m_rook_occupancy[64][4096];
     U64 m_bishop_occupancy[64][512];
 
-    U64 batt(int sq, U64 block);
-    U64 ratt(int sq, U64 block);
-    U64 bmask(int sq);
-    U64 rmask(int sq);
+    constexpr U64 batt(int sq, U64 block);
+    constexpr U64 ratt(int sq, U64 block);
+    constexpr U64 bmask(int sq);
+    constexpr U64 rmask(int sq);
     U64 set_occupancy(int index, int bits, U64 m);
     void _init_bitmasks();
     void _init_slider_masks_shifs_occupancies(int isRook);
     void _init_tables(int isRook);
 
-  public:
+ public:
     MagicBitboard();
     virtual ~MagicBitboard();
 

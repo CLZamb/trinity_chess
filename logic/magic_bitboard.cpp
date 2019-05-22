@@ -112,9 +112,10 @@ U64 MagicBitboard::queen_attacks(U64 occ, SquareIndices sq) {
 }
 
 
-U64 MagicBitboard::rmask(int sq) {
+constexpr U64 MagicBitboard::rmask(int sq) {
   U64 result = 0ULL;
-  int rk = sq/8, fl = sq%8, r, f;
+  int rk = sq/8, fl = sq%8;
+  int r = rk + 1, f = fl + 1;
   for (r = rk+1; r <= 6; r++) result |= (1ULL << (fl + r*8));
   for (r = rk-1; r >= 1; r--) result |= (1ULL << (fl + r*8));
   for (f = fl+1; f <= 6; f++) result |= (1ULL << (f + rk*8));
@@ -122,9 +123,10 @@ U64 MagicBitboard::rmask(int sq) {
   return result;
 }
 
-U64 MagicBitboard::bmask(int sq) {
+constexpr U64 MagicBitboard::bmask(int sq) {
   U64 result = 0ULL;
-  int rk = sq/8, fl = sq%8, r, f;
+  int rk = sq/8, fl = sq%8;
+  int r = rk + 1, f = fl + 1;
   for (r = rk+1, f=fl+1; r <= 6 && f <= 6; r++, f++)
     result |= (1ULL << (f + r*8));
   for (r = rk+1, f=fl-1; r <= 6 && f >= 1; r++, f--)
@@ -136,9 +138,10 @@ U64 MagicBitboard::bmask(int sq) {
   return result;
 }
 
-U64 MagicBitboard::ratt(int sq, U64 block) {
+constexpr U64 MagicBitboard::ratt(int sq, U64 block) {
   U64 result = 0ULL;
-  int rk = sq/8, fl = sq%8, r, f;
+  int rk = sq/8, fl = sq%8;
+  int r = rk + 1, f = fl + 1;
   for (r = rk+1; r <= 7; r++) {
     result |= (1ULL << (fl + r*8));
     if (block & (1ULL << (fl + r*8))) break;
@@ -158,9 +161,10 @@ U64 MagicBitboard::ratt(int sq, U64 block) {
   return result;
 }
 
-U64 MagicBitboard::batt(int sq, U64 block) {
+constexpr U64 MagicBitboard::batt(int sq, U64 block) {
   U64 result = 0ULL;
-  int rk = sq/8, fl = sq%8, r, f;
+  int rk = sq/8, fl = sq%8;
+  int r = rk + 1, f = fl + 1;
   for (r = rk+1, f = fl+1; r <= 7 && f <= 7; r++, f++) {
     result |= (1ULL << (f + r*8));
     if (block & (1ULL << (f + r * 8))) break;

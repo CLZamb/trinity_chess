@@ -1,7 +1,6 @@
 #ifndef DEFS_H
 #define DEFS_H
 
-#include <cstdint>
 #include <limits>
 #include <iostream>
 
@@ -103,45 +102,46 @@ const U64 ZERO = U64(0);
  */
 const U64 ONE = U64(1);
 
+const int MAX_MOVES = 256;
+
 // GLOBALS
 extern U64 SetMask[64];
 extern U64 ClearMask[64];
 
-constexpr void CLRBIT(U64& bb, int sq) {
-  bb &= ClearMask[sq];
+inline void CLRBIT(U64* bb, int sq) {
+  *bb &= ClearMask[sq];
 }
 
-constexpr void SETBIT(U64& bb, int sq) {
-  bb |= SetMask[sq];
+inline void SETBIT(U64* bb, int sq) {
+  *bb |= SetMask[sq];
 }
 
-constexpr bool is_ok(SquareIndices s) {
+inline bool is_ok(SquareIndices s) {
   return s >= A1 && s <= H8;
 }
 
-constexpr bool IS_BLACK(int type) {
+inline bool IS_BLACK(int type) {
   return type >= bP && type <= bK;
 }
 
-constexpr bool Valid_piece(int pieceType) {
+inline bool Valid_piece(int pieceType) {
   return (pieceType > EMPTY) && (pieceType < 13);
 }
 
-constexpr int MAX_MOVES = 256;
 
-constexpr unsigned int Get_from_sq(int move) {
+inline unsigned int Get_from_sq(int move) {
   return move & 0x3f;
 }
 
-constexpr unsigned int Get_to_sq(int move) {
+inline unsigned int Get_to_sq(int move) {
   return (move >> 6) & 0x3f;
 }
 
-constexpr unsigned int Get_captured(int move) {
+inline unsigned int Get_captured(int move) {
   return (move >> 12) & 0xf;
 }
 
-constexpr unsigned int Get_piece(int move) {
+inline unsigned int Get_piece(int move) {
   return (move >> 17) & 0xf;
 }
 

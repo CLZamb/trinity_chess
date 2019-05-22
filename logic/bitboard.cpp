@@ -300,13 +300,13 @@ void Bitboard::set_piece_at_pos(int piece, int square) {
 }
 
 void Bitboard::clear_bit_at_player_pieces(bool is_black, int pos) {
-  CLRBIT(is_black ? m_all_b_pieces : m_all_w_pieces, pos);
-  CLRBIT(m_occupied, pos);
+  CLRBIT(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);
+  CLRBIT(&m_occupied, pos);
 }
 
 void Bitboard::set_bit_at_player_pieces(bool is_black, int pos) {
-  SETBIT(is_black ? m_all_b_pieces : m_all_w_pieces, pos);
-  SETBIT(m_occupied, pos);
+  SETBIT(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);
+  SETBIT(&m_occupied, pos);
 }
 
 void Bitboard::make_move_bb(int piece, int from, int to) {
