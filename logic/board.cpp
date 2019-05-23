@@ -53,20 +53,10 @@ Piece* Board::get_piece_at_square(int pos) {
 PlayerMove Board::get_next_move() { return turn->get_next_move(); }
 Player* Board::active_player() {  return turn; }
 
-const string test[] = {
-  "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓",
-  "┃  ____ ┏━┓                        _    ┃",
-  "┃ ┃  _ .┃ ┃ __ _ _   _  ___ _ __  / ┃   ┃",
-  "┃ ┃ ┃_) ┃ ┃/ _` ┃ ┃ ┃ ┃/ _ . '__| ┃ ┃   ┃",
-  "┃ ┃  __/┃ ┃ (_┃ ┃ ┃_┃ ┃  __/ |    ┃ ┃   ┃",
-  "┃ ┃_┃   ┃_┃.__,_┃.__, ┃.___┃_┃    ┃_┃   ┃",
-  "┃                ┃___/                  ┃",
-  "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"};
-
 std::ostream& operator<<(std::ostream& os, const Board& board) {
   system(CLEAR);
-  int test2 = 0;
-  int size = sizeof(test)/sizeof(test[0]);
+  int counter = 0;
+  int size = sizeof(Drawing::player1)/sizeof(Drawing::player1[0]);
   os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n";
   // need to be print upside down so that the bottom begins at row 0
   // for each board row
@@ -87,8 +77,8 @@ std::ostream& operator<<(std::ostream& os, const Board& board) {
       os << "┃";
       // right border
       // score
-      if (test2 < size)
-        os << test[test2++];
+      if (counter < size)
+        os << Drawing::player1[counter++];
 
       os << "\n";
     }

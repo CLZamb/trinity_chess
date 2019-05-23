@@ -78,8 +78,24 @@ class Move {
     return (m_move & 0xffff) != (a.m_move & 0xffff);
   }
 
+  static unsigned int GetFrom(int mv) {
+    return mv & 0x3f;
+  }
+
+  static unsigned int GetTo(int mv) {
+    return (mv >> 6) & 0x3f;
+  }
+
+  static unsigned int GetPiece(int mv) {
+    return (mv >> 17) & 0xf;
+  }
+
+  static unsigned int GetCapture(int mv) {
+    return (mv >> 12) & 0xf;
+  }
+
  private:
-  unsigned int m_move = 0; // or short or template type
+  unsigned int m_move = 0;  // or short or template type
   int m_score = 0;
 };
 

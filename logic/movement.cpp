@@ -14,7 +14,7 @@ void Movement::_init(bool initial_turn) {
 bool Movement::get_checkmate() { return checkmate; }
 
 int Movement::take_piece(int startSquare) {
- return p_board->get_piece_at(startSquare);
+  return p_board->get_piece_at(startSquare);
 }
 
 void Movement::change_turn() {
@@ -97,10 +97,10 @@ void Movement::undo_last_move() {
 
   int last_move = prev_moves.back();
   prev_moves.pop_back();
-  unsigned int from = Get_from_sq(last_move);
-  unsigned int to = Get_to_sq(last_move);
-  unsigned int piece = Get_piece(last_move);
-  unsigned int piece_captured = Get_captured(last_move);
+  unsigned int from = Move::GetFrom(last_move);
+  unsigned int to = Move::GetTo(last_move);
+  unsigned int piece = Move::GetPiece(last_move);
+  unsigned int piece_captured = Move::GetCapture(last_move);
 
   if ((piece_captured == bK)|| (piece_captured == wK)) checkmate = false;
 
@@ -166,7 +166,7 @@ Move Movement::MoveGenerator::search_best_move() {
   Move best_move;
   m_stop = false;
   has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
-  side = has_black_pieces ? 1 : -1;
+  side = has_black_pieces ? -1 : 1;
 
   int total_depth = 0;
   for (int currDepth = 1;  ; currDepth++) {
@@ -201,7 +201,7 @@ Move Movement::MoveGenerator::root_negamax(int cur_depth) {
   for (Move& mv : m_legalMoves) {
     pick_next_move(counter++, &m_legalMoves);
     movement->move_piece_bits(&mv);
-    score = negamax(cur_depth, INT_MIN + 1, INT_MAX, side);
+    score = -negamax(cur_depth, INT_MIN + 1, INT_MAX, side);
     movement->undo_last_bitboard_move(mv);
 
     if (m_stop || time_out()) {

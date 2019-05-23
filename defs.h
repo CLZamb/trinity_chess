@@ -128,23 +128,6 @@ inline bool Valid_piece(int pieceType) {
   return (pieceType > EMPTY) && (pieceType < 13);
 }
 
-
-inline unsigned int Get_from_sq(int move) {
-  return move & 0x3f;
-}
-
-inline unsigned int Get_to_sq(int move) {
-  return (move >> 6) & 0x3f;
-}
-
-inline unsigned int Get_captured(int move) {
-  return (move >> 12) & 0xf;
-}
-
-inline unsigned int Get_piece(int move) {
-  return (move >> 17) & 0xf;
-}
-
 static const int BitTable[64] = {
   63, 30, 3,  32, 25, 41, 22, 33,
   15, 50, 42, 13, 11, 53, 19, 34,
