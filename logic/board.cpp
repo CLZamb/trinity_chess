@@ -1,5 +1,4 @@
 #include "board.h"
-#include <sstream>
 
 Board::Board() {
   // pieces_start_pos = " rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 1 1";
@@ -15,12 +14,93 @@ void Board::_init() {
   m_bb._init();
   create_board_squares();
   parser_fen(pieces_start_pos);
+  movement_controller._init(turn->has_black_pieces());
 }
 
 void Board::set_players(Player* player1, Player* player2) {
   this->player1 = player1;
   this->player2 = player2;
+  this->turn = player1;
 }
+
+void Board::undo_square_move(int piece, int piece_captured, int from, int to) {
+  move_squares(m_bb.get_piece(piece), from, to);
+
+  if (piece_captured)
+    add_to_board(piece_captured, from);
+}
+
+void Board::move_piece_to_square(int piece, int from, int to) {
+  move_squares(m_bb.get_piece(piece), from, to);
+  move_piece_bits(piece, from, to);
+}
+
+void Board::move_squares(Piece* piece, int from, int to) {
+  if (!piece || !get_square_at_pos(from) || !get_square_at_pos(to))
+    return;
+
+  get_square_at_pos(from)->clear_square();
+  get_square_at_pos(to)->set_piece(piece);
+}
+
+Piece* Board::get_piece_at_square(int pos) {
+  if (!get_square_at_pos(pos))
+    return nullptr;
+
+  return get_square_at_pos(pos)->get_piece();
+}
+
+PlayerMove Board::get_next_move() { return turn->get_next_move(); }
+Player* Board::active_player() {  return turn; }
+
+const string test[] = {
+  "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓",
+  "┃  ____ ┏━┓                        _    ┃",
+  "┃ ┃  _ .┃ ┃ __ _ _   _  ___ _ __  / ┃   ┃",
+  "┃ ┃ ┃_) ┃ ┃/ _` ┃ ┃ ┃ ┃/ _ . '__| ┃ ┃   ┃",
+  "┃ ┃  __/┃ ┃ (_┃ ┃ ┃_┃ ┃  __/ |    ┃ ┃   ┃",
+  "┃ ┃_┃   ┃_┃.__,_┃.__, ┃.___┃_┃    ┃_┃   ┃",
+  "┃                ┃___/                  ┃",
+  "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"};
+
+std::ostream& operator<<(std::ostream& os, const Board& board) {
+  system(CLEAR);
+  int test2 = 0;
+  int size = sizeof(test)/sizeof(test[0]);
+  os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n";
+  // need to be print upside down so that the bottom begins at row 0
+  // for each board row
+  for (int row = 7; row >= 0; --row) {
+    // for each box row
+    for (int k = 0; k < box::kRowSize; ++k) {
+      // left border
+      if ((k + 1) % 3)
+        os << ' ';
+      else
+        os << row + 1;
+
+      os << "┃";
+      // for each board column
+      for (int col = 0; col < 8; col++) {
+        os << board.p_board[(row * 8) + col]->at(k);
+      }
+      os << "┃";
+      // right border
+      // score
+      if (test2 < size)
+        os << test[test2++];
+
+      os << "\n";
+    }
+  }
+  os
+    << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃\n"
+    << " ┃    A        B        C        D        E        F        G       H     ┃\n"
+    << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+  return os;
+}
+
+Board::Square* Board::get_square_at_pos(int pos) { return p_board[pos]; }
 
 void Board::create_board_squares() {
   create_squares_drawing();
@@ -32,14 +112,14 @@ void Board::create_board_squares() {
     for (int col = 0; col < 8; ++col) {
       position = row * 8 + col;
       if (squareColor == 'b') {
-        p_board[position] = new Square(&bSquare, true);
         squareColor = 'w';
-      } else {
         p_board[position] = new Square(&wSquare, false);
+      } else {
         squareColor = 'b';
+        p_board[position] = new Square(&bSquare, true);
       }
     }
-    squareColor = (squareColor == 'b') ? 'w' : 'b';
+    squareColor = squareColor == 'b' ? 'w' : 'b';
   }
 }
 
@@ -71,90 +151,36 @@ void Board::parser_fen(string fen) {
   }
 }
 
-bool Board::is_number(char c) {
-  return c >= '0' && c <= '8';
-}
-
 void Board::add_to_board(int type, int position) {
   get_square_at_pos(position)->set_piece(m_bb.get_piece(type));
 }
 
-void Board::move_squares(Piece* piece, int from, int to) {
-  if (!piece || !get_square_at_pos(from) || !get_square_at_pos(to))
-    return;
-
-  get_square_at_pos(from)->clear_square();
-  get_square_at_pos(to)->set_piece(piece);
+bool Board::is_number(char c) {
+  return c >= '0' && c <= '8';
 }
 
-Board::Square* Board::get_square_at_pos(int pos) { return p_board[pos]; }
-
-std::string toString(std::ostream &str) {
-  std::ostringstream ss;
-  ss << str.rdbuf();
-  return ss.str();
+void Board::undo_last_move() {
+  movement_controller.undo_last_move();
 }
 
-std::ostream& operator<<(std::ostream& os, const Board& board) {
-  system(CLEAR);
-  os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n";
-  // need to be print upside down so that the bottom begins at row 0
-  // for each board row
-  for (int row = 7; row >= 0; --row) {
-    // for each box row
-    for (int k = 0; k < box::kRowSize; ++k) {
-      // left border
-      if ((k + 1) % 3)
-        os << ' ';
-      else
-        os << row + 1;
-
-      os << "┃";
-      // for each board column
-      for (int col = 0; col < 8; col++) {
-        os << board.p_board[(row * 8) + col]->at(k);
-      }
-      os << "┃\n";
-      // right border
-    }
-  }
-  os
-  << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃\n"
-  << " ┃    A        B        C        D        E        F        G       H     ┃\n"
-  << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
-  return os;
+void Board::move_piece(Move mv) {
+  movement_controller.move_piece(mv);
 }
 
-Piece* Board::get_piece_at_square(int pos) {
-  if (!get_square_at_pos(pos))
-    return nullptr;
-
-  return get_square_at_pos(pos)->get_piece();
+bool Board::is_valid_move(Move mv) {
+  return movement_controller.is_valid_move(mv);
 }
 
-void Board::move_piece_to_square(int piece, int from, int to) {
-  move_squares(m_bb.get_piece(piece), from, to);
-  move_piece_bits(piece, from, to);
+bool Board::get_checkmate() {
+  return movement_controller.get_checkmate();
+}
+
+Movement* Board::get_movement() {
+  return &movement_controller;
 }
 
 void Board::generate_all_moves(bool side, MoveList* moveList) {
   return m_bb.generate_all_moves(side, moveList);
-}
-
-U64 Board::get_all_pieces_bitboard() const {
-  return m_bb.get_all_pieces_bitboard();
-}
-
-U64 Board::get_piece_attacks(int type, int from) {
-  return m_bb.get_piece_attacks(type, SquareIndices(from));
-}
-
-U64 Board::get_non_attack_moves(int type, int from) {
-  return m_bb.get_non_attack_moves(type, SquareIndices(from));
-}
-
-int Board::get_piece_at(int pos) {
-  return m_bb.get_piece_at_pos(pos);
 }
 
 void Board::move_piece_bits(int piece, int from, int to) {
@@ -173,29 +199,39 @@ void Board::capture_piece(int piece_captured, int pos) {
   m_bb.capture_piece(piece_captured, pos);
 }
 
-void Board::undo_square_move(int piece, int piece_captured, int from, int to) {
-  move_squares(m_bb.get_piece(piece), from, to);
-
-  if (piece_captured)
-    add_to_board(piece_captured, from);
-}
-
 void Board::undo_move(int piece, int piece_captured, int from, int to) {
   m_bb.undo_move(piece, piece_captured, from, to);
 }
 
+U64 Board::get_piece_attacks(int type, int from) {
+  return m_bb.get_piece_attacks(type, SquareIndices(from));
+}
+
+U64 Board::get_non_attack_moves(int type, int from) {
+  return m_bb.get_non_attack_moves(type, SquareIndices(from));
+}
+
 U64 Board::get_own_pieces_occ(bool is_black) {
-  if (is_black)
-    return m_bb.get_all_b_bitboard();
+  if (is_black) return m_bb.get_all_b_bitboard();
 
   return  m_bb.get_all_w_bitboard();
 }
 
-int Board::evaluate_board() { return m_bb.evaluate_board(); }
+U64 Board::get_all_pieces_bitboard() const {
+  return m_bb.get_all_pieces_bitboard();
+}
+
 U64 Board::get_piece_bitboard(int piece) const {
   return m_bb.get_piece_bitboard(piece);
 }
 
+int Board::get_piece_at(int pos) {
+  return m_bb.get_piece_at_pos(pos);
+}
+
+int Board::evaluate_board() { return m_bb.evaluate_board(); }
+
+// Board::Square
 Board::Square::Square(box* baseDrawing, bool blackBox)
     : p_base_drawing(baseDrawing), p_cur_drawing(baseDrawing),
       m_is_black_square(blackBox) {}
@@ -212,7 +248,8 @@ void Board::Square::clear_square() {
   p_piece = nullptr;
 }
 
-box* Board::Square::get_current_drawing() { return p_cur_drawing; }
-Piece* Board::Square::get_piece() { return this->p_piece; }
-bool Board::Square::is_black_square() { return m_is_black_square; }
 char* Board::Square::at(int i) { return p_cur_drawing->content[i]; }
+bool Board::Square::is_black_square() { return m_is_black_square; }
+
+Piece* Board::Square::get_piece() { return this->p_piece; }
+box* Board::Square::get_current_drawing() { return p_cur_drawing; }

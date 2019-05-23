@@ -7,12 +7,15 @@
 #include <functional>
 #include <map>
 #include <set>
-#include "board.h"
 #include "transposition_table.h"
 #include "ZobristKey.h"
+#include "player.h"
+#include "bitboard.h"
 
 using std::string;
 using std::vector;
+
+class Board;
 
 class Movement {
  public:
@@ -30,7 +33,7 @@ class Movement {
     class MoveGenerator;
 
  private:
-    Board* m_board;
+    Board* p_board;
     Player** pp_cur_player_turn = nullptr;
     ZobristKey m_zkey;
     TTable m_table;
@@ -51,7 +54,7 @@ class Movement::MoveGenerator {
 
  private:
     Movement* movement = nullptr;
-    Board* m_board = nullptr;
+    Board* p_board = nullptr;
     bool has_black_pieces = false;
     bool m_stop = false;
     int best_move = 0;

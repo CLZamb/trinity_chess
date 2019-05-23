@@ -17,12 +17,9 @@ class Game {
   Messages m_messages;
   IDisplay* p_message_display = &m_messages;
   Player* p_player1 = nullptr, *p_player2 = nullptr;
-  Player* p_player_turn = nullptr;
-  Movement movement_controller{&m_board, &p_player_turn};
 
   int get_option(int from, int to);
   void print_message(Msg);
-  void change_turn();
   void set_players(Playertype p1, Playertype p2);
   void play();
 };

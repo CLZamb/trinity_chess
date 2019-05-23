@@ -1,20 +1,20 @@
 #include "movement.h"
-#include <chrono>
+#include "board.h"
 
 Movement::Movement(Board* board, Player** turn)
-    : m_board(board), pp_cur_player_turn(turn) {}
+    : p_board(board), pp_cur_player_turn(turn) {}
 
 Movement::~Movement() {}
 
 void Movement::_init(bool initial_turn) {
   ZobristKey::_init();
-  m_zkey = ZobristKey(m_board, initial_turn);
+  m_zkey = ZobristKey(p_board, initial_turn);
 }
 
 bool Movement::get_checkmate() { return checkmate; }
 
 int Movement::take_piece(int startSquare) {
- return m_board->get_piece_at(startSquare);
+ return p_board->get_piece_at(startSquare);
 }
 
 void Movement::change_turn() {
@@ -23,7 +23,7 @@ void Movement::change_turn() {
 }
 
 int Movement::capture_piece(int end_square) {
-  int piece = m_board->get_piece_at(end_square);
+  int piece = p_board->get_piece_at(end_square);
 
   if ((piece == bK)|| (piece == wK)) checkmate = true;
 
@@ -36,8 +36,8 @@ void Movement::move_piece(Move move) {
   unsigned int piece = take_piece(from);
   unsigned int captured_piece = capture_piece(to);
 
-  m_board->capture_piece(captured_piece, to);
-  m_board->move_piece_to_square(piece, from, to);
+  p_board->capture_piece(captured_piece, to);
+  p_board->move_piece_to_square(piece, from, to);
   m_zkey.move_piece(piece, from, to);
 
   if (captured_piece) {
@@ -55,13 +55,13 @@ void Movement::move_piece_bits(Move* move) {
   unsigned int from = move->get_from();
   unsigned int to = move->get_to();
   unsigned int piece = move->get_piece();
-  unsigned int captured_piece = m_board->get_piece_at(to);
+  unsigned int captured_piece = p_board->get_piece_at(to);
 
   if (captured_piece) {
     if ((captured_piece == bK)|| (captured_piece == wK))
       checkmate = true;
 
-    m_board->capture_piece(captured_piece, to);
+    p_board->capture_piece(captured_piece, to);
     m_zkey.capture_piece(captured_piece, to);
 
 
@@ -70,7 +70,7 @@ void Movement::move_piece_bits(Move* move) {
   }
 
   assert(Valid_piece(piece));
-  m_board->move_piece_bits(piece, from, to);
+  p_board->move_piece_bits(piece, from, to);
   m_zkey.move_piece(piece, from, to);
 
   change_turn();
@@ -84,7 +84,7 @@ void Movement::undo_last_bitboard_move(Move last_move) {
 
   if ((piece_captured == bK)|| (piece_captured == wK)) checkmate = false;
 
-  m_board->undo_move(piece, piece_captured, to, from);
+  p_board->undo_move(piece, piece_captured, to, from);
   m_zkey.undo_move(piece, piece_captured, to, from);
   change_turn();
 }
@@ -104,8 +104,8 @@ void Movement::undo_last_move() {
 
   if ((piece_captured == bK)|| (piece_captured == wK)) checkmate = false;
 
-  m_board->undo_move(piece, piece_captured, to, from);
-  m_board->undo_square_move(piece, piece_captured, to, from);
+  p_board->undo_move(piece, piece_captured, to, from);
+  p_board->undo_square_move(piece, piece_captured, to, from);
   m_zkey.undo_move(piece, piece_captured, to, from);
   change_turn();
 }
@@ -117,7 +117,7 @@ bool Movement::is_valid_move(Move pmove) {
   int from = pmove.get_from();
   int to = pmove.get_to();
 
-  Piece* current_piece = m_board->get_piece_at_square(from);
+  Piece* current_piece = p_board->get_piece_at_square(from);
   Player* opponent = (*pp_cur_player_turn)->get_opponent();
 
   if (!current_piece || !opponent)
@@ -139,9 +139,9 @@ bool Movement::is_valid_move(Move pmove) {
 bool Movement::check_move(Piece* piece, int from, int to) {
   int piece_type = piece->get_type_and_color();
 
-  U64 non_attacks =  m_board->get_non_attack_moves(piece_type, from);
-  U64 attacks = m_board->get_piece_attacks(piece_type, from);
-  U64 occ = ~m_board->get_own_pieces_occ(piece->is_black());
+  U64 non_attacks =  p_board->get_non_attack_moves(piece_type, from);
+  U64 attacks = p_board->get_piece_attacks(piece_type, from);
+  U64 occ = ~p_board->get_own_pieces_occ(piece->is_black());
 
   U64 all_moves = (attacks | non_attacks) & occ;
 
@@ -150,7 +150,7 @@ bool Movement::check_move(Piece* piece, int from, int to) {
 }
 
 Movement::MoveGenerator::MoveGenerator(Movement* movement)
-  : movement(movement), m_board(movement->m_board) {}
+  : movement(movement), p_board(movement->p_board) {}
 
 bool Movement::MoveGenerator::time_out() {
   m_elapsed =
@@ -275,13 +275,13 @@ int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
       alpha = value;
       best_move = &mv;
       if (!(mv.get_captured_piece()))
-        m_board->update_search_history(mv.get_piece(), mv.get_to(), depth);
+        p_board->update_search_history(mv.get_piece(), mv.get_to(), depth);
     }
 
     if (alpha >= beta) {
       best_move = &mv;
       if (!(mv.get_captured_piece()))
-        m_board->update_killers(mv);
+        p_board->update_killers(mv);
       break;
     }
   }
@@ -342,9 +342,9 @@ void Movement::MoveGenerator::pick_next_move(int index, MoveList* moves) {
 
 void Movement::MoveGenerator::generate_moves(MoveList* legalMoves) {
   has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
-  m_board->generate_all_moves(has_black_pieces, legalMoves);
+  p_board->generate_all_moves(has_black_pieces, legalMoves);
 }
 
 int Movement::MoveGenerator::evaluate_board() {
-  return m_board->evaluate_board();
+  return p_board->evaluate_board();
 }
