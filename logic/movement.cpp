@@ -30,7 +30,7 @@ Piecetype Movement::capture_piece(int end_square) {
   return static_cast<Piecetype>(piece);
 }
 
-void Movement::move_piece(Move move) {
+void Movement::move_piece(Move& move) {
   SquareIndices from = move.get_from();
   SquareIndices to = move.get_to();
   Piecetype piece = take_piece(from);
@@ -160,12 +160,20 @@ bool Movement::MoveGenerator::time_out() {
   return false;
 }
 
+void Movement::MoveGenerator::clear_for_seach() {
+  // movement->m_table.clear();
+  p_board->clear_search_history();
+  p_board->clear_killer_moves();
+  p_board->reset_ply();
+}
+
 Move Movement::MoveGenerator::search_best_move() {
   m_start = std::chrono::steady_clock::now();
   Move best_move;
   m_stop = false;
   has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
   side = has_black_pieces ? -1 : 1;
+  clear_for_seach();
 
   int total_depth = 0;
   for (int currDepth = 1;  ; currDepth++) {
@@ -180,7 +188,6 @@ Move Movement::MoveGenerator::search_best_move() {
     total_depth = currDepth;
   }
 
-  std::cout << "board value: "<< evaluate_board() << std::endl;
   std::cout << "depth: : " << total_depth  << std::endl;
   auto end = std::chrono::steady_clock::now();
 

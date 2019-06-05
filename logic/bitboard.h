@@ -36,6 +36,9 @@ class Bitboard {
     void set_bit_at_player_pieces(bool is_black, SquareIndices pos);
     void reset_all_pieces_bitboard();
     void set_piece_at_pos(int piece, SquareIndices pos);
+    void clear_search_history();
+    void clear_killer_moves();
+    void reset_ply();
     int evaluate_board();
     Piecetype get_piece_at_pos(int pos);
     Piece* get_piece(int type);

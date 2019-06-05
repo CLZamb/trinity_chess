@@ -21,7 +21,7 @@ class Movement {
     Movement(Board*, Player** turn);
     virtual ~Movement();
     void _init(bool black_to_move);
-    void move_piece(Move);
+    void move_piece(Move&);
     void move_piece_bits(Move*);
     void undo_last_bitboard_move(Move last_move);
     void undo_last_move();
@@ -62,11 +62,13 @@ class Movement::MoveGenerator {
     int side = 0;
     int counter = 0;
     std::chrono::time_point<std::chrono::steady_clock> m_start;
-    int m_time_allocated = 100;
+    int m_time_allocated = 2000;
     int m_elapsed = 0;
-    int negamax(int, int, int, int);
+
     bool time_out();
     void pick_next_move(int index, MoveList*);
+    void clear_for_seach();
+    int negamax(int, int, int, int);
     int is_repeated_move(const int& depth, int* alpha, int* beta);
     TTEntry::Flag get_flag(int alpha, int orig_alpha, int beta);
 };

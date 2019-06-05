@@ -303,6 +303,20 @@ void Bitboard::set_piece_at_pos(int piece, SquareIndices square) {
   set_bit_at_player_pieces(check::is_black_piece(piece), square);
 }
 
+void Bitboard::clear_search_history() {
+  for (int i = 0; i < 13; ++i)
+    for (int j = 0; j < kTotal_sqs; ++j)
+      search_history[i][j] = 0;
+}
+
+void Bitboard::clear_killer_moves() {
+  for (int i = 0; i < 2; ++i)
+    for (int j = 0; j < kMaxDepth; ++j)
+      killers[i][j].set_move(0);
+}
+
+void Bitboard::reset_ply() { ply = 0; }
+
 void Bitboard::clear_bit_at_player_pieces(bool is_black, SquareIndices pos) {
   bitUtility::clear_bit(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);
   bitUtility::clear_bit(&m_occupied, pos);
@@ -316,6 +330,7 @@ void Bitboard::set_bit_at_player_pieces(bool is_black, SquareIndices pos) {
 void Bitboard::make_move_bb(int piece, SquareIndices from, SquareIndices to) {
   move(piece, from, to);
   ply++;
+  assert(ply <= 64);
 }
 
 void Bitboard::undo_move(int piece, int captured,

@@ -42,6 +42,9 @@ class Board {
   void update_search_history(int piece, int to, int depth);
   void capture_piece_bit(int piece_captured, SquareIndices pos);
   void undo_move(int piece, int piece_captured, SquareIndices from, SquareIndices to);
+  void clear_killer_moves();
+  void clear_search_history();
+  void reset_ply();
   U64 get_piece_attacks(int type, int from);
   U64 get_non_attack_moves(int type, int from);
   U64 get_own_pieces_occ(bool is_black);

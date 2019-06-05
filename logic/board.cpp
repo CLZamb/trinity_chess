@@ -158,9 +158,12 @@ void Board::undo_last_move() {
   movement_controller.undo_last_move();
 }
 
-void Board::move_piece(PlayerMove mv) {
-  movement_controller.move_piece(mv.get_move());
-  turn->save_played_moves(mv.get_input());
+void Board::move_piece(PlayerMove p_mv) {
+  Move move = p_mv.get_move();
+  string move_str = p_mv.get_input();
+  movement_controller.move_piece(move);
+  turn->save_played_moves(piece_str_name.at(move.get_piece())
+      + "-" +  move_str);
 }
 
 bool Board::is_valid_move(Move mv) {
@@ -205,6 +208,10 @@ void Board::capture_piece_bit(int piece_captured, SquareIndices pos) {
 void Board::undo_move(int piece, int piece_captured, SquareIndices from, SquareIndices to) {
   m_bb.undo_move(piece, piece_captured, from, to);
 }
+
+void Board::clear_killer_moves() { m_bb.clear_killer_moves(); }
+void Board::clear_search_history() { m_bb.clear_search_history(); }
+void Board::reset_ply() { m_bb.reset_ply(); }
 
 U64 Board::get_piece_attacks(int type, int from) {
   return m_bb.get_piece_attacks(type, SquareIndices(from));
@@ -275,10 +282,10 @@ vector<string> Board::Info::get_info() {
   string captured = turn->get_captured_pieces();
   string opp_captured = opponent->get_captured_pieces();
   format_block("Board Score", score, start_score_pos);
-  format_block("Captured", captured, start_capture_pos);
-  format_block("Captured by Opponent", opp_captured, start_capture_opp_pos);
-  format_block("Your Moved", opp_moved, start_moved_pos);
-  format_block("Moves by Opponent", moved, start_moved_opp_pos);
+  format_block("Captures", captured, start_capture_pos);
+  format_block("Opponent's captures", opp_captured, start_capture_opp_pos);
+  format_block("Your Moves", opp_moved, start_moved_pos);
+  format_block("Opponent's moves", moved, start_moved_opp_pos);
   return m_info;
 }
 
