@@ -13,30 +13,29 @@ void Movement::_init(bool initial_turn) {
 
 bool Movement::get_checkmate() { return checkmate; }
 
-int Movement::take_piece(int startSquare) {
+Piecetype Movement::take_piece(int startSquare) {
   return p_board->get_piece_at(startSquare);
 }
 
 void Movement::change_turn() {
-  (*pp_cur_player_turn) = (*pp_cur_player_turn)->get_opponent();
+  *pp_cur_player_turn = (*pp_cur_player_turn)->get_opponent();
   m_zkey.change_turn();
 }
 
-int Movement::capture_piece(int end_square) {
+Piecetype Movement::capture_piece(int end_square) {
   int piece = p_board->get_piece_at(end_square);
 
   if ((piece == bK)|| (piece == wK)) checkmate = true;
 
-  return piece;
+  return static_cast<Piecetype>(piece);
 }
 
 void Movement::move_piece(Move move) {
-  unsigned int from = move.get_from();
-  unsigned int to = move.get_to();
-  unsigned int piece = take_piece(from);
-  unsigned int captured_piece = capture_piece(to);
+  SquareIndices from = move.get_from();
+  SquareIndices to = move.get_to();
+  Piecetype piece = take_piece(from);
+  Piecetype captured_piece = capture_piece(to);
 
-  p_board->capture_piece(captured_piece, to);
   p_board->move_piece_to_square(piece, from, to);
   m_zkey.move_piece(piece, from, to);
 
@@ -44,6 +43,7 @@ void Movement::move_piece(Move move) {
     assert(captured_piece);
     move.set_capture_piece(captured_piece);
     m_zkey.capture_piece(captured_piece, to);
+    p_board->capture_piece(move, to);
   }
 
   move.set_piece(piece);
@@ -52,24 +52,23 @@ void Movement::move_piece(Move move) {
 }
 
 void Movement::move_piece_bits(Move* move) {
-  unsigned int from = move->get_from();
-  unsigned int to = move->get_to();
-  unsigned int piece = move->get_piece();
-  unsigned int captured_piece = p_board->get_piece_at(to);
+  Piecetype piece = move->get_piece();
+  unsigned int captured_piece = p_board->get_piece_at(move->get_to());
+  SquareIndices from = move->get_from();
+  SquareIndices to = move->get_to();
 
   if (captured_piece) {
     if ((captured_piece == bK)|| (captured_piece == wK))
       checkmate = true;
 
-    p_board->capture_piece(captured_piece, to);
+    p_board->capture_piece_bit(captured_piece, to);
     m_zkey.capture_piece(captured_piece, to);
-
 
     assert(captured_piece);
     move->set_capture_piece(captured_piece);
   }
 
-  assert(Valid_piece(piece));
+  assert(check::is_valid_piece(piece));
   p_board->move_piece_bits(piece, from, to);
   m_zkey.move_piece(piece, from, to);
 
@@ -77,8 +76,8 @@ void Movement::move_piece_bits(Move* move) {
 }
 
 void Movement::undo_last_bitboard_move(Move last_move) {
-  unsigned int from = last_move.get_from();
-  unsigned int to = last_move.get_to();
+  SquareIndices from = last_move.get_from();
+  SquareIndices to = last_move.get_to();
   unsigned int piece = last_move.get_piece();
   unsigned int piece_captured = last_move.get_captured_piece();
 
@@ -97,8 +96,8 @@ void Movement::undo_last_move() {
 
   int last_move = prev_moves.back();
   prev_moves.pop_back();
-  unsigned int from = Move::GetFrom(last_move);
-  unsigned int to = Move::GetTo(last_move);
+  SquareIndices from = Move::GetFrom(last_move);
+  SquareIndices to = Move::GetTo(last_move);
   unsigned int piece = Move::GetPiece(last_move);
   unsigned int piece_captured = Move::GetCapture(last_move);
 

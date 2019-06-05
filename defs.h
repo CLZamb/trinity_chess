@@ -3,6 +3,9 @@
 
 #include <limits>
 #include <iostream>
+#include <map>
+
+using std::map;
 
 typedef uint64_t U64;
 
@@ -49,13 +52,13 @@ const U64 COLUMNCLEAR[] = {
   0b0111111101111111011111110111111101111111011111110111111101111111,
 };
 
-static const U64 BLANK =  0b0000000000000000000000000000000000000000000000000000000000000000;
-static const U64 FULL =   0b1111111111111111111111111111111111111111111111111111111111111111;
+const U64 BLANK =  0b0000000000000000000000000000000000000000000000000000000000000000;
+const U64 FULL =   0b1111111111111111111111111111111111111111111111111111111111111111;
 
-static const U64 NOT_H_FILE = 0b0111111101111111011111110111111101111111011111110111111101111111;
-static const U64 NOT_GH_FILE = 0b0011111100111111001111110011111100111111001111110011111100111111;
-static const U64 NOT_A_FILE = 0b1111111011111110111111101111111011111110111111101111111011111110;
-static const U64 NOT_AB_FILE = 0b1111110011111100111111001111110011111100111111001111110011111100;
+const U64 NOT_H_FILE = 0b0111111101111111011111110111111101111111011111110111111101111111;
+const U64 NOT_GH_FILE = 0b0011111100111111001111110011111100111111001111110011111100111111;
+const U64 NOT_A_FILE = 0b1111111011111110111111101111111011111110111111101111111011111110;
+const U64 NOT_AB_FILE = 0b1111110011111100111111001111110011111100111111001111110011111100;
 
 enum SquareIndices : int  {
   A1, B1, C1, D1, E1, F1, G1, H1,
@@ -90,7 +93,7 @@ enum PieceColor : int {
 };
 
 
-static const int VictimScore[13] =
+const int VictimScore[13] =
 { 0, 10, 40, 20, 30, 50, 60, 10, 40, 20, 30, 50, 60};
 /**
  * @brief An empty bitboard. (ie. the number 0)
@@ -108,27 +111,7 @@ const int MAX_MOVES = 256;
 extern U64 SetMask[64];
 extern U64 ClearMask[64];
 
-inline void CLRBIT(U64* bb, int sq) {
-  *bb &= ClearMask[sq];
-}
-
-inline void SETBIT(U64* bb, int sq) {
-  *bb |= SetMask[sq];
-}
-
-inline bool is_ok(SquareIndices s) {
-  return s >= A1 && s <= H8;
-}
-
-inline bool IS_BLACK(int type) {
-  return type >= bP && type <= bK;
-}
-
-inline bool Valid_piece(int pieceType) {
-  return (pieceType > EMPTY) && (pieceType < 13);
-}
-
-static const int BitTable[64] = {
+const int BitTable[64] = {
   63, 30, 3,  32, 25, 41, 22, 33,
   15, 50, 42, 13, 11, 53, 19, 34,
   61, 29, 2,  51, 21, 43, 45, 10,
@@ -139,7 +122,7 @@ static const int BitTable[64] = {
   38, 28, 58, 20, 37, 17, 36, 8
 };
 
-static const int RBits[64] = {
+const int RBits[64] = {
   12, 11, 11, 11, 11, 11, 11, 12,
   11, 10, 10, 10, 10, 10, 10, 11,
   11, 10, 10, 10, 10, 10, 10, 11,
@@ -150,7 +133,7 @@ static const int RBits[64] = {
   12, 11, 11, 11, 11, 11, 11, 12
 };
 
-static const int BBits[64] = {
+const int BBits[64] = {
   6, 5, 5, 5, 5, 5, 5, 6,
   5, 5, 5, 5, 5, 5, 5, 5,
   5, 5, 7, 7, 7, 7, 5, 5,
@@ -161,7 +144,7 @@ static const int BBits[64] = {
   6, 5, 5, 5, 5, 5, 5, 6
 };
 
-static const int KnightTable[64] = {
+const int KnightTable[64] = {
   -10, -2, -3, -3, -3, -3, -2, -10,
   -4, -2, 0, 0, 0, 0, -2, -2,
   -3, 0, 5, 3, 3, 5, 0, -3,
@@ -172,7 +155,7 @@ static const int KnightTable[64] = {
   -10, -4, -3, -3, -3, -3, -4, -10,
 };
 
-static const int PawnTable[64] = {
+const int PawnTable[64] = {
   0, 0, 0, 0, 0, 0, 0, 0,
   2, 2, 0, -2, -2, 0, 2, 2,
   1, 0, 0, 1, 1, 0, 0, 1,
@@ -183,7 +166,7 @@ static const int PawnTable[64] = {
   9, 9, 9, 9, 9, 9, 9, 9
 };
 
-static const int BishopTable[64] = {
+const int BishopTable[64] = {
   -4, -2, -2, -2, -2, -2, -2, -4,
   -2, 0, 0, 0, 0, 0, 0, -2,
   -2, 0, 1, 2, 2, 1, 0, -2,
@@ -194,7 +177,7 @@ static const int BishopTable[64] = {
   -4, -2, -2, -2, -2, -2, -2, -4,
 };
 
-static const int RookTable[64] = {
+const int RookTable[64] = {
   0, 0, 0, 0, 0, 0, 0, 0,
   1, 2, 2, 2, 2, 2, 2, 1,
   -1, 0, 1, 1, 1, 1, 0, -1,
@@ -205,7 +188,7 @@ static const int RookTable[64] = {
    0, 0, 0, 1, 1, 0, 0, 0
 };
 
-static const int QueenTable[64] = {
+const int QueenTable[64] = {
   //queen
   -4, -2, -2, -1, -1, -2, -2, -4,
   -2, 0, 0, 0, 0, 0, 0, -2,
@@ -217,7 +200,7 @@ static const int QueenTable[64] = {
   -4, -2, -2, -1, -1, -2, -2, -4
 };
 
-static const int MIRROR64[64] = {
+const int MIRROR64[64] = {
   56 , 57 , 58 , 59 , 60 , 61 , 62 , 63 ,
   48 , 49 , 50 , 51 , 52 , 53 , 54 , 55 ,
   40 , 41 , 42 , 43 , 44 , 45 , 46 , 47 ,
@@ -226,6 +209,18 @@ static const int MIRROR64[64] = {
   16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 ,
   8 , 9, 10 , 11 , 12 , 13 , 14 , 15 ,
   0 , 1, 2  , 3 ,  4 , 5 , 6  , 7
+};
+
+const map<Piecetype, std::string> piece_str_name  {
+  {bP, "pawn"}, {bR, "rook"}, {bN, "knight"},
+  {bB, "bishop"}, {bQ, "queen"}, {bK, "king"},
+  {wP, "pawn"}, {wR, "rook"}, {wN, "knight"},
+  {wB, "bishop"}, {wQ, "queen"}, {wK, "king"}
+};
+
+const map<Piecetype, int> piece_score_value {
+  {bP, 100}, {bR, 500}, {bN, 300}, {bB, 300}, {bQ, 900}, {bK, 2000},
+  {wP, -100}, {wR, -500}, {wN, -300}, {wB, -300}, {wQ, -900}, {wK, -2000}
 };
 
 #endif /* DEFS_H */

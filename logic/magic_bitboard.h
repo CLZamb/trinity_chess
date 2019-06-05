@@ -1,7 +1,7 @@
 #ifndef MAGIC_BITBOARD_H
 #define MAGIC_BITBOARD_H
 #include <iostream>
-#include "../defs.h"
+#include "bitUtilities.hpp"
 
 class MagicBitboard
 {

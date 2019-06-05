@@ -25,19 +25,19 @@ class Bitboard {
     U64 get_piece_attacks(int type, SquareIndices);
     U64 get_non_attack_moves(int type, SquareIndices);
     void generate_all_moves(bool side, MoveList*);
-    void clear_bit_at_player_pieces(bool is_black, int pos);
-    void move(int type, int f, int t);
-    void capture_piece(int captured, int pos);
-    void put_piece_back(int captured, int pos);
+    void clear_bit_at_player_pieces(bool is_black, SquareIndices pos);
+    void move(int type, SquareIndices f, SquareIndices t);
+    void capture_piece(int captured, SquareIndices pos);
+    void put_piece_back(int captured, SquareIndices pos);
     void update_killers(Move mv);
     void update_search_history(int piece, int to, int depth);
-    void make_move_bb(int piece, int from, int to);
-    void undo_move(int piece, int piece_captured, int from, int to);
-    void set_bit_at_player_pieces(bool is_black, int pos);
+    void make_move_bb(int piece, SquareIndices from, SquareIndices to);
+    void undo_move(int piece, int piece_captured, SquareIndices from, SquareIndices to);
+    void set_bit_at_player_pieces(bool is_black, SquareIndices pos);
     void reset_all_pieces_bitboard();
-    void set_piece_at_pos(int piece, int pos);
+    void set_piece_at_pos(int piece, SquareIndices pos);
     int evaluate_board();
-    int get_piece_at_pos(int pos);
+    Piecetype get_piece_at_pos(int pos);
     Piece* get_piece(int type);
 
  private:

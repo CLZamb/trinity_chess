@@ -26,8 +26,8 @@ class PlayerMove {
 
  private:
   string m_input = "exit";
-  Move m_move;
   bool valid_input = false;
+  Move m_move;
 };
 
 class Player {
@@ -40,8 +40,14 @@ class Player {
   bool has_black_pieces();
   bool is_valid_move();
   Player* get_opponent();
+  void save_played_moves(string mv);
+  void save_captured_pieces(string cap);
+  string get_played_moves();
+  string get_captured_pieces();
 
  protected:
+  string played_moves;
+  string captured_pieces;
   Player* p_opponent = nullptr;
   Move m_move;
   PlayerMove m_pl_move;

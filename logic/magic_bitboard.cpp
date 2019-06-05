@@ -81,6 +81,8 @@ U64 MagicBitboard::rook_attacks(U64 occ, SquareIndices sq) {
   occ &= m_rook_tbl[sq].mask;
   occ *=  m_rook_tbl[sq].magic;
   occ >>= m_rook_tbl[sq].shift;
+
+  assert(occ < 4096);
   return m_rook_table[sq][occ];
 }
 
@@ -219,7 +221,7 @@ void MagicBitboard::_init_slider_masks_shifs_occupancies(int isRook) {
     m_bishop_tbl[bitRef].mask = bmask(bitRef);
     m_rook_tbl[bitRef].shift = 64 - RBits[bitRef];
     m_bishop_tbl[bitRef].shift = 64 - BBits[bitRef];
-    mask = isRook ?  m_rook_tbl[bitRef].mask : m_bishop_tbl[bitRef].mask;
+    mask = isRook ? m_rook_tbl[bitRef].mask : m_bishop_tbl[bitRef].mask;
     bitCount = count_1s(mask);
     variationCount = 1 << bitCount;
     for (i = 0; i < variationCount; i++) {

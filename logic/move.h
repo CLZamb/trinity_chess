@@ -23,10 +23,18 @@ class Move {
   }
 
   unsigned int get_move() { return m_move; }
-  unsigned int get_from() const { return m_move & 0x3f; }
-  unsigned int get_to() const { return (m_move >> 6) & 0x3f; }
-  unsigned int get_captured_piece() const { return (m_move >> 12) & 0xf; }
-  unsigned int get_piece() const { return (m_move >> 17) & 0xf; }
+  SquareIndices get_from() const {
+    return static_cast<SquareIndices>(m_move & 0x3f);
+  }
+  SquareIndices get_to() const {
+    return static_cast<SquareIndices>((m_move >> 6) & 0x3f);
+  }
+  Piecetype get_captured_piece() const {
+    return static_cast<Piecetype>((m_move >> 12) & 0xf);
+  }
+  Piecetype get_piece() const {
+    return static_cast<Piecetype>((m_move >> 17) & 0xf);
+  }
   unsigned int get_score() const { return m_score; }
   // bool is_en_pessand() const { (m_move >> 16) & 0x1; }
   void set_to(unsigned int to) {
@@ -52,13 +60,8 @@ class Move {
   void set_move(unsigned int m) { m_move = m; }
 
   void set_capture_piece(unsigned int piece) {
-    assert(piece);
-    if (!piece)
-      return;
-
     m_move &= ~0xf000;
     m_move |= ((piece & 0xf) << 12);
-    assert(piece == ((m_move >> 12) & 0xf));
   }
 
   void set_piece(unsigned int piece) {
@@ -78,20 +81,20 @@ class Move {
     return (m_move & 0xffff) != (a.m_move & 0xffff);
   }
 
-  static unsigned int GetFrom(int mv) {
-    return mv & 0x3f;
+  static SquareIndices GetFrom(int mv) {
+    return static_cast<SquareIndices>(mv & 0x3f);
   }
 
-  static unsigned int GetTo(int mv) {
-    return (mv >> 6) & 0x3f;
+  static SquareIndices GetTo(int mv) {
+    return static_cast<SquareIndices>((mv >> 6) & 0x3f);
   }
 
-  static unsigned int GetPiece(int mv) {
-    return (mv >> 17) & 0xf;
+  static Piecetype GetPiece(int mv) {
+    return static_cast<Piecetype>((mv >> 17) & 0xf);
   }
 
-  static unsigned int GetCapture(int mv) {
-    return (mv >> 12) & 0xf;
+  static Piecetype GetCapture(int mv) {
+    return static_cast<Piecetype>((mv >> 12) & 0xf);
   }
 
  private:

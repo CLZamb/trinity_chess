@@ -1,17 +1,18 @@
 #ifndef PIECE_H
 #define PIECE_H
-#include "drawings.hpp"
-#include "boxStruct.h"
+
 #include <string>
-#include "../defs.h"
+#include "bitUtilities.hpp"
+#include "boxStruct.h"
+#include "drawings.hpp"
 
 class Piece {
  public:
   explicit Piece(Piecetype pct, U64 bb);
   virtual ~Piece();
-  void clear_bit(int pos);
-  void set_bit(int pos);
-  void make_move(int from, int to);
+  void clear_bit(SquareIndices pos);
+  void set_bit(SquareIndices pos);
+  void make_move(SquareIndices from, SquareIndices to);
   void clear_bitboard();
   void create_piece_drawing(Piecetype);
   void set_score(Piecetype);

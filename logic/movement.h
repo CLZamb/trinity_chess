@@ -5,7 +5,6 @@
 #include <chrono>
 #include <climits>
 #include <functional>
-#include <map>
 #include <set>
 #include "transposition_table.h"
 #include "ZobristKey.h"
@@ -39,8 +38,8 @@ class Movement {
     TTable m_table;
     bool checkmate = false;
     bool check_move(Piece*, int from, int to);
-    int take_piece(int pos);
-    int capture_piece(int pos);
+    Piecetype take_piece(int pos);
+    Piecetype capture_piece(int pos);
     vector<unsigned int> prev_moves;
 };
 
@@ -63,7 +62,7 @@ class Movement::MoveGenerator {
     int side = 0;
     int counter = 0;
     std::chrono::time_point<std::chrono::steady_clock> m_start;
-    int m_time_allocated = 4000;
+    int m_time_allocated = 100;
     int m_elapsed = 0;
     int negamax(int, int, int, int);
     bool time_out();

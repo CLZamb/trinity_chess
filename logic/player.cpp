@@ -1,6 +1,7 @@
 #include "player.h"
 
 Player::Player(bool has_black_pieces) : m_black_pieces(has_black_pieces) {}
+
 Player::~Player() {}
 
 PlayerMove Player::get_next_move() {
@@ -56,3 +57,19 @@ void Player::set_opponent(Player* opponent) { this->p_opponent = opponent; }
 bool Player::has_black_pieces() { return m_black_pieces; }
 bool Player::is_valid_move() { return is_valid_input; }
 Player* Player::get_opponent() { return p_opponent; }
+void Player::save_played_moves(string mv) {
+  played_moves += mv + " ";
+  if (played_moves.size() >= 240) {
+    // remove the first 60 chars
+    played_moves = played_moves.substr(60/* to_end */);
+  }
+}
+void Player::save_captured_pieces(string mv) {
+  captured_pieces += mv + " ";
+  if (captured_pieces.size() >= 240) {
+    // remove the first 60 chars
+    captured_pieces = captured_pieces.substr(60/* to_end */);
+  }
+}
+string Player::get_played_moves() { return played_moves; }
+string Player::get_captured_pieces() { return captured_pieces; }

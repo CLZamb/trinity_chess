@@ -168,7 +168,7 @@ U64 Bitboard::knight_mask(int sq) {
 
 
 U64 Bitboard::get_piece_bitboard(int type) const {
-  assert(Valid_piece(type));
+  assert(check::is_valid_piece(type));
   assert(m_pieces[type]);
 
   return m_pieces[type]->get_bitboard();
@@ -209,11 +209,13 @@ void Bitboard::gen_all_pawn_moves(int type, MoveList* moveList) {
     mv.set_from(from);
     mv.set_piece(type);
     dest_bitboard = get_pawn_attacks(type, SquareIndices(from));
-    dest_bitboard &= ~(IS_BLACK(type) ? m_all_b_pieces : m_all_w_pieces);
+    dest_bitboard &=
+      ~(check::is_black_piece(type) ? m_all_b_pieces : m_all_w_pieces);
     gen_all_captured_moves(dest_bitboard, mv, moveList);
 
     dest_bitboard = get_non_attack_moves(type, SquareIndices(from));
-    dest_bitboard &= ~(IS_BLACK(type) ? m_all_b_pieces : m_all_w_pieces);
+    dest_bitboard &=
+      ~(check::is_black_piece(type) ? m_all_b_pieces : m_all_w_pieces);
     gen_all_quiet_moves(dest_bitboard, mv, moveList);
   }
 }
@@ -256,27 +258,29 @@ void Bitboard::gen_all_piece_moves(int type, MoveList* moveList) {
       get_piece_attacks(type, SquareIndices(from));
     mv.set_from(from);
     mv.set_piece(type);
-    dest_bitboard &= ~(IS_BLACK(type) ? m_all_b_pieces : m_all_w_pieces);
+    dest_bitboard &=
+      ~(check::is_black_piece(type) ? m_all_b_pieces : m_all_w_pieces);
     gen_all_captured_moves(dest_bitboard, mv, moveList);
     gen_all_quiet_moves(dest_bitboard, mv, moveList);
   }
 }
 
 void Bitboard::gen_all_captured_moves(U64 dest, Move mv, MoveList* moveList) {
-  dest &= IS_BLACK(mv.get_piece()) ? m_all_w_pieces : m_all_b_pieces;
+  dest &=
+    check::is_black_piece(mv.get_piece()) ? m_all_w_pieces : m_all_b_pieces;
   int to = 0, captured = 0;
   while (dest) {
     to = magic_bb.pop_1st_bit(&dest);
     mv.set_to(to);
     captured = get_piece_at_pos(to);
-    assert(captured);
     mv.set_capture_piece(captured);
     add_captured_move(mv, moveList);
   }
 }
 
 void Bitboard::gen_all_quiet_moves(U64 dest, Move mv, MoveList* moveList) {
-  dest &= IS_BLACK(mv.get_piece()) ? ~m_all_w_pieces : ~m_all_b_pieces;
+  dest &=
+    check::is_black_piece(mv.get_piece()) ? ~m_all_w_pieces : ~m_all_b_pieces;
   int to = 0;
   while (dest) {
     to = magic_bb.pop_1st_bit(&dest);
@@ -294,59 +298,60 @@ void Bitboard::generate_all_moves(bool has_black_pieces, MoveList* moveList) {
   gen_all_piece_moves(has_black_pieces? bK : wK, moveList);
 }
 
-void Bitboard::set_piece_at_pos(int piece, int square) {
+void Bitboard::set_piece_at_pos(int piece, SquareIndices square) {
   get_piece(piece)->set_bit(square);
-  set_bit_at_player_pieces(IS_BLACK(piece), square);
+  set_bit_at_player_pieces(check::is_black_piece(piece), square);
 }
 
-void Bitboard::clear_bit_at_player_pieces(bool is_black, int pos) {
-  CLRBIT(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);
-  CLRBIT(&m_occupied, pos);
+void Bitboard::clear_bit_at_player_pieces(bool is_black, SquareIndices pos) {
+  bitUtility::clear_bit(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);
+  bitUtility::clear_bit(&m_occupied, pos);
 }
 
-void Bitboard::set_bit_at_player_pieces(bool is_black, int pos) {
-  SETBIT(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);
-  SETBIT(&m_occupied, pos);
+void Bitboard::set_bit_at_player_pieces(bool is_black, SquareIndices pos) {
+  bitUtility::set_bit(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);
+  bitUtility::set_bit(&m_occupied, pos);
 }
 
-void Bitboard::make_move_bb(int piece, int from, int to) {
+void Bitboard::make_move_bb(int piece, SquareIndices from, SquareIndices to) {
   move(piece, from, to);
   ply++;
 }
 
-void Bitboard::undo_move(int piece, int piece_captured, int from, int to) {
+void Bitboard::undo_move(int piece, int captured,
+    SquareIndices from, SquareIndices to) {
   move(piece, from, to);
-  put_piece_back(piece_captured, from);
+  put_piece_back(captured, from);
   ply--;
 }
 
-void Bitboard::move(int piece, int from, int to) {
+void Bitboard::move(int piece, SquareIndices from, SquareIndices to) {
   if (!piece)
     return;
 
   m_pieces[piece]->make_move(from, to);
-  clear_bit_at_player_pieces(IS_BLACK(piece), from);
-  set_bit_at_player_pieces(IS_BLACK(piece), to);
+  clear_bit_at_player_pieces(check::is_black_piece(piece), from);
+  set_bit_at_player_pieces(check::is_black_piece(piece), to);
 }
 
 U64 Bitboard::get_all_w_bitboard() { return m_all_w_pieces; }
 U64 Bitboard::get_all_b_bitboard() { return m_all_b_pieces; }
 U64 Bitboard::get_all_pieces_bitboard() const { return m_occupied; }
 
-void Bitboard::capture_piece(int captured, int pos) {
+void Bitboard::capture_piece(int captured, SquareIndices pos) {
   if (!captured)
     return;
 
   m_pieces[captured]->clear_bit(pos);
-  clear_bit_at_player_pieces(IS_BLACK(captured), pos);
+  clear_bit_at_player_pieces(check::is_black_piece(captured), pos);
 }
 
-void Bitboard::put_piece_back(int captured, int pos) {
+void Bitboard::put_piece_back(int captured, SquareIndices pos) {
   if (!captured)
     return;
 
   m_pieces[captured]->set_bit(pos);
-  set_bit_at_player_pieces(IS_BLACK(captured), pos);
+  set_bit_at_player_pieces(check::is_black_piece(captured), pos);
 }
 
 int Bitboard::evaluate_board() {
@@ -357,7 +362,8 @@ int Bitboard::evaluate_board() {
   for (int pce = bP; pce <= wK; ++pce) {
     piece_bitboard = m_pieces[pce]->get_bitboard();
     board_score +=
-      (magic_bb.count_1s(m_pieces[pce]->get_bitboard()) * m_pieces[pce]->get_value());
+      (magic_bb.count_1s(m_pieces[pce]->get_bitboard())
+       * m_pieces[pce]->get_value());
 
     piece_bitboard = m_pieces[pce]->get_bitboard();
     while (piece_bitboard) {
@@ -368,15 +374,15 @@ int Bitboard::evaluate_board() {
   return board_score;
 }
 
-int Bitboard::get_piece_at_pos(int pos) {
+Piecetype Bitboard::get_piece_at_pos(int pos) {
   U64 square = ONE << pos;
 
-  for (int piece = bP; piece <= wK; ++piece) {
+  for (int piece = bP; piece <= wK; piece++) {
     if (square & m_pieces[piece]->get_bitboard())
-      return piece;
+      return static_cast<Piecetype>(piece);
   }
 
-  return 0;
+  return EMPTY;
 }
 
 void Bitboard::update_killers(Move mv) {

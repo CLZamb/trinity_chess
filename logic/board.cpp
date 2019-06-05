@@ -1,19 +1,20 @@
 #include "board.h"
+#include <algorithm>
 
 Board::Board() {
-  // pieces_start_pos = " rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 1 1";
+  // parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 }
 
 Board::~Board() {
   // Free each array and sub-array
   for (int i = 0; i < 64; ++i)
-    delete p_board[i];
+    delete p_squares[i];
 }
 
 void Board::_init() {
   m_bb._init();
   create_board_squares();
-  parser_fen(pieces_start_pos);
+  parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
   movement_controller._init(turn->has_black_pieces());
 }
 
@@ -23,19 +24,19 @@ void Board::set_players(Player* player1, Player* player2) {
   this->turn = player1;
 }
 
-void Board::undo_square_move(int piece, int piece_captured, int from, int to) {
+void Board::undo_square_move(int piece, int piece_captured, SquareIndices from, SquareIndices to) {
   move_squares(m_bb.get_piece(piece), from, to);
 
   if (piece_captured)
     add_to_board(piece_captured, from);
 }
 
-void Board::move_piece_to_square(int piece, int from, int to) {
+void Board::move_piece_to_square(int piece, SquareIndices from, SquareIndices to) {
   move_squares(m_bb.get_piece(piece), from, to);
   move_piece_bits(piece, from, to);
 }
 
-void Board::move_squares(Piece* piece, int from, int to) {
+void Board::move_squares(Piece* piece, SquareIndices from, SquareIndices to) {
   if (!piece || !get_square_at_pos(from) || !get_square_at_pos(to))
     return;
 
@@ -53,44 +54,47 @@ Piece* Board::get_piece_at_square(int pos) {
 PlayerMove Board::get_next_move() { return turn->get_next_move(); }
 Player* Board::active_player() {  return turn; }
 
-std::ostream& operator<<(std::ostream& os, const Board& board) {
+std::ostream& operator<<(std::ostream& os, Board& board) {
   system(CLEAR);
-  int counter = 0;
-  int size = sizeof(Drawing::player1)/sizeof(Drawing::player1[0]);
-  os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n";
+  vector<string> right_border = board.get_board_info();
+  os << " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ \n";
   // need to be print upside down so that the bottom begins at row 0
   // for each board row
+  int right_border_counter = 0;
   for (int row = 7; row >= 0; --row) {
     // for each box row
     for (int k = 0; k < box::kRowSize; ++k) {
-      // left border
-      if ((k + 1) % 3)
-        os << ' ';
-      else
-        os << row + 1;
-
-      os << "┃";
+      os << board.left_border(row, k) << "┃";
       // for each board column
-      for (int col = 0; col < 8; col++) {
-        os << board.p_board[(row * 8) + col]->at(k);
-      }
-      os << "┃";
-      // right border
-      // score
-      if (counter < size)
-        os << Drawing::player1[counter++];
+      for (int col = 0; col < 8; col++)
+        os << board.p_squares[(row * 8) + col]->at(k);
 
-      os << "\n";
+      os <<
+        "┃" << right_border[right_border_counter++] << "\n";
     }
   }
   os
-    << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃\n"
-    << " ┃    A        B        C        D        E        F        G       H     ┃\n"
-    << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+    << " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃┃                                                          ┃\n"
+    << " ┃    A        B        C        D        E        F        G       H     ┃┃                                                          ┃\n"
+    << " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
   return os;
 }
 
-Board::Square* Board::get_square_at_pos(int pos) { return p_board[pos]; }
+char Board::left_border(int row, int col) {
+  return (col + 1) % 3 ? ' ' :  ('0' + row + 1);
+}
+
+string Board::right_border(vector<string> info, int col) {
+  return info[col];
+}
+
+vector<string> Board::get_board_info() {
+  return m_info.get_info();
+}
+
+int Board::get_score() { return m_bb.evaluate_board();  }
+
+Board::Square* Board::get_square_at_pos(int pos) { return p_squares[pos]; }
 
 void Board::create_board_squares() {
   create_squares_drawing();
@@ -103,10 +107,10 @@ void Board::create_board_squares() {
       position = row * 8 + col;
       if (squareColor == 'b') {
         squareColor = 'w';
-        p_board[position] = new Square(&wSquare, false);
+        p_squares[position] = new Square(&wSquare, false);
       } else {
         squareColor = 'b';
-        p_board[position] = new Square(&bSquare, true);
+        p_squares[position] = new Square(&bSquare, true);
       }
     }
     squareColor = squareColor == 'b' ? 'w' : 'b';
@@ -120,7 +124,7 @@ void Board::create_squares_drawing() {
 
 void Board::parser_fen(string fen) {
   char char_piece = ' ';
-  int square = A1;
+  SquareIndices square = A1;
   int piece_int;
   static std::map <char, int> piece_map = {
     {'P', bP}, {'R', bR}, {'N', bN}, {'B', bB}, {'Q', bQ}, {'K', bK},
@@ -133,15 +137,16 @@ void Board::parser_fen(string fen) {
     piece_int = piece_map[char_piece];
     if (piece_int) {
       m_bb.set_piece_at_pos(piece_int, square);
-      add_to_board(piece_int, square++);
+      add_to_board(piece_int, square);
+      square = SquareIndices(square + 1);
 
     } else if (is_number(char_piece)) {
-      square += (char_piece - '0');
+      square = SquareIndices(square + (char_piece - '0'));
     }
   }
 }
 
-void Board::add_to_board(int type, int position) {
+void Board::add_to_board(int type, SquareIndices position) {
   get_square_at_pos(position)->set_piece(m_bb.get_piece(type));
 }
 
@@ -153,8 +158,9 @@ void Board::undo_last_move() {
   movement_controller.undo_last_move();
 }
 
-void Board::move_piece(Move mv) {
-  movement_controller.move_piece(mv);
+void Board::move_piece(PlayerMove mv) {
+  movement_controller.move_piece(mv.get_move());
+  turn->save_played_moves(mv.get_input());
 }
 
 bool Board::is_valid_move(Move mv) {
@@ -173,7 +179,7 @@ void Board::generate_all_moves(bool side, MoveList* moveList) {
   return m_bb.generate_all_moves(side, moveList);
 }
 
-void Board::move_piece_bits(int piece, int from, int to) {
+void Board::move_piece_bits(int piece, SquareIndices from, SquareIndices to) {
   m_bb.make_move_bb(piece, from, to);
 }
 
@@ -185,11 +191,18 @@ void Board::update_search_history(int piece, int to, int depth) {
   m_bb.update_search_history(piece, to, depth);
 }
 
-void Board::capture_piece(int piece_captured, int pos) {
+void Board::capture_piece(Move mv, SquareIndices pos) {
+  Piecetype captured_piece = mv.get_captured_piece();
+
+  capture_piece_bit(captured_piece, pos);
+  turn->save_captured_pieces(piece_str_name.at(captured_piece));
+}
+
+void Board::capture_piece_bit(int piece_captured, SquareIndices pos) {
   m_bb.capture_piece(piece_captured, pos);
 }
 
-void Board::undo_move(int piece, int piece_captured, int from, int to) {
+void Board::undo_move(int piece, int piece_captured, SquareIndices from, SquareIndices to) {
   m_bb.undo_move(piece, piece_captured, from, to);
 }
 
@@ -215,7 +228,7 @@ U64 Board::get_piece_bitboard(int piece) const {
   return m_bb.get_piece_bitboard(piece);
 }
 
-int Board::get_piece_at(int pos) {
+Piecetype Board::get_piece_at(int pos) {
   return m_bb.get_piece_at_pos(pos);
 }
 
@@ -240,6 +253,53 @@ void Board::Square::clear_square() {
 
 char* Board::Square::at(int i) { return p_cur_drawing->content[i]; }
 bool Board::Square::is_black_square() { return m_is_black_square; }
-
 Piece* Board::Square::get_piece() { return this->p_piece; }
 box* Board::Square::get_current_drawing() { return p_cur_drawing; }
+
+Board::Info::Info(Board* b) : p_board(b) {}
+Board::Info::~Info() {}
+
+// vector<string> Board::Info::get_info() { return m_info; }
+vector<string> Board::Info::get_info() {
+  if (p_board->turn == p_board->player1)
+    std::copy(Drawing::player1.begin(), Drawing::player1.end(), m_info.begin());
+  else
+    std::copy(Drawing::player2.begin(), Drawing::player2.end(), m_info.begin());
+
+  Player* turn = p_board->get_active_player();
+  Player* opponent = p_board->get_opponent();
+
+  string score = std::to_string(p_board->get_score());
+  string moved = turn->get_played_moves();
+  string opp_moved = opponent->get_played_moves();
+  string captured = turn->get_captured_pieces();
+  string opp_captured = opponent->get_captured_pieces();
+  format_block("Board Score", score, start_score_pos);
+  format_block("Captured", captured, start_capture_pos);
+  format_block("Captured by Opponent", opp_captured, start_capture_opp_pos);
+  format_block("Your Moved", opp_moved, start_moved_pos);
+  format_block("Moves by Opponent", moved, start_moved_opp_pos);
+  return m_info;
+}
+
+void Board::Info::format_block(string title, string msg, int start) {
+  recursive_block(title + ": " + msg, start);
+}
+
+void Board::Info::recursive_block(string msg, int index) {
+  if (msg.size() < line_max_len) {
+    m_info[index] = format_line(msg);
+    return;
+  }
+
+  string resized_line = msg.substr(0, line_max_len);
+  m_info[index] = format_line(resized_line);
+
+  msg = msg.substr(line_max_len/* to_end */);
+  recursive_block(msg, ++index);
+}
+
+string Board::Info::format_line(string line) {
+  int num_spaces = line_max_len - line.size()/*┃  ┃*/;
+  return  "┃ " + line + std::string(num_spaces, ' ') + " ┃";
+}

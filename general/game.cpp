@@ -87,7 +87,7 @@ void Game::play() {
     }
 
     if (m_board.is_valid_move(player_move.get_move())) {
-      m_board.move_piece(player_move.get_move());
+      m_board.move_piece(player_move);
       is_checkMate = m_board.get_checkmate();
       counter = 0;
     } else {

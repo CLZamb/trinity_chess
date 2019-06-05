@@ -11,6 +11,8 @@ class AiPlayer : public Player {
 
  private:
     Movement::MoveGenerator* p_move_generator;
+    string convert_to_string_pos(Move mv);
+    std::vector<string> square_str{65};
 };
 
 #endif /* AIPLAYER_H */
