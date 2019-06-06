@@ -25,6 +25,7 @@ class Bitboard {
     U64 get_piece_attacks(int type, SquareIndices);
     U64 get_non_attack_moves(int type, SquareIndices);
     void generate_all_moves(bool side, MoveList*);
+    void generate_all_cap_moves(bool side, MoveList*);
     void clear_bit_at_player_pieces(bool is_black, SquareIndices pos);
     void move(int type, SquareIndices f, SquareIndices t);
     void capture_piece(int captured, SquareIndices pos);
@@ -40,6 +41,7 @@ class Bitboard {
     void clear_killer_moves();
     void reset_ply();
     int evaluate_board();
+    int get_ply();
     Piecetype get_piece_at_pos(int pos);
     Piece* get_piece(int type);
 
@@ -94,8 +96,8 @@ class Bitboard {
     void _init_slider_masks_shifs_occupancies(int);
     void _init_tables(int);
     void _init_MvvLva();
-    void gen_all_pawn_moves(int type, MoveList*);
-    void gen_all_piece_moves(int type, MoveList* moveList);
+    void gen_all_pawn_moves(int type, MoveList*, bool quiet = true);
+    void gen_all_piece_moves(int type, MoveList* moveList, bool quiet = true);
     void gen_all_captured_moves(U64 dest, Move mv, MoveList* moveList);
     void gen_all_quiet_moves(U64 dest, Move mv, MoveList* moveList);
     void add_quiet_move(Move quiet_move, MoveList* move_list);

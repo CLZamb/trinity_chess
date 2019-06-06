@@ -182,6 +182,10 @@ void Board::generate_all_moves(bool side, MoveList* moveList) {
   return m_bb.generate_all_moves(side, moveList);
 }
 
+void Board::generate_all_cap_moves(bool side, MoveList* moveList) {
+  return m_bb.generate_all_cap_moves(side, moveList);
+}
+
 void Board::move_piece_bits(int piece, SquareIndices from, SquareIndices to) {
   m_bb.make_move_bb(piece, from, to);
 }
@@ -212,6 +216,7 @@ void Board::undo_move(int piece, int piece_captured, SquareIndices from, SquareI
 void Board::clear_killer_moves() { m_bb.clear_killer_moves(); }
 void Board::clear_search_history() { m_bb.clear_search_history(); }
 void Board::reset_ply() { m_bb.reset_ply(); }
+int Board::get_ply() { return m_bb.get_ply(); }
 
 U64 Board::get_piece_attacks(int type, int from) {
   return m_bb.get_piece_attacks(type, SquareIndices(from));

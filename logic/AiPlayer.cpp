@@ -5,7 +5,10 @@ AiPlayer::AiPlayer(bool has_black_pieces, Movement* movement_controller) :
   p_move_generator(new Movement::MoveGenerator(movement_controller))
 {
   m_pl_move.set_ply_input("");
+  init_square_strings_names();
+}
 
+void AiPlayer::init_square_strings_names() {
   int position = 0;
   char file = '1';
   char rank = 'A';

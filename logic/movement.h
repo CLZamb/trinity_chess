@@ -46,9 +46,7 @@ class Movement {
 class Movement::MoveGenerator {
  public:
     explicit MoveGenerator(Movement* movement);
-    Move root_negamax(int cur_depth);
     Move search_best_move();
-    void generate_moves(MoveList*);
     int evaluate_board();
 
  private:
@@ -68,8 +66,12 @@ class Movement::MoveGenerator {
     bool time_out();
     void pick_next_move(int index, MoveList*);
     void clear_for_seach();
+    void generate_moves(MoveList*);
+    void generate_all_cap_moves(MoveList*);
     int negamax(int, int, int, int);
+    int quiescence_search(int alpha, int beta, int color);
     int is_repeated_move(const int& depth, int* alpha, int* beta);
+    Move root_negamax(int cur_depth);
     TTEntry::Flag get_flag(int alpha, int orig_alpha, int beta);
 };
 #endif /* MOVEMENT_H */

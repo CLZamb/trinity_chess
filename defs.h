@@ -104,8 +104,8 @@ const U64 ZERO = U64(0);
  * @brief A bitboard containing only the square a1. (ie. the number 1)
  */
 const U64 ONE = U64(1);
-
 const int MAX_MOVES = 256;
+const int MAX_DEPTH = 64;
 
 // GLOBALS
 extern U64 SetMask[64];

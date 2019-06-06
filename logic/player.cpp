@@ -57,19 +57,22 @@ void Player::set_opponent(Player* opponent) { this->p_opponent = opponent; }
 bool Player::has_black_pieces() { return m_black_pieces; }
 bool Player::is_valid_move() { return is_valid_input; }
 Player* Player::get_opponent() { return p_opponent; }
+
 void Player::save_played_moves(string mv) {
   played_moves = mv + " " + played_moves;
-  if (played_moves.size() >= 250) {
+  if (played_moves.size() >= 260) {
     // remove the first 60 chars
-    played_moves.resize(180);
+    played_moves.resize(200);
   }
 }
+
 void Player::save_captured_pieces(string mv) {
   captured_pieces = mv + " " + captured_pieces;
-  if (captured_pieces.size() >= 250) {
+  if (captured_pieces.size() >= 260) {
     // remove the first 60 chars
-    captured_pieces.resize(180);
+    captured_pieces.resize(200);
   }
 }
+
 string Player::get_played_moves() { return played_moves; }
 string Player::get_captured_pieces() { return captured_pieces; }

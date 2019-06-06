@@ -166,7 +166,6 @@ U64 Bitboard::knight_mask(int sq) {
   return result;
 }
 
-
 U64 Bitboard::get_piece_bitboard(int type) const {
   assert(check::is_valid_piece(type));
   assert(m_pieces[type]);
@@ -199,7 +198,7 @@ U64 Bitboard::get_piece_attacks(int type, SquareIndices from) {
   }
 }
 
-void Bitboard::gen_all_pawn_moves(int type, MoveList* moveList) {
+void Bitboard::gen_all_pawn_moves(int type, MoveList* moveList, bool quiet /*true*/) {
   U64 dest_bitboard = BLANK, from_piece_pos_bb = m_pieces[type]->get_bitboard();
   int from = 0;
   Move mv;
@@ -213,10 +212,12 @@ void Bitboard::gen_all_pawn_moves(int type, MoveList* moveList) {
       ~(check::is_black_piece(type) ? m_all_b_pieces : m_all_w_pieces);
     gen_all_captured_moves(dest_bitboard, mv, moveList);
 
-    dest_bitboard = get_non_attack_moves(type, SquareIndices(from));
-    dest_bitboard &=
-      ~(check::is_black_piece(type) ? m_all_b_pieces : m_all_w_pieces);
-    gen_all_quiet_moves(dest_bitboard, mv, moveList);
+    if (quiet) {
+      dest_bitboard = get_non_attack_moves(type, SquareIndices(from));
+      dest_bitboard &=
+        ~(check::is_black_piece(type) ? m_all_b_pieces : m_all_w_pieces);
+      gen_all_quiet_moves(dest_bitboard, mv, moveList);
+    }
   }
 }
 
@@ -246,7 +247,7 @@ U64 Bitboard::get_non_attack_moves(int type, SquareIndices from) {
   return m_w_pawn_non_attacks[from] & ~m_occupied;
 }
 
-void Bitboard::gen_all_piece_moves(int type, MoveList* moveList) {
+void Bitboard::gen_all_piece_moves(int type, MoveList* moveList, bool quiet /*true*/) {
   U64 origin_bitboard = BLANK, dest_bitboard = BLANK;
   int from = 0;
   Move mv;
@@ -261,7 +262,9 @@ void Bitboard::gen_all_piece_moves(int type, MoveList* moveList) {
     dest_bitboard &=
       ~(check::is_black_piece(type) ? m_all_b_pieces : m_all_w_pieces);
     gen_all_captured_moves(dest_bitboard, mv, moveList);
-    gen_all_quiet_moves(dest_bitboard, mv, moveList);
+
+    if (quiet)
+      gen_all_quiet_moves(dest_bitboard, mv, moveList);
   }
 }
 
@@ -298,6 +301,15 @@ void Bitboard::generate_all_moves(bool has_black_pieces, MoveList* moveList) {
   gen_all_piece_moves(has_black_pieces? bK : wK, moveList);
 }
 
+void Bitboard::generate_all_cap_moves(bool has_black_pieces, MoveList* moveList) {
+  gen_all_piece_moves(has_black_pieces? bN : wN, moveList, false);
+  gen_all_pawn_moves(has_black_pieces? bP : wP, moveList, false);
+  gen_all_piece_moves(has_black_pieces? bB : wB, moveList, false);
+  gen_all_piece_moves(has_black_pieces? bR : wR, moveList, false);
+  gen_all_piece_moves(has_black_pieces? bQ : wQ, moveList, false);
+  gen_all_piece_moves(has_black_pieces? bK : wK, moveList, false);
+}
+
 void Bitboard::set_piece_at_pos(int piece, SquareIndices square) {
   get_piece(piece)->set_bit(square);
   set_bit_at_player_pieces(check::is_black_piece(piece), square);
@@ -316,6 +328,7 @@ void Bitboard::clear_killer_moves() {
 }
 
 void Bitboard::reset_ply() { ply = 0; }
+int Bitboard::get_ply() { return ply; }
 
 void Bitboard::clear_bit_at_player_pieces(bool is_black, SquareIndices pos) {
   bitUtility::clear_bit(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);

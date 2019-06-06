@@ -228,6 +228,43 @@ Move Movement::MoveGenerator::root_negamax(int cur_depth) {
   return best;
 }
 
+int Movement::MoveGenerator::quiescence_search(int alpha, int beta, int color) {
+  if (m_stop || time_out()) {
+    m_stop = true;
+    return color * evaluate_board();
+  }
+
+  if (p_board->get_ply() >= MAX_DEPTH)
+    return color * evaluate_board();
+
+  int best_value = color * p_board->evaluate_board();
+  alpha = std::max(alpha, best_value);
+
+  if (alpha >= beta)
+    return alpha;
+
+  MoveList m_legalMoves;
+
+  generate_all_cap_moves(&m_legalMoves);
+
+  if (m_legalMoves.size() == 0)
+    return color * evaluate_board();
+
+  int counter = 0;
+  for (Move& mv : m_legalMoves) {
+    pick_next_move(counter++, &m_legalMoves);
+    movement->move_piece_bits(&mv);
+    best_value = std::max(best_value, -quiescence_search(-beta, -alpha, -color));
+    movement->undo_last_bitboard_move(mv);
+
+    alpha = std::max(alpha, best_value);
+    if (alpha >= beta)
+      break;
+  }
+
+  return alpha;
+}
+
 
 /**
  negamax algorithm
@@ -252,7 +289,10 @@ int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
     return color * evaluate_board();
   }
 
-  if (movement->checkmate || depth == 0)
+  if (depth == 0)
+    return quiescence_search(alpha, beta, color);
+
+  if (movement->checkmate)
     return color * evaluate_board();
 
   int orig_alpha = alpha;
@@ -349,6 +389,11 @@ void Movement::MoveGenerator::pick_next_move(int index, MoveList* moves) {
 void Movement::MoveGenerator::generate_moves(MoveList* legalMoves) {
   has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
   p_board->generate_all_moves(has_black_pieces, legalMoves);
+}
+
+void Movement::MoveGenerator::generate_all_cap_moves(MoveList* capMoves) {
+  has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
+  p_board->generate_all_cap_moves(has_black_pieces, capMoves);
 }
 
 int Movement::MoveGenerator::evaluate_board() {

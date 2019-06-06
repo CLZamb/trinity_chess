@@ -37,6 +37,7 @@ class Board {
 
   // adapter_pattern Bitboard
   void generate_all_moves(bool side, MoveList* moveList);
+  void generate_all_cap_moves(bool side, MoveList* mvl);
   void move_piece_bits(int type, SquareIndices from, SquareIndices to);
   void update_killers(Move mv);
   void update_search_history(int piece, int to, int depth);
@@ -45,6 +46,7 @@ class Board {
   void clear_killer_moves();
   void clear_search_history();
   void reset_ply();
+  int get_ply();
   U64 get_piece_attacks(int type, int from);
   U64 get_non_attack_moves(int type, int from);
   U64 get_own_pieces_occ(bool is_black);
