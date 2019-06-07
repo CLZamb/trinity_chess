@@ -3,6 +3,7 @@
 
 #include "boxStruct.h"
 #include <string>
+#include <string.h>
 #include <map>
 #include <iostream>
 #include <vector>
@@ -158,10 +159,17 @@ class PieceDrawing {
     DrawingMod piece_mod;
 };
 
-constexpr int utf8_strlen(const std::string& str)
+
+int constexpr length(const char* str)
 {
+  return *str ? 1 + length(str + 1) : 0;
+}
+
+constexpr int utf8_strlen(const char* str)
+{
+  const int len = length(str);
   int c = 0,i = 0,ix = 0,q = 0;
-  for (q=0, i=0, ix=str.length(); i < ix; i++, q++)
+  for (q=0, i=0, ix=len; i < ix; i++, q++)
   {
     c = (unsigned char) str[i];
     if      (c>=0   && c<=127) i+=0;
@@ -196,7 +204,7 @@ namespace Drawing {
 
   const int size_banner = player1.size();
   const int size_score = size_banner + player1.size();
-  const int banner_len = utf8_strlen(player1[0]);
+  const int banner_len = utf8_strlen(player1[0].c_str());
 }  // namespace Drawing
 
 const int size_banner_temp = Drawing::size_banner;

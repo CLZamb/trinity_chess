@@ -2,6 +2,7 @@
 #define MAGIC_BITBOARD_H
 #include <iostream>
 #include "bitUtilities.hpp"
+#include <assert.h>
 
 class MagicBitboard
 {
