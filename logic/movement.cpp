@@ -261,7 +261,6 @@ int Movement::MoveGenerator::quiescence_search(int alpha, int beta, int color) {
     if (alpha >= beta)
       break;
   }
-
   return alpha;
 }
 
