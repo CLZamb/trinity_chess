@@ -1,7 +1,6 @@
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 
-#include <algorithm>
 #include <chrono>
 #include <climits>
 #include <functional>
@@ -18,7 +17,7 @@ class Board;
 
 class Movement {
  public:
-    Movement(Board*, Player** turn);
+    Movement(Board*);
     virtual ~Movement();
     void _init(bool black_to_move);
     void move_piece(Move&);
@@ -33,9 +32,8 @@ class Movement {
 
  private:
     Board* p_board;
-    Player** pp_cur_player_turn = nullptr;
     ZobristKey m_zkey;
-    TTable m_table;
+    TTable m_hash_table;
     bool checkmate = false;
     bool check_move(Piece*, int from, int to);
     Piecetype take_piece(int pos);
@@ -50,6 +48,17 @@ class Movement::MoveGenerator {
     int evaluate_board();
 
  private:
+    bool time_out();
+    Move pick_next_move(int index, MoveList*);
+    void clear_for_seach();
+    void generate_moves(MoveList*);
+    void generate_all_cap_moves(MoveList*);
+    int negamax(int deapth, int alpha, int beta);
+    int quiescence_search(int alpha, int beta);
+    int is_repeated_move(const int& depth, int* alpha, int* beta);
+    Move root_negamax(int cur_depth);
+    TTEntry::Flag get_flag(int alpha, int orig_alpha, int beta);
+
     Movement* movement = nullptr;
     Board* p_board = nullptr;
     bool has_black_pieces = false;
@@ -57,21 +66,10 @@ class Movement::MoveGenerator {
     int best_move = 0;
     int best_score = INT_MIN;
     int score = 0;
-    int side = 0;
-    int counter = 0;
+    int total_nodes = 0;
     std::chrono::time_point<std::chrono::steady_clock> m_start;
-    int m_time_allocated = 2000;
+    // int m_time_allocated = 4000;
+    int m_time_allocated = 1028;
     int m_elapsed = 0;
-
-    bool time_out();
-    void pick_next_move(int index, MoveList*);
-    void clear_for_seach();
-    void generate_moves(MoveList*);
-    void generate_all_cap_moves(MoveList*);
-    int negamax(int, int, int, int);
-    int quiescence_search(int alpha, int beta, int color);
-    int is_repeated_move(const int& depth, int* alpha, int* beta);
-    Move root_negamax(int cur_depth);
-    TTEntry::Flag get_flag(int alpha, int orig_alpha, int beta);
 };
 #endif /* MOVEMENT_H */

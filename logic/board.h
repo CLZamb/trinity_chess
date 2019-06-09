@@ -22,9 +22,11 @@ class Board {
   void move_piece_to_square(int piece, SquareIndices from, SquareIndices to);
   void move_squares(Piece*, SquareIndices from, SquareIndices to);
   void capture_piece(Move mv, SquareIndices pos);
+  void change_turn();
   Piece* get_piece_at_square(int);
   PlayerMove get_next_move();
-  Player* active_player();
+  Player* get_active_player();
+  Player* get_opponent();
 
   friend std::ostream& operator<<(std::ostream& os, Board& b);
 
@@ -47,13 +49,13 @@ class Board {
   void clear_search_history();
   void reset_ply();
   int get_ply();
+  int evaluate_board();
   U64 get_piece_attacks(int type, int from);
   U64 get_non_attack_moves(int type, int from);
   U64 get_own_pieces_occ(bool is_black);
   U64 get_all_pieces_bitboard() const;
   U64 get_piece_bitboard(int piece) const;
   Piecetype get_piece_at(int pos);
-  int evaluate_board();
 
  private:
   class Square;
@@ -90,12 +92,9 @@ class Board {
   string right_border(vector<string> info, int col);
   string format_line(string tittle, string message);
   vector<string> get_board_info();
-  int get_score();
-  Player* get_active_player() { return turn; }
-  Player* get_opponent() { return turn->get_opponent(); }
 
   Player* player1, *player2, *turn;
-  Movement movement_controller{this, &turn};
+  Movement movement_controller{this};
   Bitboard m_bb;
   box wSquare, bSquare;
   Square* p_squares[8 * 8 /*board size*/] = {nullptr};

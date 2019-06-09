@@ -19,6 +19,19 @@ namespace bitUtility {
   inline void clear_bit(U64* bb, SquareIndices s) {
     *bb &= clear_mask_bb(s);
   }
+
+  inline int count_1s(U64 b) {
+    static int r = 0;
+    for (r = 0; b; r++, b &= b - 1) {}
+    return r;
+  }
+
+  inline int pop_1st_bit(U64* bb) {
+    U64 b = *bb ^ (*bb - 1);
+    unsigned int fold = (unsigned) ((b & 0xffffffff) ^ (b >> 32));
+    *bb &= (*bb - 1);
+    return BitTable[(fold * 0x783a9b23) >> 26];
+  }
 }  // namespace bitUtility
 
 namespace check {

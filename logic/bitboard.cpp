@@ -72,6 +72,7 @@ U64 Bitboard::pawn_non_attack(int sq, int side) {
 
     if ((fromSq & ROWMASK[1]) << 16)
       result |= fromSq  << 16;
+
   } else {
     if (fromSq >> 8)
       result |= fromSq >> 8;
@@ -206,7 +207,7 @@ void Bitboard::gen_all_pawn_moves(int type, MoveList* moveList, bool quiet /*tru
   Move mv;
 
   while (from_piece_pos_bb) {
-    from = magic_bb.pop_1st_bit(&from_piece_pos_bb);
+    from = bitUtility::pop_1st_bit(&from_piece_pos_bb);
     mv.set_from(from);
     mv.set_piece(type);
     dest_bitboard = get_pawn_attacks(type, SquareIndices(from));
@@ -257,7 +258,7 @@ void Bitboard::gen_all_piece_moves(int type, MoveList* moveList, bool quiet /*tr
 
   origin_bitboard = m_pieces[type]->get_bitboard();
   while (origin_bitboard) {
-    from = magic_bb.pop_1st_bit(&origin_bitboard);
+    from = bitUtility::pop_1st_bit(&origin_bitboard);
     dest_bitboard =
       get_piece_attacks(type, SquareIndices(from));
     mv.set_from(from);
@@ -275,7 +276,7 @@ void Bitboard::gen_all_captured_moves(U64 dest, Move mv, MoveList* moveList) {
     check::is_black_piece(mv.get_piece()) ? m_all_w_pieces : m_all_b_pieces;
   int to = 0, captured = 0;
   while (dest) {
-    to = magic_bb.pop_1st_bit(&dest);
+    to =  bitUtility::pop_1st_bit(&dest);
     mv.set_to(to);
     captured = get_piece_at_pos(to);
     mv.set_capture_piece(captured);
@@ -288,7 +289,7 @@ void Bitboard::gen_all_quiet_moves(U64 dest, Move mv, MoveList* moveList) {
     check::is_black_piece(mv.get_piece()) ? ~m_all_w_pieces : ~m_all_b_pieces;
   int to = 0;
   while (dest) {
-    to = magic_bb.pop_1st_bit(&dest);
+    to = bitUtility::pop_1st_bit(&dest);
     mv.set_to(to);
     add_quiet_move(mv, moveList);
   }
@@ -385,23 +386,27 @@ void Bitboard::put_piece_back(int captured, SquareIndices pos) {
 }
 
 int Bitboard::evaluate_board() {
-  board_score = 0;
-  U64 piece_bitboard = BLANK;
-  int pos = 0;
-
+  int board_score = 0;
   for (int pce = bP; pce <= wK; ++pce) {
-    piece_bitboard = m_pieces[pce]->get_bitboard();
-    board_score +=
-      (magic_bb.count_1s(m_pieces[pce]->get_bitboard())
-       * m_pieces[pce]->get_value());
-
-    piece_bitboard = m_pieces[pce]->get_bitboard();
-    while (piece_bitboard) {
-      pos = magic_bb.pop_1st_bit(&piece_bitboard);
-      board_score += pieces_score[pce][pos];
-    }
+    board_score += m_pieces[pce]->get_material_score();
+    board_score += get_movility_score(pce);
   }
   return board_score;
+}
+
+int Bitboard::get_movility_score(int pce) {
+  static U64 temp_bb = BLANK;
+  static int score = 0;
+  static int pos = 0;
+
+  temp_bb = m_pieces[pce]->get_bitboard();
+  score = 0;
+  pos = 0;
+  while (temp_bb) {
+    pos = bitUtility::pop_1st_bit(&temp_bb);
+    score += pieces_score[pce][pos];
+  }
+  return score;
 }
 
 Piecetype Bitboard::get_piece_at_pos(int pos) {

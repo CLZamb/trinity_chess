@@ -42,8 +42,6 @@ class MagicBitboard
     U64 rook_attacks(U64 occ, SquareIndices sq);
     U64 bishop_attacks(U64 occ, SquareIndices sq);
     U64 queen_attacks(U64 occ, SquareIndices sq);
-    int pop_1st_bit(U64* bb);
-    int count_1s(U64 b);
 };
 
 #endif /* MAGIC_BITBOARD_H */

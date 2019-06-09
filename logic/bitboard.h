@@ -41,6 +41,7 @@ class Bitboard {
     void clear_killer_moves();
     void reset_ply();
     int evaluate_board();
+    int get_movility_score(int piece);
     int get_ply();
     Piecetype get_piece_at_pos(int pos);
     Piece* get_piece(int type);
@@ -49,7 +50,6 @@ class Bitboard {
     static const int kTotal_sqs = 64;
     static const int kMaxDepth = 64;
     int ply = 0;
-    int board_score = 0;
     int pieces_score[13][kTotal_sqs] = {{0}};
     int MvvLvaScores[13][13];
     int search_history[13][kTotal_sqs] = {{0}};

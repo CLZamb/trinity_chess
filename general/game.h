@@ -18,10 +18,11 @@ class Game {
   IDisplay* p_message_display = &m_messages;
   Player* p_player1 = nullptr, *p_player2 = nullptr;
 
-  int get_option(int from, int to);
   void print_message(Msg);
   void set_players(Playertype p1, Playertype p2);
   void play();
+  int get_option(int from, int to);
+  bool has_player_quit(string str);
 };
 
 #endif /* GAME_H */

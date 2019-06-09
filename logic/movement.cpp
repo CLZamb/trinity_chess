@@ -1,9 +1,7 @@
 #include "movement.h"
 #include "board.h"
 
-Movement::Movement(Board* board, Player** turn)
-    : p_board(board), pp_cur_player_turn(turn) {}
-
+Movement::Movement(Board* board) : p_board(board) {}
 Movement::~Movement() {}
 
 void Movement::_init(bool initial_turn) {
@@ -18,7 +16,7 @@ Piecetype Movement::take_piece(int startSquare) {
 }
 
 void Movement::change_turn() {
-  *pp_cur_player_turn = (*pp_cur_player_turn)->get_opponent();
+  p_board->change_turn();
   m_zkey.change_turn();
 }
 
@@ -117,18 +115,19 @@ bool Movement::is_valid_move(Move pmove) {
   int to = pmove.get_to();
 
   Piece* current_piece = p_board->get_piece_at_square(from);
-  Player* opponent = (*pp_cur_player_turn)->get_opponent();
+  Player* opponent = p_board->get_opponent();
 
   if (!current_piece || !opponent)
     return false;
 
   // check that the pieces being use belongs to the current player turn
-  if ((*pp_cur_player_turn)->has_black_pieces() !=
+  if (p_board->get_active_player()->has_black_pieces() !=
       current_piece->is_black()) {
     std::cout
         << "Piece at that position does not belong to the current player\n";
     return false;
   }
+
   if (!check_move(current_piece, from, to))
       return false;
 
@@ -171,26 +170,27 @@ Move Movement::MoveGenerator::search_best_move() {
   m_start = std::chrono::steady_clock::now();
   Move best_move;
   m_stop = false;
-  has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
-  side = has_black_pieces ? -1 : 1;
   clear_for_seach();
 
   int total_depth = 0;
   for (int currDepth = 1;  ; currDepth++) {
+    total_depth = currDepth;
     best_move = root_negamax(currDepth);
     m_elapsed =
       std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - m_start).count();
 
+    // std::cout << "depth: : " << total_depth  << std::endl;
+    // std::cout << "nodes: " << total_nodes << std::endl;
+    // std::cout << "score: " << evaluate_board() << std::endl;
     if (m_stop)
       break;
 
     if (m_elapsed >= (m_time_allocated/2)) break;
-    total_depth = currDepth;
   }
 
   std::cout << "depth: : " << total_depth  << std::endl;
+  std::cout << "nodes: " << total_nodes << std::endl;
   auto end = std::chrono::steady_clock::now();
-
   cout << "Elapsed time in milliseconds : "
     << std::chrono::duration_cast<std::chrono::milliseconds>(end - m_start).count()
     << " ms" << endl;
@@ -203,12 +203,13 @@ Move Movement::MoveGenerator::root_negamax(int cur_depth) {
   generate_moves(&m_legalMoves);
   best_move = 0;
   score = best_score = INT_MIN;
-  counter = 0;
+  int counter = 0;
+  total_nodes = 0;
   for (Move& mv : m_legalMoves) {
-    pick_next_move(counter++, &m_legalMoves);
-    movement->move_piece_bits(&mv);
-    score = -negamax(cur_depth, INT_MIN + 1, INT_MAX, side);
-    movement->undo_last_bitboard_move(mv);
+    Move move = pick_next_move(counter++, &m_legalMoves);
+    movement->move_piece_bits(&move);
+    score = -negamax(cur_depth, INT_MIN + 1, INT_MAX);
+    movement->undo_last_bitboard_move(move);
 
     if (m_stop || time_out()) {
       m_stop = true;
@@ -216,7 +217,7 @@ Move Movement::MoveGenerator::root_negamax(int cur_depth) {
     }
 
     if (score > best_score) {
-      best_move = mv.get_move();
+      best_move = move.get_move();
       best_score = score;
     }
   }
@@ -227,43 +228,6 @@ Move Movement::MoveGenerator::root_negamax(int cur_depth) {
 
   return best;
 }
-
-int Movement::MoveGenerator::quiescence_search(int alpha, int beta, int color) {
-  if (m_stop || time_out()) {
-    m_stop = true;
-    return color * evaluate_board();
-  }
-
-  if (p_board->get_ply() >= MAX_DEPTH)
-    return color * evaluate_board();
-
-  int best_value = color * p_board->evaluate_board();
-  alpha = std::max(alpha, best_value);
-
-  if (alpha >= beta)
-    return alpha;
-
-  MoveList m_legalMoves;
-
-  generate_all_cap_moves(&m_legalMoves);
-
-  if (m_legalMoves.size() == 0)
-    return color * evaluate_board();
-
-  int counter = 0;
-  for (Move& mv : m_legalMoves) {
-    pick_next_move(counter++, &m_legalMoves);
-    movement->move_piece_bits(&mv);
-    best_value = std::max(best_value, -quiescence_search(-beta, -alpha, -color));
-    movement->undo_last_bitboard_move(mv);
-
-    alpha = std::max(alpha, best_value);
-    if (alpha >= beta)
-      break;
-  }
-  return alpha;
-}
-
 
 /**
  negamax algorithm
@@ -281,18 +245,11 @@ int Movement::MoveGenerator::quiescence_search(int alpha, int beta, int color) {
       break (* cut-off *)
   return value
 */
-int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
-                                     int color) {
+int Movement::MoveGenerator::negamax(int depth, int alpha, int beta) {
   if (m_stop || time_out()) {
     m_stop = true;
-    return color * evaluate_board();
+    return evaluate_board();
   }
-
-  if (depth == 0)
-    return quiescence_search(alpha, beta, color);
-
-  if (movement->checkmate)
-    return color * evaluate_board();
 
   int orig_alpha = alpha;
 
@@ -301,46 +258,117 @@ int Movement::MoveGenerator::negamax(int depth, int alpha, int beta,
     return repeated;
 
   MoveList m_legalMoves;
-
   generate_moves(&m_legalMoves);
 
-  if (m_legalMoves.size() == 0)
-    return color * evaluate_board();
+  if (m_legalMoves.empty()) {
+    if (movement->checkmate)
+      return evaluate_board();
+    // draw
+    return 0;
+  }
+
+  if (!depth)
+    return quiescence_search(alpha, beta);
+
+  if (movement->checkmate)
+    return evaluate_board();
 
   int value = INT_MIN;
   int counter = 0;
   Move* best_move = &m_legalMoves.at(0);
   for (Move& mv : m_legalMoves) {
-    pick_next_move(counter++, &m_legalMoves);
-    movement->move_piece_bits(&mv);
-    value = std::max(value, -negamax(depth - 1, -beta, -alpha, -color));
-    movement->undo_last_bitboard_move(mv);
+    Move move = pick_next_move(counter++, &m_legalMoves);
+    movement->move_piece_bits(&move);
+    value = std::max(value, -negamax(depth - 1, -beta, -alpha));
+    movement->undo_last_bitboard_move(move);
 
     if (value > alpha) {
       alpha = value;
-      best_move = &mv;
-      if (!(mv.get_captured_piece()))
-        p_board->update_search_history(mv.get_piece(), mv.get_to(), depth);
+      best_move = &move;
+      if (!(move.get_captured_piece()))
+        p_board->update_search_history(move.get_piece(), move.get_to(), depth);
     }
 
     if (alpha >= beta) {
-      best_move = &mv;
-      if (!(mv.get_captured_piece()))
-        p_board->update_killers(mv);
+      best_move = &move;
+      if (!(move.get_captured_piece()))
+        p_board->update_killers(move);
       break;
     }
   }
 
   TTEntry::Flag flag = get_flag(alpha, orig_alpha, beta);
-  movement->m_table.set(
+  movement->m_hash_table.set(
       movement->m_zkey, TTEntry(best_move, alpha, depth, flag));
 
   return alpha;
 }
 
+/*
+int Quiesce( int alpha, int beta ) {
+    int stand_pat = Evaluate();
+    if( stand_pat >= beta )
+        return beta;
+    if( alpha < stand_pat )
+        alpha = stand_pat;
+
+    until( every_capture_has_been_examined )  {
+        MakeCapture();
+        score = -Quiesce( -beta, -alpha );
+        TakeBackMove();
+
+        if( score >= beta )
+            return beta;
+        if( score > alpha )
+           alpha = score;
+    }
+    return alpha;
+}
+ * */
+int Movement::MoveGenerator::quiescence_search(int alpha, int beta) {
+  if (m_stop || time_out()) {
+    m_stop = true;
+    return evaluate_board();
+  }
+
+  if (p_board->get_ply() >= MAX_DEPTH)
+    return evaluate_board();
+
+  total_nodes++;
+  int standPat = evaluate_board();
+
+  if (standPat >= beta)
+    return beta;
+
+  if (alpha < standPat)
+    alpha = standPat;
+
+  MoveList m_legalMoves;
+  generate_all_cap_moves(&m_legalMoves);
+
+  if (m_legalMoves.empty())
+    return evaluate_board();
+
+  int counter = 0;
+  for (Move& mv : m_legalMoves) {
+    Move move = pick_next_move(counter++, &m_legalMoves);
+
+    movement->move_piece_bits(&move);
+    int score = -quiescence_search(-beta, -alpha);
+    movement->undo_last_bitboard_move(move);
+
+    if (score >= beta)
+      return beta;
+
+    if (score > alpha)
+      alpha = score;
+  }
+  return alpha;
+}
+
 int Movement::MoveGenerator::is_repeated_move(
     const int &depth, int* alpha, int* beta) {
-  const TTEntry* entry = movement->m_table.get_entry(movement->m_zkey);
+  const TTEntry* entry = movement->m_hash_table.get_entry(movement->m_zkey);
   if ((entry) && (entry->get_depth() >= depth)) {
     switch (entry->get_flag()) {
       case TTEntry::EXACT:
@@ -372,7 +400,7 @@ TTEntry::Flag Movement::MoveGenerator::get_flag(
   return TTEntry::EXACT;
 }
 
-void Movement::MoveGenerator::pick_next_move(int index, MoveList* moves) {
+Move Movement::MoveGenerator::pick_next_move(int index, MoveList* moves) {
   int best_so_far = index;
   unsigned int best_score = 0;
   for (unsigned int i = index; i < moves->size(); ++i) {
@@ -382,19 +410,24 @@ void Movement::MoveGenerator::pick_next_move(int index, MoveList* moves) {
     }
   }
 
-  iter_swap(moves->begin() + index, moves->begin() + best_so_far);
+  std::swap(moves->at(index), moves->at(best_so_far));
+  return moves->at(index);
 }
 
 void Movement::MoveGenerator::generate_moves(MoveList* legalMoves) {
-  has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
+  has_black_pieces = p_board->get_active_player()->has_black_pieces();
   p_board->generate_all_moves(has_black_pieces, legalMoves);
 }
 
 void Movement::MoveGenerator::generate_all_cap_moves(MoveList* capMoves) {
-  has_black_pieces = (*movement->pp_cur_player_turn)->has_black_pieces();
+  has_black_pieces = p_board->get_active_player()->has_black_pieces();
   p_board->generate_all_cap_moves(has_black_pieces, capMoves);
 }
 
 int Movement::MoveGenerator::evaluate_board() {
-  return p_board->evaluate_board();
+  has_black_pieces = p_board->get_active_player()->has_black_pieces();
+  if (has_black_pieces)
+    return p_board->evaluate_board();
+
+  return -p_board->evaluate_board();
 }

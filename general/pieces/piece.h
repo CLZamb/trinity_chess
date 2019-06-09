@@ -17,6 +17,7 @@ class Piece {
   void create_piece_drawing(Piecetype);
   void set_score(Piecetype);
   int get_value();
+  int get_material_score();
   bool is_black();
   box* get_drawing(bool is_black);
   Piecetype get_type_and_color();

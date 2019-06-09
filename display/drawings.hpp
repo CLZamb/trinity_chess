@@ -160,25 +160,21 @@ class PieceDrawing {
 };
 
 
-int constexpr length(const char* str)
-{
+int constexpr length(const char* str) {
   return *str ? 1 + length(str + 1) : 0;
 }
 
-constexpr int utf8_strlen(const char* str)
-{
+constexpr int utf8_strlen(const char* str) {
   const int len = length(str);
-  int c = 0,i = 0,ix = 0,q = 0;
-  for (q=0, i=0, ix=len; i < ix; i++, q++)
-  {
+  int c = 0, i = 0, ix = 0, q = 0;
+  for (q=0, i=0, ix=len; i < ix; i++, q++) {
     c = (unsigned char) str[i];
-    if      (c>=0   && c<=127) i+=0;
+    if      (c >= 0 && c <= 127) i+=0;
     else if ((c & 0xE0) == 0xC0) i+=1;
     else if ((c & 0xF0) == 0xE0) i+=2;
     else if ((c & 0xF8) == 0xF0) i+=3;
-    //else if (($c & 0xFC) == 0xF8) i+=4; // 111110bb //byte 5, unnecessary in 4 byte UTF-8
-    //else if (($c & 0xFE) == 0xFC) i+=5; // 1111110b //byte 6, unnecessary in 4 byte UTF-8
-    else return 0;//invalid utf8
+    else
+      return 0;  // invalid utf8
   }
   return q;
 }

@@ -2,7 +2,10 @@
 #include <algorithm>
 
 Board::Board() {
-  // parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  // parser_fen("r1bqkbnr/pppppppp/2n5/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  // parser_fen("r1bqkbnr/pppppppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq e3 0 1");
+  // rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq e3 0 1
+  // r2qr1k1/1bp1bppp/p1np1n2/1p2p3/3PP3/1BP2N1P/PP3PP1/RNBQR1K1 w - - 1 10
 }
 
 Board::~Board() {
@@ -14,13 +17,15 @@ Board::~Board() {
 void Board::_init() {
   m_bb._init();
   create_board_squares();
-  parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  parser_fen("r2qr1k1/1bp1bppp/p1np1n2/1p2p3/3PP3/1BP2N1P/PP3PP1/RNBQR1K1 w - - 1 10");
   movement_controller._init(turn->has_black_pieces());
 }
 
 void Board::set_players(Player* player1, Player* player2) {
   this->player1 = player1;
   this->player2 = player2;
+  this->player1->set_opponent(this->player2);
+  this->player2->set_opponent(this->player1);
   this->turn = player1;
 }
 
@@ -52,7 +57,8 @@ Piece* Board::get_piece_at_square(int pos) {
 }
 
 PlayerMove Board::get_next_move() { return turn->get_next_move(); }
-Player* Board::active_player() {  return turn; }
+Player* Board::get_active_player() {  return turn; }
+Player* Board::get_opponent() { return turn->get_opponent(); }
 
 std::ostream& operator<<(std::ostream& os, Board& board) {
   system(CLEAR);
@@ -92,8 +98,6 @@ vector<string> Board::get_board_info() {
   return m_info.get_info();
 }
 
-int Board::get_score() { return m_bb.evaluate_board();  }
-
 Board::Square* Board::get_square_at_pos(int pos) { return p_squares[pos]; }
 
 void Board::create_board_squares() {
@@ -123,26 +127,35 @@ void Board::create_squares_drawing() {
 }
 
 void Board::parser_fen(string fen) {
-  char char_piece = ' ';
-  SquareIndices square = A1;
-  int piece_int;
-  static std::map <char, int> piece_map = {
-    {'P', bP}, {'R', bR}, {'N', bN}, {'B', bB}, {'Q', bQ}, {'K', bK},
-    {'p', wP}, {'r', wR}, {'n', wN}, {'b', wB}, {'q', wQ}, {'k', wK},
+  std::map <char, int> piece_map = {
+    {'P', wP}, {'R', wR}, {'N', wN}, {'B', wB}, {'Q', wQ}, {'K', wK},
+    {'p', bP}, {'r', bR}, {'n', bN}, {'b', bB}, {'q', bQ}, {'k', bK},
   };
 
   m_bb.reset_all_pieces_bitboard();
-  for (unsigned int i = 0; i < fen.length() && square < SquareEnd; ++i) {
-    char_piece = fen[i];
-    piece_int = piece_map[char_piece];
-    if (piece_int) {
-      m_bb.set_piece_at_pos(piece_int, square);
-      add_to_board(piece_int, square);
-      square = SquareIndices(square + 1);
 
-    } else if (is_number(char_piece)) {
-      square = SquareIndices(square + (char_piece - '0'));
+  SquareIndices square = A1;
+  int rank = 7;
+  int file = 0;
+  char char_piece = ' ';
+  int piece_int;
+
+  for (char& c : fen) {
+    piece = piece_map[c];
+    if (piece) {
+      square = static_cast<SquareIndices>(rank * 8 + file);
+
+      m_bb.set_piece_at_pos(piece, square);
+      add_to_board(piece, square);
+      file++;
+    } else if (is_number(c)) {
+      file += (c - '0');
+    } else if (c == '/') {
+      rank--;
+      file = 0;
     }
+
+    if (rank < 0) break;
   }
 }
 
@@ -205,6 +218,7 @@ void Board::capture_piece(Move mv, SquareIndices pos) {
   turn->save_captured_pieces(piece_str_name.at(captured_piece));
 }
 
+void Board::change_turn() { turn = turn->get_opponent(); }
 void Board::capture_piece_bit(int piece_captured, SquareIndices pos) {
   m_bb.capture_piece(piece_captured, pos);
 }
@@ -281,7 +295,7 @@ vector<string> Board::Info::get_info() {
   Player* turn = p_board->get_active_player();
   Player* opponent = p_board->get_opponent();
 
-  string score = std::to_string(p_board->get_score());
+  string score = std::to_string(p_board->evaluate_board());
   string moved = turn->get_played_moves();
   string opp_moved = opponent->get_played_moves();
   string captured = turn->get_captured_pieces();
@@ -294,21 +308,21 @@ vector<string> Board::Info::get_info() {
   return m_info;
 }
 
-void Board::Info::format_block(string title, string msg, int start) {
-  recursive_block(title + ": " + msg, start);
+void Board::Info::format_block(string title, string msg, int start_line) {
+  recursive_block(title + ": " + msg, start_line);
 }
 
-void Board::Info::recursive_block(string msg, int index) {
+void Board::Info::recursive_block(string msg, int line_index) {
   if (msg.size() < line_max_len) {
-    m_info[index] = format_line(msg);
+    m_info[line_index] = format_line(msg);
     return;
   }
 
   string resized_line = msg.substr(0, line_max_len);
-  m_info[index] = format_line(resized_line);
+  m_info[line_index] = format_line(resized_line);
 
   msg = msg.substr(line_max_len/* to_end */);
-  recursive_block(msg, ++index);
+  recursive_block(msg, ++line_index);
 }
 
 string Board::Info::format_line(string line) {

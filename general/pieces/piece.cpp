@@ -36,7 +36,6 @@ box* Piece::get_drawing(bool is_black_square) {
 }
 Piecetype Piece::get_type_and_color() { return m_type; }
 bool Piece::is_black() { return black; }
-int Piece::get_value() { return m_value; }
 void Piece::clear_bit(SquareIndices pos) {
   bitUtility::clear_bit(&m_bitboard, pos);
 }
@@ -47,3 +46,6 @@ void Piece::make_move(SquareIndices from, SquareIndices to) {
   clear_bit(from); set_bit(to);
 }
 void Piece::clear_bitboard() { m_bitboard = BLANK; }
+int Piece::get_material_score() {
+  return (bitUtility::count_1s(m_bitboard) * m_value);
+}

@@ -1,7 +1,6 @@
 #include "player.h"
 
 Player::Player(bool has_black_pieces) : m_black_pieces(has_black_pieces) {}
-
 Player::~Player() {}
 
 PlayerMove Player::get_next_move() {

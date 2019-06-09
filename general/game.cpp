@@ -50,8 +50,6 @@ void Game::set_players(Playertype p1, Playertype p2) {
     new AiPlayer(BLACK, m_board.get_movement());
 
   m_board.set_players(p_player1, p_player2);
-  p_player2->set_opponent(p_player1);
-  p_player1->set_opponent(p_player2);
 }
 
 int Game::get_option(int from, int to) {
@@ -76,9 +74,7 @@ void Game::play() {
     cout << m_board;
     player_move = m_board.get_next_move();
 
-    if (player_move.get_input() == "quit" ||
-        player_move.get_input() == "close" ||
-        player_move.get_input() == "exit")
+    if (has_player_quit(player_move.get_input()))
       return;
 
     if (player_move.get_input() == "undo") {
@@ -103,9 +99,13 @@ void Game::play() {
   if (is_checkMate) {
     std::cout << "checkmate\n";
     std::cout << "Player "
-      << (m_board.active_player()->has_black_pieces()? "white" : "black")
+      << (m_board.get_active_player()->has_black_pieces()? "white" : "black")
       << " won.";
   }
+}
+
+bool Game::has_player_quit(string str) {
+  return str == "quit" || str == "close" || str == "exit";
 }
 
 void Game::print_message(Msg message) {

@@ -186,25 +186,12 @@ constexpr U64 MagicBitboard::batt(int sq, U64 block) {
   return result;
 }
 
-int MagicBitboard::count_1s(U64 b) {
-  int r;
-  for (r = 0; b; r++, b &= b - 1) {}
-  return r;
-}
-
-int MagicBitboard::pop_1st_bit(U64* bb) {
-  U64 b = *bb ^ (*bb - 1);
-  unsigned int fold = (unsigned) ((b & 0xffffffff) ^ (b >> 32));
-  *bb &= (*bb - 1);
-  return BitTable[(fold * 0x783a9b23) >> 26];
-}
-
 U64 MagicBitboard::set_occupancy(int index, int bits, U64 m) {
   int i, j;
   U64 result = 0ULL;
 
   for (i = 0; i < bits; i++) {
-    j = pop_1st_bit(&m);
+    j = bitUtility::pop_1st_bit(&m);
     if (index & (1 << i))
       result |= (1ULL << j);
   }
@@ -222,7 +209,7 @@ void MagicBitboard::_init_slider_masks_shifs_occupancies(int isRook) {
     m_rook_tbl[bitRef].shift = 64 - RBits[bitRef];
     m_bishop_tbl[bitRef].shift = 64 - BBits[bitRef];
     mask = isRook ? m_rook_tbl[bitRef].mask : m_bishop_tbl[bitRef].mask;
-    bitCount = count_1s(mask);
+    bitCount = bitUtility::count_1s(mask);
     variationCount = 1 << bitCount;
     for (i = 0; i < variationCount; i++) {
       if (isRook) {
@@ -243,7 +230,7 @@ void MagicBitboard::_init_tables(int isRook) {
 
   for (int bitRef = A1; bitRef < SquareEnd; ++bitRef) {
     mask = isRook ? m_rook_tbl[bitRef].mask : m_bishop_tbl[bitRef].mask;
-    bitCount = count_1s(mask);
+    bitCount = bitUtility::count_1s(mask);
     variations = 1ULL << bitCount;
 
     for (i=0; i < variations; i++) {
