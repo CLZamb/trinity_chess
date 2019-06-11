@@ -12,45 +12,49 @@ endif()
 project(ChessProject)
 
 include_directories(${DIRECTORY}
-  logic
-  display
-  general
-  general/pieces
+  src/display
+  src/general
+  src/general/pieces
+  src/logic
+  src/logic/search
   )
 
 set(SOURCE_FILES
-  main.cpp
-  defs.h
-  display/Idisplay.h
-  display/Idisplay.cpp
-  display/boxStruct.h
-  display/drawings.hpp
-  display/drawings.cpp
-  logic/board.h
-  logic/board.cpp
-  logic/player.h
-  logic/player.cpp
-  logic/AiPlayer.h
-  logic/AiPlayer.cpp
-  logic/magic_bitboard.h
-  logic/magic_bitboard.cpp
-  logic/movement.h
-  logic/movement.cpp
-  logic/move.h
-  logic/bitboard.h
-  logic/bitboard.cpp
-  logic/transposition_table.h
-  logic/transposition_table.cpp
-  logic/Transposition_table_entry.h
-  logic/Transposition_table_entry.cpp
-  logic/ZobristKey.h
-  logic/ZobristKey.cpp
-  general/game.h
-  general/game.cpp
-  general/messages.h
-  general/messages.cpp
-  general/pieces/piece.h
-  general/pieces/piece.cpp
+  src/main.cpp
+  src/display/Idisplay.h
+  src/display/Idisplay.cpp
+  src/display/boxStruct.h
+  src/display/drawings.hpp
+  src/display/drawings.cpp
+  src/logic/board.h
+  src/logic/board.cpp
+  src/logic/player.h
+  src/logic/player.cpp
+  src/logic/AiPlayer.h
+  src/logic/AiPlayer.cpp
+  src/logic/magic_bitboard.h
+  src/logic/magic_bitboard.cpp
+  src/logic/movement.h
+  src/logic/movement.cpp
+  src/logic/move.h
+  src/logic/bitboard.h
+  src/logic/bitboard.cpp
+  src/logic/search/Search.h
+  src/logic/search/Search.cpp
+  src/logic/search/transposition_table.h
+  src/logic/search/transposition_table.cpp
+  src/logic/search/Transposition_table_entry.h
+  src/logic/search/Transposition_table_entry.cpp
+  src/logic/search/ZobristKey.h
+  src/logic/search/ZobristKey.cpp
+  src/general/defs.h
+  src/general/game.h
+  src/general/game.cpp
+  src/general/messages.h
+  src/general/messages.cpp
+  src/general/pieces/piece.h
+  src/general/pieces/piece.cpp
+  src/general/utils.h
   )
 
 set(
