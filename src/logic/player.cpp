@@ -26,9 +26,8 @@ void Player::set_next_move(string input) {
   }
 
   if (list_pos.size() == 2) {
-    int from = convert_to_int_pos(list_pos[0][0], list_pos[0][1]);
-    int to = convert_to_int_pos(list_pos[1][0] , list_pos[1][1]);
-
+    int from = utils::square_str_to_int(list_pos[0]);
+    int to = utils::square_str_to_int(list_pos[1]);
     m_pl_move.set_valid(true);
     m_move.set_move(from, to);
   } else {
@@ -36,10 +35,6 @@ void Player::set_next_move(string input) {
   }
 
   m_pl_move.set_move(m_move, input);
-}
-
-int Player::convert_to_int_pos(char file, char rank) {
-  return (file - 'a') + ((rank - '1')*8);
 }
 
 vector<string> Player::scan(string str, const std::regex reg) {

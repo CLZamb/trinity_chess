@@ -30,7 +30,7 @@ class Piece {
   PieceDrawing* w_sq_drawing = nullptr;
   PieceDrawing* b_sq_drawing = nullptr;
   bool black = false;
-  int m_value = 0;
+  int m_material_score = 0;
 };
 
 #endif /* PIECE_H */

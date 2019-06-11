@@ -26,7 +26,7 @@ void Piece::create_piece_drawing(Piecetype pct) {
 }
 
 void Piece::set_score(Piecetype pct) {
-  m_value = utils::constant::piece_score_value[pct];
+  m_material_score = utils::constant::piece_material_score[pct];
 }
 
 U64 Piece::get_bitboard() { return m_bitboard; }
@@ -47,5 +47,5 @@ void Piece::make_move(SquareIndices from, SquareIndices to) {
 }
 void Piece::clear_bitboard() { m_bitboard = BLANK; }
 int Piece::get_material_score() {
-  return (bitUtility::count_1s(m_bitboard) * m_value);
+  return (bitUtility::count_1s(m_bitboard) * m_material_score);
 }

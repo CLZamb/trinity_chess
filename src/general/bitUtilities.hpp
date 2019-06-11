@@ -32,6 +32,28 @@ namespace bitUtility {
     *bb &= (*bb - 1);
     return BitTable[(fold * 0x783a9b23) >> 26];
   }
+
+  inline void printBitBoard(U64 bb) {
+    U64 shift = 1ULL;
+    int rank = 0;
+    int file = 0;
+    int position = 0;
+
+    std::cout << '\n';
+    for (rank = 7; rank >= 0; --rank) {
+      for (file = 0; file <= 7; ++file) {
+        position = rank * 8 + file;
+
+        if ((shift << position) & bb)
+          std::cout << "X";
+        else
+          std::cout << "-";
+      }
+
+      std::cout << '\n';
+    }
+    std::cout << "\n\n";
+  }
 }  // namespace bitUtility
 
 #endif /* BITUTILITIES_H */

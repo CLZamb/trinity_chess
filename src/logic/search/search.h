@@ -13,6 +13,8 @@ class Search {
 
   private:
     bool time_out();
+    auto get_time_now();
+    auto get_time_elapsed();
     void pick_next_move(int index, MoveList*);
     void clear_for_seach();
     void generate_moves(MoveList*);
@@ -29,9 +31,7 @@ class Search {
     bool m_stop = false;
     int total_nodes = 0;
     std::chrono::time_point<std::chrono::steady_clock> m_start;
-    // int m_time_allocated = 4000;
     int m_time_allocated = 1500;
-    int m_elapsed = 0;
 };
 
 #endif /* SEARCH_H */

@@ -26,7 +26,5 @@ string AiPlayer::convert_to_string_pos(Move mv) {
 
   int from = mv.get_from();
   int to = mv.get_to();
-  return
-    utils::constant::sq_int_pos_to_str[from] +
-    utils::constant::sq_int_pos_to_str[to];
+  return utils::square_int_to_str(from) + utils::square_int_to_str(to);
 }

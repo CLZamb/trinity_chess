@@ -57,31 +57,7 @@ void Bitboard::_init_nonsliders_attacks() {
     m_b_pawn_attacks[sq] = pawn_mask(sq, BLACK);
     m_knight_attacks[sq] = knight_mask(sq);
     m_king_attacks[sq] = king_mask(sq);
-    m_w_pawn_non_attacks[sq] = pawn_non_attack(sq, WHITE);
-    m_b_pawn_non_attacks[sq] = pawn_non_attack(sq, BLACK);
   }
-}
-
-U64 Bitboard::pawn_non_attack(int sq, int side) {
-  U64 result = 0ULL;
-  U64 fromSq = ONE << sq;
-
-  if (side == WHITE) {
-    if (fromSq << 8)
-      result |= fromSq << 8;
-
-    if ((fromSq & ROWMASK[1]) << 16)
-      result |= fromSq  << 16;
-
-  } else {
-    if (fromSq >> 8)
-      result |= fromSq >> 8;
-
-    if ((fromSq & ROWMASK[6]) >> 16)
-      result |= fromSq >> 16;
-  }
-
-  return result;
 }
 
 U64 Bitboard::pawn_mask(int sq, int side) {
@@ -216,8 +192,6 @@ void Bitboard::gen_all_pawn_moves(int type, MoveList* moveList, bool quiet /*tru
 
     if (quiet) {
       dest_bitboard = get_non_attack_moves(type, SquareIndices(from));
-      dest_bitboard &=
-        ~(utils::check::is_black_piece(type) ? m_all_b_pieces : m_all_w_pieces);
       gen_all_quiet_moves(dest_bitboard, mv, moveList);
     }
   }
@@ -243,10 +217,16 @@ U64 Bitboard::get_white_pawn_attacks(SquareIndices from) {
 U64 Bitboard::get_non_attack_moves(int type, SquareIndices from) {
   if (type != bP && type != wP) return BLANK;
 
-  if (type == bP)
-    return m_b_pawn_non_attacks[from] & ~m_occupied;
+  U64 non_attacks = m_pieces[type]->get_bitboard() & (ONE << from);
+  if (type == bP) {
+    non_attacks = (non_attacks >> 8) & ~m_occupied;
+    non_attacks |= ((non_attacks & ROWMASK[5]) >> 8) & ~m_occupied;
+    return non_attacks;
+  }
 
-  return m_w_pawn_non_attacks[from] & ~m_occupied;
+  non_attacks = (non_attacks << 8) & ~m_occupied;
+  non_attacks |= ((non_attacks & ROWMASK[2]) << 8) & ~m_occupied;
+  return non_attacks;
 }
 
 void Bitboard::gen_all_piece_moves(int type, MoveList* moveList, bool quiet /*true*/) {
@@ -320,13 +300,13 @@ void Bitboard::set_piece_at_pos(int piece, SquareIndices square) {
 
 void Bitboard::clear_search_history() {
   for (int i = 0; i < 13; ++i)
-    for (int j = 0; j < kTotal_sqs; ++j)
+    for (int j = 0; j < utils::constant::ksquares; ++j)
       search_history[i][j] = 0;
 }
 
 void Bitboard::clear_killer_moves() {
   for (int i = 0; i < 2; ++i)
-    for (int j = 0; j < kMaxDepth; ++j)
+    for (int j = 0; j < utils::constant::kMaxDepth; ++j)
       killers[i][j].set_move(0);
 }
 

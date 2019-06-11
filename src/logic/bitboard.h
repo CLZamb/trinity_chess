@@ -48,47 +48,6 @@ class Bitboard {
     Piece* get_piece(int type);
 
  private:
-    static const int kTotal_sqs = 64;
-    static const int kMaxDepth = 64;
-    int ply = 0;
-    int pieces_score[13][kTotal_sqs] = {{0}};
-    int MvvLvaScores[13][13];
-    int search_history[13][kTotal_sqs] = {{0}};
-    Move killers[2][kMaxDepth];
-    MagicBitboard magic_bb;
-
-    U64 m_all_w_pieces = ALLWHITESTART;
-    U64 m_all_b_pieces = ALLBLACKSTART;
-    U64 m_occupied = ALLWHITESTART|ALLBLACKSTART;
-
-    U64 m_w_pawn_attacks[kTotal_sqs];
-    U64 m_b_pawn_attacks[kTotal_sqs];
-    U64 m_knight_attacks[kTotal_sqs];
-    U64 m_king_attacks[kTotal_sqs];
-
-    U64 m_b_pawn_non_attacks[kTotal_sqs];
-    U64 m_w_pawn_non_attacks[kTotal_sqs];
-
-    U64 Enpessant[2];
-
-    Piece* m_pieces[13] {
-      nullptr,  // EMPTY 0
-      // black pieces
-      new Piece(bP, PAWNSTART & ALLBLACKSTART),  // 1
-      new Piece(bR, ROOKSTART & ALLBLACKSTART),
-      new Piece(bN, KNIGHTSTART & ALLBLACKSTART),
-      new Piece(bB, BISHOPSTART & ALLBLACKSTART),
-      new Piece(bQ, QUEENSTART & ALLBLACKSTART),
-      new Piece(bK, KINGSTART & ALLBLACKSTART),
-      // white pieces
-      new Piece(wP, PAWNSTART & ALLWHITESTART),
-      new Piece(wR, ROOKSTART & ALLWHITESTART),
-      new Piece(wN, KNIGHTSTART & ALLWHITESTART),
-      new Piece(wB, BISHOPSTART & ALLWHITESTART),
-      new Piece(wQ, QUEENSTART & ALLWHITESTART),
-      new Piece(wK, KINGSTART & ALLWHITESTART),  // 12
-    };
-
     int pop_1st_bit(U64* bb);
     int count_1s(U64 b);
     void _init_bitmasks();
@@ -111,7 +70,41 @@ class Bitboard {
     U64 pawn_mask(int sq, int side);
     U64 knight_mask(int sq);
     U64 king_mask(int sq);
-    U64 pawn_non_attack(int sq, int side);
+    Piece* m_pieces[13] {
+      nullptr,  // EMPTY 0
+      // black pieces
+      new Piece(bP, PAWNSTART & ALLBLACKSTART),  // 1
+      new Piece(bR, ROOKSTART & ALLBLACKSTART),
+      new Piece(bN, KNIGHTSTART & ALLBLACKSTART),
+      new Piece(bB, BISHOPSTART & ALLBLACKSTART),
+      new Piece(bQ, QUEENSTART & ALLBLACKSTART),
+      new Piece(bK, KINGSTART & ALLBLACKSTART),
+      // white pieces
+      new Piece(wP, PAWNSTART & ALLWHITESTART),
+      new Piece(wR, ROOKSTART & ALLWHITESTART),
+      new Piece(wN, KNIGHTSTART & ALLWHITESTART),
+      new Piece(wB, BISHOPSTART & ALLWHITESTART),
+      new Piece(wQ, QUEENSTART & ALLWHITESTART),
+      new Piece(wK, KINGSTART & ALLWHITESTART),  // 12
+    };
+
+    int ply = 0;
+    int pieces_score[13][utils::constant::squares] = {{0}};
+    int MvvLvaScores[13][13];
+    int search_history[13][utils::constant::squares] = {{0}};
+    Move killers[2][utils::constant::kMaxDepth];
+    MagicBitboard magic_bb;
+
+    U64 m_all_w_pieces = ALLWHITESTART;
+    U64 m_all_b_pieces = ALLBLACKSTART;
+    U64 m_occupied = ALLWHITESTART|ALLBLACKSTART;
+
+    U64 m_w_pawn_attacks[utils::constant::squares];
+    U64 m_b_pawn_attacks[utils::constant::squares];
+    U64 m_knight_attacks[utils::constant::squares];
+    U64 m_king_attacks[utils::constant::squares];
+
+    U64 Enpessant[2];
 };
 
 #endif /* BITBOARD_H */

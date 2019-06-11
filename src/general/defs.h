@@ -76,6 +76,14 @@ enum Piecetype : int {
   EMPTY, bP, bR, bN, bB, bQ, bK, wP, wR, wN, wB, wQ, wK
 };
 
+enum Pieces : int {
+  PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING,
+};
+
+enum PieceColor : int {
+  WHITE, BLACK
+};
+
 enum Playertype : int {
   HUMAN, CPU
 };
@@ -87,11 +95,6 @@ enum OPTION : int {
   EXIT,
   CREDITS
 };
-
-enum PieceColor : int {
-  WHITE, BLACK
-};
-
 
 const int VictimScore[13] =
 { 0, 10, 40, 20, 30, 50, 60, 10, 40, 20, 30, 50, 60};
@@ -159,7 +162,7 @@ const int PawnTable[64] = {
   0, 0, 0, 0, 0, 0, 0, 0,
   2, 2, 0, -2, -2, 0, 2, 2,
   1, 0, 0, 1, 1, 0, 0, 1,
-  0, 0, 2, 6, 6, 2, 0, 0,
+  0, 0, 2, 5, 5, 2, 0, 0,
   1, 1, 1, 2, 2, 1, 1, 1,
   2, 2, 2, 4, 4, 2, 2, 2,
   4, 4, 4, 6, 6, 4, 4, 4,

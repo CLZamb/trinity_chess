@@ -55,7 +55,6 @@ class Player {
   bool m_black_pieces;
 
  private:
-  int convert_to_int_pos(char file, char rank);
   void set_next_move(string input);
   vector<string> scan(string, const std::regex);
 };

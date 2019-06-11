@@ -30,44 +30,58 @@ constexpr int piece_types_each_side = 6;
 constexpr int size_piece_types = piece_types_each_side * 2 + 1;
 
 constexpr std::array<int, utils::size_piece_types>
-set_piece_values(const std::initializer_list<int>& values) {
-  assert(values.size() == utils::piece_types_each_side);
+set_piece_values(const std::initializer_list<int>& scores) {
+  assert(scores.size() == utils::piece_types_each_side);
 
-  std::array<int, utils::size_piece_types> pieces_values{0};
+  std::array<int, utils::size_piece_types> pieces_scores{0};
   // black pieces
-  int index = bP;
-  for (const auto value : values)
-    pieces_values[index++] = value;
+  int piece = bP;
+  for (const auto score : scores)
+    pieces_scores[piece++] = score;
 
-  for (const auto value : values)
-    pieces_values[index++] = -value;
+  // white pieces
+  piece = wP;
+  for (const auto score : scores)
+    pieces_scores[piece++] = -score;
 
-  return pieces_values;
+  return pieces_scores;
 }
 
-inline vector<string> square_str() {
-  vector<string> square_str{65, "0"};
-  int position = 0;
-  char rank = 'A', file = '1';
-  for (int row = 7; row >= 0; --row) {
-    for (int col = 0; col < 8; ++col) {
-      position = row * 8 + col;
+inline string square_int_to_str(int sq) {
+  if (sq < A1 || sq > H8)
+    return "-not a valid position-";
 
-      square_str[position] = rank + col;
-      square_str[position] += file + row;
-    }
-  }
+  string square_str;
+  square_str = 'A' + (sq % 8);
+  square_str += '1' + (sq / 8);
   return square_str;
 }
 
-namespace constant {
-  const std::array<int, utils::size_piece_types> piece_score_value =
-    utils::set_piece_values({
-      // pawn, rook, knight, bishop, queen, king
-      100, 500, 300, 300, 900, 10000});
+inline int square_str_to_int(string sq) {
+  if (sq.size() < 2) return 0;
 
-  const vector<string> sq_int_pos_to_str = utils::square_str();
-   // const std::array<char*, 65> square_int_pos_to_str =
+  char file = sq[0], rank = sq[1];
+  int square_int = (file - 'a') + ((rank - '1') * 8);
+
+  if (square_int < A1 || square_int > H8) return 0;
+  return square_int;
+}
+
+namespace constant {
+  const std::array<int, utils::size_piece_types> piece_material_score =
+    utils::set_piece_values(
+    {
+      /* [PAWN]  */100,
+      /* [ROOK]  */500,
+      /* [KNIGHT]  */300,
+      /* [BISHOP]  */300,
+      /* [QUEEN]  */900,
+      /* [KING]  */ 10000
+    });
+
+  const size_t squares = 64;
+  const int ksquares = 64;
+  const int kMaxDepth = 64;
 }  // namespace constant
 }  // namespace utils
 

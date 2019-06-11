@@ -2,16 +2,18 @@
 Search::Search(Board* board)
   : movement(board->get_movement()), p_board(board) {}
 
-bool Search::time_out() {
-  m_elapsed =
-    std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - m_start).count();
+Search::~Search() {}
+auto Search::get_time_now()  { return std::chrono::steady_clock::now(); }
+auto Search::get_time_elapsed() {
+  return std::chrono::duration_cast<std::chrono::milliseconds>
+    (get_time_now() - m_start).count();
+}
 
-  if (m_elapsed >= (m_time_allocated)) return true;
+bool Search::time_out() {
+  if (get_time_elapsed() >= m_time_allocated) return true;
 
   return false;
 }
-
-Search::~Search() {}
 
 void Search::clear_for_seach() {
   // movement->m_table.clear();
@@ -21,7 +23,7 @@ void Search::clear_for_seach() {
 }
 
 Move Search::search_best_move() {
-  m_start = std::chrono::steady_clock::now();
+  m_start = get_time_now();
   Move best_move;
   m_stop = false;
   clear_for_seach();
@@ -30,25 +32,16 @@ Move Search::search_best_move() {
   for (int currDepth = 1;  ; currDepth++) {
     total_depth = currDepth;
     best_move = root_negamax(currDepth);
-    m_elapsed =
-      std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - m_start).count();
-
-    // std::cout << "depth: : " << total_depth  << std::endl;
-    // std::cout << "nodes: " << total_nodes << std::endl;
-    // std::cout << "score: " << evaluate_board() << std::endl;
     if (m_stop)
       break;
 
-    if (m_elapsed >= (m_time_allocated/2)) break;
+    if (get_time_elapsed() >= (m_time_allocated/2)) break;
   }
 
-  std::cout << "depth: : " << total_depth  << std::endl;
-  std::cout << "nodes: " << total_nodes << std::endl;
-  auto end = std::chrono::steady_clock::now();
-  cout << "Elapsed time in milliseconds : "
-    << std::chrono::duration_cast<std::chrono::milliseconds>(end - m_start).count()
-    << " ms" << endl;
-
+  // std::cout << "depth: : " << total_depth  << std::endl;
+  // std::cout << "nodes: " << total_nodes << std::endl;
+  std::cout
+    << "Elapsed time in milliseconds : " << get_time_elapsed() << " ms" << endl;
   return best_move;
 }
 
@@ -79,6 +72,10 @@ Move Search::root_negamax(int cur_depth) {
         break;
     }
   }
+
+  std::cout << "depth: " << cur_depth  << " ";
+  std::cout << "nodes: " << total_nodes << " ";
+  std::cout << "score: " << alpha << std::endl;
 
   if (!m_stop) {
     movement->m_hash_table.set(
