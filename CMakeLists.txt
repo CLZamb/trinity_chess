@@ -39,8 +39,8 @@ set(SOURCE_FILES
   src/logic/move.h
   src/logic/bitboard.h
   src/logic/bitboard.cpp
-  src/logic/search/Search.h
-  src/logic/search/Search.cpp
+  src/logic/search/search.h
+  src/logic/search/search.cpp
   src/logic/search/transposition_table.h
   src/logic/search/transposition_table.cpp
   src/logic/search/Transposition_table_entry.h
