@@ -6,6 +6,7 @@
 #include <initializer_list>  // std::initializer_list
 #include <vector>
 #include <string>
+#include <assert.h>
 
 using std::map;
 using std::vector;
@@ -29,7 +30,7 @@ namespace check {
 constexpr int piece_types_each_side = 6;
 constexpr int size_piece_types = piece_types_each_side * 2 + 1;
 
-constexpr std::array<int, utils::size_piece_types>
+inline std::array<int, utils::size_piece_types>
 set_piece_values(const std::initializer_list<int>& scores) {
   assert(scores.size() == utils::piece_types_each_side);
 
