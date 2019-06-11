@@ -22,7 +22,7 @@ chess engine written in C++11
 
 # Trinity Engine
 
-[![demo](https://asciinema.org/a/246302.svg)](https://asciinema.org/a/246302?autoplay=1)
+[![demo](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY.svg)](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY?autoplay=1)
 
 ## License
 MIT License
