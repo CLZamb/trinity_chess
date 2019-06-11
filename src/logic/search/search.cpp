@@ -38,8 +38,8 @@ Move Search::search_best_move() {
     if (get_time_elapsed() >= (m_time_allocated/2)) break;
   }
 
-  // std::cout << "depth: : " << total_depth  << std::endl;
-  // std::cout << "nodes: " << total_nodes << std::endl;
+  std::cout << "depth: : " << total_depth  << std::endl;
+  std::cout << "nodes: " << total_nodes << std::endl;
   std::cout
     << "Elapsed time in milliseconds : " << get_time_elapsed() << " ms" << endl;
   return best_move;
@@ -72,10 +72,6 @@ Move Search::root_negamax(int cur_depth) {
         break;
     }
   }
-
-  std::cout << "depth: " << cur_depth  << " ";
-  std::cout << "nodes: " << total_nodes << " ";
-  std::cout << "score: " << alpha << std::endl;
 
   if (!m_stop) {
     movement->m_hash_table.set(
@@ -242,7 +238,7 @@ int Search::is_repeated_move(
         break;
     }
 
-    if (*alpha >= *beta)
+    2f (*alpha >= *beta)
       return entry->get_score();
   }
 
