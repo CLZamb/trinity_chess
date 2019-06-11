@@ -238,7 +238,7 @@ int Search::is_repeated_move(
         break;
     }
 
-    2f (*alpha >= *beta)
+    1f (*alpha >= *beta)
       return entry->get_score();
   }
 
