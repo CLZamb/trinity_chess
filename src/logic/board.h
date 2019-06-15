@@ -48,6 +48,8 @@ class Board {
   void clear_killer_moves();
   void clear_search_history();
   void reset_ply();
+  void increment_ply();
+  void deincrement_ply();
   int get_ply();
   int evaluate_board();
   U64 get_piece_attacks(int type, int from);

@@ -97,7 +97,7 @@ Move Search::root_negamax(int cur_depth) {
     break (* cut-off *)
   return value
 */
-int Search::negamax(int depth, int alpha, int beta) {
+int Search::negamax(int depth, int alpha, int beta, bool do_null/*true*/) {
   if (m_stop || time_out()) {
     m_stop = true;
     return evaluate_board();
@@ -126,9 +126,19 @@ int Search::negamax(int depth, int alpha, int beta) {
     return quiescence_search(alpha, beta);
 
   int value = -kInfinite;
+
+  if (do_null && p_board->get_ply() && depth >= 4) {
+    make_null_move();
+    value = -negamax(depth - 4, -beta, -beta + 1, false);
+    take_null_move();
+    if (m_stop) return evaluate_board();
+    if (value >= beta) return beta;
+  }
+
   int counter = 0;
   Move* best_move = &m_legalMoves.at(0);
   bool fullWindow = true;
+  value = -kInfinite;
   for (Move& mv : m_legalMoves) {
     pick_next_move(counter++, &m_legalMoves);
     movement->move_piece_bits(&mv);
@@ -291,5 +301,12 @@ int Search::evaluate_board() {
   return -p_board->evaluate_board();
 }
 
-void Search::make_null_move() {}
-void Search::take_null_move() {}
+void Search::make_null_move() {
+  p_board->increment_ply();
+  movement->change_turn();
+}
+
+void Search::take_null_move() {
+  p_board->deincrement_ply();
+  movement->change_turn();
+}

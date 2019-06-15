@@ -234,6 +234,8 @@ void Board::clear_killer_moves() { m_bb.clear_killer_moves(); }
 void Board::clear_search_history() { m_bb.clear_search_history(); }
 void Board::reset_ply() { m_bb.reset_ply(); }
 int Board::get_ply() { return m_bb.get_ply(); }
+void Board::increment_ply() { return m_bb.increment_ply(); }
+void Board::deincrement_ply() { return m_bb.deincrement_ply(); }
 
 U64 Board::get_piece_attacks(int type, int from) {
   return m_bb.get_piece_attacks(type, SquareIndices(from));

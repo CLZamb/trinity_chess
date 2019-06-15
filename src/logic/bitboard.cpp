@@ -37,10 +37,8 @@ void Bitboard::_init_pieces_table_values() {
 }
 
 void Bitboard::_init_MvvLva() {
-  int Attacker;
-  int Victim;
-  for (Attacker = bP; Attacker <= wK; ++Attacker)
-    for (Victim = bP; Victim <= wK; ++Victim)
+  for (int Attacker = bP; Attacker <= wK; ++Attacker)
+    for (int Victim = bP; Victim <= wK; ++Victim)
       MvvLvaScores[Victim][Attacker] =
         VictimScore[Victim] + 6 - (VictimScore[Attacker] / 10);
 }
@@ -50,9 +48,7 @@ Piece* Bitboard::get_piece(int type) {
 }
 
 void Bitboard::_init_nonsliders_attacks() {
-  int sq;
-
-  for (sq = 0; sq < 64; sq++) {
+  for (int sq = 0; sq < 64; sq++) {
     m_w_pawn_attacks[sq] = pawn_mask(sq, WHITE);
     m_b_pawn_attacks[sq] = pawn_mask(sq, BLACK);
     m_knight_attacks[sq] = knight_mask(sq);
@@ -366,6 +362,8 @@ void Bitboard::clear_killer_moves() {
 
 void Bitboard::reset_ply() { ply = 0; }
 int Bitboard::get_ply() { return ply; }
+void Bitboard::increment_ply() { ply++; }
+void Bitboard::deincrement_ply() { ply--; }
 
 void Bitboard::clear_bit_at_player_pieces(bool is_black, SquareIndices pos) {
   bitUtility::clear_bit(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);

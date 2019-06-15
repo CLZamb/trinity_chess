@@ -20,10 +20,10 @@ class Search {
     void generate_all_cap_moves(MoveList*);
     void make_null_move();
     void take_null_move();
-    int negamax(int deapth, int alpha, int beta);
     int quiescence_search(int alpha, int beta);
     int is_repeated_move(const int& depth, int* alpha, int* beta);
     int evaluate_board();
+    int negamax(int deapth, int alpha, int beta, bool do_null = true);
     Move root_negamax(int cur_depth);
     TTEntry::Flag get_flag(int alpha, int orig_alpha, int beta);
 

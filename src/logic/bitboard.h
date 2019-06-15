@@ -42,6 +42,8 @@ class Bitboard {
     void clear_search_history();
     void clear_killer_moves();
     void reset_ply();
+    void increment_ply();
+    void deincrement_ply();
     int evaluate_board();
     int get_movility_score(int piece);
     int get_ply();
