@@ -9,7 +9,6 @@ class Search {
     explicit Search(Board* board);
     virtual ~Search();
     Move search_best_move();
-    int evaluate_board();
 
   private:
     bool time_out();
@@ -19,9 +18,12 @@ class Search {
     void clear_for_seach();
     void generate_moves(MoveList*);
     void generate_all_cap_moves(MoveList*);
+    void make_null_move();
+    void take_null_move();
     int negamax(int deapth, int alpha, int beta);
     int quiescence_search(int alpha, int beta);
     int is_repeated_move(const int& depth, int* alpha, int* beta);
+    int evaluate_board();
     Move root_negamax(int cur_depth);
     TTEntry::Flag get_flag(int alpha, int orig_alpha, int beta);
 
@@ -32,6 +34,7 @@ class Search {
     int total_nodes = 0;
     std::chrono::time_point<std::chrono::steady_clock> m_start;
     int m_time_allocated = 1500;
+    static const int kInfinite = std::numeric_limits<int>::max();
 };
 
 #endif /* SEARCH_H */

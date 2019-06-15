@@ -53,14 +53,12 @@ inline string square_int_to_str(int sq) {
     return "-not a valid position-";
 
   string square_str;
-  square_str = 'A' + (sq % 8);
+  square_str = 'a' + (sq % 8);
   square_str += '1' + (sq / 8);
   return square_str;
 }
 
 inline int square_str_to_int(string sq) {
-  if (sq.size() < 2) return 0;
-
   char file = sq[0], rank = sq[1];
   int square_int = (file - 'a') + ((rank - '1') * 8);
 
@@ -77,7 +75,7 @@ namespace constant {
       /* [KNIGHT]  */300,
       /* [BISHOP]  */300,
       /* [QUEEN]  */900,
-      /* [KING]  */ 10000
+      /* [KING]  */10000
     });
 
   const size_t squares = 64;

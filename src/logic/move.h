@@ -21,6 +21,9 @@ class Move {
   Move(unsigned int from, unsigned int to, unsigned int type) {
     m_move = (from & 0x3f) | ((to & 0x3f) << 6) | ((type & 0xf) << 17);
   }
+  Move(unsigned int from, unsigned int to, unsigned int type, unsigned int captured) {
+    m_move = (from & 0x3f) | ((to & 0x3f) << 6) | ((captured << 0xf) & 12) | ((type & 0xf) << 17);
+  }
 
   unsigned int get_move() { return m_move; }
   SquareIndices get_from() const {

@@ -4,9 +4,9 @@
 Board::Board() {
   // parser_fen("r1bqkbnr/pppppppp/2n5/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
   // parser_fen("r1bqkbnr/pppppppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq e3 0 1");
-  // rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq e3 0 1
-  // r2qr1k1/1bp1bppp/p1np1n2/1p2p3/3PP3/1BP2N1P/PP3PP1/RNBQR1K1 w - - 1 10
-  // rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+  // parser_fen("rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq e3 0 1");
+  // parser_fen("r2qr1k1/1bp1bppp/p1np1n2/1p2p3/3PP3/1BP2N1P/PP3PP1/RNBQR1K1 w - - 1 10");
+  // parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 }
 
 Board::~Board() {
@@ -19,6 +19,8 @@ void Board::_init() {
   m_bb._init();
   create_board_squares();
   parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+  // parser_fen("r2qr1k1/1bp1bppp/p1np1n2/1p2p3/3PP3/1BP2N1P/PP3PP1/RNBQR1K1 w - - 1 10");
+  // parser_fen("r1bqkbnr/pppppppp/2n5/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
   movement_controller._init(turn->has_black_pieces());
 }
 
@@ -328,6 +330,6 @@ void Board::Info::recursive_block(string msg, int line_index) {
 }
 
 string Board::Info::format_line(string line) {
-  int num_spaces = line_max_len - line.size()/*┃  ┃*/;
+  int num_spaces = line_max_len - line.size();
   return  "┃ " + line + std::string(num_spaces, ' ') + " ┃";
 }

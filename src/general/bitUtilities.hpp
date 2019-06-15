@@ -54,6 +54,25 @@ namespace bitUtility {
     }
     std::cout << "\n\n";
   }
+
+  /***********************************************************
+   * Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
+   * Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
+   * Copyright (C) 2015-2019 Marco Costalba, Joona Kiiski, Gary Linscott, Tord Romstad
+   * Stockfish, a UCI chess playing engine derived from Glaurung 2.1
+   *************************************************************/
+  constexpr U64 FileABB = 0x0101010101010101ULL;
+  constexpr U64 FileHBB = FileABB << 7;
+  /// shift() moves a bitboard one step along direction D
+  template<Direction D>
+  constexpr U64 shift(U64 b) {
+    return  D == NORTH  ?  b             << 8 : D == SOUTH      ?  b             >> 8
+      : D == NORTH+NORTH?  b             <<16 : D == SOUTH+SOUTH?  b             >>16
+      : D == EAST       ? (b & ~FileHBB) << 1 : D == WEST       ? (b & ~FileABB) >> 1
+      : D == NORTH_EAST ? (b & ~FileHBB) << 9 : D == NORTH_WEST ? (b & ~FileABB) << 7
+      : D == SOUTH_EAST ? (b & ~FileHBB) >> 7 : D == SOUTH_WEST ? (b & ~FileABB) >> 9
+      : 0;
+  }
 }  // namespace bitUtility
 
 #endif /* BITUTILITIES_H */

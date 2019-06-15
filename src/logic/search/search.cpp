@@ -10,9 +10,7 @@ auto Search::get_time_elapsed() {
 }
 
 bool Search::time_out() {
-  if (get_time_elapsed() >= m_time_allocated) return true;
-
-  return false;
+  return (get_time_elapsed() >= m_time_allocated) ? true : false;
 }
 
 void Search::clear_for_seach() {
@@ -32,25 +30,29 @@ Move Search::search_best_move() {
   for (int currDepth = 1;  ; currDepth++) {
     total_depth = currDepth;
     best_move = root_negamax(currDepth);
+
     if (m_stop)
       break;
 
     if (get_time_elapsed() >= (m_time_allocated/2)) break;
   }
 
-  std::cout << "depth: : " << total_depth  << std::endl;
-  std::cout << "nodes: " << total_nodes << std::endl;
-  std::cout
-    << "Elapsed time in milliseconds : " << get_time_elapsed() << " ms" << endl;
+  cout << "[Search info] ";
+  cout << "Depth: " << total_depth  << " / ";
+  cout << "Nodes: " << total_nodes << " / ";
+  cout << "Elapsed time: " << get_time_elapsed() << " ms / ";
+  cout << "Best move: "
+    << utils::square_int_to_str(best_move.get_from())
+    << utils::square_int_to_str(best_move.get_to()) << endl;
   return best_move;
 }
 
 Move Search::root_negamax(int cur_depth) {
   int counter = 0;
   total_nodes = 0;
-  int alpha = -INF;
-  int beta = INF;
-  int score = -INF;
+  int alpha = -kInfinite;
+  int beta = kInfinite;
+  int score = -kInfinite;
   MoveList m_legalMoves;
   generate_moves(&m_legalMoves);
   Move best_move = m_legalMoves.at(0);
@@ -68,8 +70,6 @@ Move Search::root_negamax(int cur_depth) {
     if (score > alpha) {
       best_move = mv;
       alpha = score;
-      if (movement->checkmate)
-        break;
     }
   }
 
@@ -83,25 +83,28 @@ Move Search::root_negamax(int cur_depth) {
 
 /**
   negamax algorithm
-  function negamax( depth, α, β, color)
-  if depth = 0 or node is a terminal node then
-  return color × the heuristic value of node
+    function negamax( depth, α, β, color)
+    if depth = 0 or node is a terminal node then
+    return color × the heuristic value of node
 
-childNodes := generateMoves(node)
-childNodes := orderMoves(childNodes)
-value := −∞
-foreach child in childNodes do
-value := max(value, −negamax(child, depth − 1, −β, −α, −color))
-α := max(α, value)
-if α ≥ β then
-break (* cut-off *)
-return value
+    childNodes := generateMoves(node)
+    childNodes := orderMoves(childNodes)
+    value := −∞
+    foreach child in childNodes do
+    value := max(value, −negamax(child, depth − 1, −β, −α, −color))
+    α := max(α, value)
+    if α ≥ β then
+    break (* cut-off *)
+  return value
 */
 int Search::negamax(int depth, int alpha, int beta) {
   if (m_stop || time_out()) {
     m_stop = true;
     return evaluate_board();
   }
+
+  if (movement->checkmate)
+    return evaluate_board();
 
   int orig_alpha = alpha;
 
@@ -122,7 +125,7 @@ int Search::negamax(int depth, int alpha, int beta) {
   if (!depth)
     return quiescence_search(alpha, beta);
 
-  int value = -INF;
+  int value = -kInfinite;
   int counter = 0;
   Move* best_move = &m_legalMoves.at(0);
   bool fullWindow = true;
@@ -287,3 +290,6 @@ int Search::evaluate_board() {
 
   return -p_board->evaluate_board();
 }
+
+void Search::make_null_move() {}
+void Search::take_null_move() {}
