@@ -19,6 +19,7 @@ chess engine written in C++11
     - [History heuristic](https://www.chessprogramming.org/History_Heuristic)
 - Other
     - [Zobrist hashing](https://www.chessprogramming.org/Zobrist_Hashing) / [Transposition table](https://en.wikipedia.org/wiki/Transposition_table)
+    - [Null move pruning](https://www.chessprogramming.org/Null_Move_Pruning)
 
 # Trinity Engine
 
