@@ -27,6 +27,24 @@ chess engine written in C++11
 [![demo](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY.svg)](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY?autoplay=1)
 ![alt text](https://raw.githubusercontent.com/Cristian-L-Zambrano/trinity_engine/master/chess_screenshot.png)
 
+## Building
+Unix:
+```
+cmake .
+make
+```
+## Run
+```
+./main
+```
+# To Do
+
+- Polyglot
+- King Safety
+- Center Control
+- Game Phases 
+- Perft Testing
+
 ## License
 MIT License
 
