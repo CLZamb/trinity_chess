@@ -300,12 +300,18 @@ vector<string> Board::Info::get_info() {
   Player* p1 = p_board->player1;
   Player* p2 = p_board->player2;
   string score = std::to_string(p_board->evaluate_board());
+  clear_block();
   format_block("[Board Score]" , score, score_delimiter);
   format_block("[Black captures]", p1->get_captured_pieces(), p1_cap_delimiter);
   format_block("[White Captures]", p2->get_captured_pieces(), p2_cap_delimiter);
   format_block("[Black moves]", p1->get_played_moves(), p1_moves_delimiter);
   format_block("[White Moves]", p2->get_played_moves(), p2_moves_delimiter);
   return m_info;
+}
+
+void Board::Info::clear_block() {
+  std::fill(m_info.begin() + Drawing::kSizeBanner , m_info.end(),
+      "┃                                                          ┃");
 }
 
 void Board::Info::format_block(string title, string msg, RowsDelimiter limits) {
@@ -321,6 +327,8 @@ void Board::Info::recursive_block(string msg, RowsDelimiter limits) {
 
   if (msg.size() < kLineMaxLen) {
     m_info[row_index] = format_line(msg);
+    m_info[limits.kEndPos-1] =
+      "┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃";
     return;
   }
 

@@ -33,7 +33,7 @@ class Search {
     bool m_stop = false;
     int total_nodes = 0;
     std::chrono::time_point<std::chrono::steady_clock> m_start;
-    int m_time_allocated = 1500;
+    int m_time_allocated = 200;
     static const int kInfinite = std::numeric_limits<int>::max();
 };
 

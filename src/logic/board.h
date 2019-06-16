@@ -94,12 +94,13 @@ class Board {
         int m_index = 0;
       };
 
-      RowsDelimiter score_delimiter{ 2 };
-      RowsDelimiter p1_cap_delimiter{ 3 };
-      RowsDelimiter p2_cap_delimiter{ 3 };
-      RowsDelimiter p1_moves_delimiter{ 13 };
-      RowsDelimiter p2_moves_delimiter{ 11 };
+      RowsDelimiter score_delimiter{ 3 };
+      RowsDelimiter p1_cap_delimiter{ 4 };
+      RowsDelimiter p2_cap_delimiter{ 4 };
+      RowsDelimiter p1_moves_delimiter{ 11 };
+      RowsDelimiter p2_moves_delimiter{ 10 };
 
+      void clear_block();
       void recursive_block(string msg, RowsDelimiter limits);
       void format_block(string title, string msg, RowsDelimiter limits);
       string format_line(string);
