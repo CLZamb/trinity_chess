@@ -51,8 +51,9 @@ class Player {
   Player* p_opponent = nullptr;
   Move m_move;
   PlayerMove m_pl_move;
-  bool is_valid_input;
-  bool m_black_pieces;
+  bool is_valid_input = false;
+  bool m_black_pieces = false;
+  int ply = 1;
 
  private:
   void set_next_move(string input);

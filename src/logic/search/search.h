@@ -21,7 +21,7 @@ class Search {
     void make_null_move();
     void take_null_move();
     int quiescence_search(int alpha, int beta);
-    int is_repeated_move(const int& depth, int* alpha, int* beta);
+    int probe_hash_entry(const int& depth, int* alpha, int* beta);
     int evaluate_board();
     int negamax(int deapth, int alpha, int beta, bool do_null = true);
     Move root_negamax(int cur_depth);

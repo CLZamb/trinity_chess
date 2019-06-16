@@ -197,11 +197,8 @@ namespace Drawing {
     "┃ ╚═╝    ╚══════╚═╝  ╚═╝  ╚═╝  ╚══════╚═╝  ╚═╝    ╚══════╝ ┃",
     "┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃"};
 
-  const int size_banner = player1.size();
-  const int size_score = size_banner + player1.size();
-  const int banner_len = utf8_strlen(player1[0].c_str());
+  const int kSizeBanner = player1.size();
+  static const int kBannerLen = utf8_strlen(player1[0].c_str());
 }  // namespace Drawing
-
-const int size_banner_temp = Drawing::size_banner;
 
 #endif /* DRAWINGS_H */

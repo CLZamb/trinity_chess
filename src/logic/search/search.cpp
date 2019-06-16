@@ -14,7 +14,7 @@ bool Search::time_out() {
 }
 
 void Search::clear_for_seach() {
-  // movement->m_table.clear();
+  // movement->m_hash_table.clear();
   p_board->clear_search_history();
   p_board->clear_killer_moves();
   p_board->reset_ply();
@@ -31,6 +31,13 @@ Move Search::search_best_move() {
     total_depth = currDepth;
     best_move = root_negamax(currDepth);
 
+    // cout << "[Search info] ";
+    // cout << "Depth: " << total_depth  << " / ";
+    // cout << "Nodes: " << total_nodes << " / ";
+    // cout << "Elapsed time: " << get_time_elapsed() << " ms / ";
+    // cout << "Best move: "
+    //   << utils::square_int_to_str(best_move.get_from())
+    //   << utils::square_int_to_str(best_move.get_to()) << endl;
     if (m_stop)
       break;
 
@@ -44,15 +51,18 @@ Move Search::search_best_move() {
   cout << "Best move: "
     << utils::square_int_to_str(best_move.get_from())
     << utils::square_int_to_str(best_move.get_to()) << endl;
+
   return best_move;
 }
 
 Move Search::root_negamax(int cur_depth) {
   int counter = 0;
   total_nodes = 0;
+
   int alpha = -kInfinite;
   int beta = kInfinite;
   int score = -kInfinite;
+
   MoveList m_legalMoves;
   generate_moves(&m_legalMoves);
   Move best_move = m_legalMoves.at(0);
@@ -108,9 +118,9 @@ int Search::negamax(int depth, int alpha, int beta, bool do_null/*true*/) {
 
   int orig_alpha = alpha;
 
-  int repeated = is_repeated_move(depth, &alpha, &beta);
-  if (repeated)
-    return repeated;
+  int hash_score = probe_hash_entry(depth, &alpha, &beta);
+  if (hash_score)
+    return hash_score;
 
   MoveList m_legalMoves;
   generate_moves(&m_legalMoves);
@@ -236,7 +246,7 @@ int Search::quiescence_search(int alpha, int beta) {
   return alpha;
 }
 
-int Search::is_repeated_move(
+int Search::probe_hash_entry(
     const int &depth, int* alpha, int* beta) {
   const TTEntry* entry = movement->m_hash_table.get_entry(movement->m_zkey);
   if ((entry) && (entry->get_depth() >= depth)) {
@@ -255,7 +265,7 @@ int Search::is_repeated_move(
       return entry->get_score();
   }
 
-  return 0;
+  return false;
 }
 
 TTEntry::Flag Search::get_flag(

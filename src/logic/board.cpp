@@ -290,48 +290,48 @@ box* Board::Square::get_current_drawing() { return p_cur_drawing; }
 Board::Info::Info(Board* b) : p_board(b) {}
 Board::Info::~Info() {}
 
-// vector<string> Board::Info::get_info() { return m_info; }
+int Board::Info::RowsDelimiter::InfoIndex = Drawing::kSizeBanner;
 vector<string> Board::Info::get_info() {
   if (p_board->turn == p_board->player1)
     std::copy(Drawing::player1.begin(), Drawing::player1.end(), m_info.begin());
   else
     std::copy(Drawing::player2.begin(), Drawing::player2.end(), m_info.begin());
 
-  Player* turn = p_board->get_active_player();
-  Player* opponent = p_board->get_opponent();
-
+  Player* p1 = p_board->player1;
+  Player* p2 = p_board->player2;
   string score = std::to_string(p_board->evaluate_board());
-  string moved = turn->get_played_moves();
-  string opp_moved = opponent->get_played_moves();
-  string captured = turn->get_captured_pieces();
-  string opp_captured = opponent->get_captured_pieces();
-  format_block("Board Score", score, start_score_pos);
-  format_block("Captures", captured, start_capture_pos);
-  format_block("Opponent's captures", opp_captured, start_capture_opp_pos);
-  format_block("Your Moves", opp_moved, start_moved_pos);
-  format_block("Opponent's moves", moved, start_moved_opp_pos);
+  format_block("[Board Score]" , score, score_delimiter);
+  format_block("[Black captures]", p1->get_captured_pieces(), p1_cap_delimiter);
+  format_block("[White Captures]", p2->get_captured_pieces(), p2_cap_delimiter);
+  format_block("[Black moves]", p1->get_played_moves(), p1_moves_delimiter);
+  format_block("[White Moves]", p2->get_played_moves(), p2_moves_delimiter);
   return m_info;
 }
 
-void Board::Info::format_block(string title, string msg, int start_line) {
-  assert(msg.size() < line_max_len * aval_row_space);
-  recursive_block(title + ": " + msg, start_line);
+void Board::Info::format_block(string title, string msg, RowsDelimiter limits) {
+  assert(msg.size() < kLineMaxLen * limits.kEndPos);
+  limits.reset_index();
+  recursive_block(title + ": " + msg, limits);
 }
 
-void Board::Info::recursive_block(string msg, int line_index) {
-  if (msg.size() < line_max_len) {
-    m_info[line_index] = format_line(msg);
+void Board::Info::recursive_block(string msg, RowsDelimiter limits) {
+  int row_index = limits.get_next();
+
+  if (row_index > limits.kEndPos) return;
+
+  if (msg.size() < kLineMaxLen) {
+    m_info[row_index] = format_line(msg);
     return;
   }
 
-  string resized_line = msg.substr(0, line_max_len);
-  m_info[line_index] = format_line(resized_line);
+  string resized_line = msg.substr(0, kLineMaxLen);
+  m_info[row_index] = format_line(resized_line);
 
-  msg = msg.substr(line_max_len/* to_end */);
-  recursive_block(msg, ++line_index);
+  msg = msg.substr(kLineMaxLen/* to_end */);
+  recursive_block(msg, limits);
 }
 
 string Board::Info::format_line(string line) {
-  int num_spaces = line_max_len - line.size();
+  int num_spaces = kLineMaxLen - line.size();
   return  "┃ " + line + std::string(num_spaces, ' ') + " ┃";
 }

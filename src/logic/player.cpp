@@ -53,19 +53,14 @@ bool Player::is_valid_move() { return is_valid_input; }
 Player* Player::get_opponent() { return p_opponent; }
 
 void Player::save_played_moves(string mv) {
-  played_moves = mv + " " + played_moves;
-  if (played_moves.size() >= 260) {
-    // remove the first 60 chars
-    played_moves.resize(200);
-  }
+  played_moves = std::to_string(ply++) + ". " + mv + "  " + played_moves;
+
+  // remove the first 300 chars
+  if (played_moves.size() >= 600) { played_moves.resize(60); }
 }
 
 void Player::save_captured_pieces(string mv) {
-  captured_pieces = mv + " " + captured_pieces;
-  if (captured_pieces.size() >= 260) {
-    // remove the first 60 chars
-    captured_pieces.resize(200);
-  }
+  this->captured_pieces = mv + " " + captured_pieces;
 }
 
 string Player::get_played_moves() { return played_moves; }

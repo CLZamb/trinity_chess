@@ -66,24 +66,48 @@ class Board {
       explicit Info(Board *b);
       virtual ~Info();
       vector<string> get_info();
+
    private:
-      static const int aval_row_space = 6;
-      enum delimiters {
-        start_score_pos   = 7,
-        start_capture_pos = 2 * start_score_pos,
-        start_capture_opp_pos = 3 * start_score_pos,
-        start_moved_pos = 4 * start_score_pos,
-        start_moved_opp_pos = 5 * start_score_pos,
+      const unsigned int kLineMaxLen = Drawing::kBannerLen - 4/*┃  ┃*/;
+      struct RowsDelimiter {
+        explicit RowsDelimiter(int size) :
+          kBeginPos(InfoIndex), kEndPos((InfoIndex = InfoIndex+size)),
+          m_index(kBeginPos) {
+          if (kBeginPos >= kTotalInfoRowSpace ||
+              kEndPos >= kTotalInfoRowSpace) {
+            throw "out of bound, illegal index ";
+          }
+        }
+
+        int get_next() {
+          if (m_index > kEndPos) throw "out of bound, illegal index ";
+          return m_index++;
+        }
+
+        void reset_index() { m_index = kBeginPos; }
+        int get_index() { return m_index; }
+        const int kBeginPos;
+        const int kEndPos;
+       private:
+        static const int kTotalInfoRowSpace = 40;
+        static int InfoIndex;
+        int m_index = 0;
       };
 
-      void recursive_block(string msg, int index);
-      void format_block(string title, string msg, int start);
+      RowsDelimiter score_delimiter{ 2 };
+      RowsDelimiter p1_cap_delimiter{ 3 };
+      RowsDelimiter p2_cap_delimiter{ 3 };
+      RowsDelimiter p1_moves_delimiter{ 13 };
+      RowsDelimiter p2_moves_delimiter{ 11 };
+
+      void recursive_block(string msg, RowsDelimiter limits);
+      void format_block(string title, string msg, RowsDelimiter limits);
       string format_line(string);
-      unsigned int line_max_len = Drawing::banner_len - 4/*┃  ┃*/;
       vector<string> m_info{ 40,
         "┃                                                          ┃" };
       Board* p_board;
   };
+
 
   void create_board_squares();
   void create_squares_drawing();
