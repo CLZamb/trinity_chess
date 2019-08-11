@@ -13,7 +13,7 @@ void Game::start() {
   std::cin.get();
   print_message(Start);
 
-  switch (get_option(PLAYER_VS_PLAYER, CREDITS)) {
+  switch (get_option(BEGIN_OPTIONS + 1, END_OPTIONS - 1)) {
     case PLAYER_VS_PLAYER:
       set_players(HUMAN, HUMAN);
       play();
@@ -38,6 +38,16 @@ void Game::start() {
   }
 }
 
+int Game::get_option(int from, int to) {
+  std::cout << "\t\tchoose one of the options ("<< from << "-" << to << "): ";
+  int input;
+  std::cin >> input;
+  // clear input buffer
+  std::cin.clear();
+  std::cin.ignore();
+  return input;
+}
+
 void Game::set_players(Playertype p1, Playertype p2) {
   p_player1 =
     p1 == HUMAN ?
@@ -52,26 +62,16 @@ void Game::set_players(Playertype p1, Playertype p2) {
   m_board.set_players(p_player1, p_player2);
 }
 
-int Game::get_option(int from, int to) {
-  std::cout << "\t\tchoose one of the options ("<< from << "-" << to << "): ";
-  int input;
-  std::cin >> input;
-  // clear input buffer
-  std::cin.clear();
-  std::cin.ignore();
-  return input;
-}
-
 void Game::play() {
   m_board._init();
 
   PlayerMove player_move;
-  int counter = 0;
   bool is_checkMate = false;
 
   while (!is_checkMate) {
     // print board
     cout << m_board;
+
     player_move = m_board.get_next_move();
 
     if (has_player_quit(player_move.get_input()))
@@ -83,15 +83,11 @@ void Game::play() {
     }
 
     if (m_board.is_valid_move(player_move.get_move())) {
-      m_board.move_piece(player_move);
+      m_board.make_move(player_move);
       is_checkMate = m_board.get_checkmate();
-      counter = 0;
     } else {
-      // avoiding infinite loop
-      if (counter == 4) break;
       std::cout << player_move.get_input() << std::endl;
       std::cout << "invalid move, try again\n";
-      counter++;
     }
   }
 

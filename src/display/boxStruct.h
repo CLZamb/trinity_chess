@@ -10,14 +10,14 @@ class box {
   box(std::initializer_list<const char*> lst) {
     int counter = 0;
     for (const auto l : lst)
-      copy(content[counter++], l);
+      copy_row(content[counter++], l);
   }
 
-  static void copy(char* dest, const char* src) {
+  static void copy_row(char* dest, const char* src) {
     snprintf(dest, kCharSize, "%s", src);
   }
 
-  static void copy(char* dest, const char* src, const char* src2) {
+  static void copy_row(char* dest, const char* src, const char* src2) {
     snprintf(dest, kCharSize, "%s%s", src, src2);
   }
 

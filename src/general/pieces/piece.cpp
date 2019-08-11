@@ -1,9 +1,9 @@
 #include "piece.h"
 
 Piece::Piece(Piecetype pct, U64 bb) :
-  m_bitboard(bb), m_type(pct), black(utils::check::is_black_piece(pct)) {
+  black(utils::check::is_black_piece(pct)), m_bitboard(bb), m_type(pct) {
   create_piece_drawing(pct);
-  set_score(pct);
+  set_material_score(pct);
 }
 
 Piece::~Piece() {
@@ -12,8 +12,8 @@ Piece::~Piece() {
 }
 
 void Piece::create_piece_drawing(Piecetype pct) {
-  b_sq_drawing = new PieceDrawing(piece_str_name.at(pct));
-  w_sq_drawing = new PieceDrawing(piece_str_name.at(pct));
+  b_sq_drawing = new PieceDrawing(utils::get_piece_str_name(pct));
+  w_sq_drawing = new PieceDrawing(utils::get_piece_str_name(pct));
   b_sq_drawing->addModifier(DrawingMod::BG_INVERSE);
 
   if (black) {
@@ -25,7 +25,7 @@ void Piece::create_piece_drawing(Piecetype pct) {
   }
 }
 
-void Piece::set_score(Piecetype pct) {
+void Piece::set_material_score(Piecetype pct) {
   m_material_score = utils::constant::piece_material_score[pct];
 }
 

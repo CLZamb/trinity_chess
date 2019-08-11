@@ -32,7 +32,7 @@ class Board {
 
   // adapter_pattern Movement
   void undo_last_move();
-  void move_piece(PlayerMove mv);
+  void make_move(PlayerMove mv);
   bool is_valid_move(Move);
   bool get_checkmate();
   Movement* get_movement();
@@ -109,9 +109,8 @@ class Board {
       Board* p_board;
   };
 
-
   void create_board_squares();
-  void create_squares_drawing();
+  void create_empty_squares_drawing();
   void parser_fen(string fen);
   void add_to_board(int piece, SquareIndices position);
   bool is_number(char c);
@@ -142,7 +141,7 @@ class Board::Square {
     box* get_current_drawing();
 
  private:
-    box* p_base_drawing = nullptr;
+    box* p_empty_square_drawing = nullptr;
     box* p_cur_drawing = nullptr;
     Piece* p_piece = nullptr;
     bool m_is_black_square = false;

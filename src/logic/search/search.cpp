@@ -31,13 +31,6 @@ Move Search::search_best_move() {
     total_depth = currDepth;
     best_move = root_negamax(currDepth);
 
-    // cout << "[Search info] ";
-    // cout << "Depth: " << total_depth  << " / ";
-    // cout << "Nodes: " << total_nodes << " / ";
-    // cout << "Elapsed time: " << get_time_elapsed() << " ms / ";
-    // cout << "Best move: "
-    //   << utils::square_int_to_str(best_move.get_from())
-    //   << utils::square_int_to_str(best_move.get_to()) << endl;
     if (m_stop)
       break;
 
@@ -59,9 +52,9 @@ Move Search::root_negamax(int cur_depth) {
   int counter = 0;
   total_nodes = 0;
 
-  int alpha = -kInfinite;
-  int beta = kInfinite;
-  int score = -kInfinite;
+  int alpha = -utils::constant::kInfinite;
+  int beta = utils::constant::kInfinite;
+  int score = -utils::constant::kInfinite;
 
   MoveList m_legalMoves;
   generate_moves(&m_legalMoves);
@@ -135,7 +128,7 @@ int Search::negamax(int depth, int alpha, int beta, bool do_null/*true*/) {
   if (!depth)
     return quiescence_search(alpha, beta);
 
-  int value = -kInfinite;
+  int value = -utils::constant::kInfinite;
 
   if (do_null && p_board->get_ply() && depth >= 4) {
     make_null_move();
@@ -148,7 +141,7 @@ int Search::negamax(int depth, int alpha, int beta, bool do_null/*true*/) {
   int counter = 0;
   Move* best_move = &m_legalMoves.at(0);
   bool fullWindow = true;
-  value = -kInfinite;
+  value = -utils::constant::kInfinite;
   for (Move& mv : m_legalMoves) {
     pick_next_move(counter++, &m_legalMoves);
     movement->move_piece_bits(&mv);

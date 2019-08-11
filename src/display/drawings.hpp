@@ -114,20 +114,20 @@ class DrawingMod {
     }
 
     void append(Code c, box* drawing) {
-      char_mod = modifier_to_str(c).c_str();
+      mod = modifier_to_str(c).c_str();
 
       for (int i = 0; i < box::kRowSize; ++i) {
-        box::copy(temp_copy, drawing->content[i]);
-        box::copy(drawing->content[i], temp_copy, char_mod);
+        box::copy_row(temp_copy, drawing->content[i]);
+        box::copy_row(drawing->content[i], temp_copy, mod);
       }
     }
 
     void prepend(Code c, box* drawing) {
-      char_mod = modifier_to_str(c).c_str();
+      mod = modifier_to_str(c).c_str();
 
       for (int i = 0; i < box::kRowSize; ++i) {
-        box::copy(temp_copy, drawing->content[i]);
-        box::copy(drawing->content[i], char_mod, temp_copy);
+        box::copy_row(temp_copy, drawing->content[i]);
+        box::copy_row(drawing->content[i], mod, temp_copy);
       }
     }
 
@@ -135,14 +135,15 @@ class DrawingMod {
     static const int kColumnSize = box::kCharSize;
     static const int kSizebox = sizeof(char[kColumnSize]);
     char temp_copy[kColumnSize];
-    const char* char_mod;
+    const char* mod;
 };
 
 
 class PieceDrawing {
  public:
     explicit PieceDrawing(std::string piece) {
-      if (piece_drawing.find(piece) == piece_drawing.end()) throw "invalid key";
+      if (piece_drawing.find(piece) == piece_drawing.end())
+        throw "invalid piece name";
 
       m_drawing = piece_drawing.at(piece);
       piece_mod.append(DrawingMod::BG_NORMAL, &m_drawing);
@@ -151,7 +152,10 @@ class PieceDrawing {
 
     box* get_drawing() { return &m_drawing; }
     void set_drawing(box* newBox) { m_drawing = *newBox; }
-    void addModifier(DrawingMod::Code c) { piece_mod.prepend(c, &m_drawing); }
+    void addModifier(DrawingMod::Code mod_code) {
+      piece_mod.prepend(mod_code, &m_drawing);
+    }
+
  private:
     static const map<std::string, box> piece_drawing;
     box m_drawing;

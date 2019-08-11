@@ -104,7 +104,7 @@ vector<string> Board::get_board_info() {
 Board::Square* Board::get_square_at_pos(int pos) { return p_squares[pos]; }
 
 void Board::create_board_squares() {
-  create_squares_drawing();
+  create_empty_squares_drawing();
   char squareColor = 'w';
 
   int position = 0;
@@ -124,7 +124,7 @@ void Board::create_board_squares() {
   }
 }
 
-void Board::create_squares_drawing() {
+void Board::create_empty_squares_drawing() {
   wSquare = *PieceDrawing("BaseWhiteSquare").get_drawing();
   bSquare = *PieceDrawing("BaseBlackSquare").get_drawing();
 }
@@ -174,12 +174,14 @@ void Board::undo_last_move() {
   movement_controller.undo_last_move();
 }
 
-void Board::move_piece(PlayerMove p_mv) {
+void Board::make_move(PlayerMove p_mv) {
   Move move = p_mv.get_move();
-  string move_str = p_mv.get_input();
   movement_controller.move_piece(move);
-  turn->save_played_moves(piece_str_name.at(move.get_piece())
-      + "-" +  move_str);
+
+  string played_move = utils::get_piece_str_name(move.get_piece())
+    + "-" +  p_mv.get_input();
+
+  turn->save_played_moves(played_move);
 }
 
 bool Board::is_valid_move(Move mv) {
@@ -218,7 +220,7 @@ void Board::capture_piece(Move mv, SquareIndices pos) {
   Piecetype captured_piece = mv.get_captured_piece();
 
   capture_piece_bit(captured_piece, pos);
-  turn->save_captured_pieces(piece_str_name.at(captured_piece));
+  turn->save_captured_pieces(utils::get_piece_str_name(captured_piece));
 }
 
 void Board::change_turn() { turn = turn->get_opponent(); }
@@ -266,8 +268,8 @@ Piecetype Board::get_piece_at(int pos) {
 int Board::evaluate_board() { return m_bb.evaluate_board(); }
 
 // Board::Square
-Board::Square::Square(box* baseDrawing, bool blackBox)
-    : p_base_drawing(baseDrawing), p_cur_drawing(baseDrawing),
+Board::Square::Square(box* emtpySqDrawing, bool blackBox)
+    : p_empty_square_drawing(emtpySqDrawing), p_cur_drawing(emtpySqDrawing),
       m_is_black_square(blackBox) {}
 
 Board::Square::~Square() {}
@@ -278,7 +280,7 @@ void Board::Square::set_piece(Piece* piece) {
 }
 
 void Board::Square::clear_square() {
-  p_cur_drawing = p_base_drawing;
+  p_cur_drawing = p_empty_square_drawing;
   p_piece = nullptr;
 }
 

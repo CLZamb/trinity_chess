@@ -66,6 +66,17 @@ inline int square_str_to_int(string sq) {
   return square_int;
 }
 
+inline string get_piece_str_name(Piecetype piece_type) {
+  static const map<Piecetype, std::string> piece_str_name  {
+    {bP, "pawn"}, {bR, "rook"}, {bN, "knight"},
+      {bB, "bishop"}, {bQ, "queen"}, {bK, "king"},
+      {wP, "pawn"}, {wR, "rook"}, {wN, "knight"},
+      {wB, "bishop"}, {wQ, "queen"}, {wK, "king"}
+  };
+
+  return piece_str_name.at(piece_type);
+}
+
 namespace constant {
   const std::array<int, utils::size_piece_types> piece_material_score =
     utils::set_piece_values(
@@ -81,6 +92,7 @@ namespace constant {
   const size_t squares = 64;
   const int ksquares = 64;
   const int kMaxDepth = 64;
+  const int kInfinite = std::numeric_limits<int>::max();
 }  // namespace constant
 }  // namespace utils
 

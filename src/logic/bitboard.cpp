@@ -94,32 +94,49 @@ U64 Bitboard::king_mask(int sq) {
 }
 
 U64 Bitboard::knight_mask(int sq) {
-  U64 result = 0ULL;
-  U64 fromSq = ONE << sq;
+  U64 result = BLANK;
+  U64 from_sq = ONE << sq;
+  U64 shift = BLANK;
 
-  if (fromSq >> 17 & NOT_H_FILE)
-    result |= fromSq >> 17 & NOT_H_FILE;
+  shift = bitUtility::shift<SOUTH_SOUTH>(from_sq);
+  shift = bitUtility::shift<WEST>(shift);
+  if (shift & NOT_H_FILE)
+    result |= shift & NOT_H_FILE;
 
-  if (fromSq >> 15 & NOT_A_FILE)
-    result |= fromSq >> 15 & NOT_A_FILE;
+  shift = bitUtility::shift<SOUTH_SOUTH>(from_sq);
+  shift = bitUtility::shift<EAST>(shift);
+  if (shift & NOT_A_FILE)
+    result |= shift & NOT_A_FILE;
 
-  if (fromSq >> 10 & NOT_GH_FILE)
-    result |= fromSq >> 10 & NOT_GH_FILE;
+  shift = bitUtility::shift<SOUTH_WEST>(from_sq);
+  shift = bitUtility::shift<WEST>(shift);
+  if (shift & NOT_GH_FILE)
+    result |= shift & NOT_GH_FILE;
 
-  if (fromSq >> 6 & NOT_AB_FILE)
-    result |= fromSq >> 6 & NOT_AB_FILE;
+  shift = bitUtility::shift<SOUTH_EAST>(from_sq);
+  shift = bitUtility::shift<EAST>(shift);
+  if (shift & NOT_AB_FILE)
+    result |= shift & NOT_AB_FILE;
 
-  if (fromSq << 17 & NOT_A_FILE)
-    result |= fromSq << 17 & NOT_A_FILE;
+  shift = bitUtility::shift<NORTH_NORTH>(from_sq);
+  shift = bitUtility::shift<EAST>(shift);
+  if (shift & NOT_A_FILE)
+    result |= shift & NOT_A_FILE;
 
-  if (fromSq << 15 & NOT_H_FILE)
-    result |= fromSq << 15 & NOT_H_FILE;
+  shift = bitUtility::shift<NORTH_NORTH>(from_sq);
+  shift = bitUtility::shift<WEST>(shift);
+  if (shift & NOT_H_FILE)
+    result |= shift & NOT_H_FILE;
 
-  if (fromSq << 10 & NOT_AB_FILE)
-    result |= fromSq << 10 & NOT_AB_FILE;
+  shift = bitUtility::shift<NORTH_EAST>(from_sq);
+  shift = bitUtility::shift<EAST>(shift);
+  if (shift & NOT_AB_FILE)
+    result |= shift & NOT_AB_FILE;
 
-  if (fromSq << 6 & NOT_GH_FILE)
-    result |= fromSq << 6 & NOT_GH_FILE;
+  shift = bitUtility::shift<NORTH_WEST>(from_sq);
+  shift = bitUtility::shift<WEST>(shift);
+  if (shift & NOT_GH_FILE)
+    result |= shift & NOT_GH_FILE;
 
   return result;
 }

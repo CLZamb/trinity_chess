@@ -16,8 +16,7 @@ class Piece {
   void make_move(SquareIndices from, SquareIndices to);
   void clear_bitboard();
   void create_piece_drawing(Piecetype);
-  void set_score(Piecetype);
-  int get_value();
+  void set_material_score(Piecetype);
   int get_material_score();
   bool is_black();
   box* get_drawing(bool is_black);
@@ -25,12 +24,12 @@ class Piece {
   U64 get_bitboard();
 
  private:
+  bool black = false;
+  int m_material_score = 0;
   U64 m_bitboard = BLANK;
   Piecetype m_type = EMPTY;
   PieceDrawing* w_sq_drawing = nullptr;
   PieceDrawing* b_sq_drawing = nullptr;
-  bool black = false;
-  int m_material_score = 0;
 };
 
 #endif /* PIECE_H */

@@ -82,7 +82,7 @@ class Bitboard {
     Piece* m_pieces[13] {
       nullptr,  // EMPTY 0
       // black pieces
-      new Piece(bP, PAWNSTART & ALLBLACKSTART),  // 1
+      new Piece(bP, PAWNSTART & ALLBLACKSTART),
       new Piece(bR, ROOKSTART & ALLBLACKSTART),
       new Piece(bN, KNIGHTSTART & ALLBLACKSTART),
       new Piece(bB, BISHOPSTART & ALLBLACKSTART),

@@ -72,6 +72,8 @@ enum Direction : int {
   SOUTH = -NORTH,
   WEST  = -EAST,
 
+  NORTH_NORTH = NORTH + NORTH,
+  SOUTH_SOUTH = SOUTH + SOUTH,
   NORTH_EAST = NORTH + EAST,
   SOUTH_EAST = SOUTH + EAST,
   SOUTH_WEST = SOUTH + WEST,
@@ -107,11 +109,13 @@ enum Playertype : int {
 };
 
 enum OPTION : int {
-  PLAYER_VS_PLAYER = 1,
+  BEGIN_OPTIONS = 0,
+  PLAYER_VS_PLAYER,
   PLAYER_VS_CPU,
   CPU_VS_CPU,
   EXIT,
-  CREDITS
+  CREDITS,
+  END_OPTIONS,
 };
 
 const int VictimScore[13] =
@@ -230,13 +234,6 @@ const int MIRROR64[64] = {
   16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 ,
   8 , 9, 10 , 11 , 12 , 13 , 14 , 15 ,
   0 , 1, 2  , 3 ,  4 , 5 , 6  , 7
-};
-
-const map<Piecetype, std::string> piece_str_name  {
-  {bP, "pawn"}, {bR, "rook"}, {bN, "knight"},
-  {bB, "bishop"}, {bQ, "queen"}, {bK, "king"},
-  {wP, "pawn"}, {wR, "rook"}, {wN, "knight"},
-  {wB, "bishop"}, {wQ, "queen"}, {wK, "king"}
 };
 
 #endif /* DEFS_H */
