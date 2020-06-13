@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/cu_pipe.cpp
+headers/cu_pipe.h
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/headers/cu_pipe.h
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/headers/cu_pipe.h
+unistd.h
+-
+cstdio
+-
+string
+-
+array
+-
+

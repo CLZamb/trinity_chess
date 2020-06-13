@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common/headers/common.h
+iostream
+-
+string
+-
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/headers/search.h
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/headers/uci.h
+iomanip
+-
+iostream
+-
+sstream
+-
+string
+-
+../../../include/common/headers/common.h
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common/headers/common.h
+../headers/search.h
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/headers/search.h
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/search.cpp
+headers/search.h
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/headers/search.h
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/uci.cpp
+headers/uci.h
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/headers/uci.h
+fstream
+-
+

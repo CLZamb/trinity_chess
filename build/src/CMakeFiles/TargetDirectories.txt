@@ -1,0 +1,10 @@
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/rebuild_cache.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/edit_cache.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/rebuild_cache.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/edit_cache.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/CMakeFiles/rebuild_cache.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/CMakeFiles/edit_cache.dir
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/CMakeFiles/search_lib.dir

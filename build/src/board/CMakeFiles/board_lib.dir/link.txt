@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc /Users/cristofher/desktop/practice/c++/ChessProject_v2/lib/libboard_lib.a  CMakeFiles/board_lib.dir/board.cpp.o CMakeFiles/board_lib.dir/drawing.cpp.o CMakeFiles/board_lib.dir/piece.cpp.o CMakeFiles/board_lib.dir/info.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib /Users/cristofher/desktop/practice/c++/ChessProject_v2/lib/libboard_lib.a

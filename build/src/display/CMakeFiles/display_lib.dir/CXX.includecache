@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/headers/utils.h
+map
+-
+string
+-
+iostream
+-
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/headers/ISectionComponent.h
+vector
+-
+string
+-
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/headers/pane.h
+vector
+-
+string
+-
+memory
+-
+unordered_map
+-
+../../board/headers/utils.h
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/headers/utils.h
+ISectionComponent.h
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/headers/ISectionComponent.h
+
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/pane.cpp
+headers/pane.h
+/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/headers/pane.h
+

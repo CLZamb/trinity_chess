@@ -1,0 +1,12 @@
+#include "headers/section.h"
+
+Section::Section(size_t size) : section_size(size) {
+}
+
+Section::~Section() {}
+
+string& Section::at(int index) {
+  if (index >= section_size)
+    throw("index not found");
+  return *section[index];
+}
