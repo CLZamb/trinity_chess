@@ -4,9 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/game.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir/game.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/main.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir/main.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/player.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir/player.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/game.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir/game.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/game_turn_observable.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir/game_turn_observable.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/main.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir/main.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/move_utils.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir/move_utils.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/player.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/src.dir/player.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

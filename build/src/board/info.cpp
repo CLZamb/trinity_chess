@@ -1,79 +1,111 @@
 #include "headers/info.h"
 
-Info::Info(Board* b) : p_board(b) {
+Info::Info() : Displayable(44) {}
+Info::~Info() {}
+
+void Info::_init() {
+  p_top_section = make_unique<Section>("top", 1);
+  p_player_banner =
+    make_unique<Section>("Player banner", p_banners[m_turn]->size());
+  p_board_score = make_unique<Section>("[Board Score]", 4);
+  p_player_2_captures = make_unique<Section>("[Black captures]", 4);
+  p_player_1_captures = make_unique<Section>("[White Captures]", 4);
+  p_player_2_moves = make_unique<Section>("[Black moves]", 9);
+  p_player_1_moves = make_unique<Section>("[White Moves]", 9);
+  p_game_info = make_unique<Section>("[Game info:]", 5);
+  p_bottom_section = make_unique<Section>("bottom", 1);
+
+  m_drawing.add_section(p_top_section);
+  m_drawing.add_section(p_player_banner);
+  m_drawing.add_section(p_board_score);
+  m_drawing.add_section(p_player_1_moves);
+  m_drawing.add_section(p_player_1_captures);
+  m_drawing.add_section(p_player_2_moves);
+  m_drawing.add_section(p_player_2_captures);
+  m_drawing.add_section(p_game_info);
+  m_drawing.add_section(p_bottom_section);
 }
 
-Info::~Info() {
+void Info::clear() {
+  m_drawing.fill(
+      " ┃                                                          ┃");
+
+  p_top_section->set_content({
+      " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+      });
+  p_bottom_section->set_content({
+      " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
+      });
 }
 
-void Info::_init(Pane* pane) {
-  m_drawing = pane;
-  m_drawing->set_top(" ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-
-  player_banner
-    = make_unique<Section>("Player banner", Banner::player1.size());
-  board_score    = make_unique<Section>("[Board Score]", 4);
-  black_captures = make_unique<Section>("[Black captures]", 4);
-  white_captures = make_unique<Section>("[White Captures]", 4);
-  black_moves    = make_unique<Section>("[Black moves]", 11);
-  white_moves    = make_unique<Section>("[White Moves]", 11);
-
-  m_drawing->add_section(player_banner);
-  m_drawing->add_section(board_score);
-  m_drawing->add_section(black_captures);
-  m_drawing->add_section(white_captures);
-  m_drawing->add_section(black_moves);
-  m_drawing->add_section(white_moves);
-
-  m_drawing->set_bottom(" ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-}
-
-void Info::draw_info_board() {
-  if (player_banner) {
-    if (p_board->get_turn() == p_board->get_player_1()) {
-      player_banner->set_content(p_p1_banner);
-    } else {
-      player_banner->set_content(p_p2_banner);
-    }
+void Info::draw() {
+  clear();
+  if (p_player_banner) {
+    p_player_banner->set_content(p_banners[m_turn]);
   }
 
-  string score = std::to_string(p_board->evaluate_board());
-  format_block(board_score, score);
-  format_block(black_captures, "");
-  format_block(white_captures, "");
-  format_block(black_moves, "");
-  format_block(white_moves, "");
+  format_block(p_board_score, board_score);
+  format_block(p_player_1_moves, player_moves[players::player_1]);
+  format_block(p_player_1_captures, player_captures[players::player_1]);
+  format_block(p_player_2_moves, player_moves[players::player_2]);
+  format_block(p_player_2_captures, player_captures[players::player_2]);
+  format_block(p_game_info, game_info);
 }
 
 void Info::clear_block() {
-  m_drawing->clear();
+  m_drawing.clear();
 }
 
-void Info::format_block(shared_ptr<Section>& block, string msg) {
+void Info::format_block(shared_ptr<Section>& block, string content) {
   if (block == nullptr) return;
 
-  assert(msg.size() < kLineMaxLen * (block->size() - 1));
-  recursive_block(block, block->get_name() + ": " + msg, 0);
+  if (!has_block_space_for_content(block, content)) return;
+
+  set_content_to_block_recursively(
+      block, block->get_name() + ": " + content, 0);
 }
 
-void Info::recursive_block(shared_ptr<Section>& block, string msg, int current_row) {
+bool Info::has_block_space_for_content(
+    const shared_ptr<Section>& block, const string& message) {
+  return message.size() < kRowMaxLen * (block->size() - 1);
+}
+
+void Info::set_content_to_block_recursively(shared_ptr<Section>& block,
+    string msg, int current_row) {
   if (current_row > block->size()) return;
 
-  if (msg.size() < kLineMaxLen) {
-    *block->at(current_row) = format_line(msg);
-    *block->at(block->size() - 1) =
-      " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃";
+  if (msg.size() < kRowMaxLen) {
+    block->set_content_at_index(format_line(msg), current_row);
+    block->set_content_at_index(
+        " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃",
+        block->size() - 1);
     return;
   }
 
-  string resized_line = msg.substr(0, kLineMaxLen);
-  *block->at(current_row) = format_line(resized_line);
+  string row_content = msg.substr(0, kRowMaxLen);
+  block->set_content_at_index(format_line(row_content), current_row);
 
-  msg = msg.substr(kLineMaxLen/* to_end */);
-  recursive_block(block, msg, ++current_row);
+  msg = msg.substr(kRowMaxLen/* to_end */);
+  set_content_to_block_recursively(block, msg, ++current_row);
 }
 
 string Info::format_line(string line) {
-  int num_spaces = kLineMaxLen - line.size();
+  int num_spaces = kRowMaxLen - line.size();
   return  " ┃ " + line + std::string(num_spaces, ' ') + "┃";
+}
+
+void Info::save_moves(const string& moves) {
+  player_moves[m_turn] += " " + moves;
+}
+
+void Info::save_captures(const string& captures) {
+  player_captures[m_turn] += " " + captures;
+}
+
+void Info::update_turn(players turn) {
+  m_turn = turn;
+}
+
+void Info::save_game_info(const string& info) {
+  game_info = info;
 }

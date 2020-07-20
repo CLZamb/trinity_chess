@@ -1,10 +1,10 @@
 add_library(
   display_lib
-  cli_display.cpp
   gui_controller.cpp
   Idisplay.cpp
   ISectionComponent.cpp
   messages.cpp
+  message_state.cpp
   pane.cpp
   section.cpp
   )

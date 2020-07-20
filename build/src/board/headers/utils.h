@@ -38,7 +38,7 @@ namespace check {
   }
 }  // namespace check
 
-inline string get_piece_str_name_from_key_square_index(Piecetype piece_type) {
+inline string get_piece_str_name_from_piecetype(Piecetype piece_type) {
   static const map<Piecetype, string> piece_str_name  {
     {bP, "pawn"}, {bR, "rook"}, {bN, "knight"},
       {bB, "bishop"}, {bQ, "queen"}, {bK, "king"},
@@ -82,6 +82,14 @@ inline int square_str_to_int(string sq) {
 
   if (square_int < A1 || square_int > H8) return 0;
   return square_int;
+}
+
+namespace constants {
+  enum Players {
+    player_1 = 0,
+    player_2 = 1,
+    players_size = 2,
+  };
 }
 
 }  // namespace utils

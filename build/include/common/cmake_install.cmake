@@ -1,8 +1,8 @@
-# Install script for directory: /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common
+# Install script for directory: /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build")
+  set(CMAKE_INSTALL_PREFIX "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

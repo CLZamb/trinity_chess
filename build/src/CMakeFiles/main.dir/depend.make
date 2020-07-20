@@ -3,45 +3,64 @@
 
 src/CMakeFiles/main.dir/game.cpp.o: include/common/headers/common.h
 src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/board.h
+src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/board_with_info.h
 src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/box.h
-src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/drawing.hpp
 src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/info.h
 src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/piece.h
+src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/pieces_drawings.hpp
+src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/savable.h
+src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/square.h
 src/CMakeFiles/main.dir/game.cpp.o: src/board/headers/utils.h
 src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/ISectionComponent.h
 src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/Idisplay.h
-src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/cli_display.h
-src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/display.h
+src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/game_drawings.hpp
 src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/gui_controller.h
+src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/message_state.h
 src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/messages.h
 src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/pane.h
 src/CMakeFiles/main.dir/game.cpp.o: src/display/headers/section.h
 src/CMakeFiles/main.dir/game.cpp.o: src/game.cpp
 src/CMakeFiles/main.dir/game.cpp.o: src/headers/game.h
+src/CMakeFiles/main.dir/game.cpp.o: src/headers/game_turn.h
+src/CMakeFiles/main.dir/game.cpp.o: src/headers/game_turn_observable.h
+src/CMakeFiles/main.dir/game.cpp.o: src/headers/game_turn_observer.h
 src/CMakeFiles/main.dir/game.cpp.o: src/headers/move.h
+src/CMakeFiles/main.dir/game.cpp.o: src/headers/move_utils.h
 src/CMakeFiles/main.dir/game.cpp.o: src/headers/player.h
 src/CMakeFiles/main.dir/game.cpp.o: src/ipc/headers/cu_pipe.h
 src/CMakeFiles/main.dir/game.cpp.o: src/ipc/headers/ipc_pipe.h
 src/CMakeFiles/main.dir/game.cpp.o: src/search/headers/search.h
 src/CMakeFiles/main.dir/game.cpp.o: src/search/headers/uci.h
 
+src/CMakeFiles/main.dir/game_turn_observable.cpp.o: src/game_turn_observable.cpp
+src/CMakeFiles/main.dir/game_turn_observable.cpp.o: src/headers/game_turn.h
+src/CMakeFiles/main.dir/game_turn_observable.cpp.o: src/headers/game_turn_observable.h
+src/CMakeFiles/main.dir/game_turn_observable.cpp.o: src/headers/game_turn_observer.h
+
 src/CMakeFiles/main.dir/main.cpp.o: include/common/headers/common.h
 src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/board.h
+src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/board_with_info.h
 src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/box.h
-src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/drawing.hpp
 src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/info.h
 src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/piece.h
+src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/pieces_drawings.hpp
+src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/savable.h
+src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/square.h
 src/CMakeFiles/main.dir/main.cpp.o: src/board/headers/utils.h
 src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/ISectionComponent.h
 src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/Idisplay.h
-src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/cli_display.h
-src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/display.h
+src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/game_drawings.hpp
 src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/gui_controller.h
+src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/message_state.h
 src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/messages.h
 src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/pane.h
 src/CMakeFiles/main.dir/main.cpp.o: src/display/headers/section.h
 src/CMakeFiles/main.dir/main.cpp.o: src/headers/game.h
+src/CMakeFiles/main.dir/main.cpp.o: src/headers/game_turn.h
+src/CMakeFiles/main.dir/main.cpp.o: src/headers/game_turn_observable.h
+src/CMakeFiles/main.dir/main.cpp.o: src/headers/game_turn_observer.h
 src/CMakeFiles/main.dir/main.cpp.o: src/headers/move.h
+src/CMakeFiles/main.dir/main.cpp.o: src/headers/move_utils.h
 src/CMakeFiles/main.dir/main.cpp.o: src/headers/player.h
 src/CMakeFiles/main.dir/main.cpp.o: src/ipc/headers/cu_pipe.h
 src/CMakeFiles/main.dir/main.cpp.o: src/ipc/headers/ipc_pipe.h
@@ -49,8 +68,11 @@ src/CMakeFiles/main.dir/main.cpp.o: src/main.cpp
 src/CMakeFiles/main.dir/main.cpp.o: src/search/headers/search.h
 src/CMakeFiles/main.dir/main.cpp.o: src/search/headers/uci.h
 
-src/CMakeFiles/main.dir/player.cpp.o: src/board/headers/utils.h
-src/CMakeFiles/main.dir/player.cpp.o: src/headers/move.h
+src/CMakeFiles/main.dir/move_utils.cpp.o: src/board/headers/utils.h
+src/CMakeFiles/main.dir/move_utils.cpp.o: src/headers/move.h
+src/CMakeFiles/main.dir/move_utils.cpp.o: src/headers/move_utils.h
+src/CMakeFiles/main.dir/move_utils.cpp.o: src/move_utils.cpp
+
 src/CMakeFiles/main.dir/player.cpp.o: src/headers/player.h
 src/CMakeFiles/main.dir/player.cpp.o: src/player.cpp
 

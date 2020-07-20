@@ -1,20 +1,51 @@
 #include "headers/gui_controller.h"
 
 GuiController::GuiController() {}
+
 GuiController::~GuiController() {}
 
 // defatult size 44
-void GuiController::add_pane(string name, string default_drawing) {
-  panes[name] = new Pane(default_drawing);
+
+void GuiController::add_pane_at_pos(Displayable* pane, Pane_pos pos) {
+  if (panes.size() >= Max_panes_size)
+    return;
+
+  panes.emplace(pos, pane);
 }
 
-void GuiController::add_pane(string name) {
-  panes[name] = new Pane();
+ostream& operator << (ostream& os, GuiController &gc) {
+  system(CLEAR);
+
+  if (gc.panes.size() == 0) { return os; }
+
+  for (auto& iter : gc.panes) {
+    iter.second->draw();
+  }
+
+  gc.insert_formatted_output(gc.panes, os, 0);
+  return os;
 }
 
-Pane* GuiController::get_pane(string name) {
-  if (panes.count(name) == 0)
-    throw "pane does not exist with that key";
 
-  return panes[name];
+void GuiController::insert_formatted_output(
+    map<int, Displayable*, std::less<int>> panes, ostream& os, int index) {
+
+  if (panes.empty())
+    return;
+
+  map<int, Displayable*>::iterator smallest =
+    std::min_element(panes.begin(), panes.end(),
+        [](const auto& a, const auto& b) {
+        return a.second->size() < b.second->size(); });
+
+  for (; index < smallest->second->size(); ++index) {
+    for (auto& iter : panes) {
+      os << (*iter.second)[index];
+    }
+    os << "\n";
+  }
+
+  panes.erase(smallest);
+
+  insert_formatted_output(panes, os, index);
 }

@@ -3,42 +3,68 @@
 
 // #include <string>
 // #include "utils.h"
+#include <array>
 #include <assert.h>     /* assert */
 #include <memory>
+#include <map>
 #include <string>
 #include <vector>
-#include "drawing.hpp"
-#include "board.h"
+#include "pieces_drawings.hpp"
+#include "savable.h"
+#include "../../display/headers/game_drawings.hpp"
+#include "../../display/headers/Idisplay.h"
+#include "../../display/headers/section.h"
+#include "../../headers/game_turn_observer.h"
 
 using std::vector;
 using std::string;
 using std::make_unique;
 using std::shared_ptr;
 
-class Info {
+using players = GameTurn::players;
+// using
+
+class Info : public Displayable, public Savable, public GameTurnObserver {
  public:
-    explicit Info(Board *b);
+    Info();
     virtual ~Info();
-    void draw_info_board();
-    void _init(Pane* pane);
+    void draw();
+    void _init();
+    void save_moves(const string& moves);
+    void save_captures(const string& moves);
+    void save_game_info(const string& info);
+    void update_turn(GameTurn::players turn);
 
  private:
-    const unsigned int kLineMaxLen = Banner::kBannerLen - 4/*┃  ┃*/;
+    const unsigned int kRowMaxLen = Banner::width - 4/*┃  ┃*/;
+    void start_or_quit_selection();
     void clear_block();
-    void recursive_block(shared_ptr<Section>&, string msg, int cur_row);
+    void set_content_to_block_recursively(
+        shared_ptr<Section>&, string msg, int cur_row);
     void format_block(shared_ptr<Section>&, string msg);
+    void clear();
+    bool has_block_space_for_content(
+        const shared_ptr<Section>& block, const string& message);
     string format_line(string);
-    Pane* m_drawing;
-    Board* p_board;
-    const vector<string>* p_p1_banner = &Banner::player1;
-    const vector<string>* p_p2_banner = &Banner::player2;
 
-    shared_ptr<Section> player_banner;
-    shared_ptr<Section> board_score;
-    shared_ptr<Section> black_captures;
-    shared_ptr<Section> white_captures;
-    shared_ptr<Section> black_moves;
-    shared_ptr<Section> white_moves;
+    std::array<const vector<string>*, Info::players_size>
+      p_banners {
+        &Banner::player1,
+        &Banner::player2
+      };
+
+    shared_ptr<Section> p_top_section;
+    shared_ptr<Section> p_player_banner;
+    shared_ptr<Section> p_board_score;
+    shared_ptr<Section> p_player_2_moves;
+    shared_ptr<Section> p_player_2_captures;
+    shared_ptr<Section> p_player_1_captures;
+    shared_ptr<Section> p_player_1_moves;
+    shared_ptr<Section> p_game_info;
+    shared_ptr<Section> p_bottom_section;
+
+    string board_score;
+    GameTurn::players m_turn = GameTurn::players::player_1;
 };
 
 #endif /* INFO_H */

@@ -4,31 +4,36 @@
 src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.o: src/display/ISectionComponent.cpp
 src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.o: src/display/headers/ISectionComponent.h
 
+src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o: src/board/headers/utils.h
 src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o: src/display/Idisplay.cpp
+src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o: src/display/headers/ISectionComponent.h
 src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o: src/display/headers/Idisplay.h
+src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o: src/display/headers/pane.h
 
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: include/common/headers/common.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/board/headers/utils.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/cli_display.cpp
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/headers/ISectionComponent.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/headers/Idisplay.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/headers/cli_display.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/headers/display.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/headers/gui_controller.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/headers/messages.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/headers/pane.h
-src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o: src/display/headers/section.h
-
+src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o: include/common/headers/common.h
 src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o: src/board/headers/utils.h
 src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o: src/display/gui_controller.cpp
 src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o: src/display/headers/ISectionComponent.h
+src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o: src/display/headers/Idisplay.h
 src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o: src/display/headers/gui_controller.h
 src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o: src/display/headers/pane.h
 src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o: src/display/headers/section.h
 
+src/display/CMakeFiles/display_lib.dir/message_state.cpp.o: src/board/headers/box.h
+src/display/CMakeFiles/display_lib.dir/message_state.cpp.o: src/display/headers/game_drawings.hpp
+src/display/CMakeFiles/display_lib.dir/message_state.cpp.o: src/display/headers/message_state.h
+src/display/CMakeFiles/display_lib.dir/message_state.cpp.o: src/display/message_state.cpp
+
 src/display/CMakeFiles/display_lib.dir/messages.cpp.o: include/common/headers/common.h
+src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/board/headers/box.h
+src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/board/headers/utils.h
+src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/display/headers/ISectionComponent.h
 src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/display/headers/Idisplay.h
+src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/display/headers/game_drawings.hpp
+src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/display/headers/message_state.h
 src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/display/headers/messages.h
+src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/display/headers/pane.h
+src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/display/headers/section.h
 src/display/CMakeFiles/display_lib.dir/messages.cpp.o: src/display/messages.cpp
 
 src/display/CMakeFiles/display_lib.dir/pane.cpp.o: src/board/headers/utils.h

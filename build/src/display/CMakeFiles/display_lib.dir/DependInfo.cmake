@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/ISectionComponent.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/Idisplay.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/cli_display.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/gui_controller.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/messages.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/messages.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/pane.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/pane.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/section.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/section.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/ISectionComponent.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/Idisplay.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/gui_controller.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/message_state.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/message_state.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/messages.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/messages.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/pane.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/pane.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/section.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/section.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.17.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.17.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_SOURCE_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.17.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.17.3/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -100,14 +100,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/progress.marks
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles 0
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/progress.marks
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/clean
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/clean
 .PHONY : clean
 
 # The main clean target
@@ -117,22 +117,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/preinstall
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/preinstall
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/board/CMakeFiles/board_lib.dir/rule:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/CMakeFiles/board_lib.dir/rule
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/board/CMakeFiles/board_lib.dir/rule
 .PHONY : src/board/CMakeFiles/board_lib.dir/rule
 
 # Convenience name for target.
@@ -142,7 +142,7 @@ board_lib: src/board/CMakeFiles/board_lib.dir/rule
 
 # fast build rule for target.
 board_lib/fast:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/build
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/build
 .PHONY : board_lib/fast
 
 board.o: board.cpp.o
@@ -151,7 +151,7 @@ board.o: board.cpp.o
 
 # target to build an object file
 board.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board.cpp.o
 .PHONY : board.cpp.o
 
 board.i: board.cpp.i
@@ -160,7 +160,7 @@ board.i: board.cpp.i
 
 # target to preprocess a source file
 board.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board.cpp.i
 .PHONY : board.cpp.i
 
 board.s: board.cpp.s
@@ -169,35 +169,35 @@ board.s: board.cpp.s
 
 # target to generate assembly for a file
 board.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board.cpp.s
 .PHONY : board.cpp.s
 
-drawing.o: drawing.cpp.o
+board_with_info.o: board_with_info.cpp.o
 
-.PHONY : drawing.o
+.PHONY : board_with_info.o
 
 # target to build an object file
-drawing.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/drawing.cpp.o
-.PHONY : drawing.cpp.o
+board_with_info.cpp.o:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board_with_info.cpp.o
+.PHONY : board_with_info.cpp.o
 
-drawing.i: drawing.cpp.i
+board_with_info.i: board_with_info.cpp.i
 
-.PHONY : drawing.i
+.PHONY : board_with_info.i
 
 # target to preprocess a source file
-drawing.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/drawing.cpp.i
-.PHONY : drawing.cpp.i
+board_with_info.cpp.i:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board_with_info.cpp.i
+.PHONY : board_with_info.cpp.i
 
-drawing.s: drawing.cpp.s
+board_with_info.s: board_with_info.cpp.s
 
-.PHONY : drawing.s
+.PHONY : board_with_info.s
 
 # target to generate assembly for a file
-drawing.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/drawing.cpp.s
-.PHONY : drawing.cpp.s
+board_with_info.cpp.s:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/board_with_info.cpp.s
+.PHONY : board_with_info.cpp.s
 
 info.o: info.cpp.o
 
@@ -205,7 +205,7 @@ info.o: info.cpp.o
 
 # target to build an object file
 info.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/info.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/info.cpp.o
 .PHONY : info.cpp.o
 
 info.i: info.cpp.i
@@ -214,7 +214,7 @@ info.i: info.cpp.i
 
 # target to preprocess a source file
 info.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/info.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/info.cpp.i
 .PHONY : info.cpp.i
 
 info.s: info.cpp.s
@@ -223,7 +223,7 @@ info.s: info.cpp.s
 
 # target to generate assembly for a file
 info.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/info.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/info.cpp.s
 .PHONY : info.cpp.s
 
 piece.o: piece.cpp.o
@@ -232,7 +232,7 @@ piece.o: piece.cpp.o
 
 # target to build an object file
 piece.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/piece.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/piece.cpp.o
 .PHONY : piece.cpp.o
 
 piece.i: piece.cpp.i
@@ -241,7 +241,7 @@ piece.i: piece.cpp.i
 
 # target to preprocess a source file
 piece.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/piece.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/piece.cpp.i
 .PHONY : piece.cpp.i
 
 piece.s: piece.cpp.s
@@ -250,8 +250,62 @@ piece.s: piece.cpp.s
 
 # target to generate assembly for a file
 piece.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/piece.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/piece.cpp.s
 .PHONY : piece.cpp.s
+
+pieces_drawings.o: pieces_drawings.cpp.o
+
+.PHONY : pieces_drawings.o
+
+# target to build an object file
+pieces_drawings.cpp.o:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/pieces_drawings.cpp.o
+.PHONY : pieces_drawings.cpp.o
+
+pieces_drawings.i: pieces_drawings.cpp.i
+
+.PHONY : pieces_drawings.i
+
+# target to preprocess a source file
+pieces_drawings.cpp.i:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/pieces_drawings.cpp.i
+.PHONY : pieces_drawings.cpp.i
+
+pieces_drawings.s: pieces_drawings.cpp.s
+
+.PHONY : pieces_drawings.s
+
+# target to generate assembly for a file
+pieces_drawings.cpp.s:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/pieces_drawings.cpp.s
+.PHONY : pieces_drawings.cpp.s
+
+square.o: square.cpp.o
+
+.PHONY : square.o
+
+# target to build an object file
+square.cpp.o:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/square.cpp.o
+.PHONY : square.cpp.o
+
+square.i: square.cpp.i
+
+.PHONY : square.i
+
+# target to preprocess a source file
+square.cpp.i:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/square.cpp.i
+.PHONY : square.cpp.i
+
+square.s: square.cpp.s
+
+.PHONY : square.s
+
+# target to generate assembly for a file
+square.cpp.s:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/board/CMakeFiles/board_lib.dir/build.make src/board/CMakeFiles/board_lib.dir/square.cpp.s
+.PHONY : square.cpp.s
 
 # Help Target
 help:
@@ -265,15 +319,21 @@ help:
 	@echo "... board.o"
 	@echo "... board.i"
 	@echo "... board.s"
-	@echo "... drawing.o"
-	@echo "... drawing.i"
-	@echo "... drawing.s"
+	@echo "... board_with_info.o"
+	@echo "... board_with_info.i"
+	@echo "... board_with_info.s"
 	@echo "... info.o"
 	@echo "... info.i"
 	@echo "... info.s"
 	@echo "... piece.o"
 	@echo "... piece.i"
 	@echo "... piece.s"
+	@echo "... pieces_drawings.o"
+	@echo "... pieces_drawings.i"
+	@echo "... pieces_drawings.s"
+	@echo "... square.o"
+	@echo "... square.i"
+	@echo "... square.s"
 .PHONY : help
 
 
@@ -285,6 +345,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -101,7 +101,7 @@ class Move {
       return static_cast<Piecetype>((mv >> 12) & 0xf);
     }
 
-  private:
+ private:
     unsigned int m_move = 0;  // or short or template type
     int m_score = 0;
 };

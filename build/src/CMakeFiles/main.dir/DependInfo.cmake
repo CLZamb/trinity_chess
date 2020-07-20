@@ -4,9 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/game.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir/game.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/main.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir/main.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/player.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir/player.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/game.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir/game.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/game_turn_observable.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir/game_turn_observable.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/main.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir/main.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/move_utils.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir/move_utils.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/player.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/CMakeFiles/main.dir/player.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
@@ -28,11 +30,11 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/DependInfo.cmake"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common/CMakeFiles/common_lib.dir/DependInfo.cmake"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/CMakeFiles/search_lib.dir/DependInfo.cmake"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/CMakeFiles/ipc_lib.dir/DependInfo.cmake"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/DependInfo.cmake"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/display_lib.dir/DependInfo.cmake"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common/CMakeFiles/common_lib.dir/DependInfo.cmake"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/CMakeFiles/search_lib.dir/DependInfo.cmake"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/CMakeFiles/ipc_lib.dir/DependInfo.cmake"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

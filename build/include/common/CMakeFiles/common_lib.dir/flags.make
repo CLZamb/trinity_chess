@@ -6,5 +6,5 @@ CXX_FLAGS =  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacO
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include 
+CXX_INCLUDES = -I/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include 
 

@@ -54,19 +54,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.17.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.17.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_SOURCE_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # Include any dependencies generated for this target.
 include src/search/CMakeFiles/search.dir/depend.make
@@ -79,42 +79,42 @@ include src/search/CMakeFiles/search.dir/flags.make
 
 src/search/CMakeFiles/search.dir/main.cpp.o: src/search/CMakeFiles/search.dir/flags.make
 src/search/CMakeFiles/search.dir/main.cpp.o: src/search/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/search/CMakeFiles/search.dir/main.cpp.o"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/search.dir/main.cpp.o -c /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/search/CMakeFiles/search.dir/main.cpp.o"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/search.dir/main.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/main.cpp
 
 src/search/CMakeFiles/search.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/search.dir/main.cpp.i"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/main.cpp > CMakeFiles/search.dir/main.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/main.cpp > CMakeFiles/search.dir/main.cpp.i
 
 src/search/CMakeFiles/search.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/search.dir/main.cpp.s"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/main.cpp -o CMakeFiles/search.dir/main.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/main.cpp -o CMakeFiles/search.dir/main.cpp.s
 
 src/search/CMakeFiles/search.dir/uci.cpp.o: src/search/CMakeFiles/search.dir/flags.make
 src/search/CMakeFiles/search.dir/uci.cpp.o: src/search/uci.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/search/CMakeFiles/search.dir/uci.cpp.o"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/search.dir/uci.cpp.o -c /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/uci.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/search/CMakeFiles/search.dir/uci.cpp.o"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/search.dir/uci.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/uci.cpp
 
 src/search/CMakeFiles/search.dir/uci.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/search.dir/uci.cpp.i"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/uci.cpp > CMakeFiles/search.dir/uci.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/uci.cpp > CMakeFiles/search.dir/uci.cpp.i
 
 src/search/CMakeFiles/search.dir/uci.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/search.dir/uci.cpp.s"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/uci.cpp -o CMakeFiles/search.dir/uci.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/uci.cpp -o CMakeFiles/search.dir/uci.cpp.s
 
 src/search/CMakeFiles/search.dir/search.cpp.o: src/search/CMakeFiles/search.dir/flags.make
 src/search/CMakeFiles/search.dir/search.cpp.o: src/search/search.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/search/CMakeFiles/search.dir/search.cpp.o"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/search.dir/search.cpp.o -c /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/search.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/search/CMakeFiles/search.dir/search.cpp.o"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/search.dir/search.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/search.cpp
 
 src/search/CMakeFiles/search.dir/search.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/search.dir/search.cpp.i"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/search.cpp > CMakeFiles/search.dir/search.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/search.cpp > CMakeFiles/search.dir/search.cpp.i
 
 src/search/CMakeFiles/search.dir/search.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/search.dir/search.cpp.s"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/search.cpp -o CMakeFiles/search.dir/search.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/search.cpp -o CMakeFiles/search.dir/search.cpp.s
 
 # Object files for target search
 search_OBJECTS = \
@@ -125,24 +125,24 @@ search_OBJECTS = \
 # External object files for target search
 search_EXTERNAL_OBJECTS =
 
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/main.cpp.o
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/uci.cpp.o
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/search.cpp.o
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/build.make
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable /Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/search.dir/link.txt --verbose=$(VERBOSE)
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/main.cpp.o
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/uci.cpp.o
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/search.cpp.o
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/build.make
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/bin/search: src/search/CMakeFiles/search.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable /Users/cristofher/Desktop/practice/c++/ChessProject_v2/bin/search"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/search.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-src/search/CMakeFiles/search.dir/build: /Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search
+src/search/CMakeFiles/search.dir/build: /Users/cristofher/Desktop/practice/c++/ChessProject_v2/bin/search
 
 .PHONY : src/search/CMakeFiles/search.dir/build
 
 src/search/CMakeFiles/search.dir/clean:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search && $(CMAKE_COMMAND) -P CMakeFiles/search.dir/cmake_clean.cmake
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search && $(CMAKE_COMMAND) -P CMakeFiles/search.dir/cmake_clean.cmake
 .PHONY : src/search/CMakeFiles/search.dir/clean
 
 src/search/CMakeFiles/search.dir/depend:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/cristofher/desktop/practice/c++/ChessProject_v2/build /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search /Users/cristofher/desktop/practice/c++/ChessProject_v2/build /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/CMakeFiles/search.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/CMakeFiles/search.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/search/CMakeFiles/search.dir/depend
 

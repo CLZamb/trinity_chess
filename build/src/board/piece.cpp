@@ -2,52 +2,31 @@
 
 Piece::Piece(Piecetype pct) :
   black(utils::check::is_black_piece(pct)), m_type(pct) {
-    create_piece_drawing(pct);
-    // set_material_score(pct);
-  }
-//
-Piece::~Piece() {
-  delete b_sq_drawing;
-  delete w_sq_drawing;
+    create_drawing(utils::get_piece_str_name_from_piecetype(pct));
 }
-//
-void Piece::create_piece_drawing(Piecetype pct) {
-  b_sq_drawing =
-    new Drawing(utils::get_piece_str_name_from_key_square_index(pct));
-  w_sq_drawing =
-    new Drawing(utils::get_piece_str_name_from_key_square_index(pct));
-  b_sq_drawing->addModifier(DrawingMod::BG_INVERSE);
 
-  if (black) {
-    b_sq_drawing->addModifier(DrawingMod::BG_BLACK);
-    w_sq_drawing->addModifier(DrawingMod::BG_BLACK);
-  } else {
-    b_sq_drawing->addModifier(DrawingMod::FG_WHITE);
-    w_sq_drawing->addModifier(DrawingMod::FG_WHITE);
-  }
+Piece::~Piece() {
+  delete white_square_drawing;
+  delete black_square_drawing;
 }
 //
-// void Piece::set_material_score(Piecetype pct) {
-//   m_material_score = utils::constant::piece_material_score[pct];
-// }
-//
-// U64 Piece::get_bitboard() { return m_bitboard; }
+void Piece::create_drawing(string piece_type) {
+  black_square_drawing = new Drawing(piece_type);
+  white_square_drawing = new Drawing(piece_type);
+
+  DrawingMod::Code piece_drawing_mod =
+    black ? DrawingMod::BG_BLACK : DrawingMod::FG_WHITE;
+
+  black_square_drawing->addModifier(DrawingMod::BG_INVERSE);
+  black_square_drawing->addModifier(piece_drawing_mod);
+  white_square_drawing->addModifier(piece_drawing_mod);
+}
+
 box* Piece::get_drawing(bool is_black_square) {
   return is_black_square ?
-    b_sq_drawing->get_drawing() : w_sq_drawing->get_drawing();
+    black_square_drawing->get_drawing() : white_square_drawing->get_drawing();
 }
-// Piecetype Piece::get_type_and_color() { return m_type; }
-// bool Piece::is_black() { return black; }
-// void Piece::clear_bit(SquareIndices pos) {
-//   bitUtility::clear_bit(&m_bitboard, pos);
-// }
-// void Piece::set_bit(SquareIndices pos) {
-//   bitUtility::set_bit(&m_bitboard, pos);
-//
-// void Piece::make_move(SquareIndices from, SquareIndices to) {
-//   clear_bit(from); set_bit(to);
-// }
-// void Piece::clear_bitboard() { m_bitboard = BLANK; }
-// int Piece::get_material_score() {
-//   return (bitUtility::count_1s(m_bitboard) * m_material_score);
-// }
+
+Piecetype Piece::get_type_and_color() { return m_type; }
+
+bool Piece::is_black() { return black; }

@@ -14,30 +14,22 @@ using std::shared_ptr;
 
 class Pane {
  public:
-  Pane();
-  explicit Pane(string content);
+  explicit Pane(int size);
   virtual ~Pane();
-  string* at(size_t);
-  std::vector<string>::iterator begin();
-  std::vector<string>::iterator end();
   void clear();
+  void fill(const string& content);
   void add_section(shared_ptr<ISectionComponent> section);
-  void set_top(string);
-  void set_bottom(std::initializer_list<string> lst);
-  void set_bottom(string bottom);
+  void set_content(std::initializer_list<string> lst);
   int size();
-  string operator[] (int i) const;
-  string& operator[] (int i);
+  const string& operator[] (int i);
 
  private:
+  void fill_pane();
   int get_next_index();
-  int rows_left();
+  bool is_valid_pane_index(const int& index);
 
-  static const size_t size_pane = 44;
-  int bottom_index = size_pane;
-  int top_index = 0;
-  vector<string> pane {size_pane, ""};
-  string default_content = "";
+  int m_size = 0;
+  vector<string*> m_pane_drawing;
 };
 
 #endif /* PANE_H */

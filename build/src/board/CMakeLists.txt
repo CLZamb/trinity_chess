@@ -1,9 +1,11 @@
 add_library(
   board_lib
   board.cpp
-  drawing.cpp
+  board_with_info.cpp
+  pieces_drawings.cpp
   piece.cpp
   info.cpp
+  square.cpp
   )
 
 # add_executable(ipc ${SOURCE_FILES})

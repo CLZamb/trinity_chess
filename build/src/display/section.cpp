@@ -1,48 +1,35 @@
 #include "headers/section.h"
 
 Section::Section(string name, size_t size) :
-  ISectionComponent(size), m_name(name) {
+ ISectionComponent(size), m_name(name) {
   if (size >= std::numeric_limits<size_t>::max())
     std::cerr
       <<  "illegal size length: " << size
       << " on section " << name << std::endl;
 }
 
-Section::~Section() {
-  section.clear();
-}
+Section::~Section() {}
 
-string* Section::at(int index) {
-  if (index > section.size())
-    throw std::out_of_range("index not found");
-
-  if (section[index] == nullptr)
-    throw std::out_of_range("element at index does not exist");
-
-  return section[index];
-}
-
-void Section::set_content(string content) {
-  if (section.size() == 0) {
-    std::cerr << "error size is 0" << std::endl;
+void Section::set_content_at_index(string content, const int& index) {
+  if (!is_valid_index(index))
     return;
-  }
 
-  if (section[0] == nullptr) return;
-
-  *section[0] = content;
+  m_section_drawing[index] = content;
 }
 
+bool Section::is_valid_index(const int& index) {
+  if (index >= size()) return false;
+  if (index < 0) return false;
+  return true;
+}
 
 void Section::set_content(std::initializer_list<string> lst) {
   if (lst.size() > size())
     return;
 
-  if (section[0] == nullptr) return;
-
   int index = 0;
-  for (auto& i : lst) {
-    *section[index++] = i;
+  for (auto i : lst) {
+    m_section_drawing[index++] = i;
   }
 }
 
@@ -50,11 +37,9 @@ void Section::set_content(const vector<string>* content) {
   if (content->size() > size())
     return;
 
-  if (section[0] == nullptr) return;
-
   int index = 0;
   for (auto i : *content) {
-    *section[index++] = i;
+    m_section_drawing[index++] = i;
   }
 }
 

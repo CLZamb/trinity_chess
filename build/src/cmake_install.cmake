@@ -1,8 +1,8 @@
-# Install script for directory: /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src
+# Install script for directory: /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build")
+  set(CMAKE_INSTALL_PREFIX "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,11 +34,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/cmake_install.cmake")
-  include("/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/search/cmake_install.cmake")
-  include("/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/cmake_install.cmake")
-  include("/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/headers/cmake_install.cmake")
-  include("/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/cmake_install.cmake")
+  include("/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/cmake_install.cmake")
+  include("/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/search/cmake_install.cmake")
+  include("/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/cmake_install.cmake")
+  include("/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/headers/cmake_install.cmake")
+  include("/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/cmake_install.cmake")
 
 endif()
 

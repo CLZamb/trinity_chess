@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.17.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.17.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_SOURCE_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.17.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.17.3/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -100,14 +100,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common/CMakeFiles/progress.marks
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles 0
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common/CMakeFiles/progress.marks
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/clean
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/clean
 .PHONY : clean
 
 # The main clean target
@@ -117,22 +117,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/preinstall
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/preinstall
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 include/common/CMakeFiles/common_lib.dir/rule:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/CMakeFiles/common_lib.dir/rule
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/common/CMakeFiles/common_lib.dir/rule
 .PHONY : include/common/CMakeFiles/common_lib.dir/rule
 
 # Convenience name for target.
@@ -142,7 +142,7 @@ common_lib: include/common/CMakeFiles/common_lib.dir/rule
 
 # fast build rule for target.
 common_lib/fast:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f include/common/CMakeFiles/common_lib.dir/build.make include/common/CMakeFiles/common_lib.dir/build
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f include/common/CMakeFiles/common_lib.dir/build.make include/common/CMakeFiles/common_lib.dir/build
 .PHONY : common_lib/fast
 
 common.o: common.cpp.o
@@ -151,7 +151,7 @@ common.o: common.cpp.o
 
 # target to build an object file
 common.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f include/common/CMakeFiles/common_lib.dir/build.make include/common/CMakeFiles/common_lib.dir/common.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f include/common/CMakeFiles/common_lib.dir/build.make include/common/CMakeFiles/common_lib.dir/common.cpp.o
 .PHONY : common.cpp.o
 
 common.i: common.cpp.i
@@ -160,7 +160,7 @@ common.i: common.cpp.i
 
 # target to preprocess a source file
 common.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f include/common/CMakeFiles/common_lib.dir/build.make include/common/CMakeFiles/common_lib.dir/common.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f include/common/CMakeFiles/common_lib.dir/build.make include/common/CMakeFiles/common_lib.dir/common.cpp.i
 .PHONY : common.cpp.i
 
 common.s: common.cpp.s
@@ -169,7 +169,7 @@ common.s: common.cpp.s
 
 # target to generate assembly for a file
 common.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f include/common/CMakeFiles/common_lib.dir/build.make include/common/CMakeFiles/common_lib.dir/common.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f include/common/CMakeFiles/common_lib.dir/build.make include/common/CMakeFiles/common_lib.dir/common.cpp.s
 .PHONY : common.cpp.s
 
 # Help Target
@@ -195,6 +195,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

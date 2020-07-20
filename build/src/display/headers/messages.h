@@ -2,28 +2,38 @@
 #define MESSAGES_H
 #include "Idisplay.h"
 #include "../../../include/common/headers/common.h"
+#include "../headers/message_state.h"
+#include "../headers/section.h"
 
 enum Msg : int {
-  No_message,
-  Welcome,
-  ChooseColor,
-  ChooseStartOption,
-  GameOver
+  no_message,
+  welcome,
+  chooseColor,
+  chooseStartOption,
+  gameOver
 };
 
-class Messages : public IDisplay {
-  public:
+class Messages : public Displayable {
+ public:
     Messages();
-    ~Messages() {}
+    ~Messages();
+    void draw();
+    void set_message(MessageState* message_state);
 
-    void print();
+    MessageState* get_start_or_quit();
+    MessageState* get_players_options();
+    MessageState* get_game_over();
+    MessageState* get_choose_color();
+    MessageState* get_no_message();
 
-    static Msg m_nextMessage;
-  private:
-    static const char* p_welcome_message;
-    static const char* p_options_message;
-    static const char* p_game_over;
-    static const char* p_choose_color_message;
+ private:
+    No_message m_no_message;
+    Start_or_quit m_start_or_quit;
+    Players_options m_players_options;
+    Game_over m_game_over;
+    Choose_color m_choose_color;
+    MessageState* p_current_state;
+    shared_ptr<Section> p_main = std::make_shared<Section>("main", 1);
 };
 
 #endif /* MESSAGES_H */

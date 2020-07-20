@@ -8,20 +8,21 @@ using std::string;
 using std::vector;
 
 class Pane;
-
 class ISectionComponent {
  public:
   explicit ISectionComponent(size_t size);
   virtual ~ISectionComponent();
 
-  vector<string*>& get_section();
+  vector<string>::iterator begin();
+  vector<string>::iterator end();
   void set_parent_pane(Pane* parent);
   int size();
 
  protected:
-  vector<string*> section;
+  vector<string> m_section_drawing;
 
  private:
+  const int m_size;
   Pane* parent_pane = nullptr;
 };
 

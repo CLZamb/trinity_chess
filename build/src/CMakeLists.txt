@@ -13,6 +13,8 @@ add_library(
   main.cpp
   game.cpp
   player.cpp
+  move_utils.cpp
+  game_turn_observable.cpp
   )
 
 # setting the output directory
@@ -35,6 +37,8 @@ set(SOURCE_FILES
   main.cpp
   game.cpp
   player.cpp
+  move_utils.cpp
+  game_turn_observable.cpp
   )
 
 add_executable(main ${SOURCE_FILES})

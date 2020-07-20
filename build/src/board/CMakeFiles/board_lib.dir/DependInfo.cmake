@@ -4,10 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/board.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/board.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/drawing.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/drawing.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/info.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/info.cpp.o"
-  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/piece.cpp" "/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/piece.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/board.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/board.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/board_with_info.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/board_with_info.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/info.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/info.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/piece.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/piece.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/pieces_drawings.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/pieces_drawings.cpp.o"
+  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/square.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/board/CMakeFiles/board_lib.dir/square.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

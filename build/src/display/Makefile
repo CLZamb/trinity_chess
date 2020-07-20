@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.17.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.17.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_SOURCE_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.17.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.17.3/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -100,14 +100,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/progress.marks
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles 0
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/display/CMakeFiles/progress.marks
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/clean
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/clean
 .PHONY : clean
 
 # The main clean target
@@ -117,22 +117,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/preinstall
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/preinstall
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/display/CMakeFiles/display_lib.dir/rule:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/CMakeFiles/display_lib.dir/rule
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/display/CMakeFiles/display_lib.dir/rule
 .PHONY : src/display/CMakeFiles/display_lib.dir/rule
 
 # Convenience name for target.
@@ -142,7 +142,7 @@ display_lib: src/display/CMakeFiles/display_lib.dir/rule
 
 # fast build rule for target.
 display_lib/fast:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/build
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/build
 .PHONY : display_lib/fast
 
 ISectionComponent.o: ISectionComponent.cpp.o
@@ -151,7 +151,7 @@ ISectionComponent.o: ISectionComponent.cpp.o
 
 # target to build an object file
 ISectionComponent.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.o
 .PHONY : ISectionComponent.cpp.o
 
 ISectionComponent.i: ISectionComponent.cpp.i
@@ -160,7 +160,7 @@ ISectionComponent.i: ISectionComponent.cpp.i
 
 # target to preprocess a source file
 ISectionComponent.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.i
 .PHONY : ISectionComponent.cpp.i
 
 ISectionComponent.s: ISectionComponent.cpp.s
@@ -169,7 +169,7 @@ ISectionComponent.s: ISectionComponent.cpp.s
 
 # target to generate assembly for a file
 ISectionComponent.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/ISectionComponent.cpp.s
 .PHONY : ISectionComponent.cpp.s
 
 Idisplay.o: Idisplay.cpp.o
@@ -178,7 +178,7 @@ Idisplay.o: Idisplay.cpp.o
 
 # target to build an object file
 Idisplay.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.o
 .PHONY : Idisplay.cpp.o
 
 Idisplay.i: Idisplay.cpp.i
@@ -187,7 +187,7 @@ Idisplay.i: Idisplay.cpp.i
 
 # target to preprocess a source file
 Idisplay.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.i
 .PHONY : Idisplay.cpp.i
 
 Idisplay.s: Idisplay.cpp.s
@@ -196,35 +196,8 @@ Idisplay.s: Idisplay.cpp.s
 
 # target to generate assembly for a file
 Idisplay.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/Idisplay.cpp.s
 .PHONY : Idisplay.cpp.s
-
-cli_display.o: cli_display.cpp.o
-
-.PHONY : cli_display.o
-
-# target to build an object file
-cli_display.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/cli_display.cpp.o
-.PHONY : cli_display.cpp.o
-
-cli_display.i: cli_display.cpp.i
-
-.PHONY : cli_display.i
-
-# target to preprocess a source file
-cli_display.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/cli_display.cpp.i
-.PHONY : cli_display.cpp.i
-
-cli_display.s: cli_display.cpp.s
-
-.PHONY : cli_display.s
-
-# target to generate assembly for a file
-cli_display.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/cli_display.cpp.s
-.PHONY : cli_display.cpp.s
 
 gui_controller.o: gui_controller.cpp.o
 
@@ -232,7 +205,7 @@ gui_controller.o: gui_controller.cpp.o
 
 # target to build an object file
 gui_controller.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.o
 .PHONY : gui_controller.cpp.o
 
 gui_controller.i: gui_controller.cpp.i
@@ -241,7 +214,7 @@ gui_controller.i: gui_controller.cpp.i
 
 # target to preprocess a source file
 gui_controller.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.i
 .PHONY : gui_controller.cpp.i
 
 gui_controller.s: gui_controller.cpp.s
@@ -250,8 +223,35 @@ gui_controller.s: gui_controller.cpp.s
 
 # target to generate assembly for a file
 gui_controller.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/gui_controller.cpp.s
 .PHONY : gui_controller.cpp.s
+
+message_state.o: message_state.cpp.o
+
+.PHONY : message_state.o
+
+# target to build an object file
+message_state.cpp.o:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/message_state.cpp.o
+.PHONY : message_state.cpp.o
+
+message_state.i: message_state.cpp.i
+
+.PHONY : message_state.i
+
+# target to preprocess a source file
+message_state.cpp.i:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/message_state.cpp.i
+.PHONY : message_state.cpp.i
+
+message_state.s: message_state.cpp.s
+
+.PHONY : message_state.s
+
+# target to generate assembly for a file
+message_state.cpp.s:
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/message_state.cpp.s
+.PHONY : message_state.cpp.s
 
 messages.o: messages.cpp.o
 
@@ -259,7 +259,7 @@ messages.o: messages.cpp.o
 
 # target to build an object file
 messages.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/messages.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/messages.cpp.o
 .PHONY : messages.cpp.o
 
 messages.i: messages.cpp.i
@@ -268,7 +268,7 @@ messages.i: messages.cpp.i
 
 # target to preprocess a source file
 messages.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/messages.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/messages.cpp.i
 .PHONY : messages.cpp.i
 
 messages.s: messages.cpp.s
@@ -277,7 +277,7 @@ messages.s: messages.cpp.s
 
 # target to generate assembly for a file
 messages.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/messages.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/messages.cpp.s
 .PHONY : messages.cpp.s
 
 pane.o: pane.cpp.o
@@ -286,7 +286,7 @@ pane.o: pane.cpp.o
 
 # target to build an object file
 pane.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/pane.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/pane.cpp.o
 .PHONY : pane.cpp.o
 
 pane.i: pane.cpp.i
@@ -295,7 +295,7 @@ pane.i: pane.cpp.i
 
 # target to preprocess a source file
 pane.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/pane.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/pane.cpp.i
 .PHONY : pane.cpp.i
 
 pane.s: pane.cpp.s
@@ -304,7 +304,7 @@ pane.s: pane.cpp.s
 
 # target to generate assembly for a file
 pane.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/pane.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/pane.cpp.s
 .PHONY : pane.cpp.s
 
 section.o: section.cpp.o
@@ -313,7 +313,7 @@ section.o: section.cpp.o
 
 # target to build an object file
 section.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/section.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/section.cpp.o
 .PHONY : section.cpp.o
 
 section.i: section.cpp.i
@@ -322,7 +322,7 @@ section.i: section.cpp.i
 
 # target to preprocess a source file
 section.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/section.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/section.cpp.i
 .PHONY : section.cpp.i
 
 section.s: section.cpp.s
@@ -331,7 +331,7 @@ section.s: section.cpp.s
 
 # target to generate assembly for a file
 section.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/section.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/display/CMakeFiles/display_lib.dir/build.make src/display/CMakeFiles/display_lib.dir/section.cpp.s
 .PHONY : section.cpp.s
 
 # Help Target
@@ -349,12 +349,12 @@ help:
 	@echo "... Idisplay.o"
 	@echo "... Idisplay.i"
 	@echo "... Idisplay.s"
-	@echo "... cli_display.o"
-	@echo "... cli_display.i"
-	@echo "... cli_display.s"
 	@echo "... gui_controller.o"
 	@echo "... gui_controller.i"
 	@echo "... gui_controller.s"
+	@echo "... message_state.o"
+	@echo "... message_state.i"
+	@echo "... message_state.s"
 	@echo "... messages.o"
 	@echo "... messages.i"
 	@echo "... messages.s"
@@ -375,6 +375,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

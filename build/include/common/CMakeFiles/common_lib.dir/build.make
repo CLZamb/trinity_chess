@@ -54,19 +54,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.17.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.17.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_SOURCE_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # Include any dependencies generated for this target.
 include include/common/CMakeFiles/common_lib.dir/depend.make
@@ -79,16 +79,16 @@ include include/common/CMakeFiles/common_lib.dir/flags.make
 
 include/common/CMakeFiles/common_lib.dir/common.cpp.o: include/common/CMakeFiles/common_lib.dir/flags.make
 include/common/CMakeFiles/common_lib.dir/common.cpp.o: include/common/common.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object include/common/CMakeFiles/common_lib.dir/common.cpp.o"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/common_lib.dir/common.cpp.o -c /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common/common.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object include/common/CMakeFiles/common_lib.dir/common.cpp.o"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/common_lib.dir/common.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common/common.cpp
 
 include/common/CMakeFiles/common_lib.dir/common.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common_lib.dir/common.cpp.i"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common/common.cpp > CMakeFiles/common_lib.dir/common.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common/common.cpp > CMakeFiles/common_lib.dir/common.cpp.i
 
 include/common/CMakeFiles/common_lib.dir/common.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common_lib.dir/common.cpp.s"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common/common.cpp -o CMakeFiles/common_lib.dir/common.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common/common.cpp -o CMakeFiles/common_lib.dir/common.cpp.s
 
 # Object files for target common_lib
 common_lib_OBJECTS = \
@@ -100,9 +100,9 @@ common_lib_EXTERNAL_OBJECTS =
 Compile/libcommon_lib.a: include/common/CMakeFiles/common_lib.dir/common.cpp.o
 Compile/libcommon_lib.a: include/common/CMakeFiles/common_lib.dir/build.make
 Compile/libcommon_lib.a: include/common/CMakeFiles/common_lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library ../../Compile/libcommon_lib.a"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common && $(CMAKE_COMMAND) -P CMakeFiles/common_lib.dir/cmake_clean_target.cmake
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/common_lib.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library ../../Compile/libcommon_lib.a"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common && $(CMAKE_COMMAND) -P CMakeFiles/common_lib.dir/cmake_clean_target.cmake
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/common_lib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 include/common/CMakeFiles/common_lib.dir/build: Compile/libcommon_lib.a
@@ -110,10 +110,10 @@ include/common/CMakeFiles/common_lib.dir/build: Compile/libcommon_lib.a
 .PHONY : include/common/CMakeFiles/common_lib.dir/build
 
 include/common/CMakeFiles/common_lib.dir/clean:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common && $(CMAKE_COMMAND) -P CMakeFiles/common_lib.dir/cmake_clean.cmake
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common && $(CMAKE_COMMAND) -P CMakeFiles/common_lib.dir/cmake_clean.cmake
 .PHONY : include/common/CMakeFiles/common_lib.dir/clean
 
 include/common/CMakeFiles/common_lib.dir/depend:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/cristofher/desktop/practice/c++/ChessProject_v2/build /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common /Users/cristofher/desktop/practice/c++/ChessProject_v2/build /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/include/common/CMakeFiles/common_lib.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/include/common/CMakeFiles/common_lib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : include/common/CMakeFiles/common_lib.dir/depend
 

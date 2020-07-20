@@ -54,19 +54,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.17.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.17.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_SOURCE_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # Include any dependencies generated for this target.
 include src/ipc/CMakeFiles/ipc_lib.dir/depend.make
@@ -79,29 +79,29 @@ include src/ipc/CMakeFiles/ipc_lib.dir/flags.make
 
 src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o: src/ipc/CMakeFiles/ipc_lib.dir/flags.make
 src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o: src/ipc/ipc_pipe.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o -c /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/ipc_pipe.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/ipc_pipe.cpp
 
 src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.i"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/ipc_pipe.cpp > CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/ipc_pipe.cpp > CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.i
 
 src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.s"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/ipc_pipe.cpp -o CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/ipc_pipe.cpp -o CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.s
 
 src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o: src/ipc/CMakeFiles/ipc_lib.dir/flags.make
 src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o: src/ipc/cu_pipe.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o -c /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/cu_pipe.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o -c /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/cu_pipe.cpp
 
 src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ipc_lib.dir/cu_pipe.cpp.i"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/cu_pipe.cpp > CMakeFiles/ipc_lib.dir/cu_pipe.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/cu_pipe.cpp > CMakeFiles/ipc_lib.dir/cu_pipe.cpp.i
 
 src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ipc_lib.dir/cu_pipe.cpp.s"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/cu_pipe.cpp -o CMakeFiles/ipc_lib.dir/cu_pipe.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/cu_pipe.cpp -o CMakeFiles/ipc_lib.dir/cu_pipe.cpp.s
 
 # Object files for target ipc_lib
 ipc_lib_OBJECTS = \
@@ -111,24 +111,24 @@ ipc_lib_OBJECTS = \
 # External object files for target ipc_lib
 ipc_lib_EXTERNAL_OBJECTS =
 
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a: src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a: src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a: src/ipc/CMakeFiles/ipc_lib.dir/build.make
-/Users/cristofher/desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a: src/ipc/CMakeFiles/ipc_lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library /Users/cristofher/desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a"
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && $(CMAKE_COMMAND) -P CMakeFiles/ipc_lib.dir/cmake_clean_target.cmake
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ipc_lib.dir/link.txt --verbose=$(VERBOSE)
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a: src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a: src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a: src/ipc/CMakeFiles/ipc_lib.dir/build.make
+/Users/cristofher/Desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a: src/ipc/CMakeFiles/ipc_lib.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library /Users/cristofher/Desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a"
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && $(CMAKE_COMMAND) -P CMakeFiles/ipc_lib.dir/cmake_clean_target.cmake
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ipc_lib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-src/ipc/CMakeFiles/ipc_lib.dir/build: /Users/cristofher/desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a
+src/ipc/CMakeFiles/ipc_lib.dir/build: /Users/cristofher/Desktop/practice/c++/ChessProject_v2/lib/libipc_lib.a
 
 .PHONY : src/ipc/CMakeFiles/ipc_lib.dir/build
 
 src/ipc/CMakeFiles/ipc_lib.dir/clean:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc && $(CMAKE_COMMAND) -P CMakeFiles/ipc_lib.dir/cmake_clean.cmake
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc && $(CMAKE_COMMAND) -P CMakeFiles/ipc_lib.dir/cmake_clean.cmake
 .PHONY : src/ipc/CMakeFiles/ipc_lib.dir/clean
 
 src/ipc/CMakeFiles/ipc_lib.dir/depend:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/cristofher/desktop/practice/c++/ChessProject_v2/build /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc /Users/cristofher/desktop/practice/c++/ChessProject_v2/build /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/CMakeFiles/ipc_lib.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/CMakeFiles/ipc_lib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/ipc/CMakeFiles/ipc_lib.dir/depend
 

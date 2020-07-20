@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.17.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.17.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.17.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_SOURCE_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
+CMAKE_BINARY_DIR = /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /Users/cristofher/desktop/practice/c++/ChessProject_v2/build
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.17.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.17.3/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -100,14 +100,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/src/ipc/CMakeFiles/progress.marks
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/desktop/practice/c++/ChessProject_v2/build/CMakeFiles 0
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/CMakeFiles/progress.marks
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/clean
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/clean
 .PHONY : clean
 
 # The main clean target
@@ -117,22 +117,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/preinstall
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/preinstall
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/ipc/CMakeFiles/ipc_lib.dir/rule:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/CMakeFiles/ipc_lib.dir/rule
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/ipc/CMakeFiles/ipc_lib.dir/rule
 .PHONY : src/ipc/CMakeFiles/ipc_lib.dir/rule
 
 # Convenience name for target.
@@ -142,7 +142,7 @@ ipc_lib: src/ipc/CMakeFiles/ipc_lib.dir/rule
 
 # fast build rule for target.
 ipc_lib/fast:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/build
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/build
 .PHONY : ipc_lib/fast
 
 cu_pipe.o: cu_pipe.cpp.o
@@ -151,7 +151,7 @@ cu_pipe.o: cu_pipe.cpp.o
 
 # target to build an object file
 cu_pipe.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o
 .PHONY : cu_pipe.cpp.o
 
 cu_pipe.i: cu_pipe.cpp.i
@@ -160,7 +160,7 @@ cu_pipe.i: cu_pipe.cpp.i
 
 # target to preprocess a source file
 cu_pipe.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.i
 .PHONY : cu_pipe.cpp.i
 
 cu_pipe.s: cu_pipe.cpp.s
@@ -169,7 +169,7 @@ cu_pipe.s: cu_pipe.cpp.s
 
 # target to generate assembly for a file
 cu_pipe.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.s
 .PHONY : cu_pipe.cpp.s
 
 ipc_pipe.o: ipc_pipe.cpp.o
@@ -178,7 +178,7 @@ ipc_pipe.o: ipc_pipe.cpp.o
 
 # target to build an object file
 ipc_pipe.cpp.o:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o
 .PHONY : ipc_pipe.cpp.o
 
 ipc_pipe.i: ipc_pipe.cpp.i
@@ -187,7 +187,7 @@ ipc_pipe.i: ipc_pipe.cpp.i
 
 # target to preprocess a source file
 ipc_pipe.cpp.i:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.i
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.i
 .PHONY : ipc_pipe.cpp.i
 
 ipc_pipe.s: ipc_pipe.cpp.s
@@ -196,7 +196,7 @@ ipc_pipe.s: ipc_pipe.cpp.s
 
 # target to generate assembly for a file
 ipc_pipe.cpp.s:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.s
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(MAKE) $(MAKESILENT) -f src/ipc/CMakeFiles/ipc_lib.dir/build.make src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.s
 .PHONY : ipc_pipe.cpp.s
 
 # Help Target
@@ -225,6 +225,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/cristofher/desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/cristofher/Desktop/practice/c++/ChessProject_v2/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
