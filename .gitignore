@@ -1,0 +1,8 @@
+# Distribution / packaging
+/bin 
+/build
+/lib
+/obj
+/tests
+# Ignore json files
+.json

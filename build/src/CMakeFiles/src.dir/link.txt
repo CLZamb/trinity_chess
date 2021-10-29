@@ -1,2 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc ../Compile/libsrc.a  CMakeFiles/src.dir/main.cpp.o CMakeFiles/src.dir/game.cpp.o CMakeFiles/src.dir/player.cpp.o CMakeFiles/src.dir/move_utils.cpp.o CMakeFiles/src.dir/game_turn_observable.cpp.o
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib ../Compile/libsrc.a

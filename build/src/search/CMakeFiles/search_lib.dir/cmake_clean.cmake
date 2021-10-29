@@ -1,8 +1,10 @@
 file(REMOVE_RECURSE
-  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/lib/libsearch_lib.a"
-  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/lib/libsearch_lib.pdb"
+  "../../lib/libsearch_lib.a"
+  "../../lib/libsearch_lib.pdb"
   "CMakeFiles/search_lib.dir/search.cpp.o"
+  "CMakeFiles/search_lib.dir/search.cpp.o.d"
   "CMakeFiles/search_lib.dir/uci.cpp.o"
+  "CMakeFiles/search_lib.dir/uci.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

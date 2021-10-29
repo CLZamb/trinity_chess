@@ -1,17 +1,15 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
   )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/cu_pipe.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o"
-  "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/ipc_pipe.cpp" "/Users/cristofher/Desktop/practice/c++/ChessProject_v2/build/src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "include"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/src/ipc/cu_pipe.cpp" "src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o" "gcc" "src/ipc/CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o.d"
+  "/Users/cristofher/desktop/practice/c++/ChessProject_v2/src/ipc/ipc_pipe.cpp" "src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o" "gcc" "src/ipc/CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o.d"
   )
 
 # Targets to which this target links.

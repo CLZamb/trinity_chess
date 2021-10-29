@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc ../../lib/libpiece_lib.a CMakeFiles/piece_lib.dir/bishop.cpp.o CMakeFiles/piece_lib.dir/king.cpp.o CMakeFiles/piece_lib.dir/knight.cpp.o CMakeFiles/piece_lib.dir/pawn.cpp.o CMakeFiles/piece_lib.dir/piece.cpp.o CMakeFiles/piece_lib.dir/pieces_drawings.cpp.o CMakeFiles/piece_lib.dir/queen.cpp.o CMakeFiles/piece_lib.dir/rook.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib ../../lib/libpiece_lib.a
