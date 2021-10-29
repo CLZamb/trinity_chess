@@ -1,9 +1,9 @@
 # Distribution / packaging
-/bin 
-/build
-/lib
-/obj
-/tests
+bin/ 
+build/
+lib/
+obj/
+tests/
 # Ignore json files
 .json
 .DS_Store
