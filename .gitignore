@@ -6,3 +6,5 @@
 /tests
 # Ignore json files
 .json
+.DS_Store
+.ccls-cache
