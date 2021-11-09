@@ -4,6 +4,7 @@ build/
 lib/
 obj/
 tests/
+lib
 # Ignore json files
 .json
 .DS_Store
