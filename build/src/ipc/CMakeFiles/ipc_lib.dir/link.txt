@@ -1,2 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc ../../lib/libipc_lib.a CMakeFiles/ipc_lib.dir/ipc_pipe.cpp.o CMakeFiles/ipc_lib.dir/cu_pipe.cpp.o
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib ../../lib/libipc_lib.a

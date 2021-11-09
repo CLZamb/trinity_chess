@@ -53,7 +53,9 @@ bool Board::is_legal_move(Move& m) {
     m.set_capture_piece(captured_piece->get_type_and_color());
   }
 
-  return piece->is_legal_move(m);
+  if (!piece->is_legal_move(m)) return false;
+
+  eturn true;
 }
 
 bool Board::check_piece_belongs_to_current_player(Piece* piece) {

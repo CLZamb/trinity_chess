@@ -1,2 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc ../../lib/libboard_lib.a CMakeFiles/board_lib.dir/board.cpp.o CMakeFiles/board_lib.dir/board_with_info.cpp.o CMakeFiles/board_lib.dir/magic_bitboard.cpp.o CMakeFiles/board_lib.dir/move_validation.cpp.o CMakeFiles/board_lib.dir/info.cpp.o CMakeFiles/board_lib.dir/square.cpp.o
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib ../../lib/libboard_lib.a
