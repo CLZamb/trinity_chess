@@ -12,7 +12,7 @@ void Info::_init() {
   p_player_1_captures = make_unique<Section>("[White Captures]", 4);
   p_player_2_moves = make_unique<Section>("[Black moves]", 9);
   p_player_1_moves = make_unique<Section>("[White Moves]", 9);
-  p_game_info = make_unique<Section>("[Game info:]", 5);
+  p_game_info = make_unique<Section>("[Game info]", 5);
   p_bottom_section = make_unique<Section>("bottom", 1);
 
   m_drawing.add_section(p_top_section);
@@ -94,11 +94,11 @@ string Info::format_line(string line) {
   return  " ┃ " + line + std::string(num_spaces, ' ') + "┃";
 }
 
-void Info::save_moves(const string& moves) {
+void Info::save_move(const string& moves) {
   player_moves[m_turn] += " " + moves;
 }
 
-void Info::save_captures(const string& captures) {
+void Info::save_capture(const string& captures) {
   player_captures[m_turn] += " " + captures;
 }
 

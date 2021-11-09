@@ -13,12 +13,21 @@ class BoardWithInfo : public GameTurnObserver {
 
   void make_move(Move m);
   void update_turn(GameTurn::players turn);
+  void update_game_info(const string& info);
+  bool is_checkmate();
+  bool is_legal_move(Move& m);
   void _init();
-  Board* get_board();
-  Info* get_info();
+  void set_players(
+      std::shared_ptr<Player> player1, std::shared_ptr<Player> player2);
+  std::shared_ptr<Player> get_turn();
+  Displayable* get_board_drawing();
+  Displayable* get_info_drawing();
 
  private:
-  MoveValidator mv;
+  string get_turn_info(players turn);
+  string get_str_moves(const Move& m);
+  void save_move(const Move& m);
+  void save_capture(const Move& m);
   Board m_board;
   Info m_info;
 };

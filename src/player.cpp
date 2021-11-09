@@ -2,6 +2,7 @@
 
 Player::Player(Color color) : color(color) {
   m_black_pieces = color;
+  color_str = utils::get_color_str_from_color(color);
 }
 
 Player::~Player() {}
@@ -21,7 +22,7 @@ void Player::get_input(string& input) {
 }
 
 string Player::get_str_color_pieces()  {
-  return color_str[color];
+  return color_str;
 }
 
 Color Player::get_int_color_pieces() {

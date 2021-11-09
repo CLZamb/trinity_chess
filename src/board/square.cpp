@@ -8,12 +8,18 @@ Square::Square(box* emtpySqDrawing, bool blackBox):
 Square::~Square() {}
 
 void Square::set_piece(Piece* piece) {
+  if (piece == nullptr) {
+    cout << "piece not found" << endl;
+    return;
+  }
+
   this->p_piece = piece;
   p_cur_drawing = piece->get_box_drawing(m_is_black_square);
 }
 
 void Square::clear_square() {
   p_cur_drawing = p_empty_square_drawing;
+  this->p_piece = nullptr;
 }
 
 char* Square::at(int i) {

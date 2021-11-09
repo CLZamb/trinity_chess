@@ -1,4 +1,5 @@
 #include "headers/magic_bitboard.h"
+#include "../board/headers/defs.h"
 
 // extern declaration in defs.h
 U64 SetMask[64];
@@ -75,7 +76,7 @@ void MagicBitboard::_init_bitmasks() {
   }
 }
 
-U64 MagicBitboard::rook_attacks(U64 occ, SquareIndices sq) {
+U64 MagicBitboard::rook_attacks(U64 occ, SquareIndices sq) const {
   // U64* aptr = m_rook_tbl[sq].ptr;
   occ &= m_rook_tbl[sq].mask;
   occ *=  m_rook_tbl[sq].magic;
@@ -85,7 +86,7 @@ U64 MagicBitboard::rook_attacks(U64 occ, SquareIndices sq) {
   return m_rook_table[sq][occ];
 }
 
-U64 MagicBitboard::bishop_attacks(U64 occ, SquareIndices sq) {
+U64 MagicBitboard::bishop_attacks(U64 occ, SquareIndices sq) const {
   // U64* aptr = m_bishop_tbl[sq].ptr;
   occ &= m_bishop_tbl[sq].mask;
   occ *= m_bishop_tbl[sq].magic;
@@ -93,7 +94,7 @@ U64 MagicBitboard::bishop_attacks(U64 occ, SquareIndices sq) {
   return m_bishop_table[sq][occ];
 }
 
-U64 MagicBitboard::queen_attacks(U64 occ, SquareIndices sq) {
+U64 MagicBitboard::queen_attacks(U64 occ, SquareIndices sq) const {
   U64 result = 0ULL;
   U64 temp_occ = occ;
 

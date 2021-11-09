@@ -1,7 +1,9 @@
 add_library(
-  display_lib
+  graphics_lib
+  board_drawing.cpp
   gui_controller.cpp
   Idisplay.cpp
+  pieces_drawings.cpp
   ISectionComponent.cpp
   messages.cpp
   message_state.cpp
@@ -9,4 +11,4 @@ add_library(
   section.cpp
   )
 
-message("display library compiled")
+message("graphics library compiled")

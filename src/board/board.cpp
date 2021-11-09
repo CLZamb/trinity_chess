@@ -1,6 +1,6 @@
 #include "headers/board.h"
 
-Board::Board(IMoveValidation& m): Displayable(), m_move_validator(m) {
+Board::Board(){
   // parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
 }
 
@@ -11,29 +11,9 @@ Board::~Board() {
 }
 
 void Board::_init() {
-  p_top_section = std::make_unique<Section>("top", 1);
-  p_main = std::make_unique<Section>("board", 40);
-  p_bottom_section = std::make_unique<Section>("bottom", 3);
-
-  p_top_section->set_content_at_index(
-       " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓", 0);
-  p_bottom_section->set_content({
-       " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃",
-       " ┃    A        B        C        D        E        F        G       H     ┃",
-       " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"});
-
-  m_drawing.add_section(p_top_section);
-  m_drawing.add_section(p_main);
-  m_drawing.add_section(p_bottom_section);
-
-
+  m_bdrawing._init();
   create_board_squares();
-  create_pieces();
   parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-}
-
-void Board::set_checkmate_true() {
-  checkmate = true;
 }
 
 bool Board::is_checkmate() {
@@ -42,20 +22,17 @@ bool Board::is_checkmate() {
 
 bool Board::is_legal_move(Move& m) {
   Piece* piece = get_piece_at_square(m.get_from());
-  Piece* captured_piece = get_piece_at_square(m.get_to());
 
   if (!piece) return false;
-  if (check_piece_belongs_to_current_player(piece)) {
-    return false;
-  }
+  if (check_piece_belongs_to_current_player(piece)) return false; 
+  if (!piece->is_legal_move(m)) return false;
 
+  Piece* captured_piece = get_piece_at_square(m.get_to());
   if (captured_piece) {
     m.set_capture_piece(captured_piece->get_type_and_color());
   }
 
-  if (!piece->is_legal_move(m)) return false;
-
-  eturn true;
+  return true;
 }
 
 bool Board::check_piece_belongs_to_current_player(Piece* piece) {
@@ -97,24 +74,6 @@ Piece* Board::get_piece_at_square(int pos) {
   return square->get_piece();
 }
 
-char Board::left_border(int row, int col) {
-  return (col + 1) % 3 ? ' ' :  ('0' + row + 1);
-}
-
-
-void Board::create_pieces() {
-  if (!m_pieces.empty())
-    m_pieces.empty();
-
-  Piecetype pct = EMPTY;
-  m_pieces.create({});
-
-  // for (int piece_type = bP; piece_type <= wK; ++piece_type) {
-  //   pct = Piecetype(piece_type);
-  //   m_pieces[piece_type] = new Piece(pct);
-  // }
-}
-
 void Board::create_board_squares() {
   create_empty_squares_drawing();
   char squareColor = 'w';
@@ -148,30 +107,28 @@ void Board::parser_fen(string fen) {
   int file = 0;
   int piece;
 
-  add_to_board(wP, A2);
-  add_to_board(bP, A7);
-  // for (const char& c : fen) {
-  //   piece = utils::get_square_index_from_char_key(c);
-  //   if (piece) {
-  //     square = static_cast<SquareIndices>(rank * 8 + file);
-  //     // m_bb.set_piece_at_pos(piece, square);
-  //     add_to_board(piece, square);
-  //     file++;
-  //
-  //   } else if (is_number(c)) {
-  //     file += (c - '0');
-  //
-  //   } else if (c == '/') {
-  //     rank--;
-  //     file = 0;
-  //   }
-  //
-  //   if (rank < 0) break;
-  // }
+  for (const char& c : fen) {
+    piece = utils::get_square_index_from_char_key(c);
+    if (piece) {
+      square = static_cast<SquareIndices>(rank * 8 + file);
+      // m_bb.set_piece_at_pos(piece, square);
+      add_to_board(piece, square);
+      file++;
+
+    } else if (is_number(c)) {
+      file += (c - '0');
+
+    } else if (c == '/') {
+      rank--;
+      file = 0;
+    }
+
+    if (rank < 0) break;
+  }
 }
 
 void Board::add_to_board(int type, SquareIndices position) {
-  get_square_at_pos(position)->set_piece(m_pieces[type]);
+  get_square_at_pos(position)->set_piece(m_pieces.get_piece(type));
 }
 
 bool Board::is_number(char c) {
@@ -180,26 +137,6 @@ bool Board::is_number(char c) {
 
 Square* Board::get_square_at_pos(int pos) { return p_squares[pos]; }
 
-void Board::draw() {
-  int row_counter = 0;
-  string row_drawing = "";
-  // need to be print upside down so that the bottom begins at row 0
-  for (int row = 7; row >= 0; --row) {
-    for (int k = 0; k < box::kRowSize; ++k, row_counter++) {
-      row_drawing = "";
-
-      row_drawing += left_border(row, k);
-      row_drawing += "┃";
-
-      for (int col = 0; col < 8; col++) {
-        row_drawing += p_squares[(row * 8) + col]->at(k);
-      }
-
-      row_drawing += "┃";
-      p_main->set_content_at_index(row_drawing, row_counter);
-    }
-  }
-}
 
 std::shared_ptr<Player> Board::get_turn() {
   return turn;
@@ -224,4 +161,8 @@ void Board::update_turn(GameTurn::players pl_turn) {
     this->turn = player1;
   else
     this->turn = player2;
+}
+
+Displayable* Board::get_drawing() {
+  return &m_bdrawing;
 }

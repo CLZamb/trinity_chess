@@ -15,7 +15,7 @@ enum Piecetype : unsigned int {
 };
 
 enum Color {
-  WHITE = 0, BLACK = 1, NONE = 2
+  WHITE = 0, BLACK = 1, NONE = 2, SIZE = 2,
 };
 
 namespace utils {
@@ -35,7 +35,7 @@ namespace check {
 
 inline string get_piece_str_name_from_piecetype(Piecetype piece_type) {
   static const map<Piecetype, string> piece_str_name  {
-    {bP, "pawn"}, {bR, "rook"}, {bN, "knight"},
+      {bP, "pawn"}, {bR, "rook"}, {bN, "knight"},
       {bB, "bishop"}, {bQ, "queen"}, {bK, "king"},
       {wP, "pawn"}, {wR, "rook"}, {wN, "knight"},
       {wB, "bishop"}, {wQ, "queen"}, {wK, "king"}
@@ -46,6 +46,10 @@ inline string get_piece_str_name_from_piecetype(Piecetype piece_type) {
   if (search == piece_str_name.end()) return "";
 
   return search->second;
+}
+
+inline string get_color_str_from_color(Color c) {
+  return (c == WHITE) ? "white" : "black";
 }
 
 inline int get_square_index_from_char_key(const char c) {

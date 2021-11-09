@@ -1,16 +1,14 @@
-
 add_library(
   piece_lib
+  rook.cpp
   bishop.cpp
   king.cpp
   knight.cpp
   pawn.cpp
-  piece.cpp
-  pieces_drawings.cpp
   queen.cpp
-  rook.cpp
+  piece.cpp
+  pieces.cpp
+  magic_bitboard.cpp
 )
-
-# add_executable(ipc ${SOURCE_FILES})
 
 message("piece library compiled")

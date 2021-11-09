@@ -76,6 +76,7 @@ void IpcPipe::child_process() {
   child_write_end->redirect_output();
 
   const char* arguments[] = {
+    
     "/Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search" ,
     // "uci",
     nullptr };

@@ -6,11 +6,11 @@
 #include <string>
 #include <utility>
 #include "../board/headers/info.h"
-#include "../display/headers/messages.h"
+#include "../graphics//headers/messages.h"
 #include "../search/headers/uci.h"
 #include "../ipc/headers/ipc_pipe.h"
 #include "../board/headers/board_with_info.h"
-#include "../display/headers/gui_controller.h"
+#include "../graphics/headers/gui_controller.h"
 #include "../headers/player.h"
 #include "../headers/move_utils.h"
 #include "game_turn_observable.h"
@@ -51,6 +51,7 @@ class Game : public GameTurnObservable {
 
     Move player_move;
     std::shared_ptr<Player> player_1, player_2, current_player;
+    string initial_side = "";
     GameTurn::players m_turn = GameTurn::player_1;
     PlayersSelections m_players_selections;
 };

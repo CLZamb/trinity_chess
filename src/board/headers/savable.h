@@ -11,8 +11,8 @@ using std::array;
 
 class Savable {
  public:
-  virtual void save_moves(const string& moves) = 0;
-  virtual void save_captures(const string& moves) = 0;
+  virtual void save_move(const string& moves) = 0;
+  virtual void save_capture(const string& moves) = 0;
   virtual void save_game_info(const string& info) = 0;
 
  protected:

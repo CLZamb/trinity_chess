@@ -9,11 +9,11 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "../../piece/headers/pieces_drawings.hpp"
+#include "../../graphics//headers/pieces_drawings.hpp"
 #include "savable.h"
-#include "../../display/headers/game_drawings.hpp"
-#include "../../display/headers/Idisplay.h"
-#include "../../display/headers/section.h"
+#include "../../graphics//headers/game_drawings.hpp"
+#include "../../graphics//headers/Idisplay.h"
+#include "../../graphics//headers/section.h"
 #include "../../headers/game_turn_observer.h"
 
 using std::vector;
@@ -30,8 +30,8 @@ class Info : public Displayable, public Savable, public GameTurnObserver {
     virtual ~Info();
     void draw();
     void _init();
-    void save_moves(const string& moves);
-    void save_captures(const string& moves);
+    void save_move(const string& moves);
+    void save_capture(const string& moves);
     void save_game_info(const string& info);
     void update_turn(GameTurn::players turn);
 
@@ -46,6 +46,7 @@ class Info : public Displayable, public Savable, public GameTurnObserver {
     bool has_block_space_for_content(
         const shared_ptr<Section>& block, const string& message);
     string format_line(string);
+    string get_turn_info(GameTurn::players turn);
 
     std::array<const vector<string>*, Info::players_size>
       p_banners {
@@ -56,10 +57,10 @@ class Info : public Displayable, public Savable, public GameTurnObserver {
     shared_ptr<Section> p_top_section;
     shared_ptr<Section> p_player_banner;
     shared_ptr<Section> p_board_score;
-    shared_ptr<Section> p_player_2_moves;
-    shared_ptr<Section> p_player_2_captures;
-    shared_ptr<Section> p_player_1_captures;
     shared_ptr<Section> p_player_1_moves;
+    shared_ptr<Section> p_player_2_moves;
+    shared_ptr<Section> p_player_1_captures;
+    shared_ptr<Section> p_player_2_captures;
     shared_ptr<Section> p_game_info;
     shared_ptr<Section> p_bottom_section;
 

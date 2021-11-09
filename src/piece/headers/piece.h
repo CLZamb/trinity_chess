@@ -3,17 +3,15 @@
 
 #include <array>
 #include <string>
-// #include "bitUtilities.hpp"
 #include "../../include/common/headers/common.h"
 // #include "utils.h"
-#include "../../board/headers/box.h"
-#include "pieces_drawings.hpp"
+#include "../../graphics/headers/box.h"
+#include "../../graphics/headers/pieces_drawings.hpp"
 #include "../../board/headers/utils.h"
 #include "../../headers/move.h"
 #include "../../board/headers/bit_utilities.h"
 
 using namespace bitUtility;
-
 
 class Piece {
  public:
@@ -37,42 +35,5 @@ class Piece {
 };
 
 
-class Pieces {
- public:
-    Pieces();
-    virtual ~Pieces();
-
-  // for (auto p : m_pieces)
-  //   delete p;
- private:
-  // std::array<Piece*, 13> m_pieces {
-  //   nullptr,  // EMPTY 0
-  //     // black pieces
-  //
-  //   new Pawn<BLACK>(),
-  //   new Pawn<BLACK>(),
-  //   new Pawn<BLACK>(),
-  //   new Pawn<BLACK>(),
-  //   new Pawn<BLACK>(),
-  //   new Pawn<BLACK>(),
-  //   // new Piece(bR),
-  //   // new Piece(bN),
-  //   // new Piece(bB),
-  //   // new Piece(bQ),
-  //   // new Piece(bK),
-  //   // // white pieces
-  //   new Pawn<WHITE>(),
-  //   new Pawn<WHITE>(),
-  //   new Pawn<WHITE>(),
-  //   new Pawn<WHITE>(),
-  //   new Pawn<WHITE>(),
-  //   new Pawn<WHITE>(),
-  //   // new Piece(wR),
-  //   // new Piece(wN),
-  //   // new Piece(wB),
-  //   // new Piece(wQ),
-  //   // new Piece(wK),  // 12
-  // };
-};
 
 #endif /* PIECE_H */

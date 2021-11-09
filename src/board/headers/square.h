@@ -2,7 +2,7 @@
 #define SQUARE_H
 
 #pragma once
-#include "../headers/box.h"
+#include "../../graphics/headers/box.h"
 #include "../../piece/headers/piece.h"
 
 class Square {

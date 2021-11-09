@@ -1,8 +1,7 @@
 #ifndef MAGIC_BITBOARD_H
 #define MAGIC_BITBOARD_H
-
 #include <iostream>
-#include "bit_utilities.h"
+#include "../../board/headers/bit_utilities.h"
 #include <assert.h>
 
 class MagicBitboard
@@ -13,28 +12,6 @@ class MagicBitboard
       U64 mask;  // to mask relevant squares of both lines (no outer squares)
       U64 magic;  // magic 64-bit factor
       int shift;  // shift right
-    };
-
-    const int RBits[64] = {
-      12, 11, 11, 11, 11, 11, 11, 12,
-      11, 10, 10, 10, 10, 10, 10, 11,
-      11, 10, 10, 10, 10, 10, 10, 11,
-      11, 10, 10, 10, 10, 10, 10, 11,
-      11, 10, 10, 10, 10, 10, 10, 11,
-      11, 10, 10, 10, 10, 10, 10, 11,
-      11, 10, 10, 10, 10, 10, 10, 11,
-      12, 11, 11, 11, 11, 11, 11, 12
-    };
-
-    const int BBits[64] = {
-      6, 5, 5, 5, 5, 5, 5, 6,
-      5, 5, 5, 5, 5, 5, 5, 5,
-      5, 5, 7, 7, 7, 7, 5, 5,
-      5, 5, 7, 9, 9, 7, 5, 5,
-      5, 5, 7, 9, 9, 7, 5, 5,
-      5, 5, 7, 7, 7, 7, 5, 5,
-      5, 5, 5, 5, 5, 5, 5, 5,
-      6, 5, 5, 5, 5, 5, 5, 6
     };
 
     static const U64 RookMagic[64];
@@ -62,9 +39,9 @@ class MagicBitboard
     MagicBitboard();
     virtual ~MagicBitboard();
 
-    U64 rook_attacks(U64 occ, SquareIndices sq);
-    U64 bishop_attacks(U64 occ, SquareIndices sq);
-    U64 queen_attacks(U64 occ, SquareIndices sq);
+    U64 rook_attacks(U64 occ, SquareIndices sq) const;
+    U64 bishop_attacks(U64 occ, SquareIndices sq) const;
+    U64 queen_attacks(U64 occ, SquareIndices sq) const;
 };
 
 #endif /* MAGIC_BITBOARD_H */

@@ -31,3 +31,4 @@ bool Piece::is_black() { return black; }
 bool Piece::is_black_piece(int pct) {
   return utils::check::is_black_piece(pct);
 }
+

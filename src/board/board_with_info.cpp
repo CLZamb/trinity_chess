@@ -1,6 +1,6 @@
 #include "headers/board_with_info.h"
 
-BoardWithInfo::BoardWithInfo() : m_board(mv) {}
+BoardWithInfo::BoardWithInfo() {}
 BoardWithInfo::~BoardWithInfo() {}
 
 void BoardWithInfo::_init() {
@@ -9,35 +9,73 @@ void BoardWithInfo::_init() {
 }
 
 void BoardWithInfo::make_move(Move m) {
-  string from = utils::square_int_to_str(m.get_from());
-  string to = utils::square_int_to_str(m.get_to());
-
-  Piece* captured = m_board.get_piece_at_square(m.get_to());
-
+  save_move(m);
+  save_capture(m);
   m_board.make_move(m);
-  m_info.save_moves(from + to);
+}
 
+void BoardWithInfo::save_move(const Move& m) {
+  m_info.save_move(get_str_moves(m));
+}
+
+void BoardWithInfo::save_capture(const Move& m) {
+  Piece* captured = m_board.get_piece_at_square(m.get_to());
   if (captured) {
-    m_info.save_captures(
+    m_info.save_capture(
         utils::get_piece_str_name_from_piecetype(
           captured->get_type_and_color()));
   }
 }
 
-void BoardWithInfo::update_turn(GameTurn::players turn) {
-  string info;
-  info += m_board.get_turn()->get_str_color_pieces();
-  info += " to move - (player ";
-  info += (turn == GameTurn::player_2) ? "2" : "1";
-  info += ")";
+string BoardWithInfo::get_str_moves(const Move& m) {
+  string from = utils::square_int_to_str(m.get_from());
+  string to = utils::square_int_to_str(m.get_to());
+  return from + to;
+}
 
+void BoardWithInfo::update_turn(GameTurn::players turn) {
+  m_board.update_turn(turn);
+  m_info.update_turn(turn);
+  m_info.save_game_info(get_turn_info(turn));
+}
+
+Displayable* BoardWithInfo::get_board_drawing() {
+  return m_board.get_drawing();
+}
+
+Displayable* BoardWithInfo::get_info_drawing() {
+  return &m_info;
+}
+
+string BoardWithInfo::get_turn_info(players turn) {
+  bool is_player_1_turn = (turn == GameTurn::player_1);
+  string info;
+
+  info += is_player_1_turn ? "white" : "black";
+  info += " to move - (player ";
+  info += is_player_1_turn ? "1" : "2";
+  info += ")";
+  return info;
+}
+
+void BoardWithInfo::update_game_info(const string& info) {
   m_info.save_game_info(info);
 }
 
-Board* BoardWithInfo::get_board() {
-  return &m_board;
+bool BoardWithInfo::is_checkmate() {
+  return m_board.is_checkmate();
 }
 
-Info* BoardWithInfo::get_info() {
-  return &m_info;
+std::shared_ptr<Player> BoardWithInfo::get_turn() {
+  return m_board.get_turn();
 }
+
+bool BoardWithInfo::is_legal_move(Move& m) {
+  return m_board.is_legal_move(m);
+}
+
+void BoardWithInfo::set_players(
+    std::shared_ptr<Player> player1, std::shared_ptr<Player> player2) {
+  return m_board.set_players(player1, player2);
+}
+

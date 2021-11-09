@@ -48,15 +48,15 @@ class Pawn : public Piece {
 
   bool is_legal_move(const Move& m) override  {
     U64 all_moves = BLANK;
-    int square_from = m.get_from();
+    int from = m.get_from();
+    U64 to = ONE << m.get_to();
 
     if (m.get_captured_piece()) {
-      all_moves |= m_attacks[square_from];  // enemy is that square occ
+      all_moves |= m_attacks[from];  // enemy is that square occ
+      return all_moves & to;
     }
 
-    all_moves |= pawn_non_attack_mask(square_from);
-
-    U64 to = ONE << m.get_to();
+    all_moves |= pawn_non_attack_mask(from);
     return all_moves & to;
   }
 

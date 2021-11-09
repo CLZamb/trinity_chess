@@ -1,13 +1,13 @@
 #ifndef DRAWINGS_H
 #define DRAWINGS_H
 
-#include "../../board/headers/box.h"
+#include "box.h"
 #include <string>
 #include <string.h>
 #include <map>
 #include <iostream>
 #include <vector>
-#include "../../display/headers/game_drawings.hpp"
+#include "../../graphics//headers/game_drawings.hpp"
 #include "../../board/headers/utils.h"
 
 using std::map;

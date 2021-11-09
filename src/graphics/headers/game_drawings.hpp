@@ -5,7 +5,7 @@
 #include<vector>
 #include<map>
 #include<string>
-#include"../../board/headers/box.h"
+#include"box.h"
 
 
 static const std::map<std::string, box> const_piece_drawing = {
