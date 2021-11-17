@@ -1,10 +1,11 @@
 #include "headers/game.h"
 #include <algorithm>
 
-Game::Game() : m_board_with_info() {
-  m_messages_gui.add_pane_at_pos(&m_messages, GuiController::Left_pane);
-  attach(&m_board_with_info);
-  initial_side = (GameTurn::player_1 == m_turn) ? "white" : "black" ;
+Game::Game() : m_board(),  
+  m_turn(GameTurn::player_1),
+  initial_side(GameTurn::player_1 == m_turn ? "white" : "black") {
+  m_messages_window.add_pane(&m_messages, Window::Left_pane);
+  attach(&m_board);
 }
 
 Game::~Game() {}
@@ -13,9 +14,8 @@ void Game::start() {
   if (get_start_or_quit_selection() == Quit) {
     print_message(m_messages.get_game_over());
     return;
-  }
+  } // else start
 
-  set_players_on_board(get_players_selection());
   play();
 }
 
@@ -25,59 +25,65 @@ int Game::get_start_or_quit_selection() {
 }
 
 void Game::_init() {
-  m_board_with_info._init();
-  // if (player_1 == Player::Cpu || player_2 == Player::Cpu)
-  //   m_ipc_search._init();
+  setup_players();
+  m_board._init();
+  m_board.update_game_info("Is player " + initial_side + " turn");
 
-  Displayable* board = m_board_with_info.get_board_drawing();
-  Displayable* info = m_board_with_info.get_info_drawing();
+  m_game_window.add_pane(m_board.get_board_drawing(), Window::Middle_pane);
+  m_game_window.add_pane(m_board.get_info_drawing(), Window::Right_pane);
+}
 
-  m_main_gui.add_pane_at_pos(board, GuiController::Middle_pane);
-  m_main_gui.add_pane_at_pos(info, GuiController::Right_pane);
+void Game::setup_players() {
+  create_players(get_players_selection());
 
-  m_board_with_info.update_turn(m_turn);
-  m_board_with_info.update_game_info(
-      "Is player " + initial_side + " turn");
-  cout << m_main_gui;
+  game_turn = (GameTurn::player_1 == m_turn)? player_1 : player_2;
+  player_1->set_opponent(player_2);
+  player_2->set_opponent(player_1);
 }
 
 void Game::play() {
   _init();
 
+  if (!game_turn_exists())
+    return;
+
+  Move player_move;
   string player_input = "";
 
-  while (!m_board_with_info.is_checkmate()) {
-    current_player = m_board_with_info.get_turn();
-    current_player->get_input(player_input);
+  while (!m_board.is_checkmate()) {
+    cout << m_game_window;
+    player_input = get_current_player_input();
 
-    if (has_player_quit(player_input))
-      break;
-
+    if (has_player_quit(player_input)) break;
     if (!MoveUtils::is_valid_str_move_format(player_input)) {
-      m_board_with_info.update_game_info(
+      m_board.update_game_info(
           "Move { " +
           player_input +
           " } - is an not in a recognizable format, please try again ");
-      cout << m_main_gui;
       continue;
     }
 
     player_move = MoveUtils::str_convert_to_move(player_input);
 
-    if (!m_board_with_info.is_legal_move(player_move)) {
-      m_board_with_info.update_game_info(
+    if (!m_board.is_legal_move(game_turn, player_move)) {
+      m_board.update_game_info(
           "Move { " +
           player_input +
           " } is an ilegal move");
-      cout << m_main_gui;
       continue;
     }
 
-    m_board_with_info.make_move(player_move);
+    m_board.make_move(player_move);
     change_turn();
-
-    cout << m_main_gui;
   }
+};
+
+bool Game::game_turn_exists() {
+  if (game_turn == nullptr) {
+    cout << "no players exists" << endl;
+    return false;
+  }
+  return true;
 }
 
 bool Game::has_player_quit(const string& str) {
@@ -103,7 +109,6 @@ int Game::get_selected_option(vector<int> opts) {
   bool valid_option = false;
 
   while (!valid_option) {
-
     std::cin >> input;
     valid_option = check_valid_option(input, opts);
 
@@ -124,10 +129,9 @@ bool Game::check_valid_option(int i, const vector<int>& opts) {
 }
 
 void Game::
-set_players_on_board(const std::pair<Player::Type, Player::Type>& p_type) {
+create_players(const std::pair<Player::Type, Player::Type>& p_type) {
   player_1 = create_new_player(p_type.first, WHITE);
   player_2 = create_new_player(p_type.second, BLACK);
-  m_board_with_info.set_players(player_1, player_2);
 }
 
 std::unique_ptr<Player>
@@ -140,11 +144,11 @@ Game::create_new_player(Player::Type type, Color color) {
 
 void Game::print_message(MessageState* message) {
   m_messages.set_message(message);
-  cout << m_messages_gui << endl;
+  cout << m_messages_window << endl;
 }
 
 void Game::change_turn() {
-  current_player = current_player->get_opponent();;
+  game_turn = game_turn->get_opponent();;
 
   if (m_turn == GameTurn::player_2)
     m_turn = GameTurn::player_1;
@@ -159,3 +163,12 @@ void Game::notify() {
     observer->update_turn(m_turn);
   }
 }
+
+string Game::get_current_player_input() {
+  string input;
+  std::cout << std::endl << " >> ";
+  std::getline(std::cin, input);
+  std::cout << std::endl;
+  return input;
+}
+

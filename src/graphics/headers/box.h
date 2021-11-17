@@ -4,10 +4,10 @@
 #include <iostream>
 #include <algorithm>
 
-class box {
+class Box {
   public:
-    box() {}
-    box(std::initializer_list<const char*> lst) {
+    Box() {}
+    Box(std::initializer_list<const char*> lst) {
       int counter = 0;
       for (const auto l : lst)
         copy_row(content[counter++], l);

@@ -1,7 +1,7 @@
 add_library(
   graphics_lib
   board_drawing.cpp
-  gui_controller.cpp
+  window.cpp
   Idisplay.cpp
   pieces_drawings.cpp
   ISectionComponent.cpp

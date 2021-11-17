@@ -41,22 +41,34 @@ class Pawn : public Piece {
     }
     init_masks();
   }
-
+ 
   virtual ~Pawn() {
     delete pawn_moves;
   }
 
-  bool is_legal_move(const Move& m) override  {
+  bool is_legal_attack_move(const Move& m, const BoardBitboard& board) override  {
+    if (!m.get_captured_piece())
+      return false;
+
     U64 all_moves = BLANK;
     int from = m.get_from();
     U64 to = ONE << m.get_to();
 
-    if (m.get_captured_piece()) {
-      all_moves |= m_attacks[from];  // enemy is that square occ
-      return all_moves & to;
-    }
+    const U64 opponent = 
+      (color == BLACK) ? 
+      board.get_all_white_pieces() : board.get_all_black_pieces();
 
-    all_moves |= pawn_non_attack_mask(from);
+    all_moves |= m_attacks[from] & opponent;  // enemy is that square occ
+    return all_moves & to;
+  }
+
+  bool is_legal_non_attack_move(const Move& m, const BoardBitboard& board) override {
+    U64 all_moves = BLANK;
+    int from = m.get_from();
+    U64 to = ONE << m.get_to();
+    const U64 free_squares = ~board.get_all_board_pieces();
+
+    all_moves |= pawn_non_attack_mask(from) & free_squares;
     return all_moves & to;
   }
 

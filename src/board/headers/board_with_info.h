@@ -15,10 +15,8 @@ class BoardWithInfo : public GameTurnObserver {
   void update_turn(GameTurn::players turn);
   void update_game_info(const string& info);
   bool is_checkmate();
-  bool is_legal_move(Move& m);
+  bool is_legal_move(std::shared_ptr<Player> turn, Move& m);
   void _init();
-  void set_players(
-      std::shared_ptr<Player> player1, std::shared_ptr<Player> player2);
   std::shared_ptr<Player> get_turn();
   Displayable* get_board_drawing();
   Displayable* get_info_drawing();

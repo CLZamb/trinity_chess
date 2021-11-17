@@ -23,7 +23,6 @@ class Player {
    bool has_black_pieces();
    bool is_valid_move();
    std::shared_ptr<Player> get_opponent();
-   void get_input(string&);
    string get_str_color_pieces();
    Color get_int_color_pieces();
 

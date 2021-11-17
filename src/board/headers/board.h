@@ -13,10 +13,11 @@
 #include "../../headers/move.h"
 #include "../../headers/game_turn_observer.h"
 #include "../../graphics/headers/board_drawing.h"
+#include "BoardBitboard.h"
 
 using std::shared_ptr;
 
-class Board : public GameTurnObserver {
+class Board {
  public:
   explicit Board();
   virtual ~Board();
@@ -25,39 +26,38 @@ class Board : public GameTurnObserver {
   void set_players(
       std::shared_ptr<Player> player1, std::shared_ptr<Player> player2);
   void move_piece_to_square(Piece* piece, SquareIndices from, SquareIndices to);
-  void update_turn(GameTurn::players turn);
   void parser_fen(string fen);
   bool is_checkmate();
-  bool is_legal_move(Move&);
+  bool is_legal_move(std::shared_ptr<Player> turn, Move&);
   int evaluate_board() { return 0; }
   Piece* get_piece_at_square(int);
 
   Displayable* get_drawing();
-  shared_ptr<Player> get_turn();
-  shared_ptr<Player> get_opponent();
-  shared_ptr<Player> get_player_1();
-  shared_ptr<Player> get_player_2();
   friend std::ostream& operator<<(std::ostream& os, Board& b);
 
  private:
+  bool exist_piece_at_square(const int& pos);
+  bool is_legal_attack_move(Move & m);
+  bool is_legal_non_attack_move(Move & m);
+  bool is_attack_move(std::shared_ptr<Player> turn, const int& to);
   void create_board_squares();
   void create_empty_squares_drawing();
   void add_to_board(int piece, SquareIndices position);
   bool is_number(char c);
-  bool check_piece_belongs_to_current_player(Piece*);
-  char left_border(int row, int col);
+  bool check_captured_belongs_to_opponent_player(std::shared_ptr<Player> turn, const int& pos);
+  bool check_piece_belongs_to_current_player(std::shared_ptr<Player> turn, const int& pos);
 
   Square* get_square_at_pos(int pos);
-  box wSquare, bSquare;
+  Box wSquare, bSquare;
   Square* p_squares[8 * 8 /*board size*/] = {nullptr};
   BoardDrawing m_bdrawing{p_squares};
   Pieces m_pieces;
   bool checkmate = false;
+  BoardBitboard board_state;
 
-  GameTurn::players m_turn = GameTurn::player_1;
+  // GameTurn::players m_turn = GameTurn::player_1;
 
- protected:
-  std::shared_ptr<Player> player1, player2, turn, opponent;
+//  protected:
 };
 
 

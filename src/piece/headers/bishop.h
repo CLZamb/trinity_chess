@@ -9,7 +9,8 @@ class Bishop : public Piece {
 public:
   explicit Bishop(const MagicBitboard& m_bb);
   virtual ~Bishop();
-  bool is_legal_move(const Move&) override;
+  bool is_legal_non_attack_move(const Move&, const BoardBitboard& board) override;
+  bool is_legal_attack_move(const Move&, const BoardBitboard& board) override;
 
 private:
   const MagicBitboard * const m_bb;

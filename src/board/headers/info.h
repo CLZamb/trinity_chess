@@ -24,7 +24,7 @@ using std::shared_ptr;
 using players = GameTurn::players;
 // using
 
-class Info : public Displayable, public Savable, public GameTurnObserver {
+class Info : public Displayable, public Savable {
  public:
     Info();
     virtual ~Info();

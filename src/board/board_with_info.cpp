@@ -34,7 +34,6 @@ string BoardWithInfo::get_str_moves(const Move& m) {
 }
 
 void BoardWithInfo::update_turn(GameTurn::players turn) {
-  m_board.update_turn(turn);
   m_info.update_turn(turn);
   m_info.save_game_info(get_turn_info(turn));
 }
@@ -66,16 +65,7 @@ bool BoardWithInfo::is_checkmate() {
   return m_board.is_checkmate();
 }
 
-std::shared_ptr<Player> BoardWithInfo::get_turn() {
-  return m_board.get_turn();
-}
-
-bool BoardWithInfo::is_legal_move(Move& m) {
-  return m_board.is_legal_move(m);
-}
-
-void BoardWithInfo::set_players(
-    std::shared_ptr<Player> player1, std::shared_ptr<Player> player2) {
-  return m_board.set_players(player1, player2);
+bool BoardWithInfo::is_legal_move(std::shared_ptr<Player> turn, Move& m) {
+  return m_board.is_legal_move(turn, m);
 }
 

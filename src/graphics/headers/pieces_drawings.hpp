@@ -114,27 +114,27 @@ class DrawingMod {
       return "\033[" + std::to_string(mod) + "m";
     }
 
-    void append(Code c, box* drawing) {
+    void append(Code c, Box* drawing) {
       mod = modifier_to_str(c).c_str();
 
-      for (int i = 0; i < box::kRowSize; ++i) {
-        box::copy_row(temp_copy, drawing->content[i]);
-        box::copy_row(drawing->content[i], temp_copy, mod);
+      for (int i = 0; i < Box::kRowSize; ++i) {
+        Box::copy_row(temp_copy, drawing->content[i]);
+        Box::copy_row(drawing->content[i], temp_copy, mod);
       }
     }
 
-    void prepend(Code c, box* drawing) {
+    void prepend(Code c, Box* drawing) {
       mod = modifier_to_str(c).c_str();
 
-      for (int i = 0; i < box::kRowSize; ++i) {
-        box::copy_row(temp_copy, drawing->content[i]);
-        box::copy_row(drawing->content[i], mod, temp_copy);
+      for (int i = 0; i < Box::kRowSize; ++i) {
+        Box::copy_row(temp_copy, drawing->content[i]);
+        Box::copy_row(drawing->content[i], mod, temp_copy);
       }
     }
 
   private:
-    static const int kColumnSize = box::kCharSize;
-    static const int kSizebox = sizeof(char[kColumnSize]);
+    static const int kColumnSize = Box::kCharSize;
+    static const int kSizeBox = sizeof(char[kColumnSize]);
     char temp_copy[kColumnSize];
     const char* mod;
 };
@@ -151,19 +151,19 @@ class Drawing {
     }
     virtual ~Drawing() {}
 
-    box* get_drawing() { return &m_drawing; }
-    void set_drawing(box* newBox) { m_drawing = *newBox; }
+    Box* get_drawing() { return &m_drawing; }
+    void set_drawing(Box* newBox) { m_drawing = *newBox; }
     void addModifier(DrawingMod::Code mod_code) {
       piece_mod.prepend(mod_code, &m_drawing);
     }
 
   private:
-    static const map<std::string, box> piece_drawing;
-    box m_drawing;
+    static const map<std::string, Box> piece_drawing;
+    Box m_drawing;
     DrawingMod piece_mod;
 };
 
-const map<std::string, box> piece_drawing = const_piece_drawing;
+const map<std::string, Box> piece_drawing = const_piece_drawing;
 
 class PieceDrawing {
  public:
@@ -183,7 +183,7 @@ class PieceDrawing {
     white_square_drawing->addModifier(mod);
   }
 
-  box* get_box_drawing(bool is_in_black_square) {
+  Box* get_box_drawing(bool is_in_black_square) {
     return is_in_black_square ?
       black_square_drawing->get_drawing() : white_square_drawing->get_drawing();
   }

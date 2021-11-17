@@ -20,40 +20,61 @@ bool Board::is_checkmate() {
   return checkmate;
 }
 
-bool Board::is_legal_move(Move& m) {
-  Piece* piece = get_piece_at_square(m.get_from());
+bool Board::is_legal_move(std::shared_ptr<Player> turn, Move& m) {
+  if (!exist_piece_at_square(m.get_from())) return false;
 
-  if (!piece) return false;
-  if (check_piece_belongs_to_current_player(piece)) return false; 
-  if (!piece->is_legal_move(m)) return false;
+  if (check_piece_belongs_to_current_player(turn, m.get_from())) return false; 
 
-  Piece* captured_piece = get_piece_at_square(m.get_to());
-  if (captured_piece) {
-    m.set_capture_piece(captured_piece->get_type_and_color());
+  if (is_attack_move(turn, m.get_to())) {
+    return is_legal_attack_move(m);
   }
 
-  return true;
+  return is_legal_non_attack_move(m);
 }
 
-bool Board::check_piece_belongs_to_current_player(Piece* piece) {
+bool Board::exist_piece_at_square(const int& pos) {
+  if (get_piece_at_square(pos)) return true ;
+  return false;
+}
+
+bool Board::is_attack_move(std::shared_ptr<Player> turn, const int& pos) {
+  if (check_captured_belongs_to_opponent_player(turn, pos)) 
+    return true;
+
+  return false;
+}
+bool Board::is_legal_non_attack_move(Move& m) {
+  Piece* piece = get_piece_at_square(m.get_from());
+  return piece->is_legal_non_attack_move(m, board_state);
+}
+
+bool Board::is_legal_attack_move(Move& m){
+  Piece* piece = get_piece_at_square(m.get_from());
+  Piece* captured = get_piece_at_square(m.get_to());
+  m.set_capture_piece(captured->get_type_and_color());
+  return piece->is_legal_attack_move(m, board_state);
+}
+
+bool Board::check_piece_belongs_to_current_player(std::shared_ptr<Player> turn, const int& pos) {
+  Piece* piece = get_piece_at_square(pos);
+  if (!piece) return false;
   return piece->is_black() != turn->has_black_pieces();
+}
+
+bool Board::check_captured_belongs_to_opponent_player(std::shared_ptr<Player> turn, const int& pos) {
+  Piece* captured = get_piece_at_square(pos);
+  if (!captured) return false;
+
+  return captured->is_black() == turn->get_opponent()->has_black_pieces();
 }
 
 void Board::make_move(Move mv) {
   SquareIndices from = mv.get_from();
   SquareIndices to = mv.get_to();
   Piece* piece = get_piece_at_square(from);
+  board_state.move(piece->is_black(),from , to);
 
   move_piece_to_square(piece, from, to);
-}
-
-void Board::set_players(
-    shared_ptr<Player> player1, shared_ptr<Player> player2) {
-  this->player1 = player1;
-  this->player2 = player2;
-  this->player1->set_opponent(this->player2);
-  this->player2->set_opponent(this->player1);
-  this->turn = player1;
 }
 
 void
@@ -77,18 +98,30 @@ Piece* Board::get_piece_at_square(int pos) {
 void Board::create_board_squares() {
   create_empty_squares_drawing();
   char squareColor = 'w';
+  bool is_black_box = true;
 
   int position = 0;
-  // need to be ordered upside down
+  /* 
+   * Rows needs to be ordered upside down
+   * because the program prints from top to bottom
+   * so that 8 should be printed frist
+  */
   for (int row = 7; row >= 0; --row) {
     for (int col = 0; col < 8; ++col) {
+      /*
+       * there are 8*8 (from 0 to 63) squares
+       * to get the position 
+       * we need to multyply rwo by 8 and add the col
+       * i.e the bottom right position would be  
+       * 8 * 0 + 7 = 7
+       * */
       position = row * 8 + col;
       if (squareColor == 'b') {
         squareColor = 'w';
-        p_squares[position] = new Square(&wSquare, false);
+        p_squares[position] = new Square(&wSquare, !is_black_box);
       } else {
         squareColor = 'b';
-        p_squares[position] = new Square(&bSquare, true);
+        p_squares[position] = new Square(&bSquare, is_black_box);
       }
     }
     squareColor = squareColor == 'b' ? 'w' : 'b';
@@ -101,7 +134,6 @@ void Board::create_empty_squares_drawing() {
 }
 
 void Board::parser_fen(string fen) {
-  // m_bb.reset_all_pieces_bitboard();
   SquareIndices square = A1;
   int rank = 7;
   int file = 0;
@@ -137,31 +169,6 @@ bool Board::is_number(char c) {
 
 Square* Board::get_square_at_pos(int pos) { return p_squares[pos]; }
 
-
-std::shared_ptr<Player> Board::get_turn() {
-  return turn;
-}
-
-std::shared_ptr<Player> Board::get_opponent() {
-  return turn->get_opponent();
-}
-
-std::shared_ptr<Player> Board::get_player_1() {
-  return player1;
-}
-
-std::shared_ptr<Player> Board::get_player_2() {
-  return player2;
-}
-
-void Board::update_turn(GameTurn::players pl_turn) {
-  m_turn = pl_turn;
-
-  if (m_turn == GameTurn::player_1)
-    this->turn = player1;
-  else
-    this->turn = player2;
-}
 
 Displayable* Board::get_drawing() {
   return &m_bdrawing;

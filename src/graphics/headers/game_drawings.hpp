@@ -8,7 +8,7 @@
 #include"box.h"
 
 
-static const std::map<std::string, box> const_piece_drawing = {
+static const std::map<std::string, Box> const_piece_drawing = {
   {
     "bishop",
     {{

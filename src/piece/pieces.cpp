@@ -75,4 +75,3 @@ void Pieces::make_knight(const Color C) {
   else
     m_pieces[wN] = new Knight<WHITE>;
 }
-

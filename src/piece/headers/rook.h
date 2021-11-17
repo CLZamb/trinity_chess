@@ -9,7 +9,8 @@ class Rook : public Piece {
 public:
   explicit Rook(const MagicBitboard& m_bb);
   virtual ~Rook();
-  bool is_legal_move(const Move&) override;
+  bool is_legal_non_attack_move(const Move&, const BoardBitboard& board) override;
+  bool is_legal_attack_move(const Move&, const BoardBitboard& board) override;
 
 private:
   const MagicBitboard * const m_bb;

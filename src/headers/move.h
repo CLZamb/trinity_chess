@@ -3,7 +3,6 @@
 
 #include <cassert>
 #include "../board/headers/utils.h"
-
 /*
    0000 0000 0000 0000 0000 0011 1111 -> From 0x3F
    0000 0000 0000 0000 1111 1100 0000 -> To >> 6, 0x3F

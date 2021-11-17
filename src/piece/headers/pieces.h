@@ -21,8 +21,8 @@ class Pieces {
     void make_knight(const Color C);
 
  private:
-    MagicBitboard m_magic_bitboard;
     void create_all_pieces();
+    MagicBitboard m_magic_bitboard;
     std::array<Piece*, 13> m_pieces { nullptr };
     int m_size = 0;
     static const int m_max_size = 13;

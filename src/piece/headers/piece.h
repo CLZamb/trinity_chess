@@ -10,6 +10,7 @@
 #include "../../board/headers/utils.h"
 #include "../../headers/move.h"
 #include "../../board/headers/bit_utilities.h"
+#include "../../board/headers/BoardBitboard.h"
 
 using namespace bitUtility;
 
@@ -17,10 +18,11 @@ class Piece {
  public:
     virtual ~Piece();
     bool is_black();
-    box* get_box_drawing(bool is_black);
+    Box* get_box_drawing(bool is_black);
     Piecetype get_type_and_color();
     bool is_black_piece(int pct);
-    virtual bool is_legal_move(const Move&) = 0;
+    virtual bool is_legal_non_attack_move(const Move&, const BoardBitboard& board) = 0;
+    virtual bool is_legal_attack_move(const Move&, const BoardBitboard&  board) = 0;
 
  protected:
     explicit Piece(const Piecetype&);

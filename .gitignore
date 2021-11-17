@@ -4,11 +4,18 @@ build/
 lib/
 obj/
 tests/
-lib
+lib/
+node_modules/
 # Ignore json files
 .json
 .DS_Store
 .ccls-cache
+.cache
+.vimspector.json
+.vscode/
+neovim.json
+package.json
+yarn.lock
 
 **/cmake-build-debug
 **/CMakeCache.txt

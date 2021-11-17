@@ -20,13 +20,15 @@ PieceDrawing* Piece::create_drawing(const Piecetype& m_type) {
   return drawing_builder.get_drawing();;
 }
 
-box* Piece::get_box_drawing(bool is_in_black_square) {
+Box* Piece::get_box_drawing(bool is_in_black_square) {
   return p_piece_drawing->get_box_drawing(is_in_black_square);
 }
 
 Piecetype Piece::get_type_and_color() { return m_type; }
 
-bool Piece::is_black() { return black; }
+bool Piece::is_black() { 
+  return black; 
+}
 
 bool Piece::is_black_piece(int pct) {
   return utils::check::is_black_piece(pct);

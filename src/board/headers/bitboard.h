@@ -8,7 +8,7 @@
 #include "../../headers/move.h"
 #include "../../piece/headers/piece.h"
 #include "utils.h"
-#include "magic_bitboard.h"
+#include "../../piece/headers/magic_bitboard.h"
 #include "bit_utilities.h"
 
 typedef std::vector<Move> MoveList;

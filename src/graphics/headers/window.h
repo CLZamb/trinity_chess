@@ -1,5 +1,5 @@
-#ifndef GUI_CONTROLLER_H
-#define GUI_CONTROLLER_H
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <algorithm>
 #include <array>
@@ -16,7 +16,7 @@ using std::ostream;
 // using std::array;
 using std::map;
 
-class GuiController {
+class Window {
  public:
     enum Pane_pos {
       Left_pane = 0,
@@ -25,17 +25,20 @@ class GuiController {
       Max_panes_size = 3
     };
 
-    GuiController();
-    virtual ~GuiController();
+    Window();
+    virtual ~Window();
 
-    void add_pane_at_pos(Displayable* pane, Pane_pos pos);
+    void add_pane(Displayable* pane, Pane_pos pos);
     int get_pane_size(int index);
-    friend ostream& operator << (ostream &os,  GuiController &);
+    friend ostream& operator << (ostream &os,  Window &);
 
  private:
+    std::once_flag initOnceFlag;
+    std::once_flag destructOnceFlag;
+    void _init_();
     void insert_formatted_output
       (map<int, Displayable*, std::less<int>> panes, ostream& os, int index);
     map<int, Displayable*, std::less<int>> panes;
 };
 
-#endif /* GUI_CONTROLLER_H */
+#endif /* WINDOW_H */

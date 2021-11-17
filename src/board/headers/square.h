@@ -7,7 +7,7 @@
 
 class Square {
  public:
-    Square(box*, bool);
+    Square(Box*, bool);
     virtual ~Square ();
 
     void set_piece(Piece* piece);
@@ -15,11 +15,11 @@ class Square {
     char* at(int i);
     bool is_black_square();
     Piece* get_piece();
-    box* get_current_drawing();
+    Box* get_current_drawing();
 
  private:
-    box* p_empty_square_drawing = nullptr;
-    box* p_cur_drawing = nullptr;
+    Box* p_empty_square_drawing = nullptr;
+    Box* p_cur_drawing = nullptr;
     Piece* p_piece = nullptr;
     bool m_is_black_square = false;
 };

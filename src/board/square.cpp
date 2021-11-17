@@ -1,6 +1,6 @@
 #include "headers/square.h"
 
-Square::Square(box* emtpySqDrawing, bool blackBox):
+Square::Square(Box* emtpySqDrawing, bool blackBox):
   p_empty_square_drawing(emtpySqDrawing),
   p_cur_drawing(emtpySqDrawing),
   m_is_black_square(blackBox) {}
@@ -34,6 +34,6 @@ Piece* Square::get_piece() {
   return this->p_piece;
 }
 
-box* Square::get_current_drawing() {
+Box* Square::get_current_drawing() {
   return p_cur_drawing;
 }

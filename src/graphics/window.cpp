@@ -1,18 +1,18 @@
-#include "headers/gui_controller.h"
+#include "headers/window.h"
 
-GuiController::GuiController() {}
+Window::Window() {}
 
-GuiController::~GuiController() {}
+Window::~Window() {}
 
 // defatult size 44
-void GuiController::add_pane_at_pos(Displayable* pane, Pane_pos pos) {
+void Window::add_pane(Displayable* pane, Pane_pos pos) {
   if (panes.size() >= Max_panes_size)
     return;
 
   panes.emplace(pos, pane);
 }
 
-ostream& operator << (ostream& os, GuiController &gc) {
+ostream& operator << (ostream& os, Window &gc) {
   system(CLEAR);
 
   if (gc.panes.size() == 0) { return os; }
@@ -22,11 +22,12 @@ ostream& operator << (ostream& os, GuiController &gc) {
   }
 
   gc.insert_formatted_output(gc.panes, os, 0);
+
   return os;
 }
 
 
-void GuiController::insert_formatted_output(
+void Window::insert_formatted_output(
     map<int, Displayable*, std::less<int>> panes, ostream& os, int index) {
 
   if (panes.empty())
