@@ -5,7 +5,12 @@
 #include "king.cpp"
 #include "knight.cpp"
 
-Pieces::Pieces() {
+Pieces::Pieces() :
+  m_rook_magic_bitboard(m_magic_bitboard),
+  m_queen_magic_bitboard(m_magic_bitboard),
+  m_bishop_magic_bitboard(m_magic_bitboard)
+{
+
   create_all_pieces();
 }
 
@@ -43,23 +48,23 @@ void Pieces::make_pawn(const Color C) {
 
 void Pieces::make_rook(const Color C) {
   if (C == BLACK)
-    m_pieces[bR] = new Rook<BLACK>(m_magic_bitboard);
+    m_pieces[bR] = new Rook<BLACK>(m_rook_magic_bitboard);
   else
-    m_pieces[wR] = new Rook<WHITE>(m_magic_bitboard);;
+    m_pieces[wR] = new Rook<WHITE>(m_rook_magic_bitboard);
 }
 //
 void Pieces::make_bishop(const Color C) {
   if (C == BLACK)
-    m_pieces[bB] = new Bishop<BLACK>(m_magic_bitboard);
+    m_pieces[bB] = new Bishop<BLACK>(m_queen_magic_bitboard);
   else
-    m_pieces[wB] = new Bishop<WHITE>(m_magic_bitboard);
+    m_pieces[wB] = new Bishop<WHITE>(m_queen_magic_bitboard);
 }
 //
 void Pieces::make_queen(const Color C) {
   if (C == BLACK)
-    m_pieces[bQ] = new Queen<BLACK>(m_magic_bitboard);
+    m_pieces[bQ] = new Queen<BLACK>(m_bishop_magic_bitboard);
   else
-    m_pieces[wQ] = new Queen<WHITE>(m_magic_bitboard);
+    m_pieces[wQ] = new Queen<WHITE>(m_bishop_magic_bitboard);
 }
 
 void Pieces::make_king(const Color C) {

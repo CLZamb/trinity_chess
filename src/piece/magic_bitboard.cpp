@@ -109,7 +109,6 @@ U64 MagicBitboard::queen_attacks(U64 occ, SquareIndices sq) const {
   temp_occ >>= m_rook_tbl[sq].shift;
 
   result |= m_rook_table[sq][temp_occ];
-
   return result;
 }
 

@@ -2,8 +2,11 @@ set(SOURCE_FILES
   main.cpp
   game.cpp
   player.cpp
+  players.cpp
   move_utils.cpp
   game_turn_observable.cpp
+  game_setup.cpp
+  options.cpp
   )
 # Exectuable
 add_executable(Chess ${SOURCE_FILES})

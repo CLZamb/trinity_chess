@@ -1,39 +1,18 @@
 #include "headers/rook.h"
 
 template<Color color>
-Rook<color>::Rook(const MagicBitboard& m_bb) :
-  Piece(color == BLACK ? bR : wR),
-  m_bb{&m_bb} {}
+Rook<color>::Rook(IMagicBitboardAttackType& mb) :
+  Piece(color == BLACK ? bR : wR), rook_moves(mb) {}
 
 template<Color color>
 Rook<color>::~Rook() {}
 
 template<Color color>
 bool Rook<color>::is_legal_non_attack_move(const Move& m, const BoardBitboard& board) {
-  if (m_bb == nullptr) return false;
-
-  U64 all_moves = BLANK;
-  SquareIndices from = m.get_from();
-  U64 to = ONE << m.get_to();
-  const U64 own_color_pieces = 
-    (color == BLACK) ? 
-    board.get_all_black_pieces() : board.get_all_white_pieces();
-
-  all_moves = m_bb->rook_attacks(board.get_all_board_pieces(), from);
-
-  return all_moves & to & ~own_color_pieces;
+  return rook_moves.get_sliding_attacks(m, board);
 }
 
 template<Color color>
 bool Rook<color>::is_legal_attack_move(const Move& m, const BoardBitboard& board) {
-  if (m_bb == nullptr) return false;
-  U64 all_moves = BLANK;
-  SquareIndices from = m.get_from();
-  U64 to = ONE << m.get_to();
-  const U64 opponent = 
-    (color == BLACK) ? 
-    board.get_all_white_pieces() : board.get_all_black_pieces();
-
-  all_moves = m_bb->rook_attacks(board.get_all_board_pieces(), from);
-  return all_moves & to & opponent;
+  return rook_moves.get_sliding_attacks(m, board);
 }

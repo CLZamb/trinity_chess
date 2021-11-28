@@ -9,6 +9,9 @@ add_library(
   message_state.cpp
   pane.cpp
   section.cpp
+  square_drawing.cpp
+  uicontroller.cpp
+  view.cpp
   )
 
 message("graphics library compiled")

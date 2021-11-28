@@ -12,13 +12,5 @@ void Player::set_opponent(std::shared_ptr<Player> opponent) {
 }
 
 bool Player::has_black_pieces() { return m_black_pieces; }
-bool Player::is_valid_move() { return is_valid_input; }
 std::shared_ptr<Player> Player::get_opponent() { return p_opponent; }
 
-string Player::get_str_color_pieces()  {
-  return color_str;
-}
-
-Color Player::get_int_color_pieces() {
-  return color;
-}

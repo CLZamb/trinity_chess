@@ -4,8 +4,7 @@
 #include "../../board/headers/bit_utilities.h"
 #include <assert.h>
 
-class MagicBitboard
-{
+class MagicBitboard {
   private:
     struct SMagic {
       U64* attacks;  // pointer to attack_table for each particular square
@@ -42,6 +41,40 @@ class MagicBitboard
     U64 rook_attacks(U64 occ, SquareIndices sq) const;
     U64 bishop_attacks(U64 occ, SquareIndices sq) const;
     U64 queen_attacks(U64 occ, SquareIndices sq) const;
+};
+
+class IMagicBitboardAttackType {
+  public:
+    virtual U64 get_attacks(U64 occ, SquareIndices sq) const = 0;
+
+  protected:
+    IMagicBitboardAttackType(const MagicBitboard& mb) : m_magic_bitboard(&mb) {};
+    virtual ~IMagicBitboardAttackType() = default;
+    const MagicBitboard* const m_magic_bitboard;
+};
+
+class RookMagicBitboard : public IMagicBitboardAttackType {
+  public:
+    RookMagicBitboard(const MagicBitboard& mb) : IMagicBitboardAttackType(mb) {}
+    U64 get_attacks(U64 occ, SquareIndices sq) const {
+      return m_magic_bitboard->rook_attacks(occ, sq);
+    }
+};
+
+class BishopMagicBitboard : public IMagicBitboardAttackType {
+  public:
+    BishopMagicBitboard(const MagicBitboard& mb) : IMagicBitboardAttackType(mb) {}
+    U64 get_attacks(U64 occ, SquareIndices sq) const {
+      return m_magic_bitboard->bishop_attacks(occ, sq);
+    }
+};
+
+class QueenMagicBitboard : public IMagicBitboardAttackType {
+  public:
+    QueenMagicBitboard(const MagicBitboard& mb) : IMagicBitboardAttackType(mb) {}
+    U64 get_attacks(U64 occ, SquareIndices sq) const {
+      return m_magic_bitboard->queen_attacks(occ, sq);
+    }
 };
 
 #endif /* MAGIC_BITBOARD_H */

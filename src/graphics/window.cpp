@@ -1,7 +1,6 @@
 #include "headers/window.h"
 
 Window::Window() {}
-
 Window::~Window() {}
 
 // defatult size 44
@@ -26,7 +25,6 @@ ostream& operator << (ostream& os, Window &gc) {
   return os;
 }
 
-
 void Window::insert_formatted_output(
     map<int, Displayable*, std::less<int>> panes, ostream& os, int index) {
 
@@ -49,3 +47,4 @@ void Window::insert_formatted_output(
 
   insert_formatted_output(panes, os, index);
 }
+

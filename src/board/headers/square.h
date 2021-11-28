@@ -4,10 +4,11 @@
 #pragma once
 #include "../../graphics/headers/box.h"
 #include "../../piece/headers/piece.h"
+#include "../../graphics/headers/square_drawing.h"
 
 class Square {
  public:
-    Square(Box*, bool);
+    Square(bool is_black_square);
     virtual ~Square ();
 
     void set_piece(Piece* piece);
@@ -18,8 +19,7 @@ class Square {
     Box* get_current_drawing();
 
  private:
-    Box* p_empty_square_drawing = nullptr;
-    Box* p_cur_drawing = nullptr;
+    SquareDrawing square_drawing;
     Piece* p_piece = nullptr;
     bool m_is_black_square = false;
 };

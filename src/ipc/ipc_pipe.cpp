@@ -1,4 +1,7 @@
 #include "headers/ipc_pipe.h"
+#include <filesystem>
+
+namespace fs = std::__fs::filesystem;
 
 IpcPipe::IpcPipe() {
   parent_read_end = &read_pipe;
@@ -75,9 +78,11 @@ void IpcPipe::child_process() {
   child_read_end->redirect_input();
   child_write_end->redirect_output();
 
+  string relative_path = fs::current_path();
+  string exec_path = relative_path + "/build/bin/search";
+
   const char* arguments[] = {
-    
-    "/Users/cristofher/desktop/practice/c++/ChessProject_v2/bin/search" ,
+     exec_path.c_str(),
     // "uci",
     nullptr };
   execv(

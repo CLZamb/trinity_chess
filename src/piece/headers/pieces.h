@@ -23,6 +23,9 @@ class Pieces {
  private:
     void create_all_pieces();
     MagicBitboard m_magic_bitboard;
+    RookMagicBitboard m_rook_magic_bitboard;
+    QueenMagicBitboard m_queen_magic_bitboard;
+    BishopMagicBitboard m_bishop_magic_bitboard;
     std::array<Piece*, 13> m_pieces { nullptr };
     int m_size = 0;
     static const int m_max_size = 13;

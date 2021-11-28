@@ -18,7 +18,7 @@ class Piece {
  public:
     virtual ~Piece();
     bool is_black();
-    Box* get_box_drawing(bool is_black);
+    Box* get_drawing(bool is_in_a_black);
     Piecetype get_type_and_color();
     bool is_black_piece(int pct);
     virtual bool is_legal_non_attack_move(const Move&, const BoardBitboard& board) = 0;
@@ -26,8 +26,8 @@ class Piece {
 
  protected:
     explicit Piece(const Piecetype&);
-    PieceDrawing* create_drawing(const Piecetype& m_type);
     U64 m_attacks[utils::constant::ksquares] = { BLANK };
+    PieceDrawing* create_drawing(const Piecetype& m_type);
 
  private:
     StandardDrawingBuilder drawing_builder;

@@ -23,9 +23,9 @@ bool King<color>::is_legal_attack_move(const Move& m, const BoardBitboard& board
   SquareIndices from = m.get_from();
   U64 to = ONE << m.get_to();
 
-  const U64 opponent = 
-    (color == BLACK) ? 
-    board.get_all_white_pieces() : board.get_all_black_pieces();
+  const U64 opponent = 0;
+    // (color == BLACK) ? 
+    // board.get_all_white_pieces() : board.get_all_black_pieces();
 
   return m_attacks[from] & to & opponent;
 }

@@ -1,5 +1,8 @@
 #include "headers/uci.h"
 #include <fstream>
+#include <filesystem>
+
+namespace fs = std::__fs::filesystem;
 // void parse_go(string line, search_info info, Board *pos) {}
 // void parse_position(string line, Board *pos) {}
 using std::istringstream;
@@ -7,7 +10,6 @@ using std::skipws;
 using std::ofstream;
 
 namespace UCI {
-
 Handler::Handler(Search* search) {
   this->search = search;
 }
@@ -60,7 +62,9 @@ void Handler::is_ready_command() {
 void Handler::set_option_command(std::istringstream &inStream) {}
 void Handler::uci_new_game_command() {}
 void Handler::position_command(std::istringstream &inStream) {}
-void Handler::go_command(std::istringstream &inStream) {}
+void Handler::go_command(std::istringstream &inStream) {
+ cout << "error" << endl;
+}
 void Handler::stop_command() {}
 void Handler::ponder_hit_command() {}
 void Handler::register_command() {}

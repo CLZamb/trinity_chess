@@ -50,15 +50,16 @@ class Pawn : public Piece {
     if (!m.get_captured_piece())
       return false;
 
+    cout << "is legal attack move" << endl;
+
     U64 all_moves = BLANK;
     int from = m.get_from();
     U64 to = ONE << m.get_to();
 
-    const U64 opponent = 
-      (color == BLACK) ? 
-      board.get_all_white_pieces() : board.get_all_black_pieces();
+    const U64 opponent = board.get_all_side_pieces(!(color == BLACK));
 
     all_moves |= m_attacks[from] & opponent;  // enemy is that square occ
+
     return all_moves & to;
   }
 
@@ -68,8 +69,7 @@ class Pawn : public Piece {
     U64 to = ONE << m.get_to();
     const U64 free_squares = ~board.get_all_board_pieces();
 
-    all_moves |= pawn_non_attack_mask(from) & free_squares;
-    return all_moves & to;
+    return pawn_non_attack_mask(from) & free_squares & to;
   }
 
  private:

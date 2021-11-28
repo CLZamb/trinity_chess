@@ -22,10 +22,9 @@ bool Board::is_checkmate() {
 
 bool Board::is_legal_move(std::shared_ptr<Player> turn, Move& m) {
   if (!exist_piece_at_square(m.get_from())) return false;
+  if (!check_piece_belongs_to_current_player(turn, m.get_from())) return false; 
 
-  if (check_piece_belongs_to_current_player(turn, m.get_from())) return false; 
-
-  if (is_attack_move(turn, m.get_to())) {
+  if (is_attack_move(turn->get_opponent(), m.get_to())) {
     return is_legal_attack_move(m);
   }
 
@@ -37,12 +36,13 @@ bool Board::exist_piece_at_square(const int& pos) {
   return false;
 }
 
-bool Board::is_attack_move(std::shared_ptr<Player> turn, const int& pos) {
-  if (check_captured_belongs_to_opponent_player(turn, pos)) 
+bool Board::is_attack_move(std::shared_ptr<Player> opponent, const int& pos) {
+  if (check_captured_belongs_to_opponent_player(opponent, pos)) 
     return true;
 
   return false;
 }
+
 bool Board::is_legal_non_attack_move(Move& m) {
   Piece* piece = get_piece_at_square(m.get_from());
   return piece->is_legal_non_attack_move(m, board_state);
@@ -58,22 +58,22 @@ bool Board::is_legal_attack_move(Move& m){
 bool Board::check_piece_belongs_to_current_player(std::shared_ptr<Player> turn, const int& pos) {
   Piece* piece = get_piece_at_square(pos);
   if (!piece) return false;
-  return piece->is_black() != turn->has_black_pieces();
+  return piece->is_black() == turn->has_black_pieces();
 }
 
-bool Board::check_captured_belongs_to_opponent_player(std::shared_ptr<Player> turn, const int& pos) {
+bool Board::check_captured_belongs_to_opponent_player(std::shared_ptr<Player> opponent, const int& pos) {
   Piece* captured = get_piece_at_square(pos);
   if (!captured) return false;
 
-  return captured->is_black() == turn->get_opponent()->has_black_pieces();
+  return captured->is_black() == opponent->has_black_pieces();
 }
 
 void Board::make_move(Move mv) {
   SquareIndices from = mv.get_from();
   SquareIndices to = mv.get_to();
   Piece* piece = get_piece_at_square(from);
-  board_state.move(piece->is_black(),from , to);
 
+  board_state.move(piece->is_black(),from , to);
   move_piece_to_square(piece, from, to);
 }
 
@@ -96,9 +96,8 @@ Piece* Board::get_piece_at_square(int pos) {
 }
 
 void Board::create_board_squares() {
-  create_empty_squares_drawing();
   char squareColor = 'w';
-  bool is_black_box = true;
+  bool is_black_squared = true;
 
   int position = 0;
   /* 
@@ -118,19 +117,14 @@ void Board::create_board_squares() {
       position = row * 8 + col;
       if (squareColor == 'b') {
         squareColor = 'w';
-        p_squares[position] = new Square(&wSquare, !is_black_box);
+        p_squares[position] = new Square(!is_black_squared);
       } else {
         squareColor = 'b';
-        p_squares[position] = new Square(&bSquare, is_black_box);
+        p_squares[position] = new Square(is_black_squared);
       }
     }
     squareColor = squareColor == 'b' ? 'w' : 'b';
   }
-}
-
-void Board::create_empty_squares_drawing() {
-  wSquare = *Drawing("BaseWhiteSquare").get_drawing();
-  bSquare = *Drawing("BaseBlackSquare").get_drawing();
 }
 
 void Board::parser_fen(string fen) {
@@ -143,8 +137,8 @@ void Board::parser_fen(string fen) {
     piece = utils::get_square_index_from_char_key(c);
     if (piece) {
       square = static_cast<SquareIndices>(rank * 8 + file);
-      // m_bb.set_piece_at_pos(piece, square);
       add_to_board(piece, square);
+
       file++;
 
     } else if (is_number(c)) {
@@ -161,15 +155,15 @@ void Board::parser_fen(string fen) {
 
 void Board::add_to_board(int type, SquareIndices position) {
   get_square_at_pos(position)->set_piece(m_pieces.get_piece(type));
+  board_state.set_bit_at_player_pieces(utils::check::is_black_piece(type), position);
 }
 
 bool Board::is_number(char c) {
   return c >= '0' && c <= '8';
 }
 
-Square* Board::get_square_at_pos(int pos) { return p_squares[pos]; }
-
-
-Displayable* Board::get_drawing() {
-  return &m_bdrawing;
+Square* Board::get_square_at_pos(int pos) { 
+  return p_squares[pos]; 
 }
+
+Displayable* Board::get_drawing() { return &m_bdrawing; }

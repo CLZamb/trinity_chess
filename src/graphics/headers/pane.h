@@ -9,7 +9,6 @@
 
 using std::string;
 using std::vector;
-using std::unordered_map;
 using std::shared_ptr;
 
 class Pane {

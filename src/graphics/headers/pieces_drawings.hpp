@@ -183,7 +183,7 @@ class PieceDrawing {
     white_square_drawing->addModifier(mod);
   }
 
-  Box* get_box_drawing(bool is_in_black_square) {
+  Box* get_drawing(bool is_in_black_square) {
     return is_in_black_square ?
       black_square_drawing->get_drawing() : white_square_drawing->get_drawing();
   }

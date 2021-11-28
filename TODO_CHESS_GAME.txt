@@ -1,3 +1,8 @@
 CHESS GAME TODO
 
-1) let the player choose a side
+1) add options menu (change color, side, remove the side info, etc)
+2) let the player choose a side
+3) change color of the pieces for different types of terminals
+
+-- version 2
+1) use the library FTXUI https://github.com/ArthurSonzogni/FTXUI
