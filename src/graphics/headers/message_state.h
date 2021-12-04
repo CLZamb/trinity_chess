@@ -14,8 +14,8 @@ class MessageState {
   const char* p_message = nullptr;
 };
 
-struct Start_or_quit : public MessageState {
-  explicit Start_or_quit(Messages* msg);
+struct Play_or_quit : public MessageState {
+  explicit Play_or_quit(Messages* msg);
 };
 
 struct Players_options : public MessageState {

@@ -3,8 +3,8 @@
 MessageState::MessageState(Messages* msg) : p_messages(msg) {}
 MessageState::~MessageState() {}
 
-Start_or_quit::Start_or_quit(Messages* msg) : MessageState(msg) {
-  p_message = p_start_or_quit_message;
+Play_or_quit::Play_or_quit(Messages* msg) : MessageState(msg) {
+  p_message = p_play_or_quit_message;
 }
 
 Players_options::Players_options(Messages* msg) : MessageState(msg) {

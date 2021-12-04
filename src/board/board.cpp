@@ -16,9 +16,7 @@ void Board::_init() {
   parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
 }
 
-bool Board::is_checkmate() {
-  return checkmate;
-}
+bool Board::is_checkmate() { return checkmate; }
 
 bool Board::is_legal_move(std::shared_ptr<Player> turn, Move& m) {
   if (!exist_piece_at_square(m.get_from())) return false;

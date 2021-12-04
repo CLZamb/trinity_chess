@@ -8,7 +8,7 @@
 #include "../../piece/headers/piece.h"
 #include "../../piece/headers/pieces.h"
 #include "utils.h"
-#include "../../headers/player.h"
+#include "../../player/headers/player.h"
 #include "../headers/square.h"
 #include "../../headers/move.h"
 #include "../../headers/game_turn_observer.h"

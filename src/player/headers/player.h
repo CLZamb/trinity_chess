@@ -6,9 +6,10 @@
 #include <iostream>
 #include <regex>
 #include <string>
-#include "../board/headers/utils.h"
+#include "../../board/headers/utils.h"
 
 using std::string;
+
 
 class Player {
  public:
@@ -29,6 +30,11 @@ class Player {
    bool is_valid_input = false;
    bool m_black_pieces = false;
    int ply = 1;
+};
+
+struct PlayerConfig {
+  Player::Type P1;
+  Player::Type P2;
 };
 
 #endif /* PLAYER_H */

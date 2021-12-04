@@ -20,7 +20,7 @@ void Messages::draw() {
   m_drawing.fill(p_current_state->get_message());
 }
 
-MessageState* Messages::get_start_or_quit() {
+MessageState* Messages::get_play_or_quit() {
   return &m_start_or_quit;
 }
 

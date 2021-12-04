@@ -13,12 +13,12 @@ class GameTurnObservable {
  public:
   virtual ~GameTurnObservable();
 
+ protected:
+  GameTurnObservable();
   virtual void attach(GameTurnObserver*);
   virtual void detach(GameTurnObserver*);
   virtual void notify() = 0;
- protected:
   list<GameTurnObserver*> *_observers;
-  GameTurnObservable();
 };
 
 #endif /* GAME_TURN_OBSERVABLE_H */

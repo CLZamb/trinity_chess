@@ -1,10 +1,8 @@
 #include "headers/game.h"
-// #include <algorithm>
 
-Game::Game():  
-    m_turn(GameTurn::player_1),
-    initial_side(GameTurn::player_1 == m_turn ? "white" : "black") 
-{
+Game::Game()
+    : m_turn(GameTurn::player_1),
+      initial_side(GameTurn::player_1 == m_turn ? "white" : "black") {
   ui_controller.add_view(MessageView(&m_messages));
   attach(&m_board);
 }
@@ -12,14 +10,19 @@ Game::Game():
 Game::~Game() {}
 
 void Game::start() {
-  if (get_play_or_quit_selection() == Options::Quit) {
+  string play = "Play", quit = "Quit";
+  Options<string> options{play, quit};
+
+  print_message(m_messages.get_play_or_quit());
+
+  if (options.select_option() == quit) {
     print_message(m_messages.get_game_over());
     return;
   }
 
   setup_players();
   setup_board();
-  play();
+  this->play();
 }
 
 void Game::setup_board() {
@@ -29,84 +32,89 @@ void Game::setup_board() {
 }
 
 void Game::setup_players() {
+  Options<PlayerConfig> player_options{
+      {Player::Human, Player::Human},
+      {Player::Human, Player::Cpu},
+      {Player::Cpu, Player::Cpu},
+  };
+
   print_message(m_messages.get_players_options());
-  players.create_players(get_players_selection());
+  players.create_players(player_options.select_option());
 
-  game_turn = (GameTurn::player_1 == m_turn)? players.get_player_1() : players.get_player_2();
-}
-
-int Game::get_play_or_quit_selection() {
-  print_message(m_messages.get_start_or_quit());
-  return options.get_selected_option({Options::Start, Options::Quit});
-}
-
-std::pair<Player::Type, Player::Type> Game::get_players_selection() {
-  int opt = options.get_players_options();
-  return options.get_players_selection(opt);
+  game_turn = (GameTurn::player_1 == m_turn) ? players.get_player_1()
+                                             : players.get_player_2();
 }
 
 void Game::play() {
+  if (!game_players_exists()) {
+    return;
+  }
+
   string player_input = "";
 
   while (!m_board.is_checkmate()) {
     ui_controller.print_view(BoardView::Get_name());
     player_input = get_current_player_input();
 
-    if (has_player_quit(player_input)) break;
-    if (!is_valid_str_move_format(player_input)) continue;
-    if (!is_legal_move(player_input)) continue;
+    if (has_player_quit(player_input))
+      break;
+    if (!is_valid_str_move_format(player_input))
+      continue;
+    if (!is_legal_move(player_input))
+      continue;
 
     make_move(player_input);
     change_turn();
   }
 };
 
-void Game::make_move(const string& move) {
+
+void Game::make_move(const string &move) {
   Move player_move = MoveUtils::str_convert_to_move(move);
   m_board.make_move(player_move);
 }
 
-bool Game::is_valid_str_move_format(const string& input) {
+bool Game::is_valid_str_move_format(const string &input) {
   if (MoveUtils::is_valid_str_move_format(input))
     return true;
 
   m_board.update_game_info(
-      "Move { " +
-      input +
+      "Move { " + input +
       " } - is an not in a recognizable format, please try again ");
 
   return false;
 }
 
-bool Game::is_legal_move(const string& str_player_move) {
+bool Game::is_legal_move(const string &str_player_move) {
   Move player_move = MoveUtils::str_convert_to_move(str_player_move);
 
-  if(m_board.is_legal_move(game_turn, player_move))
+  if (m_board.is_legal_move(game_turn, player_move))
     return true;
 
-  m_board.update_game_info( "Move { " + str_player_move + " } is an ilegal move");
+  m_board.update_game_info("Move { " + str_player_move +
+                           " } is an ilegal move");
 
   return false;
 }
 
-bool Game::game_turn_exists() {
+bool Game::game_players_exists() {
   if (game_turn == nullptr) {
-    cout << "no players exists" << endl;
+    cout << "players don't exists" << endl;
     return false;
   }
   return true;
 }
 
-bool Game::has_player_quit(const string& str) {
+bool Game::has_player_quit(const string &str) {
   return str == "quit" || str == "close" || str == "exit";
 }
 
 void Game::change_turn() {
-  game_turn = game_turn->get_opponent();;
+  game_turn = game_turn->get_opponent();
 
   if (m_turn == GameTurn::player_2)
     m_turn = GameTurn::player_1;
-  else  // current_player == player_2
+  else // current_player == player_2
     m_turn = GameTurn::player_2;
 
   notify();
@@ -126,7 +134,7 @@ string Game::get_current_player_input() {
   return input;
 }
 
-void Game::print_message(MessageState* message) {
+void Game::print_message(MessageState *message) {
   m_messages.set_message(message);
   ui_controller.print_view(MessageView::Get_name());
 }

@@ -1,23 +1,14 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <unistd.h>
-#include <vector>
-#include <string>
-#include <utility>
-// #include "../board/headers/info.h"
 #include "../graphics/headers/uicontroller.h"
-// #include "../graphics/headers/messages.h"
 #include "../search/headers/uci.h"
 #include "../ipc/headers/ipc_pipe.h"
-// #include "../board/headers/board_with_info.h"
-#include "../headers/player.h"
+#include "player/headers/player.h"
+#include "player/headers/players.h"
 #include "../headers/move_utils.h"
 #include "game_turn_observable.h"
-#include "../headers/players_selections.h"
-// #include "game_setup.h"
 #include "options.h"
-#include "players.h"
 
 class Game: public GameTurnObservable {
   public:
@@ -33,21 +24,16 @@ class Game: public GameTurnObservable {
     void setup_board();
     void play();
     void print_message(MessageState* message);
-    void setup_player();
     void change_turn();
     void notify() override;
-    bool game_turn_exists();
+    bool game_players_exists();
     bool has_player_quit(const string& str);
-    int get_play_or_quit_selection();
+    string get_play_or_quit_selection();
     string get_current_player_input();
     Players players;
-
     Messages m_messages;
     BoardWithInfo m_board;
-
-    Options options;
-
-    pair<Player::Type, Player::Type> get_players_selection();
+    Options<string> start_quit;
 
     UIController ui_controller;
 

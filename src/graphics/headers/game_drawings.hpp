@@ -133,7 +133,7 @@ namespace Banner {
   static const int width = utf8_strlen(player1[0].c_str());
 }  // namespace Drawing
 
-static const char* p_start_or_quit_message =
+static const char* p_play_or_quit_message =
 (
  "\n\n\n\n"
 "\t\t********************************************************************************\n "
@@ -160,7 +160,7 @@ static const char* p_start_or_quit_message =
 "\t\t**                                                                              *\n "
 "\t\t**                                                                              *\n "
 "\t\t**                          Welcome to chess Game                               *\n "
-"\t\t**                            1. Start                                          *\n "
+"\t\t**                            1. Play                                           *\n "
 "\t\t**                            2. Quit                                           *\n "
 "\t\t**                                                                              *\n "
 "\t\t**                                                                              *\n "

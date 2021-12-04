@@ -1,35 +1,46 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include "players_selections.h"
-#include<vector>
-#include<iostream>
+#include "player/headers/player.h"
+#include <iostream>
+#include <unordered_map>
 
-using std::vector;
+using std::cin;
 using std::cout;
 using std::endl;
-using std::cin;
+using std::unordered_map;
 
+template <typename T>
 class Options {
-public:
-  enum Start_or_quit {
-    Start = 1,
-    Quit = 2,
-  };
+ public:
   Options() {}
-  virtual ~Options() {}
-  int get_selected_option(vector<int> opts) {
+  Options(std::initializer_list<T> lst) {
+    int index = start_index;
+    for (const auto l : lst) {
+      options.emplace(index++, l);
+    }
+  }
 
-    cout << "\t\tchoose one of the options ("
-      << opts.front() << "-"
-      << opts.back() << "): ";
+  void set_options(std::initializer_list<T> lst) {
+    int index = start_index;
+    for (const auto l : lst) {
+      options.emplace(index++, l);
+    }
+  }
+
+  virtual ~Options() {}
+
+  T& select_option() {
+    cout << "\t\tchoose one of the options (" 
+      << start_index << " - "
+      << options.size() << "): ";
 
     int input = -1;
     bool valid_option = false;
 
     while (!valid_option) {
       cin >> input;
-      valid_option = check_valid_option(input, opts);
+      valid_option = check_valid_option(input);
 
       if (!valid_option) {
         cout << "invalid option try again!" << endl;
@@ -40,50 +51,17 @@ public:
 
     cin.clear();
     cin.ignore();
-    return input;
+    return options[input];
   }
 
-  int get_players_options() {
-    int opt =
-      get_selected_option(m_players_selections.get_configurations_options());
+ private:
+  static const int start_index = 1;
 
-    return opt;
+  bool check_valid_option(int i) {
+    return options.find(i) != options.end();
   }
 
-  std::pair<Player::Type, Player::Type> get_players_selection(int opt) {
-    return m_players_selections.get_pair_players_type(
-        static_cast<PlayersSelections::Players_configuration>(opt));
-  }
-
-private:
-  bool check_valid_option(int i, const vector<int>& opts) {
-    return find(opts.begin(), opts.end(), i) != opts.end();
-  }
-  PlayersSelections m_players_selections;
-
+  unordered_map<int, T> options;
 };
 
 #endif /* OPTIONS_H */
-// int Game::get_selected_option(vector<int> opts) {
-//   std::cout << "\t\tchoose one of the options ("
-//     << opts.front() << "-"
-//     << opts.back() << "): ";
-//
-//   int input = -1;
-//   bool valid_option = false;
-//
-//   while (!valid_option) {
-//     std::cin >> input;
-//     valid_option = check_valid_option(input, opts);
-//
-//     if (!valid_option) {
-//       cout << "invalid option try again!" << endl;
-//       std::cin.clear();
-//       std::cin.ignore();
-//     }
-//   }
-//
-//   std::cin.clear();
-//   std::cin.ignore();
-//   return input;
-// }

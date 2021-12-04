@@ -6,3 +6,7 @@ CHESS GAME TODO
 
 -- version 2
 1) use the library FTXUI https://github.com/ArthurSonzogni/FTXUI
+2) create different config ie: 
+  1) Passing through command like g++ Chess param param etc.
+  2) Config from a file setup.txt players = cpu vs cpu
+  3) UI input from te player at running time

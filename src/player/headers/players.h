@@ -3,13 +3,13 @@
 
 #include <memory>
 #include "player.h"
-#include "game_turn_observable.h"
+#include "../../headers/game_turn_observable.h"
 
 class Players {
   public:
     Players();
     virtual ~Players();
-    void create_players(const std::pair<Player::Type, Player::Type>& p_type);
+    void create_players(const PlayerConfig& config);
     std::shared_ptr<Player> get_player_1();
     std::shared_ptr<Player> get_player_2();
 
