@@ -1,3 +1,14 @@
 CHESS GAME TODO
 
-1) let the player choose a side
+1) add special moves, en pessant, king-rook,etc
+2) check checkmate move
+2) add options menu (change color, side, remove the side info, etc)
+3) let the player choose a side
+4) change color of the pieces for different types of terminals
+
+-- version 2
+1) use the library FTXUI https://github.com/ArthurSonzogni/FTXUI
+2) create different config ie: 
+  1) Passing through command like g++ Chess param param etc.
+  2) Config from a file setup.txt players = cpu vs cpu
+  3) UI input from te player at running time
