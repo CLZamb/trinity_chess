@@ -3,7 +3,7 @@
 
 #include "magic_bitboard.h"
 #include "../../board/headers/defs.h"
-#include "../../headers/move.h"
+#include "../../game/headers/move.h"
 #include "../../board/headers/BoardBitboard.h"
 
 template<Color color>

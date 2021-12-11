@@ -4,7 +4,7 @@
 #pragma once
 #include <array>
 #include <string>
-#include "../../headers/game_turn.h"
+#include "../../game/headers/game_turn.h"
 
 using std::string;
 using std::array;

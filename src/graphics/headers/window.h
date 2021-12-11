@@ -5,7 +5,7 @@
 #include "pane.h"
 #include "section.h"
 #include "../headers/Idisplay.h"
-#include "../../include/common/headers/common.h"
+#include "../../common/headers/common.h"
 
 using std::ostream;
 using std::map;

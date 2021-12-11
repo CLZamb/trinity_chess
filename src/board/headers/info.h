@@ -14,7 +14,7 @@
 #include "../../graphics//headers/game_drawings.hpp"
 #include "../../graphics//headers/Idisplay.h"
 #include "../../graphics//headers/section.h"
-#include "../../headers/game_turn_observer.h"
+#include "../../game/headers/game_turn_observer.h"
 
 using std::vector;
 using std::string;
@@ -22,7 +22,6 @@ using std::make_unique;
 using std::shared_ptr;
 
 using players = GameTurn::players;
-// using
 
 class Info : public Displayable, public Savable {
  public:

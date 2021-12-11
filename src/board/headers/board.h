@@ -3,15 +3,15 @@
 
 #include <memory>
 #include <string>
-#include "../../include/common/headers/common.h"
+#include "../../common/headers/common.h"
 #include "../../graphics//headers/pieces_drawings.hpp"
 #include "../../piece/headers/piece.h"
 #include "../../piece/headers/pieces.h"
 #include "utils.h"
 #include "../../player/headers/player.h"
 #include "../headers/square.h"
-#include "../../headers/move.h"
-#include "../../headers/game_turn_observer.h"
+#include "../../game/headers/move.h"
+#include "../../game/headers/game_turn_observer.h"
 #include "../../graphics/headers/board_drawing.h"
 #include "BoardBitboard.h"
 

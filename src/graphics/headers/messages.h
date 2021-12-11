@@ -1,7 +1,7 @@
 #ifndef MESSAGES_H
 #define MESSAGES_H
 #include "Idisplay.h"
-#include "../../include/common/headers/common.h"
+#include "../../common/headers/common.h"
 #include "../headers/message_state.h"
 #include "../headers/section.h"
 

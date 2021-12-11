@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include "../../include/common/headers/common.h"
+#include "../../common/headers/common.h"
 #include "../headers/search.h"
 
 namespace UCI {

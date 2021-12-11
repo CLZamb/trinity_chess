@@ -1,7 +1,8 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include "player/headers/player.h"
+#include "../../player/headers/player.h"
+#include <cstddef>
 #include <iostream>
 #include <unordered_map>
 
@@ -15,13 +16,6 @@ class Options {
  public:
   Options() {}
   Options(std::initializer_list<T> lst) {
-    int index = start_index;
-    for (const auto l : lst) {
-      options.emplace(index++, l);
-    }
-  }
-
-  void set_options(std::initializer_list<T> lst) {
     int index = start_index;
     for (const auto l : lst) {
       options.emplace(index++, l);
@@ -51,11 +45,11 @@ class Options {
 
     cin.clear();
     cin.ignore();
-    return options[input];
+    return options.find(input)->second;
   }
 
  private:
-  static const int start_index = 1;
+  static const size_t start_index = 1;
 
   bool check_valid_option(int i) {
     return options.find(i) != options.end();

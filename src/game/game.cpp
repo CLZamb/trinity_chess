@@ -10,12 +10,11 @@ Game::Game()
 Game::~Game() {}
 
 void Game::start() {
-  string play = "Play", quit = "Quit";
-  Options<string> options{play, quit};
+  string play = "Play", quit = "Quit", config = "Config";
 
-  print_message(m_messages.get_play_or_quit());
+  string selected_option = select_option(play, quit);
 
-  if (options.select_option() == quit) {
+  if (selected_option == quit) {
     print_message(m_messages.get_game_over());
     return;
   }
@@ -25,7 +24,16 @@ void Game::start() {
   this->play();
 }
 
+string Game::select_option(const string &play, const string &quit) {
+  Options<string> options{play, quit};
+
+  print_message(m_messages.get_play_or_quit());
+  return options.select_option();
+}
+
 void Game::setup_board() {
+  int a;
+
   m_board._init();
   m_board.update_game_info("Is player " + initial_side + " turn");
   ui_controller.add_view(BoardView(&m_board));
@@ -68,14 +76,13 @@ void Game::play() {
   }
 };
 
-
 void Game::make_move(const string &move) {
-  Move player_move = MoveUtils::str_convert_to_move(move);
+  Move player_move = StringMove::to_move(move);
   m_board.make_move(player_move);
 }
 
 bool Game::is_valid_str_move_format(const string &input) {
-  if (MoveUtils::is_valid_str_move_format(input))
+  if (StringMove::is_valid_move_format(input))
     return true;
 
   m_board.update_game_info(
@@ -86,7 +93,7 @@ bool Game::is_valid_str_move_format(const string &input) {
 }
 
 bool Game::is_legal_move(const string &str_player_move) {
-  Move player_move = MoveUtils::str_convert_to_move(str_player_move);
+  Move player_move = StringMove::to_move(str_player_move);
 
   if (m_board.is_legal_move(game_turn, player_move))
     return true;

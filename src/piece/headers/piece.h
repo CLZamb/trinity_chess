@@ -3,12 +3,12 @@
 
 #include <array>
 #include <string>
-#include "../../include/common/headers/common.h"
+#include "../../common/headers/common.h"
 // #include "utils.h"
 #include "../../graphics/headers/box.h"
 #include "../../graphics/headers/pieces_drawings.hpp"
 #include "../../board/headers/utils.h"
-#include "../../headers/move.h"
+#include "../../game/headers/move.h"
 #include "../../board/headers/bit_utilities.h"
 #include "../../board/headers/BoardBitboard.h"
 

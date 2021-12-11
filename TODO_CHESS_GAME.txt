@@ -1,8 +1,10 @@
 CHESS GAME TODO
 
-1) add options menu (change color, side, remove the side info, etc)
-2) let the player choose a side
-3) change color of the pieces for different types of terminals
+1) add special moves, en pessant, king-rook,etc
+2) check checkmate move
+2) add options menu (change color, side, remove the side info, etc)
+3) let the player choose a side
+4) change color of the pieces for different types of terminals
 
 -- version 2
 1) use the library FTXUI https://github.com/ArthurSonzogni/FTXUI

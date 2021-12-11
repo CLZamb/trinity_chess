@@ -3,7 +3,7 @@ bin/
 build/
 lib/
 obj/
-tests/
+# tests/
 lib/
 node_modules/
 # Ignore json files

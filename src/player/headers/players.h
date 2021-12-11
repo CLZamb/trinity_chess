@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "player.h"
-#include "../../headers/game_turn_observable.h"
+#include "../../game/headers/game_turn_observable.h"
 
 class Players {
   public:

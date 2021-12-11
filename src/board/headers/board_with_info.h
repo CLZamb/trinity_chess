@@ -4,7 +4,7 @@
 #include "board.h"
 #include "info.h"
 #include "savable.h"
-#include "../../headers/game_turn_observer.h"
+#include "../../game/headers/game_turn_observer.h"
 
 class BoardWithInfo : public GameTurnObserver {
  public:
