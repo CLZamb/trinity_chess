@@ -64,7 +64,6 @@ class Pawn : public Piece {
   }
 
   bool is_legal_non_attack_move(const Move& m, const BoardBitboard& board) override {
-    U64 all_moves = BLANK;
     int from = m.get_from();
     U64 to = ONE << m.get_to();
     const U64 free_squares = ~board.get_all_board_pieces();

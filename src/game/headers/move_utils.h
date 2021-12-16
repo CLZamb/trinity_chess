@@ -12,7 +12,7 @@
 
 using std::string;
 
-class StringMove {
+class String {
  public:
    static Move to_move(const string& str_move){
     std::vector<string> list_pos;

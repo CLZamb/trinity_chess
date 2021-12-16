@@ -5,12 +5,14 @@
 
 class SquareDrawing {
 public:
+  SquareDrawing();
   SquareDrawing(bool is_black_squared);
   virtual ~SquareDrawing();
   Box* get_drawing();
   char* at(int i);
   void clear_square();
   void update_drawing(Box* drawing);
+  void update_drawing(bool is_black_square);
 
 private:
   Box p_empty_square_drawing;

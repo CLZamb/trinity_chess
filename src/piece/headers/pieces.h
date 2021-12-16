@@ -12,7 +12,7 @@ class Pieces {
  public:
     Pieces();
     virtual ~Pieces();
-    Piece* const get_piece(int type);
+    Piece* get_piece(int type) const;
     void make_pawn(const Color C);
     void make_rook(const Color C);
     void make_bishop(const Color C);

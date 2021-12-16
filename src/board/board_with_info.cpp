@@ -5,7 +5,6 @@ BoardWithInfo::~BoardWithInfo() {}
 
 void BoardWithInfo::_init() {
   m_info._init();
-  m_board._init();
 }
 
 void BoardWithInfo::make_move(Move m) {

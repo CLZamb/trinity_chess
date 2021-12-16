@@ -195,7 +195,7 @@ class PieceDrawing {
 
 class DrawingBuilder {
  public:
-  virtual void build_drawing(Piecetype pct) {}
+  virtual void build_drawing(Piecetype pct)  = 0;
   virtual PieceDrawing* get_drawing() { return nullptr; }
 
  protected:

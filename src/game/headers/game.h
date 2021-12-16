@@ -34,7 +34,7 @@ class Game: public GameTurnObservable {
     Players players;
     Messages m_messages;
     BoardWithInfo m_board;
-    Options<string> start_quit;
+    // Options<string> start_quit;
 
     UIController ui_controller;
 

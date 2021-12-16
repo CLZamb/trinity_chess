@@ -1,18 +1,17 @@
-cmake_minimum_required(VERSION 3.6.2)
+cmake_minimum_required(VERSION 3.14.7)
 
 set(chess_tests ${CMAKE_PROJECT_NAME}_tests)
-set(chess_lib ${CMAKE_PROJECT_NAME}_lib)
 
 set(TESTS_SOURCE_FILES 
   gtest.cpp
 )
 
-# enable_testing()
 add_executable(${chess_tests} ${TESTS_SOURCE_FILES})
 
 target_link_libraries(${chess_tests} PUBLIC
-  gtest_main
   gtest
+  gmock
+  gtest_main
   pthread
   # required libraries
   board_lib
@@ -21,6 +20,12 @@ target_link_libraries(${chess_tests} PUBLIC
   piece_lib
   player_lib
 )
+
+include(GoogleTest)
+# gtest
+message(STATUS ${gtest_SOURCE_DIR})
+# include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+
 
 target_include_directories(
   ${chess_tests} PUBLIC
@@ -32,5 +37,4 @@ add_test(
   COMMAND ${chess_tests}
 )
 
-include(GoogleTest)
 gtest_discover_tests(${chess_tests})
