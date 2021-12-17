@@ -15,7 +15,6 @@ class BoardDrawing : public Displayable {
     char left_border(int row, int col);
 
   private:
-    void _init();
     shared_ptr<Section> p_top_section;
     shared_ptr<Section> p_main;
     shared_ptr<Section> p_bottom_section;

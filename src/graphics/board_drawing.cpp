@@ -2,12 +2,6 @@
 
 
 BoardDrawing::BoardDrawing(std::array<Square, 64> & arr) : m_squares(arr) {
-  _init();
-}
-
-BoardDrawing::~BoardDrawing() {}
-
-void BoardDrawing::_init() {
   p_top_section = std::make_unique<Section>("top", 1);
   p_main = std::make_unique<Section>("board", 40);
   p_bottom_section = std::make_unique<Section>("bottom", 3);
@@ -23,6 +17,8 @@ void BoardDrawing::_init() {
   m_drawing.add_section(p_main);
   m_drawing.add_section(p_bottom_section);
 }
+
+BoardDrawing::~BoardDrawing() {}
 
 void BoardDrawing::draw() {
   int row_counter = 0;

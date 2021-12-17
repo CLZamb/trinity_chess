@@ -17,7 +17,6 @@ void Game::start() {
 }
 
 void Game::setup_board() {
-  m_board._init();
   m_board.update_game_info("Is player " + initial_side + " turn");
 }
 

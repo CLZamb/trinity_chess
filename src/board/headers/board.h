@@ -19,8 +19,7 @@ using std::shared_ptr;
 
 class Board {
  public:
-  explicit Board();
-  // explicit Board(string fen);
+  Board(string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
   virtual ~Board();
   void draw();
   void make_move(Move mv);
@@ -33,7 +32,7 @@ class Board {
   Displayable* get_drawing();
 
  private:
-  void _init();
+  void clear_board();
   bool exist_piece_at_square(const int& pos);
   bool is_legal_attack_move(Move & m);
   bool is_legal_non_attack_move(Move & m);

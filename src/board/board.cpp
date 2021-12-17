@@ -1,15 +1,12 @@
 #include "headers/board.h"
 
-Board::Board() {
-  _init();
+
+Board::Board(string fen /*"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"*/ ) {
+  create_board_squares();
+  parser_fen(fen);
 }
 
 Board::~Board() {}
-
-void Board::_init() {
-  create_board_squares();
-  parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-}
 
 bool Board::is_checkmate() { return checkmate; }
 
@@ -119,6 +116,7 @@ void Board::create_board_squares() {
 }
 
 void Board::parser_fen(string fen) {
+  clear_board();
   SquareIndices square = A1;
   int rank = 7;
   int file = 0;
@@ -141,6 +139,17 @@ void Board::parser_fen(string fen) {
     }
 
     if (rank < 0) break;
+  }
+}
+
+void Board::clear_board() {
+  int pos = 0;
+  bool is_black = false;
+  for(auto& square: m_squares) {
+    square.clear_square();
+    board_state.clear_bit_at_player_pieces(is_black, static_cast<SquareIndices>(pos));
+    board_state.clear_bit_at_player_pieces(!is_black, static_cast<SquareIndices>(pos));
+    pos++;
   }
 }
 

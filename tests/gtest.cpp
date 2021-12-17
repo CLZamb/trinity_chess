@@ -26,8 +26,9 @@ TEST_F(Aboard, CheckLegalMoves) {
 }
 
 TEST_F(Aboard, CheckLegaRooklMoves) {
+  board.parser_fen("r111111r/11111111/8/8/8/8/11111111/R111111R");
   Players players;
   players.create_players({Player::Human, Player::Human});
-  Move m = String::to_move("a1a2");
-  ASSERT_THAT(board.is_legal_move(players.get_player_1(), m), Eq(false));
+  Move m = String::to_move("a1a3");
+  ASSERT_THAT(board.is_legal_move(players.get_player_1(), m), Eq(true));
 }
