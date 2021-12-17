@@ -20,11 +20,11 @@ enum Color {
 
 namespace utils {
 namespace check {
-  inline bool is_black_piece(int type) {
+  inline bool is_black_piece(unsigned int type) {
     return type >= bP && type <= bK;
   }
 
-  inline bool is_valid_piece(int pieceType) {
+  inline bool is_valid_piece(unsigned int pieceType) {
     return (pieceType > EMPTY) && (pieceType < 13);
   }
 

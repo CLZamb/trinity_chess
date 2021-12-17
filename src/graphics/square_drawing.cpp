@@ -1,5 +1,8 @@
 #include "headers/square_drawing.h"
 
+SquareDrawing::SquareDrawing() {
+}
+
 SquareDrawing::SquareDrawing(bool is_black_suqare) {
   p_empty_square_drawing = 
     (is_black_suqare)?
@@ -25,6 +28,15 @@ void SquareDrawing::clear_square() {
 
 void SquareDrawing::update_drawing(Box* drawing) {
   p_cur_drawing = drawing;
+}
+
+void SquareDrawing::update_drawing(bool is_black_suqare) {
+  p_empty_square_drawing = 
+    (is_black_suqare)?
+  *Drawing("BaseBlackSquare").get_drawing():
+  *Drawing("BaseWhiteSquare").get_drawing();
+
+  p_cur_drawing = &p_empty_square_drawing;
 }
 
 

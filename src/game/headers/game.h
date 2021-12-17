@@ -12,7 +12,7 @@
 
 class Game: public GameTurnObservable {
   public:
-    Game();
+    Game(PlayerConfig);
     virtual ~Game();
     void start();
 
@@ -20,10 +20,9 @@ class Game: public GameTurnObservable {
     bool is_valid_str_move_format(const string& move);
     bool is_legal_move(const string& move);
     void make_move(const string& move);
-    void setup_players();
+    void setup_players(PlayerConfig pc);
     void setup_board();
     void play();
-    void print_message(MessageState* message);
     void change_turn();
     void notify() override;
     bool game_players_exists();
@@ -34,13 +33,11 @@ class Game: public GameTurnObservable {
     Players players;
     Messages m_messages;
     BoardWithInfo m_board;
-    Options<string> start_quit;
-
-    UIController ui_controller;
 
     GameTurn::players m_turn = GameTurn::player_1;
     std::shared_ptr<Player> game_turn;
     string initial_side = "";
+    BoardView m_board_view;
 };
 
 

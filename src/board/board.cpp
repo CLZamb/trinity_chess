@@ -1,20 +1,12 @@
 #include "headers/board.h"
 
-Board::Board(){
-  // parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-}
 
-Board::~Board() {
-  // Free each array and sub-array
-  for (int i = 0; i < 64; ++i)
-    delete p_squares[i];
-}
-
-void Board::_init() {
-  m_bdrawing._init();
+Board::Board(string fen /*"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"*/ ) {
   create_board_squares();
-  parser_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+  parser_fen(fen);
 }
+
+Board::~Board() {}
 
 bool Board::is_checkmate() { return checkmate; }
 
@@ -77,20 +69,15 @@ void Board::make_move(Move mv) {
 
 void
 Board::move_piece_to_square(Piece* pc, SquareIndices from, SquareIndices to) {
-  if (!pc || !get_square_at_pos(from) || !get_square_at_pos(to))
+  if (!pc)
     return;
 
-  get_square_at_pos(from)->clear_square();
-  get_square_at_pos(to)->set_piece(pc);
+  get_square_at_pos(from).clear_square();
+  get_square_at_pos(to).set_piece(pc);
 }
 
 Piece* Board::get_piece_at_square(int pos) {
-  Square* square = get_square_at_pos(pos);
-
-  if (!square)
-    return nullptr;
-
-  return square->get_piece();
+  return get_square_at_pos(pos).get_piece();
 }
 
 void Board::create_board_squares() {
@@ -98,13 +85,16 @@ void Board::create_board_squares() {
   bool is_black_squared = true;
 
   int position = 0;
+  const int col_size = 7;
+  const int row_size = 8;
   /* 
    * Rows needs to be ordered upside down
    * because the program prints from top to bottom
    * so that 8 should be printed frist
   */
-  for (int row = 7; row >= 0; --row) {
-    for (int col = 0; col < 8; ++col) {
+
+  for (int row = col_size; row >= 0; --row) {
+    for (int col = 0; col < row_size; ++col) {
       /*
        * there are 8*8 (from 0 to 63) squares
        * to get the position 
@@ -115,10 +105,10 @@ void Board::create_board_squares() {
       position = row * 8 + col;
       if (squareColor == 'b') {
         squareColor = 'w';
-        p_squares[position] = new Square(!is_black_squared);
+        m_squares[position].set_color(!is_black_squared);
       } else {
         squareColor = 'b';
-        p_squares[position] = new Square(is_black_squared);
+        m_squares[position].set_color(is_black_squared);
       }
     }
     squareColor = squareColor == 'b' ? 'w' : 'b';
@@ -126,6 +116,7 @@ void Board::create_board_squares() {
 }
 
 void Board::parser_fen(string fen) {
+  clear_board();
   SquareIndices square = A1;
   int rank = 7;
   int file = 0;
@@ -151,8 +142,19 @@ void Board::parser_fen(string fen) {
   }
 }
 
+void Board::clear_board() {
+  int pos = 0;
+  bool is_black = false;
+  for(auto& square: m_squares) {
+    square.clear_square();
+    board_state.clear_bit_at_player_pieces(is_black, static_cast<SquareIndices>(pos));
+    board_state.clear_bit_at_player_pieces(!is_black, static_cast<SquareIndices>(pos));
+    pos++;
+  }
+}
+
 void Board::add_to_board(int type, SquareIndices position) {
-  get_square_at_pos(position)->set_piece(m_pieces.get_piece(type));
+  get_square_at_pos(position).set_piece(m_pieces.get_piece(type));
   board_state.set_bit_at_player_pieces(utils::check::is_black_piece(type), position);
 }
 
@@ -160,8 +162,8 @@ bool Board::is_number(char c) {
   return c >= '0' && c <= '8';
 }
 
-Square* Board::get_square_at_pos(int pos) { 
-  return p_squares[pos]; 
+Square& Board::get_square_at_pos(int pos) { 
+  return m_squares[pos]; 
 }
 
 Displayable* Board::get_drawing() { return &m_bdrawing; }

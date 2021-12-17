@@ -27,7 +27,6 @@ class Window {
     friend ostream& operator << (ostream &os,  Window &);
 
  private:
-    void _init_();
     void insert_formatted_output
       (map<int, Displayable*, std::less<int>> panes, ostream& os, int index);
     map<int, Displayable*, std::less<int>> panes;

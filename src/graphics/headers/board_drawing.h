@@ -9,9 +9,8 @@
 
 class BoardDrawing : public Displayable {
   public:
-    explicit BoardDrawing(Square* square[]);
+    explicit BoardDrawing(std::array<Square, 64>& arr);
     virtual ~BoardDrawing();
-    void _init();
     void draw();
     char left_border(int row, int col);
 
@@ -19,8 +18,7 @@ class BoardDrawing : public Displayable {
     shared_ptr<Section> p_top_section;
     shared_ptr<Section> p_main;
     shared_ptr<Section> p_bottom_section;
-
-    Square** p_squares;
+    std::array<Square, 64>& m_squares;
 };
 
 #endif /* BOARD_DRAWING_H */

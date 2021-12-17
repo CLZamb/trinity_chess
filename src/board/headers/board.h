@@ -19,9 +19,8 @@ using std::shared_ptr;
 
 class Board {
  public:
-  explicit Board();
+  Board(string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
   virtual ~Board();
-  void _init();
   void draw();
   void make_move(Move mv);
   void move_piece_to_square(Piece* piece, SquareIndices from, SquareIndices to);
@@ -33,6 +32,7 @@ class Board {
   Displayable* get_drawing();
 
  private:
+  void clear_board();
   bool exist_piece_at_square(const int& pos);
   bool is_legal_attack_move(Move & m);
   bool is_legal_non_attack_move(Move & m);
@@ -43,10 +43,13 @@ class Board {
   bool check_captured_belongs_to_opponent_player(std::shared_ptr<Player> turn, const int& pos);
   bool check_piece_belongs_to_current_player(std::shared_ptr<Player> turn, const int& pos);
 
-  Square* get_square_at_pos(int pos);
-  Square* p_squares[8 * 8 /*board size*/] = {nullptr};
+  Square& get_square_at_pos(int pos);
+  static const size_t board_rwo_sizea = 8;
+  static const size_t board_column_sizea = 8;
+  std::array<Square, board_rwo_sizea * board_column_sizea> m_squares;  
+  // Square* p_squares[board_rwo_sizea * board_column_sizea /*board size*/] = {nullptr};
   Pieces m_pieces;
-  BoardDrawing m_bdrawing{p_squares};
+  BoardDrawing m_bdrawing{m_squares};
   BoardBitboard board_state;
   bool checkmate = false;
 };

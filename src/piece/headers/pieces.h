@@ -12,7 +12,7 @@ class Pieces {
  public:
     Pieces();
     virtual ~Pieces();
-    Piece* const get_piece(int type);
+    Piece* get_piece(int type) const;
     void make_pawn(const Color C);
     void make_rook(const Color C);
     void make_bishop(const Color C);
@@ -27,7 +27,6 @@ class Pieces {
     QueenMagicBitboard m_queen_magic_bitboard;
     BishopMagicBitboard m_bishop_magic_bitboard;
     std::array<Piece*, 13> m_pieces { nullptr };
-    int m_size = 0;
     static const int m_max_size = 13;
 };
 

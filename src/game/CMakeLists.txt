@@ -3,7 +3,8 @@ add_library(
   game.cpp
   game_turn_observable.cpp
   move_utils.cpp
-  # option.cpp
+  menu.cpp
+  # option.cpp
 )
 
 message("game library compiled")

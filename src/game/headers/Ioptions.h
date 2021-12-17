@@ -12,9 +12,7 @@ template<typename T>
 class Ioptions {
 public:
   virtual ~Ioptions();
-
   int get_selected_option() {}
-
   int select_option() {
     cout << "\t\tchoose one of the options ("
       << 0

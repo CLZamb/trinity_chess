@@ -13,6 +13,7 @@ class SlidingMoves {
     virtual ~SlidingMoves() {}
     virtual U64 get_sliding_attacks(const Move& m, const BoardBitboard& board) {
       U64 to = ONE << m.get_to();
+
       const U64 own_color_pieces = board.get_all_side_pieces(color == BLACK);
       return to & ~own_color_pieces & m_piece_attacks.get_attacks(board.get_all_board_pieces(), m.get_from());
     };

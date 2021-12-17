@@ -31,7 +31,6 @@ class Regex {
    static vector<string> scan(string str, const std::regex reg) {
     vector<string> results;
     std::smatch matches;
-    int count = 0;
     while (std::regex_search(str, matches, reg)) {
       results.push_back(matches.str(1));
       str = matches.suffix().str();

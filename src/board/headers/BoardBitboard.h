@@ -25,11 +25,12 @@ public:
     bitUtility::set_bit(&m_occupied, pos);
   }
 
-private:
   void clear_bit_at_player_pieces(bool is_black, SquareIndices pos) {
     bitUtility::clear_bit(is_black ? &m_all_b_pieces : &m_all_w_pieces, pos);
     bitUtility::clear_bit(&m_occupied, pos);
   }
+
+private:
 
   U64 m_all_w_pieces = BLANK;
   U64 m_all_b_pieces = BLANK;
