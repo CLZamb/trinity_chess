@@ -16,7 +16,6 @@ class BoardWithInfo : public GameTurnObserver {
   void update_game_info(const string& info);
   bool is_checkmate();
   bool is_legal_move(std::shared_ptr<Player> turn, Move& m);
-  void _init();
   std::shared_ptr<Player> get_turn();
   Displayable* get_board_drawing();
   Displayable* get_info_drawing();

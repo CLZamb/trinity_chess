@@ -4,10 +4,6 @@ Board::Board() {
   _init();
 }
 
-// Board::Board(string fen){
-//   parser_fen(fen);
-// }
-
 Board::~Board() {}
 
 void Board::_init() {
@@ -100,8 +96,8 @@ void Board::create_board_squares() {
    * so that 8 should be printed frist
   */
 
-  for (int row = row_size; row >= 0 ; row--) {
-    for (int col = 0; col <= col_size; ++col) {
+  for (int row = col_size; row >= 0; --row) {
+    for (int col = 0; col < row_size; ++col) {
       /*
        * there are 8*8 (from 0 to 63) squares
        * to get the position 

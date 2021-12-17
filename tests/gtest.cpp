@@ -15,7 +15,6 @@ TEST_F(Aboard, IsEmptyWhenCreated) {
 }
 
 TEST_F(Aboard, CheckLegalMoves) {
-  board._init();
   Players players;
   players.create_players({Player::Human, Player::Human});
   Move m = String::to_move("a2a3");
@@ -23,5 +22,12 @@ TEST_F(Aboard, CheckLegalMoves) {
   m = String::to_move("a2a4");
   ASSERT_THAT(board.is_legal_move(players.get_player_1(), m), Eq(true));
   m = String::to_move("h2f3");
+  ASSERT_THAT(board.is_legal_move(players.get_player_1(), m), Eq(false));
+}
+
+TEST_F(Aboard, CheckLegaRooklMoves) {
+  Players players;
+  players.create_players({Player::Human, Player::Human});
+  Move m = String::to_move("a1a2");
   ASSERT_THAT(board.is_legal_move(players.get_player_1(), m), Eq(false));
 }

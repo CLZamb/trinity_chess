@@ -11,4 +11,6 @@ CHESS GAME TODO
   1) Passing through command like g++ Chess param param etc.
   2) Config from a file setup.txt players = cpu vs cpu
   3) UI input from te player at running time
-2) add options menu (change color, side, remove the side info, etc)
+3) add options menu (change color, side, remove the side info, etc)
+4) Choose dificulty
+5) Allow the user to save/load or continue the game

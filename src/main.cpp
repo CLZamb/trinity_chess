@@ -1,15 +1,26 @@
 #include "game/headers/game.h"
-#include "game/headers/game_options.h"
+#include "game/headers/menu.h"
+
+void play() {
+  Menu<PlayerConfig> player_menu ({
+      {Player::Human, Player::Human},
+      {Player::Human, Player::Cpu},
+      {Player::Cpu, Player::Cpu}});
+
+  player_menu.print_players_options();
+
+  Game game(player_menu.select_option());
+  game.start();
+}
 
 int main(/*int argc, char *argv[]*/) {
-  GameOptions game_opts;
-  string play = "Play", quit = "Quit", config = "Config";
-  Options<string> options{play, quit, config};
-  string option_selected = game_opts.select_start_option(options);
+  string play_str = "Play", quit = "Quit";
+  Menu<string> start_menu ({play_str, quit});
 
-  if (option_selected == play) {
-    Game game;
-    game.start();
+  start_menu.print_play_or_quit();
+
+  if (start_menu.select_option() == play_str) {
+    play();
   }
 
   return 0;

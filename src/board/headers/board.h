@@ -22,7 +22,6 @@ class Board {
   explicit Board();
   // explicit Board(string fen);
   virtual ~Board();
-  void _init();
   void draw();
   void make_move(Move mv);
   void move_piece_to_square(Piece* piece, SquareIndices from, SquareIndices to);
@@ -34,6 +33,7 @@ class Board {
   Displayable* get_drawing();
 
  private:
+  void _init();
   bool exist_piece_at_square(const int& pos);
   bool is_legal_attack_move(Move & m);
   bool is_legal_non_attack_move(Move & m);

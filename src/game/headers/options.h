@@ -24,6 +24,10 @@ class Options {
 
   virtual ~Options() {}
 
+  void add_options(T item) {
+    options.emplace(options.size() - 1, item);
+  }
+
   T& select_option() {
     cout << "\t\tchoose one of the options (" 
       << start_index << " - "
