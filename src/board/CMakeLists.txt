@@ -6,6 +6,4 @@ add_library(
   square.cpp
 )
 
-# add_executable(ipc ${SOURCE_FILES})
-
 message("board library compiled")
