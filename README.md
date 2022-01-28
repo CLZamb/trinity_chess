@@ -38,8 +38,6 @@ make
 ./main
 ```
 ### To Do
-
-- Pawn Promotion
 - Polyglot
 - King Safety
 - Center Control
