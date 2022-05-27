@@ -1,0 +1,33 @@
+# Distribution / packaging
+bin/ 
+build/
+lib/
+obj/
+#debug
+debug/
+# tests/
+lib/
+node_modules/
+# Ignore json files
+.json
+.DS_Store
+.ccls-cache
+.cache
+.vimspector.json
+.vscode/
+.git/
+.cmake
+neovim.json
+package.json
+yarn.lock
+
+**/cmake-build-debug
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/install_manifest.txt
+**/CMakeFiles/
+**/CTestTestfile.cmake
+**/Makefile
+**/*.cbp
+**/CMakeScripts
+**/compile_commands.json
