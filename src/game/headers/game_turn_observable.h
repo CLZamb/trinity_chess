@@ -5,18 +5,17 @@
 
 #include <list>
 #include "game_turn_observer.h"
-#include "game_turn.h"
 
 using std::list;
 
 class GameTurnObservable {
  public:
   virtual ~GameTurnObservable();
+  virtual void attach(GameTurnObserver*);
+  virtual void detach(GameTurnObserver*);
 
  protected:
   GameTurnObservable();
-  virtual void attach(GameTurnObserver*);
-  virtual void detach(GameTurnObserver*);
   virtual void notify() = 0;
   list<GameTurnObserver*> *_observers;
 };

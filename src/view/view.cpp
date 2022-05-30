@@ -1,7 +1,5 @@
 #include "headers/view.h"
 
-
-// View::View()  {}
 View::View(string name) {
   this->name = name;
 }
@@ -17,3 +15,6 @@ string View::Get_name() {
 string View::name{ "" }; // initializer
 
     // static string name;
+
+void View::draw() {
+}

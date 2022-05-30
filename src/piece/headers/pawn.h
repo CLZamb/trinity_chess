@@ -50,8 +50,6 @@ class Pawn : public Piece {
     if (!m.get_captured_piece())
       return false;
 
-    cout << "is legal attack move" << endl;
-
     U64 all_moves = BLANK;
     int from = m.get_from();
     U64 to = ONE << m.get_to();

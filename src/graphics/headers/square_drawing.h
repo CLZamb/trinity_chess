@@ -13,10 +13,12 @@ public:
   void clear_square();
   void update_drawing(Box* drawing);
   void update_drawing(bool is_black_square);
+  bool is_black_square();
 
 private:
   Box p_empty_square_drawing;
   Box* p_cur_drawing = nullptr;
+  bool m_black_square = false;
 };
 
 #endif /* SQUARE__DRAWING_H */

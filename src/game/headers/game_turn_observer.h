@@ -4,11 +4,12 @@
 #pragma once
 
 #include "game_turn.h"
+#include "model/headers/player_info.h"
 
 class GameTurnObserver {
  public:
     virtual ~GameTurnObserver() {}
-    virtual void update_turn(GameTurn::players turn) = 0;
+    virtual void update_turn(const PlayerInfo &) = 0;
  protected:
     // GameTurnObserver() {}
 };

@@ -2,21 +2,33 @@
 #define PLAYERS_H
 
 #include <memory>
+#include <array>
 #include "player.h"
-#include "../../game/headers/game_turn_observable.h"
+#include "game/headers/game_turn_observable.h"
+#include "configuration/headers/players_configuration.h"
 
-class Players {
+using std::array;
+
+class Players : public GameTurnObservable {
   public:
-    Players();
+    Players(); 
+    Players(PlayersConfig& config);
     virtual ~Players();
-    void create_players(const PlayerConfig& config);
-    std::shared_ptr<Player> get_player_1();
-    std::shared_ptr<Player> get_player_2();
+    void create_players(PlayersConfig& config);
+    void notify();
+    void change_turn();
+    void set_inital_side(GameTurn::players p);
+    std::shared_ptr<Player> get_player_turn();
+    std::shared_ptr<Player> get_player(GameTurn::players);
 
   private:
-    std::unique_ptr<Player> create_new_player(Player::Type type, Color color);
-    GameTurn::players m_turn = GameTurn::player_1;
-    std::shared_ptr<Player> player_1, player_2, game_turn;
+    static const int players_size = GameTurn::kSize;
+    std::unique_ptr<Player> create_new_player(PlayerInfo::Type type, Color color);
+    PlayerInfo *m_turn;
+    PlayerInfo p1;
+    PlayerInfo p2;
+    array<std::shared_ptr<Player>, players_size> players;
+    std::shared_ptr<Player> p_game_turn;
 };
 
 #endif /* GAME_H */
