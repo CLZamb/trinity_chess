@@ -3,13 +3,9 @@
 
 #include <list>
 #include <string>
-#include <memory>
-#include "graphics/headers/section.h"
 #include "view.h"
 #include "graphics/headers/game_drawings.hpp"
 
-
-using std::make_unique;
 using std::string;
 using std::list;
 
@@ -17,33 +13,35 @@ template<typename T>
 class MenuView : public View {
   public: 
     MenuView(list<string> l_s) : View("Menu") {
-      string s = format_line(l_s);
-      p_top = make_unique<Section>("top", 1);
-      p_title = make_unique<Section>("title", 1);
-      p_options = make_unique<Section>("top", 1);
-      p_bottom = make_unique<Section>("top", 1);
+      string s = format_options(l_s);
 
-      m_drawing.add_section(p_top);
-      m_drawing.add_section(p_title);
-      m_drawing.add_section(p_options);
-      m_drawing.add_section(p_bottom);
+      m_pane.add_section(m_top_section, 1);
+      m_pane.add_section(m_title_section, 1);
+      m_pane.add_section(m_options_section, 1);
+      m_pane.add_section(m_bottom_section, 1);
 
-      p_top->set_content_at_index(MenuDrawings::p_menu_top.data(), 0);
-      p_bottom->set_content_at_index(MenuDrawings::p_menu_bottom.data(), 0);
-      p_options->set_content({s});
+      m_pane.get_section(m_top_section)->set_content_at_index(MenuDrawings::p_menu_top.data(), 0 );
+      m_pane.get_section(m_options_section)->set_content_at_index(s, 0);
+      m_pane.get_section(m_bottom_section)->set_content_at_index(MenuDrawings::p_menu_bottom.data(), 0 );
+
+      set_title();
 
       window_view.add_pane(this, Window::Left_pane);
-      set_title();
     }
 
     void set_title(string title = "") {
-      p_title->set_content({add_margins(title)});
+      m_pane.set_content_at_section(m_title_section, {add_margins(title)});
     }
+
  private:
   static const size_t left_space_needed{32};
   static const size_t right_space_needed{46};
+  const string m_top_section = "top";
+  const string m_title_section = "title";
+  const string m_options_section = "options";
+  const string m_bottom_section = "bottom";
 
-  string format_line(list<string> &options) {
+  string format_options(list<string> &options) {
     string m_option;
     for (auto o : options) {
       m_option += add_margins(o) + (options.back() == o ? "": "\n");
@@ -54,15 +52,9 @@ class MenuView : public View {
   string add_margins(const string &opt) {
     auto spaced_needed = right_space_needed - opt.length();
     return 
-      MenuDrawings::left_margin.data() + 
-      std::string(left_space_needed,' ') +
+      MenuDrawings::left_margin.data() + string(left_space_needed,' ') +
       opt +
-      std::string(spaced_needed,' ') +
-      MenuDrawings::right_margin.data();
+      string(spaced_needed,' ') + MenuDrawings::right_margin.data();
   }
-  shared_ptr<Section> p_top;
-  shared_ptr<Section> p_title;
-  shared_ptr<Section> p_options;
-  shared_ptr<Section> p_bottom;
 };
 #endif /* MENU_VIEW_H */

@@ -17,11 +17,12 @@ char* SquareDrawing::at(int i) {
 }
 
 void SquareDrawing::clear_square() {
-  p_cur_drawing = &p_empty_square_drawing;
+  update_drawing(&p_empty_square_drawing);
 }
 
 void SquareDrawing::update_drawing(Box* drawing) {
-  p_cur_drawing = drawing;
+  if (p_cur_drawing != drawing)
+    p_cur_drawing = drawing;
 }
 
 void SquareDrawing::update_drawing(bool is_black_suqare) {
@@ -32,7 +33,7 @@ void SquareDrawing::update_drawing(bool is_black_suqare) {
   *Drawing("BaseBlackSquare").get_drawing():
   *Drawing("BaseWhiteSquare").get_drawing();
 
-  p_cur_drawing = &p_empty_square_drawing;
+  update_drawing(&p_empty_square_drawing);
 }
 
 bool SquareDrawing::is_black_square() {

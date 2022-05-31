@@ -3,48 +3,39 @@
 Window::Window() {}
 Window::~Window() {}
 
-// defatult size 44
-void Window::add_pane(Displayable* pane, Pane_pos pos) {
-  if (panes.size() >= Max_panes_size)
+void Window::add_pane(Displayable *pane, Pane_pos pos) {
+  if (m_panes.size() >= Max_panes_size)
     return;
 
-  panes.emplace(pos, pane);
+  if (pane->size() > m_pane_max_heigh_size)
+    m_pane_max_heigh_size = pane->size();
+
+  m_panes.emplace(pos, pane);
 }
 
-ostream& operator << (ostream& os, Window &gc) {
+ostream &operator<<(ostream &os, Window &gc) {
   system(CLEAR);
 
-  if (gc.panes.size() == 0) { return os; }
+  if (gc.m_panes.size() == 0) {
+    return os;
+  }
 
-  for (auto& iter : gc.panes) {
+  for (auto &iter : gc.m_panes) {
     iter.second->draw();
   }
 
-  gc.insert_formatted_output(gc.panes, os, 0);
+  gc.insert_formatted_output(gc.m_panes, os);
 
   return os;
 }
 
-void Window::insert_formatted_output(
-    map<int, Displayable*, std::less<int>> panes, ostream& os, int index) {
+void Window::insert_formatted_output(map<int, Displayable *> &panes, ostream &os) {
+  for (size_t row = 0; row < m_pane_max_heigh_size; ++row) {
+    for (auto &pane : panes) {
+      if (row >= pane.second->size()) continue;
 
-  if (panes.empty())
-    return;
-
-  map<int, Displayable*>::iterator smallest =
-    std::min_element(panes.begin(), panes.end(),
-        [](const auto& a, const auto& b) {
-        return a.second->size() < b.second->size(); });
-
-  for (; index < smallest->second->size(); ++index) {
-    for (auto& iter : panes) {
-      os << (*iter.second)[index];
+      os << (*pane.second)[row];
     }
     os << "\n";
   }
-
-  panes.erase(smallest);
-
-  insert_formatted_output(panes, os, index);
 }
-

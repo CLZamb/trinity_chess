@@ -16,14 +16,14 @@ class ISectionComponent {
   vector<string>::iterator begin();
   vector<string>::iterator end();
   void set_parent_pane(Pane* parent);
-  int size();
-
- protected:
-  vector<string> m_section_drawing;
+  size_t size();
 
  private:
   const int m_size;
   Pane* parent_pane = nullptr;
+
+ protected:
+  vector<string> m_section_drawing;
 };
 
 #endif /* ISECTIONCOMPONENT_H */

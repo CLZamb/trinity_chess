@@ -9,9 +9,9 @@ void InputConfiguration::get_player_input_configuration() {
 
 void InputConfiguration::get_players_type(){
   Menu<PlayersConfig> player_menu ({
-      {2, "Human vs Human", {PlayerInfo::Human, PlayerInfo::Human}},
-      {3, "Human vs Cpu", {PlayerInfo::Human, PlayerInfo::Cpu}},
-      {1, "Cpu vs Cpu", {PlayerInfo::Cpu, PlayerInfo::Cpu}},
+      {1, "Human vs Human", {PlayerInfo::Human, PlayerInfo::Human}},
+      {2, "Human vs Cpu", {PlayerInfo::Human, PlayerInfo::Cpu}},
+      {3, "Cpu vs Cpu", {PlayerInfo::Cpu, PlayerInfo::Cpu}},
   });
 
   player_menu.set_title("Select Players");

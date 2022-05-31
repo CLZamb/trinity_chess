@@ -1,23 +1,25 @@
 #include "headers/board_view.h"
 
 BoardView::BoardView() : View("Board") {
-  p_top_section = std::make_unique<Section>("top", 1);
-  p_main = std::make_unique<Section>("board", 40);
-  p_bottom_section = std::make_unique<Section>("bottom", 3);
+  m_pane.add_section(m_top_section, 1);
+  m_pane.add_section(m_board_section, 40);
+  m_pane.add_section(m_bottom_section, 3);
 
-  p_top_section->set_content_at_index(
-       " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓", 0);
-  p_bottom_section->set_content({
+  clear();
+  setup_board_squares();
+
+  window_view.add_pane(this, Window::Middle_pane);
+}
+
+void BoardView::clear() {
+  m_pane.set_content_at_section(m_top_section, {
+       " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+      });
+
+  m_pane.set_content_at_section(m_bottom_section, {
        " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃",
        " ┃    A        B        C        D        E        F        G       H     ┃",
        " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"});
-
-  m_drawing.add_section(p_top_section);
-  m_drawing.add_section(p_main);
-  m_drawing.add_section(p_bottom_section);
-
-  add_view_to_window_pos(*this, Window::Left_pane);
-  setup_board_squares();
 }
 
 BoardView::~BoardView() {}
@@ -38,7 +40,7 @@ void BoardView::draw() {
       }
 
       row_drawing += "┃";
-      p_main->set_content_at_index(row_drawing, row_counter);
+      m_pane.get_section(m_board_section)->set_content_at_index(row_drawing,row_counter );
     }
   }
 }
@@ -47,9 +49,9 @@ void BoardView::setup_board_squares() {
   char squareColor = 'w';
   bool is_black_squared = true;
 
+  static const int col_size = 7;
+  static const int row_size = 8;
   int position = 0;
-  const int col_size = 7;
-  const int row_size = 8;
   /* 
    * Rows needs to be ordered upside down
    * because the program prints from top to bottom
@@ -87,35 +89,43 @@ void BoardView::parser_fen(const string& fen) {
   int rank = 7;
   int file = 0;
   Piecetype piece;
+  int space = 0;
 
   for (const char& c : fen) {
     piece = utils::get_square_index_from_char_key(c);
+    square = static_cast<SquareIndices>(rank * 8 + file);
     if (piece) {
-      square = static_cast<SquareIndices>(rank * 8 + file);
       set_piece_drawing_at_square_pos(piece, square);
-
       file++;
 
     } else if (is_number(c)) {
-      file += (c - '0');
+      space = (c - '0');
+      file += space;
+      clear_square_on_range(square, square + space);
 
     } else if (c == '/') {
       rank--;
       file = 0;
-    }
+    } 
 
     if (rank < 0) break;
   }
 }
 
-
 bool BoardView::is_number(const char& c) {
   return c >= '0' && c <= '8';
 }
+
+void BoardView::clear_square_on_range(const int start_pos, const int end_pos) {
+  for (int pos = start_pos; pos < end_pos; pos++) {
+    m_squares[pos].clear_square();
+  }
+}
+
 void BoardView::add_view_to_window_pos(View& v, Window::Pane_pos pos) {
   window_view.add_pane(&v, pos);
 }
 
 void BoardView::set_piece_drawing_at_square_pos(Piecetype type, SquareIndices position) {
-  m_squares[position].update_drawing(m_pieces_drawings.get_drawing(type)->get_drawing(m_squares[position].is_black_square()));
+  m_squares[position].update_drawing(m_pieces_drawings.get_drawing(type, m_squares[position].is_black_square()));
 }

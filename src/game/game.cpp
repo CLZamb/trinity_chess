@@ -25,12 +25,13 @@ void Game::attach_observers_to_players() {
   m_players.attach(&m_info_view);
 }
 
-void Game::start() {
-  this->play();
-}
 
 void Game::setup_board() {
   m_board_view.add_view_to_window_pos(m_info_view, Window::Right_pane);
+}
+
+void Game::start() {
+  this->play();
 }
 
 void Game::play() {
@@ -89,8 +90,8 @@ bool Game::has_player_quit(const string &str) {
 
 string Game::get_current_player_input() {
   string input;
-  std::cout << std::endl << " >> ";
+  std::cout << "\n" << " >> ";
   std::getline(std::cin, input);
-  std::cout << std::endl;
+  std::cout << "\n";
   return input;
 }

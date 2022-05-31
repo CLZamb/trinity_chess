@@ -1,6 +1,6 @@
 #include "headers/pieces_drawings.hpp"
 
-const map<std::string, Box> Drawing::piece_drawing = {
+const unordered_map<std::string, Box> Drawing::piece_drawing = {
   {
     "bishop",
     {{

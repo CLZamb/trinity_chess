@@ -2,9 +2,9 @@
 #define SQUARE_H
 
 #pragma once
-#include "../../graphics/headers/box.h"
-#include "../../piece/headers/piece.h"
-#include "../../graphics/headers/square_drawing.h"
+#include "graphics/headers/box.h"
+#include "piece/headers/piece.h"
+#include "graphics/headers/square_drawing.h"
 
 class Square {
  public:

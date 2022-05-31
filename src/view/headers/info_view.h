@@ -2,7 +2,6 @@
 #define INFO_VIEW_H
 
 #include <array>
-#include <memory>
 #include <string>
 #include <vector>
 #include "board/headers/savable.h"
@@ -38,7 +37,7 @@ class InfoView : public GameTurnObserver, public View {
     void clear_all_sections();
     void update_banner(GameTurn::players p);
     void set_content_to_block_recursively(
-        shared_ptr<Section>&, string msg, int cur_row);
+        shared_ptr<Section>&, string msg, size_t cur_row);
     void format_block(shared_ptr<Section>&, string msg);
     bool has_block_space_for_content(
         const shared_ptr<Section>& block, const string& message);
@@ -46,14 +45,21 @@ class InfoView : public GameTurnObserver, public View {
 
     array<const vector<string>*, players_size> p_banners { &Banner::player1, &Banner::player2};
 
-    shared_ptr<Section> p_top_section;
-    shared_ptr<Section> p_player_banner;
+    const string m_top_section = "top";
+    const string m_player_banner_section = "Player banner";
+    const array<string, color_size> 
+      m_moves_section {
+        "[White Moves]",
+        "[Black Moves]"
+      };
 
-    array<shared_ptr<Section>, color_size> p_moves;
-    array<shared_ptr<Section>, color_size> p_captures;
-
-    shared_ptr<Section> p_game_info;
-    shared_ptr<Section> p_bottom_section;
+    const array<string, color_size> 
+      m_captures_section {
+        "[White Captures]",
+        "[Black Captures]"
+    };
+    const string m_game_info_section = "[Game info]";
+    const string m_bottom_section = "bottom";
 
     PlayerInfo m_turn_info;
 };

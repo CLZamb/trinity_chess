@@ -1,13 +1,14 @@
-#pragma once
 #ifndef GAME_DRAWINGS_H
 #define GAME_DRAWINGS_H
 
+#pragma once
+
 #include<vector>
-#include<map>
+#include<unordered_map>
 #include<string>
 #include"box.h"
 
-static const std::map<std::string, Box> const_piece_drawing = {
+static const std::unordered_map<std::string, Box> const_piece_drawing = {
   {
     "bishop",
     {{
@@ -154,14 +155,14 @@ constexpr std::string_view p_menu_top =
 "\t\t**                                                                              *\n "
 "\t\t**                                                                              *\n "
 "\t\t**                                                                              *\n "
-"\t\t**                                                                              *\n "
-"\t\t**                                                                              *\n "
-"\t\t**                                                                              *\n "
-"\t\t**                                                                              *\n "
 "\t\t**                                                                              *"
 );
 
 constexpr std::string_view p_menu_bottom = (
+"\t\t**                                                                              *\n "
+"\t\t**                                                                              *\n "
+"\t\t**                                                                              *\n "
+"\t\t**                                                                              *\n "
 "\t\t**                                                                              *\n "
 "\t\t**                                                                              *\n "
 "\t\t**                                                                              *\n "

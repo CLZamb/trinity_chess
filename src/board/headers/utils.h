@@ -65,6 +65,18 @@ inline Piecetype get_square_index_from_char_key(const char c) {
   return search->second;
 }
 
+inline char piecetype_to_char(Piecetype pct) {
+  constexpr char NotADigit{'*'};
+
+  static const map<Piecetype, char> encodings = {
+      {wP, 'P'}, {wR, 'R'}, {wN, 'N'}, {wB, 'B'}, {wQ, 'Q'}, {wK, 'K'},
+      {bP, 'p'}, {bR, 'r'}, {bN, 'n'}, {bB, 'b'}, {bQ, 'q'}, {bK, 'k'},
+  };
+
+  auto it = encodings.find(pct);
+  return it == encodings.end() ? NotADigit : it->second;
+}
+
 inline string square_int_to_str(int sq) {
   if (sq < A1 || sq > H8)
     return "-not a valid position-";

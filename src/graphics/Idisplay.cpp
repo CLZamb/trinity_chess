@@ -1,11 +1,11 @@
 #include "headers/Idisplay.h"
 
-Displayable::Displayable(size_t size /* = 44 */) : m_drawing(size) {}
+Displayable::Displayable(size_t size /* = 44 */) : m_pane(size) {}
 
 const string& Displayable::operator[](int i) {
-  return m_drawing[i];
+  return m_pane[i];
 }
 
-int Displayable::size() {
-  return m_drawing.size();
+size_t Displayable::size() {
+  return m_pane.size();
 }

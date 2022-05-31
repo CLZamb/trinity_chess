@@ -4,7 +4,6 @@
 #include <unordered_map>
 
 using std::cout;
-using std::endl;
 using std::cin;
 using std::unordered_map;
 
@@ -27,7 +26,7 @@ public:
       valid_option = check_valid_option(input);
 
       if (!valid_option) {
-        cout << "invalid option try again!" << endl;
+        cout << "invalid option try again!" << "\n";
         cin.clear();
         cin.ignore();
       }

@@ -1,4 +1,5 @@
 #include "headers/pane.h"
+using std::make_unique;
 
 Pane::Pane(int size /*= 44 */) {
   m_pane_drawing.reserve(size);
@@ -24,6 +25,16 @@ void Pane::add_section(shared_ptr<ISectionComponent> section) {
   }
 
   section->set_parent_pane(this);
+  vector<int> p;
+}
+
+void Pane::add_section(const string &name, const size_t size) {
+  sections.emplace(name, make_unique<Section>(name, size));
+  add_section(sections[name]);
+}
+
+shared_ptr<Section>& Pane::get_section(const string& key) {
+  return sections[key];
 }
 
 const string& Pane::operator[](int index) {
@@ -37,8 +48,16 @@ int Pane::size() {
   return this->m_pane_drawing.size();
 }
 
-bool Pane::is_valid_pane_index(const int& index) {
+bool Pane::is_valid_pane_index(const size_t& index) {
   if (index >= m_pane_drawing.size()) return false;
   if (index < 0) return false;
   return true;
+}
+
+void Pane::set_content_at_section(const string &key, std::initializer_list<string> lst) {
+  sections[key]->set_content(lst);
+}
+
+void Pane::set_content_at_section(const string &key, const vector<string>* content) {
+  sections[key]->set_content(content);
 }
