@@ -1,11 +1,12 @@
 #include "headers/square.h"
+using std::cerr;
 
 Square::Square() {}
 Square::~Square() {}
 
 void Square::set_piece(Piece* piece) {
   if (piece == nullptr) {
-    cout << "piece not found" << endl;
+    cerr << "piece not found" << endl;
     return;
   }
 

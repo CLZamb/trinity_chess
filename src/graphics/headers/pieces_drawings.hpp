@@ -4,14 +4,14 @@
 #include "box.h"
 #include <string>
 #include <string.h>
-#include <map>
+#include <unordered_map>
 #include <iostream>
 #include <vector>
 #include <array>
-#include "../../graphics//headers/game_drawings.hpp"
-#include "../../board/headers/utils.h"
+#include "graphics//headers/game_drawings.hpp"
+#include "board/headers/utils.h"
 
-using std::map;
+using std::unordered_map;
 using std::array;
 /*
    ╔══════════╦════════════════════════════════╦═════════════════════════════════════════════════════════════════════════╗
@@ -160,12 +160,12 @@ class Drawing {
     }
 
   private:
-    static const map<std::string, Box> piece_drawing;
+    static const unordered_map<std::string, Box> piece_drawing;
     Box m_drawing;
     DrawingMod piece_mod;
 };
 
-const map<std::string, Box> piece_drawing = const_piece_drawing;
+const unordered_map<std::string, Box> piece_drawing = const_piece_drawing;
 
 class PieceDrawing {
  public:
@@ -247,8 +247,8 @@ class PiecesDrawings {
 
     virtual ~PiecesDrawings() {}
 
-    PieceDrawing* get_drawing(const Piecetype& m_type) {
-      return m_pieces[m_type];
+    Box* get_drawing(const Piecetype &m_type, bool is_in_black_square) {
+      return m_pieces[m_type]->get_drawing(is_in_black_square);
     }
 
   private:

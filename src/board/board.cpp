@@ -2,7 +2,6 @@
 
 Board::Board(string fen /*"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"*/ ) {
   parser_fen(fen);
-  m_view.parser_fen(fen);
 }
 
 Board::~Board() {}
@@ -65,9 +64,14 @@ void Board::make_move(Move mv) {
   SquareIndices from = mv.get_from();
   SquareIndices to = mv.get_to();
   Piece* piece = get_piece_at_square(from);
+  Piece* captured = get_piece_at_square(to);
 
   board_state.move(piece->is_black(),from , to);
   move_piece_to_square(piece, from, to);
+
+  if (captured) {
+  }
+
   save_move(mv);
   update_board_view();
 }
@@ -79,8 +83,12 @@ void Board::update_board_view() {
 void Board::save_move(const Move &m) {
   m_info.save_move(utils::square_int_to_str(m.get_from()) +
                    utils::square_int_to_str(m.get_to()));
-  m_info.save_capture(utils::get_piece_str_name_from_piecetype(m.get_captured_piece()));
+
 }
+
+// void Board::captured_piece(const Move& m) {
+// m_info.save_capture("pawn");
+// }
 
 void
 Board::move_piece_to_square(Piece* pc, SquareIndices from, SquareIndices to) {
@@ -120,6 +128,8 @@ void Board::parser_fen(string fen) {
 
     if (rank < 0) break;
   }
+
+  update_board_view();
 }
 
 void Board::clear_board() {
@@ -147,7 +157,33 @@ Square& Board::get_square_at_pos(int pos) {
 }
 
 string Board::get_fen() {
-  string fen;
+  Square square;
+  Piece *pc;
+  string fen = "";
+  int space = 0;
+  auto print_empty = [&](int &space) {
+    if (space) {
+      fen += std::to_string(space);
+    }
+    space = 0;
+  };
+
+  for (int rank = 7; rank >= 0; rank--) {
+    for (int file = 0; file <= 7; file++) {
+      square = get_square_at_pos(rank * 8 + file);
+      pc = square.get_piece();
+      if (pc) {
+        print_empty(space);
+        fen += utils::piecetype_to_char(pc->get_type_and_color());
+      } else {
+        space++;
+      }
+    }
+    if (rank > 0) {
+      print_empty(space);
+      fen += "/";
+    }
+  }
   return fen;
 }
 

@@ -1,7 +1,7 @@
 #ifndef MAGIC_BITBOARD_H
 #define MAGIC_BITBOARD_H
 #include <iostream>
-#include "../../board/headers/bit_utilities.h"
+#include "board/headers/bit_utilities.h"
 #include <assert.h>
 
 class MagicBitboard {

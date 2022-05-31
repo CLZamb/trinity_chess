@@ -1,20 +1,12 @@
 #include "headers/view.h"
+using std::flush;
 
-View::View(string name) {
-  this->name = name;
-}
+View::View(string name) { this->name = name; }
 
-void View::print() {
-  cout << window_view << endl;
-}
+void View::print() { cout << window_view << flush; }
 
-string View::Get_name() {
-  return name;
-}
+string View::Get_name() { return name; }
 
-string View::name{ "" }; // initializer
+string View::name{ "" };
 
-    // static string name;
-
-void View::draw() {
-}
+void View::draw() {}

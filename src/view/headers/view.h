@@ -14,10 +14,11 @@ class View : public Displayable {
     static string Get_name();
     void draw() override;
 
-  protected:
-    Window window_view;
   private:
     static string name;
+
+  protected:
+    Window window_view;
 };
  
 #endif /* VIEW_H */

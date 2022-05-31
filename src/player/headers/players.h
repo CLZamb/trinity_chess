@@ -19,16 +19,15 @@ class Players : public GameTurnObservable {
     void change_turn();
     void set_inital_side(GameTurn::players p);
     std::shared_ptr<Player> get_player_turn();
-    std::shared_ptr<Player> get_player(GameTurn::players);
 
   private:
+    std::unique_ptr<Player> create_new_player(PlayerInfo& config);
+
     static const int players_size = GameTurn::kSize;
-    std::unique_ptr<Player> create_new_player(PlayerInfo::Type type, Color color);
-    PlayerInfo *m_turn;
-    PlayerInfo p1;
-    PlayerInfo p2;
+    array<PlayerInfo, players_size> players_info;
     array<std::shared_ptr<Player>, players_size> players;
     std::shared_ptr<Player> p_game_turn;
+    PlayerInfo *m_turn;
 };
 
 #endif /* GAME_H */

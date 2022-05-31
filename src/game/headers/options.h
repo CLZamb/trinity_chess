@@ -1,14 +1,13 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include "../../player/headers/player.h"
+#include "player/headers/player.h"
 #include <cstddef>
 #include <iostream>
 #include <unordered_map>
 
 using std::cin;
 using std::cout;
-using std::endl;
 using std::unordered_map;
 
 template <typename T>
@@ -47,7 +46,7 @@ class Options {
       valid_option = check_valid_option(input);
 
       if (!valid_option) {
-        cout << "invalid option try again!" << endl;
+        cout << "invalid option try again!" << "\n";
         cin.clear();
         cin.ignore();
       }

@@ -1,24 +1,14 @@
 #include "headers/info_view.h"
 
-using std::make_unique;
 InfoView::InfoView() : View("Info") {
-  p_top_section = make_unique<Section>("top", 1);
-  p_player_banner = make_unique<Section>("Player banner", Banner::height);
-  p_moves[BLACK]= make_unique<Section>("[Black Moves]", 5);
-  p_moves[WHITE]= make_unique<Section>("[White Moves]", 5);
-  p_captures[BLACK] = make_unique<Section>("[Black Captures]", 10);
-  p_captures[WHITE] = make_unique<Section>("[White Captures]", 10);
-  p_game_info = make_unique<Section>("[Game info]", 5);
-  p_bottom_section = make_unique<Section>("bottom", 1);
-
-  m_drawing.add_section(p_top_section);
-  m_drawing.add_section(p_player_banner);
-  m_drawing.add_section(p_moves[WHITE]);
-  m_drawing.add_section(p_captures[WHITE]);
-  m_drawing.add_section(p_moves[BLACK]);
-  m_drawing.add_section(p_captures[BLACK]);
-  m_drawing.add_section(p_game_info);
-  m_drawing.add_section(p_bottom_section);
+  m_pane.add_section(m_top_section, 1);
+  m_pane.add_section(m_player_banner_section, Banner::height);
+  m_pane.add_section(m_moves_section[BLACK], 10);
+  m_pane.add_section(m_captures_section[BLACK], 5);
+  m_pane.add_section(m_moves_section[WHITE], 10);
+  m_pane.add_section(m_captures_section[WHITE], 5);
+  m_pane.add_section(m_game_info_section, 5);
+  m_pane.add_section(m_bottom_section, 1);
 
   clear_all_sections();
 }
@@ -28,21 +18,22 @@ InfoView::~InfoView() {}
 void InfoView::clear_all_sections() {
   clear();
   update_banner(GameTurn::player_1);
-  format_block(p_moves[BLACK], "");
-  format_block(p_moves[WHITE], "");
-  format_block(p_captures[BLACK], "");
-  format_block(p_captures[WHITE], "");
+  format_block(m_pane.get_section(m_moves_section[BLACK]), "");
+  format_block(m_pane.get_section(m_moves_section[WHITE]), "");
+  format_block(m_pane.get_section(m_captures_section[BLACK]), "");
+  format_block(m_pane.get_section(m_captures_section[WHITE]), "");
   update_game_info("");
 }
 
 void InfoView::clear() {
-  m_drawing.fill(
+  m_pane.fill(
       " ┃                                                          ┃");
 
-  p_top_section->set_content({
+  m_pane.set_content_at_section(m_top_section, {
       " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
       });
-  p_bottom_section->set_content({
+
+  m_pane.set_content_at_section(m_bottom_section, {
       " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
       });
 }
@@ -50,7 +41,7 @@ void InfoView::clear() {
 void InfoView::draw() {}
 
 void InfoView::clear_block() {
-  m_drawing.clear();
+  m_pane.clear();
 }
 
 void InfoView::format_block(shared_ptr<Section>& block, string content) {
@@ -68,7 +59,7 @@ bool InfoView::has_block_space_for_content(
 }
 
 void InfoView::set_content_to_block_recursively(shared_ptr<Section>& block,
-    string msg, int current_row) {
+    string msg, size_t current_row) {
   if (current_row > block->size()) return;
 
   if (msg.size() < kRowMaxLen) {
@@ -98,17 +89,17 @@ void InfoView::update_turn(const PlayerInfo &info) {
 }
 
 void InfoView::update_banner(GameTurn::players p) {
-  p_player_banner->set_content(p_banners[p]);
+  m_pane.set_content_at_section(m_player_banner_section, p_banners[p]);
 }
 
 void InfoView::update_moves(const string& moves) {
-  format_block(p_moves[m_turn_info.get_color()], moves);
+  format_block(m_pane.get_section(m_moves_section[m_turn_info.get_color()]), moves);
 }
 
 void InfoView::update_captures(const string& captures) {
-  format_block(p_captures[m_turn_info.get_color()], captures);
+  format_block(m_pane.get_section(m_captures_section[m_turn_info.get_color()]), captures);
 }
 
 void InfoView::update_game_info(const string& info) {
-  format_block(p_game_info, info);
+  format_block(m_pane.get_section(m_game_info_section), info);
 }

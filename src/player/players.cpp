@@ -1,6 +1,6 @@
 #include "headers/players.h"
 
-Players::Players() : m_turn(&p1) {}
+Players::Players() : m_turn(&players_info[GameTurn::player_1]) {}
 Players::Players(PlayersConfig& config) : Players() {
   create_players(config);
 }
@@ -8,31 +8,29 @@ Players::Players(PlayersConfig& config) : Players() {
 Players::~Players() {}
 
 void Players::create_players(PlayersConfig& config) {
-  p1 = config.get_player_info(GameTurn::player_1);
-  p2 = config.get_player_info(GameTurn::player_2);
+  players_info[GameTurn::player_1] = config.get_player_info(GameTurn::player_1);
+  players_info[GameTurn::player_2] = config.get_player_info(GameTurn::player_2);
 
-  players[GameTurn::player_1] = create_new_player(config.get_type(GameTurn::player_1), config.get_color(GameTurn::player_1));
-  players[GameTurn::player_2] = create_new_player(config.get_type(GameTurn::player_2), config.get_color(GameTurn::player_2));
-
-  players[GameTurn::player_1]->set_opponent(players[GameTurn::player_2]);
-  players[GameTurn::player_2]->set_opponent(players[GameTurn::player_1]);
-}
-
-std::shared_ptr<Player> Players::get_player(GameTurn::players gt) { 
-  return players[gt]; 
+  players[GameTurn::player_1] = create_new_player(players_info[GameTurn::player_1]);
+  players[GameTurn::player_2] = create_new_player(players_info[GameTurn::player_2]);
 }
 
 std::unique_ptr<Player>
-Players::create_new_player(PlayerInfo::Type type, Color color) {
-  if (type == PlayerInfo::Human) 
-    return std::make_unique<Player>(Player(color));
+Players::create_new_player(PlayerInfo &p) {
+  if (p.get_type() == PlayerInfo::Human) 
+    return std::make_unique<Player>(Player(p.get_color()));
 
   // else Playyer::CPU
-  return std::make_unique<Player>(Player(color));
+  return std::make_unique<Player>(Player(p.get_color()));
 }
 
 void Players::change_turn() {
-  m_turn = m_turn->get_turn() == GameTurn::player_1 ? &p2 : &p1;
+  m_turn = &players_info
+  [
+    m_turn->get_turn() == GameTurn::player_1 ? 
+    GameTurn::player_2 : 
+    GameTurn::player_1
+  ];
   notify();
 }
 
@@ -42,10 +40,10 @@ void Players::notify() {
   }
 }
 
-std::shared_ptr<Player> Players::get_player_turn() {
-  return p_game_turn;
+void Players::set_inital_side(GameTurn::players gt) {
+  m_turn = &players_info[gt];
 }
 
-void Players::set_inital_side(GameTurn::players gt) {
-  m_turn = (gt == GameTurn::player_1) ? &p1 : &p2;
+std::shared_ptr<Player> Players::get_player_turn() {
+  return p_game_turn;
 }
