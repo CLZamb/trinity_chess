@@ -16,6 +16,8 @@ bool Board::is_legal_move(Move& m) {
   if (!exist_piece_at_square(m.get_from())) return false;
   if (!check_piece_belongs_to_current_player(m.get_from())) return false; 
 
+  // if (!is_spacial_move(m)) return false;
+
   if (is_attack_move(m.get_to())) {
     return is_legal_attack_move(m);
   }
@@ -36,43 +38,44 @@ bool Board::is_attack_move(const int& pos) {
 }
 
 bool Board::is_legal_non_attack_move(Move& m) {
-  Piece* piece = get_piece_at_square(m.get_from());
-  return piece->is_legal_non_attack_move(m, board_state);
+  Piecetype piece = get_piece_at_square(m.get_from());
+  return m_pieces.get_piece(piece)->is_legal_non_attack_move(m, board_state);
 }
 
 bool Board::is_legal_attack_move(Move& m){
-  Piece* piece = get_piece_at_square(m.get_from());
-  Piece* captured = get_piece_at_square(m.get_to());
-  m.set_capture_piece(captured->get_type_and_color());
-  return piece->is_legal_attack_move(m, board_state);
+  Piecetype piece = get_piece_at_square(m.get_from());
+  Piecetype captured = get_piece_at_square(m.get_to());
+  m.set_capture_piece(piece);
+  return m_pieces.get_piece(captured)->is_legal_attack_move(m, board_state);
 }
 
 bool Board::check_piece_belongs_to_current_player(const int& pos) {
-  Piece* piece = get_piece_at_square(pos);
+  Piecetype piece = get_piece_at_square(pos);
   if (!piece) return false;
-  return piece->is_black() == (m_turn_info.get_color() == BLACK);
+  return utils::check::is_black_piece(piece) == (m_turn_info.get_color() == BLACK);
 }
 
 bool Board::check_captured_belongs_to_opponent_player(const int& pos) {
-  Piece* captured = get_piece_at_square(pos);
+  Piecetype captured = get_piece_at_square(pos);
   if (!captured) return false;
 
-  return captured->is_black() == (m_turn_info.get_color() != BLACK);
+  return utils::check::is_black_piece(captured) == (m_turn_info.get_color() != BLACK);
 }
 
 void Board::make_move(Move mv) {
   SquareIndices from = mv.get_from();
   SquareIndices to = mv.get_to();
-  Piece* piece = get_piece_at_square(from);
-  Piece* captured = get_piece_at_square(to);
+  Piecetype piece = get_piece_at_square(from);
+  Piecetype captured = get_piece_at_square(to);
 
-  board_state.move(piece->is_black(),from , to);
+  board_state.move(utils::check::is_black_piece(piece),from , to);
   move_piece_to_square(piece, from, to);
+  save_move(mv);
 
   if (captured) {
+    capture_piece(mv);
   }
 
-  save_move(mv);
   update_board_view();
 }
 
@@ -86,12 +89,13 @@ void Board::save_move(const Move &m) {
 
 }
 
-// void Board::captured_piece(const Move& m) {
-// m_info.save_capture("pawn");
-// }
+void Board::capture_piece(const Move& m) {
+  if (m.get_captured_piece())
+    m_info.save_capture(utils::get_piece_str_name_from_piecetype(m.get_captured_piece()));
+}
 
 void
-Board::move_piece_to_square(Piece* pc, SquareIndices from, SquareIndices to) {
+Board::move_piece_to_square(Piecetype pc, SquareIndices from, SquareIndices to) {
   if (!pc)
     return;
 
@@ -99,7 +103,7 @@ Board::move_piece_to_square(Piece* pc, SquareIndices from, SquareIndices to) {
   get_square_at_pos(to).set_piece(pc);
 }
 
-Piece* Board::get_piece_at_square(int pos) {
+Piecetype Board::get_piece_at_square(int pos) {
   return get_square_at_pos(pos).get_piece();
 }
 
@@ -144,7 +148,7 @@ void Board::clear_board() {
 }
 
 void Board::add_to_board(Piecetype type, SquareIndices position) {
-  get_square_at_pos(position).set_piece(m_pieces.get_piece(type));
+  get_square_at_pos(position).set_piece(type);
   board_state.set_bit_at_player_pieces(utils::check::is_black_piece(type), position);
 }
 
@@ -158,7 +162,7 @@ Square& Board::get_square_at_pos(int pos) {
 
 string Board::get_fen() {
   Square square;
-  Piece *pc;
+  Piecetype pc;
   string fen = "";
   int space = 0;
   auto print_empty = [&](int &space) {
@@ -174,7 +178,7 @@ string Board::get_fen() {
       pc = square.get_piece();
       if (pc) {
         print_empty(space);
-        fen += utils::piecetype_to_char(pc->get_type_and_color());
+        fen += utils::piecetype_to_char(pc);
       } else {
         space++;
       }

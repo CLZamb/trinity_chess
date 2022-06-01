@@ -10,6 +10,7 @@ public:
 
 protected:
   PlayersConfig m_p_config;
+  // GameConfig m_g_config;
   // BoardConfig b_config;
 };
 

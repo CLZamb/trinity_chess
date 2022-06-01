@@ -10,11 +10,11 @@ Queen<color>::~Queen() {}
 
 
 template<Color color>
-bool Queen<color>::is_legal_non_attack_move(const Move& m, const BoardBitboard& board) {
+bool Queen<color>::is_legal_non_attack_move(Move &m, BoardBitboard& board) {
   return queen_moves.get_sliding_attacks(m, board);
 }
 
 template<Color color>
-bool Queen<color>::is_legal_attack_move(const Move& m, const BoardBitboard& board) {
+bool Queen<color>::is_legal_attack_move(Move &m, BoardBitboard& board) {
   return queen_moves.get_sliding_attacks(m, board);
 }

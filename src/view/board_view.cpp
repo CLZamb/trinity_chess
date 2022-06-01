@@ -122,8 +122,12 @@ void BoardView::clear_square_on_range(const int start_pos, const int end_pos) {
   }
 }
 
+void BoardView::add_pane_to_window_pos(Displayable *pane, Window::Pane_pos pos) {
+  window_view.add_pane(pane, pos);
+}
+
 void BoardView::add_view_to_window_pos(View& v, Window::Pane_pos pos) {
-  window_view.add_pane(&v, pos);
+  add_pane_to_window_pos(&v, pos);
 }
 
 void BoardView::set_piece_drawing_at_square_pos(Piecetype type, SquareIndices position) {

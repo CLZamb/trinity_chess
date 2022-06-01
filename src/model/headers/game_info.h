@@ -16,14 +16,14 @@ public:
   void illegal_move(const string &s);
   void update_turn(const PlayerInfo &i) override;
 
-  string get_info();
+  string &get_info();
 
 private:
   string game_info;
   static const string Kwrong_format;
   static const string Killegal_move;
   array<string, GameTurn::kSize> m_turn_string {
-  "Is player 1 turn","Is player 2 turn"
+    "Is player 1 turn","Is player 2 turn"
   };
   PlayerInfo m_turn;
 };

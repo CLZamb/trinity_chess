@@ -2,7 +2,7 @@
 
 InputConfiguration::InputConfiguration() {}
 
-void InputConfiguration::get_player_input_configuration() {
+void InputConfiguration::get_configuration() {
   get_players_type();
   get_players_color();
 }

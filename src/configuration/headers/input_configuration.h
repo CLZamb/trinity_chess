@@ -6,7 +6,7 @@
 class InputConfiguration : public Configuration {
 public:
   InputConfiguration();
-  void get_player_input_configuration();
+  void get_configuration();
 
 private:
   void get_players_type();

@@ -35,7 +35,6 @@ class Pane {
   int get_next_index();
   bool is_valid_pane_index(const size_t& index);
 
-  int m_size = 0;
   vector<string*> m_pane_drawing;
   unordered_map<string, shared_ptr<Section>> sections;
 };

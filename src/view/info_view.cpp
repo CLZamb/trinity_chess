@@ -1,6 +1,6 @@
 #include "headers/info_view.h"
 
-InfoView::InfoView() : View("Info") {
+InfoView::InfoView() {
   m_pane.add_section(m_top_section, 1);
   m_pane.add_section(m_player_banner_section, Banner::height);
   m_pane.add_section(m_moves_section[BLACK], 10);

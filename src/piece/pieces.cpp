@@ -37,7 +37,7 @@ void Pieces::create_all_pieces() {
   make_knight(WHITE);
 }
 
-Piece* Pieces::get_piece(int type) const { return m_pieces[type]; }
+Piece* Pieces::get_piece(Piecetype type) const { return m_pieces[type]; }
 
 void Pieces::make_pawn(const Color C) {
   if (C == BLACK)

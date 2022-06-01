@@ -17,7 +17,7 @@ using std::array;
 
 using players = GameTurn::players;
 
-class InfoView : public GameTurnObserver, public View {
+class InfoView : public GameTurnObserver, public Displayable {
  public:
     InfoView();
     virtual ~InfoView();

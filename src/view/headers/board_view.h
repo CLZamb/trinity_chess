@@ -11,6 +11,7 @@ class BoardView : public View {
     void draw() override;
     void parser_fen(const string& s);
     void add_view_to_window_pos(View& v, Window::Pane_pos pos);
+    void add_pane_to_window_pos(Displayable *v, Window::Pane_pos pos);
     void clear_square_on_range(const int start, const int end);
 
   private:
