@@ -4,7 +4,7 @@ Section::Section(string name, size_t size) :
  ISectionComponent(size), m_name(name) {
   if (size >= std::numeric_limits<size_t>::max())
     std::cerr
-      <<  "illegal size length: " << size
+      << "illegal size length: " << size
       << " on section " << name << std::endl;
 }
 

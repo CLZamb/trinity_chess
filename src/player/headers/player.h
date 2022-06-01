@@ -15,9 +15,12 @@ class Player {
    explicit Player(Color);
    virtual ~Player();
    bool has_black_pieces();
+   virtual const string &get_input();
 
+ protected:
+   string m_input = "quit";
  private:
-   Color color = Color::NONE;
+   Color m_color = Color::NONE;
 };
 
 #endif /* PLAYER_H */

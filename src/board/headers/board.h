@@ -1,7 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <memory>
 #include <string>
 #include "common/headers/common.h"
 #include "graphics//headers/pieces_drawings.hpp"
@@ -14,9 +13,7 @@
 #include "game/headers/move.h"
 #include "game/headers/game_turn_observer.h"
 #include "view/headers/board_view.h"
-#include "BoardBitboard.h"
-
-using std::shared_ptr;
+// #include "BoardBitboard.h"
 
 class Board : public GameTurnObserver {
  public:
@@ -24,17 +21,18 @@ class Board : public GameTurnObserver {
   virtual ~Board();
   void update_turn(const PlayerInfo &) override;
   void make_move(Move mv);
-  void move_piece_to_square(Piece* piece, SquareIndices from, SquareIndices to);
-  void parser_fen(string fen);
   bool is_checkmate();
   bool is_legal_move(Move&);
-  int evaluate_board() { return 0; }
-  Piece* get_piece_at_square(int);
   string get_fen();
   BoardView& get_view();
   BoardInfo& get_info();
 
  private:
+  Piecetype get_piece_at_square(int);
+  int evaluate_board() { return 0; }
+  void parser_fen(string fen);
+  void move_piece_to_square(Piecetype piece, SquareIndices from, SquareIndices to);
+  void capture_piece(const Move& m);
   void save_move(const Move &m);
   void update_board_view();
   void clear_board();

@@ -5,7 +5,8 @@
 
 void play() {
   InputConfiguration i_config;
-  i_config.get_player_input_configuration();
+  i_config.get_configuration();
+
   Game game(i_config);
   game.start();
 }

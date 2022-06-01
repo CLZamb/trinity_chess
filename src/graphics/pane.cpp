@@ -7,9 +7,7 @@ Pane::Pane(int size /*= 44 */) {
 
 Pane::~Pane() {}
 
-void Pane::clear() {
-  fill("");
-}
+void Pane::clear() { fill(""); }
 
 void Pane::fill(const string& content) {
   for (auto& i : m_pane_drawing) {
@@ -25,7 +23,6 @@ void Pane::add_section(shared_ptr<ISectionComponent> section) {
   }
 
   section->set_parent_pane(this);
-  vector<int> p;
 }
 
 void Pane::add_section(const string &name, const size_t size) {

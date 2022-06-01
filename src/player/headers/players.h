@@ -19,13 +19,11 @@ class Players : public GameTurnObservable {
     void change_turn();
     void set_inital_side(GameTurn::players p);
     std::shared_ptr<Player> get_player_turn();
+    const string& get_current_turn_input();
 
   private:
-    std::unique_ptr<Player> create_new_player(PlayerInfo& config);
-
     static const int players_size = GameTurn::kSize;
     array<PlayerInfo, players_size> players_info;
-    array<std::shared_ptr<Player>, players_size> players;
     std::shared_ptr<Player> p_game_turn;
     PlayerInfo *m_turn;
 };

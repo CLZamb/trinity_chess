@@ -1,37 +1,34 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <map>
-#include "pane.h"
-#include "section.h"
 #include "Idisplay.h"
 #include "common/headers/common.h"
+#include "pane.h"
+#include "section.h"
+#include <map>
 
-using std::ostream;
 using std::map;
+using std::ostream;
 
 class Window {
  public:
-    enum Pane_pos {
-      Left_pane = 0,
-      Middle_pane = 1,
-      Right_pane = 2,
-      Max_panes_size = 3
-    };
+  enum Pane_pos {
+    Left_pane = 0,
+    Middle_pane = 1,
+    Right_pane = 2,
+    Max_panes_size = 3
+  };
 
-    Window();
-    virtual ~Window();
+  Window();
+  virtual ~Window();
 
-    void add_pane(Displayable* pane, Pane_pos pos);
-    friend ostream& operator << (ostream &os,  Window &);
+  void add_pane(Displayable *pane, Pane_pos pos);
+  friend ostream &operator<<(ostream &os, Window &);
 
  private:
-  void insert_formatted_output(map<int, Displayable *> &panes,
-                               ostream &os);
-
-  size_t m_pane_max_heigh_size{0};
-  map<int, Displayable*> m_panes;
-  map<int, Displayable*>::iterator pane_begin_iter;
+  size_t panes_size_max_height{0};
+  string get_formatted_window_drawing();
+  map<int, Displayable *> m_panes;
 };
 
 #endif /* WINDOW_H */

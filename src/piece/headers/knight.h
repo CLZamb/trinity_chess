@@ -8,8 +8,8 @@ class Knight : public Piece{
   public:
     Knight();
     virtual ~Knight();
-    bool is_legal_non_attack_move(const Move&, const BoardBitboard& board) override;
-    bool is_legal_attack_move(const Move&, const BoardBitboard& board) override;
+    bool is_legal_non_attack_move(Move& m, BoardBitboard& ) override;
+    bool is_legal_attack_move(Move& m, BoardBitboard& ) override;
 
   private:
     U64 knight_mask(int sq) {

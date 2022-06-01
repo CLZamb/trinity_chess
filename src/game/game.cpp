@@ -1,19 +1,18 @@
 #include "headers/game.h"
-#include "game/headers/game_turn_observer.h"
 
 Game::Game(Configuration pc) : 
+  m_players(pc.get_players_info()),
   m_board_view(m_board.get_view()),
   m_board_info(m_board.get_info())
 {
-  setup_players(pc.get_players_info());
+  setup_players();
   setup_board();
 }
 
 Game::~Game() {}
 
-void Game::setup_players(PlayersConfig pc) {
+void Game::setup_players() {
   attach_observers_to_players();
-  m_players.create_players(pc);
   m_players.set_inital_side(GameTurn::player_1);
   m_players.notify();
 }
@@ -23,27 +22,33 @@ void Game::attach_observers_to_players() {
   m_players.attach(&m_board_info);
   m_players.attach(&m_game_info);
   m_players.attach(&m_info_view);
+  // m_players.attach(&m_console_input);
 }
 
-
 void Game::setup_board() {
-  m_board_view.add_view_to_window_pos(m_info_view, Window::Right_pane);
+  m_board_view.add_pane_to_window_pos(&m_info_view, Window::Right_pane);
 }
 
 void Game::start() {
   this->play();
 }
 
+void Game::print_view() {
+  m_info_view.update_game_info(m_game_info.get_info());
+  m_board_view.print();
+}
+
 void Game::play() {
   string player_input = "";
 
   while (!m_board.is_checkmate()) {
-    m_info_view.update_game_info(m_game_info.get_info());
-    m_board_view.print();
-    player_input = get_current_player_input();
+    print_view();
 
-    if (has_player_quit(player_input))
+    player_input = m_input.get_input();
+
+    if (has_player_quit(player_input)){
       break;
+    }
     if (!is_valid_str_move_format(player_input))
       continue;
 
@@ -86,12 +91,4 @@ bool Game::is_legal_move(const string &str_player_move) {
 
 bool Game::has_player_quit(const string &str) {
   return str == "quit" || str == "close" || str == "exit";
-}
-
-string Game::get_current_player_input() {
-  string input;
-  std::cout << "\n" << " >> ";
-  std::getline(std::cin, input);
-  std::cout << "\n";
-  return input;
 }

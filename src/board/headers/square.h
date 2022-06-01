@@ -11,12 +11,12 @@ class Square {
     Square();
     virtual ~Square ();
 
-    void set_piece(Piece* piece);
+    void set_piece(Piecetype piece);
     void clear_square();
-    Piece* get_piece();
+    Piecetype& get_piece();
 
  private:
-    Piece* p_piece = nullptr;
+    Piecetype m_piece = EMPTY;
 };
 
 #endif /* SQUARE_H */
