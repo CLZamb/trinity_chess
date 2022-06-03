@@ -1,6 +1,7 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
+#include "player/headers/input.h"
 #include "player/headers/player.h"
 #include <cstddef>
 #include <iostream>
@@ -33,17 +34,17 @@ class Options {
     options.emplace(options.size() - 1, item);
   }
 
-  T& select_option() {
-    cout << "\t\tchoose one of the options (" 
+  Option<T>& select_option(Input& input) {
+    int key = -1;
+    bool valid_option = false;
+
+    cout << "\t\t\t\tchoose one of the options (" 
       << start_index << " - "
       << options.size() << "): ";
 
-    int input = -1;
-    bool valid_option = false;
-
     while (!valid_option) {
-      cin >> input;
-      valid_option = check_valid_option(input);
+      key = input.get_integer_input();
+      valid_option = check_valid_option(key);
 
       if (!valid_option) {
         cout << "invalid option try again!" << "\n";
@@ -54,7 +55,7 @@ class Options {
 
     cin.clear();
     cin.ignore();
-    return options.find(input)->second.opt;
+    return options.find(key)->second;
   }
 
   unordered_map<int, Option<T>> get_options() {

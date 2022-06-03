@@ -38,7 +38,7 @@ class Game {
     BoardInfo& m_board_info;
     GameInfo m_game_info;
     InfoView m_info_view;
-    ConsoleInput m_input;
+    Input& m_input;
 };
 
 

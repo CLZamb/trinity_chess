@@ -3,7 +3,8 @@
 Game::Game(Configuration pc) : 
   m_players(pc.get_players_info()),
   m_board_view(m_board.get_view()),
-  m_board_info(m_board.get_info())
+  m_board_info(m_board.get_info()),
+  m_input(pc.get_input_manager())
 {
   setup_players();
   setup_board();
@@ -44,11 +45,8 @@ void Game::play() {
   while (!m_board.is_checkmate()) {
     print_view();
 
-    player_input = m_input.get_input();
+    player_input = m_input.get_string_input();
 
-    if (has_player_quit(player_input)){
-      break;
-    }
     if (!is_valid_str_move_format(player_input))
       continue;
 
@@ -87,8 +85,4 @@ bool Game::is_legal_move(const string &str_player_move) {
 
   m_game_info.illegal_move(str_player_move);
   return false;
-}
-
-bool Game::has_player_quit(const string &str) {
-  return str == "quit" || str == "close" || str == "exit";
 }

@@ -10,9 +10,11 @@ class ConsoleInput : public Input , public GameTurnObserver {
   virtual ~ConsoleInput();
 
   void update_turn(const PlayerInfo& i) override;
-  const string& get_input() override;
+  const string& get_string_input() override;
+  int get_integer_input() override;
 
  private:
+  void has_player_quit(const string &s);
   void get_human_input();
   void get_cpu_input();
   PlayerInfo m_player_info;

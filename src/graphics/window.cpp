@@ -1,6 +1,7 @@
 #include "headers/window.h"
 
 Window::Window() {}
+
 Window::~Window() {}
 
 void Window::add_pane(Displayable *pane, Pane_pos pos) {
@@ -23,7 +24,6 @@ ostream &operator<<(ostream &os, Window &gc) {
     iter.second->draw(); 
 
   os << gc.get_formatted_window_drawing();
-
   return os;
 }
 

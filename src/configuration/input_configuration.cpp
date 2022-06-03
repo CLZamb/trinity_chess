@@ -1,6 +1,6 @@
 #include "headers/input_configuration.h"
 
-InputConfiguration::InputConfiguration() {}
+InputConfiguration::InputConfiguration() : Configuration(m_input) {}
 
 void InputConfiguration::get_configuration() {
   get_players_type();
@@ -17,7 +17,7 @@ void InputConfiguration::get_players_type(){
   player_menu.set_title("Select Players");
   player_menu.print();
 
-  m_p_config = player_menu.select_option();
+  m_p_config = player_menu.select_option(m_input);
 }
 
 void InputConfiguration::get_players_color() {
@@ -29,9 +29,8 @@ void InputConfiguration::get_players_color() {
   player_menu.set_title("Select Color");
   player_menu.print();
 
-  Color c = player_menu.select_option();
+  Color c = player_menu.select_option(m_input);
+
   m_p_config.set_color(GameTurn::player_1, c);
   m_p_config.set_color(GameTurn::player_2, c == BLACK ? WHITE :  BLACK);
 }
-
-
