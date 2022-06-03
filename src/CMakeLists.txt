@@ -29,6 +29,7 @@ target_link_libraries(${chess} PUBLIC piece_lib)
 target_link_libraries(${chess} PUBLIC player_lib)
 # target_link_libraries(${chess} PUBLIC search_lib)
 target_link_libraries(${chess} PUBLIC view_lib)
+target_link_libraries(${chess} PUBLIC ${CURSES_LIBRARIES})
 
 target_include_directories(
   ${chess} PUBLIC 

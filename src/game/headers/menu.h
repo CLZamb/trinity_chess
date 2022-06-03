@@ -4,6 +4,7 @@
 #include "view/headers/menu_view.h"
 #include "options.h"
 #include "player/headers/player.h"
+#include <sys/wait.h>
 #include <unordered_map>
 
 template <typename T> class Menu {
@@ -16,11 +17,23 @@ public:
 
   void set_title(string s) { view.set_title(s); }
 
-  T select_option() { return opts.select_option(); }
+  T select_option(Input& i) { 
+    return get_option(i).opt; 
+  }
+
+  // T select_option_using_keyboard(Input& i) {
+  //   Option<T> opt = get_option(i);
+  //   view.select_option(opt.num);
+  //   return opt.opt;
+  // }
 
   void print() { view.print(); }
 
 private:
+
+  Option<T> get_option(Input& i) { 
+    return opts.select_option(i); 
+  }
 
   list<string>  format_options() {
     list<string> options_formatted;
