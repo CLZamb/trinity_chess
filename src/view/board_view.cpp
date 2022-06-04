@@ -12,14 +12,8 @@ BoardView::BoardView() : View("Board") {
 }
 
 void BoardView::clear() {
-  m_pane.set_content_at_section(m_top_section, {
-       " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
-      });
-
-  m_pane.set_content_at_section(m_bottom_section, {
-       " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃",
-       " ┃    A        B        C        D        E        F        G       H     ┃",
-       " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"});
+  m_pane.set_content_at_section(m_top_section, {m_top_section_drawing});
+  m_pane.set_content_at_section(m_bottom_section, &m_bottom_section_drawing);
 }
 
 BoardView::~BoardView() {}
@@ -122,12 +116,12 @@ void BoardView::clear_square_on_range(const int start_pos, const int end_pos) {
   }
 }
 
-void BoardView::add_pane_to_window_pos(Displayable *pane, Window::Pane_pos pos) {
+void BoardView::add_pane_at_window_pos(Displayable *pane, Window::Pane_pos pos) {
   window_view.add_pane(pane, pos);
 }
 
-void BoardView::add_view_to_window_pos(View& v, Window::Pane_pos pos) {
-  add_pane_to_window_pos(&v, pos);
+void BoardView::add_view_at_window_pos(View& v, Window::Pane_pos pos) {
+  add_pane_at_window_pos(&v, pos);
 }
 
 void BoardView::set_piece_drawing_at_square_pos(Piecetype type, SquareIndices position) {

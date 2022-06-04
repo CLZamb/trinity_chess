@@ -1,5 +1,6 @@
 #include "headers/players_configuration.h"
 
+PlayersConfig::PlayersConfig() {}
 PlayersConfig::PlayersConfig(PlayerInfo::Type t1, PlayerInfo::Type t2) {
   player[GameTurn::player_1].set_type(t1);
   player[GameTurn::player_2].set_type(t2);

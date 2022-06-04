@@ -157,8 +157,8 @@ constexpr std::string_view p_menu_top =
 "\t\t\t\t┃                                                                              ┃"
 );
 
-constexpr std::string_view left_margin = {"\t\t\t\t┃                                 "};
-constexpr std::string_view left_margin_selected = {"\t\t\t\t┃                               ➤ "};
+constexpr std::string_view left_margin = {"\t\t\t\t┃                            "};
+constexpr std::string_view left_margin_selected = {"\t\t\t\t┃                          ➤ "};
 constexpr std::string_view empty_row = "\t\t\t\t┃                                                                              ┃";
 
 constexpr std::string_view right_margin = {"┃"};
@@ -176,16 +176,6 @@ constexpr std::string_view p_menu_bottom = (
 );
 
 } // namespace GameDrawings
-//  "\t\t**                         Game Option                                          *\n "
-//  "\t\t**                                                                              *\n "
-//  "\t\t**                    1. Player vs Player                                       *\n "
-//  "\t\t**                    2. Player vs Computer                                     *\n "
-//  "\t\t**                    3. Computer vs Computer                                   *\n "
-//
-//  "\t\t**                                                                              *\n "
-//  "\t\t**                    Player 1 Choose Color                                     *\n "
-//  "\t\t**                    1. White                                                  *\n "
-//  "\t\t**                    2. Black                                                  *\n "
 
 // "\t\t**                          Welcome to chess Game                               *\n "
 // "\t\t**                            1. New Game                                       *\n "

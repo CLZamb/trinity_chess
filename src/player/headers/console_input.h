@@ -4,7 +4,7 @@
 #include "input.h"
 #include "game/headers/game_turn_observer.h"
 
-class ConsoleInput : public Input , public GameTurnObserver {
+class ConsoleInput : public Input {
  public:
   ConsoleInput();
   virtual ~ConsoleInput();

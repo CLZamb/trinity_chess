@@ -16,7 +16,7 @@ class GameTurnObservable {
 
  protected:
   GameTurnObservable();
-  virtual void notify() = 0;
+  virtual void notify_change_turn() = 0;
   list<GameTurnObserver*> *_observers;
 };
 
