@@ -62,7 +62,24 @@ bool Board::check_captured_belongs_to_opponent_player(const int& pos) {
   return utils::check::is_black_piece(captured) == (m_turn_info.get_color() != BLACK);
 }
 
-void Board::make_move(Move mv) {
+bool Board::is_valid_move(const string &m) {
+  if (!string_utils::is_valid_move_format(m)) {
+    m_info.wrong_format(m);
+    return false;
+  }
+
+  Move mv = string_utils::to_move(m);
+
+  if (!is_legal_move(mv)) {
+    m_info.illegal_move(m);
+    return false;
+  }
+
+  return true;
+}
+
+void Board::make_move(string m) {
+  Move mv = string_utils::to_move(m);
   SquareIndices from = mv.get_from();
   SquareIndices to = mv.get_to();
   Piecetype piece = get_piece_at_square(from);
@@ -83,10 +100,13 @@ void Board::update_board_view() {
   m_view.parser_fen(get_fen());
 }
 
+void Board::update_board_info(const string &info) {
+  m_info.save_info(info);
+}
+
 void Board::save_move(const Move &m) {
   m_info.save_move(utils::square_int_to_str(m.get_from()) +
                    utils::square_int_to_str(m.get_to()));
-
 }
 
 void Board::capture_piece(const Move& m) {

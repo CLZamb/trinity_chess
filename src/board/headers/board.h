@@ -9,10 +9,11 @@
 #include "piece/headers/pieces.h"
 #include "utils.h"
 #include "player/headers/player.h"
-#include "../headers/square.h"
+#include "square.h"
 #include "game/headers/move.h"
 #include "game/headers/game_turn_observer.h"
 #include "view/headers/board_view.h"
+#include "game/headers/move_utils.h"
 // #include "BoardBitboard.h"
 
 class Board : public GameTurnObserver {
@@ -20,20 +21,22 @@ class Board : public GameTurnObserver {
   explicit Board(string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
   virtual ~Board();
   void update_turn(const PlayerInfo &) override;
-  void make_move(Move mv);
+  void make_move(string mv);
   bool is_checkmate();
-  bool is_legal_move(Move&);
+  bool is_valid_move(const string &m);
   string get_fen();
   BoardView& get_view();
   BoardInfo& get_info();
 
  private:
+  bool is_legal_move(Move&);
   Piecetype get_piece_at_square(int);
   int evaluate_board() { return 0; }
   void parser_fen(string fen);
   void move_piece_to_square(Piecetype piece, SquareIndices from, SquareIndices to);
   void capture_piece(const Move& m);
   void save_move(const Move &m);
+  void update_board_info(const string &info);
   void update_board_view();
   void clear_board();
   void add_to_board(Piecetype piece, SquareIndices position);

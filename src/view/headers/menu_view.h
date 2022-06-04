@@ -33,7 +33,7 @@ class MenuView : public View {
       m_pane.set_content_at_section(m_title_section, {left_margin(title) + right_margin(title, false)});
     }
 
-    void select_option(const int &i) {
+    void selected_option(const int &i) {
       string m_option;
       int index = 1;
 
@@ -44,7 +44,7 @@ class MenuView : public View {
       }
       m_option += MenuDrawings::empty_row;
 
-      m_pane.get_section(m_options_section)->set_content_at_index(m_option, 0);
+      m_pane.set_content_at_section(m_title_section, {m_option});
     }
 
     void draw() override {}
@@ -83,7 +83,7 @@ class MenuView : public View {
     return opt.length() < right_space_needed ? right_space_needed - opt.length() : 0;
   }
 
-  static const size_t right_space_needed{45};
+  static const size_t right_space_needed{50};
   list<string> m_l_options;
   const string m_top_section = "top";
   const string m_title_section = "title";

@@ -1,10 +1,11 @@
 #ifndef INPUT_H
 #define INPUT_H
 #include <string>
+#include "game/headers/game_turn_observer.h"
 
 using std::string;
 
-class Input {
+class Input : public GameTurnObserver {
  public:
   Input() {}
   virtual ~Input() {}

@@ -17,10 +17,10 @@ using std::array;
 
 using players = GameTurn::players;
 
-class InfoView : public GameTurnObserver, public Displayable {
+class InfoPane : public GameTurnObserver, public Displayable {
  public:
-    InfoView();
-    virtual ~InfoView();
+    InfoPane();
+    virtual ~InfoPane();
     void draw();
     void update_turn(const PlayerInfo &info);
     void update_moves(const string &s);
@@ -58,8 +58,18 @@ class InfoView : public GameTurnObserver, public Displayable {
         "[White Captures]",
         "[Black Captures]"
     };
-    const string m_game_info_section = "[Game info]";
+
+    const string m_board_info_section = "[Game info]";
     const string m_bottom_section = "bottom";
+
+    const string m_top_section_drawing =
+        " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓";
+    const string m_empty_row =
+        " ┃                                                          ┃";
+    const string m_row_divider =
+        " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃";
+    const string m_bottom_section_drawing =
+        " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛";
 
     PlayerInfo m_turn_info;
 };

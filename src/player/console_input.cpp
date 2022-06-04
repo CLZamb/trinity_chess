@@ -2,7 +2,6 @@
 #include <iostream>
 
 using std::cout;
-using std::cout;
 using std::cin;
 
 ConsoleInput::ConsoleInput() {}
@@ -10,6 +9,7 @@ ConsoleInput::~ConsoleInput() {}
 
 void ConsoleInput::update_turn(const PlayerInfo& info) {
   m_player_info = info;
+  cout << "console input change turn " << std::endl;
 }
 
 const string& ConsoleInput::get_string_input() {
@@ -44,5 +44,5 @@ void ConsoleInput::get_cpu_input() {
 
 void ConsoleInput::has_player_quit(const string& s) {
   if( s == "quit" || s == "close" || s == "exit")
-    exit(0);
+    exit(EXIT_SUCCESS);
 }

@@ -3,7 +3,6 @@
 
 # pragma once
 
-#include<iostream>
 #include<string>
 #include<vector>
 #include<regex>
@@ -12,9 +11,11 @@
 
 using std::string;
 
-class String {
- public:
-   static Move to_move(const string& str_move){
+namespace string_utils{
+  static const std::regex format_full_move = std::regex("[a-hA-H][1-8]\\s*[a-hA-H][1-8]");
+  static const std::regex format_single_position = std::regex("([a-hA-H]\\s*[1-8])");
+
+  static Move to_move(const string& str_move){
     std::vector<string> list_pos;
     Move result;
 
@@ -30,14 +31,10 @@ class String {
     result.set_move(from, to);
     return result;
   }
+
   static bool is_valid_move_format(const string& str_mv) {
     return Regex::match(str_mv, format_full_move);
   }
-
- private:
-  static const std::regex format_full_move;
-  static const std::regex format_single_position;
-};
-
+}
 
 #endif /* MOVE_UTILS_H */
