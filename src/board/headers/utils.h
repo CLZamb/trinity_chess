@@ -77,7 +77,7 @@ inline char piecetype_to_char(Piecetype pct) {
   return it == encodings.end() ? NotADigit : it->second;
 }
 
-inline string square_int_to_str(int sq) {
+inline string square_int_to_str(SquareIndices sq) {
   if (sq < A1 || sq > H8)
     return "-not a valid position-";
 

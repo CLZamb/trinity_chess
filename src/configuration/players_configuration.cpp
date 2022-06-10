@@ -1,23 +1,27 @@
 #include "headers/players_configuration.h"
 
 PlayersConfig::PlayersConfig() {}
-PlayersConfig::PlayersConfig(PlayerInfo::Type t1, PlayerInfo::Type t2) {
-  player[GameTurn::player_1].set_type(t1);
-  player[GameTurn::player_2].set_type(t2);
+PlayersConfig::PlayersConfig(GameTurn::Type t1, GameTurn::Type t2) {
+  player[GameTurn::player_1].type = t1;
+  player[GameTurn::player_2].type = t2;
 }
 
-Color PlayersConfig::get_color(GameTurn::players gt) {
-  return player[gt].get_color();
+void PlayersConfig::set_color(GameTurn::Players gt, Color c) {
+  player[gt].color = c;
 }
 
-PlayerInfo::Type PlayersConfig::get_type(GameTurn::players gt) {
-  return player[gt].get_type();
+Color PlayersConfig::get_color(GameTurn::Players gt) {
+  return player[gt].color;
 }
 
-void PlayersConfig::set_color(GameTurn::players gt, Color c) {
-  player[gt].set_color(c);
+GameTurn::Type PlayersConfig::get_type(GameTurn::Players gt) {
+  return player[gt].type;
 }
 
-PlayerInfo PlayersConfig::get_player_info(GameTurn::players gt)  {
+void PlayersConfig::set_type(GameTurn::Players gt, GameTurn::Type t) {
+  player[gt].type = t;
+}
+
+PlayerInfo PlayersConfig::get_player_info(GameTurn::Players gt) {
   return player[gt];
 }

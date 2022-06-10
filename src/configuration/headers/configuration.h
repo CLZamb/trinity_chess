@@ -6,13 +6,11 @@
 
 class Configuration {
 public:
-  Configuration(Input&);
+  Configuration();
   PlayersConfig& get_players_info();
-  Input& get_input_manager();
 
 protected:
   PlayersConfig m_p_config;
-  Input& m_input;
   // GameConfig m_g_config;
   // BoardConfig b_config;
 };

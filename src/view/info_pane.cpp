@@ -1,4 +1,4 @@
-#include "headers/info_view.h"
+#include "headers/info_pane.h"
 
 InfoPane::InfoPane() {
   m_pane.add_section(m_top_section, 1);
@@ -76,19 +76,19 @@ string InfoPane::format_line(string line) {
 void InfoPane::update_turn(const PlayerInfo &info) {
   m_turn_info = info;
 
-  update_banner(m_turn_info.get_turn());
+  update_banner(m_turn_info.turn);
 }
 
-void InfoPane::update_banner(GameTurn::players p) {
+void InfoPane::update_banner(GameTurn::Players p) {
   m_pane.set_content_at_section(m_player_banner_section, p_banners[p]);
 }
 
 void InfoPane::update_moves(const string& moves) {
-  format_block(m_pane.get_section(m_moves_section[m_turn_info.get_color()]), moves);
+  format_block(m_pane.get_section(m_moves_section[m_turn_info.color]), moves);
 }
 
 void InfoPane::update_captures(const string& captures) {
-  format_block(m_pane.get_section(m_captures_section[m_turn_info.get_color()]), captures);
+  format_block(m_pane.get_section(m_captures_section[m_turn_info.color]), captures);
 }
 
 void InfoPane::update_game_info(const string& info) {

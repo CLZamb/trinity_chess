@@ -5,7 +5,12 @@
 
 class GameTurn {
  public:
-  enum players : int {
+  enum Type {
+    Cpu = 0,
+    Human = 1,
+  };
+
+  enum Players : int {
     player_1 = 0,
     player_2 = 1
   };

@@ -5,11 +5,10 @@
 #include <string>
 #include "view.h"
 #include "graphics/headers/game_drawings.hpp"
-                                                         //
+
 using std::string;
 using std::list;
 
-template<typename T>
 class MenuView : public View {
   public: 
     MenuView(list<string> l_s) : View("Menu"), m_l_options(l_s) {
@@ -24,8 +23,6 @@ class MenuView : public View {
       m_pane.get_section(m_options_section)->set_content_at_index(s, 0);
       m_pane.get_section(m_bottom_section)->set_content_at_index(MenuDrawings::p_menu_bottom.data(), 0 );
 
-      set_title();
-
       window_view.add_pane(this, Window::Left_pane);
     }
 
@@ -33,23 +30,53 @@ class MenuView : public View {
       m_pane.set_content_at_section(m_title_section, {left_margin(title) + right_margin(title, false)});
     }
 
-    void selected_option(const int &i) {
+    void selected_option() {
       string m_option;
-      int index = 1;
 
-      for (auto o : m_l_options) {
-        m_option += left_margin(o, i == index);
+      for (const auto &o : m_l_options) {
+        m_option += left_margin(o, o == *m_selection);
         m_option += right_margin(o);
-        index++;
       }
+
       m_option += MenuDrawings::empty_row;
 
-      m_pane.set_content_at_section(m_title_section, {m_option});
+      m_pane.set_content_at_section(m_options_section, {m_option});
     }
 
     void draw() override {}
 
+    void handle_input_event(const InputEvent& e) override {
+      switch(e.get_type()) {
+        case InputEvent::KeyPressed:
+          handle_key_pressed(e.get_pressed_key());
+          break;
+        case InputEvent::KeyboardSetup:
+          selected_option();
+        default:
+          break;
+      }
+      print();
+    }
+
  private:
+
+  void handle_key_pressed(const InputKeys::Key key) {
+    switch(key) {
+      case InputKeys::UP:
+        if(m_selection != m_l_options.begin()) {
+          m_selection--;
+        }
+      break;
+      case InputKeys::DOWN:
+        if(*m_selection != m_l_options.back()) {
+          m_selection++;
+        }
+      break;
+      default:
+      break;
+    }
+    selected_option();
+  }
 
   string format_options(list<string> &options) {
     string m_option;
@@ -90,6 +117,7 @@ class MenuView : public View {
   const string m_options_section = "options";
   const string m_bottom_section = "bottom";
   const string m_select_signal = ">>";
+  list<string>::iterator m_selection = m_l_options.begin();
 };
 
 #endif /* MENU_VIEW_H */

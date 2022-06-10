@@ -8,6 +8,7 @@
 #include<string>
 #include"box.h"
 
+namespace DrawingPieces {
 static const std::unordered_map<std::string, Box> const_piece_drawing = {
   {
     "bishop",
@@ -70,26 +71,28 @@ static const std::unordered_map<std::string, Box> const_piece_drawing = {
      }}
   },
   {
-    "BaseWhiteSquare",
+    "BaseSquare",
     {{
-       "█████████",
-       "█████████",
-       "█████████",
-       "█████████",
-       "█████████",
+       "\033[38;5;245m█████████\033[0m",
+       "\033[38;5;246m█████████\033[0m",
+       "\033[38;5;247m█████████\033[0m",
+       "\033[38;5;248m█████████\033[0m",
+       "\033[38;5;249m█████████\033[0m",
      }}
   },
   {
-    "BaseBlackSquare",
+    "BlackSquare",
     {{
-       "         ",
-       "         ",
-       "         ",
-       "         ",
-       "         ",
+       "\033[38;5;232m█████████\033[0m",
+       "\033[38;5;233m█████████\033[0m",
+       "\033[38;5;234m█████████\033[0m",
+       "\033[38;5;235m█████████\033[0m",
+       "\033[38;5;236m█████████\033[0m",
      }}
-  }
+  },
 };
+
+}
 
 namespace Banner {
   int constexpr length(const char* str) {
@@ -175,7 +178,7 @@ constexpr std::string_view p_menu_bottom = (
 "\t\t\t\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n"
 );
 
-} // namespace GameDrawings
+} // MenuDrawinge GameDrawings
 
 // "\t\t**                          Welcome to chess Game                               *\n "
 // "\t\t**                            1. New Game                                       *\n "
@@ -190,8 +193,9 @@ constexpr std::string_view p_menu_bottom = (
 // "\t\t**                            3. Hard                                           *\n "
 // "\t\t**                            4. Expert                                         *\n "
 
+namespace GameDrawing {
 
-static const char* p_game_over =
+constexpr std::string_view game_over =
 (
  "   ███████████████████████████████████████████████████████████\n"
  "   ███████████████████████████████████████████████████████████\n"
@@ -215,6 +219,5 @@ static const char* p_game_over =
  "   ███████████████████████████████████████████████████████████\n"
 );
 
-static const char* p_no_message = {""};
-
+} // Game Drawing
 #endif /*  */

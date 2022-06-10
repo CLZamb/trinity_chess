@@ -8,10 +8,9 @@
 #include <iostream>
 #include <vector>
 #include <array>
-#include "graphics//headers/game_drawings.hpp"
+#include "graphics/headers/game_drawings.hpp"
 #include "board/headers/utils.h"
 
-using std::unordered_map;
 using std::array;
 /*
    ╔══════════╦════════════════════════════════╦═════════════════════════════════════════════════════════════════════════╗
@@ -97,82 +96,112 @@ using std::array;
 
 class DrawingMod {
   public:
-    enum Code {
-      BG_NORMAL  = 0,
+    enum CodeAttribute {
+      RESET  = 0,
       BG_INVERSE = 7,
-      FG_BLACK   = 30,
-      FG_GREEN   = 32,
-      FG_WHITE   = 97,
-      FG_DEFAULT = 39,
-      BG_DEFAULT = 49,
-      BG_BLACK   = 40,
-      BG_WHITE   = 47,
+      SLOW_BLINK = 5,
+    };
+
+    enum Color {
+      BLACK      = 240,
+      GREEN      = 8, 
+      BLACK_GREY = 236,
+      WHITE      = 253,
+      WHITE_GREY = 250,
     };
 
     DrawingMod() {}
     ~DrawingMod() {}
 
-    std::string modifier_to_str(const Code mod) {
-      return "\033[" + std::to_string(mod) + "m";
+    void add_attribute(CodeAttribute c, Box* drawing) {
+      mod = modifier_to_str(c).c_str();
+      prepend(mod, drawing);
+    };
+
+    void add_bg_color(Color c, Box* drawing) {
+      mod = modifier_bg_color_to_str(c).c_str();
+      prepend(mod, drawing);
     }
 
-    void append(Code c, Box* drawing) {
-      mod = modifier_to_str(c).c_str();
-
-      for (int i = 0; i < Box::kRowSize; ++i) {
-        Box::copy_row(temp_copy, drawing->content[i]);
-        Box::copy_row(drawing->content[i], temp_copy, mod);
-      }
+    void add_fg_color(Color c, Box* drawing) {
+      mod = modifier_fg_color_to_str(c).c_str();
+      prepend(mod, drawing);
     }
 
-    void prepend(Code c, Box* drawing) {
-      mod = modifier_to_str(c).c_str();
-
-      for (int i = 0; i < Box::kRowSize; ++i) {
-        Box::copy_row(temp_copy, drawing->content[i]);
-        Box::copy_row(drawing->content[i], mod, temp_copy);
-      }
+    void reset(Box* drawing) {
+      mod = modifier_to_str(RESET).c_str();
+      append(mod, drawing);
     }
 
   private:
+    void prepend(const char code[] , Box* drawing) {
+      for (int i = 0; i < Box::kRowSize; ++i) {
+        Box::copy_row(temp_copy, drawing->content[i]);
+        Box::copy_row(drawing->content[i], code, temp_copy);
+      }
+    }
+
+    void append(const char code[] , Box* drawing) {
+      for (int i = 0; i < Box::kRowSize; ++i) {
+        Box::copy_row(temp_copy, drawing->content[i]);
+        Box::copy_row(drawing->content[i], temp_copy, code);
+      }
+    }
+
+    std::string modifier_to_str(const CodeAttribute mod) {
+      return "\033[" + std::to_string(mod) + "m";
+    }
+
+    string modifier_bg_color_to_str(const Color mod) {
+      return "\x1B[48;5;" + std::to_string(mod) + "m";
+    }
+
+    string modifier_fg_color_to_str(const Color mod) {
+      return "\033[38;5;" + std::to_string(mod) + "m";
+    }
+
     static const int kColumnSize = Box::kCharSize;
     static const int kSizeBox = sizeof(char[kColumnSize]);
     char temp_copy[kColumnSize];
     const char* mod;
 };
 
-
 class Drawing {
   public:
     explicit Drawing(std::string piece) {
-      if (piece_drawing.find(piece) == piece_drawing.end())
+      if (DrawingPieces::const_piece_drawing.find(piece) == DrawingPieces::const_piece_drawing.end())
         throw "invalid piece name";
 
-      m_drawing = piece_drawing.at(piece);
-      piece_mod.append(DrawingMod::BG_NORMAL, &m_drawing);
+      m_drawing = DrawingPieces::const_piece_drawing.at(piece);
+      piece_mod.reset(&m_drawing);
     }
     virtual ~Drawing() {}
 
     Box* get_drawing() { return &m_drawing; }
     void set_drawing(Box* newBox) { m_drawing = *newBox; }
-    void addModifier(DrawingMod::Code mod_code) {
-      piece_mod.prepend(mod_code, &m_drawing);
+    void add_attribute(DrawingMod::CodeAttribute mod_code) {
+      piece_mod.add_attribute(mod_code, &m_drawing);
+    }
+
+    void add_fg_color_modifier(DrawingMod::Color mod_code) {
+      piece_mod.add_fg_color(mod_code, &m_drawing);
+    }
+
+    void add_bg_color_modifier(DrawingMod::Color mod_code) {
+      piece_mod.add_bg_color(mod_code, &m_drawing);
     }
 
   private:
-    static const unordered_map<std::string, Box> piece_drawing;
     Box m_drawing;
     DrawingMod piece_mod;
 };
-
-const unordered_map<std::string, Box> piece_drawing = const_piece_drawing;
 
 class PieceDrawing {
  public:
   explicit PieceDrawing(const string& piece_type) {
     black_square_drawing = new Drawing(piece_type);
     white_square_drawing = new Drawing(piece_type);
-    black_square_drawing->addModifier(DrawingMod::BG_INVERSE);
+    black_square_drawing->add_attribute(DrawingMod::BG_INVERSE);
   }
 
   ~PieceDrawing() {
@@ -180,9 +209,19 @@ class PieceDrawing {
     delete white_square_drawing;
   }
 
-  void set_drawing_mod(DrawingMod::Code mod) {
-    black_square_drawing->addModifier(mod);
-    white_square_drawing->addModifier(mod);
+  void set_fg_color_modifier(DrawingMod::Color mod) {
+    black_square_drawing->add_fg_color_modifier(mod);
+    white_square_drawing->add_fg_color_modifier(mod);
+  }
+
+  void set_atr_modifier(DrawingMod::CodeAttribute mod) {
+    black_square_drawing->add_attribute(mod);
+    white_square_drawing->add_attribute(mod);
+  }
+
+  void set_bg_color_modifier(DrawingMod::Color mod) {
+    black_square_drawing->add_fg_color_modifier(mod);
+    white_square_drawing->add_fg_color_modifier(mod);
   }
 
   Box* get_drawing(bool is_in_black_square) {
@@ -223,6 +262,8 @@ class StandardDrawingBuilder : public DrawingBuilder {
   PieceDrawing* piece_drawing;
 };
 
+
+
 class PiecesDrawings {
   public:
     PiecesDrawings() {
@@ -231,16 +272,15 @@ class PiecesDrawings {
         wP, wR, wN, wB, wQ, wK
       };
 
-      DrawingMod::Code piece_drawing_mod;  
-      PieceDrawing *drawing; 
       for (const Piecetype &pct : NodePositionVector) {
         m_drawing_builder.build_drawing(pct);
         drawing = m_drawing_builder.get_drawing();
-        piece_drawing_mod = 
-          utils::check::is_black_piece(pct)
-          ? DrawingMod::BG_BLACK
-          : DrawingMod::FG_WHITE;
-        drawing->set_drawing_mod(piece_drawing_mod);
+        piece_drawing_mod_fg = utils::check::is_black_piece(pct)
+          ? DrawingMod::BLACK
+          : DrawingMod::WHITE;
+
+        drawing->set_fg_color_modifier(piece_drawing_mod_fg);
+
         m_pieces[pct] = drawing;
       }
     }
@@ -252,6 +292,8 @@ class PiecesDrawings {
     }
 
   private:
+    DrawingMod::Color piece_drawing_mod_fg;  
+    PieceDrawing *drawing; 
     StandardDrawingBuilder m_drawing_builder;
     std::array<PieceDrawing*, utils::constant::ktotal_number_pieces> m_pieces;
 };

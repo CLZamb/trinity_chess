@@ -1,10 +1,13 @@
 #include "headers/uicontroller.h"
 
+using std::cout;
+using std::endl;
+
 UIController::UIController() {}
 UIController::~UIController() {}
 
 void UIController::add_view(View view) {
-  views.emplace(view.Get_name(), view);
+  views.emplace(view.get_name(), view);
 }
 
 void UIController::remove_view(const string& name) {

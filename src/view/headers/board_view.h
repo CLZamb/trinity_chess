@@ -3,6 +3,8 @@
 
 #include "view.h"
 #include "board/headers/square.h"
+#include "player/headers/input_observer.h"
+#include "game/headers/game_turn.h"
 
 class BoardView : public View {
   public:
@@ -13,10 +15,12 @@ class BoardView : public View {
     void add_view_at_window_pos(View& v, Window::Pane_pos pos);
     void add_pane_at_window_pos(Displayable *v, Window::Pane_pos pos);
     void clear_square_on_range(const int start, const int end);
+    void handle_input_event(const InputEvent &) override;
 
   private:
     void clear();
-    void setup_board_squares();
+    void selected_option(const int& pos);
+    void deselected_option(const int& pos);
     void set_piece_drawing_at_square_pos(Piecetype type, SquareIndices position);
     char left_border(const int &row,const int &col);
     bool is_number(const char &c);
@@ -33,7 +37,7 @@ class BoardView : public View {
       " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"};
 
     PiecesDrawings m_pieces_drawings;
-    std::array<SquareDrawing, utils::constant::ksquares> m_squares;
+    SquaresDrawings m_squares_drawings;
 };
 
 #endif /* BOARD_VIEW_H */

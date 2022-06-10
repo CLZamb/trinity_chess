@@ -1,10 +1,8 @@
 #include "headers/players.h"
 
-Players::Players(PlayersConfig &config, Input& input)
-    : m_turn(&players_info[GameTurn::player_1]),
-      m_input(input) {
+Players::Players(PlayersConfig &config)
+    : m_turn(&players_info[GameTurn::player_1]) {
   create_players(config);
-  attach(&m_input);
 }
 
 Players::~Players() {}
@@ -17,7 +15,7 @@ void Players::create_players(PlayersConfig& config) {
 void Players::change_turn() {
   m_turn = &players_info
   [
-    m_turn->get_turn() == GameTurn::player_1 ? 
+    m_turn->turn == GameTurn::player_1 ? 
     GameTurn::player_2 : 
     GameTurn::player_1
   ];
@@ -30,10 +28,6 @@ void Players::notify_change_turn() {
   }
 }
 
-void Players::set_inital_side(GameTurn::players gt) {
+void Players::set_inital_side(GameTurn::Players gt) {
   m_turn = &players_info[gt];
-}
-
-const string& Players::get_current_player_input() {
-  return m_input.get_string_input();
 }

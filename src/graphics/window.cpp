@@ -22,7 +22,6 @@ ostream &operator<<(ostream &os, Window &gc) {
 
   for (auto &iter : gc.m_panes)  
     iter.second->draw(); 
-
   os << gc.get_formatted_window_drawing();
   return os;
 }
