@@ -1,6 +1,6 @@
 #include "headers/input_configuration.h"
 
-InputConfiguration::InputConfiguration() : Configuration(m_input) {}
+InputConfiguration::InputConfiguration(Input& input) :  m_menu_input(input) {}
 
 void InputConfiguration::get_configuration() {
   get_players_type();
@@ -8,28 +8,29 @@ void InputConfiguration::get_configuration() {
 }
 
 void InputConfiguration::get_players_type(){
-  Menu<PlayersConfig> player_menu ({
-      {1, "Human vs Human", {PlayerInfo::Human, PlayerInfo::Human}},
-      {2, "Human vs Computer", {PlayerInfo::Human, PlayerInfo::Cpu}},
-      {3, "Computer vs Cpu", {PlayerInfo::Cpu, PlayerInfo::Cpu}},
-  });
+  Menu<PlayersConfig> player_menu(
+    "Select Players",{
+      {1, "Human vs Human",       {GameTurn::Human, GameTurn::Human}},
+      {2, "Human vs Computer",    {GameTurn::Human, GameTurn::Cpu}},
+      {3, "Computer vs Computer", {GameTurn::Cpu,   GameTurn::Cpu}},
+    }
+  );
 
-  player_menu.set_title("Select Players");
-  player_menu.print();
-
-  m_p_config = player_menu.select_option(m_input);
+  player_menu.add_input_manager(m_menu_input);
+  m_p_config = player_menu.select_option();
 }
 
 void InputConfiguration::get_players_color() {
-  Menu<Color> player_menu  ({
+  Menu<Color> player_menu  (
+    "Select Color",{
       {1, "WHITE", WHITE},
       {2, "BLACK", BLACK}
-  });
+    }
+  );
 
-  player_menu.set_title("Select Color");
-  player_menu.print();
+  player_menu.add_input_manager(m_menu_input);
 
-  Color c = player_menu.select_option(m_input);
+  Color c = player_menu.select_option();
 
   m_p_config.set_color(GameTurn::player_1, c);
   m_p_config.set_color(GameTurn::player_2, c == BLACK ? WHITE :  BLACK);

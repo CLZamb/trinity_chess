@@ -2,7 +2,6 @@
 #define BOXSTRUCT_H
 #include <initializer_list>
 #include <iostream>
-#include <algorithm>
 
 class Box {
   public:
@@ -22,7 +21,7 @@ class Box {
     }
 
     static const int kRowSize = 5 /*rows*/;
-    static const int kCharSize = (9 /*characters*/ * 5 /*bytes*/);
+    static const int kCharSize = (9 /*characters*/ * 7 /*bytes*/);
     char content[kRowSize][kCharSize];
 };
 

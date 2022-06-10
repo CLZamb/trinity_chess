@@ -15,7 +15,7 @@ namespace string_utils{
   static const std::regex format_full_move = std::regex("[a-hA-H][1-8]\\s*[a-hA-H][1-8]");
   static const std::regex format_single_position = std::regex("([a-hA-H]\\s*[1-8])");
 
-  static Move to_move(const string& str_move){
+  inline Move to_move(const string& str_move){
     std::vector<string> list_pos;
     Move result;
 
@@ -32,9 +32,10 @@ namespace string_utils{
     return result;
   }
 
-  static bool is_valid_move_format(const string& str_mv) {
+  inline bool is_valid_move_format(const string& str_mv) {
     return Regex::match(str_mv, format_full_move);
   }
+
 }
 
 #endif /* MOVE_UTILS_H */

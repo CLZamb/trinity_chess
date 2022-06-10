@@ -2,19 +2,16 @@
 #define OPTIONS_H
 
 #include "player/headers/input.h"
-#include "player/headers/player.h"
 #include <cstddef>
 #include <iostream>
 #include <unordered_map>
 
-using std::cin;
-using std::cout;
 using std::unordered_map;
 
 template <typename T>
 struct Option {
-  int num;
-  string desc;
+  int num = 0;
+  string desc = "";
   T opt;
 };
 
@@ -25,6 +22,7 @@ class Options {
   Options(std::initializer_list<Option<T>> lst) {
     for (const auto l : lst) {
       options.emplace(l.num, l);
+      keys.push_back(l.num);
     }
   }
 
@@ -34,42 +32,32 @@ class Options {
     options.emplace(options.size() - 1, item);
   }
 
-  Option<T>& select_option(Input& input) {
-    int key = -1;
-    bool valid_option = false;
-
-    cout << "\t\t\t\tchoose one of the options (" 
-      << start_index << " - "
-      << options.size() << "): ";
-
-    while (!valid_option) {
-      key = input.get_integer_input();
-      valid_option = check_valid_option(key);
-
-      if (!valid_option) {
-        cout << "invalid option try again!" << "\n";
-        cin.clear();
-        cin.ignore();
-      }
-    }
-
-    cin.clear();
-    cin.ignore();
-    return options.find(key)->second;
+  Option<T>& get_option(const int &key) {
+    auto it = options.find(key);
+    return it == options.end() ? empty : it->second;
   }
 
-  unordered_map<int, Option<T>> get_options() {
+  const unordered_map<int, Option<T>> &get_options() {
     return options;
   }
-
- private:
-  static const size_t start_index = 1;
 
   bool check_valid_option(int i) {
     return options.find(i) != options.end();
   }
 
+  size_t size() {
+    return options.size();
+  }
+
+  const vector<int>& get_keys() {
+    return keys;
+  }
+
+ private:
+  static const size_t start_index = 1;
+  Option<T> empty;
   unordered_map<int, Option<T>> options;
+  vector<int> keys;
 };
 
 #endif /* OPTIONS_H */

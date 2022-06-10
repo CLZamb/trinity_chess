@@ -8,7 +8,6 @@
 #include "piece/headers/piece.h"
 #include "piece/headers/pieces.h"
 #include "utils.h"
-#include "player/headers/player.h"
 #include "square.h"
 #include "game/headers/move.h"
 #include "game/headers/game_turn_observer.h"
@@ -31,10 +30,8 @@ class Board : public GameTurnObserver {
  private:
   bool is_legal_move(Move&);
   Piecetype get_piece_at_square(int);
-  int evaluate_board() { return 0; }
   void parser_fen(string fen);
   void move_piece_to_square(Piecetype piece, SquareIndices from, SquareIndices to);
-  void capture_piece(const Move& m);
   void save_move(const Move &m);
   void update_board_info(const string &info);
   void update_board_view();

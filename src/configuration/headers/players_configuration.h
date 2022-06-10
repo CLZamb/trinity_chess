@@ -10,15 +10,20 @@ using std::array;
 class PlayersConfig {
 public:
   PlayersConfig();
-  PlayersConfig(PlayerInfo::Type, PlayerInfo::Type);
-  void set_color(GameTurn::players, Color c);
-  Color get_color(GameTurn::players p);
-  PlayerInfo::Type get_type(GameTurn::players p);
-  PlayerInfo get_player_info(GameTurn::players);
+  PlayersConfig(GameTurn::Type, GameTurn::Type);
+
+  void set_color(GameTurn::Players, Color c);
+  Color get_color(GameTurn::Players p);
+
+  void  set_type(GameTurn::Players, GameTurn::Type c);
+  GameTurn::Type get_type(GameTurn::Players p);
+
+  PlayerInfo get_player_info(GameTurn::Players);
 
 private:
-  array<PlayerInfo, GameTurn::kSize> player{GameTurn::player_1,
-                                            GameTurn::player_2};
+  array<PlayerInfo, GameTurn::kSize> player {{
+    {WHITE, GameTurn::Human, GameTurn::player_1},
+    {BLACK, GameTurn::Human, GameTurn::player_2}
+  }};
 };
-
 #endif /* PLAYER_CONFIG_H */

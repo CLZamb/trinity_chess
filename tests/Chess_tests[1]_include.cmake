@@ -1,0 +1,5 @@
+if(EXISTS "/Users/cristofher/code/c++/chess_project/trinity_engine/tests/Chess_tests[1]_tests.cmake")
+  include("/Users/cristofher/code/c++/chess_project/trinity_engine/tests/Chess_tests[1]_tests.cmake")
+else()
+  add_test(Chess_tests_NOT_BUILT Chess_tests_NOT_BUILT)
+endif()
