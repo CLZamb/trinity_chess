@@ -7,9 +7,9 @@ Game::Game(Configuration pc, Input& input) :
   m_board_info(m_board.get_info()),
   m_board_view(m_board.get_view()),
   m_input(input) {
-  setup_input();
   setup_players();
   setup_board();
+  setup_input();
 }
 
 Game::~Game() {}

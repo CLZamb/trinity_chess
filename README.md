@@ -30,12 +30,12 @@ chess engine written in C++17
 ## Building
 Unix:
 ```
-cmake .
-make
-```
+cmake -S . -B build 
+cmake --build build -j 18 ```
 ## Run
 ```
-./main
+./build/bin/Chess
+
 ```
 ### To Do
 - Polyglot

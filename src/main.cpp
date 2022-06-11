@@ -14,19 +14,19 @@ void play(Input& input) {
 }
 
 int main(/*int argc, char *argv[]*/) {
-  KeyboardInput m_c_input;
+  KeyboardInput m_input;
 
   string play_str = "Play", quit = "Quit";
-  Menu<string> start_menu (
+  Menu<string> start_menu ( m_input,
     "Welcome to trintity Chess",{ 
       { 1, "Play", play_str}, 
       { 2, "Quit", quit}
     }
   );
 
-  start_menu.add_input_manager(m_c_input);
+  start_menu.print();
   if (start_menu.select_option() == play_str) {
-    play(m_c_input);
+    play(m_input);
   }
 
   return 0;

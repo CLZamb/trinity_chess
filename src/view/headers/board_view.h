@@ -6,7 +6,7 @@
 #include "player/headers/input_observer.h"
 #include "game/headers/game_turn.h"
 
-class BoardView : public View {
+class BoardView : public View, public InputObserver {
   public:
     BoardView();
     virtual ~BoardView();

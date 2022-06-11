@@ -5,9 +5,7 @@
 using std::cout;
 using std::cin;
 
-ConsoleInput::ConsoleInput() {
-  m_event.set_type(InputEvent::None);
-}
+ConsoleInput::ConsoleInput() { m_event.set_type(InputEvent::None); }
 
 void ConsoleInput::update_turn(const PlayerInfo& info) { m_player_info = info; }
 
@@ -20,24 +18,10 @@ const string &ConsoleInput::get_player_string_move() {
   return m_input;
 }
 
-int ConsoleInput::select_menu_option(const vector<int>& opts) {
-  if (opts.size() == 0)  return 0;
-
-  int key = -1;
-  bool valid_option = false;
-  m_event.set_type(InputEvent::None);
-
-  while (!valid_option) {
-    key = get_integer_input();
-    valid_option = is_valid_option(opts, key);
-
-    if (!valid_option) {
-      notify_input_event();
-      cout << invalid_option_msg;
-    }
-  }
-
-  return key;
+void ConsoleInput::select_menu_option() {
+  m_event.set_type(InputEvent::IntInput);
+  m_event.set_int_input(get_integer_input());
+  notify_input_event();
 }
 
 int ConsoleInput::get_integer_input() {
@@ -70,8 +54,4 @@ void ConsoleInput::notify_input_event() {
 void ConsoleInput::update_listener(InputObserver *observer) {
   p_observer = observer;
   notify_input_event();
-}
-
-bool ConsoleInput::is_valid_option(const vector<int> options, const int &option) {
-  return std::find(options.begin(), options.end(), option) != options.end();
 }
