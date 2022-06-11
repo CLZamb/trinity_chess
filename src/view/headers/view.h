@@ -7,14 +7,13 @@
 
 using std::string;
 
-class View : public Displayable , public InputObserver {
+class View : public Displayable {
   public:
     View(string name);
     void print();
 
     static string get_name();
     void draw() override;
-    void handle_input_event(const InputEvent&) override {}
 
   private:
     static string name;

@@ -1,12 +1,15 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include "player/headers/input.h"
 #include <cstddef>
 #include <iostream>
+#include <iterator>
 #include <unordered_map>
+#include <vector>
 
 using std::unordered_map;
+using std::string;
+using std::vector;
 
 template <typename T>
 struct Option {
@@ -41,6 +44,7 @@ class Options {
     return options;
   }
 
+
   bool check_valid_option(int i) {
     return options.find(i) != options.end();
   }
@@ -49,8 +53,16 @@ class Options {
     return options.size();
   }
 
-  const vector<int>& get_keys() {
-    return keys;
+  vector<int>::const_iterator get_keys_begin() {
+    return keys.begin();
+  }
+
+  vector<int>::const_iterator begin() {
+    return keys.cbegin();
+  }
+
+  int &back() {
+    return keys.back();
   }
 
  private:

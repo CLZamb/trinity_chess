@@ -2,8 +2,6 @@
 #define INPUT_H
 #include <string>
 #include "game/headers/game_turn_observer.h"
-#include "view/headers/menu_view.h"
-#include "view/headers/view.h"
 #include "input_observer.h"
 
 using std::string;
@@ -20,7 +18,7 @@ class InputObservable {
 
 class Input : public GameTurnObserver , public InputObservable {
   public:
-    virtual int select_menu_option(const vector<int> &options) = 0;
+    virtual void select_menu_option() = 0;
     virtual const string& get_player_string_move() = 0;
   protected:
     string m_input = "quit";

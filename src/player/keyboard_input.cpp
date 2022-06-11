@@ -1,9 +1,9 @@
 #include "headers/keyboard_input.h"
+#include "input/headers/input_event.h"
 
 termios KeyboardInput::old;
 termios KeyboardInput::current;
 
-using std::cin;
 using std::cout;
 
 KeyboardInput::KeyboardInput() {
@@ -26,19 +26,17 @@ void KeyboardInput::update_turn(const PlayerInfo &info) {
 }
 
 const string &KeyboardInput::get_player_string_move() {
-  cin.get();
-  exit(0);
+  m_input = get_input();
   return m_input;
 }
 
-int KeyboardInput::select_menu_option(const vector<int> &opts) {
-  if (opts.size() == 0) return 0;
-
+string KeyboardInput::get_input() {
   m_event.set_type(InputEvent::KeyPressed);
-  bool selected = false;
-  vector<int>::const_iterator selected_option = opts.begin();
 
-  InputKeys::Key key_pressed = InputKeys::quit;
+  bool selected = false;
+  InputKeys::Key key_pressed {InputKeys::quit};
+  SquareIndices from = SquareIndices(pos[m_player_info.turn]);
+
   while (!selected) {
     key_pressed = InputKeys::Key(fgetc(stdin));
     switch (key_pressed) {
@@ -49,46 +47,87 @@ int KeyboardInput::select_menu_option(const vector<int> &opts) {
         selected = true;
         break;
       case InputKeys::ARROW_KEY:
-        key_pressed = InputKeys::Key(get_arrow_key_pressed());
-        update_current_selection(key_pressed, opts, selected_option);
+        next_position();
+        m_event.set_position(pos[m_player_info.turn]);
+        notify_input_event();
+        break;
+      default:
+        cout << "pressed"  << key_pressed << std::endl;
+        cout << "Invalid key, please use arrow keys and select with enter\n";
+        break;
+    }
+  }
+
+  return utils::square_int_to_str(from) + utils::square_int_to_str(SquareIndices(pos[m_player_info.turn]));
+}
+
+void KeyboardInput::next_position() {
+  switch(get_arrow_key_pressed()) {
+    case InputKeys::UP:
+      pos[m_player_info.turn] += 8;
+      break;
+    case InputKeys::DOWN:
+      pos[m_player_info.turn] -= 8;
+      break;
+    case InputKeys::LEFT:
+      pos[m_player_info.turn] -= 1;
+      break;
+    case InputKeys::RIGHT:
+      pos[m_player_info.turn] += 1;
+      break;
+    default:
+      break;
+  }
+
+  if (pos[m_player_info.turn] > H8) {
+    pos[m_player_info.turn] = H8;
+  }
+
+  if (pos[m_player_info.turn] < A1) {
+    pos[m_player_info.turn] = A1;
+  }
+}
+
+void KeyboardInput::select_menu_option() {
+  m_event.set_type(InputEvent::KeyPressed);
+  bool selected = false;
+  InputKeys::Key key_pressed = InputKeys::quit;
+
+  while (!selected) {
+    key_pressed = InputKeys::Key(fgetc(stdin));
+    switch (key_pressed) {
+      case InputKeys::quit:
+      case InputKeys::Quit:
+        exit(EXIT_SUCCESS);
+      case InputKeys::ENTER:
+        selected = true;
+        notify_key_pressed(key_pressed);
+        break;
+      case InputKeys::ARROW_KEY:
+        notify_key_pressed(get_arrow_key_pressed());
         break;
       default:
         cout << "Invalid key, please use arrow keys, select with enter!\n";
         break;
     }
   }
-
-  return *selected_option;
 }
 
-void KeyboardInput::update_current_selection(
-    const InputKeys::Key &key_pressed, const vector<int> &opts,
-    vector<int>::const_iterator &selected_option) {
-  switch(key_pressed) {
-    case InputKeys::UP:
-      if(*selected_option != opts.front())
-        selected_option--;
-      break;
-    case InputKeys::DOWN:
-      if(*selected_option != opts.back())
-        selected_option++;
-      break;
-    default:
-      return;
-  }
-
+void KeyboardInput::notify_key_pressed(const InputKeys::Key &key_pressed) {
   m_event.set_pressed_key(key_pressed);
   notify_input_event();
 }
 
-int KeyboardInput::get_arrow_key_pressed() {
-  if (fgetc(stdin) != InputKeys::LEFT_BRACKET) return 0;
+InputKeys::Key KeyboardInput::get_arrow_key_pressed() {
+  if (fgetc(stdin) != InputKeys::LEFT_BRACKET) return InputKeys::Quit;
 
-  int key_pressed =  fgetc(stdin);
+  InputKeys::Key key_pressed = key_pressed = InputKeys::Key(fgetc(stdin));
   return key_pressed;
 }
 
 void KeyboardInput::update_listener(InputObserver *observer) {
+  if (!observer) return;
+
   p_observer = observer;
   m_event.set_type(InputEvent::KeyboardSetup);
   notify_input_event();

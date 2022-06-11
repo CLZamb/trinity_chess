@@ -105,6 +105,7 @@ void BoardView::handle_input_event(const InputEvent &e) {
     case InputEvent::KeyPressed:
       m_squares_drawings.deselect_square(e.get_previous_position());
       m_squares_drawings.select_square(e.get_position());
+      print();
       break;
     case InputEvent::KeyboardSetup:
       m_squares_drawings.select_square(e.get_position());
@@ -113,5 +114,4 @@ void BoardView::handle_input_event(const InputEvent &e) {
       break;
   }
 
-  print();
 }

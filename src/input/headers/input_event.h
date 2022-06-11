@@ -8,6 +8,7 @@ using std::string;
 
 struct InputKeys{
   enum Key {
+    NONE      = 0,
     ARROW_KEY = 27,
     UP        = 'A',
     DOWN      = 'B',
@@ -26,9 +27,8 @@ class InputEvent {
   enum Type {
     InvalidType = 0,
     None = 1,
-    Menu,
+    IntInput,
     KeyPressed, 
-    StringMove,
     KeyboardSetup,
   };
 
@@ -39,8 +39,8 @@ class InputEvent {
   void set_pressed_key(InputKeys::Key t);
   InputKeys::Key get_pressed_key() const ;
 
-  void set_input(const string &i);
-  string get_input() const;
+  void set_int_input(const int &i);
+  int get_int_input() const;
 
   void set_position(const int &pos);
   int get_position() const;
@@ -49,9 +49,8 @@ class InputEvent {
  private:
     Type m_type;
     InputKeys::Key m_key;
-    string m_input;
+    int m_int_input;
     int m_pos = A1, m_prev_pos = A1;
-    int m_current_selected;
 };
 
 #endif /* INPUT_EVENT_H */

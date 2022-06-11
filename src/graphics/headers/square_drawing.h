@@ -69,7 +69,6 @@ class SquaresDrawings {
       selected = *prev;
       mod.add_attribute(DrawingMod::SLOW_BLINK, &selected);
       m_squares[i].update_drawing(&selected);
-      std::cout << "selected selection " << i << std::endl;
     }
 
     void deselect_square(const size_t &i) {
