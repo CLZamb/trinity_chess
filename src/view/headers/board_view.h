@@ -6,7 +6,7 @@
 #include "player/headers/input_observer.h"
 #include "game/headers/game_turn.h"
 
-class BoardView : public View, public InputObserver {
+class BoardView : public View {
   public:
     BoardView();
     virtual ~BoardView();
@@ -15,7 +15,8 @@ class BoardView : public View, public InputObserver {
     void add_view_at_window_pos(View& v, Window::Pane_pos pos);
     void add_pane_at_window_pos(Displayable *v, Window::Pane_pos pos);
     void clear_square_on_range(const int start, const int end);
-    void handle_input_event(const InputEvent &) override;
+    void deselect_square(const size_t &i);
+    void select_square(const size_t &i);
 
   private:
     void clear();

@@ -6,17 +6,12 @@ Game::Game(Configuration pc, Input& input) :
   m_players(pc.get_players_info()),
   m_board_info(m_board.get_info()),
   m_board_view(m_board.get_view()),
-  m_input(input) {
+  m_board_input_handler(input, m_board_view) {
   setup_players();
   setup_board();
-  setup_input();
 }
 
 Game::~Game() {}
-
-void Game::setup_input() {
-  m_input.update_listener(&m_board_view);
-}
 
 void Game::setup_players() {
   attach_observers_to_players();
@@ -25,10 +20,10 @@ void Game::setup_players() {
 }
 
 void Game::attach_observers_to_players() {
-  m_players.attach(&m_input);
   m_players.attach(&m_board);
   m_players.attach(&m_board_info);
   m_players.attach(&m_info_pane);
+  m_players.attach(&m_board_input_handler);
 }
 
 void Game::setup_board() {
@@ -41,7 +36,7 @@ void Game::play() {
   while (!m_board.is_checkmate()) {
     print_view();
 
-    str_move = m_input.get_player_string_move();
+    str_move = m_board_input_handler.get_next_player_string_move();
 
     if (!m_board.is_valid_move(str_move))
       continue;

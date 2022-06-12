@@ -47,7 +47,6 @@ class MenuView : public View {
 
     void draw() override {}
 
-
  private:
 
   string format_options(list<string> &options) {

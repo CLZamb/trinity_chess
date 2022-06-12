@@ -7,21 +7,20 @@ class ConsoleInput : public Input {
  public:
   ConsoleInput();
 
-  void update_turn(const PlayerInfo &i) override;
-  const string &get_player_string_move() override;
+  void get_player_string_move() override;
   void notify_input_event() override;
   void update_listener(InputObserver *observer) override;
   void select_menu_option() override;
 
  private:
-  int get_integer_input();
   void has_player_quit(const string &s);
 
-  void get_human_input(string &input);
-  void get_cpu_input(string &input);
-  PlayerInfo m_player_info;
-  string input_space = "\t\t\t\t";
+  int get_integer_input();
+  string get_string_input();
+
+  static const string input_space;
   InputEvent m_event;
 };
+
 
 #endif /* CONSOLE_INPUT_H */

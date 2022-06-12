@@ -28,6 +28,7 @@ class InputEvent {
     InvalidType = 0,
     None = 1,
     IntInput,
+    StringInput,
     KeyPressed, 
     KeyboardSetup,
   };
@@ -42,15 +43,14 @@ class InputEvent {
   void set_int_input(const int &i);
   int get_int_input() const;
 
-  void set_position(const int &pos);
-  int get_position() const;
+  void set_string_input(const string &i);
+  const string &get_string_input() const;
 
-  int get_previous_position() const;
  private:
     Type m_type;
     InputKeys::Key m_key;
     int m_int_input;
-    int m_pos = A1, m_prev_pos = A1;
+    string m_string_input = "quit";
 };
 
 #endif /* INPUT_EVENT_H */

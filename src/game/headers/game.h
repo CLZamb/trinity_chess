@@ -5,6 +5,7 @@
 #include "configuration/headers/configuration.h"
 // #include "move_utils.h"
 #include "controller/headers/uicontroller.h"
+#include "game/headers/board_input_hanlder.h"
 #include "player/headers/console_input.h"
 #include "player/headers/players.h"
 #include "view/headers/info_pane.h"
@@ -16,7 +17,6 @@ class Game {
   void play();
 
  private:
-  void setup_input();
   void print_view();
   void attach_observers_to_players();
   void setup_players();
@@ -30,7 +30,8 @@ class Game {
   BoardInfo &m_board_info;
   BoardView &m_board_view;
   InfoPane m_info_pane;
-  Input &m_input;
+
+  BoardInputHanlder m_board_input_handler;
 };
 
 #endif /* GAME_H */

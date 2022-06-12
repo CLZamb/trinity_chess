@@ -100,18 +100,10 @@ void BoardView::set_piece_drawing_at_square_pos(Piecetype type, SquareIndices po
   m_squares_drawings[position].update_drawing(m_pieces_drawings.get_drawing(type, m_squares_drawings[position].is_black_square()));
 }
 
-void BoardView::handle_input_event(const InputEvent &e) {
-  switch(e.get_type()) {
-    case InputEvent::KeyPressed:
-      m_squares_drawings.deselect_square(e.get_previous_position());
-      m_squares_drawings.select_square(e.get_position());
-      print();
-      break;
-    case InputEvent::KeyboardSetup:
-      m_squares_drawings.select_square(e.get_position());
-      break;
-    default:
-      break;
-  }
+void BoardView::select_square(const size_t &i)  {
+  m_squares_drawings.select_square(i);
+}
 
+void BoardView::deselect_square(const size_t &i) {
+  m_squares_drawings.deselect_square(i);
 }
