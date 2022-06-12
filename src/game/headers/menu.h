@@ -30,7 +30,7 @@ public:
   void add_options(const Options<T> &m_opts) { this->m_opts = m_opts; }
 
   const T &select_option() {
-    return m_input_handler.get_selected_option();
+    return m_input_handler.select_option();
   }
 
   void print() { m_view.print(); }

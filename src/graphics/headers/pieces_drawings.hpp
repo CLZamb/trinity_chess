@@ -97,21 +97,27 @@ using std::array;
 class DrawingMod {
   public:
     enum CodeAttribute {
-      RESET  = 0,
+      RESET      = 0,
       BG_INVERSE = 7,
-      SLOW_BLINK = 5,
+      SLOW_BLINK = 100,
+      DEFAULT    = 90,
     };
 
     enum Color {
-      BLACK      = 240,
+      BLACK_FG   = 232,
+      BLACK_BG_BLACK_SQUARE   = 236,
+      BLACK_BG_WHITE_SQUARE   = 241,
+
+      WHITE_FG   = 255,
+      WHITE_BG_BLACK_SQUARE   = 240,
+      WHITE_BG_WHITE_SQUARE   = 250,
+
+      WHITE      = 254,
       GREEN      = 8, 
-      BLACK_GREY = 236,
-      WHITE      = 253,
-      WHITE_GREY = 250,
     };
 
     DrawingMod() {}
-    ~DrawingMod() {}
+    virtual ~DrawingMod() {}
 
     void add_attribute(CodeAttribute c, Box* drawing) {
       mod = modifier_to_str(c).c_str();
@@ -201,10 +207,9 @@ class PieceDrawing {
   explicit PieceDrawing(const string& piece_type) {
     black_square_drawing = new Drawing(piece_type);
     white_square_drawing = new Drawing(piece_type);
-    black_square_drawing->add_attribute(DrawingMod::BG_INVERSE);
   }
 
-  ~PieceDrawing() {
+  virtual ~PieceDrawing() {
     delete black_square_drawing;
     delete white_square_drawing;
   }
@@ -219,9 +224,9 @@ class PieceDrawing {
     white_square_drawing->add_attribute(mod);
   }
 
-  void set_bg_color_modifier(DrawingMod::Color mod) {
-    black_square_drawing->add_fg_color_modifier(mod);
-    white_square_drawing->add_fg_color_modifier(mod);
+  void set_bg_color_modifier(DrawingMod::Color white_square, DrawingMod::Color black_square) {
+    white_square_drawing->add_bg_color_modifier(white_square);
+    black_square_drawing->add_bg_color_modifier(black_square);
   }
 
   Box* get_drawing(bool is_in_black_square) {
@@ -276,10 +281,19 @@ class PiecesDrawings {
         m_drawing_builder.build_drawing(pct);
         drawing = m_drawing_builder.get_drawing();
         piece_drawing_mod_fg = utils::check::is_black_piece(pct)
-          ? DrawingMod::BLACK
-          : DrawingMod::WHITE;
+          ? DrawingMod::BLACK_FG
+          : DrawingMod::WHITE_FG;
+
+        piece_drawing_mod_black_square_bg = utils::check::is_black_piece(pct)
+          ? DrawingMod::BLACK_BG_BLACK_SQUARE
+          : DrawingMod::WHITE_BG_BLACK_SQUARE;
+
+        piece_drawing_mod_white_square_bg = utils::check::is_black_piece(pct)
+          ? DrawingMod::BLACK_BG_WHITE_SQUARE
+          : DrawingMod::WHITE_BG_WHITE_SQUARE;
 
         drawing->set_fg_color_modifier(piece_drawing_mod_fg);
+        drawing->set_bg_color_modifier(piece_drawing_mod_white_square_bg, piece_drawing_mod_black_square_bg);
 
         m_pieces[pct] = drawing;
       }
@@ -293,6 +307,8 @@ class PiecesDrawings {
 
   private:
     DrawingMod::Color piece_drawing_mod_fg;  
+    DrawingMod::Color piece_drawing_mod_black_square_bg;  
+    DrawingMod::Color piece_drawing_mod_white_square_bg;  
     PieceDrawing *drawing; 
     StandardDrawingBuilder m_drawing_builder;
     std::array<PieceDrawing*, utils::constant::ktotal_number_pieces> m_pieces;

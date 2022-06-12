@@ -14,7 +14,7 @@ class MenuInputHandler : public InputObserver  {
       m_input.update_listener(this); 
     }
 
-  const T& get_selected_option() {
+  const T& select_option() {
     m_input.select_menu_option();
     return m_opts.get_option(m_selected).opt;
   }

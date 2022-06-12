@@ -1,5 +1,4 @@
 #include "headers/keyboard_input.h"
-#include "input/headers/input_event.h"
 
 termios KeyboardInput::old;
 termios KeyboardInput::current;
@@ -12,8 +11,6 @@ KeyboardInput::KeyboardInput() {
   current.c_lflag &= ~(ICANON | ECHO);
   tcsetattr(STDIN_FILENO, TCSANOW, &current);
 
-  pos[GameTurn::player_1] = A1;
-  pos[GameTurn::player_2] = H8;
   m_event.set_type(InputEvent::None);
 }
 
@@ -21,71 +18,8 @@ KeyboardInput::~KeyboardInput() {
   tcsetattr(STDIN_FILENO, TCSANOW, &old); 
 }
 
-void KeyboardInput::update_turn(const PlayerInfo &info) {
-  m_player_info = info;
-}
-
-const string &KeyboardInput::get_player_string_move() {
-  m_input = get_input();
-  return m_input;
-}
-
-string KeyboardInput::get_input() {
-  m_event.set_type(InputEvent::KeyPressed);
-
-  bool selected = false;
-  InputKeys::Key key_pressed {InputKeys::quit};
-  SquareIndices from = SquareIndices(pos[m_player_info.turn]);
-
-  while (!selected) {
-    key_pressed = InputKeys::Key(fgetc(stdin));
-    switch (key_pressed) {
-      case InputKeys::quit:
-      case InputKeys::Quit:
-        exit(EXIT_SUCCESS);
-      case InputKeys::ENTER:
-        selected = true;
-        break;
-      case InputKeys::ARROW_KEY:
-        next_position();
-        m_event.set_position(pos[m_player_info.turn]);
-        notify_input_event();
-        break;
-      default:
-        cout << "pressed"  << key_pressed << std::endl;
-        cout << "Invalid key, please use arrow keys and select with enter\n";
-        break;
-    }
-  }
-
-  return utils::square_int_to_str(from) + utils::square_int_to_str(SquareIndices(pos[m_player_info.turn]));
-}
-
-void KeyboardInput::next_position() {
-  switch(get_arrow_key_pressed()) {
-    case InputKeys::UP:
-      pos[m_player_info.turn] += 8;
-      break;
-    case InputKeys::DOWN:
-      pos[m_player_info.turn] -= 8;
-      break;
-    case InputKeys::LEFT:
-      pos[m_player_info.turn] -= 1;
-      break;
-    case InputKeys::RIGHT:
-      pos[m_player_info.turn] += 1;
-      break;
-    default:
-      break;
-  }
-
-  if (pos[m_player_info.turn] > H8) {
-    pos[m_player_info.turn] = H8;
-  }
-
-  if (pos[m_player_info.turn] < A1) {
-    pos[m_player_info.turn] = A1;
-  }
+void KeyboardInput::get_player_string_move() {
+  select_menu_option();
 }
 
 void KeyboardInput::select_menu_option() {

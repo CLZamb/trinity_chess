@@ -1,6 +1,7 @@
 #ifndef SQUARE_DRAWING_H
 #define SQUARE_DRAWING_H
 
+#include "graphics/headers/game_drawings.hpp"
 #include "pieces_drawings.hpp"
 
 class SquareDrawing {
@@ -67,7 +68,7 @@ class SquaresDrawings {
     void select_square(const size_t &i) {
       prev = m_squares[i].get_drawing();
       selected = *prev;
-      mod.add_attribute(DrawingMod::SLOW_BLINK, &selected);
+      mod.add_attribute(DrawingMod::BG_INVERSE, &selected);
       m_squares[i].update_drawing(&selected);
     }
 

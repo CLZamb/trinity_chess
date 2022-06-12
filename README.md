@@ -31,9 +31,10 @@ chess engine written in C++17
 Unix:
 ```
 cmake -S . -B build 
-cmake --build build -j 18 ```
-## Run
+cmake --build build -j 18
+
 ```
+## Run
 ./build/bin/Chess
 
 ```
