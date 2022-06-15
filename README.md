@@ -2,7 +2,7 @@ chess engine written in C++17
 
 # Trinity Engine
 [![demo](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY.svg)](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY?autoplay=1)
-![alt text](https://raw.githubusercontent.com/CLZamb/trinity_engine/v1/chess_screenshot.png)
+![alt text](https://raw.githubusercontent.com/CLZamb/trinity_engine/dev/chess_screenshot.png)
 
 ## Features
 - Board representation
