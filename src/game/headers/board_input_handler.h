@@ -26,7 +26,9 @@ private:
   void handle_type(const InputEvent::Type & t);
   void handle_key_pressed(const InputKeys::Key key);
   void handle_selected_position(const int& p);
+  void update_view_select_next_square(const int &next);
   void update_view_selected_square(const int &next);
+  void update_view_deselected_square(const int &next);
 
   array<int, GameTurn::kSize> from_pos{D3, E6};
   array<int, GameTurn::kSize> to_pos{from_pos[GameTurn::player_1],
