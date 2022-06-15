@@ -16,7 +16,7 @@ public:
   void update_input_event_listener(InputObserver *observer) override;
   void notify_input_event() override;
   void dispatch_event(const InputEvent& event) override;
-  void set_keyboard_new_attributes();
+  void set_terminal_new_attributes();
 
 private:
   void notify_key_pressed(const InputKeys::Key &key);

@@ -105,12 +105,12 @@ class DrawingMod {
 
     enum Color {
       BLACK_FG   = 232,
-      BLACK_BG_BLACK_SQUARE   = 236,
-      BLACK_BG_WHITE_SQUARE   = 241,
+      BLACK_BG_BLACK_SQUARE   = 1,
+      BLACK_BG_WHITE_SQUARE   = 255,
 
-      WHITE_FG   = 255,
-      WHITE_BG_BLACK_SQUARE   = 240,
-      WHITE_BG_WHITE_SQUARE   = 250,
+      WHITE_FG   = 231,
+      WHITE_BG_BLACK_SQUARE   = 35,
+      WHITE_BG_WHITE_SQUARE   = 252,
 
       WHITE      = 254,
       GREEN      = 10, 

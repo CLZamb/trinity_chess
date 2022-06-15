@@ -40,7 +40,7 @@ void BoardInputHandler::handle_type(const InputEvent::Type & t) {
     case InputEvent::Text:
       break;
     case InputEvent::Keyboard:
-      m_view.select_next_square(from_pos[m_turn.color]);
+      m_view.select_next_square(to_pos[m_turn.color]);
       break;
   }
 }
