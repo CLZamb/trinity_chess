@@ -3,19 +3,34 @@
 termios KeyboardInput::old;
 termios KeyboardInput::current;
 
+string KeyboardInput::hide_cursor  = "\x1b[?25l";
+string KeyboardInput::show_cursor  = "\x1b[?25h";
+
 using std::cout;
 
 KeyboardInput::KeyboardInput() {
-  tcgetattr(STDIN_FILENO, &old);
-  current = old;
-  current.c_lflag &= ~(ICANON | ECHO);
-  tcsetattr(STDIN_FILENO, TCSANOW, &current);
-
-  m_event.set_type(InputEvent::None);
+  set_keyboard_new_attributes();
+  m_event.set_event_type(InputEvent::None);
+  m_event.set_type(InputEvent::Keyboard);
 }
 
 KeyboardInput::~KeyboardInput() { 
+  reset_terminal_configuration();
+}
+
+void KeyboardInput::reset_terminal_configuration() {
+  write(STDOUT_FILENO, show_cursor.c_str(), 6);
+
   tcsetattr(STDIN_FILENO, TCSANOW, &old); 
+}
+
+void KeyboardInput::set_keyboard_new_attributes() {
+  write(STDOUT_FILENO, hide_cursor.c_str(), 6);
+
+  tcgetattr(STDIN_FILENO, &old);
+  current = old;
+  current.c_lflag &= ~(ECHO | ICANON);
+  tcsetattr(STDIN_FILENO, TCSANOW, &current);
 }
 
 void KeyboardInput::get_player_string_move() {
@@ -23,7 +38,7 @@ void KeyboardInput::get_player_string_move() {
 }
 
 void KeyboardInput::select_menu_option() {
-  m_event.set_type(InputEvent::KeyPressed);
+  m_event.set_event_type(InputEvent::KeyPressed);
   bool selected = false;
   InputKeys::Key key_pressed = InputKeys::quit;
 
@@ -32,7 +47,9 @@ void KeyboardInput::select_menu_option() {
     switch (key_pressed) {
       case InputKeys::quit:
       case InputKeys::Quit:
+        reset_terminal_configuration();
         exit(EXIT_SUCCESS);
+        break;
       case InputKeys::ENTER:
         selected = true;
         notify_key_pressed(key_pressed);
@@ -59,15 +76,21 @@ InputKeys::Key KeyboardInput::get_arrow_key_pressed() {
   return key_pressed;
 }
 
-void KeyboardInput::update_listener(InputObserver *observer) {
+void KeyboardInput::update_input_event_listener(InputObserver *observer) {
   if (!observer) return;
 
   p_observer = observer;
-  m_event.set_type(InputEvent::KeyboardSetup);
+  m_event.set_event_type(InputEvent::Setup);
   notify_input_event();
 }
 
 void KeyboardInput::notify_input_event() {
-  if (p_observer)
-    p_observer->handle_input_event(m_event);
+  if (!p_observer) return;
+
+  p_observer->handle_input_event(m_event);
+}
+
+void KeyboardInput::dispatch_event(const InputEvent& event) {
+  m_event.set_event_type(event.get_event_type());
+  notify_input_event();
 }

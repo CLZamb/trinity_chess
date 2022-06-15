@@ -113,7 +113,7 @@ class DrawingMod {
       WHITE_BG_WHITE_SQUARE   = 250,
 
       WHITE      = 254,
-      GREEN      = 8, 
+      GREEN      = 10, 
     };
 
     DrawingMod() {}

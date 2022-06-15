@@ -9,8 +9,9 @@ class ConsoleInput : public Input {
 
   void get_player_string_move() override;
   void notify_input_event() override;
-  void update_listener(InputObserver *observer) override;
+  void update_input_event_listener(InputObserver *observer) override;
   void select_menu_option() override;
+  void dispatch_event(const InputEvent& event) override;
 
  private:
   void has_player_quit(const string &s);

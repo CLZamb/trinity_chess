@@ -5,8 +5,8 @@
 #include "configuration/headers/configuration.h"
 // #include "move_utils.h"
 #include "controller/headers/uicontroller.h"
-#include "game/headers/board_input_hanlder.h"
-#include "player/headers/console_input.h"
+#include "game/headers/board_input_handler.h"
+#include "input/headers/console_input.h"
 #include "player/headers/players.h"
 #include "view/headers/info_pane.h"
 
@@ -31,7 +31,7 @@ class Game {
   BoardView &m_board_view;
   InfoPane m_info_pane;
 
-  BoardInputHanlder m_board_input_handler;
+  BoardInputHandler m_board_input_handler;
 };
 
 #endif /* GAME_H */

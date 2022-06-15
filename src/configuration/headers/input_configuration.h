@@ -2,7 +2,7 @@
 #define INPUT_CONFIGURATION_H
 #include "configuration.h"
 #include "game/headers/menu.h"
-#include "player/headers/console_input.h"
+#include "input/headers/console_input.h"
 
 class InputConfiguration : public Configuration {
 public:

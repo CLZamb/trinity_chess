@@ -79,15 +79,6 @@ void BoardView::clear_square_on_range(const int start_pos, const int end_pos) {
   }
 }
 
-void BoardView::selected_option(const int &pos) {
-  m_squares_drawings.select_square(pos);
-}
-
-void BoardView::deselected_option(const int &pos) {
-  m_squares_drawings.select_square(pos);
-}
-
-
 void BoardView::add_pane_at_window_pos(Displayable *pane, Window::Pane_pos pos) {
   window_view.add_pane(pane, pos);
 }
@@ -97,13 +88,18 @@ void BoardView::add_view_at_window_pos(View& v, Window::Pane_pos pos) {
 }
 
 void BoardView::set_piece_drawing_at_square_pos(Piecetype type, SquareIndices position) {
-  m_squares_drawings[position].update_drawing(m_pieces_drawings.get_drawing(type, m_squares_drawings[position].is_black_square()));
+  m_squares_drawings[position].set_piece_drawing(m_pieces_drawings.get_drawing(type, m_squares_drawings[position].is_black_square()));
 }
 
-void BoardView::select_square(const size_t &i)  {
-  m_squares_drawings.select_square(i);
+void BoardView::select_next_square(const size_t &i)  {
+  m_squares_drawings.select_next_square(i);
+}
+
+void BoardView::selected_square(const size_t &i) {
+  m_squares_drawings.selected_square(i);
 }
 
 void BoardView::deselect_square(const size_t &i) {
-  m_squares_drawings.deselect_square(i);
+  m_squares_drawings.selected_square(i);
 }
+

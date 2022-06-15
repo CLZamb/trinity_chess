@@ -1,18 +1,17 @@
 #ifndef BOARD_INPUT_HANLDER_H
 #define BOARD_INPUT_HANLDER_H
 
+#include "board/headers/defs.h"
 #include "game/headers/game_turn_observer.h"
 #include "input/headers/input_event.h"
-#include "player/headers/input.h"
+#include "input/headers/input.h"
 #include "view/headers/board_view.h"
 
-class BoardInputHanlder : public GameTurnObserver, public InputObserver    {
+class BoardInputHandler : public GameTurnObserver, public InputObserver    {
 public:
-  BoardInputHanlder(Input& i, BoardView &b);
+  BoardInputHandler(Input& i, BoardView &b);
 
   void update_turn(const PlayerInfo &t) override;
-  void next_position();
-
   string get_next_player_string_move();
 
 private:
@@ -24,14 +23,21 @@ private:
   };
 
   void handle_input_event(const InputEvent& e) override;
+  void handle_type(const InputEvent::Type & t);
   void handle_key_pressed(const InputKeys::Key key);
+  void handle_selected_position(const int& p);
+  void update_view_selected_square(const int &next);
 
-  array<int, GameTurn::kSize> pos = {A1, H8};
-  array<int, GameTurn::kSize> from_pos = {A1, H8};
+  array<int, GameTurn::kSize> from_pos{D3, E6};
+  array<int, GameTurn::kSize> to_pos{from_pos[GameTurn::player_1],
+                                     from_pos[GameTurn::player_2]};
+
+  bool from_pos_selected = false;
   string m_string_player_input = "error";
   Input &m_input;
   BoardView &m_view;
   PlayerInfo m_turn;
+  InputEvent m_game_turn_event;
 };
 
 #endif /* BOARD_INPUT_HANLDER_H */

@@ -7,13 +7,23 @@
 #include<unordered_map>
 #include<string>
 #include"box.h"
+using std::string;
 
 namespace DrawingPieces {
+  static const string bishop_str_name = "bishop"; 
+  static const string king_str_name   = "king"; 
+  static const string knight_str_name = "knight"; 
+  static const string pawn_str_name   = "pawn"; 
+  static const string queen_str_name  = "queen"; 
+  static const string rook_str_name   = "rook"; 
+  static const string white_square_str_name = "WhiteSquare";
+  static const string black_square_str_name = "BlackSquare";
+
 static const std::unordered_map<std::string, Box> const_piece_drawing = {
   {
-    "bishop",
+    bishop_str_name,
     {{
-       "   ▗⧳▖   ",
+       "   ▗◘▖   ",
        "   ▚/▞   ",
        "    █    ",
        "   ▟█▙   ",
@@ -21,7 +31,7 @@ static const std::unordered_map<std::string, Box> const_piece_drawing = {
      }}
   },
   {
-    "king",
+    king_str_name,
     {{
        "  ▁ ✜ ▁  ",
        " ( ╲|╱ ) ",
@@ -31,17 +41,17 @@ static const std::unordered_map<std::string, Box> const_piece_drawing = {
      }}
   },
   {
-    "knight",
+    knight_str_name,
     {{
        "         ",
-       "    █ █  ",
-       "   ████  ",
-       "    ███  ",
+       "   █ █   ",
+       "  ████   ",
+       "   ███   ",
        "         ",
      }}
   },
   {
-    "pawn",
+    pawn_str_name,
     {{
        "   ▗▄▖   ",
        "   ▜█▛   ",
@@ -51,7 +61,7 @@ static const std::unordered_map<std::string, Box> const_piece_drawing = {
      }}
   },
   {
-    "queen",
+    queen_str_name,
     {{
        "         ",
        "  █ █ █  ",
@@ -61,7 +71,7 @@ static const std::unordered_map<std::string, Box> const_piece_drawing = {
      }}
   },
   {
-    "rook",
+    rook_str_name,
     {{
        "  ▄ ▄ ▄  ",
        "  ▜███▛  ",
@@ -72,7 +82,7 @@ static const std::unordered_map<std::string, Box> const_piece_drawing = {
 
   },
   {
-    "BaseSquare",
+    white_square_str_name,
     {{
        "\033[38;5;245m█████████\033[0m",
        "\033[38;5;246m█████████\033[0m",
@@ -82,7 +92,7 @@ static const std::unordered_map<std::string, Box> const_piece_drawing = {
      }}
   },
   {
-    "BlackSquare",
+    black_square_str_name,
     {{
        "\033[38;5;233m█████████\033[0m",
        "\033[38;5;234m█████████\033[0m",

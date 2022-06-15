@@ -1,4 +1,5 @@
 #include "headers/game.h"
+
 using std::cout;
 using std::endl;
 
@@ -16,7 +17,6 @@ Game::~Game() {}
 void Game::setup_players() {
   attach_observers_to_players();
   m_players.set_inital_side(GameTurn::player_1);
-  m_players.notify_change_turn();
 }
 
 void Game::attach_observers_to_players() {

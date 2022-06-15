@@ -3,7 +3,6 @@
 
 #include <string>
 #include "graphics/headers/window.h"
-#include "player/headers/input_observer.h"
 
 using std::string;
 

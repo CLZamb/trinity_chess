@@ -4,7 +4,7 @@
 #include "game/headers/menu_input_handler.h"
 #include "input/headers/input_event.h"
 #include "options.h"
-#include "player/headers/keyboard_input.h"
+#include "input/headers/keyboard_input.h"
 #include "view/headers/menu_view.h"
 #include <unordered_map>
 
@@ -28,18 +28,17 @@ public:
 
   void set_title(const string &s) { m_view.set_title(s); }
   void add_options(const Options<T> &m_opts) { this->m_opts = m_opts; }
-
-  const T &select_option() {
-    return m_input_handler.select_option();
-  }
+  const T &select_option() { return m_input_handler.select_option(); }
 
   void print() { m_view.print(); }
 private:
   list<string> format_options() {
     list<string> options_formatted;
     for (auto i : m_opts.get_options()) {
-      options_formatted.push_back(std::to_string(i.second.num) + ". " +
-                                  i.second.desc);
+      options_formatted.push_back(
+          std::to_string(i.second.num) 
+          + ". " +
+          i.second.desc);
     }
     return options_formatted;
   }

@@ -3,15 +3,15 @@
 
 #include "game/headers/options.h"
 #include "input/headers/input_event.h"
-#include "player/headers/input.h"
+#include "input/headers/input.h"
 #include "view/headers/menu_view.h"
 
 template <typename T> 
 class MenuInputHandler : public InputObserver  {
  public:
   MenuInputHandler(Input& i, MenuView &v, Options<T> &o) : 
-    m_input(i), m_view(v) ,m_opts(o), m_selection(m_opts.get_keys_begin()) {
-      m_input.update_listener(this); 
+    m_input(i), m_view(v) ,m_opts(o), m_selection(o.get_keys_begin()) {
+      m_input.update_input_event_listener(this); 
     }
 
   const T& select_option() {
@@ -21,17 +21,28 @@ class MenuInputHandler : public InputObserver  {
 
  private:
   void handle_input_event(const InputEvent& e) override {
-    switch(e.get_type()) {
+    switch(e.get_event_type()) {
+      case InputEvent::Setup:
+        handle_type(e.get_type()); 
+        break;
       case InputEvent::KeyPressed:
         handle_key_pressed(e.get_pressed_key());
         break;
-      case InputEvent::KeyboardSetup:
-        m_view.selected_option(*m_selection);
-        break;
-      case InputEvent::IntInput:
+      case InputEvent::Int:
         handle_int_input(e.get_int_input());
         break;
       default:
+        break;
+    }
+  }
+
+  void handle_type(const InputEvent::Type & t) {
+    switch(t) {
+      case InputEvent::Text:
+        break;
+
+      case InputEvent::Keyboard:
+        m_view.selected_option(*m_selection);
         break;
     }
   }
