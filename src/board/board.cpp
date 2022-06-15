@@ -86,6 +86,7 @@ void Board::make_move(string m) {
   SquareIndices from = mv.get_from();
   SquareIndices to = mv.get_to();
   Piecetype piece = get_piece_at_square(from);
+  mv.set_piece(piece);
 
   board_state.move(utils::check::is_black_piece(piece), from, to);
   move_piece_to_square(piece, from, to);

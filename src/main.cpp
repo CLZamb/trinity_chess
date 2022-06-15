@@ -11,7 +11,7 @@ void play(Input& input) {
 }
 
 int main(/*int argc, char *argv[]*/) {
-  KeyboardInput m_input;
+  ConsoleInput m_input;
 
   string play_str = "Play", quit = "Quit";
   Menu<string> start_menu ( m_input,

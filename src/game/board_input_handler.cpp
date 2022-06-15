@@ -71,14 +71,9 @@ void BoardInputHandler::handle_key_pressed(const InputKeys::Key key) {
 
   if (next_pos < A1 || next_pos > H8) return;
 
-  update_view_selected_square(next_pos);
+  update_view_select_next_square(next_pos);
 
   to_pos[m_turn.color] = next_pos;
-}
-
-void BoardInputHandler::update_view_selected_square(const int &next) {
-  m_view.select_next_square(next);
-  m_view.print();
 }
 
 void BoardInputHandler::handle_selected_position(const int& p){ 
@@ -86,15 +81,29 @@ void BoardInputHandler::handle_selected_position(const int& p){
 
   if (from_pos_selected) {
     from_pos_selected = false;
-    m_view.deselect_square(from_pos[m_turn.turn]);
-    m_view.print();
+    update_view_deselected_square(from_pos[m_turn.turn]);
     return;
   }
 
-  m_view.selected_square(p);
-  m_view.print();
+  update_view_selected_square(p);
+
   from_pos[m_turn.turn] = to_pos[m_turn.turn];
   from_pos_selected = true;
 
   m_input.get_player_string_move();
+}
+
+void BoardInputHandler::update_view_select_next_square(const int &next) {
+  m_view.select_next_square(next);
+  m_view.print();
+}
+
+void BoardInputHandler::update_view_selected_square(const int &p) {
+  m_view.selected_square(p);
+  m_view.print();
+}
+
+void BoardInputHandler::update_view_deselected_square(const int &p) {
+  m_view.deselect_square(p);
+  m_view.print();
 }
