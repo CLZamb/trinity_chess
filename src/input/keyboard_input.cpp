@@ -9,7 +9,7 @@ string KeyboardInput::show_cursor  = "\x1b[?25h";
 using std::cout;
 
 KeyboardInput::KeyboardInput() {
-  set_keyboard_new_attributes();
+  set_terminal_new_attributes();
   m_event.set_event_type(InputEvent::None);
   m_event.set_type(InputEvent::Keyboard);
 }
@@ -24,7 +24,7 @@ void KeyboardInput::reset_terminal_configuration() {
   tcsetattr(STDIN_FILENO, TCSANOW, &old); 
 }
 
-void KeyboardInput::set_keyboard_new_attributes() {
+void KeyboardInput::set_terminal_new_attributes() {
   write(STDOUT_FILENO, hide_cursor.c_str(), 6);
 
   tcgetattr(STDIN_FILENO, &old);
@@ -38,13 +38,11 @@ void KeyboardInput::get_player_string_move() {
 }
 
 void KeyboardInput::select_menu_option() {
-  m_event.set_event_type(InputEvent::KeyPressed);
   bool selected = false;
-  InputKeys::Key key_pressed = InputKeys::quit;
+  m_event.set_event_type(InputEvent::KeyPressed);
 
   while (!selected) {
-    key_pressed = InputKeys::Key(fgetc(stdin));
-    switch (key_pressed) {
+    switch (InputKeys::Key(fgetc(stdin))) {
       case InputKeys::quit:
       case InputKeys::Quit:
         reset_terminal_configuration();
@@ -52,7 +50,7 @@ void KeyboardInput::select_menu_option() {
         break;
       case InputKeys::ENTER:
         selected = true;
-        notify_key_pressed(key_pressed);
+        notify_key_pressed(InputKeys::ENTER);
         break;
       case InputKeys::ARROW_KEY:
         notify_key_pressed(get_arrow_key_pressed());
