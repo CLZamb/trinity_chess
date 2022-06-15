@@ -1,9 +1,6 @@
 #include "game/headers/game.h"
 #include "game/headers/menu.h"
-// #include "configuration/headers/configuration.h"
 #include "configuration/headers/input_configuration.h"  
-#include "player/headers/keyboard_input.h"
-#include <iostream>
 
 void play(Input& input) {
   // fileConfiguration json?
@@ -25,9 +22,8 @@ int main(/*int argc, char *argv[]*/) {
   );
 
   start_menu.print();
-  if (start_menu.select_option() == play_str) {
+  if (start_menu.select_option() == play_str)
     play(m_input);
-  }
 
   return 0;
  }

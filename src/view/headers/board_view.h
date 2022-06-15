@@ -1,9 +1,9 @@
 #ifndef BOARD_VIEW_H
 #define BOARD_VIEW_H
 
-#include "view.h"
+#include "view/headers/view.h"
 #include "board/headers/square.h"
-#include "player/headers/input_observer.h"
+#include "input/headers/input_observer.h"
 #include "game/headers/game_turn.h"
 
 class BoardView : public View {
@@ -14,14 +14,13 @@ class BoardView : public View {
     void parser_fen(const string& s);
     void add_view_at_window_pos(View& v, Window::Pane_pos pos);
     void add_pane_at_window_pos(Displayable *v, Window::Pane_pos pos);
-    void clear_square_on_range(const int start, const int end);
+    void select_next_square(const size_t &i);
+    void selected_square(const size_t &i);
     void deselect_square(const size_t &i);
-    void select_square(const size_t &i);
 
   private:
     void clear();
-    void selected_option(const int& pos);
-    void deselected_option(const int& pos);
+    void clear_square_on_range(const int start, const int end);
     void set_piece_drawing_at_square_pos(Piecetype type, SquareIndices position);
     char left_border(const int &row,const int &col);
     bool is_number(const char &c);

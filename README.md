@@ -35,15 +35,18 @@ cmake --build build -j 18
 
 ```
 ## Run
+```
 ./build/bin/Chess
 
 ```
 ### To Do
+```
 - Polyglot
 - King Safety
 - Center Control
 - Game Phases 
 - Perft Testing
+```
 
 ## License
 MIT License

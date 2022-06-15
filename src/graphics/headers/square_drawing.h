@@ -11,15 +11,28 @@ public:
   virtual ~SquareDrawing();
   const Box* get_drawing();
   const char* at(int i);
+
   void clear_square();
   void update_drawing(const Box* drawing);
-  void update_drawing(bool is_black_square);
+  void set_piece_drawing(const Box* drawing);
+  void set_base_square_drawing(bool is_black_square);
   bool is_black_square();
+  void select();
+  void deselect();
+  bool is_selected();
+  void set_is_selected(const bool&);
 
 private:
-  const Box* p_empty_square_drawing;
+  const Box* get_original_drawing();
+
+  const Box* p_empty_square_drawing {nullptr};
+  const Box* p_piece_square_drawing {nullptr};
   const Box* p_cur_drawing {nullptr};
+  Box m_select_drawing;
   bool m_black_square {false};
+  bool m_is_selected {false};
+  bool m_has_piece {false};
+  static DrawingMod mod;
 };
 
 class SquaresDrawings {
@@ -34,7 +47,7 @@ class SquaresDrawings {
       /* 
        * Rows needs to be ordered upside down
        * because the program prints from top to bottom
-       * so that 8 should be printed frist
+       * so that the 8th row should be printed frist
        */
 
       for (int row = col_size; row >= 0; --row) {
@@ -49,10 +62,10 @@ class SquaresDrawings {
           position = row * 8 + col;
           if (squareColor == 'b') {
             squareColor = 'w';
-            m_squares[position].update_drawing(!is_black_squared);
+            m_squares[position].set_base_square_drawing(!is_black_squared);
           } else {
             squareColor = 'b';
-            m_squares[position].update_drawing(is_black_squared);
+            m_squares[position].set_base_square_drawing(is_black_squared);
           }
         }
         squareColor = squareColor == 'b' ? 'w' : 'b';
@@ -65,21 +78,28 @@ class SquaresDrawings {
       return m_squares[i];
     }
 
-    void select_square(const size_t &i) {
-      prev = m_squares[i].get_drawing();
-      selected = *prev;
-      mod.add_attribute(DrawingMod::BG_INVERSE, &selected);
-      m_squares[i].update_drawing(&selected);
+    void select_next_square(const size_t &i) {
+      m_squares[prev_pos].deselect();
+      prev_pos = i;
+      m_squares[i].select();
     }
 
-    void deselect_square(const size_t &i) {
-      m_squares[i].update_drawing(prev);
+    void selected_square(const size_t &i) {
+      if (m_squares[i].is_selected())  return;
+
+      m_squares[i].select();
+      m_squares[i].set_is_selected(true);
+    }
+
+    void desselected_square(const size_t &i) {
+      if (!m_squares[i].is_selected())  return;
+
+      m_squares[i].deselect();
+      m_squares[i].set_is_selected(false);
     }
 
   private:
-    Box selected;
-    const Box* prev;
-    static DrawingMod mod;
+    int prev_pos = A1;
     std::array<SquareDrawing, utils::constant::ksquares> m_squares;
 };
 

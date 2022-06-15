@@ -6,6 +6,7 @@
 #include <iostream>
 #include <limits>
 #include "defs.h"
+#include "graphics/headers/game_drawings.hpp"
 
 using std::map;
 using std::string;
@@ -34,11 +35,19 @@ namespace check {
 }  // namespace check
 
 inline string get_piece_str_name_from_piecetype(Piecetype piece_type) {
-  static const map<Piecetype, string> piece_str_name  {
-      {bP, "pawn"}, {bR, "rook"}, {bN, "knight"},
-      {bB, "bishop"}, {bQ, "queen"}, {bK, "king"},
-      {wP, "pawn"}, {wR, "rook"}, {wN, "knight"},
-      {wB, "bishop"}, {wQ, "queen"}, {wK, "king"}
+  static const map<Piecetype, string> piece_str_name{
+    {bP, DrawingPieces::pawn_str_name},
+    {bR, DrawingPieces::rook_str_name},
+    {bN, DrawingPieces::knight_str_name},
+    {bB, DrawingPieces::bishop_str_name},
+    {bQ, DrawingPieces::queen_str_name},
+    {bK, DrawingPieces::king_str_name},
+    {wP, DrawingPieces::pawn_str_name},
+    {wR, DrawingPieces::rook_str_name},
+    {wN, DrawingPieces::knight_str_name},
+    {wB, DrawingPieces::bishop_str_name},
+    {wQ, DrawingPieces::queen_str_name},
+    {wK, DrawingPieces::king_str_name}
   };
 
   auto search = piece_str_name.find(piece_type);

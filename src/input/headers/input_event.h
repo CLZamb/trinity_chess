@@ -24,18 +24,31 @@ struct InputKeys{
 
 class InputEvent {
  public:
-  enum Type {
+  enum EventType {
     InvalidType = 0,
     None = 1,
-    IntInput,
-    StringInput,
+    Int,
+    String,
     KeyPressed, 
-    KeyboardSetup,
+    Setup,
+    GameTurnChanged,
+  };
+
+  enum Type {
+    Text,
+    Keyboard,
+    // Mouse,
+    // MouseButton,
+    // JoystickButtonEvent
   };
 
   InputEvent();
-  void set_type(Type t);
+  InputEvent(const EventType& t);
+  void set_type(const Type &t);
   Type get_type() const;
+
+  void set_event_type(const EventType &t);
+  EventType get_event_type() const;
 
   void set_pressed_key(InputKeys::Key t);
   InputKeys::Key get_pressed_key() const ;
@@ -46,8 +59,11 @@ class InputEvent {
   void set_string_input(const string &i);
   const string &get_string_input() const;
 
+  void set_device_type();
+
  private:
     Type m_type;
+    EventType m_event_type;
     InputKeys::Key m_key;
     int m_int_input;
     string m_string_input = "quit";

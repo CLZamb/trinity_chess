@@ -16,13 +16,12 @@ class Box {
       snprintf(dest, kCharSize, "%s", src);
     }
 
-
     static void copy_row(char* dest, const char* src, const char* src2) {
       snprintf(dest, kCharSize, "%s%s", src, src2);
     }
 
     static const int kRowSize = 5 /*rows*/;
-    static const int kCharSize = (20/*characters*/ * 4 /*bytes*/);
+    static const int kCharSize = (15/*characters*/ * 4 /*bytes*/);
     char content[kRowSize][kCharSize];
 };
 
