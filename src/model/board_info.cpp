@@ -24,12 +24,12 @@ void BoardInfo::save_move(const Move &mv) {
 
 string BoardInfo::get_move_string(const Move &m) {
   return
-    utils::get_piece_str_name_from_piecetype(m.get_piece()) + "-" +
-    utils::square_int_to_str(m.get_from()) + utils::square_int_to_str(m.get_to());
+    string(1, utils::piecetype_to_char(m.get_piece())) + "-" +
+    string_utils::squareindex_to_str(m.get_from()) + string_utils::squareindex_to_str(m.get_to());
 }
 
 string BoardInfo::get_captured_string(const Move &m) {
-  return utils::get_piece_str_name_from_piecetype(m.get_captured_piece());
+  return string_utils::get_piece_str_name_from_piecetype(m.get_captured_piece());
 }
 
 void BoardInfo::save_info(const string &info) {

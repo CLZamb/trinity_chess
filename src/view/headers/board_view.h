@@ -3,7 +3,6 @@
 
 #include "view/headers/view.h"
 #include "board/headers/square.h"
-#include "input/headers/input_observer.h"
 #include "game/headers/game_turn.h"
 
 class BoardView : public View {

@@ -2,32 +2,22 @@
 #define KEYBOARD_INPUT_H
 
 #include "input/headers/input_event.h"
-#include "input/headers/input.h"
-#include <termios.h>
-#include <iostream>
+#include "input/headers/key_reader.h"
+#include "input_type.h"
+#include "view/headers/board_view.h"
+#include "input/headers/keyboard_base.h"
+#include "input/headers/keyboard_input_menu.h"
+#include "input/headers/keyboard_input_player.h"
 
-class KeyboardInput : public Input {
-public:
+class KeyboardInput : public KeyboardBase, public InputType {
+ public:
   KeyboardInput();
   virtual ~KeyboardInput();
+  PlayerInput &get_player_input() override { return m_i_p; }
 
-  void get_player_string_move() override;
-  void select_menu_option() override;
-  void update_input_event_listener(InputObserver *observer) override;
-  void notify_input_event() override;
-  void dispatch_event(const InputEvent& event) override;
-  void set_terminal_new_attributes();
-
-private:
-  void notify_key_pressed(const InputKeys::Key &key);
-  void reset_terminal_configuration();
-
-  InputKeys::Key get_arrow_key_pressed();
-
-  static struct termios old, current;
-  InputEvent m_event;
-  static string hide_cursor;
-  static string show_cursor;
+ private:
+  KeyboardInputPlayer m_i_p;
 };
+
 
 #endif /* KEBOARD_INPUT_H */

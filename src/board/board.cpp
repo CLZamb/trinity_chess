@@ -13,6 +13,7 @@ void Board::update_turn(const PlayerInfo &turn) { m_turn_info = turn; }
 bool Board::is_legal_move(Move &m) {
   if (!exist_piece_at_square(m.get_from()))
     return false;
+
   if (!check_piece_belongs_to_current_player(m.get_from()))
     return false;
 

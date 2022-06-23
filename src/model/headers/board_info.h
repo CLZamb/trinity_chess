@@ -5,6 +5,7 @@
 #include "game/headers/game_turn.h"
 #include "game/headers/game_turn_observer.h"
 #include "game/headers/move.h"
+#include "game/headers/move_utils.h"
 #include <array>
 #include <string>
 
