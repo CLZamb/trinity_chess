@@ -26,6 +26,8 @@ class MenuView : public View {
       window_view.add_pane(this, Window::Left_pane);
     }
 
+    virtual ~MenuView() {}
+
     void set_title(string title = "") {
       m_pane.set_content_at_section(m_title_section, {left_margin(title) + right_margin(title, false)});
     }
@@ -48,7 +50,6 @@ class MenuView : public View {
     void draw() override {}
 
  private:
-
   string format_options(list<string> &options) {
     string m_option;
     for (auto o : options) {
@@ -60,6 +61,7 @@ class MenuView : public View {
 
     return m_option;
   }
+
 
   string left_margin(const string &s, bool is_selected = false) {
     return 

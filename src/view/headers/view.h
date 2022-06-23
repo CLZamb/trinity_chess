@@ -9,6 +9,7 @@ using std::string;
 class View : public Displayable {
   public:
     View(string name);
+    virtual ~View() {}
     void print();
 
     static string get_name();

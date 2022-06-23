@@ -1,8 +1,10 @@
 Version 3
 
 1. use FTXUI
-2. create another info view 
-to show posible movements ex :taken the piece pawn a2 should show a3 a4
+2. add mouse support
+3. create another info view 
+  to show posible movements ex 
+  :taken the piece pawn a2 should show a3 a4 as possible moves
 
 Version 4
-3. port to window 
+3. port to windows

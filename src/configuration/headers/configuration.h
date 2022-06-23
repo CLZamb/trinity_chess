@@ -2,7 +2,6 @@
 #define CONFIGURATION_H
 
 #include "configuration/headers/players_configuration.h"
-#include "input/headers/input.h"
 
 class Configuration {
 public:

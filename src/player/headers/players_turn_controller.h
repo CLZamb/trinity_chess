@@ -5,14 +5,13 @@
 #include <array>
 #include "game/headers/game_turn_observable.h"
 #include "configuration/headers/players_configuration.h"
-#include "input/headers/input.h"
 
 using std::array;
 
-class Players : public GameTurnObservable {
+class PlayersTurnController : public GameTurnObservable {
   public:
-    Players(PlayersConfig& config);
-    virtual ~Players();
+    PlayersTurnController(PlayersConfig& config);
+    virtual ~PlayersTurnController();
     void create_players(PlayersConfig& config);
     void notify_change_turn();
     void change_turn();

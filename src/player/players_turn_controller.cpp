@@ -1,17 +1,17 @@
-#include "headers/players.h"
+#include "headers/players_turn_controller.h"
 
-Players::Players(PlayersConfig &config) : m_turn(GameTurn::player_1) {
+PlayersTurnController::PlayersTurnController(PlayersConfig &config) : m_turn(GameTurn::player_1) {
   create_players(config);
 }
 
-Players::~Players() {}
+PlayersTurnController::~PlayersTurnController() {}
 
-void Players::create_players(PlayersConfig &config) {
+void PlayersTurnController::create_players(PlayersConfig &config) {
   players_info[GameTurn::player_1] = config.get_player_info(GameTurn::player_1);
   players_info[GameTurn::player_2] = config.get_player_info(GameTurn::player_2);
 }
 
-void Players::change_turn() {
+void PlayersTurnController::change_turn() {
   m_turn = m_turn == 
     GameTurn::player_1 ? 
       GameTurn::player_2: 
@@ -20,12 +20,12 @@ void Players::change_turn() {
   notify_change_turn();
 }
 
-void Players::notify_change_turn() {
+void PlayersTurnController::notify_change_turn() {
   for (auto observer : *_observers)
     observer->update_turn(players_info[m_turn]);
 }
 
-void Players::set_inital_side(const GameTurn::Players &gt) {
+void PlayersTurnController::set_inital_side(const GameTurn::Players &gt) {
   m_turn = gt;
   notify_change_turn();
 }

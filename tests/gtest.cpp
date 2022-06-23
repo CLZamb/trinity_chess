@@ -1,6 +1,5 @@
 #include <gmock/gmock.h>
 #include "../src/board/headers/board.h"
-#include "../src/player/headers/players.h"
 #include "../src/game/headers/move_utils.h"
 
 using namespace testing;

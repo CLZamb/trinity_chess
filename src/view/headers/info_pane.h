@@ -11,7 +11,6 @@
 #include <vector>
 
 using std::array;
-using std::shared_ptr;
 using std::string;
 using std::vector;
 

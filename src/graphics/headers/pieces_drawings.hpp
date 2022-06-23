@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include "game/headers/move_utils.h"
 #include "graphics/headers/game_drawings.hpp"
 #include "board/headers/utils.h"
 
@@ -255,7 +256,7 @@ class StandardDrawingBuilder : public DrawingBuilder {
   ~StandardDrawingBuilder() {}
 
   void build_drawing(Piecetype pct) override {
-    std::string piece_type = utils::get_piece_str_name_from_piecetype(pct);
+    std::string piece_type = string_utils::get_piece_str_name_from_piecetype(pct);
     piece_drawing = new PieceDrawing(piece_type);
   }
 
