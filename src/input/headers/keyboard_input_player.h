@@ -18,28 +18,37 @@ class KeyboardInputPlayer : public PlayerInput {
     KeyboardInputPlayer(KeyboardBase& ki);
     void update_turn(const PlayerInfo & p) override;
     void setup(BoardView& v) override;
-    string get_player_string_move(BoardView&, HumanPlayer&) override; 
+    string get_player_string_move(PlayerPosition&) override; 
 
   private:
-    string select_position(HumanPlayer &p,const int pos);
-    void update_view_select_next_square(BoardView& v, const int &position);
-    void update_view_selected_square(BoardView& v, const int &position);
-    void update_view_deselected_square(BoardView& v, const int &position);
-    void select_from(HumanPlayer &p,const int pos);
-    void select_to(HumanPlayer &p,const int pos);
+    string select_position(PlayerPosition &p,const int pos);
+    void update_view_select_next_square(const int &position);
+    void update_view_selected_square(const int &position);
+    void update_view_deselected_square(const int &position);
+    void select_from(PlayerPosition &p,const int pos);
+    void select_to(PlayerPosition &p,const int pos);
     void handle_arrow_keys(const InputKeys::Key&, int& pos);
+    void update_last_position(const int &pos);
+    void deselect_all_previous_selected_squares();
 
+    static const string key_not_supprted;
     PlayerInfo m_turn;
     KeyboardBase& m_k_input;
-    static const string key_not_supprted;
+    BoardView* m_view;
     bool completed{false};
     bool has_been_selected{false};
     unordered_map<InputKeys::Key, int> m_direction_value {
-      {InputKeys::UP,   DIR_UP},
-      {InputKeys::DOWN, DIR_DOWN},
-      {InputKeys::LEFT, DIR_LEFT},
+      {InputKeys::UP,    DIR_UP},
+      {InputKeys::DOWN,  DIR_DOWN},
+      {InputKeys::LEFT,  DIR_LEFT},
       {InputKeys::RIGHT, DIR_RIGHT},
     };
+    unordered_map<GameTurn::Players, int> last_position {
+      {GameTurn::player_1, D3},
+      {GameTurn::player_2, E6},
+    };
+
+    list<int> selected_positions;
 };
 
 #endif /* KEYBOARD_INPUT_PLAYER_H */

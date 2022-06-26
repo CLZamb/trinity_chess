@@ -1,6 +1,4 @@
 #include "headers/keyboard_base.h"
-#include "input/headers/input_event.h"
-#include <sys/_types/_key_t.h>
 
 termios KeyboardBase::old;
 termios KeyboardBase::current;

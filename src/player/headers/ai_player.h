@@ -10,7 +10,7 @@ class AIPlayer : public Player {
   public:
     AIPlayer ();
     virtual ~AIPlayer ();
-    const string &get_player_string_move() const override; 
+    const string &get_player_string_move() override; 
   private:
 };
 

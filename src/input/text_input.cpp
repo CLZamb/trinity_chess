@@ -1,9 +1,6 @@
 #include "headers/text_input.h"
 #include <iostream>
 
-using std::cin;
-using std::cout;
-
 TextInput::TextInput() : m_i_p(*this) {}
 TextInput::~TextInput() {}
 

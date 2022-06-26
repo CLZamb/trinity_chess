@@ -18,7 +18,6 @@ class TextInputMenu : public MenuInput<T> {
     int key = m_opts.begin()->first;
     bool is_valid = false;
 
-    m_view.print();
     while (!is_valid) {
       key = m_tib.get_integer_input();
       is_valid = m_opts.check_valid_option(key);

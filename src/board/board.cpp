@@ -196,8 +196,11 @@ string Board::get_fen() {
       fen += "/";
     }
   }
+
+  m_fen.set_fen(fen);
   return fen;
 }
 
 BoardView &Board::get_view() { return m_view; }
 BoardInfo &Board::get_info() { return m_info; }
+const BoardFen &Board::get_board_fen() { return m_fen; }

@@ -48,6 +48,7 @@ void SquareDrawing::update_drawing(const Box* drawing) {
 }
 
 void SquareDrawing::deselect() {
+  if (m_is_selected) return;
   update_drawing(get_original_drawing());
 }
 

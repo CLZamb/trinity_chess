@@ -3,7 +3,7 @@
 
 #include "game/headers/options.h"
 #include "input/headers/keyboard_base.h"
-#include "player/headers/human_player.h"
+#include "player/headers/player_position.h"
 #include "view/headers/board_view.h"
 #include "view/headers/menu_view.h"
 #include "game/headers/game_turn_observer.h"
@@ -14,7 +14,7 @@ using std::string;
 class PlayerInput : public GameTurnObserver {
  public:
   virtual void setup(BoardView& v) = 0;
-  virtual string get_player_string_move(BoardView& v, HumanPlayer& p) = 0;
+  virtual string get_player_string_move(PlayerPosition&) = 0;
 };
 
 template<typename T>

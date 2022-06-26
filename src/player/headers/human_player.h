@@ -1,24 +1,22 @@
 #ifndef HUMAN_PLAYER_H
 #define HUMAN_PLAYER_H
 
+#include "input/headers/input_type.h"
 #include "player.h"
+#include "player/headers/player_position.h"
 #include "view/headers/board_view.h"
 
 class HumanPlayer : public Player {
 public:
-  HumanPlayer();
-
-  const string &get_player_string_move() const override;
-  void set_from_poistion(const int &pos) { from_pos = pos; }
-  void set_to_position(const int &pos) { to_pos = pos; }
-
-  const int &get_from_position() const { return from_pos; }
-  const int &get_to_position() const { return to_pos; }
+  HumanPlayer(PlayerInput&, SquareIndices sq);
+  virtual ~HumanPlayer();
+  const string &get_player_string_move() override;
 
 private:
+  void set_initial_pos(SquareIndices sq);
+  PlayerInput& m_input;
   string m_string_player_input = "error";
-  int from_pos{E4};
-  int to_pos{E4};
+  PlayerPosition m_player_pos;
 };
 
 #endif /* HUMAN_PLAYER_H */

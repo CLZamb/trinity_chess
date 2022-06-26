@@ -26,6 +26,10 @@ class MenuView : public View {
       window_view.add_pane(this, Window::Left_pane);
     }
 
+    MenuView(string title, list<string> ls) : MenuView(ls) {
+      set_title(title);
+    }
+
     virtual ~MenuView() {}
 
     void set_title(string title = "") {

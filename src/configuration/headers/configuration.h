@@ -6,7 +6,7 @@
 class Configuration {
 public:
   Configuration();
-  PlayersConfig& get_players_info();
+  PlayersConfig& get_players_config();
 
 protected:
   PlayersConfig m_p_config;
