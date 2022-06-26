@@ -78,14 +78,14 @@ class SquaresDrawings {
       return m_squares[i];
     }
 
-    void select_next_square(const size_t &i) {
+    void select_next_square(const size_t &new_pos) {
       m_squares[prev_pos].deselect();
-      prev_pos = i;
-      m_squares[i].select();
+      prev_pos = new_pos;
+      m_squares[new_pos].select();
     }
 
     void selected_square(const size_t &i) {
-      if (m_squares[i].is_selected())  return;
+      if (m_squares[i].is_selected()) return;
 
       m_squares[i].select();
       m_squares[i].set_is_selected(true);
@@ -94,8 +94,8 @@ class SquaresDrawings {
     void desselected_square(const size_t &i) {
       if (!m_squares[i].is_selected())  return;
 
-      m_squares[i].deselect();
       m_squares[i].set_is_selected(false);
+      m_squares[i].deselect();
     }
 
   private:

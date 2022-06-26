@@ -14,6 +14,7 @@
 #include "view/headers/board_view.h"
 #include "game/headers/move_utils.h"
 // #include "BoardBitboard.h"
+#include "board/headers/board_fen.h"
 
 class Board : public GameTurnObserver {
  public:
@@ -26,6 +27,7 @@ class Board : public GameTurnObserver {
   string get_fen();
   BoardView& get_view();
   BoardInfo& get_info();
+  const BoardFen& get_board_fen();
 
  private:
   bool is_legal_move(Move&);
@@ -55,6 +57,7 @@ class Board : public GameTurnObserver {
   PlayerInfo m_turn_info;
   BoardView m_view;
   BoardInfo m_info;
+  BoardFen m_fen;
 };
 
 

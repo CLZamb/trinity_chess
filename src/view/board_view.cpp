@@ -100,6 +100,6 @@ void BoardView::selected_square(const size_t &i) {
 }
 
 void BoardView::deselect_square(const size_t &i) {
-  m_squares_drawings.selected_square(i);
+  m_squares_drawings.desselected_square(i);
 }
 

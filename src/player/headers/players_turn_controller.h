@@ -1,5 +1,5 @@
-#ifndef PLAYERS_H
-#define PLAYERS_H
+#ifndef PLAYERS_TURN_CONTROLLER_H
+#define PLAYERS_TURN_CONTROLLER_H
 
 #include <memory>
 #include <array>
@@ -23,4 +23,4 @@ class PlayersTurnController : public GameTurnObservable {
     GameTurn::Players m_turn;
 };
 
-#endif /* GAME_H */
+#endif /* PLAYERS_TURN_CONTROLLER_H */

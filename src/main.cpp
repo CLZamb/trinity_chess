@@ -12,7 +12,7 @@ void play(T& input) {
 }
 
 int main(/*int argc, char *argv[]*/) {
-  KeyboardInput m_input;
+  TextInput m_input;
 
   string play_str = "Play", quit = "Quit";
   Menu<string> start_menu ( 
@@ -23,6 +23,7 @@ int main(/*int argc, char *argv[]*/) {
     }
   );
 
+  start_menu.print();
   if (start_menu.select_option() == play_str)
     play(m_input);
 

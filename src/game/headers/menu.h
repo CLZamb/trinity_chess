@@ -18,16 +18,14 @@ public:
 
   Menu(KeyboardInput &k_input, const string title, const Options<T> &opts) :
     m_opts(opts),
-    m_view(format_options()),
+    m_view(title, format_options()),
     m_m_input(std::make_unique<KeyboardInputMenu<T>>(k_input, m_view, m_opts)) {
-    m_view.set_title(title);
   }
 
   Menu(TextInput &t_input, const string title, const Options<T> &opts) : 
     m_opts(opts),
-    m_view(format_options()),
+    m_view(title, format_options()),
     m_m_input(std::make_unique<TextInputMenu<T>>(t_input, m_view, m_opts)) {
-    m_view.set_title(title);
   }
 
   virtual ~Menu() {}

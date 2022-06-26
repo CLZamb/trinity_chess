@@ -4,26 +4,30 @@ using std::cout;
 using std::endl;
 
 Game::Game(Configuration pc, PlayerInput& input) : 
-  m_players_turn(pc.get_players_info()),
+  m_players_turn(pc.get_players_config()),
   m_board_info(m_board.get_info()),
   m_board_view(m_board.get_view()), 
-  m_player_input(input) {
-  setup_players();
+  m_player_input(input),
+  m_players(m_board.get_board_fen(), pc.get_players_config(), input)
+{
+  setup_players_turn();
   setup_board();
 }
 
 Game::~Game() {}
 
-void Game::setup_players() {
+void Game::setup_players_turn() {
   attach_observers_to_players_turn();
+  m_player_input.setup(m_board_view);
   m_players_turn.set_inital_side(GameTurn::player_1);
 }
 
 void Game::attach_observers_to_players_turn() { 
+  m_players_turn.attach(&m_player_input);
   m_players_turn.attach(&m_board);
   m_players_turn.attach(&m_board_info);
   m_players_turn.attach(&m_info_pane);
-  m_players_turn.attach(&m_player_input);
+  m_players_turn.attach(&m_players);
 }
 
 void Game::setup_board() {
@@ -32,11 +36,11 @@ void Game::setup_board() {
 
 void Game::play() {
   string str_move;
-  m_player_input.setup(m_board_view);
-  HumanPlayer hp;
 
   while (!m_board.is_checkmate()) {
-    str_move = m_player_input.get_player_string_move(m_board_view, hp);
+    print_view();
+
+    str_move = m_players.get_next_string_move();
 
     if (!m_board.is_valid_move(str_move))
       continue;
@@ -45,8 +49,6 @@ void Game::play() {
     update_move_info_view();
 
     m_players_turn.change_turn();
-
-    print_view();
   }
 
   if (!m_board.is_checkmate())  {

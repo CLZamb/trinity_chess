@@ -23,11 +23,12 @@ class KeyboardInputMenu : public MenuInput<T>{
     p_selection_option = m_opts.cbegin();
     bool selected = false;
 
-    m_view.print();
     while (!selected) {
       switch (m_k_input.read_key()) {
         case InputKeys::ARROW_KEY:
           handle_arrow_key(m_k_input.read_arrow_key());
+          m_view.selected_option(p_selection_option->first);
+          m_view.print();
           break;
         case InputKeys::ENTER:
           selected = true;
@@ -36,8 +37,6 @@ class KeyboardInputMenu : public MenuInput<T>{
           std::cout << key_not_supprted;
           break;
       }
-      m_view.selected_option(p_selection_option->first);
-      m_view.print();
     }
     return p_selection_option->second;
   }
