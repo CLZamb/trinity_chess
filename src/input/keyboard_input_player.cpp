@@ -4,13 +4,11 @@ const string KeyboardInputPlayer::key_not_supprted = "key not supported\n";
 
 KeyboardInputPlayer::KeyboardInputPlayer(KeyboardBase &k) : m_k_input(k) {}
 
-void KeyboardInputPlayer::setup(BoardView &v) {
-  m_view = &v;
-}
+void KeyboardInputPlayer::setup(BoardView &v) { m_view = &v; }
 
-void KeyboardInputPlayer::update_turn(const PlayerInfo &p){
+void KeyboardInputPlayer::update_turn(const PlayerInfo &p) {
   m_turn = p;
-  update_view_select_next_square(last_position[m_turn.turn]);
+  update_view_select_next_square(last_position[p.turn]);
 }
 
 string KeyboardInputPlayer::get_player_string_move(PlayerPosition &player) {
@@ -22,16 +20,16 @@ string KeyboardInputPlayer::get_player_string_move(PlayerPosition &player) {
 
   while (!completed) {
     switch (m_k_input.read_key()) {
-    case InputKeys::ARROW_KEY:
-      handle_arrow_keys(m_k_input.read_arrow_key(), next_pos);
-      break;
-    case InputKeys::ENTER:
-      next_move += select_position(player, next_pos);
-      update_view_selected_square(next_pos);
-      break;
-    default:
-      std::cout << key_not_supprted << std::endl;
-      break;
+      case InputKeys::ARROW_KEY:
+        handle_arrow_keys(m_k_input.read_arrow_key(), next_pos);
+        break;
+      case InputKeys::ENTER:
+        next_move += select_position(player, next_pos);
+        update_view_selected_square(next_pos);
+        break;
+      default:
+        std::cout << key_not_supprted << std::endl;
+        break;
     }
 
     update_view_select_next_square(next_pos);
@@ -44,13 +42,13 @@ string KeyboardInputPlayer::get_player_string_move(PlayerPosition &player) {
 }
 
 void KeyboardInputPlayer::deselect_all_previous_selected_squares() {
-  for (const auto &pos: selected_positions) {
+  for (const auto &pos : selected_positions) {
     update_view_deselected_square(pos);
   }
   selected_positions.clear();
 }
 
-void KeyboardInputPlayer::update_last_position(const int& pos) {
+void KeyboardInputPlayer::update_last_position(const int &pos) {
   last_position[m_turn.turn] = pos;
 }
 
@@ -58,7 +56,8 @@ void KeyboardInputPlayer::handle_arrow_keys(const InputKeys::Key &k, int &pos) {
   int prev = pos;
   pos += m_direction_value[k];
 
-  if (pos < A1 || pos > H8) pos = prev;
+  if (pos < A1 || pos > H8)
+    pos = prev;
 }
 
 string KeyboardInputPlayer::select_position(PlayerPosition &p, const int pos) {

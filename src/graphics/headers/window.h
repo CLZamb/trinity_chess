@@ -26,8 +26,8 @@ class Window {
   friend ostream &operator<<(ostream &os, Window &);
 
  private:
-  size_t panes_size_max_height{0};
-  string get_formatted_window_drawing();
+  size_t m_panes_size_max_height{0};
+  void get_formatted_window_drawing(ostream &os);
   map<int, Displayable *> m_panes;
 };
 

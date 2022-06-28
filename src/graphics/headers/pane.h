@@ -37,6 +37,7 @@ class Pane {
 
   vector<string*> m_pane_drawing;
   unordered_map<string, shared_ptr<Section>> sections;
+  string m_empty{};
 };
 
 #endif /* PANE_H */

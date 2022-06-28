@@ -1,17 +1,17 @@
 #include <gmock/gmock.h>
-#include "../src/board/headers/board.h"
-#include "../src/game/headers/move_utils.h"
+// #include "../src/board/headers/board.h"
+// #include "../src/game/headers/string_utils.h"
 
-using namespace testing;
-
-class Aboard : public testing::Test {
-  public:
-    // Board board;
-};
-
-TEST_F(Aboard, IsEmptyWhenCreated) {
-  // ASSERT_THAT(board.is_checkmate(), Eq(false));
-}
+// using namespace testing;
+//
+// class Aboard : public testing::Test {
+//   public:
+//     // Board board;
+// };
+//
+// TEST_F(Aboard, IsEmptyWhenCreated) {
+//   // ASSERT_THAT(board.is_checkmate(), Eq(false));
+// }
 
 // TEST_F(Aboard, CheckLegalMoves) {
 //   Players players;

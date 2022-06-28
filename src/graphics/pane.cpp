@@ -35,8 +35,7 @@ shared_ptr<Section>& Pane::get_section(const string& key) {
 }
 
 const string& Pane::operator[](int index) {
-  if (!is_valid_pane_index(index))
-    throw std::out_of_range("index not found");
+  if (!is_valid_pane_index(index)) return m_empty;
 
   return *m_pane_drawing[index];
 }

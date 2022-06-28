@@ -1,4 +1,5 @@
 #include "headers/game.h"
+#include<chrono>
 
 using std::cout;
 using std::endl;
@@ -34,6 +35,7 @@ void Game::setup_board() {
   m_board_view.add_pane_at_window_pos(&m_info_pane, Window::Right_pane);
 }
 
+using namespace std::chrono; 	
 void Game::play() {
   string str_move;
 

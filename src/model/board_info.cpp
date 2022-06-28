@@ -18,18 +18,18 @@ void BoardInfo::illegal_move(const string &s) {
 void BoardInfo::save_move(const Move &mv) {
   m_moves[m_turn.turn] +=  get_move_string(mv) + " ";
 
-  if (mv.get_captured_piece())
+  if (Move_Utils::get_captured_piece(mv))
     m_captures[m_turn.turn] += get_captured_string(mv) + " ";
 }
 
 string BoardInfo::get_move_string(const Move &m) {
   return
-    string(1, utils::piecetype_to_char(m.get_piece())) + "-" +
-    string_utils::squareindex_to_str(m.get_from()) + string_utils::squareindex_to_str(m.get_to());
+    string(1, utils::piecetype_to_char(Move_Utils::get_piece(m))) + "-" +
+    string_utils::squareindex_to_str(Move_Utils::get_from(m)) + string_utils::squareindex_to_str(Move_Utils::get_to(m));
 }
 
 string BoardInfo::get_captured_string(const Move &m) {
-  return string_utils::get_piece_str_name_from_piecetype(m.get_captured_piece());
+  return string_utils::get_piece_str_name_from_piecetype(Move_Utils::get_captured_piece(m));
 }
 
 void BoardInfo::save_info(const string &info) {

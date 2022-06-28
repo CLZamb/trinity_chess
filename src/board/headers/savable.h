@@ -5,7 +5,7 @@
 #include <array>
 #include <string>
 #include "game/headers/game_turn.h"
-#include "game/headers/move.h"
+#include "game/headers/move.hpp"
 
 using std::string;
 using std::array;

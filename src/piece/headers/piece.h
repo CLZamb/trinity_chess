@@ -7,8 +7,8 @@
 #include "graphics/headers/box.h"
 #include "graphics/headers/pieces_drawings.hpp"
 #include "board/headers/utils.h"
-#include "game/headers/move.h"
 #include "board/headers/BoardBitboard.h"
+#include "game/headers/move.hpp"
 
 using namespace bitUtility;
 
