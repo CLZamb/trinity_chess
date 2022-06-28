@@ -3,7 +3,9 @@
 TextInputPlayer::TextInputPlayer(TextInputBase &t) : m_tib(t) {}
 TextInputPlayer::~TextInputPlayer() {}
 
-void TextInputPlayer::setup(BoardView &v) { v.print(); }
+void TextInputPlayer::setup(BoardView &v) { 
+  m_view.reset(&v);
+}
 
 void TextInputPlayer::update_turn(const PlayerInfo & p) {
   m_turn = p;

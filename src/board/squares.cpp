@@ -1,0 +1,19 @@
+#include "board/headers/squares.h"
+#include "board/headers/defs.h"
+
+Squares::Squares() {}
+Squares::~Squares() {}
+
+Square &Squares::operator[](size_t i) {
+  return m_squares[i];
+}
+
+void Squares::clear() {
+  for (auto &square : m_squares) {
+    square.clear_square();
+  }
+}
+
+bool Squares::exist_piece_at_position(const int &pos) {
+  return m_squares[pos].get_piece() != EMPTY;
+}

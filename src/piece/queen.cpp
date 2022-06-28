@@ -1,6 +1,5 @@
 #include "headers/queen.h"
 
-
 template<Color color>
 Queen<color>::Queen(IMagicBitboardAttackType& m_bb) :
   Piece(color == BLACK ? bQ : wQ), queen_moves(m_bb) {}

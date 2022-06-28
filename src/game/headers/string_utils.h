@@ -6,7 +6,7 @@
 #include<string>
 #include<vector>
 #include<regex>
-#include"move.h"
+#include"game/headers/move.hpp"
 #include"regex.h"
 
 using std::string;
@@ -25,7 +25,7 @@ namespace string_utils {
 
   inline Move to_move(const string& str_move) {
     std::vector<string> list_pos;
-    Move result;
+    Move result{0};
 
     list_pos = Regex::get_list_of_positions(str_move, format_single_position);
 
@@ -36,7 +36,7 @@ namespace string_utils {
     int from = square_str_to_int(list_pos[0]);
     int to = square_str_to_int(list_pos[1]);
 
-    result.set_move(from, to);
+    Move_Utils::set_move(result, from, to);
     return result;
   }
 
