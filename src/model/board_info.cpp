@@ -1,5 +1,10 @@
 #include "headers/board_info.h"
 
+const string BoardInfo::Kwrong_format = 
+  "Move is an not in a recognizable format, please try again";
+const string BoardInfo::Killegal_move = 
+  "Move is an ilegal move";
+
 BoardInfo::BoardInfo() {}
 
 void BoardInfo::update_turn(const PlayerInfo& t){
@@ -47,8 +52,3 @@ string BoardInfo::get_captures() {
 string BoardInfo::get_info() {
   return m_info;
 }
-
-const string BoardInfo::Kwrong_format = 
-  "Move is an not in a recognizable format, please try again";
-const string BoardInfo::Killegal_move = 
-  "Move is an ilegal move";

@@ -5,4 +5,4 @@ add_library(
   view.cpp
   )
 
-message("Player library compiled")
+message("View library compiled")

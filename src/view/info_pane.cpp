@@ -32,10 +32,7 @@ void InfoPane::clear() {
 }
 
 void InfoPane::draw() {}
-
-void InfoPane::clear_block() {
-  m_pane.clear();
-}
+void InfoPane::clear_block() { m_pane.clear(); }
 
 void InfoPane::format_block(shared_ptr<Section>& block, string content) {
   if (block == nullptr) return;
@@ -92,5 +89,6 @@ void InfoPane::update_captures(const string& captures) {
 }
 
 void InfoPane::update_game_info(const string& info) {
+  m_pane.get_section(m_board_info_section)->fill(m_empty_row);
   format_block(m_pane.get_section(m_board_info_section), info);
 }

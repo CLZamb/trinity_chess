@@ -51,12 +51,11 @@ class Pawn : public Piece {
       return false;
 
     U64 all_moves = BLANK;
-    int from = Move_Utils::get_from(m);
+    U64 attacks = m_attacks[Move_Utils::get_from(m)];
     U64 to = ONE << Move_Utils::get_to(m);
-    printBitBoard(board.get_all_side_pieces(!color));
     const U64 opponent = board.get_all_side_pieces(!color);
 
-    all_moves |= m_attacks[from] & opponent;  // enemy is that square occ
+    all_moves |= attacks & opponent;  // enemy is that square occ
 
     return all_moves & to;
   }
