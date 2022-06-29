@@ -4,10 +4,15 @@
 #include "board/headers/board.h"
 #include "configuration/headers/configuration.h"
 #include "controller/headers/uicontroller.h"
+#include "controller/headers/ui_board_controller.h"
+#include "controller/headers/ui_board_info_controller.h"
 #include "input/headers/text_input.h"
 #include "player/headers/players_turn_controller.h"
 #include "view/headers/info_pane.h"
 #include "player/headers/players.h"
+#include <memory>
+
+using std::shared_ptr;
 
 class Game {
  public:
@@ -16,21 +21,21 @@ class Game {
   void play();
 
  private:
-  void print_view();
   void attach_observers_to_players_turn();
-  void setup_board();
-  void update_board_info_view();
-  void update_move_info_view();
   void setup_players_turn();
+  void add_info_to_board();
+  void make_move(const Move& m);
+  bool is_valid_move(const string& str_move, Move& mv);
 
   PlayersTurnController m_players_turn;
   Board m_board;
-
-  BoardInfo &m_board_info;
-  BoardView &m_board_view;
+  BoardView m_board_view;
   InfoPane m_info_pane;
-  PlayerInput &m_player_input;
   Players m_players;
+  BoardInfo m_board_info;
+
+  PlayerInput &m_player_input;
+  shared_ptr<UIBoard> p_view_controller;
 };
 
 #endif /* GAME_H */

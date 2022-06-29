@@ -1,18 +1,15 @@
 #include "headers/game.h"
-#include<chrono>
 
-using std::cout;
-using std::endl;
+using std::make_unique;
 
 Game::Game(Configuration pc, PlayerInput& input) : 
   m_players_turn(pc.get_players_config()),
-  m_board_info(m_board.get_info()),
-  m_board_view(m_board.get_view()), 
+  m_players(m_board.get_board_fen(), pc.get_players_config(), input),
   m_player_input(input),
-  m_players(m_board.get_board_fen(), pc.get_players_config(), input)
-{
+  p_view_controller(std::make_unique<UiBoardController>(
+    m_board_view, m_board.get_board_fen())) {
   setup_players_turn();
-  setup_board();
+  add_info_to_board();
 }
 
 Game::~Game() {}
@@ -31,43 +28,50 @@ void Game::attach_observers_to_players_turn() {
   m_players_turn.attach(&m_players);
 }
 
-void Game::setup_board() {
+void Game::add_info_to_board() {
   m_board_view.add_pane_at_window_pos(&m_info_pane, Window::Right_pane);
+  p_view_controller = std::make_shared<UiBoardInfoController>(p_view_controller, m_board_info, m_info_pane);
 }
 
-using namespace std::chrono; 	
 void Game::play() {
   string str_move;
+  Move mv{0};
+  p_view_controller->update();
 
   while (!m_board.is_checkmate()) {
-    print_view();
+    p_view_controller->print();
 
     str_move = m_players.get_next_string_move();
+    mv = m_board.string_to_move(str_move);
 
-    if (!m_board.is_valid_move(str_move))
-      continue;
+    if (!is_valid_move(str_move, mv)) continue;
 
-    m_board.make_move(str_move);
-    update_move_info_view();
-
+    make_move(mv);
     m_players_turn.change_turn();
   }
 
   if (!m_board.is_checkmate())  {
-    cout << GameDrawing::game_over << endl;
+    std::cout << GameDrawing::game_over << std::endl;
     // winner_view.print();
   }
-};
-void Game::update_move_info_view() {
-  m_info_pane.update_moves(m_board_info.get_moves());
-  m_info_pane.update_captures(m_board_info.get_captures());
 }
 
-void Game::update_board_info_view() {
-  m_info_pane.update_game_info(m_board_info.get_info());
+void Game::make_move(const Move& mv) {
+  m_board.make_move(mv);
+  m_board_info.save_move(mv);
+  p_view_controller->update();
 }
 
-void Game::print_view() {
-  update_board_info_view();
-  m_board_view.print();
+bool Game::is_valid_move(const string& str_move, Move& mv) {
+  if (!string_utils::is_valid_move_format(str_move)) {
+    m_board_info.wrong_format(str_move);
+    return false;
+  }
+
+  if (!m_board.is_legal_move(mv)) {
+    m_board_info.illegal_move(str_move);
+    return false;
+  }
+
+  return true;
 }

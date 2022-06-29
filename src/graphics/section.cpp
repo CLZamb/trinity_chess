@@ -10,11 +10,17 @@ Section::Section(string name, size_t size) :
 
 Section::~Section() {}
 
+void Section::fill(const string& content) {
+  for (auto& i : m_section_drawing) {
+    i = content;
+  }
+}
+
 void Section::set_content_at_index(string content, const size_t& index) {
   if (!is_valid_index(index))
     return;
 
-  m_section_drawing[index] = content;
+  m_section_drawing[index] = std::move(content);
 }
 
 bool Section::is_valid_index(const size_t& index) {

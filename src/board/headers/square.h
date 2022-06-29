@@ -16,7 +16,7 @@ class Square {
     Piecetype& get_piece();
 
  private:
-    Piecetype m_piece = EMPTY;
+    Piecetype m_piece{EMPTY};
 };
 
 #endif /* SQUARE_H */
