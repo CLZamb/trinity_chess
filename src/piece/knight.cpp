@@ -9,20 +9,17 @@ Knight<color>::Knight() :
 template<Color color>
 Knight<color>::~Knight() {}
 
+
 template<Color color>
-bool Knight<color>::is_legal_non_attack_move(Move& m, BoardBitboard& board) {
+bool Knight<color>::is_legal_move(Move& m, BoardBitboard& board) {
   SquareIndices from = Move_Utils::get_from(m);
   U64 to = ONE << Move_Utils::get_to(m);
-  const U64 free_squares = ~board[BOTH];
+  Piecetype captured = Move_Utils::get_captured_piece(m);
+  U64 free_squares = ~board[BOTH];
+
+  if (captured) {
+    free_squares |= board[utils::check::get_color_piece(captured)];
+  }
 
   return m_attacks[from] & to & free_squares;
-}
-
-template<Color color>
-bool Knight<color>::is_legal_attack_move(Move& m, BoardBitboard& board) {
-  SquareIndices from = Move_Utils::get_from(m);
-  U64 to = ONE << Move_Utils::get_to(m);
-  const U64 opponent = board[color];
-
-  return m_attacks[from] & to & opponent;
 }

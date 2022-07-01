@@ -57,16 +57,16 @@ void Pieces::make_rook(const Color C) {
 //
 void Pieces::make_bishop(const Color C) {
   if (C == BLACK)
-    m_pieces[bB] = new Bishop<BLACK>(m_queen_magic_bitboard);
+    m_pieces[bB] = new Bishop<BLACK>(m_bishop_magic_bitboard);
   else
-    m_pieces[wB] = new Bishop<WHITE>(m_queen_magic_bitboard);
+    m_pieces[wB] = new Bishop<WHITE>(m_bishop_magic_bitboard);
 }
 //
 void Pieces::make_queen(const Color C) {
   if (C == BLACK)
-    m_pieces[bQ] = new Queen<BLACK>(m_bishop_magic_bitboard);
+    m_pieces[bQ] = new Queen<BLACK>(m_queen_magic_bitboard);
   else
-    m_pieces[wQ] = new Queen<WHITE>(m_bishop_magic_bitboard);
+    m_pieces[wQ] = new Queen<WHITE>(m_queen_magic_bitboard);
 }
 
 void Pieces::make_king(const Color C) {

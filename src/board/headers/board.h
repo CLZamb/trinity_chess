@@ -28,8 +28,7 @@ public:
 private:
   void move_piece_to_square(const Move &);
   void save_move(const Move &m);
-  bool check_piece_belongs_to_opponent(const bool is_black_piece);
-  bool check_piece_belongs_to_player(const bool is_black_piece);
+  bool check_piece_belongs_to_player(const Piecetype);
 
   Squares m_squares;
   Pieces m_pieces;

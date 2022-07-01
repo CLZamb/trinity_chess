@@ -10,8 +10,7 @@ class Rook : public Piece {
 public:
   explicit Rook(IMagicBitboardAttackType& mb);
   virtual ~Rook();
-  bool is_legal_non_attack_move(Move& m, BoardBitboard&) override;
-  bool is_legal_attack_move(Move& m, BoardBitboard&) override;
+  bool is_legal_move(Move& m, BoardBitboard&) override;
 
 private:
   SlidingMoves<color> rook_moves;
