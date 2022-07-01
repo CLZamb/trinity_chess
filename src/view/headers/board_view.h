@@ -10,7 +10,7 @@ class BoardView : public View {
     BoardView();
     virtual ~BoardView();
     void draw() override;
-    void parser_fen(const string& s);
+    void parse_fen(const string& s);
     void add_view_at_window_pos(View& v, Window::Pane_pos pos);
     void add_pane_at_window_pos(Displayable *v, Window::Pane_pos pos);
     void select_next_square(const size_t &i);

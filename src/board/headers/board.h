@@ -18,24 +18,18 @@
 class Board : public GameTurnObserver {
 public:
   explicit Board(string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-  virtual ~Board();
   void update_turn(const PlayerInfo &) override;
   void make_move(Move mv);
   bool is_checkmate();
   bool is_legal_move(Move &);
-  BoardInfo &get_info();
   BoardFen &get_board_fen();
   Move string_to_move(const string &);
 
 private:
-  void parser_fen(string fen);
   void move_piece_to_square(const Move &);
   void save_move(const Move &m);
-  void clear_board();
-  void add_to_board(Piecetype piece, SquareIndices position);
-  bool is_attack_move(const Piecetype &captured);
-  bool is_number(char c);
-  bool check_piece_belongs_to_current_player(const Piecetype &);
+  bool check_piece_belongs_to_opponent(const bool is_black_piece);
+  bool check_piece_belongs_to_player(const bool is_black_piece);
 
   Squares m_squares;
   Pieces m_pieces;

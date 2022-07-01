@@ -53,7 +53,7 @@ class Pawn : public Piece {
     U64 all_moves = BLANK;
     U64 attacks = m_attacks[Move_Utils::get_from(m)];
     U64 to = ONE << Move_Utils::get_to(m);
-    const U64 opponent = board.get_all_side_pieces(!color);
+    const U64 opponent = board[color == WHITE ? BLACK : WHITE];
 
     all_moves |= attacks & opponent;  // enemy is that square occ
 
@@ -63,7 +63,7 @@ class Pawn : public Piece {
   bool is_legal_non_attack_move(Move& m, BoardBitboard &board) override {
     int from = Move_Utils::get_from(m);
     U64 to = ONE << Move_Utils::get_to(m);
-    const U64 free_squares = ~board.get_all_board_pieces();
+    const U64 free_squares = ~board[BOTH];
 
     return pawn_non_attack_mask(from) & free_squares & to;
   }

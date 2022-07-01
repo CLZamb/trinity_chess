@@ -8,5 +8,5 @@ UiBoardController::~UiBoardController() {}
 void UiBoardController::print() { p_view->print(); }
 
 void UiBoardController::update() {
-  p_view->parser_fen(p_board_fen->get_fen());
+  p_view->parse_fen(p_board_fen->get_fen());
 }
