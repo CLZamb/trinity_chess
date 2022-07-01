@@ -41,7 +41,7 @@ char BoardView::left_border(const int &row, const int &col) {
   return (col + 1) % 3 ? ' ' :  ('0' + row + 1);
 }
 
-void BoardView::parser_fen(const string& fen) {
+void BoardView::parse_fen(const string& fen) {
   SquareIndices square = A1;
   int rank = 7;
   int file = 0;

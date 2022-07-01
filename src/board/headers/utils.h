@@ -16,13 +16,19 @@ enum Piecetype : unsigned int {
 };
 
 enum Color {
-  WHITE = 0, BLACK = 1, NONE = 2, SIZE = 2,
+  WHITE = 0, BLACK = 1, NONE = 3, SIZE = 2, BOTH = 2,
 };
 
 namespace utils {
 namespace check {
   inline bool is_black_piece(Piecetype type) {
     return type >= bP && type <= bK;
+  }
+
+  inline Color get_color_piece(Piecetype type) {
+    if (type >= bP && type <= bK) return BLACK;
+    if (type >= wP && type <= wK) return WHITE;
+    return NONE;
   }
 
   inline bool is_valid_piece(unsigned int pieceType) {

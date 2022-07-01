@@ -12,13 +12,14 @@ class Pieces {
  public:
     Pieces();
     virtual ~Pieces();
-    Piece* get_piece(Piecetype type) const;
+    Piece* operator[](Piecetype type);
     void make_pawn(const Color C);
     void make_rook(const Color C);
     void make_bishop(const Color C);
     void make_queen(const Color C);
     void make_king(const Color C);
     void make_knight(const Color C);
+
 
  private:
     void create_all_pieces();
