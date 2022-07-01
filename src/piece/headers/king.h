@@ -8,8 +8,7 @@ class King : public Piece {
   public:
     King();
     virtual ~King();
-    bool is_legal_non_attack_move(Move& m, BoardBitboard&) override;
-    bool is_legal_attack_move(Move& m, BoardBitboard&) override;
+    bool is_legal_move(Move& m, BoardBitboard&) override;
   private:
     U64 king_mask(int sq) {
       U64 king_mask = 0ULL;

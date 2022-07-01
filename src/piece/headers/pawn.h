@@ -46,29 +46,34 @@ class Pawn : public Piece {
     delete pawn_moves;
   }
 
-  bool is_legal_attack_move(Move& m, BoardBitboard &board) override  {
-    if (!Move_Utils::get_captured_piece(m))
-      return false;
+  bool is_legal_move(Move &m, BoardBitboard& board) override {
+    if (Move_Utils::get_captured_piece(m))
+      return is_legal_attack_move(m, board);
 
+    return is_legal_non_attack_move(m, board);
+  }
+
+
+ private:
+  bool is_legal_attack_move(Move& m, BoardBitboard &board)  {
     U64 all_moves = BLANK;
-    U64 attacks = m_attacks[Move_Utils::get_from(m)];
+    int from = Move_Utils::get_from(m);
     U64 to = ONE << Move_Utils::get_to(m);
-    const U64 opponent = board[color == WHITE ? BLACK : WHITE];
+    Piecetype captured = Move_Utils::get_captured_piece(m);
+    const U64 opponent = board[utils::check::get_color_piece(captured)];
 
-    all_moves |= attacks & opponent;  // enemy is that square occ
+    all_moves |= m_attacks[from] & opponent;  // enemy is that square occ
 
     return all_moves & to;
   }
 
-  bool is_legal_non_attack_move(Move& m, BoardBitboard &board) override {
+  bool is_legal_non_attack_move(Move& m, BoardBitboard &board) {
     int from = Move_Utils::get_from(m);
     U64 to = ONE << Move_Utils::get_to(m);
     const U64 free_squares = ~board[BOTH];
-
     return pawn_non_attack_mask(from) & free_squares & to;
   }
 
- private:
   void init_masks() {
     for (int sq = 0; sq < utils::constant::ksquares; sq++)
       m_attacks[sq] = pawn_attack_mask(sq);

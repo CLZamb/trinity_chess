@@ -33,7 +33,15 @@ inline Piecetype get_piece(const Move &m) {
   return static_cast<Piecetype>((m >> 17) & 0xf);
 }
 
-// bool is_en_pessand() const { (m_move >> 16) & 0x1; }
+inline bool is_en_pessand(const Move &m) { 
+  return (m >> 16) & 0x1; 
+}
+
+inline void set_en_passant(Move &m, bool is_en_passant) {
+  m &= ~0x1;
+  m |= ((is_en_passant ? ONE : BLANK) & 0x1) << 16;
+}
+
 inline void set_to(Move &m, int to) {
   m &= ~0xfc0;
   m |= (to & 0x3f) << 6;

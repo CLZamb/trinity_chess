@@ -10,11 +10,6 @@ template<Color color>
 Bishop<color>::~Bishop() {}
 
 template<Color color>
-bool Bishop<color>::is_legal_non_attack_move(Move& m, BoardBitboard& board) {
-  return bishop_moves.get_sliding_attacks(m, board);
-}
-
-template<Color color>
-bool Bishop<color>::is_legal_attack_move(Move &m, BoardBitboard& board) {
+bool Bishop<color>::is_legal_move(Move& m, BoardBitboard& board) {
   return bishop_moves.get_sliding_attacks(m, board);
 }

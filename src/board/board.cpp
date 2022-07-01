@@ -12,27 +12,21 @@ void Board::update_turn(const PlayerInfo &turn) { m_turn_info = turn; }
 bool Board::is_legal_move(Move &m) {
   Piecetype piece = Move_Utils::get_piece(m);
   Piecetype captured = Move_Utils::get_captured_piece(m);
-  bool is_black_piece = utils::check::is_black_piece(piece);
-  bool is_black_captured = utils::check::is_black_piece(captured);
  
-  if (!piece || !check_piece_belongs_to_player(is_black_piece))
+  if (!piece || !check_piece_belongs_to_player(piece))
     return false;
 
+  if (m_pieces[piece]->is_piece_in_same_side(captured))
+    return false;
+  // if (is_square_attacked(king)) return false;
   // if (!is_special_move(m)) return false;
 
-  if (captured && check_piece_belongs_to_opponent(is_black_captured)) {
-    return m_pieces[piece]->is_legal_attack_move(m, m_board_state);
-  }
-
-  return m_pieces[piece]->is_legal_non_attack_move(m, m_board_state);
+  return m_pieces[piece]->is_legal_move(m, m_board_state);
 }
 
-bool Board::check_piece_belongs_to_opponent(const bool is_black_piece) {
-  return !check_piece_belongs_to_player(is_black_piece);
-}
 
-bool Board::check_piece_belongs_to_player(const bool is_black_piece) {
-  return is_black_piece == m_turn_info.color;
+bool Board::check_piece_belongs_to_player(const Piecetype pc) {
+  return utils::check::get_color_piece(pc) == m_turn_info.color;
 }
 
 void Board::make_move(Move mv) {

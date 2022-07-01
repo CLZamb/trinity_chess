@@ -20,7 +20,6 @@ class Pieces {
     void make_king(const Color C);
     void make_knight(const Color C);
 
-
  private:
     void create_all_pieces();
     MagicBitboard m_magic_bitboard;

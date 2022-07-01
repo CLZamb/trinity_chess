@@ -12,7 +12,7 @@ void play(T& input) {
 }
 
 int main(/*int argc, char *argv[]*/) {
-  TextInput m_input;
+  KeyboardInput m_input;
 
   string play_str = "Play", quit = "Quit";
   Menu<string> start_menu ( 

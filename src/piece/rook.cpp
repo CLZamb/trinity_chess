@@ -8,12 +8,6 @@ template<Color color>
 Rook<color>::~Rook() {}
 
 template<Color color>
-bool Rook<color>::is_legal_non_attack_move(Move& m, BoardBitboard& board) {
-  return rook_moves.get_sliding_attacks(m, board);
-}
-
-template<Color color>
-bool Rook<color>::is_legal_attack_move(Move& m, BoardBitboard& board) {
-  return false;
+bool Rook<color>::is_legal_move(Move& m, BoardBitboard& board) {
   return rook_moves.get_sliding_attacks(m, board);
 }

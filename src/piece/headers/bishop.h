@@ -10,8 +10,7 @@ class Bishop : public Piece {
 public:
   explicit Bishop(IMagicBitboardAttackType& m_bb);
   virtual ~Bishop();
-  bool is_legal_non_attack_move(Move &, BoardBitboard&) override;
-  bool is_legal_attack_move(Move &, BoardBitboard&) override;
+  bool is_legal_move(Move &, BoardBitboard&) override;
 
 private:
   SlidingMoves<color> bishop_moves;
