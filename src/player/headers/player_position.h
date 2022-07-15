@@ -2,12 +2,13 @@
 #define PLAYER_POSITION_H
 
 #include "board/headers/defs.h"
+#include "game/headers/string_utils.h"
 
 class PlayerPosition {
 public:
   PlayerPosition() {}
   virtual ~PlayerPosition() {}
-  void set_from_poistion(const int &pos) { from_pos = pos; }
+  void set_from_position(const int &pos) { from_pos = pos; }
   void set_to_position(const int &pos) { to_pos = pos; }
   const int &get_from_position() const { return from_pos; }
   const int &get_to_position() const { return to_pos; }

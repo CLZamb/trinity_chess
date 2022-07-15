@@ -2,7 +2,6 @@
 #include "game/headers/menu.h"
 #include "configuration/headers/input_configuration.h"  
 
-
 template<typename T>
 void play(T& input) {
   InputConfiguration i_config(input);
@@ -16,7 +15,7 @@ int main(/*int argc, char *argv[]*/) {
 
   string play_str = "Play", quit = "Quit";
   Menu<string> start_menu ( 
-      m_input,
+    m_input,
     "Welcome to trintity Chess",{ 
       { 1, "Play", play_str}, 
       { 2, "Quit", quit}
@@ -29,5 +28,3 @@ int main(/*int argc, char *argv[]*/) {
 
   return EXIT_SUCCESS;
  }
-
-

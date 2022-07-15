@@ -17,7 +17,42 @@ enum SquareIndices : int  {
   A6, B6, C6, D6, E6, F6, G6, H6,
   A7, B7, C7, D7, E7, F7, G7, H7,
   A8, B8, C8, D8, E8, F8, G8, H8,
-  Squarebegin = A1, SquareEnd = H8 + 1
+
+  Squarebegin = A1, 
+  SquareEnd = H8 + 1,
+};
+
+enum CastleSquares : int {
+  NO_CASTLE_POS = SquareEnd,
+
+  WK_CA_INITIAL_POS = E1,
+  BK_CA_INITIAL_POS = E8,
+
+  WK_CA_KING_SIDE_END_POS = G1,  // WKCA
+  WK_CA_QUEEN_SIDE_END_POS = C1, // WQCA
+
+  BK_CA_KING_SIDE_END_POS = G8,  // BKCA
+  BK_CA_QUEEN_SIDE_END_POS = C8, // BQCA
+
+  ROOK_WHITE_CA_KING_SIDE_FROM_POS = H1, // WKCA
+  ROOK_WHITE_CA_KING_SIDE_TO_POS = F1, // WKCA
+
+  ROOK_WHITE_CA_QUEEN_SIDE_FROM_POS = A1, // WQCA
+  ROOK_WHITE_CA_QUEEN_SIDE_TO_POS = D1, // WQCA
+
+  ROOK_BLACK_CA_KING_SIDE_FROM_POS = H8, // BKCA
+  ROOK_BLACK_CA_KING_SIDE_TO_POS = F8, // BkCA
+ 
+  ROOK_BLACK_CA_QUEEN_SIDE_FROM_POS = A8, // BQCA
+  ROOK_BLACK_CA_QUEEN_SIDE_TO_POS = D8, // BQCA
+};
+
+enum CastlePermission {
+  NO_CASTLING = 0,
+  WKCA = 1,
+  WQCA = 2,
+  BKCA = 3,
+  BQCA = 4,
 };
 
 const int BitTable[64] = {

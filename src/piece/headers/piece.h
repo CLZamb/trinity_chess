@@ -16,8 +16,7 @@ class Piece {
 public:
   virtual ~Piece();
   Piecetype get_type_and_color();
-  virtual bool is_legal_move(Move &, BoardBitboard &board) = 0;
-  bool is_piece_in_same_side(const Piecetype captured);
+  virtual bool is_legal_move(Move &, BoardBitboard &) = 0;
 
 protected:
   explicit Piece(const Piecetype &);

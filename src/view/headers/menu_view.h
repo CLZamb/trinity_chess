@@ -23,7 +23,7 @@ class MenuView : public View {
       m_pane.get_section(m_options_section)->set_content_at_index(s, 0);
       m_pane.get_section(m_bottom_section)->set_content_at_index(MenuDrawings::p_menu_bottom.data(), 0 );
 
-      window_view.add_pane(this, Window::Left_pane);
+      _window.add_pane(this, Window::Left_pane);
     }
 
     MenuView(string title, list<string> ls) : MenuView(ls) {
