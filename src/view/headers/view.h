@@ -19,7 +19,7 @@ class View : public Displayable {
     static string name;
 
   protected:
-    Window window_view;
+    Window _window;
 };
  
 #endif /* VIEW_H */

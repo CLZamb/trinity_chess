@@ -12,6 +12,7 @@ public:
   Square &operator[](size_t i);
   void clear();
   bool exist_piece_at_position(const int& pos);
+  void do_move(const SquareIndices &from, const SquareIndices &to);
 private:
   static const size_t board_rwo_sizea = 8;
   static const size_t board_column_sizea = 8;

@@ -4,6 +4,7 @@ add_library(
   square.cpp
   squares.cpp
   board_fen.cpp
+  castling.cpp
 )
 
 message("board library compiled")

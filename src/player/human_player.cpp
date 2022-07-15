@@ -8,7 +8,7 @@ HumanPlayer::~HumanPlayer() {}
 
 
 void HumanPlayer::set_initial_pos(SquareIndices sq) {
-  m_player_pos.set_from_poistion(sq);
+  m_player_pos.set_from_position(sq);
   m_player_pos.set_to_position(sq);
 }
 

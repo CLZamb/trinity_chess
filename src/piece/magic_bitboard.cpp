@@ -1,6 +1,4 @@
 #include "headers/magic_bitboard.h"
-#include "../board/headers/defs.h"
-
 // extern declaration in defs.h
 U64 SetMask[64];
 U64 ClearMask[64];
@@ -82,7 +80,6 @@ U64 MagicBitboard::rook_attacks(U64 occ, SquareIndices sq) const {
   occ *=  m_rook_tbl[sq].magic;
   occ >>= m_rook_tbl[sq].shift;
 
-  assert(occ < 4096);
   return m_rook_table[sq][occ];
 }
 

@@ -3,6 +3,7 @@
 
 #include <string>
 #include "board/headers/board_fen.h"
+#include "board/headers/castling.h"
 #include "board/headers/defs.h"
 #include "board/headers/squares.h"
 #include "board/headers/utils.h"
@@ -27,15 +28,21 @@ public:
 
 private:
   void move_piece_to_square(const Move &);
-  void save_move(const Move &m);
   bool check_piece_belongs_to_player(const Piecetype);
+  bool is_captured_piece_in_same_side(const Piecetype, const Piecetype);
+  bool is_en_passant_move(Move& m);
+  bool can_castle();
+  bool is_castle_move(const Move& m);
+  void assign_castle_rights(Move& m);
+  void move_castle_move(const std::pair<CastleSquares, CastleSquares>& rook_pos);
 
   Squares m_squares;
   Pieces m_pieces;
-  BoardBitboard m_board_state;
-  bool checkmate = false;
+  BoardBitboard m_board_bitboard;
+  bool checkmate{false};
   PlayerInfo m_turn_info;
   BoardFen m_fen;
+  Castling m_castling;
 };
 
 #endif /* BOARD_H */

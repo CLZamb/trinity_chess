@@ -6,7 +6,7 @@ BoardView::BoardView() : View("Board") {
   m_pane.add_section(m_bottom_section, 3);
   clear();
 
-  window_view.add_pane(this, Window::Middle_pane);
+  _window.add_pane(this, Window::Middle_pane);
 }
 
 void BoardView::clear() {
@@ -80,7 +80,7 @@ void BoardView::clear_square_on_range(const int start_pos, const int end_pos) {
 }
 
 void BoardView::add_pane_at_window_pos(Displayable *pane, Window::Pane_pos pos) {
-  window_view.add_pane(pane, pos);
+  _window.add_pane(pane, pos);
 }
 
 void BoardView::add_view_at_window_pos(View& v, Window::Pane_pos pos) {

@@ -28,14 +28,15 @@ class Game {
   bool is_valid_move(const string& str_move, Move& mv);
 
   PlayersTurnController m_players_turn;
-  Board m_board;
+// rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+  Board m_board{"r3k2r/8/8/8/8/8/8/R3K2R b KQkq - 0 1"};
   BoardView m_board_view;
   InfoPane m_info_pane;
   Players m_players;
   BoardInfo m_board_info;
 
   PlayerInput &m_player_input;
-  shared_ptr<UIBoard> p_view_controller;
+  shared_ptr<UIBoard> p_boardview_controller;
 };
 
 #endif /* GAME_H */
