@@ -1,7 +1,8 @@
 #include "headers/ipc_pipe.h"
 #include <filesystem>
+#include <sys/wait.h>
 
-namespace fs = std::__fs::filesystem;
+namespace fs = std::filesystem;
 
 IpcPipe::IpcPipe() {
   parent_read_end = &read_pipe;
