@@ -19,10 +19,7 @@ bool Board::is_legal_move(Move &m) {
   if (captured && is_captured_piece_in_same_side(piece, captured))
     return false;
 
-  // if (is_castle(m)) {
-  // }
   // if (is_square_attacked(king)) return false;
-  // if (is_special_move(m)) return false;
 
   return m_pieces[piece]->is_legal_move(m, m_board_bitboard);
 }
@@ -86,7 +83,6 @@ bool Board::is_castle_move(const Move& m) {
 // bool Board::is_en_passant_move(Move& m) {
 // }
 //
-
 
 void Board::move_castle_move(const std::pair<CastleSquares, CastleSquares>& r_pos) {
   SquareIndices from_pos = static_cast<SquareIndices>(r_pos.first);
