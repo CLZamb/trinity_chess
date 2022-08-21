@@ -18,19 +18,19 @@ add_subdirectory(player)
 # add_subdirectory(search)
 add_subdirectory(view)
 
-target_link_libraries(${chess} PUBLIC board_lib)
 # target_link_libraries(${chess} PUBLIC common_lib)
 target_link_libraries(${chess} PUBLIC configuration_lib)
-target_link_libraries(${chess} PUBLIC controller_lib)
-target_link_libraries(${chess} PUBLIC graphics_lib)
 target_link_libraries(${chess} PUBLIC input_lib)
 # target_link_libraries(${chess} PUBLIC ipc_lib)
-target_link_libraries(${chess} PUBLIC game_lib)
 target_link_libraries(${chess} PUBLIC model_lib)
 target_link_libraries(${chess} PUBLIC piece_lib)
 target_link_libraries(${chess} PUBLIC player_lib)
 # target_link_libraries(${chess} PUBLIC search_lib)
+target_link_libraries(${chess} PUBLIC board_lib)
 target_link_libraries(${chess} PUBLIC view_lib)
+target_link_libraries(${chess} PUBLIC graphics_lib)
+target_link_libraries(${chess} PUBLIC game_lib)
+target_link_libraries(${chess} PUBLIC controller_lib)
 
 target_include_directories(
   ${chess} PUBLIC 

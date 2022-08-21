@@ -10,7 +10,6 @@ using std::unordered_map;
 class Castling {
 public:
   Castling ();
-  virtual ~Castling ();
   const std::pair<CastleSquares, CastleSquares> &get_rook_castle_move(const CastlePermission &cp) const;
   bool is_castle_move(const Move& m, const Color &side);
   void assign_castle_rights_to_move(Move& m, const Color &side);

@@ -5,14 +5,16 @@
 #include "model/headers/player_info.h"
 #include "view/headers/board_view.h"
 #include "controller/headers/ui_board.h"
+#include <memory>
 
 class UiBoardController : public UIBoard {
 public:
   UiBoardController(BoardView& v, BoardFen& i);
+  virtual ~UiBoardController ();
+
   void print() override;
   void update() override;
 
-  virtual ~UiBoardController ();
 private:
   std::shared_ptr<BoardView> p_view;
   std::shared_ptr<BoardFen> p_board_fen;

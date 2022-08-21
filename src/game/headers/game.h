@@ -4,8 +4,8 @@
 #include "board/headers/board.h"
 #include "configuration/headers/configuration.h"
 #include "controller/headers/uicontroller.h"
+#include "../../controller/headers/ui_board_info_controller.h"
 #include "controller/headers/ui_board_controller.h"
-#include "controller/headers/ui_board_info_controller.h"
 #include "input/headers/text_input.h"
 #include "player/headers/players_turn_controller.h"
 #include "view/headers/info_pane.h"
@@ -17,7 +17,6 @@ using std::shared_ptr;
 class Game {
  public:
   Game(Configuration, PlayerInput &);
-  virtual ~Game();
   void play();
 
  private:

@@ -7,14 +7,12 @@ Game::Game(Configuration pc, PlayerInput& input) :
       m_players(m_board.get_board_fen(), pc.get_players_config(), input),
       m_player_input(input),
       p_boardview_controller(
-        std::make_unique<UiBoardController>(
+        make_unique<UiBoardController>(
         m_board_view, m_board.get_board_fen())) {
   m_player_input.setup(m_board_view);
   setup_players_turn();
   add_info_to_board();
 }
-
-Game::~Game() {}
 
 void Game::setup_players_turn() {
   attach_observers_to_players_turn();
