@@ -4,6 +4,7 @@ UiBoardInfoController::UiBoardInfoController(
     shared_ptr<UIBoard> b, BoardInfo& i, InfoPane& p) :
   UiBoardDecorator(b), p_info(&i), p_info_pane(&p) {}
 
+UiBoardInfoController::~UiBoardInfoController() {}
 
 void UiBoardInfoController::print() { 
   p_info_pane->update_game_info(p_info->get_info());

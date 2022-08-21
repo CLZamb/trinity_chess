@@ -1,6 +1,7 @@
 #include "game/headers/game.h"
 #include "game/headers/menu.h"
 #include "configuration/headers/input_configuration.h"  
+#include <unistd.h>
 
 template<typename T>
 void play(T& input) {

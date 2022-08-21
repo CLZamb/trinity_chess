@@ -24,7 +24,6 @@ const unordered_map<Color, const unordered_map<CastleSquares, CastlePermission>>
 };
 
 Castling::Castling() {}
-Castling::~Castling() {}
 
 const std::pair<CastleSquares, CastleSquares>& Castling::get_rook_castle_move(const CastlePermission &cp) const {
   return m_rook_castle_pos.at(cp);
