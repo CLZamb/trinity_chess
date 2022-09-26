@@ -10,14 +10,14 @@
 class UiBoardController : public UIBoard {
 public:
   UiBoardController(BoardView& v, BoardFen& i);
-  virtual ~UiBoardController ();
+  virtual ~UiBoardController();
 
   void print() override;
   void update() override;
 
 private:
-  std::shared_ptr<BoardView> p_view;
-  std::shared_ptr<BoardFen> p_board_fen;
+  BoardView& p_view;
+  BoardFen& p_board_fen;
   PlayerInfo m_player_info;
 };
 

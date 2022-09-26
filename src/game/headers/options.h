@@ -22,7 +22,7 @@ class Options : public map<int, Option<T>> {
 public:
   Options() {}
   Options(std::initializer_list<Option<T>> lst) {
-    for (const auto l : lst) {
+    for (const auto &l : lst) {
       this->emplace(l.num, l);
     }
   }
