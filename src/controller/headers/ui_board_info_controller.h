@@ -14,8 +14,8 @@ class UiBoardInfoController : public UiBoardDecorator {
   void print() override;
   void update() override;
 
-  std::shared_ptr<BoardInfo> p_info;
-  std::shared_ptr<InfoPane> p_info_pane;
+  BoardInfo& p_info;
+  InfoPane& p_info_pane;
 };
 
 

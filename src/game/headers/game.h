@@ -17,6 +17,7 @@ using std::shared_ptr;
 class Game {
  public:
   Game(Configuration, PlayerInput &);
+  virtual ~Game();
   void play();
 
  private:

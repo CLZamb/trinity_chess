@@ -4,7 +4,6 @@ add_library(
   players_turn_controller.cpp
   human_player.cpp
   players.cpp
-  player_position.cpp
   )
 
 message("Player library compiled")

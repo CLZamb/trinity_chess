@@ -1,6 +1,7 @@
 #include "headers/board_fen.h"
 
 BoardFen::BoardFen(Squares &s) : m_squares(s) {}
+BoardFen::~BoardFen() {}
 
 const string &BoardFen::get_fen() {
   fen.clear();

@@ -9,6 +9,7 @@ using std::string;
 class BoardFen {
  public:
   BoardFen (Squares& s);
+  virtual ~BoardFen();
   void parse_fen(const string &fen, BoardBitboard& b_b);
   const string &get_fen();
 
