@@ -15,7 +15,6 @@ void Window::add_pane(Displayable *pane, Pane_pos pos) {
 }
 
 ostream &operator<<(ostream &os, Window &w) {
-  system(CLEAR);
   w.get_formatted_window_drawing(os);
   return os;
 }

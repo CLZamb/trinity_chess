@@ -1,4 +1,5 @@
 #include "headers/board.h"
+#include "board/headers/utils.h"
 
 Board::Board(string fen /*"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"*/) : 
   m_fen(m_squares) {
@@ -80,9 +81,8 @@ bool Board::is_castle_move(const Move& m) {
   return is_castle_move & (piece_at_rook_initial_pos == bR || piece_at_rook_initial_pos == wR);
 }
 
-// bool Board::is_en_passant_move(Move& m) {
-// }
-//
+bool Board::is_en_passant_move(Move& m) {
+}
 
 void Board::move_castle_move(const std::pair<CastleSquares, CastleSquares>& r_pos) {
   SquareIndices from_pos = static_cast<SquareIndices>(r_pos.first);

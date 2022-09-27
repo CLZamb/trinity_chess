@@ -13,9 +13,9 @@ using std::ostream;
 class Window {
  public:
   enum Pane_pos {
-    Left_pane = 0,
-    Middle_pane = 1,
-    Right_pane = 2,
+    Left_pane      = 0,
+    Middle_pane    = 1,
+    Right_pane     = 2,
     Max_panes_size = 3
   };
 

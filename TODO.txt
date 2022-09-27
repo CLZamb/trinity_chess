@@ -1,5 +1,10 @@
-Version 3
+Version 2 * current
+1. finish all special moves
+  1. pawn promotion
+  3. en passant
+2. king safety
 
+Version 3
 1. use FTXUI
 2. add mouse support
 3. create another info view 

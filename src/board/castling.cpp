@@ -61,7 +61,7 @@ CastleSquares Castling::get_castle_rook_initial_position(const Move& m, const Co
         return ROOK_WHITE_CA_KING_SIDE_FROM_POS;
       case WK_CA_QUEEN_SIDE_END_POS:
         return  ROOK_WHITE_CA_QUEEN_SIDE_FROM_POS;
-      default:break;
+      default: break;
     }  
   } else if (side == BLACK) {
     switch (to) {
@@ -69,7 +69,7 @@ CastleSquares Castling::get_castle_rook_initial_position(const Move& m, const Co
         return ROOK_BLACK_CA_KING_SIDE_FROM_POS;
       case BK_CA_QUEEN_SIDE_END_POS:
         return ROOK_BLACK_CA_QUEEN_SIDE_FROM_POS;
-      default:break;
+      default: break;
     }
   }
 

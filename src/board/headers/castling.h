@@ -20,7 +20,6 @@ private:
   static const unordered_map<CastleSquares, CastlePermission> m_white_permission;
   static const unordered_map<CastleSquares, CastlePermission> m_black_permission;
   static const unordered_map<Color, const unordered_map<CastleSquares, CastlePermission>> m_castle_permission;
-
   // static const unordered_map<CastlePermission, std::pair<CastleSquares, CastleSquares>> m_rook_castle_rights_assigment;
 };
 

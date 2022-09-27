@@ -11,6 +11,7 @@
 #include "game/headers/string_utils.h"
 #include "graphics/headers/game_drawings.hpp"
 #include "board/headers/utils.h"
+#include <list>
 
 using std::array;
 /*
@@ -242,30 +243,33 @@ class PieceDrawing {
 
 class DrawingBuilder {
  public:
-  virtual void build_drawing(Piecetype pct)  = 0;
-  virtual PieceDrawing* get_drawing() { return nullptr; }
+  virtual PieceDrawing* build_drawing(Piecetype pct)  = 0;
 
  protected:
   DrawingBuilder() {}
 };
 
-
+using std::list;
 class StandardDrawingBuilder : public DrawingBuilder {
  public:
-  StandardDrawingBuilder() : piece_drawing(nullptr) {}
-  ~StandardDrawingBuilder() {}
+  StandardDrawingBuilder() : _pieces_drawings(new std::list<PieceDrawing*>) {}
+  virtual ~StandardDrawingBuilder() {
+    for (auto * piece_drawing : *_pieces_drawings) 
+      delete piece_drawing;
 
-  void build_drawing(Piecetype pct) override {
-    std::string piece_type = string_utils::get_piece_str_name_from_piecetype(pct);
-    piece_drawing = new PieceDrawing(piece_type);
+    _pieces_drawings->clear();
+    delete _pieces_drawings;
   }
 
-  PieceDrawing* get_drawing() override {
+  PieceDrawing* build_drawing(Piecetype pct) override {
+    std::string piece_type = string_utils::get_piece_str_name_from_piecetype(pct);
+    PieceDrawing * piece_drawing = new PieceDrawing(piece_type);
+    _pieces_drawings->push_back(piece_drawing);
     return piece_drawing;
   }
 
  private:
-  PieceDrawing* piece_drawing;
+  list<PieceDrawing*> *_pieces_drawings;
 };
 
 
@@ -278,8 +282,7 @@ class PiecesDrawings {
     };
 
     for (const Piecetype &pct : NodePositionVector) {
-      m_drawing_builder.build_drawing(pct);
-      drawing = m_drawing_builder.get_drawing();
+      drawing = m_drawing_builder.build_drawing(pct);
       piece_drawing_mod_fg = utils::check::is_black_piece(pct)
         ? DrawingMod::BLACK_FG
         : DrawingMod::WHITE_FG;
