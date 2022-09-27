@@ -53,7 +53,6 @@ class Pawn : public Piece {
     return is_legal_non_attack_move(m, board);
   }
 
-
  private:
   bool is_legal_attack_move(Move& m, BoardBitboard &board)  {
     U64 all_moves = BLANK;

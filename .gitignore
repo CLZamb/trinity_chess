@@ -5,6 +5,7 @@ lib/
 obj/
 #debug
 debug/
+Debug/
 # tests/
 lib/
 node_modules/

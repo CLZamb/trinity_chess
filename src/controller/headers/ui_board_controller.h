@@ -2,7 +2,6 @@
 #define UI_BOARD_CONTROLLER_H
 
 #include "board/headers/board_fen.h"
-#include "model/headers/player_info.h"
 #include "view/headers/board_view.h"
 #include "controller/headers/ui_board.h"
 #include <memory>
@@ -18,7 +17,6 @@ public:
 private:
   BoardView& p_view;
   BoardFen& p_board_fen;
-  PlayerInfo m_player_info;
 };
 
 #endif /* UI_BOARD_CONTROLLER_H */
