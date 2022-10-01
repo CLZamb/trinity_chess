@@ -6,7 +6,7 @@ using std::flush;
 View::View(string name) { this->name = name; }
 
 void View::print() { 
-  system(CLEAR);
+  // system(CLEAR);
   cout << _window << flush; 
 }
 

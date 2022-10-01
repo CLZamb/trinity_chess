@@ -1,6 +1,7 @@
 #ifndef MOVE_H
 #define MOVE_H
 
+#include "board/headers/bit_utilities.h"
 #include "board/headers/utils.h"
 
 /*
@@ -14,6 +15,7 @@
  */
 
 typedef unsigned int Move;
+
 
 namespace Move_Utils {
 namespace {
@@ -130,5 +132,10 @@ constexpr void set_move(Move &m, unsigned int from, unsigned int to) {
       ((to & designated_space_in_hex_square) << shift_to);
 }
 } // namespace Move_Utils
+
+constexpr SquareIndices operator+(SquareIndices s, bitUtility::Direction d) { return SquareIndices(int(s) + int(d)); }
+constexpr SquareIndices operator-(SquareIndices s, bitUtility::Direction d) { return SquareIndices(int(s) - int(d)); }
+inline SquareIndices& operator+=(SquareIndices& s, bitUtility::Direction d) { return s = s + d; }
+inline SquareIndices& operator-=(SquareIndices& s, bitUtility::Direction d) { return s = s - d; }
 
 #endif /* MOVE_H */

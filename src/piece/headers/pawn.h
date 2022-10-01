@@ -1,6 +1,7 @@
 #ifndef PAWN_H
 #define PAWN_H
 
+#include "board/headers/bit_utilities.h"
 #include "piece.h"
 
 template<Color C>
@@ -47,10 +48,60 @@ class Pawn : public Piece {
   }
 
   bool is_legal_move(Move &m, BoardBitboard& board) override {
+    if (Move_Utils::is_en_passand(m)) 
+      return is_legal_en_passant_move(m);
+
     if (Move_Utils::get_captured_piece(m))
       return is_legal_attack_move(m, board);
 
     return is_legal_non_attack_move(m, board);
+  }
+
+  bool is_legal_en_passant_move(const Move &m) {
+    SquareIndices sq = Move_Utils::get_from(m);
+    U64 from_sq = ONE << sq;
+    U64 to_sq = ONE << Move_Utils::get_to(m);
+    U64 attack_moves = pawn_moves->pawn_attack(sq);
+    U64 row_mask = (color == WHITE) ? ROWMASK[4] : ROWMASK[3];
+    return (row_mask & from_sq) && (to_sq & attack_moves);
+  }
+ 
+  static bool is_first_move(const Move &m) {
+    Piecetype piece = Move_Utils::get_piece(m);
+    U64 from_sq = ONE << Move_Utils::get_from(m);
+
+    if (piece != bP && piece != wP)
+      return false;
+
+    if (color == BLACK) {
+      if (from_sq & ROWMASK[6]) {
+        return true;
+      }
+    } else {
+      if (from_sq & ROWMASK[1])
+        return true;
+    }
+
+    return false;
+  }
+
+  static bool is_double_forward_move(const Move &m) {
+    Piecetype piece = Move_Utils::get_piece(m);
+    U64 to_sq = ONE << Move_Utils::get_to(m);
+
+    if (piece != bP && piece != wP)
+      return false;
+
+    if (color == BLACK) {
+      if (to_sq & ROWMASK[4]) {
+        return true;
+      }
+    } else {
+      if (to_sq & ROWMASK[3])
+        return true;
+    }
+
+    return false;
   }
 
  private:
@@ -61,8 +112,7 @@ class Pawn : public Piece {
     Piecetype captured = Move_Utils::get_captured_piece(m);
     const U64 opponent = board[utils::check::get_color_piece(captured)];
 
-    all_moves |= m_attacks[from] & opponent;  // enemy is that square occ
-
+    all_moves |= m_attacks[from] & opponent;  // enemy is in that square
     return all_moves & to;
   }
 

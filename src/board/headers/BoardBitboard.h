@@ -67,10 +67,19 @@ public:
     return castle_perm;
   }
 
+  void set_en_passant_pos(SquareIndices sq) {
+    en_passant_pos = sq;
+  }
+
+  const SquareIndices &get_en_passant_pos() {
+    return en_passant_pos;
+  }
+
 private:
   std::array<U64, Color::SIZE + 1> m_occupancies{BLANK};
   int castle_perm{NO_CASTLING};
   Castling m_caslting;
+  SquareIndices en_passant_pos{SquareEnd};
 };
 
 #endif /* BOARDBITBOARD_H */

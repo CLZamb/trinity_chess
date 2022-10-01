@@ -28,13 +28,18 @@ public:
 
 private:
   void move_piece_to_square(const Move &);
+  bool can_castle();
   bool check_piece_belongs_to_player(const Piecetype);
   bool is_captured_piece_in_same_side(const Piecetype, const Piecetype);
-  bool is_en_passant_move(Move& m);
-  bool can_castle();
   bool is_castle_move(const Move& m);
+  SquareIndices get_en_passant_move(const Move& m);
   void assign_castle_rights(Move& m);
   void move_castle_move(const std::pair<CastleSquares, CastleSquares>& rook_pos);
+  bool is_pawn_piece(const Piecetype);
+  bool is_first_move(const Move& m);
+  bool is_double_forward_move(const Move& m);
+  void save_en_passant_move(const SquareIndices& sq);
+  bool is_en_passand_move(const Move& m);
 
   Squares m_squares;
   Pieces m_pieces;

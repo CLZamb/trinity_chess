@@ -12,12 +12,13 @@ class BoardFen {
   virtual ~BoardFen();
   void parse_fen(const string &fen, BoardBitboard& b_b);
   const string &get_fen();
+  void update_fen();
 
  private:
   bool is_number(char c);
   void add_empty_space(string& fen, int &space);
-  string fen;
   Squares &m_squares;
+  string m_board_fen;
 };
 
 #endif /* BOARD_FEN_H */

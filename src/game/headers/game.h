@@ -28,9 +28,9 @@ class Game {
   bool is_valid_move(const string& str_move, Move& mv);
 
   PlayersTurnController m_players_turn;
-  Board m_board{"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"};
+  // Board m_board{"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"};
   // Board m_board{"r3k3/ppp5/8/8/8/8/5PPP/4K2R w Kq - 0 1"};
-  // Board m_board{"4k3/8/8/4pP2/8/8/8/4K3 w - e6 0 1"};
+  Board m_board{"4k3/8/8/4pP2/8/8/8/4K2R w - e6 0 1"};
   BoardView m_board_view;
   InfoPane m_info_pane;
   Players m_players;
