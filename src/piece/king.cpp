@@ -34,9 +34,9 @@ bool King<color>::is_legal_move(Move &m, BoardBitboard &board) {
 
 template <Color color>
 bool King<color>::eheck_legal_castle(const Move& m, BoardBitboard &b) {
-  const SquareIndices from = Move_Utils::get_from(m);
-  const SquareIndices to = Move_Utils::get_to(m);
-  const KingCastle &kc  = m_kc.at(Move_Utils::get_castle_permission(m));
+  SquareIndices from = Move_Utils::get_from(m);
+  SquareIndices to = Move_Utils::get_to(m);
+  const KingCastle &kc = m_kc.at(Move_Utils::get_castle_permission(m));
 
   if (from != static_cast<SquareIndices>(kc._from)) return false;
   if (to != static_cast<SquareIndices>(kc._to))  return false;

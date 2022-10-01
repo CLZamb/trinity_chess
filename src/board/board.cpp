@@ -1,19 +1,24 @@
 #include "headers/board.h"
+#include "board/headers/defs.h"
+#include "board/headers/square.h"
 #include "board/headers/utils.h"
 
 Board::Board(string fen /*"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"*/) : 
   m_fen(m_squares) {
   m_fen.parse_fen(fen, m_board_bitboard);
+  m_fen.update_fen();
 }
 
 bool Board::is_checkmate() { return checkmate; }
 
-void Board::update_turn(const PlayerInfo &turn) { m_turn_info = turn; }
+void Board::update_turn(const PlayerInfo &turn) { 
+  m_turn_info = turn; 
+}
 
 bool Board::is_legal_move(Move &m) {
   Piecetype piece = Move_Utils::get_piece(m);
   Piecetype captured = Move_Utils::get_captured_piece(m);
- 
+
   if (!piece || !check_piece_belongs_to_player(piece))
     return false;
 
@@ -37,6 +42,7 @@ bool Board::check_piece_belongs_to_player(const Piecetype pc) {
 void Board::make_move(Move mv) {
   m_board_bitboard.move(mv);
   move_piece_to_square(mv);
+  m_fen.update_fen();
 }
 
 void Board::move_piece_to_square(const Move &mv) {
@@ -44,6 +50,7 @@ void Board::move_piece_to_square(const Move &mv) {
   SquareIndices to = SquareEnd;
   from = Move_Utils::get_from(mv);
   to = Move_Utils::get_to(mv);
+  Piecetype piece = Move_Utils::get_piece(mv);
 
   m_squares.do_move(from, to);
 
@@ -51,6 +58,45 @@ void Board::move_piece_to_square(const Move &mv) {
     CastlePermission caslte_perm = Move_Utils::get_castle_permission(mv);
     move_castle_move(m_castling.get_rook_castle_move(caslte_perm));
   }
+
+  if (is_pawn_piece(piece)) {
+    if (is_first_move(mv) && is_double_forward_move(mv)) {
+      m_board_bitboard.set_en_passant_pos(get_en_passant_move(mv));
+    }
+  }
+}
+
+bool Board::is_first_move(const Move& m) {
+  Piecetype piece = Move_Utils::get_piece(m);
+  if (piece == bP) {
+    if (Pawn<BLACK>::is_first_move(m))
+      return true;
+  } else if (piece == wP) {
+    if (Pawn<WHITE>::is_first_move(m))
+      return true;
+  }
+
+  return false;
+}
+
+bool Board::is_double_forward_move(const Move& m) {
+  Piecetype piece = Move_Utils::get_piece(m);
+  if (piece == bP) {
+    if (Pawn<BLACK>::is_double_forward_move(m))
+      return true;
+  } else if (piece == wP) {
+    if (Pawn<WHITE>::is_double_forward_move(m))
+      return true;
+  }
+  return false;
+}
+
+void Board::save_en_passant_move(const SquareIndices& s) {
+  m_board_bitboard.set_en_passant_pos(s);
+}
+
+bool Board::is_pawn_piece(const Piecetype pct) {
+  return pct == bP || pct == wP;
 }
 
 Move Board::string_to_move(const string &m) {
@@ -67,7 +113,18 @@ Move Board::string_to_move(const string &m) {
   if (can_castle() && is_castle_move(mv))
     m_castling.assign_castle_rights_to_move(mv, m_turn_info.color);
 
+  if (is_en_passand_move(mv)) {
+    Move_Utils::set_en_passant(mv, true);
+  }
+
   return mv;
+}
+
+bool Board::is_en_passand_move(const Move& m) {
+  SquareIndices to = Move_Utils::get_to(m);
+  SquareIndices en_passant_pos = m_board_bitboard.get_en_passant_pos();
+  Piecetype piece = Move_Utils::get_piece(m);
+  return is_pawn_piece(piece) && (to == en_passant_pos);
 }
 
 bool Board::can_castle() {
@@ -81,7 +138,16 @@ bool Board::is_castle_move(const Move& m) {
   return is_castle_move & (piece_at_rook_initial_pos == bR || piece_at_rook_initial_pos == wR);
 }
 
-bool Board::is_en_passant_move(Move& m) {
+SquareIndices Board::get_en_passant_move(const Move& m) {
+  Piecetype piece = Move_Utils::get_piece(m);
+  SquareIndices to = Move_Utils::get_to(m);
+
+  if (piece == bP)
+    return (to += NORTH);
+  else if (piece == wP)
+      return (to += SOUTH);
+
+  return SquareEnd;
 }
 
 void Board::move_castle_move(const std::pair<CastleSquares, CastleSquares>& r_pos) {

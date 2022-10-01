@@ -49,7 +49,7 @@ void BoardView::parse_fen(const string& fen) {
   int space = 0;
 
   for (const char& c : fen) {
-    piece = utils::get_square_index_from_char_key(c);
+    piece = utils::get_piecetype_from_char_key(c);
     square = static_cast<SquareIndices>(rank * 8 + file);
     if (piece) {
       set_piece_drawing_at_square_pos(piece, square);

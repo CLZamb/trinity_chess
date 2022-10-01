@@ -40,7 +40,7 @@ namespace check {
   }
 }  // namespace check
 
-inline Piecetype get_square_index_from_char_key(const char c) {
+inline Piecetype get_piecetype_from_char_key(const char c) {
   static const map<char, Piecetype> piece_map = {
     {'P', wP}, {'R', wR}, {'N', wN}, {'B', wB}, {'Q', wQ}, {'K', wK},
     {'p', bP}, {'r', bR}, {'n', bN}, {'b', bB}, {'q', bQ}, {'k', bK},
