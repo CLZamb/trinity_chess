@@ -3,11 +3,7 @@
 #include "board/headers/square.h"
 #include "board/headers/utils.h"
 
-Board::Board(string fen /*"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"*/) : 
-  m_fen(m_squares) {
-  m_fen.parse_fen(fen, m_board_bitboard);
-  m_fen.update_fen();
-}
+Board::Board() {}
 
 bool Board::is_checkmate() { return checkmate; }
 
@@ -42,12 +38,11 @@ bool Board::check_piece_belongs_to_player(const Piecetype pc) {
 void Board::make_move(Move mv) {
   m_board_bitboard.move(mv);
   move_piece_to_square(mv);
-  m_fen.update_fen();
 }
 
 void Board::move_piece_to_square(const Move &mv) {
-  SquareIndices from = SquareEnd;
-  SquareIndices to = SquareEnd;
+  SquareIndices from = SquareNull;
+  SquareIndices to = SquareNull;
   from = Move_Utils::get_from(mv);
   to = Move_Utils::get_to(mv);
   Piecetype piece = Move_Utils::get_piece(mv);
@@ -56,13 +51,20 @@ void Board::move_piece_to_square(const Move &mv) {
 
   if (Move_Utils::can_castle(mv)) {
     CastlePermission caslte_perm = Move_Utils::get_castle_permission(mv);
-    move_castle_move(m_castling.get_rook_castle_move(caslte_perm));
+    move_rook_castle_move(m_special_move.get_rook_castle_move(caslte_perm));
   }
 
   if (is_pawn_piece(piece)) {
     if (is_first_move(mv) && is_double_forward_move(mv)) {
-      m_board_bitboard.set_en_passant_pos(get_en_passant_move(mv));
+      m_special_move.set_en_passant_square(get_en_passant_move(mv));
     }
+  }
+
+  if (Move_Utils::is_en_passand(mv)) {
+    if (utils::check::is_black_piece(Move_Utils::get_piece(mv)))
+      m_squares[Move_Utils::get_to(mv) + NORTH].clear_square();
+    else
+      m_squares[Move_Utils::get_to(mv) + SOUTH].clear_square();
   }
 }
 
@@ -91,10 +93,6 @@ bool Board::is_double_forward_move(const Move& m) {
   return false;
 }
 
-void Board::save_en_passant_move(const SquareIndices& s) {
-  m_board_bitboard.set_en_passant_pos(s);
-}
-
 bool Board::is_pawn_piece(const Piecetype pct) {
   return pct == bP || pct == wP;
 }
@@ -109,33 +107,22 @@ Move Board::string_to_move(const string &m) {
 
   Move_Utils::set_piece(mv, piece);
   Move_Utils::set_capture_piece(mv, captured);
-
-  if (can_castle() && is_castle_move(mv))
-    m_castling.assign_castle_rights_to_move(mv, m_turn_info.color);
-
-  if (is_en_passand_move(mv)) {
-    Move_Utils::set_en_passant(mv, true);
+  
+  switch (m_special_move.check_special_type(mv, m_squares)) {
+    case SpecialMove::Pawn_Promotion:
+      break;
+    case SpecialMove::En_Passant:
+      Move_Utils::set_en_passant(mv, true);
+      break;
+    case SpecialMove::Castling_Move:
+      Move_Utils::set_castle_permission(mv, m_special_move.get_castle_permission());
+      break;
+    case SpecialMove::None:
+    default:
+      break;
   }
 
   return mv;
-}
-
-bool Board::is_en_passand_move(const Move& m) {
-  SquareIndices to = Move_Utils::get_to(m);
-  SquareIndices en_passant_pos = m_board_bitboard.get_en_passant_pos();
-  Piecetype piece = Move_Utils::get_piece(m);
-  return is_pawn_piece(piece) && (to == en_passant_pos);
-}
-
-bool Board::can_castle() {
-  return m_board_bitboard.get_castle_permission() != NO_CASTLING;
-}
-
-bool Board::is_castle_move(const Move& m) {
-  bool is_castle_move = m_castling.is_castle_move(m, m_turn_info.color);
-  CastleSquares rook_initial_pos = m_castling.get_castle_rook_initial_position(m, m_turn_info.color);
-  Piecetype piece_at_rook_initial_pos = m_squares[rook_initial_pos].get_piece();
-  return is_castle_move & (piece_at_rook_initial_pos == bR || piece_at_rook_initial_pos == wR);
 }
 
 SquareIndices Board::get_en_passant_move(const Move& m) {
@@ -147,13 +134,41 @@ SquareIndices Board::get_en_passant_move(const Move& m) {
   else if (piece == wP)
       return (to += SOUTH);
 
-  return SquareEnd;
+  return SquareNull;
 }
 
-void Board::move_castle_move(const std::pair<CastleSquares, CastleSquares>& r_pos) {
-  SquareIndices from_pos = static_cast<SquareIndices>(r_pos.first);
-  SquareIndices to_pos = static_cast<SquareIndices>(r_pos.second);
+void Board::move_rook_castle_move(const Move& r_pos) {
+  SquareIndices from_pos = Move_Utils::get_from(r_pos);
+  SquareIndices to_pos = Move_Utils::get_to(r_pos);
   m_squares.do_move(from_pos, to_pos);
 }
 
-BoardFen &Board::get_board_fen() { return m_fen; }
+void Board::clear() {
+  m_squares.clear();
+  m_board_bitboard.clear();
+}
+
+void Board::set_piece_at_square(const SquareIndices& s, const Piecetype& p) {
+  m_squares[s].set_piece(p);
+  m_board_bitboard.set_bit_at_player_pieces(utils::check::get_color_piece(p), s);
+}
+
+Piecetype Board::get_piece_at_square(const int &pos) {
+  return m_squares[pos].get_piece();
+}
+
+void Board::set_en_passant_square(SquareIndices sq) {
+  m_special_move.set_en_passant_square(sq);
+}
+
+const SquareIndices &Board::get_en_passant_square() {
+  return m_special_move.get_en_passant_square();
+}
+
+void Board::set_castle_permission(CastlePermission perm) {
+  m_special_move.set_castle_permission(perm);
+}
+
+const int &Board::get_castle_permission() {
+  return m_special_move.get_castle_permission();
+}

@@ -5,6 +5,7 @@ add_library(
   squares.cpp
   board_fen.cpp
   castling.cpp
+  special_move.cpp
 )
 
 message("board library compiled")

@@ -16,7 +16,6 @@
 
 typedef unsigned int Move;
 
-
 namespace Move_Utils {
 namespace {
 inline static const unsigned int designated_space_in_hex_square = 0x3F;

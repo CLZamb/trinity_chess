@@ -16,7 +16,7 @@ using std::unique_ptr;
 
 class Players : public GameTurnObserver {
 public:
-  Players(const BoardFen &, PlayersConfig &, PlayerInput&);
+  Players(PlayersConfig &, PlayerInput&);
   virtual ~Players();
   void update_turn(const PlayerInfo & p) override;
   void create_players(PlayersConfig &c, PlayerInput& i);
@@ -24,7 +24,6 @@ public:
   string get_next_string_move();
 
 private:
-  const BoardFen& m_fen;
   array<unique_ptr<Player>, GameTurn::kSize> m_players;
   PlayerInfo m_turn;
 };

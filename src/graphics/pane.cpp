@@ -46,7 +46,6 @@ int Pane::size() {
 
 bool Pane::is_valid_pane_index(const size_t& index) {
   if (index >= m_pane_drawing.size()) return false;
-  if (index < 0) return false;
   return true;
 }
 
