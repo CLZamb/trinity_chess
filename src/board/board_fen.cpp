@@ -1,16 +1,20 @@
 #include "headers/board_fen.h"
 
-BoardFen::BoardFen(Squares &s) : m_squares(s) {}
+BoardFen::BoardFen(BoardFenInfo &b, const string fen) {
+  parse_fen(fen, b);
+  update_fen(b);
+}
+
 BoardFen::~BoardFen() {}
 
-void BoardFen::update_fen() {
+void BoardFen::update_fen(BoardFenInfo& board) {
   m_board_fen.clear();
   Piecetype piece{EMPTY};
   int space{0};
 
   for (int rank = 7; rank >= 0; rank--) {
     for (int file = 0; file <= 7; file++) {
-      piece = m_squares[rank * 8 + file].get_piece();
+      piece = board.get_piece_at_square(rank * 8 + file);
       if (piece) {
         add_empty_space(m_board_fen, space);
         m_board_fen += utils::piecetype_to_char(piece);
@@ -38,9 +42,8 @@ void BoardFen::add_empty_space(string& f, int &space) {
   space = 0;
 }
 
-void BoardFen::parse_fen(const string &c_str_fen, BoardBitboard& board_bitboard) {
-  m_squares.clear();
-  board_bitboard.clear();
+void BoardFen::parse_fen(const string &c_str_fen, BoardFenInfo &board) {
+  board.clear();
 
   SquareIndices square = A1;
   int rank = 7;
@@ -52,8 +55,7 @@ void BoardFen::parse_fen(const string &c_str_fen, BoardBitboard& board_bitboard)
     piece = utils::get_piecetype_from_char_key(*fen);
     if (piece) {
       square = static_cast<SquareIndices>(rank * 8 + file);
-      m_squares[square].set_piece(piece);
-      board_bitboard.set_bit_at_player_pieces(utils::check::get_color_piece(piece), square);
+      board.set_piece_at_square(square, piece);
 
       file++;
 
@@ -80,16 +82,16 @@ void BoardFen::parse_fen(const string &c_str_fen, BoardBitboard& board_bitboard)
   while (*fen != ' ') {
     switch(*fen) {
       case 'Q': 
-        board_bitboard.set_castle_permission(WQCA); 
+        board.set_castle_permission(WQCA);
         break;
       case 'K': 
-        board_bitboard.set_castle_permission(WKCA); 
+        board.set_castle_permission(WKCA);
         break;
       case 'k': 
-        board_bitboard.set_castle_permission(BKCA); 
+        board.set_castle_permission(BKCA);
         break;
       case 'q': 
-        board_bitboard.set_castle_permission(BQCA); 
+        board.set_castle_permission(WKCA);
         break;
       case '-': break;
     }
@@ -103,9 +105,8 @@ void BoardFen::parse_fen(const string &c_str_fen, BoardBitboard& board_bitboard)
     fen++;
 		rank = *fen - '1';
     square = static_cast<SquareIndices>(rank * 8 + file);
-    board_bitboard.set_en_passant_pos(square); 
+    board.set_en_passant_square(square);
   }
 };
-
 
 bool BoardFen::is_number(char c) { return c >= '0' && c <= '8'; }

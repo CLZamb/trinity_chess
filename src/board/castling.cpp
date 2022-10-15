@@ -1,11 +1,11 @@
 #include "headers/castling.h"
 
-const unordered_map<CastlePermission, std::pair<CastleSquares, CastleSquares>> Castling::m_rook_castle_pos {
-  {NO_CASTLING, {{NO_CASTLE_POS}, {NO_CASTLE_POS}}},
-  {WKCA ,{{ROOK_WHITE_CA_KING_SIDE_FROM_POS}, {ROOK_WHITE_CA_KING_SIDE_TO_POS}}},
-  {WQCA ,{{ROOK_WHITE_CA_QUEEN_SIDE_FROM_POS}, {ROOK_WHITE_CA_QUEEN_SIDE_TO_POS}}},
-  {BKCA ,{{ROOK_BLACK_CA_KING_SIDE_FROM_POS}, {ROOK_BLACK_CA_KING_SIDE_TO_POS}}},
-  {BQCA ,{{ROOK_BLACK_CA_QUEEN_SIDE_FROM_POS}, {ROOK_BLACK_CA_QUEEN_SIDE_TO_POS}}},
+const unordered_map<CastlePermission, const Move> Castling::m_rook_castle_pos { 
+  {NO_CASTLING, 0},
+  {WKCA , m_wkca},
+  {WQCA , m_wqca},
+  {BKCA , m_bkca},
+  {BQCA , m_bqca},
 };
 
 const unordered_map<CastleSquares, CastlePermission> Castling::m_white_permission {
@@ -25,7 +25,7 @@ const unordered_map<Color, const unordered_map<CastleSquares, CastlePermission>>
 
 Castling::Castling() {}
 
-const std::pair<CastleSquares, CastleSquares>& Castling::get_rook_castle_move(const CastlePermission &cp) const {
+const Move& Castling::get_rook_castle_move(const CastlePermission &cp) const {
   return m_rook_castle_pos.at(cp);
 }
 
@@ -80,3 +80,8 @@ void Castling::assign_castle_rights_to_move(Move& m, const Color &side) {
   CastleSquares to = static_cast<CastleSquares>(Move_Utils::get_to(m));
   Move_Utils::set_castle_permission(m, m_castle_permission.at(side).at(to));
 }
+
+const int &Castling::get_castle_permission() {
+  return castle_perm;
+}
+

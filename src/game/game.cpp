@@ -5,13 +5,14 @@ using std::make_shared;
 
 Game::Game(Configuration pc, PlayerInput& input) : 
       m_players_turn(pc.get_players_config()),
-      m_players(m_board.get_board_fen(), pc.get_players_config(), input),
+      m_board_fen(m_board, start_fen),
+      m_players(pc.get_players_config(), input),
       m_player_input(input),
       p_boardview_controller(
-        make_shared<UiBoardController>(m_board_view, m_board.get_board_fen())) {
+          make_shared<UiBoardController>(m_board_view, m_board_fen)) {
   m_player_input.setup(m_board_view);
   setup_players_turn();
-  add_info_to_board();
+  add_info_pane_to_board();
 }
 
 Game::~Game() {}
@@ -29,7 +30,7 @@ void Game::attach_observers_to_players_turn() {
   m_players_turn.attach(&m_players);
 }
 
-void Game::add_info_to_board() {
+void Game::add_info_pane_to_board() {
   m_board_view.add_pane_at_window_pos(&m_info_pane, Window::Right_pane);
   p_boardview_controller = std::make_shared<UiBoardInfoController>(p_boardview_controller, m_board_info, m_info_pane);
 }
@@ -60,6 +61,7 @@ void Game::play() {
 void Game::make_move(const Move& mv) {
   m_board.make_move(mv);
   m_board_info.save_move(mv);
+  m_board_fen.update_fen(m_board);
   p_boardview_controller->update();
 }
 

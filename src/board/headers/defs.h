@@ -21,10 +21,11 @@ enum SquareIndices : int {
 
   Squarebegin = A1, 
   SquareEnd = H8 + 1,
+  SquareNull = SquareEnd + 1,
 };
 
 enum CastleSquares : int {
-  NO_CASTLE_POS = SquareEnd,
+  NO_CASTLE_POS = SquareNull,
 
   WK_CA_INITIAL_POS = E1,
   BK_CA_INITIAL_POS = E8,

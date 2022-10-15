@@ -25,7 +25,6 @@ void Section::set_content_at_index(string content, const size_t& index) {
 
 bool Section::is_valid_index(const size_t& index) {
   if (index >= size()) return false;
-  if (index < 0) return false;
   return true;
 }
 

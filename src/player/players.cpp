@@ -2,8 +2,7 @@
 
 using std::make_unique;
 
-Players::Players(const BoardFen &f, PlayersConfig &p, PlayerInput&i) : 
-  m_fen(f) {
+Players::Players(PlayersConfig &p, PlayerInput&i) {
   create_players(p, i);
 }
 
