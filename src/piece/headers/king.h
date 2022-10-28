@@ -20,9 +20,6 @@ class King : public Piece {
 
     bool eheck_legal_castle(const Move& m, BoardBitboard &b);
 
-    // void set_castle_permission_queen_side(Move &m, BoardBitboard&);
-    // void set_castle_permission_king_side(Move &m, BoardBitboard&);
-
     U64 king_mask(int sq) {
       U64 king_mask = 0ULL;
       U64 from_sq = ONE << sq;

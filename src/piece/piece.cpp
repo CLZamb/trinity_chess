@@ -5,4 +5,4 @@ Piece::Piece(const Piecetype &type) :
 
 Piece::~Piece() {}
 
-Piecetype Piece::get_type_and_color() { return _m_type; }
+Piecetype Piece::get_piecetype() { return _m_type; }

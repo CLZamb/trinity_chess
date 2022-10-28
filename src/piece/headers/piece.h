@@ -15,7 +15,7 @@ using namespace bitUtility;
 class Piece {
 public:
   virtual ~Piece();
-  Piecetype get_type_and_color();
+  Piecetype get_piecetype();
   virtual bool is_legal_move(Move &, BoardBitboard &) = 0;
 
 protected:

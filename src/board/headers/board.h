@@ -25,7 +25,6 @@ public:
   bool is_checkmate();
   bool is_legal_move(Move &);
   Move string_to_move(const string &);
-  const int &get_castle_permission();
   const SquareIndices &get_en_passant_square();
   // fen
   Piecetype get_piece_at_square(const int &pos) override;
@@ -38,14 +37,8 @@ private:
   void move_piece_to_square(const Move &);
   bool can_castle();
   bool check_piece_belongs_to_player(const Piecetype);
-  bool is_captured_piece_in_same_side(const Piecetype, const Piecetype);
-  SquareIndices get_en_passant_move(const Move& m);
+  bool is_captured_piece_in_same_color(const Piecetype, const Piecetype);
   void assign_castle_rights(Move& m);
-  void move_rook_castle_move(const Move& rook_pos);
-  bool is_pawn_piece(const Piecetype);
-  bool is_first_move(const Move& m);
-  bool is_double_forward_move(const Move& m);
-  bool is_en_passand_move(const Move& m);
 
   Squares m_squares;
   Pieces m_pieces;
@@ -53,10 +46,7 @@ private:
   bool checkmate{false};
   PlayerInfo m_turn_info;
 
-  // int castle_perm{NO_CASTLING};
   SpecialMove m_special_move;
-  // Castling m_castling;
-  // SquareIndices en_passant_pos{SquareNull};
   // EnPassant m_en_passant;
 };
 
