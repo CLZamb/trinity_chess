@@ -12,6 +12,7 @@ class AIPlayer : public Player {
     virtual ~AIPlayer ();
     const string &get_player_string_move() override; 
   private:
+    const string empty_str = "";
 };
 
 #endif /* AI_PLAYER_H */

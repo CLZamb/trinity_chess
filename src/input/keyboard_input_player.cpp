@@ -19,9 +19,15 @@ string KeyboardInputPlayer::get_player_string_move(PlayerPosition &player) {
   int next_pos = player.get_to_position();
 
   while (!completed) {
-    switch (m_k_input.read_key()) {
+    switch (InputKeys::Key key = m_k_input.read_key(); key) {
       case InputKeys::ARROW_KEY:
         handle_arrow_keys(m_k_input.read_arrow_key(), next_pos);
+        break;
+      case InputKeys::W:
+      case InputKeys::A:
+      case InputKeys::S:
+      case InputKeys::D:
+        handle_arrow_keys(key, next_pos);
         break;
       case InputKeys::ENTER:
         next_move += select_position(player, next_pos);

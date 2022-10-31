@@ -4,7 +4,7 @@
 #include <string>
 #include "board/headers/castling.h"
 #include "board/headers/defs.h"
-#include "board/headers/special_move.h"
+#include "board/headers/special_move_controller.h"
 #include "board/headers/squares.h"
 #include "board/headers/utils.h"
 #include "common/headers/common.h"
@@ -46,7 +46,7 @@ private:
   bool checkmate{false};
   PlayerInfo m_turn_info;
 
-  SpecialMove m_special_move;
+  SpecialMoveController m_special_move;
   // EnPassant m_en_passant;
 };
 

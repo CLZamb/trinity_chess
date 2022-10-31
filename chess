@@ -16,27 +16,50 @@ endif
 badd +11 src/main.cpp
 badd +1 src/game/game.cpp
 badd +1 src/board/board.cpp
-badd +44 src/board/headers/board.h
-badd +91 src/board/special_move.cpp
-badd +39 src/board/headers/special_move.h
+badd +7 src/board/headers/board.h
+badd +20 src/board/special_move_controller.cpp
+badd +30 src/board/headers/special_move_controller.h
 badd +8 src/piece/piece.cpp
 badd +18 src/piece/headers/piece.h
 badd +23 src/piece/headers/pieces.h
 badd +1 src/piece/pieces.cpp
 badd +14 src/board/headers/utils.h
-badd +55 src/game/headers/move.hpp
-badd +34 src/game/headers/game.h
-badd +16 src/board/headers/castling.h
-badd +100 src/board/castling.cpp
-badd +10 src/board/CMakeLists.txt
-badd +10 src/board/headers/en_passant.h
-badd +24 src/board/en_passant.cpp
+badd +75 src/game/headers/move.hpp
+badd +32 src/game/headers/game.h
+badd +4 src/board/headers/castling.h
+badd +106 src/board/castling.cpp
+badd +9 src/board/CMakeLists.txt
+badd +19 src/board/headers/en_passant.h
+badd +1 src/board/en_passant.cpp
 badd +4 src/board/headers/squares.h
+badd +99 src/piece/headers/pawn.h
+badd +7 src/player/ai_player.cpp
+badd +15 src/player/headers/ai_player.h
+badd +87 src/board/headers/defs.h
+badd +10 src/board/headers/special_move.h
+badd +12 src/board/headers/pawn_promition.h
+badd +33 src/board/pawn_promotion.cpp
+badd +4 src/input/key_reader.cpp
+badd +22 src/input/headers/input_event.h
+badd +4 src/input/headers/key_reader.h
+badd +22 src/input/keyboard_input_player.cpp
+badd +48 src/input/headers/keyboard_input_player.h
+badd +23 src/input/keyboard_base.cpp
+badd +23 src/board/squares.cpp
+badd +62 src/board/board_fen.cpp
+badd +11 src/board/headers/board_fen_info.h
+badd +6 src/board/square.cpp
+badd +7 src/input/text_input.cpp
+badd +39 src/search/main.cpp
+badd +27 src/search/headers/uci.h
+badd +7 src/search/headers/search.h
+badd +77 src/search/uci.cpp
+badd +53 /usr/include/c++/12.2.0/filesystem
 argglobal
 %argdel
 $argadd src/main.cpp
-set lines=53 columns=259
-edit src/board/en_passant.cpp
+set lines=52 columns=297
+edit src/board/board.cpp
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -49,6 +72,10 @@ wincmd _ | wincmd |
 split
 1wincmd k
 wincmd w
+wincmd w
+wincmd _ | wincmd |
+split
+1wincmd k
 wincmd w
 wincmd w
 wincmd _ | wincmd |
@@ -64,56 +91,20 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 25 + 26) / 53)
-exe 'vert 1resize ' . ((&columns * 86 + 129) / 259)
-exe '2resize ' . ((&lines * 24 + 26) / 53)
-exe 'vert 2resize ' . ((&columns * 86 + 129) / 259)
-exe 'vert 3resize ' . ((&columns * 86 + 129) / 259)
-exe '4resize ' . ((&lines * 24 + 26) / 53)
-exe 'vert 4resize ' . ((&columns * 85 + 129) / 259)
-exe '5resize ' . ((&lines * 25 + 26) / 53)
-exe 'vert 5resize ' . ((&columns * 85 + 129) / 259)
+exe '1resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 1resize ' . ((&columns * 98 + 148) / 297)
+exe '2resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 2resize ' . ((&columns * 98 + 148) / 297)
+exe '3resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 3resize ' . ((&columns * 99 + 148) / 297)
+exe '4resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 4resize ' . ((&columns * 99 + 148) / 297)
+exe '5resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 5resize ' . ((&columns * 98 + 148) / 297)
+exe '6resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 6resize ' . ((&columns * 98 + 148) / 297)
 argglobal
-balt src/board/headers/en_passant.h
-let s:l = 24 - ((20 * winheight(0) + 12) / 25)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 24
-normal! 06|
-wincmd w
-argglobal
-if bufexists(fnamemodify("src/game/headers/game.h", ":p")) | buffer src/game/headers/game.h | else | edit src/game/headers/game.h | endif
-if &buftype ==# 'terminal'
-  silent file src/game/headers/game.h
-endif
-balt src/board/headers/en_passant.h
-let s:l = 34 - ((11 * winheight(0) + 12) / 24)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 34
-normal! 029|
-wincmd w
-argglobal
-if bufexists(fnamemodify("src/board/special_move.cpp", ":p")) | buffer src/board/special_move.cpp | else | edit src/board/special_move.cpp | endif
-if &buftype ==# 'terminal'
-  silent file src/board/special_move.cpp
-endif
-balt src/board/castling.cpp
-let s:l = 91 - ((49 * winheight(0) + 25) / 50)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 91
-normal! 0
-wincmd w
-argglobal
-if bufexists(fnamemodify("src/board/headers/special_move.h", ":p")) | buffer src/board/headers/special_move.h | else | edit src/board/headers/special_move.h | endif
-if &buftype ==# 'terminal'
-  silent file src/board/headers/special_move.h
-endif
-balt src/board/board.cpp
+balt src/board/en_passant.cpp
 let s:l = 1 - ((0 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
@@ -122,28 +113,83 @@ keepjumps 1
 normal! 0
 wincmd w
 argglobal
-if bufexists(fnamemodify("src/board/headers/board.h", ":p")) | buffer src/board/headers/board.h | else | edit src/board/headers/board.h | endif
+if bufexists(fnamemodify("src/search/uci.cpp", ":p")) | buffer src/search/uci.cpp | else | edit src/search/uci.cpp | endif
 if &buftype ==# 'terminal'
-  silent file src/board/headers/board.h
+  silent file src/search/uci.cpp
 endif
-balt src/board/board.cpp
-let s:l = 31 - ((16 * winheight(0) + 12) / 25)
+balt /usr/include/c++/12.2.0/filesystem
+let s:l = 77 - ((23 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 31
-normal! 014|
+keepjumps 77
+normal! 019|
+wincmd w
+argglobal
+if bufexists(fnamemodify("src/board/board.cpp", ":p")) | buffer src/board/board.cpp | else | edit src/board/board.cpp | endif
+if &buftype ==# 'terminal'
+  silent file src/board/board.cpp
+endif
+balt src/board/board_fen.cpp
+let s:l = 76 - ((8 * winheight(0) + 12) / 24)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 76
+normal! 028|
+wincmd w
+argglobal
+if bufexists(fnamemodify("src/board/board.cpp", ":p")) | buffer src/board/board.cpp | else | edit src/board/board.cpp | endif
+if &buftype ==# 'terminal'
+  silent file src/board/board.cpp
+endif
+balt src/board/special_move_controller.cpp
+let s:l = 85 - ((14 * winheight(0) + 12) / 24)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 85
+normal! 03|
+wincmd w
+argglobal
+if bufexists(fnamemodify("src/game/headers/game.h", ":p")) | buffer src/game/headers/game.h | else | edit src/game/headers/game.h | endif
+if &buftype ==# 'terminal'
+  silent file src/game/headers/game.h
+endif
+balt src/game/game.cpp
+let s:l = 1 - ((0 * winheight(0) + 12) / 24)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 06|
+wincmd w
+argglobal
+if bufexists(fnamemodify("src/input/keyboard_input_player.cpp", ":p")) | buffer src/input/keyboard_input_player.cpp | else | edit src/input/keyboard_input_player.cpp | endif
+if &buftype ==# 'terminal'
+  silent file src/input/keyboard_input_player.cpp
+endif
+balt src/input/headers/input_event.h
+let s:l = 30 - ((12 * winheight(0) + 12) / 24)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 30
+normal! 07|
 wincmd w
 3wincmd w
-exe '1resize ' . ((&lines * 25 + 26) / 53)
-exe 'vert 1resize ' . ((&columns * 86 + 129) / 259)
-exe '2resize ' . ((&lines * 24 + 26) / 53)
-exe 'vert 2resize ' . ((&columns * 86 + 129) / 259)
-exe 'vert 3resize ' . ((&columns * 86 + 129) / 259)
-exe '4resize ' . ((&lines * 24 + 26) / 53)
-exe 'vert 4resize ' . ((&columns * 85 + 129) / 259)
-exe '5resize ' . ((&lines * 25 + 26) / 53)
-exe 'vert 5resize ' . ((&columns * 85 + 129) / 259)
+exe '1resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 1resize ' . ((&columns * 98 + 148) / 297)
+exe '2resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 2resize ' . ((&columns * 98 + 148) / 297)
+exe '3resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 3resize ' . ((&columns * 99 + 148) / 297)
+exe '4resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 4resize ' . ((&columns * 99 + 148) / 297)
+exe '5resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 5resize ' . ((&columns * 98 + 148) / 297)
+exe '6resize ' . ((&lines * 24 + 26) / 52)
+exe 'vert 6resize ' . ((&columns * 98 + 148) / 297)
 if exists(':tcd') == 2 | tcd ~/Code/c++/trinity_engine | endif
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
@@ -160,6 +206,7 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

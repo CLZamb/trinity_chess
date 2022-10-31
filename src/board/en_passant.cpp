@@ -1,4 +1,5 @@
 #include "headers/en_passant.h"
+#include "piece/headers/pawn.h"
 
 EnPassant::EnPassant() {}
 EnPassant::~EnPassant() {}
@@ -21,6 +22,42 @@ bool EnPassant::is_pawn_piece(const Piecetype pct) {
   return pct == bP || pct == wP;
 }
 
-void EnPassant::set_en_passant_to_move(Move &m) {
+bool EnPassant::is_first_move(const Move& m) {
+  Piecetype piece = Move_Utils::get_piece(m);
+
+  if (piece == bP) {
+    if (Pawn<BLACK>::is_first_move(m))
+      return true;
+  } else if (piece == wP) {
+    if (Pawn<WHITE>::is_first_move(m))
+      return true;
+  }
+
+  return false;
+}
+
+bool EnPassant::is_double_forward_move(const Move& m) {
+  Piecetype piece = Move_Utils::get_piece(m);
+  if (piece == bP) {
+    if (Pawn<BLACK>::is_double_forward_move(m))
+      return true;
+  } else if (piece == wP) {
+    if (Pawn<WHITE>::is_double_forward_move(m))
+      return true;
+  }
+  return false;
+}
+
+void EnPassant::capture_en_passant(const Move& m, Squares& s) {
+  Direction d = (utils::check::is_black_piece(Move_Utils::get_piece(m)) ?  NORTH :  SOUTH);
+  SquareIndices piece_capture_position = Move_Utils::get_to(m) + d;
+  s[piece_capture_position].clear_square();
+}
+
+void EnPassant::assign_special_to_move(Move& m) {
   Move_Utils::set_en_passant(m, true);
+}
+
+void EnPassant::handle_special_move(const Move &m, Squares &s) {
+  capture_en_passant(m, s);
 }

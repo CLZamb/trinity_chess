@@ -87,16 +87,27 @@ CastleSquares Castling::get_castle_rook_initial_position(const Move& m, const Co
   return NO_CASTLE_POS;
 }
 
-void Castling::assign_castle_rights_to_move(Move& m) {
-  Color side = utils::check::get_color_piece(Move_Utils::get_piece(m));
-  CastleSquares to = static_cast<CastleSquares>(Move_Utils::get_to(m));
-  Move_Utils::set_castle_permission(m, m_castle_permission.at(side).at(to));
-}
-
 void Castling::set_castle_permission(CastlePermission c) {
   castle_perm += c;
 }
 
 const int &Castling::get_castle_permission() {
   return castle_perm;
+}
+
+void Castling::move_rook(const Move &m, Squares &s) {
+  const Move r_pos =  get_rook_castle_move(Move_Utils::get_castle_permission(m));
+  SquareIndices from_pos = Move_Utils::get_from(r_pos);
+  SquareIndices to_pos = Move_Utils::get_to(r_pos);
+  s.do_move(from_pos, to_pos);
+}
+
+void Castling::assign_special_to_move(Move& m) {
+  Color side = utils::check::get_color_piece(Move_Utils::get_piece(m));
+  CastleSquares to = static_cast<CastleSquares>(Move_Utils::get_to(m));
+  Move_Utils::set_castle_permission(m, m_castle_permission.at(side).at(to));
+}
+
+void Castling::handle_special_move(const Move& m, Squares &s) {
+  move_rook(m, s);
 }
