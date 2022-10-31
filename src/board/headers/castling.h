@@ -1,6 +1,7 @@
 #ifndef CASTLING_H
 #define CASTLING_H
 
+#include "board/headers/special_move.h"
 #include "board/headers/defs.h"
 #include "game/headers/move.hpp"
 #include "board/headers/squares.h"
@@ -8,17 +9,19 @@
 
 using std::unordered_map;
 
-class Castling {
+class Castling : public SpecialMove {
 public:
   Castling ();
-  const Move &get_rook_castle_move(const CastlePermission &cp) const;
   bool is_castle_move(const Move& m, Squares &s);
-  void assign_castle_rights_to_move(Move& m);
   CastleSquares get_castle_rook_initial_position(const Move& m, const Color &side);
   const int &get_castle_permission();
   void set_castle_permission(CastlePermission c);
+  void assign_special_to_move(Move& m) override;
+  void handle_special_move(const Move& m, Squares &s) override;
 
 private:
+  const Move &get_rook_castle_move(const CastlePermission &cp) const;
+  void move_rook(const Move& m, Squares &s);
   bool is_rook_is_at_castling_position(const Move& m, Squares &s);
   static const Move m_wkca{Move_Utils::make_move(ROOK_WHITE_CA_KING_SIDE_FROM_POS, ROOK_WHITE_CA_KING_SIDE_TO_POS, wR)};
   static const Move m_wqca{Move_Utils::make_move(ROOK_WHITE_CA_QUEEN_SIDE_FROM_POS, ROOK_WHITE_CA_QUEEN_SIDE_TO_POS, wR)};

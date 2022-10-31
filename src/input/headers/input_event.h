@@ -12,7 +12,17 @@ struct InputKeys{
     ENTER     = 10,
     quit      = 'q',
     Quit      = 'Q',
+    W         = 'w',
+    A         = 'a',
+    S         = 's',
+    D         = 'd',
     SELECTED  = 128,
+    /*
+     * W = 
+     * A = 
+     * S = 
+     * D = 
+     * */
     LEFT_BRACKET  = '[',
   };
 };

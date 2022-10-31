@@ -31,7 +31,7 @@ class Game {
   // 4k3/8/8/4pP2/8/8/8/4K2R w - e6 0 1
   // r3k3/ppp5/8/8/8/8/5PPP/4K2R w Kq - 0 1
   // rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-  const string start_fen = "r3k3/ppp5/8/8/8/8/5PPP/4K2R w Kq - 0 1";
+  const string start_fen = "4k3/8/8/4pP2/8/8/8/4K2R w - e6 0 1";
 
   PlayersTurnController m_players_turn;
   Board m_board;

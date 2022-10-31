@@ -1,13 +1,17 @@
 #include "headers/uci.h"
 #include <fstream>
 #include <filesystem>
+#include <iostream>
 
-namespace fs = std::__fs::filesystem;
+namespace fs = std::filesystem;
 // void parse_go(string line, search_info info, Board *pos) {}
 // void parse_position(string line, Board *pos) {}
 using std::istringstream;
 using std::skipws;
 using std::ofstream;
+using std::cin;
+using std::cout;
+using std::endl;
 
 namespace UCI {
 Handler::Handler(Search* search) {

@@ -85,6 +85,25 @@ class Pawn : public Piece {
     return false;
   }
 
+  static bool is_promotion(const Move &m) {
+    Piecetype piece = Move_Utils::get_piece(m);
+    U64 to_sq = ONE << Move_Utils::get_to(m);
+
+    if (piece != bP && piece != wP)
+      return false;
+
+    if (color == BLACK) {
+      if (to_sq & ROWMASK[0]) {
+        return true;
+      }
+    } else {
+      if (to_sq & ROWMASK[7])
+        return true;
+    }
+
+    return false;
+  }
+
   static bool is_double_forward_move(const Move &m) {
     Piecetype piece = Move_Utils::get_piece(m);
     U64 to_sq = ONE << Move_Utils::get_to(m);

@@ -42,6 +42,10 @@ class KeyboardInputPlayer : public PlayerInput {
       {InputKeys::DOWN,  DIR_DOWN},
       {InputKeys::LEFT,  DIR_LEFT},
       {InputKeys::RIGHT, DIR_RIGHT},
+      {InputKeys::W,     DIR_UP},
+      {InputKeys::A,     DIR_LEFT},
+      {InputKeys::S,     DIR_DOWN},
+      {InputKeys::D,     DIR_RIGHT},
     };
     unordered_map<GameTurn::Players, int> last_position {
       {GameTurn::player_1, D3},

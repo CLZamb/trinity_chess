@@ -4,5 +4,5 @@ AIPlayer::AIPlayer() {}
 AIPlayer::~AIPlayer() {}
 
 const string &AIPlayer::get_player_string_move() {
-  return "";
+  return empty_str;
 }

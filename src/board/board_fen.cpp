@@ -91,7 +91,6 @@ void BoardFen::parse_fen(const string &c_str_fen, BoardFenInfo &board) {
         board.set_castle_permission(BKCA);
         break;
       case 'q': 
-        std::cout << "setting queen side white" << std::endl;
         board.set_castle_permission(WKCA);
         break;
       case '-': break;

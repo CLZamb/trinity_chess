@@ -48,7 +48,7 @@ void Board::move_piece_to_square(const Move &mv) {
 
   m_squares.do_move(from, to);
 
-  if (m_special_move.is_special_move(mv))
+  if (m_special_move.is_current_move_special_move())
     m_special_move.handle_special_move(mv, m_squares);
 }
 
