@@ -1,4 +1,9 @@
 #include "headers/board_fen.h"
+#include "game/headers/string_utils.h"
+
+const unordered_map<char, CastlePermission> BoardFen::m_castle_permision { 
+  {'Q', WQCA}, {'K', WKCA}, {'q', BQCA}, {'k', BKCA}, {'-', NO_CASTLING},
+};
 
 BoardFen::BoardFen(BoardFenInfo &b, const string fen) {
   parse_fen(fen, b);
@@ -28,12 +33,25 @@ void BoardFen::update_fen(BoardFenInfo& board) {
       m_board_fen += "/";
     }
   }
+
   add_empty_space(m_board_fen, space);
+
+  m_board_fen += ' ';
+  m_board_fen += board.get_side_turn();
+  m_board_fen += ' ';
+  m_board_fen += board.get_castling_rights_string();
+  m_board_fen += ' ';
+  m_board_fen += board.get_en_passant_square_string();
+  m_board_fen += ' ';
+  m_board_fen += board.get_half_moves();
+  m_board_fen += ' ';
+  m_board_fen += board.get_full_moves();
 }
 
-const string &BoardFen::get_fen() {
-  return m_board_fen;
-}
+// rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+// r3k2r/8/5P2/4p3/8/8/8/R3K2R w KQkq e6 0 1
+
+const string &BoardFen::get_fen() { return m_board_fen; }
 
 void BoardFen::add_empty_space(string& f, int &space) {
   if (space) {
@@ -67,34 +85,17 @@ void BoardFen::parse_fen(const string &c_str_fen, BoardFenInfo &board) {
       file = 0;
     }
 
-    if (rank < 0)
-      break;
+    if (rank < 0) break;
 
     fen++;
   }
 
   fen++;
-  // parse side to move
-  fen++;
-  // Color side = (*c == 'w') ? WHITE : BLACK;
-  // go to castling rights parsing
+  // Color side = (*fen == 'w') ? WHITE : BLACK;
   fen += 2;
+
   while (*fen != ' ') {
-    switch(*fen) {
-      case 'Q': 
-        board.set_castle_permission(WQCA);
-        break;
-      case 'K': 
-        board.set_castle_permission(WKCA);
-        break;
-      case 'k': 
-        board.set_castle_permission(BKCA);
-        break;
-      case 'q': 
-        board.set_castle_permission(WKCA);
-        break;
-      case '-': break;
-    }
+    board.set_castle_permission(m_castle_permision.at(*fen));
     fen++;
   }
   fen++;

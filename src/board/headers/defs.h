@@ -53,8 +53,8 @@ enum CastlePermission {
   NO_CASTLING = 0,
   WKCA = 1,
   WQCA = 2,
-  BKCA = 3,
-  BQCA = 4,
+  BKCA = 4,
+  BQCA = 8,
 };
 
 const int BitTable[64] = {

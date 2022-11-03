@@ -1,17 +1,10 @@
 #include "headers/board.h"
-#include "board/headers/defs.h"
-#include "board/headers/special_move.h"
-#include "board/headers/square.h"
-#include "board/headers/utils.h"
-#include <algorithm>
 
 Board::Board() {}
 
 bool Board::is_checkmate() { return checkmate; }
 
-void Board::update_turn(const PlayerInfo &turn) { 
-  m_turn_info = turn; 
-}
+void Board::update_turn(const PlayerInfo &turn) { m_turn_info = turn; }
 
 bool Board::is_legal_move(Move &m) {
   Piecetype piece = Move_Utils::get_piece(m);
@@ -28,7 +21,8 @@ bool Board::is_legal_move(Move &m) {
   return m_pieces[piece]->is_legal_move(m, m_board_bitboard);
 }
 
-bool Board::is_captured_piece_in_same_color(const Piecetype piece, const Piecetype captured) {
+bool Board::is_captured_piece_in_same_color(const Piecetype piece,
+                                            const Piecetype captured) {
   return utils::check::get_color_piece(piece) ==
          utils::check::get_color_piece(captured);
 }
@@ -50,7 +44,24 @@ void Board::move_piece_to_square(const Move &mv) {
 
   if (m_special_move.is_current_move_special_move())
     m_special_move.handle_special_move(mv, m_squares);
+
+  update_half_moves(mv);
+  update_full_moves();
 }
+
+void Board::update_half_moves(const Move& m) {
+  Piecetype piece = Move_Utils::get_piece(m);
+  Piecetype captured = Move_Utils::get_captured_piece(m);
+
+  if (piece == bP || piece == wP || captured) {
+    half_moves++;
+    return;
+  }
+
+  half_moves = 0;
+}
+
+void Board::update_full_moves() { full_moves++; }
 
 Move Board::string_to_move(const string &m) {
   Move mv = string_utils::to_move(m);
@@ -72,7 +83,7 @@ void Board::clear() {
   m_board_bitboard.clear();
 }
 
-void Board::set_piece_at_square(const SquareIndices& s, const Piecetype& p) {
+void Board::set_piece_at_square(const SquareIndices &s, const Piecetype &p) {
   m_squares[s].set_piece(p);
   m_board_bitboard.set_bit_at_player_pieces(utils::check::get_color_piece(p), s);
 }
@@ -91,4 +102,29 @@ const SquareIndices &Board::get_en_passant_square() {
 
 void Board::set_castle_permission(CastlePermission perm) {
   m_special_move.set_castle_permission(perm);
+}
+
+char Board::get_side_turn() {
+  return (m_turn_info.color == BLACK) ? 'b' : 'w';
+}
+
+string Board::get_en_passant_square_string() {
+  string position = string_utils::squareindex_to_str(m_special_move.get_en_passant_square());
+
+  if ("-not a valid position-" == position) return "-";
+
+  return position;
+}
+
+string Board::get_castling_rights_string() {
+  int castle_perm = m_special_move.get_castle_permission();
+  return string_utils::get_permission_str_from_castle_permission(castle_perm);
+}
+
+string Board::get_half_moves() {
+  return std::to_string(half_moves);
+}
+
+string Board::get_full_moves() {
+  return std::to_string(full_moves);
 }

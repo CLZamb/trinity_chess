@@ -11,7 +11,7 @@
   0000 0000 0000 1111 0000 0000 0000 0000 -> Captured                 >> 16, 0xF
   0000 0000 1111 0000 0000 0000 0000 0000 -> Promoted Piece           >> 20, 0xF
   0000 0001 0000 0000 0000 0000 0000 0000 -> EnPessant                >> 24, 0x1
-  0000 1110 0000 0000 0000 0000 0000 0000 -> Castle permission        >> 25, 0x7
+  0001 1110 0000 0000 0000 0000 0000 0000 -> Castle permission        >> 25, 0xF
  */
 
 typedef unsigned int Move;
@@ -21,7 +21,7 @@ namespace {
 inline static const unsigned int designated_space_in_hex_square = 0x3F;
 inline static const unsigned int designated_space_in_hex_piecetype = 0xF;
 inline static const unsigned int designated_space_in_hex_flag = 0x1;
-inline static const unsigned int designated_space_in_hex_caslte = 0x7;
+inline static const unsigned int designated_space_in_hex_caslte = 0xF;
 
 inline static const int shift_from = 0;
 inline static const int shift_to = 6;

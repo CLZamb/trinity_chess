@@ -47,29 +47,31 @@ void BoardView::parse_fen(const string& fen) {
   int file = 0;
   Piecetype piece;
   int space = 0;
+  const char* c = fen.c_str();
 
-  for (const char& c : fen) {
-    piece = utils::get_piecetype_from_char_key(c);
+  while (*c != ' ') {
+    piece = utils::get_piecetype_from_char_key(*c);
     square = static_cast<SquareIndices>(rank * 8 + file);
     if (piece) {
-      set_piece_drawing_at_square_pos(piece, square);
+      set_piece_drawing_at_square_pos(square, piece);
       file++;
 
-    } else if (is_number(c)) {
-      space = (c - '0');
+    } else if (is_number(*c)) {
+      space = (*c - '0');
       file += space; 
       clear_square_on_range(square, square + space);
 
-    } else if (c == '/') {
+    } else if (*c == '/') {
       rank--;
       file = 0;
     } 
 
     if (rank < 0) break;
+    c++;
   }
 }
 
-bool BoardView::is_number(const char& c) {
+bool BoardView::is_number(char c) {
   return c >= '0' && c <= '8';
 }
 
@@ -87,7 +89,7 @@ void BoardView::add_view_at_window_pos(View& v, Window::Pane_pos pos) {
   add_pane_at_window_pos(&v, pos);
 }
 
-void BoardView::set_piece_drawing_at_square_pos(Piecetype type, SquareIndices position) {
+void BoardView::set_piece_drawing_at_square_pos(SquareIndices position, Piecetype type) {
   m_squares_drawings[position].set_piece_drawing(m_pieces_drawings.get_drawing(type, m_squares_drawings[position].is_black_square()));
 }
 

@@ -88,7 +88,7 @@ CastleSquares Castling::get_castle_rook_initial_position(const Move& m, const Co
 }
 
 void Castling::set_castle_permission(CastlePermission c) {
-  castle_perm += c;
+  castle_perm |= c;
 }
 
 const int &Castling::get_castle_permission() {
@@ -96,10 +96,12 @@ const int &Castling::get_castle_permission() {
 }
 
 void Castling::move_rook(const Move &m, Squares &s) {
-  const Move r_pos =  get_rook_castle_move(Move_Utils::get_castle_permission(m));
+  const CastlePermission perm = Move_Utils::get_castle_permission(m);
+  const Move r_pos =  get_rook_castle_move(perm);
   SquareIndices from_pos = Move_Utils::get_from(r_pos);
   SquareIndices to_pos = Move_Utils::get_to(r_pos);
   s.do_move(from_pos, to_pos);
+  remove_castle_permission(perm);
 }
 
 void Castling::assign_special_to_move(Move& m) {
@@ -110,4 +112,8 @@ void Castling::assign_special_to_move(Move& m) {
 
 void Castling::handle_special_move(const Move& m, Squares &s) {
   move_rook(m, s);
+}
+
+void Castling::remove_castle_permission(const CastlePermission& perm) {
+  castle_perm ^= perm;
 }

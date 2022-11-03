@@ -14,6 +14,7 @@ class SpecialMoveController {
   virtual ~SpecialMoveController();
   void set_en_passant_square(SquareIndices sq);
   void set_castle_permission(CastlePermission perm);
+  const int &get_castle_permission();
   const SquareIndices &get_en_passant_square();
   void handle_special_move(const Move& m, Squares& squares);
   bool is_current_move_special_move();
