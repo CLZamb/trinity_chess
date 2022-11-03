@@ -3,8 +3,10 @@
 
 #include "board/headers/board_fen_info.h"
 #include <string>
+#include <unordered_map>
 
 using std::string;
+using std::unordered_map;
 
 class BoardFen {
  public:
@@ -19,6 +21,7 @@ class BoardFen {
   bool is_number(char c);
   void add_empty_space(string& fen, int &space);
   string m_board_fen;
+  static const unordered_map<char, CastlePermission> m_castle_permision;
 };
 
 #endif /* BOARD_FEN_H */

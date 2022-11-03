@@ -7,6 +7,10 @@ void SpecialMoveController::set_castle_permission(CastlePermission perm) {
   m_castling.set_castle_permission(perm);
 }
 
+const int &SpecialMoveController::get_castle_permission() {
+  return m_castling.get_castle_permission();
+}
+
 const SquareIndices &SpecialMoveController::get_en_passant_square() {
   return m_en_passant.get_en_passant_position();
 }

@@ -1,5 +1,4 @@
 #include "headers/en_passant.h"
-#include "piece/headers/pawn.h"
 
 EnPassant::EnPassant() {}
 EnPassant::~EnPassant() {}
@@ -52,6 +51,7 @@ void EnPassant::capture_en_passant(const Move& m, Squares& s) {
   Direction d = (utils::check::is_black_piece(Move_Utils::get_piece(m)) ?  NORTH :  SOUTH);
   SquareIndices piece_capture_position = Move_Utils::get_to(m) + d;
   s[piece_capture_position].clear_square();
+  en_passant_pos = SquareNull;
 }
 
 void EnPassant::assign_special_to_move(Move& m) {

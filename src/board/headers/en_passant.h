@@ -5,6 +5,7 @@
 #include "board/headers/squares.h"
 #include "board/headers/utils.h"
 #include "game/headers/move.hpp"
+#include "piece/headers/pawn.h"
 
 class EnPassant : public SpecialMove {
 public:

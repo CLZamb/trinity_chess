@@ -32,6 +32,11 @@ public:
   void set_piece_at_square(const SquareIndices &s, const Piecetype &p) override;
   void set_castle_permission(CastlePermission perm) override;
   void set_en_passant_square(SquareIndices sq) override;
+  char get_side_turn() override;
+  string get_en_passant_square_string() override;
+  string get_castling_rights_string() override;
+  string get_half_moves() override;
+  string get_full_moves() override;
 
 private:
   void move_piece_to_square(const Move &);
@@ -39,6 +44,8 @@ private:
   bool check_piece_belongs_to_player(const Piecetype);
   bool is_captured_piece_in_same_color(const Piecetype, const Piecetype);
   void assign_castle_rights(Move& m);
+  void update_half_moves(const Move& m);
+  void update_full_moves();
 
   Squares m_squares;
   Pieces m_pieces;
@@ -47,7 +54,8 @@ private:
   PlayerInfo m_turn_info;
 
   SpecialMoveController m_special_move;
-  // EnPassant m_en_passant;
+  int half_moves{0};
+  int full_moves{1};
 };
 
 #endif /* BOARD_H */
