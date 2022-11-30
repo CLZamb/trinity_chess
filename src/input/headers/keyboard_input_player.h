@@ -31,7 +31,7 @@ class KeyboardInputPlayer : public PlayerInput {
     void update_last_position(const size_t &pos);
     void deselect_all_previous_selected_squares();
 
-    static const string key_not_supprted;
+    static const string key_not_supported;
     PlayerInfo m_turn;
     KeyboardBase& m_k_input;
     BoardView* m_view;
