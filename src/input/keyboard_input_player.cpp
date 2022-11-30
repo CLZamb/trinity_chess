@@ -1,6 +1,6 @@
 #include "input/headers/keyboard_input_player.h"
 
-const string KeyboardInputPlayer::key_not_supprted = "key not supported\n";
+const string KeyboardInputPlayer::key_not_supported = "key not supported\n";
 
 KeyboardInputPlayer::KeyboardInputPlayer(KeyboardBase &k) : m_k_input(k) {}
 
@@ -35,7 +35,7 @@ string KeyboardInputPlayer::get_player_string_move(PlayerPosition &player) {
         selected_positions.push_back(next_pos);
         break;
       default:
-        std::cout << key_not_supprted << std::endl;
+        std::cout << key_not_supported << std::endl;
         break;
     }
 
@@ -62,10 +62,10 @@ void KeyboardInputPlayer::handle_arrow_keys(const InputKeys::Key &k, size_t &pos
   size_t prev = pos;
   int _pos = static_cast<int>(pos);
 
-  if (_pos > 0)
+  if (_pos >= 0)
     _pos += m_direction_value[k];
 
-  pos += static_cast<size_t>(_pos);
+  pos = static_cast<size_t>(_pos);
 
   if (pos < A1 || pos > H8)
     pos = prev;

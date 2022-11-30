@@ -39,3 +39,4 @@ InputKeys::Key KeyboardBase::read_arrow_key() {
   return m_k_reader.read_arrow_key();
 }
 
+const string KeyboardBase::key_not_supported = "key not supported\n";

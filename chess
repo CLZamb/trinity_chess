@@ -45,7 +45,7 @@ badd +4 src/input/headers/key_reader.h
 badd +42 src/input/keyboard_input_player.cpp
 badd +41 src/input/headers/keyboard_input_player.h
 badd +23 src/input/keyboard_base.cpp
-badd +18 src/board/squares.cpp
+badd +1 src/board/squares.cpp
 badd +22 src/board/board_fen.cpp
 badd +9 src/board/headers/board_fen_info.h
 badd +1 src/board/square.cpp

@@ -21,6 +21,7 @@ class KeyboardBase {
  private:
   static struct termios old, current;
   static string hide_cursor, show_cursor;
+  static const string key_not_supported;
 };
 
 #endif /* KEYBOARD_BASE_H */
