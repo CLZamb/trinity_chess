@@ -39,7 +39,6 @@ void Game::play() {
   string str_move;
   Move mv{0};
 
-  std::cout << m_board_fen.get_fen() << std::endl;
   p_boardview_controller->update();
   while (!m_board.is_checkmate()) {
     p_boardview_controller->print();

@@ -19,6 +19,6 @@ void Squares::do_move(const SquareIndices &from, const SquareIndices &to) {
   m_squares[from].clear_square();
 }
 
-bool Squares::exist_piece_at_position(const int &pos) {
+bool Squares::exist_piece_at_position(const unsigned int &pos) {
   return m_squares[pos].get_piece() != EMPTY;
 }

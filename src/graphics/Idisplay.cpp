@@ -2,7 +2,7 @@
 
 Displayable::Displayable(size_t size /* = 44 */) : m_pane(size) {}
 
-const string& Displayable::operator[](int i) {
+const string& Displayable::operator[](size_t i) {
   return m_pane[i];
 }
 

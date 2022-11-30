@@ -19,7 +19,7 @@ class ISectionComponent {
   size_t size();
 
  private:
-  const int m_size;
+  const size_t m_size;
   Pane* parent_pane = nullptr;
 
  protected:

@@ -21,14 +21,14 @@ class KeyboardInputPlayer : public PlayerInput {
     string get_player_string_move(PlayerPosition&) override; 
 
   private:
-    string select_position(PlayerPosition &p,const int pos);
-    void update_view_select_next_square(const int &position);
-    void update_view_selected_square(const int &position);
-    void update_view_deselected_square(const int &position);
-    void select_from(PlayerPosition &p,const int pos);
-    void select_to(PlayerPosition &p,const int pos);
-    void handle_arrow_keys(const InputKeys::Key&, int& pos);
-    void update_last_position(const int &pos);
+    string select_position(PlayerPosition &p,const size_t &pos);
+    void update_view_select_next_square(const size_t &position);
+    void update_view_selected_square(const size_t &position);
+    void update_view_deselected_square(const size_t &position);
+    void select_from(PlayerPosition &p,const size_t pos);
+    void select_to(PlayerPosition &p,const size_t pos);
+    void handle_arrow_keys(const InputKeys::Key&, size_t& pos);
+    void update_last_position(const size_t &pos);
     void deselect_all_previous_selected_squares();
 
     static const string key_not_supprted;
@@ -47,12 +47,12 @@ class KeyboardInputPlayer : public PlayerInput {
       {InputKeys::S,     DIR_DOWN},
       {InputKeys::D,     DIR_RIGHT},
     };
-    unordered_map<GameTurn::Players, int> last_position {
+    unordered_map<GameTurn::Players, size_t> last_position {
       {GameTurn::player_1, D3},
       {GameTurn::player_2, E6},
     };
 
-    list<int> selected_positions;
+    list<size_t> selected_positions;
 };
 
 #endif /* KEYBOARD_INPUT_PLAYER_H */

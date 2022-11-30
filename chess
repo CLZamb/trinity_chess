@@ -15,8 +15,8 @@ else
 endif
 badd +11 src/main.cpp
 badd +1 src/game/game.cpp
-badd +112 src/board/board.cpp
-badd +61 src/board/headers/board.h
+badd +110 src/board/board.cpp
+badd +20 src/board/headers/board.h
 badd +32 src/board/special_move_controller.cpp
 badd +17 src/board/headers/special_move_controller.h
 badd +8 src/piece/piece.cpp
@@ -24,31 +24,31 @@ badd +18 src/piece/headers/piece.h
 badd +23 src/piece/headers/pieces.h
 badd +1 src/piece/pieces.cpp
 badd +19 src/board/headers/utils.h
-badd +88 src/game/headers/move.hpp
-badd +34 src/game/headers/game.h
+badd +91 src/game/headers/move.hpp
+badd +27 src/game/headers/game.h
 badd +26 src/board/headers/castling.h
 badd +118 src/board/castling.cpp
 badd +9 src/board/CMakeLists.txt
 badd +1 src/board/headers/en_passant.h
-badd +1 src/board/en_passant.cpp
-badd +4 src/board/headers/squares.h
+badd +61 src/board/en_passant.cpp
+badd +5 src/board/headers/squares.h
 badd +99 src/piece/headers/pawn.h
 badd +7 src/player/ai_player.cpp
 badd +15 src/player/headers/ai_player.h
-badd +57 src/board/headers/defs.h
+badd +13 src/board/headers/defs.h
 badd +1 src/board/headers/special_move.h
 badd +12 src/board/headers/pawn_promition.h
 badd +33 src/board/pawn_promotion.cpp
-badd +4 src/input/key_reader.cpp
-badd +22 src/input/headers/input_event.h
+badd +14 src/input/key_reader.cpp
+badd +8 src/input/headers/input_event.h
 badd +4 src/input/headers/key_reader.h
-badd +22 src/input/keyboard_input_player.cpp
-badd +48 src/input/headers/keyboard_input_player.h
+badd +42 src/input/keyboard_input_player.cpp
+badd +41 src/input/headers/keyboard_input_player.h
 badd +23 src/input/keyboard_base.cpp
-badd +4 src/board/squares.cpp
-badd +47 src/board/board_fen.cpp
-badd +17 src/board/headers/board_fen_info.h
-badd +6 src/board/square.cpp
+badd +18 src/board/squares.cpp
+badd +22 src/board/board_fen.cpp
+badd +9 src/board/headers/board_fen_info.h
+badd +1 src/board/square.cpp
 badd +7 src/input/text_input.cpp
 badd +39 src/search/main.cpp
 badd +27 src/search/headers/uci.h
@@ -56,35 +56,52 @@ badd +7 src/search/headers/search.h
 badd +77 src/search/uci.cpp
 badd +53 /usr/include/c++/12.2.0/filesystem
 badd +24 src/board/headers/board_fen.h
-badd +7 src/model/headers/player_info.h
-badd +51 src/game/headers/string_utils.h
+badd +8 src/model/headers/player_info.h
+badd +58 src/game/headers/string_utils.h
 badd +8 src/controller/headers/ui_board.h
 badd +10 src/controller/headers/ui_board_controller.h
 badd +14 src/controller/ui_board_controller.cpp
-badd +25 src/view/headers/board_view.h
-badd +58 src/view/board_view.cpp
+badd +39 src/view/headers/board_view.h
+badd +1 src/view/board_view.cpp
 badd +21 src/player/headers/players_turn_controller.h
 badd +3 src/player/players_turn_controller.cpp
-badd +6 src/game/headers/game_turn.h
+badd +13 src/game/headers/game_turn.h
 badd +12 src/game/headers/game_turn_observer.h
 badd +30 src/piece/king.cpp
 badd +1 src/model/board_info.cpp
+badd +43 src/board/headers/BoardBitboard.h
+badd +30 src/board/headers/bit_utilities.h
+badd +1 CMakeLists.txt
+badd +146 src/graphics/headers/game_drawings.hpp
+badd +1 /usr/include/c++/12.2.0/bits/stl_vector.h
+badd +196 src/graphics/headers/pieces_drawings.hpp
+badd +78 src/graphics/headers/square_drawing.h
+badd +1 src/graphics/square_drawing.cpp
+badd +8 src/game/headers/regex.h
+badd +8 src/graphics/ISectionComponent.cpp
+badd +24 src/graphics/headers/ISectionComponent.h
+badd +30 src/graphics/window.cpp
+badd +11 src/graphics/Idisplay.cpp
+badd +13 src/graphics/headers/Idisplay.h
+badd +18 src/graphics/headers/pane.h
+badd +56 src/graphics/pane.cpp
+badd +203 src/piece/magic_bitboard.cpp
+badd +19 src/piece/headers/magic_bitboard.h
+badd +1 src/view/view.cpp
+badd +14 src/view/headers/view.h
+badd +10 src/input/text_input_player.cpp
+badd +59 src/view/info_pane.cpp
+badd +14 src/graphics/headers/box.h
+badd +11 src/player/headers/player_position.h
+badd +16 src/game/headers/menu.h
 argglobal
 %argdel
 $argadd src/main.cpp
-set lines=52 columns=257
-edit src/board/en_passant.cpp
+set lines=52 columns=227
+edit src/board/squares.cpp
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
-wincmd w
 wincmd _ | wincmd |
 split
 1wincmd k
@@ -98,56 +115,32 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-wincmd =
+exe '1resize ' . ((&lines * 24 + 26) / 52)
+exe '2resize ' . ((&lines * 24 + 26) / 52)
 argglobal
-balt src/board/headers/en_passant.h
+balt src/board/headers/squares.h
 let s:l = 1 - ((0 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
-normal! 03|
+normal! 010|
 wincmd w
 argglobal
-if bufexists(fnamemodify("src/board/headers/castling.h", ":p")) | buffer src/board/headers/castling.h | else | edit src/board/headers/castling.h | endif
+if bufexists(fnamemodify("src/board/headers/squares.h", ":p")) | buffer src/board/headers/squares.h | else | edit src/board/headers/squares.h | endif
 if &buftype ==# 'terminal'
-  silent file src/board/headers/castling.h
+  silent file src/board/headers/squares.h
 endif
-balt src/board/special_move_controller.cpp
-let s:l = 27 - ((12 * winheight(0) + 12) / 24)
+balt src/board/headers/board_fen_info.h
+let s:l = 6 - ((5 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 27
+keepjumps 6
 normal! 0
 wincmd w
-argglobal
-if bufexists(fnamemodify("src/game/headers/game.h", ":p")) | buffer src/game/headers/game.h | else | edit src/game/headers/game.h | endif
-if &buftype ==# 'terminal'
-  silent file src/game/headers/game.h
-endif
-balt src/game/game.cpp
-let s:l = 34 - ((11 * winheight(0) + 12) / 24)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 34
-normal! 062|
-wincmd w
-argglobal
-if bufexists(fnamemodify("src/board/board.cpp", ":p")) | buffer src/board/board.cpp | else | edit src/board/board.cpp | endif
-if &buftype ==# 'terminal'
-  silent file src/board/board.cpp
-endif
-balt src/board/headers/defs.h
-let s:l = 17 - ((15 * winheight(0) + 12) / 24)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 17
-normal! 05|
-wincmd w
-wincmd =
+exe '1resize ' . ((&lines * 24 + 26) / 52)
+exe '2resize ' . ((&lines * 24 + 26) / 52)
 if exists(':tcd') == 2 | tcd ~/Code/c++/trinity_engine | endif
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

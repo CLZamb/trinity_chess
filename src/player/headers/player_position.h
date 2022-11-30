@@ -8,14 +8,14 @@ class PlayerPosition {
 public:
   PlayerPosition() {}
   virtual ~PlayerPosition() {}
-  void set_from_position(const int &pos) { from_pos = pos; }
-  void set_to_position(const int &pos) { to_pos = pos; }
-  const int &get_from_position() const { return from_pos; }
-  const int &get_to_position() const { return to_pos; }
+  void set_from_position(const size_t &pos) { from_pos = pos; }
+  void set_to_position(const size_t &pos) { to_pos = pos; }
+  const size_t &get_from_position() const { return from_pos; }
+  const size_t &get_to_position() const { return to_pos; }
 
 private:
-  int from_pos{E4};
-  int to_pos{E4};
+  size_t from_pos{E4};
+  size_t to_pos{E4};
 };
 
 #endif /* PLAYER_POSITION_H */

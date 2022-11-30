@@ -106,16 +106,16 @@ class DrawingMod {
     };
 
     enum Color {
-      BLACK_FG   = 232,
+      BLACK_FG                = 232,
       BLACK_BG_BLACK_SQUARE   = 1,
       BLACK_BG_WHITE_SQUARE   = 255,
 
-      WHITE_FG   = 231,
+      WHITE_FG                = 231,
       WHITE_BG_BLACK_SQUARE   = 35,
       WHITE_BG_WHITE_SQUARE   = 252,
 
-      WHITE      = 254,
-      GREEN      = 10, 
+      WHITE_FG_BG      = 254,
+      GREEN_FG_BG      = 10, 
     };
 
     DrawingMod() {}
@@ -156,16 +156,16 @@ class DrawingMod {
       }
     }
 
-    std::string modifier_to_str(const CodeAttribute mod) {
-      return "\033[" + std::to_string(mod) + "m";
+    std::string modifier_to_str(const CodeAttribute ca) {
+      return "\033[" + std::to_string(ca) + "m";
     }
 
-    string modifier_bg_color_to_str(const Color mod) {
-      return "\x1B[48;5;" + std::to_string(mod) + "m";
+    string modifier_bg_color_to_str(const Color c) {
+      return "\x1B[48;5;" + std::to_string(c) + "m";
     }
 
-    string modifier_fg_color_to_str(const Color mod) {
-      return "\033[38;5;" + std::to_string(mod) + "m";
+    string modifier_fg_color_to_str(const Color c) {
+      return "\033[38;5;" + std::to_string(c) + "m";
     }
 
     static const int kColumnSize = Box::kCharSize;

@@ -1,4 +1,5 @@
 #include "headers/board.h"
+#include "game/headers/move.hpp"
 
 Board::Board() {}
 
@@ -16,19 +17,37 @@ bool Board::is_legal_move(Move &m) {
   if (captured && is_captured_piece_in_same_color(piece, captured))
     return false;
 
-  // if (is_square_attacked(king)) return false;
+  if (is_king_piece(piece) && is_square_attacked(Move_Utils::get_to(m))) return false;
 
   return m_pieces[piece]->is_legal_move(m, m_board_bitboard);
 }
 
-bool Board::is_captured_piece_in_same_color(const Piecetype piece,
-                                            const Piecetype captured) {
+bool Board::is_captured_piece_in_same_color(const Piecetype &piece,
+                                            const Piecetype &captured) {
   return utils::check::get_color_piece(piece) ==
          utils::check::get_color_piece(captured);
 }
 
-bool Board::check_piece_belongs_to_player(const Piecetype pc) {
+bool Board::is_square_attacked(const SquareIndices &to) {
+  Color c = m_turn_info.color == WHITE ? BLACK : WHITE;
+  vector<size_t> opposite_pieces_locations = m_board_bitboard.get_all_locations_at_side(c);
+  Move m;
+  SquareIndices from;
+  for (const size_t& i: opposite_pieces_locations) {
+    from = static_cast<SquareIndices>(i);
+    m = Move_Utils::make_move(from, static_cast<unsigned int>(to), m_squares[i].get_piece());
+    if (!is_king_piece(m_squares[i].get_piece()))
+      if (m_pieces[m_squares[i].get_piece()]->is_legal_move(m, m_board_bitboard)) { return true; }
+  }
+  return false;
+}
+
+bool Board::check_piece_belongs_to_player(const Piecetype &pc) {
   return utils::check::get_color_piece(pc) == m_turn_info.color;
+}
+
+bool Board::is_king_piece(const Piecetype& pct) {
+  return (pct == wK) || (pct == bK);
 }
 
 void Board::make_move(Move mv) {
@@ -68,8 +87,8 @@ Move Board::string_to_move(const string &m) {
   SquareIndices from = Move_Utils::get_from(mv);
   SquareIndices to = Move_Utils::get_to(mv);
 
-  Piecetype piece = m_squares[from].get_piece();
-  Piecetype captured = m_squares[to].get_piece();
+  Piecetype piece = m_squares[static_cast<unsigned int>(from)].get_piece();
+  Piecetype captured = m_squares[static_cast<unsigned int>(to)].get_piece();
 
   Move_Utils::set_piece(mv, piece);
   Move_Utils::set_capture_piece(mv, captured);
@@ -84,11 +103,11 @@ void Board::clear() {
 }
 
 void Board::set_piece_at_square(const SquareIndices &s, const Piecetype &p) {
-  m_squares[s].set_piece(p);
+  m_squares[static_cast<unsigned int>(s)].set_piece(p);
   m_board_bitboard.set_bit_at_player_pieces(utils::check::get_color_piece(p), s);
 }
 
-Piecetype Board::get_piece_at_square(const int &pos) {
+Piecetype Board::get_piece_at_square(const size_t &pos) {
   return m_squares[pos].get_piece();
 }
 

@@ -35,7 +35,6 @@ private:
   static const unordered_map<CastleSquares, CastlePermission> m_black_permission;
   static const unordered_map<Color, const unordered_map<CastleSquares, CastlePermission>> m_castle_permission;
   int castle_perm{NO_CASTLING};
-  // static const unordered_map<CastlePermission, std::pair<CastleSquares, CastleSquares>> m_rook_castle_rights_assigment;
 };
 
 #endif /* CASTLING_H */

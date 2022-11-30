@@ -143,7 +143,7 @@ namespace Banner {
     " ┃ ╚═╝    ╚══════╚═╝  ╚═╝  ╚═╝  ╚══════╚═╝  ╚═╝    ╚══════╝ ┃",
     " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃"};
 
-  const int height = player1.size();
+  const unsigned long height = player1.size();
   static const int width = utf8_strlen(player1[0].c_str());
 }  // namespace Drawing
 

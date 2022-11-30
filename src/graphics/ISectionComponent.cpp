@@ -3,11 +3,11 @@
 ISectionComponent::ISectionComponent(size_t size) : m_size(size), m_section_drawing(size) {}
 ISectionComponent::~ISectionComponent() {}
 
-void ISectionComponent::set_parent_pane(Pane* parent_pane) {
+void ISectionComponent::set_parent_pane(Pane* p_pane) {
   if (this->parent_pane) return;
-  if (!parent_pane) return;
+  if (!p_pane) return;
 
-  this->parent_pane = parent_pane;
+  this->parent_pane = p_pane;
 }
 
 size_t ISectionComponent::size() {

@@ -1,8 +1,8 @@
-#ifndef  REGEX_H
-#define REGEX_H
+#ifndef REGEX_STRING_H
+#define REGEX_STRING_H
 
-#include<iostream>
 #include<regex>
+#include<iostream>
 #include<vector>
 
 using std::vector;
@@ -39,4 +39,4 @@ class Regex {
   }
 };
 
-#endif
+#endif /* REGEX_STRING_H */

@@ -9,7 +9,7 @@ InputKeys::Key KeyReader::read_key() {
 InputKeys::Key KeyReader::read_arrow_key() {
   if (fgetc(stdin) != InputKeys::LEFT_BRACKET) return InputKeys::Quit;
 
-  InputKeys::Key key_pressed = key_pressed = InputKeys::Key(fgetc(stdin));
+  InputKeys::Key key_pressed = InputKeys::Key(fgetc(stdin));
   return key_pressed;
 }
 

@@ -27,7 +27,7 @@ public:
   Move string_to_move(const string &);
   const SquareIndices &get_en_passant_square();
   // fen
-  Piecetype get_piece_at_square(const int &pos) override;
+  Piecetype get_piece_at_square(const size_t &pos) override;
   void clear() override;
   void set_piece_at_square(const SquareIndices &s, const Piecetype &p) override;
   void set_castle_permission(CastlePermission perm) override;
@@ -41,11 +41,13 @@ public:
 private:
   void move_piece_to_square(const Move &);
   bool can_castle();
-  bool check_piece_belongs_to_player(const Piecetype);
-  bool is_captured_piece_in_same_color(const Piecetype, const Piecetype);
+  bool check_piece_belongs_to_player(const Piecetype&);
+  bool is_captured_piece_in_same_color(const Piecetype&, const Piecetype&);
   void assign_castle_rights(Move& m);
   void update_half_moves(const Move& m);
   void update_full_moves();
+  bool is_king_piece(const Piecetype&);
+  bool is_square_attacked(const SquareIndices &);
 
   Squares m_squares;
   Pieces m_pieces;

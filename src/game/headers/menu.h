@@ -31,7 +31,7 @@ public:
   virtual ~Menu() {}
 
   void set_title(const string &s) { m_view.set_title(s); }
-  void add_options(const Options<T> &m_opts) { this->m_opts = m_opts; }
+  void add_options(const Options<T> &m) { this->m_opts = m; }
 
   const T &select_option() { 
     return m_m_input->select_menu_option().opt;

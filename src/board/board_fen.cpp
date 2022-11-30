@@ -19,7 +19,7 @@ void BoardFen::update_fen(BoardFenInfo& board) {
 
   for (int rank = 7; rank >= 0; rank--) {
     for (int file = 0; file <= 7; file++) {
-      piece = board.get_piece_at_square(rank * 8 + file);
+      piece = board.get_piece_at_square(static_cast<unsigned int>(rank * 8 + file));
       if (piece) {
         add_empty_space(m_board_fen, space);
         m_board_fen += utils::piecetype_to_char(piece);

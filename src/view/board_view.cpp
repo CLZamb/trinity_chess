@@ -28,7 +28,7 @@ void BoardView::draw() {
       row_drawing += "┃";
 
       for (int col = 0; col < 8; col++) {
-        row_drawing += m_squares_drawings[(row * 8) + col].at(k);
+        row_drawing += m_squares_drawings[static_cast<size_t>((row * 8) + col)].at(k);
       }
 
       row_drawing += "┃";
@@ -38,7 +38,7 @@ void BoardView::draw() {
 }
 
 char BoardView::left_border(const int &row, const int &col) {
-  return (col + 1) % 3 ? ' ' :  ('0' + row + 1);
+  return (col + 1) % 3 ? ' ' :  static_cast<char>(('0' + row + 1));
 }
 
 void BoardView::parse_fen(const string& fen) {

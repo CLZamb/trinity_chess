@@ -12,6 +12,6 @@ void TextInputPlayer::update_turn(const PlayerInfo & p) {
 }
 
 string TextInputPlayer::get_player_string_move(PlayerPosition &p) {
-  std::cout << ">> ";
+  std::cout << p.get_from_position() << std::endl;
   return m_tib.get_string_input();
 }
