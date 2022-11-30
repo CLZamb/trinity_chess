@@ -3,6 +3,8 @@
 #include <initializer_list>
 #include <iostream>
 
+#define snprintf_nowarn(...) (snprintf(__VA_ARGS__) < 0 ? abort() : (void)0)
+
 class Box {
   public:
     Box() {}
@@ -17,7 +19,7 @@ class Box {
     }
 
     static void copy_row(char* dest, const char* src, const char* src2) {
-      snprintf(dest, kCharSize, "%s%s", src, src2);
+      snprintf_nowarn(dest, kCharSize, "%s%s", src, src2);
     }
 
     static const int kRowSize = 5 /*rows*/;

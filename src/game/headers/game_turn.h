@@ -10,7 +10,7 @@ class GameTurn {
     Human = 1,
   };
 
-  enum Players : int {
+  enum Players : unsigned int {
     player_1 = 0,
     player_2 = 1
   };

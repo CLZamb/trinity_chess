@@ -3,7 +3,7 @@
 using std::cout;
 using std::flush;
 
-View::View(string name) { this->name = name; }
+View::View(string n) { this->name = n; }
 
 void View::print() { 
   // system(CLEAR);

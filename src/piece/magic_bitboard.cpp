@@ -199,7 +199,7 @@ void MagicBitboard::_init_slider_masks_shifs_occupancies(int isRook) {
   int i, bitCount, variationCount;
   U64 mask;
 
-  for (int bitRef = A1; bitRef < SquareEnd; ++bitRef) {
+  for (int bitRef = A1; bitRef < static_cast<int>(SquareEnd); ++bitRef) {
     m_rook_tbl[bitRef].mask = rmask(bitRef);
     m_bishop_tbl[bitRef].mask = bmask(bitRef);
     m_rook_tbl[bitRef].shift = 64 - RBits[bitRef];
@@ -221,10 +221,11 @@ void MagicBitboard::_init_slider_masks_shifs_occupancies(int isRook) {
 
 void MagicBitboard::_init_tables(int isRook) {
   U64 validMoves, mask;
-  int variations, bitCount;
-  int i, magicIndex;
+  int bitCount;
+  unsigned long variations; 
+  unsigned long i, magicIndex;
 
-  for (int bitRef = A1; bitRef < SquareEnd; ++bitRef) {
+  for (int bitRef = A1; bitRef < static_cast<int>(SquareEnd); ++bitRef) {
     mask = isRook ? m_rook_tbl[bitRef].mask : m_bishop_tbl[bitRef].mask;
     bitCount = bitUtility::count_1s(mask);
     variations = 1ULL << bitCount;

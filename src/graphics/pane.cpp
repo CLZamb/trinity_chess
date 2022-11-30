@@ -1,7 +1,7 @@
 #include "headers/pane.h"
 using std::make_unique;
 
-Pane::Pane(int size /*= 44 */) {
+Pane::Pane(size_t size /*= 44 */) {
   m_pane_drawing.reserve(size);
 }
 
@@ -34,13 +34,13 @@ shared_ptr<Section>& Pane::get_section(const string& key) {
   return sections[key];
 }
 
-const string& Pane::operator[](int index) {
+const string& Pane::operator[](size_t index) {
   if (!is_valid_pane_index(index)) return m_empty;
 
   return *m_pane_drawing[index];
 }
 
-int Pane::size() {
+size_t Pane::size() {
   return this->m_pane_drawing.size();
 }
 

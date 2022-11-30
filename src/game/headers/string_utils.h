@@ -13,9 +13,9 @@ using std::string;
 using std::unordered_map;
 
 namespace string_utils {
-inline int square_str_to_int(string sq) {
+inline unsigned int square_str_to_int(string sq) {
   char file = sq[0], rank = sq[1];
-  int square_int = (file - 'a') + ((rank - '1') * 8);
+  unsigned int square_int = static_cast<unsigned int>((file - 'a') + ((rank - '1') * 8));
 
   if (square_int < A1 || square_int > H8)
     return 0;
@@ -37,8 +37,8 @@ inline Move to_move(const string &str_move) {
     return result;
   }
 
-  int from = square_str_to_int(list_pos[0]);
-  int to = square_str_to_int(list_pos[1]);
+  unsigned int from = square_str_to_int(list_pos[0]);
+  unsigned int to = square_str_to_int(list_pos[1]);
 
   Move_Utils::set_move(result, from, to);
   return result;
@@ -54,7 +54,7 @@ inline string squareindex_to_str(SquareIndices sq) {
 
   string square_str;
   square_str = 'a' + (sq % 8);
-  square_str += '1' + (sq / 8);
+  square_str += static_cast<char>('1' + (sq / 8));
   return square_str;
 }
 

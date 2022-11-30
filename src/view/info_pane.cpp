@@ -66,7 +66,7 @@ void InfoPane::set_content_to_block_recursively(shared_ptr<Section>& block,
 }
 
 string InfoPane::format_line(string line) {
-  int num_spaces = kRowMaxLen - line.size();
+  unsigned long num_spaces = kRowMaxLen - line.size();
   return  " ┃ " + line + std::string(num_spaces, ' ') + "┃";
 }
 

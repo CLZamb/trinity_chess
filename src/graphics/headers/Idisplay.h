@@ -10,7 +10,7 @@ class Displayable {
  public:
     explicit Displayable(size_t size = 44);
     virtual void draw() = 0;
-    const string& operator[] (int i);
+    const string& operator[] (size_t i);
     size_t size();
 
  protected:

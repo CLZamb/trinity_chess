@@ -33,20 +33,20 @@ inline static const int shift_castle = 25;
 
 constexpr unsigned int get_encoded_value(const Move &m,
                                          const int &bits_shift_to_right,
-                                         const int &reserved_space_hex_value) {
+                                         const unsigned int &reserved_space_hex_value) {
   return (m >> bits_shift_to_right) & reserved_space_hex_value;
 }
 
 constexpr void remove_encoded_value(Move &m, 
                                     const int &bits_shift_to_left,
-                                    const int &reserved_space_hex_value) {
+                                    const unsigned int &reserved_space_hex_value) {
   m &= ~(reserved_space_hex_value << bits_shift_to_left);
 }
 
 constexpr void set_encoded_value(Move &m, 
-                                 const int &value,
+                                 const unsigned int &value,
                                  const int &bits_shift_to_left,
-                                 const int &reserved_space_hex_value) {
+                                 const unsigned int &reserved_space_hex_value) {
   remove_encoded_value(m, bits_shift_to_left, reserved_space_hex_value);
   m |= (value & reserved_space_hex_value) << bits_shift_to_left;
 }
@@ -116,11 +116,11 @@ constexpr void set_en_passant(Move &m, bool is_en_passant) {
                     designated_space_in_hex_flag);
 }
 
-constexpr void set_castle_permission(Move &m, int permission) {
+constexpr void set_castle_permission(Move &m, const unsigned int & permission) {
   set_encoded_value(m, permission, shift_castle, designated_space_in_hex_caslte);
 }
 
-constexpr Move make_move(int from, unsigned int to, unsigned int piece_type) {
+constexpr Move make_move(unsigned int from, unsigned int to, unsigned int piece_type) {
   return (from & designated_space_in_hex_square) |
          ((to & designated_space_in_hex_square) << shift_to) |
          ((piece_type & designated_space_in_hex_piecetype) << shift_piece);

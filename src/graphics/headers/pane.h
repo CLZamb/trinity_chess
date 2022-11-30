@@ -17,7 +17,7 @@ using std::unordered_map;
 
 class Pane {
  public:
-  explicit Pane(int size);
+  explicit Pane(size_t size);
   virtual ~Pane();
   void clear();
   void fill(const string& content);
@@ -27,8 +27,8 @@ class Pane {
   void set_content_at_section(const string &section_name, const vector<string>* content);
   shared_ptr<Section>& get_section(const string& key);
 
-  int size();
-  const string& operator[] (int i);
+  size_t size();
+  const string& operator[] (size_t i);
 
  private:
   void fill_pane();

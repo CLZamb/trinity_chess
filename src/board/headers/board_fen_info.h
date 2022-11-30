@@ -6,7 +6,7 @@
 class BoardFenInfo {
 private:
 public:
-  virtual Piecetype get_piece_at_square(const int &pos) = 0;
+  virtual Piecetype get_piece_at_square(const size_t &pos) = 0;
   virtual char get_side_turn() = 0;
   virtual string get_en_passant_square_string() = 0;
   virtual string get_castling_rights_string() = 0;

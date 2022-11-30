@@ -40,10 +40,19 @@ public:
   }
 
   void clear() {
-    for (int pos = Squarebegin; pos < SquareEnd; pos++) {
-      clear_bit_at_player_pieces(BLACK, static_cast<SquareIndices>(pos));
-      clear_bit_at_player_pieces(WHITE, static_cast<SquareIndices>(pos));
+    for (unsigned int pos = Squarebegin; pos < SquareEnd; pos++) {
+      clear_bit_at_player_pieces(BLACK, SquareIndices(pos));
+      clear_bit_at_player_pieces(WHITE, SquareIndices(pos));
     }
+  }
+
+  std::vector<size_t> get_all_locations_at_side(const Color c) {
+    std::vector<size_t> all_locations{static_cast<unsigned long>(bitUtility::count_1s(m_occupancies[c]))};
+    U64 temp_locations = m_occupancies[c];
+    while(temp_locations) {
+      all_locations.push_back(static_cast<unsigned long>(bitUtility::pop_1st_bit(&temp_locations)));
+    }
+    return all_locations;
   }
 
 private:

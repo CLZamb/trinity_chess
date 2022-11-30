@@ -43,7 +43,7 @@ class SquaresDrawings {
 
       static const int col_size = 7;
       static const int row_size = 8;
-      int position = 0;
+      unsigned int position = 0;
       /* 
        * Rows needs to be ordered upside down
        * because the program prints from top to bottom
@@ -59,7 +59,7 @@ class SquaresDrawings {
            * i.e the bottom right position would be  
            * 8 * 0 + 7 = 7
            * */
-          position = row * 8 + col;
+          position = static_cast<unsigned int> (row * 8 + col);
           if (squareColor == 'b') {
             squareColor = 'w';
             m_squares[position].set_base_square_drawing(!is_black_squared);
@@ -99,7 +99,7 @@ class SquaresDrawings {
     }
 
   private:
-    int prev_pos = A1;
+    size_t prev_pos = A1;
     std::array<SquareDrawing, utils::constant::ksquares> m_squares;
 };
 
