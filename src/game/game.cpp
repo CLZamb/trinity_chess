@@ -50,13 +50,15 @@ void Game::play() {
 
     make_move(mv);
     m_players_turn.change_turn();
-    std::cout << m_board_fen.get_fen() << std::endl;
   }
 
   if (!m_board.is_checkmate())  {
     std::cout << GameDrawing::game_over << std::endl;
     // winner_view.print();
+  } else {
+    std::cout << "checkmate" << std::endl;
   }
+
 }
 
 void Game::make_move(const Move& mv) {
@@ -69,6 +71,11 @@ void Game::make_move(const Move& mv) {
 bool Game::is_valid_move(const string& str_move, Move& mv) {
   if (!string_utils::is_valid_move_format(str_move)) {
     m_board_info.wrong_format(str_move);
+    return false;
+  }
+
+  if (m_board.is_in_check(mv)) {
+    m_board_info.in_check(str_move);
     return false;
   }
 

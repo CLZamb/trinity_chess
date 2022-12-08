@@ -21,6 +21,7 @@ public:
 
   void wrong_format(const string &s);
   void illegal_move(const string &s);
+  void in_check(const string& s);
 
   string get_moves() override;
   string get_captures() override;
@@ -34,6 +35,7 @@ private:
   string game_info;
   static const string Kwrong_format;
   static const string Killegal_move;
+  static const string Kcheck_move;
   array<string, Color::SIZE> m_turn_string{"Is white turn", "Is black turn"};
 };
 

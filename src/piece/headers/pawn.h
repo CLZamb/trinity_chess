@@ -126,7 +126,7 @@ class Pawn : public Piece {
  private:
   bool is_legal_attack_move(Move& m, BoardBitboard &board)  {
     U64 all_moves = BLANK;
-    int from = Move_Utils::get_from(m);
+    SquareIndices from = Move_Utils::get_from(m);
     U64 to = ONE << Move_Utils::get_to(m);
     Piecetype captured = Move_Utils::get_captured_piece(m);
     const U64 opponent = board[utils::check::get_color_piece(captured)];
@@ -136,7 +136,7 @@ class Pawn : public Piece {
   }
 
   bool is_legal_non_attack_move(Move& m, BoardBitboard &board) {
-    int from = Move_Utils::get_from(m);
+    SquareIndices from = Move_Utils::get_from(m);
     U64 to = ONE << Move_Utils::get_to(m);
     const U64 free_squares = ~board[BOTH];
     return pawn_non_attack_mask(from) & free_squares & to;

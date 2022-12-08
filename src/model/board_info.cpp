@@ -4,6 +4,8 @@ const string BoardInfo::Kwrong_format =
   "Move is an not in a recognizable format, please try again";
 const string BoardInfo::Killegal_move = 
   "Move is an ilegal move";
+const string BoardInfo::Kcheck_move = 
+  "cannot make that move, player is in check";
 
 BoardInfo::BoardInfo() {}
 
@@ -18,6 +20,10 @@ void BoardInfo::wrong_format(const string &s) {
 
 void BoardInfo::illegal_move(const string &s) {
   save_info("{ " + s + " } " + Killegal_move);
+}
+
+void BoardInfo::in_check(const string &s) {
+  save_info("{ " + s + " } " + Kcheck_move);
 }
 
 void BoardInfo::save_move(const Move &mv) {

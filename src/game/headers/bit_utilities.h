@@ -4,7 +4,6 @@
 #include<iostream>
 #include"defs.h"
 
-
 namespace bitUtility {
   inline U64 set_mask_bb(SquareIndices s) {
     return SetMask[s];

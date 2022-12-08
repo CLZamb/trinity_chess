@@ -11,16 +11,7 @@ class King : public Piece {
     King();
     virtual ~King();
     bool is_legal_move(Move& m, BoardBitboard&) override;
-  private:
-    struct KingCastle {
-      CastleSquares _from;
-      CastleSquares _to;
-      vector<SquareIndices> free_squares;
-    };
-
-    bool eheck_legal_castle(const Move& m, BoardBitboard &b);
-
-    U64 king_mask(int sq) {
+    static U64 king_mask(unsigned int sq) {
       U64 king_mask = 0ULL;
       U64 from_sq = ONE << sq;
 
@@ -35,8 +26,18 @@ class King : public Piece {
       return king_mask;
     }
 
+  private:
+    struct KingCastle {
+      CastleSquares _from;
+      CastleSquares _to;
+      vector<SquareIndices> free_squares;
+    };
+
+    bool eheck_legal_castle(const Move& m, BoardBitboard &b);
+
+
     void _init_moves() {
-      for (int sq = 0; sq < utils::constant::ksquares; sq++) {
+      for (unsigned int sq = 0; sq < utils::constant::ksquares; sq++) {
         m_attacks[sq] = king_mask(sq);
       }
     }

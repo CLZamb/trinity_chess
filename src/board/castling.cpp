@@ -32,7 +32,7 @@ const Move& Castling::get_rook_castle_move(const CastlePermission &cp) const {
 bool Castling::is_rook_is_at_castling_position(const Move& m, Squares &s) {
   Color color = utils::check::get_color_piece(Move_Utils::get_piece(m));
   CastleSquares rook_initial_pos = get_castle_rook_initial_position(m, color);
-  Piecetype piece_at_rook_initial_pos = s[rook_initial_pos].get_piece();
+  Piecetype piece_at_rook_initial_pos = s[static_cast<size_t>(rook_initial_pos)].get_piece();
   return (piece_at_rook_initial_pos == bR || piece_at_rook_initial_pos == wR);
 }
 
@@ -42,8 +42,8 @@ bool Castling::is_castle_move(const Move& m, Squares &squares) {
 
   Color side = utils::check::get_color_piece(Move_Utils::get_piece(m));
   Piecetype piece = Move_Utils::get_piece(m);
-  int from = Move_Utils::get_from(m);
-  int to = Move_Utils::get_to(m);
+  unsigned int from = Move_Utils::get_from(m);
+  unsigned int to = Move_Utils::get_to(m);
 
   if (side == WHITE) {
     if (piece != wK || from != WK_CA_INITIAL_POS) 
@@ -64,7 +64,7 @@ bool Castling::is_castle_move(const Move& m, Squares &squares) {
 }
 
 CastleSquares Castling::get_castle_rook_initial_position(const Move& m, const Color &side) {
-  int to = Move_Utils::get_to(m);
+  unsigned int to = Move_Utils::get_to(m);
 
   if (side == WHITE) {
     switch (to) {
