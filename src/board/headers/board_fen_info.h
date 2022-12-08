@@ -16,6 +16,7 @@ public:
   virtual void set_piece_at_square(const SquareIndices &i, const Piecetype& p) = 0;
   virtual void set_castle_permission(CastlePermission perm) = 0;
   virtual void set_en_passant_square(SquareIndices sq) = 0;
+  virtual void update_king_position(Color c, const SquareIndices &pos) = 0;
 };
 
 #endif /* BOARD_FEN_INFO_H */

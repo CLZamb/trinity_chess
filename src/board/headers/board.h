@@ -33,21 +33,29 @@ public:
   void set_castle_permission(CastlePermission perm) override;
   void set_en_passant_square(SquareIndices sq) override;
   char get_side_turn() override;
+  void update_king_position(Color c, const SquareIndices &pos) override;
   string get_en_passant_square_string() override;
   string get_castling_rights_string() override;
   string get_half_moves() override;
   string get_full_moves() override;
+  bool is_in_check(const Move&m);
 
 private:
   void move_piece_to_square(const Move &);
   bool can_castle();
   bool check_piece_belongs_to_player(const Piecetype&);
-  bool is_captured_piece_in_same_color(const Piecetype&, const Piecetype&);
+  bool is_captured_piece_same_color(const Piecetype&, const Piecetype&);
   void assign_castle_rights(Move& m);
   void update_half_moves(const Move& m);
   void update_full_moves();
+  void update_king_position(const Move &pos);
   bool is_king_piece(const Piecetype&);
-  bool is_square_attacked(const SquareIndices &);
+  bool can_opponent_attack_square(const unsigned int & pos);
+  bool is_king_piece_attacked();
+  Color get_opponent_player_color();
+  Color get_player_color();
+  void check_checkmate();
+  int count_blocked_king_moves();
 
   Squares m_squares;
   Pieces m_pieces;
@@ -58,6 +66,8 @@ private:
   SpecialMoveController m_special_move;
   int half_moves{0};
   int full_moves{1};
+  SquareIndices m_black_king_position;
+  SquareIndices m_white_king_position;
 };
 
 #endif /* BOARD_H */
