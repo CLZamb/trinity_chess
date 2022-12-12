@@ -16,6 +16,8 @@ class PlayersTurnController : public GameTurnObservable {
     void notify_change_turn();
     void change_turn();
     void set_inital_side(const GameTurn::Players &p);
+    GameTurn::Players get_turn();
+
 
   private:
     static const int players_size = GameTurn::kSize;

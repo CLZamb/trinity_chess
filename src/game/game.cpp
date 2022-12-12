@@ -1,4 +1,5 @@
 #include "headers/game.h"
+#include <algorithm>
 
 using std::make_shared;
 
@@ -54,11 +55,16 @@ void Game::play() {
 
   if (!m_board.is_checkmate())  {
     std::cout << GameDrawing::game_over << std::endl;
-    // winner_view.print();
   } else {
-    std::cout << "checkmate" << std::endl;
+    m_players_turn.change_turn();
+    std::cout << 
+      (
+       m_players_turn.get_turn() == GameTurn::player_1 ? 
+       GameDrawing::player_1_won.data() :
+       GameDrawing::player_2_won.data()
+      )
+      << std::endl;
   }
-
 }
 
 void Game::make_move(const Move& mv) {
@@ -86,4 +92,3 @@ bool Game::is_valid_move(const string& str_move, Move& mv) {
 
   return true;
 }
-
