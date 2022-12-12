@@ -31,9 +31,9 @@ class Game {
   // 4k3/8/8/4pP2/8/8/8/4K2R w - e6 0 1
   // r3k3/ppp5/8/8/8/8/5PPP/4K2R w Kq - 0 1
   // k1Q5/8/R7/8/8/2b5/q7/K1r5 w - - 0 1
-  // rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-  // 3kq2r/8/8/8/8/8/8/3K1Q2 w - - 0 1
-  const string start_fen = "k1R5/1Q6/8/8/8/8/1q6/K1r5 w - - 0 1";
+  // k1R5/8/2Q5/8/1q6/2r5/8/K7 b - - 0 1  
+  // // 3kq2r/8/8/8/8/8/8/3K1Q2 w - - 0 1
+  const string start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
   PlayersTurnController m_players_turn;
   Board m_board;

@@ -29,3 +29,7 @@ void PlayersTurnController::set_inital_side(const GameTurn::Players &gt) {
   m_turn = gt;
   notify_change_turn();
 }
+
+GameTurn::Players PlayersTurnController::get_turn() {
+  return m_turn;
+}

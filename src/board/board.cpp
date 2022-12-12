@@ -1,4 +1,5 @@
 #include "headers/board.h"
+#include "board/headers/utils.h"
 #include "game/headers/move.hpp"
 
 Board::Board() {}
@@ -14,17 +15,16 @@ void Board::check_checkmate() {
   U64 all_king_possible_positions{King<WHITE>::king_mask(sq)};
   int count_possible_king_moves{0};
   int count_king_moves_blocked{0};
+  unsigned int position;
 
   while (all_king_possible_positions) {
     count_possible_king_moves++;
-    if (can_opponent_attack_square(
-          static_cast<unsigned int>(
-            bitUtility::pop_1st_bit(&all_king_possible_positions))))
-      count_king_moves_blocked++;
+    position = static_cast<unsigned int>(pop_1st_bit(&all_king_possible_positions));
+
+    if (can_opponent_attack_square(position))count_king_moves_blocked++;
   }
 
-  if (count_possible_king_moves == count_king_moves_blocked) 
-    checkmate = true;
+  if (count_possible_king_moves == count_king_moves_blocked)  checkmate = true;
 }
 
 void Board::update_turn(const PlayerInfo &turn) { m_turn_info = turn; }
@@ -34,11 +34,9 @@ bool Board::is_legal_move(Move &m) {
   Piecetype captured = Move_Utils::get_captured_piece(m);
   SquareIndices to = Move_Utils::get_to(m);
 
-  if (!piece || !check_piece_belongs_to_player(piece))
-    return false;
+  if (!piece || !check_piece_belongs_to_player(piece)) return false;
 
-  if (captured && is_captured_piece_same_color(piece, captured))
-    return false;
+  if (captured && is_captured_piece_same_color(piece, captured)) return false;
 
   if (is_king_piece(piece) && can_opponent_attack_square(to)) return false;
 
@@ -63,9 +61,9 @@ bool Board::can_opponent_attack_square(const unsigned int &to) {
   SquareIndices from;
   Move m;
   Piecetype pt;
-  Color op_color = get_opponent_player_color();
+  Color opposite_color = get_opponent_player_color();
 
-  for (const size_t& i: m_board_bitboard.get_all_locations_at_side(op_color)) {
+  for (const size_t& i: m_board_bitboard.get_all_locations_at_side(opposite_color)) {
     pt = m_squares[i].get_piece();
     from = static_cast<SquareIndices>(i);
     m = Move_Utils::make_move(from, to, pt);
@@ -95,13 +93,15 @@ void Board::update_king_position(const Move &mv) {
   if (is_king_piece(pct)) {
     SquareIndices pos = Move_Utils::get_to(mv);
     update_king_position(c, pos);
-    std::cout << "king piece updated" << std::endl;
   }
 }
 
 void Board::move_piece_to_square(const Move &mv) {
   SquareIndices from = Move_Utils::get_from(mv);
   SquareIndices to = Move_Utils::get_to(mv);
+  Piecetype captured = Move_Utils::get_captured_piece(mv);
+
+  if (is_king_piece(captured)) { checkmate = true; }
 
   m_squares.do_move(from, to);
 
@@ -145,8 +145,8 @@ Move Board::string_to_move(const string &m) {
   SquareIndices from = Move_Utils::get_from(mv);
   SquareIndices to = Move_Utils::get_to(mv);
 
-  Piecetype piece = m_squares[static_cast<unsigned int>(from)].get_piece();
-  Piecetype captured = m_squares[static_cast<unsigned int>(to)].get_piece();
+  Piecetype piece = m_squares[from].get_piece();
+  Piecetype captured = m_squares[to].get_piece();
 
   Move_Utils::set_piece(mv, piece);
   Move_Utils::set_capture_piece(mv, captured);
@@ -198,13 +198,9 @@ string Board::get_castling_rights_string() {
   return string_utils::get_permission_str_from_castle_permission(castle_perm);
 }
 
-string Board::get_half_moves() {
-  return std::to_string(half_moves);
-}
+string Board::get_half_moves() { return std::to_string(half_moves); }
 
-string Board::get_full_moves() {
-  return std::to_string(full_moves);
-}
+string Board::get_full_moves() { return std::to_string(full_moves); }
 
 void Board::update_king_position(Color c, const SquareIndices &pos) {
   if (c == BLACK) {
