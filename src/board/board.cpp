@@ -1,29 +1,26 @@
 #include "headers/board.h"
 #include "board/headers/utils.h"
 #include "game/headers/move.hpp"
+#include <unordered_set>
+#include <set>
 
 Board::Board() {}
 
-bool Board::is_checkmate() { 
+bool Board::is_checkmate() {
   check_checkmate();
   return checkmate; 
 }
 
 void Board::check_checkmate() {
-  Color c = m_turn_info.color;
-  SquareIndices sq = c == BLACK ? m_black_king_position : m_white_king_position;
-  U64 all_king_possible_positions{King<WHITE>::king_mask(sq)};
+  U64 all_king_possible_positions{get_all_king_possible_positions()};
   int count_possible_king_moves{0};
   int count_king_moves_blocked{0};
   unsigned int position;
-
   while (all_king_possible_positions) {
     count_possible_king_moves++;
     position = static_cast<unsigned int>(pop_1st_bit(&all_king_possible_positions));
-
     if (can_opponent_attack_square(position))count_king_moves_blocked++;
   }
-
   if (count_possible_king_moves == count_king_moves_blocked)  checkmate = true;
 }
 
@@ -39,7 +36,6 @@ bool Board::is_legal_move(Move &m) {
   if (captured && is_captured_piece_same_color(piece, captured)) return false;
 
   if (is_king_piece(piece) && can_opponent_attack_square(to)) return false;
-
   return m_pieces[piece]->is_legal_move(m, m_board_bitboard);
 }
 
@@ -120,11 +116,46 @@ bool Board::is_in_check(const Move& m) {
   return false;
 }
 
+// can be blocked by another picece
+bool Board::can_be_block_by_another_piece(const Move& m) {
+  Piecetype piece = Move_Utils::get_piece(m);
+  if (is_king_piece(piece)) return false;
+
+  // U64 all_king_possible_positions{get_all_king_possible_positions()};
+
+  return true;
+}
+
+void Board::get_all_possible_pieces() {
+  // SquareIndices from;
+  // Move m;
+  // Piecetype pt;
+  // Color opposite_color = get_opponent_player_color();
+  // SquareIndices to = m_turn_info.color == BLACK ? m_black_king_position : m_white_king_position;
+  // std::unordered_set<Piecetype> pieces;
+  //
+  // for (const size_t& i: m_board_bitboard.get_all_locations_at_side(opposite_color)) {
+  //   pt = m_squares[i].get_piece();
+  //   from = static_cast<SquareIndices>(i);
+  //   m = Move_Utils::make_move(from, to, pt);
+  //
+  //   if (pt && is_legal_move(m))
+  //     pieces.insert(pt);
+  // }
+}
+
+U64 Board::get_all_king_possible_positions() {
+  Color c = m_turn_info.color;
+  SquareIndices sq = c == BLACK ? m_black_king_position : m_white_king_position;
+  return King<WHITE>::king_mask(sq);
+}
+
 bool Board::is_king_piece_attacked() {
   SquareIndices sq = m_turn_info.color == BLACK ? m_black_king_position
                                                 : m_white_king_position;
   return can_opponent_attack_square(sq);
 }
+
 
 void Board::update_half_moves(const Move& m) {
   Piecetype piece = Move_Utils::get_piece(m);
@@ -173,7 +204,7 @@ void Board::set_en_passant_square(SquareIndices sq) {
   m_special_move.set_en_passant_square(sq);
 }
 
-const SquareIndices &Board::get_en_passant_square() {
+const SquareIndices& Board::get_en_passant_square() {
   return m_special_move.get_en_passant_square();
 }
 

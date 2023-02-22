@@ -54,7 +54,7 @@ void Pieces::make_rook(const Color C) {
   else
     m_pieces[wR] = new Rook<WHITE>(m_rook_magic_bitboard);
 }
-//
+
 void Pieces::make_bishop(const Color C) {
   if (C == BLACK)
     m_pieces[bB] = new Bishop<BLACK>(m_bishop_magic_bitboard);

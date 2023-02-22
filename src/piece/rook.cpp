@@ -11,3 +11,10 @@ template<Color color>
 bool Rook<color>::is_legal_move(Move& m, BoardBitboard& board) {
   return rook_moves.get_sliding_attacks(m, board);
 }
+
+// template<Color color>
+// U64 Rook<color>::get_all_possible_positions(Move& ,BoardBitboard&) {
+//   return EMPTY;
+// }
+
+

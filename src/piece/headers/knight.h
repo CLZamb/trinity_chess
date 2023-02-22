@@ -9,6 +9,7 @@ class Knight : public Piece {
     Knight();
     virtual ~Knight();
     bool is_legal_move(Move& m, BoardBitboard& ) override;
+    // U64 get_all_possible_positions(Move& m, BoardBitboard&) override;
 
   private:
     U64 knight_mask(int sq) {

@@ -11,6 +11,7 @@ public:
   explicit Queen(IMagicBitboardAttackType& m_bb);
   virtual ~Queen();
   bool is_legal_move(Move &m, BoardBitboard&) override;
+  // U64 get_all_possible_positions(Move&, BoardBitboard &) override;
 
 private:
   SlidingMoves<color> queen_moves;

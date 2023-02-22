@@ -57,6 +57,12 @@ class Pawn : public Piece {
     return is_legal_non_attack_move(m, board);
   }
 
+  // U64 get_all_possible_positions(Move& m, BoardBitboard&  board) override {
+  //   SquareIndices from = Move_Utils::get_from(m);
+  //   const U64 free_squares = ~board[BOTH];
+  //   return pawn_non_attack_mask(from) & free_squares;
+  // }
+
   bool is_legal_en_passant_move(const Move &m) {
     SquareIndices sq = Move_Utils::get_from(m);
     U64 from_sq = ONE << sq;

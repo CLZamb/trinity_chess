@@ -11,6 +11,7 @@ class King : public Piece {
     King();
     virtual ~King();
     bool is_legal_move(Move& m, BoardBitboard&) override;
+    // U64 get_all_possible_positions(Move&, BoardBitboard &) override;
     static U64 king_mask(unsigned int sq) {
       U64 king_mask = 0ULL;
       U64 from_sq = ONE << sq;
@@ -33,8 +34,7 @@ class King : public Piece {
       vector<SquareIndices> free_squares;
     };
 
-    bool eheck_legal_castle(const Move& m, BoardBitboard &b);
-
+    bool check_legal_castle(const Move& m, BoardBitboard &b);
 
     void _init_moves() {
       for (unsigned int sq = 0; sq < utils::constant::ksquares; sq++) {

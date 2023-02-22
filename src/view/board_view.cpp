@@ -5,7 +5,6 @@ BoardView::BoardView() : View("Board") {
   m_pane.add_section(m_board_section, 40);
   m_pane.add_section(m_bottom_section, 3);
   clear();
-
   _window.add_pane(this, Window::Middle_pane);
 }
 

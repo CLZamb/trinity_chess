@@ -17,6 +17,7 @@ public:
   virtual ~Piece();
   Piecetype get_piecetype();
   virtual bool is_legal_move(Move &, BoardBitboard &) = 0;
+  // virtual void get_all_possible_positions(Move&, BoardBitboard &, U64& result) = 0;
 
 protected:
   explicit Piece(const Piecetype &);

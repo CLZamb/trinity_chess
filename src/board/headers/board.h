@@ -39,6 +39,8 @@ public:
   string get_half_moves() override;
   string get_full_moves() override;
   bool is_in_check(const Move&m);
+  bool can_be_block_by_another_piece(const Move& m);
+  U64 get_all_king_possible_positions();
 
 private:
   void move_piece_to_square(const Move &);
@@ -55,7 +57,8 @@ private:
   Color get_opponent_player_color();
   Color get_player_color();
   void check_checkmate();
-  int count_blocked_king_moves();
+  void get_all_possible_pieces();
+  U64 get_all_possible_positions();
 
   Squares m_squares;
   Pieces m_pieces;
