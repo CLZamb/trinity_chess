@@ -24,7 +24,7 @@ bool King<color>::is_legal_move(Move &m, BoardBitboard &board) {
   Piecetype captured = Move_Utils::get_captured_piece(m);
 
   if (Move_Utils::can_castle(m))
-    return eheck_legal_castle(m, board);
+    return check_legal_castle(m, board);
 
   if (captured) 
     free_squares |= board[utils::check::get_color_piece(captured)];
@@ -33,7 +33,7 @@ bool King<color>::is_legal_move(Move &m, BoardBitboard &board) {
 }
 
 template <Color color>
-bool King<color>::eheck_legal_castle(const Move& m, BoardBitboard &b) {
+bool King<color>::check_legal_castle(const Move& m, BoardBitboard &b) {
   SquareIndices from = Move_Utils::get_from(m);
   SquareIndices to = Move_Utils::get_to(m);
   const KingCastle &kc = m_kc.at(Move_Utils::get_castle_permission(m));
@@ -47,3 +47,9 @@ bool King<color>::eheck_legal_castle(const Move& m, BoardBitboard &b) {
   return true;
 }
 
+// template<Color color>
+// U64 King<color>::get_all_possible_positions(Move& m, BoardBitboard &board) {
+//   SquareIndices from = Move_Utils::get_from(m);
+//   U64 free_squares = ~board[BOTH];
+//   return m_attacks[from] & free_squares;
+// }

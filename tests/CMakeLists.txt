@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14.7)
 set(chess_tests ${CMAKE_PROJECT_NAME}_tests)
 
 set(TESTS_SOURCE_FILES 
-  gtest.cpp
+  g_test.cpp
 )
 
 add_executable(${chess_tests} ${TESTS_SOURCE_FILES})

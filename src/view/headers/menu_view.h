@@ -11,6 +11,7 @@ using std::list;
 
 class MenuView : public View {
   public: 
+    MenuView() : MenuView({""}) {}
     MenuView(list<string> l_s) : View("Menu"), m_l_options(l_s) {
       string s = format_options(m_l_options);
 

@@ -1,4 +1,5 @@
 #include "headers/knight.h"
+#include "board/headers/bit_utilities.h"
 
 template<Color color>
 Knight<color>::Knight() :
@@ -8,7 +9,6 @@ Knight<color>::Knight() :
 
 template<Color color>
 Knight<color>::~Knight() {}
-
 
 template<Color color>
 bool Knight<color>::is_legal_move(Move& m, BoardBitboard& board) {
@@ -23,3 +23,11 @@ bool Knight<color>::is_legal_move(Move& m, BoardBitboard& board) {
 
   return m_attacks[from] & to & free_squares;
 }
+
+// template<Color color>
+// U64 Knight<color>::get_all_possible_positions(Move& m, BoardBitboard& board) {
+//   SquareIndices from = Move_Utils::get_from(m);
+//   U64 free_squares = ~board[BOTH];
+//
+//   return m_attacks[from] & free_squares;
+// }

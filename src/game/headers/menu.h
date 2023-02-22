@@ -54,7 +54,6 @@ private:
   Options<T> m_opts;
   MenuView m_view;
   std::unique_ptr<MenuInput<T>> m_m_input;
-  // MenuInput& m_input;
 };
 
 

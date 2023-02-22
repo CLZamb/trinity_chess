@@ -33,14 +33,14 @@ void Game::attach_observers_to_players_turn() {
 void Game::add_info_pane_to_board() {
   m_board_view.add_pane_at_window_pos(&m_info_pane, Window::Right_pane);
   p_boardview_controller = std::make_shared<UiBoardInfoController>(
-      p_boardview_controller, m_board_info, m_info_pane);
+      p_boardview_controller, m_info_pane, m_board_info);
 }
 
 void Game::play() {
   string str_move;
-  Move mv{0};
-
+  Move mv;
   p_boardview_controller->update();
+
   while (!m_board.is_checkmate()) {
     p_boardview_controller->print();
 
@@ -57,14 +57,15 @@ void Game::play() {
     std::cout << GameDrawing::game_over << std::endl;
   } else {
     m_players_turn.change_turn();
-    std::cout << 
-      (
-       m_players_turn.get_turn() == GameTurn::player_1 ? 
-       GameDrawing::player_1_won.data() :
-       GameDrawing::player_2_won.data()
-      )
-      << std::endl;
+    std::cout << get_winner_drawing() << std::endl;
   }
+}
+
+string Game::get_winner_drawing() {
+  return 
+    m_players_turn.get_turn() == GameTurn::player_1 ? 
+      GameDrawing::player_1_won.data() :
+      GameDrawing::player_2_won.data();
 }
 
 void Game::make_move(const Move& mv) {
@@ -80,7 +81,7 @@ bool Game::is_valid_move(const string& str_move, Move& mv) {
     return false;
   }
 
-  if (m_board.is_in_check(mv)) {
+  if (m_board.is_in_check(mv) && !m_board.can_be_block_by_another_piece(mv)) {
     m_board_info.in_check(str_move);
     return false;
   }

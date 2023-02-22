@@ -8,7 +8,7 @@
 
 class UiBoardInfoController : public UiBoardDecorator {
  public:
-  UiBoardInfoController(shared_ptr<UIBoard> b, BoardInfo& i, InfoPane& p);
+  UiBoardInfoController(shared_ptr<UIBoard> b, InfoPane& p, BoardInfo& i);
   virtual ~UiBoardInfoController();
 
   void print() override;

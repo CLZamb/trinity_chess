@@ -1,7 +1,7 @@
 #include "controller/headers/ui_board_info_controller.h"
 
 UiBoardInfoController::UiBoardInfoController(
-    shared_ptr<UIBoard> b, BoardInfo& i, InfoPane& p) :
+    shared_ptr<UIBoard> b, InfoPane& p, BoardInfo& i) :
   UiBoardDecorator(b), p_info(i), p_info_pane(p) {}
 
 UiBoardInfoController::~UiBoardInfoController() {}

@@ -27,8 +27,7 @@ private:
 
     player_menu.print();
     m_p_config = player_menu.select_option();
-  }
-
+   }
 
   void get_players_color() {
     Menu<Color> player_menu  (

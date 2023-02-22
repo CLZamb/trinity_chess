@@ -12,3 +12,9 @@ template<Color color>
 bool Queen<color>::is_legal_move(Move &m, BoardBitboard& board) {
   return queen_moves.get_sliding_attacks(m, board);
 }
+
+// template<Color color>
+// U64 Queen<color>::get_all_possible_positions(Move&, BoardBitboard&) {
+//   return EMPTY;
+// }
+
