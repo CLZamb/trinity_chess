@@ -12,16 +12,14 @@ using std::list;
 class MenuView : public View {
   public: 
     MenuView() : MenuView({""}) {}
-    MenuView(list<string> l_s) : View("Menu"), m_l_options(l_s) {
-      string s = format_options(m_l_options);
 
+    MenuView(list<string> l_s) : View("Menu"), m_l_options(l_s) {
       m_pane.add_section(m_top_section, 1);
       m_pane.add_section(m_title_section, 1);
       m_pane.add_section(m_options_section, 1);
       m_pane.add_section(m_bottom_section, 1);
 
       m_pane.get_section(m_top_section)->set_content_at_index(MenuDrawings::p_menu_top.data(), 0 );
-      m_pane.get_section(m_options_section)->set_content_at_index(s, 0);
       m_pane.get_section(m_bottom_section)->set_content_at_index(MenuDrawings::p_menu_bottom.data(), 0 );
 
       _window.add_pane(this, Window::Left_pane);
@@ -29,12 +27,18 @@ class MenuView : public View {
 
     MenuView(string title, list<string> ls) : MenuView(ls) {
       set_title(title);
+      add_options_to_options_section();
     }
 
     virtual ~MenuView() {}
 
     void set_title(string title = "") {
       m_pane.set_content_at_section(m_title_section, {left_margin(title) + right_margin(title, false)});
+    }
+
+    void set_options(list<string> l_s) {
+      m_l_options = l_s;
+      add_options_to_options_section();
     }
 
     void selected_option(const int &i) {
@@ -55,6 +59,11 @@ class MenuView : public View {
     void draw() override {}
 
  private:
+  void add_options_to_options_section() {
+    string s = format_options(m_l_options);
+    m_pane.get_section(m_options_section)->set_content_at_index(s, 0);
+  }
+
   string format_options(list<string> &options) {
     string m_option;
     for (auto o : options) {

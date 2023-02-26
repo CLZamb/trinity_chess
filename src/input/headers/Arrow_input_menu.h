@@ -7,20 +7,17 @@
 #include "input/headers/input_type.h"
 
 template<typename T>
-class KeyboardInputMenu : public MenuInput<T>{
+class ArrowInputMenu : public MenuInput<T>{
  public:
-  KeyboardInputMenu(KeyboardBase &k, MenuView& v, const Options<T> &o) : 
+  ArrowInputMenu(KeyboardBase &k, MenuView& v, Options<T> &o) :
     m_k_input(k), m_view(v), m_opts(o) {
-      p_selection_begin  = o.begin();
-      p_selection_back   = --o.crbegin().base();
-      p_selection_option = p_selection_begin;
-      m_view.selected_option(p_selection_option->first);
+      m_view.selected_option(m_opts.begin()->first);
     }
 
-  virtual ~KeyboardInputMenu() {}
-  
+  virtual ~ArrowInputMenu() {}
+
   const Option<T>& select_menu_option() override { 
-    p_selection_option = m_opts.cbegin();
+    p_selection_option = m_opts.begin();
     bool selected = false;
 
     while (!selected) {
@@ -50,26 +47,24 @@ class KeyboardInputMenu : public MenuInput<T>{
     switch (k) {
       case InputKeys::UP:
       case InputKeys::W:
-        if(p_selection_option != p_selection_begin)
-          p_selection_option--;
+        if(p_selection_option != m_opts.begin())
+          --p_selection_option;
         break;
       case InputKeys::DOWN:
       case InputKeys::S:
-        if(p_selection_option != p_selection_back)
-          p_selection_option++;
+        if(p_selection_option != (--m_opts.end()))
+          ++p_selection_option;
         break;
       default:
         break;
     }
   }
 
+  typename Options<T>::iterator p_selection_option;
   KeyboardBase& m_k_input;
   MenuView& m_view;
-  const Options<T>& m_opts;
+  Options<T>& m_opts;
   const string key_not_supported = "key not supported\n";
-  typename Options<T>::const_iterator  p_selection_option;
-  typename Options<T>::const_iterator  p_selection_begin;
-  typename Options<T>::const_iterator  p_selection_back;
 };
 
 
