@@ -14,12 +14,12 @@ else
   set shortmess=aoO
 endif
 badd +28 src/piece/king.cpp
-badd +19 src/main.cpp
-badd +1 src/board/board.cpp
+badd +30 src/main.cpp
+badd +145 src/board/board.cpp
 badd +1 src/graphics/headers/IGuiComponent.h
-badd +9 ~/Code/c++/trinity_engine/src/input/headers/arrow_input.h
+badd +17 ~/Code/c++/trinity_engine/src/input/headers/arrow_input.h
 badd +1 src/input/keyboard_input.cpp
-badd +36 src/game/headers/menu.h
+badd +20 src/game/headers/menu.h
 badd +6 ~/Code/c++/trinity_engine/src/input/headers/Arrow_input_menu.h
 badd +39 src/game/headers/options.h
 badd +44 ~/Code/c++/trinity_engine/src/configuration/headers/input_configuration.h
@@ -28,11 +28,13 @@ badd +19 src/view/headers/menu_view.h
 badd +367 /usr/include/c++/12.2.1/bits/stl_map.h
 badd +21 src/input/keyboard_input_player.cpp
 badd +17 src/game/headers/move.hpp
-badd +14 src/game/game.cpp
-badd +19 ~/Code/c++/trinity_engine/src/input/headers/text_input_menu.h
+badd +1 src/game/game.cpp
+badd +10 ~/Code/c++/trinity_engine/src/input/headers/text_input_menu.h
 badd +8 ~/Code/c++/trinity_engine/src/input/text_base.cpp
 badd +10 ~/Code/c++/trinity_engine/src/input/headers/text_input.h
 badd +27 ~/Code/c++/trinity_engine/src/input/headers/input_type.h
+badd +38 src/game/headers/game.h
+badd +28 src/board/headers/board.h
 argglobal
 %argdel
 $argadd src/main.cpp
@@ -59,40 +61,41 @@ set winminwidth=0
 set winwidth=1
 wincmd =
 argglobal
-balt ~/Code/c++/trinity_engine/src/configuration/headers/input_configuration.h
+balt src/board/board.cpp
+let s:l = 1 - ((0 * winheight(0) + 24) / 48)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 010|
+wincmd w
+argglobal
+if bufexists(fnamemodify("src/game/headers/menu.h", ":p")) | buffer src/game/headers/menu.h | else | edit src/game/headers/menu.h | endif
+if &buftype ==# 'terminal'
+  silent file src/game/headers/menu.h
+endif
+balt ~/Code/c++/trinity_engine/src/input/headers/text_input_menu.h
+let s:l = 20 - ((19 * winheight(0) + 24) / 48)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 20
+normal! 0
+wincmd w
+argglobal
+if bufexists(fnamemodify("src/main.cpp", ":p")) | buffer src/main.cpp | else | edit src/main.cpp | endif
+if &buftype ==# 'terminal'
+  silent file src/main.cpp
+endif
+balt src/board/board.cpp
 let s:l = 14 - ((13 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 14
-normal! 05|
-wincmd w
-argglobal
-if bufexists(fnamemodify("src/board/board.cpp", ":p")) | buffer src/board/board.cpp | else | edit src/board/board.cpp | endif
-if &buftype ==# 'terminal'
-  silent file src/board/board.cpp
-endif
-balt src/game/game.cpp
-let s:l = 1 - ((0 * winheight(0) + 24) / 48)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 1
 normal! 0
 wincmd w
-argglobal
-if bufexists(fnamemodify("src/board/board.cpp", ":p")) | buffer src/board/board.cpp | else | edit src/board/board.cpp | endif
-if &buftype ==# 'terminal'
-  silent file src/board/board.cpp
-endif
-balt src/game/game.cpp
-let s:l = 1 - ((0 * winheight(0) + 24) / 48)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 1
-normal! 0
-wincmd w
+2wincmd w
 wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
