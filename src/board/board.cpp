@@ -127,21 +127,6 @@ bool Board::can_be_block_by_another_piece(const Move& m) {
 }
 
 void Board::get_all_possible_pieces() {
-  // SquareIndices from;
-  // Move m;
-  // Piecetype pt;
-  // Color opposite_color = get_opponent_player_color();
-  // SquareIndices to = m_turn_info.color == BLACK ? m_black_king_position : m_white_king_position;
-  // std::unordered_set<Piecetype> pieces;
-  //
-  // for (const size_t& i: m_board_bitboard.get_all_locations_at_side(opposite_color)) {
-  //   pt = m_squares[i].get_piece();
-  //   from = static_cast<SquareIndices>(i);
-  //   m = Move_Utils::make_move(from, to, pt);
-  //
-  //   if (pt && is_legal_move(m))
-  //     pieces.insert(pt);
-  // }
 }
 
 U64 Board::get_all_king_possible_positions() {
@@ -155,7 +140,6 @@ bool Board::is_king_piece_attacked() {
                                                 : m_white_king_position;
   return can_opponent_attack_square(sq);
 }
-
 
 void Board::update_half_moves(const Move& m) {
   Piecetype piece = Move_Utils::get_piece(m);

@@ -15,9 +15,9 @@ TEST_F(Aboard, IsEmptyWhenCreated) {
   ASSERT_THAT(board.is_checkmate(), Eq(false));
 }
 
-// TEST_F(Aboard, CheckLegalMoves) {
-//   EXPECT_THAT(true, Eq(false));
-// }
+TEST_F(Aboard, CheckLegalMoves) {
+  EXPECT_THAT(true, Eq(false));
+}
 
 // TEST_F(Aboard, CheckLegaRooklMoves) {
 //   ASSERT_THAT(false, Eq(false));

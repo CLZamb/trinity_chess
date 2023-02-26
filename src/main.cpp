@@ -15,9 +15,7 @@ void play(T& input) {
 // ArrowInput m_input;
 
 int main(/*int argc, char *argv[]*/) {
-  TextInput m_input;
-  Menu<string>start_menu(m_input);
-
+  ArrowInput m_input;
   string play_str = "Play", quit = "Quit";
   string title = "Welcome tor trinity Chess";
   const Options<string> opts = {
@@ -25,10 +23,12 @@ int main(/*int argc, char *argv[]*/) {
     { 2, "Quit", quit}
   };
 
+  Menu<string>start_menu(m_input);
+
   start_menu.set_title(title);
   start_menu.add_options(opts);
-
   start_menu.print();
+
   if (start_menu.select_option() == play_str)
     play(m_input);
 
