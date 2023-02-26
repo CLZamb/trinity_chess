@@ -11,27 +11,22 @@ void play(T& input) {
   game.play();
 }
 
-int main(/*int argc, char *argv[]*/) {
-  // int *i;
-  // std::cout << *i << std::endl;
-  // TextInput m_input;
-  KeyboardInput m_input;
-  string play_str = "Play", quit = "Quit";
-  // Menu<string> m_inputt (m_input);
-  // m_inputt.set_title("Welcome to trintity Chess");
-  // m_inputt.add_options ({
-  //     { 1, "Play", play_str},
-  //     { 2, "Quit", quit}
-  // });
+// TextInput m_input;
+// ArrowInput m_input;
 
-  // m_inputt.print();
-  Menu<string> start_menu(
-    m_input,
-    "Welcome to trintity Chess", {
-      { 1, "Play", play_str},
-      { 2, "Quit", quit}
-    }
-  );
+int main(/*int argc, char *argv[]*/) {
+  TextInput m_input;
+  Menu<string>start_menu(m_input);
+
+  string play_str = "Play", quit = "Quit";
+  string title = "Welcome tor trinity Chess";
+  const Options<string> opts = {
+    { 1, "Play", play_str},
+    { 2, "Quit", quit}
+  };
+
+  start_menu.set_title(title);
+  start_menu.add_options(opts);
 
   start_menu.print();
   if (start_menu.select_option() == play_str)

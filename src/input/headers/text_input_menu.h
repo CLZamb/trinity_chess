@@ -10,8 +10,7 @@ template<typename T>
 class TextInputMenu : public MenuInput<T> {
  public:
   TextInputMenu (TextInputBase &k, MenuView& v, Options<T> &o) :
-    m_tib(k), m_view(v), m_opts(o) {
-  }
+    m_text_input(k), m_view(v), m_opts(o) {}
   virtual ~TextInputMenu () {}
 
   const Option<T>& select_menu_option() {
@@ -19,20 +18,20 @@ class TextInputMenu : public MenuInput<T> {
     bool is_valid = false;
 
     while (!is_valid) {
-      key = m_tib.get_integer_input();
+      key = m_text_input.get_integer_input();
       is_valid = m_opts.check_valid_option(key);
 
       if (!is_valid) {
         m_view.print();
-        std::cout << m_tib.invalid_option_msg;
+        std::cout << m_text_input.invalid_option_msg;
       }
     }
 
-    return m_opts[key];
+    return m_opts.at(key);
   }
 
  private:
-  TextInputBase &m_tib;
+  TextInputBase &m_text_input;
   MenuView& m_view;
   Options<T>& m_opts;
 };

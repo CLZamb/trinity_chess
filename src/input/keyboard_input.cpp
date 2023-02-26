@@ -1,7 +1,7 @@
-#include "headers/keyboard_input.h"
+#include "headers/arrow_input.h"
 
-KeyboardInput::KeyboardInput() : m_i_p(*this) {
+ArrowInput::ArrowInput() : m_i_p(*this) {
   set_terminal_new_attributes();
 }
 
-KeyboardInput::~KeyboardInput() { restore_terminal_configuration(); }
+ArrowInput::~ArrowInput() { restore_terminal_configuration(); }
