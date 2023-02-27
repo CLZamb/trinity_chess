@@ -1,9 +1,6 @@
 #include "headers/board.h"
 #include "board/headers/utils.h"
 #include "game/headers/move.hpp"
-#include <stdexcept>
-#include <unordered_set>
-#include <set>
 
 Board::Board() {}
 
@@ -22,7 +19,8 @@ void Board::check_checkmate() {
     position = static_cast<unsigned int>(pop_1st_bit(&all_king_possible_positions));
     if (can_opponent_attack_square(position))count_king_moves_blocked++;
   }
-  if (count_possible_king_moves == count_king_moves_blocked)  checkmate = true;
+
+  checkmate = count_possible_king_moves == count_king_moves_blocked;
 }
 
 void Board::update_turn(const PlayerInfo &turn) { m_turn_info = turn; }
@@ -117,7 +115,6 @@ bool Board::is_in_check(const Move& m) {
   return false;
 }
 
-// can be blocked by another picece
 bool Board::can_be_block_by_another_piece(const Move& m) {
   Piecetype piece = Move_Utils::get_piece(m);
   if (is_king_piece(piece)) return false;

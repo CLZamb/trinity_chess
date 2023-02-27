@@ -1,8 +1,6 @@
 Version 2 * current
 1. pawn promotion
   1.1 fix the pawn promotion to select a piece
-2. king safety
-  make other pieces block the path to king
 
 Version 3
 1. use FTXUI
