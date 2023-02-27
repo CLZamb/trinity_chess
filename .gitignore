@@ -18,6 +18,7 @@ node_modules/
 .vscode/
 .git/
 .cmake
+chess
 neovim.json
 package.json
 yarn.lock
