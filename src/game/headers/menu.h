@@ -64,8 +64,8 @@ private:
     return options_formatted;
   }
 
-  Options<T> m_opts{};
-  MenuView m_view{};
+  Options<T> m_opts;
+  MenuView m_view;
   std::unique_ptr<MenuInput<T>> m_m_input;
 };
 
