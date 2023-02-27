@@ -1,42 +1,40 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "graphics/headers/view.h"
+#include "view/headers/menu_view.h"
 #include "options.h"
 #include "player/headers/player.h"
+#include <unordered_map>
 
-template<typename T>
-class Menu {
+template <typename T> class Menu {
 public:
   Menu() {}
-  Menu(Options<T> opts) : opts(opts) , view(MessageView(&msg)) {}
+
+  Menu(Options<T> opts) : opts(opts), view(format_options()) {}
+
   virtual ~Menu() {}
-  void print_menu()  {
-    view.print();
-  }
-  
-  T select_option() {
-    return opts.select_option();
-  }
-  
-  void print_play_or_quit() {
-    print(msg.get_play_or_quit());
-  }
 
-  void print_players_options() {
-    print(msg.get_players_options());
-  }
+  void set_title(string s) { view.set_title(s); }
 
+  T select_option() { return opts.select_option(); }
+
+  void print() { view.print(); }
 
 private:
-  void print(MessageState* state) {
-    msg.set_message(state);
-    view.print();
+
+  list<string>  format_options() {
+    list<string> options_formatted;
+    for (auto i : opts.get_options()) {
+      options_formatted.push_front(
+          std::to_string(i.second.num) + ". " + i.second.desc
+      );
+    }
+
+    return options_formatted;
   }
 
   Options<T> opts;
-  Messages msg;
-  MessageView view;
+  MenuView<T> view;
 };
 
-#endif /* MENU_H */ 
+#endif /* MENU_H */

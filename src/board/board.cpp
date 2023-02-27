@@ -1,20 +1,23 @@
 #include "headers/board.h"
 
-
 Board::Board(string fen /*"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"*/ ) {
-  create_board_squares();
   parser_fen(fen);
+  m_view.parser_fen(fen);
 }
 
 Board::~Board() {}
 
 bool Board::is_checkmate() { return checkmate; }
 
-bool Board::is_legal_move(std::shared_ptr<Player> turn, Move& m) {
-  if (!exist_piece_at_square(m.get_from())) return false;
-  if (!check_piece_belongs_to_current_player(turn, m.get_from())) return false; 
+void Board::update_turn(const PlayerInfo &turn) {
+  m_turn_info = turn;
+}
 
-  if (is_attack_move(turn->get_opponent(), m.get_to())) {
+bool Board::is_legal_move(Move& m) {
+  if (!exist_piece_at_square(m.get_from())) return false;
+  if (!check_piece_belongs_to_current_player(m.get_from())) return false; 
+
+  if (is_attack_move(m.get_to())) {
     return is_legal_attack_move(m);
   }
 
@@ -26,8 +29,8 @@ bool Board::exist_piece_at_square(const int& pos) {
   return false;
 }
 
-bool Board::is_attack_move(std::shared_ptr<Player> opponent, const int& pos) {
-  if (check_captured_belongs_to_opponent_player(opponent, pos)) 
+bool Board::is_attack_move(const int& pos) {
+  if (check_captured_belongs_to_opponent_player(pos)) 
     return true;
 
   return false;
@@ -45,17 +48,17 @@ bool Board::is_legal_attack_move(Move& m){
   return piece->is_legal_attack_move(m, board_state);
 }
 
-bool Board::check_piece_belongs_to_current_player(std::shared_ptr<Player> turn, const int& pos) {
+bool Board::check_piece_belongs_to_current_player(const int& pos) {
   Piece* piece = get_piece_at_square(pos);
   if (!piece) return false;
-  return piece->is_black() == turn->has_black_pieces();
+  return piece->is_black() == (m_turn_info.get_color() == BLACK);
 }
 
-bool Board::check_captured_belongs_to_opponent_player(std::shared_ptr<Player> opponent, const int& pos) {
+bool Board::check_captured_belongs_to_opponent_player(const int& pos) {
   Piece* captured = get_piece_at_square(pos);
   if (!captured) return false;
 
-  return captured->is_black() == opponent->has_black_pieces();
+  return captured->is_black() == (m_turn_info.get_color() != BLACK);
 }
 
 void Board::make_move(Move mv) {
@@ -65,6 +68,18 @@ void Board::make_move(Move mv) {
 
   board_state.move(piece->is_black(),from , to);
   move_piece_to_square(piece, from, to);
+  save_move(mv);
+  update_board_view();
+}
+
+void Board::update_board_view() {
+  m_view.parser_fen(get_fen());
+}
+
+void Board::save_move(const Move &m) {
+  m_info.save_move(utils::square_int_to_str(m.get_from()) +
+                   utils::square_int_to_str(m.get_to()));
+  m_info.save_capture(utils::get_piece_str_name_from_piecetype(m.get_captured_piece()));
 }
 
 void
@@ -80,47 +95,12 @@ Piece* Board::get_piece_at_square(int pos) {
   return get_square_at_pos(pos).get_piece();
 }
 
-void Board::create_board_squares() {
-  char squareColor = 'w';
-  bool is_black_squared = true;
-
-  int position = 0;
-  const int col_size = 7;
-  const int row_size = 8;
-  /* 
-   * Rows needs to be ordered upside down
-   * because the program prints from top to bottom
-   * so that 8 should be printed frist
-  */
-
-  for (int row = col_size; row >= 0; --row) {
-    for (int col = 0; col < row_size; ++col) {
-      /*
-       * there are 8*8 (from 0 to 63) squares
-       * to get the position 
-       * we need to multyply rwo by 8 and add the col
-       * i.e the bottom right position would be  
-       * 8 * 0 + 7 = 7
-       * */
-      position = row * 8 + col;
-      if (squareColor == 'b') {
-        squareColor = 'w';
-        m_squares[position].set_color(!is_black_squared);
-      } else {
-        squareColor = 'b';
-        m_squares[position].set_color(is_black_squared);
-      }
-    }
-    squareColor = squareColor == 'b' ? 'w' : 'b';
-  }
-}
-
 void Board::parser_fen(string fen) {
   clear_board();
   SquareIndices square = A1;
   int rank = 7;
   int file = 0;
-  int piece;
+  Piecetype piece;
 
   for (const char& c : fen) {
     piece = utils::get_square_index_from_char_key(c);
@@ -153,7 +133,7 @@ void Board::clear_board() {
   }
 }
 
-void Board::add_to_board(int type, SquareIndices position) {
+void Board::add_to_board(Piecetype type, SquareIndices position) {
   get_square_at_pos(position).set_piece(m_pieces.get_piece(type));
   board_state.set_bit_at_player_pieces(utils::check::is_black_piece(type), position);
 }
@@ -166,4 +146,15 @@ Square& Board::get_square_at_pos(int pos) {
   return m_squares[pos]; 
 }
 
-Displayable* Board::get_drawing() { return &m_bdrawing; }
+string Board::get_fen() {
+  string fen;
+  return fen;
+}
+
+BoardView& Board::get_view() {
+  return m_view;
+}
+
+BoardInfo& Board::get_info() {
+  return m_info;
+}

@@ -11,15 +11,16 @@ using std::array;
 
 class Savable {
  public:
-  virtual void save_move(const string& moves) = 0;
-  virtual void save_capture(const string& moves) = 0;
-  virtual void save_game_info(const string& info) = 0;
+  virtual string get_moves() = 0;
+  virtual string get_captures() = 0;
 
  protected:
-  static const int players_size = GameTurn::kSize;
-  array<string, players_size> player_moves;
-  array<string, players_size> player_captures;
-  string game_info;
+  virtual void save_move(const string& moves) = 0;
+  virtual void save_capture(const string& captures) = 0;
+
+  static const size_t players_size = GameTurn::kSize;
+  array<string, players_size> m_moves;
+  array<string, players_size> m_captures;
 };
 
 #endif /* SAVABLE_H */

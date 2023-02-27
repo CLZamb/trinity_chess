@@ -20,7 +20,7 @@ enum Color {
 
 namespace utils {
 namespace check {
-  inline bool is_black_piece(unsigned int type) {
+  inline bool is_black_piece(Piecetype type) {
     return type >= bP && type <= bK;
   }
 
@@ -52,15 +52,15 @@ inline string get_color_str_from_color(Color c) {
   return (c == WHITE) ? "white" : "black";
 }
 
-inline int get_square_index_from_char_key(const char c) {
-  static const map<char, int> piece_map = {
+inline Piecetype get_square_index_from_char_key(const char c) {
+  static const map<char, Piecetype> piece_map = {
     {'P', wP}, {'R', wR}, {'N', wN}, {'B', wB}, {'Q', wQ}, {'K', wK},
     {'p', bP}, {'r', bR}, {'n', bN}, {'b', bB}, {'q', bQ}, {'k', bK},
   };
 
   auto search = piece_map.find(c);
   // check if the key exists
-  if (search == piece_map.end()) return 0;
+  if (search == piece_map.end()) return EMPTY;
 
   return search->second;
 }
@@ -102,6 +102,7 @@ namespace constant {
   const int ksquares = 64;
   const int kMaxDepth = 64;
   const int kInfinite = std::numeric_limits<int>::max();
+  const size_t ktotal_number_pieces = 13;
 }  // namespace constant
 }  // namespace utils
 

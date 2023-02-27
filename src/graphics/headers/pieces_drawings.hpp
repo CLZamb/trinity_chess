@@ -7,10 +7,12 @@
 #include <map>
 #include <iostream>
 #include <vector>
+#include <array>
 #include "../../graphics//headers/game_drawings.hpp"
 #include "../../board/headers/utils.h"
 
 using std::map;
+using std::array;
 /*
    ╔══════════╦════════════════════════════════╦═════════════════════════════════════════════════════════════════════════╗
    ║  Code    ║             Effect             ║                                   Note                                  ║
@@ -219,6 +221,39 @@ class StandardDrawingBuilder : public DrawingBuilder {
 
  private:
   PieceDrawing* piece_drawing;
+};
+
+class PiecesDrawings {
+  public:
+    PiecesDrawings() {
+      const Piecetype NodePositionVector[] = {
+        bP, bR, bN, bB, bQ, bK,
+        wP, wR, wN, wB, wQ, wK
+      };
+
+      DrawingMod::Code piece_drawing_mod;  
+      PieceDrawing *drawing; 
+      for (const Piecetype &pct : NodePositionVector) {
+        m_drawing_builder.build_drawing(pct);
+        drawing = m_drawing_builder.get_drawing();
+        piece_drawing_mod = 
+          utils::check::is_black_piece(pct)
+          ? DrawingMod::BG_BLACK
+          : DrawingMod::FG_WHITE;
+        drawing->set_drawing_mod(piece_drawing_mod);
+        m_pieces[pct] = drawing;
+      }
+    }
+
+    virtual ~PiecesDrawings() {}
+
+    PieceDrawing* get_drawing(const Piecetype& m_type) {
+      return m_pieces[m_type];
+    }
+
+  private:
+    StandardDrawingBuilder m_drawing_builder;
+    std::array<PieceDrawing*, utils::constant::ktotal_number_pieces> m_pieces;
 };
 
 //

@@ -2,8 +2,8 @@
 #define UICONTROLLER_H
 
 #include <iostream>
-#include "view.h"
-#include "window.h"
+#include "view/headers/view.h"
+#include "graphics/headers/window.h"
 #include <unordered_map>
 
 /*! \class uicontroller

@@ -1,5 +1,4 @@
 #include "headers/game_turn_observable.h"
-#include <iostream>
 
 GameTurnObservable::GameTurnObservable() {
   _observers = new list<GameTurnObserver*>();
@@ -17,3 +16,5 @@ void GameTurnObservable::attach(GameTurnObserver* o) {
 void GameTurnObservable::detach(GameTurnObserver* o) {
   _observers->remove(o);
 }
+
+

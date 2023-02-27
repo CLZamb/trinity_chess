@@ -12,13 +12,19 @@ using std::endl;
 using std::unordered_map;
 
 template <typename T>
+struct Option {
+  int num;
+  string desc;
+  T opt;
+};
+
+template <typename T>
 class Options {
  public:
   Options() {}
-  Options(std::initializer_list<T> lst) {
-    int index = start_index;
+  Options(std::initializer_list<Option<T>> lst) {
     for (const auto l : lst) {
-      options.emplace(index++, l);
+      options.emplace(l.num, l);
     }
   }
 
@@ -49,7 +55,11 @@ class Options {
 
     cin.clear();
     cin.ignore();
-    return options.find(input)->second;
+    return options.find(input)->second.opt;
+  }
+
+  unordered_map<int, Option<T>> get_options() {
+    return options;
   }
 
  private:
@@ -59,7 +69,7 @@ class Options {
     return options.find(i) != options.end();
   }
 
-  unordered_map<int, T> options;
+  unordered_map<int, Option<T>> options;
 };
 
 #endif /* OPTIONS_H */

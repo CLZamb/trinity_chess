@@ -1,6 +1,5 @@
 #include "headers/uicontroller.h"
 
-
 UIController::UIController() {}
 UIController::~UIController() {}
 
