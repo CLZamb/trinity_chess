@@ -16,6 +16,11 @@ public:
     do_move(color, Move_Utils::get_from(m), Move_Utils::get_to(m));
   }
 
+  void undo_move(const Move& m) {
+    Color color = utils::check::get_color_piece(Move_Utils::get_piece(m));
+    do_move(color, Move_Utils::get_to(m), Move_Utils::get_from(m));
+  }
+
   void do_move(const Color c, const SquareIndices from, const SquareIndices to) {
     clear_bit_at_player_pieces(c, from);
     set_bit_at_player_pieces(c, to);

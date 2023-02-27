@@ -1,6 +1,7 @@
 #include "headers/board.h"
 #include "board/headers/utils.h"
 #include "game/headers/move.hpp"
+#include <stdexcept>
 #include <unordered_set>
 #include <set>
 
@@ -13,9 +14,9 @@ bool Board::is_checkmate() {
 
 void Board::check_checkmate() {
   U64 all_king_possible_positions{get_all_king_possible_positions()};
-  int count_possible_king_moves{0};
-  int count_king_moves_blocked{0};
+  int count_possible_king_moves{0}, count_king_moves_blocked{0};
   unsigned int position;
+
   while (all_king_possible_positions) {
     count_possible_king_moves++;
     position = static_cast<unsigned int>(pop_1st_bit(&all_king_possible_positions));
@@ -121,12 +122,13 @@ bool Board::can_be_block_by_another_piece(const Move& m) {
   Piecetype piece = Move_Utils::get_piece(m);
   if (is_king_piece(piece)) return false;
 
-  // U64 all_king_possible_positions{get_all_king_possible_positions()};
+  bool is_king_in_check = false;
 
-  return true;
-}
+  m_board_bitboard.move(m);
+  is_king_in_check = is_in_check(m);
+  m_board_bitboard.undo_move(m);
 
-void Board::get_all_possible_pieces() {
+  return !is_king_in_check;
 }
 
 U64 Board::get_all_king_possible_positions() {

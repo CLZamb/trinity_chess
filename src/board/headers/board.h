@@ -57,7 +57,6 @@ private:
   Color get_opponent_player_color();
   Color get_player_color();
   void check_checkmate();
-  void get_all_possible_pieces();
   U64 get_all_possible_positions();
 
   Squares m_squares;
