@@ -9,7 +9,7 @@ public:
   PlayersConfig& get_players_config();
 
 protected:
-  PlayersConfig m_p_config;
+  PlayersConfig m_players_config;
   // GameConfig m_g_config;
   // BoardConfig b_config;
 };

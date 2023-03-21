@@ -26,7 +26,7 @@ private:
     );
 
     player_menu.print();
-    m_p_config = player_menu.select_option();
+    m_players_config = player_menu.select_option();
    }
 
   void get_players_color() {
@@ -38,10 +38,11 @@ private:
     );
 
     player_menu.print();
-    Color c = player_menu.select_option();
+    Color player = player_menu.select_option();
+    Color opponent = player == BLACK ? WHITE : BLACK;
 
-    m_p_config.set_color(GameTurn::player_1, c);
-    m_p_config.set_color(GameTurn::player_2, c == BLACK ? WHITE :  BLACK);
+    m_players_config.set_color(GameTurn::player_1, player);
+    m_players_config.set_color(GameTurn::player_2, opponent);
   }
 
   T& m_menu_input;

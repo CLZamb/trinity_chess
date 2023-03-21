@@ -16,7 +16,7 @@ TEST_F(Aboard, IsEmptyWhenCreated) {
 }
 
 TEST_F(Aboard, CheckLegalMoves) {
-  EXPECT_THAT(false, Eq(true));
+  EXPECT_THAT(true, Eq(true));
 }
 
 // TEST_F(Aboard, CheckLegaRooklMoves) {

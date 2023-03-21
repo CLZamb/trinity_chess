@@ -26,8 +26,8 @@ int main(/*int argc, char *argv[]*/) {
   Menu<string>start_menu(m_input);
   start_menu.set_title(title);
   start_menu.add_options(opts);
-  start_menu.print();
 
+  start_menu.print();
   if (start_menu.select_option() == play_str)
     play(m_input);
 

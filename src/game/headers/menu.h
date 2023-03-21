@@ -40,6 +40,13 @@ public:
 
   void set_title(const string &s) { m_view.set_title(s); }
 
+  template <typename U> 
+  void add_options(const Options<U> &m) {
+    m_opts = m;
+    m_view.set_options(format_options());
+    m_view.selected_option(m_opts.begin()->first);
+  }
+
   void add_options(const Options<T> &m) { 
     m_opts = m;
     m_view.set_options(format_options());
