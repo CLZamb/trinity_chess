@@ -16,11 +16,11 @@ void play(T& input) {
 int main(/*int argc, char *argv[]*/) {
   ArrowInput m_input;
   string play_str = "play", quit = "quit", config = "configuration";
-  string title = "Welcome tor trinity Chess";
+  string title = "Welcome to trinity Chess";
   const Options<string> opts = {
     { 1, "Play", play_str},
     { 2, "Quit", quit},
-    { 5, "Configuration", quit}
+    { 3, "Configuration", quit}
   };
 
   Menu<string>start_menu(m_input);

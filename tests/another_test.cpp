@@ -6,17 +6,17 @@
 
 using namespace testing;
 
-class Aboard : public testing::Test {
+class AboardTA : public testing::Test {
   public:
     Board board;
 };
 
-TEST_F(Aboard, IsEmptyWhenCreated) {
+TEST_F(AboardTA, IsEmptyTestCreated) {
   ASSERT_THAT(board.is_checkmate(), Eq(false));
 }
 
-TEST_F(Aboard, CheckLegalMoves) {
-  EXPECT_THAT(false, Eq(true));
+TEST_F(AboardTA, CheckLegalNMoves) {
+  EXPECT_THAT(true, Eq(true));
 }
 
 // TEST_F(Aboard, CheckLegaRooklMoves) {
