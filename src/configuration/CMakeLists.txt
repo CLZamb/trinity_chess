@@ -5,4 +5,4 @@ add_library(
   players_configuration.cpp
 )
 
-message("configuration library compiled")
+message("configuration_lib library compiled")

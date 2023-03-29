@@ -1,6 +1,4 @@
-#include "headers/board.h"
-#include "board/headers/utils.h"
-#include "game/headers/move.hpp"
+#include "board.h"
 
 Board::Board() {}
 

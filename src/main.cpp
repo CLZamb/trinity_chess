@@ -1,13 +1,11 @@
-#include "game/headers/game.h"
-#include "game/headers/menu.h"
-#include "configuration/headers/input_configuration.h"
+#include "game/game.h"
+#include <configuration/input_configuration.h>
 #include <unistd.h>
+#include "ui/menu/menu.hpp"
 
 template<typename T>
-void play(T& input) {
-  InputConfiguration i_config(input);
-  i_config.get_configuration();
-  Game game(i_config, input.get_player_input());
+void play(InputConfiguration<T> &i_config, PlayerInput &player_input) {
+  Game game(i_config, player_input);
   game.play();
 }
 
@@ -15,21 +13,32 @@ void play(T& input) {
 // ArrowInput m_input;
 int main(/*int argc, char *argv[]*/) {
   ArrowInput m_input;
-  string play_str = "play", quit = "quit", config = "configuration";
+  Menu start_menu(m_input);
+  InputConfiguration i_config(m_input);
+
   string title = "Welcome to trinity Chess";
-  const Options<string> opts = {
-    { 1, "Play", play_str},
-    { 2, "Quit", quit},
-    { 3, "Configuration", quit}
+  const int play_key_num = 1, quit_key_num = 3, config_key_num = 2;
+  const Options opts = {
+    { play_key_num, "Play"},
+    { config_key_num, "Settings"},
+    { quit_key_num, "Quit"}
   };
 
-  Menu<string>start_menu(m_input);
   start_menu.set_title(title);
   start_menu.add_options(opts);
-
   start_menu.print();
-  if (start_menu.select_option() == play_str)
-    play(m_input);
+
+  switch(start_menu.select_option_by_number_key()) {
+    case config_key_num:
+      i_config.get_configuration();
+      [[fallthrough]];
+    case play_key_num:
+      play(i_config, m_input.get_player_input());
+      break;
+    case quit_key_num:
+      std::cout << GameDrawing::game_over << std::endl;
+    default: break;
+  }
 
   return EXIT_SUCCESS;
 }

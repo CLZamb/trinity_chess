@@ -1,4 +1,4 @@
-#include "headers/uci.h"
+#include "uci.h"
 #include <fstream>
 #include <filesystem>
 #include <iostream>

@@ -1,5 +1,4 @@
-#include "board/headers/squares.h"
-#include "board/headers/defs.h"
+#include "squares.h"
 
 Squares::Squares() {}
 Squares::~Squares() {}

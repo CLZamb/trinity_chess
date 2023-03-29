@@ -1,4 +1,4 @@
-#include "headers/configuration.h"
+#include "configuration/configuration.h"
 
 Configuration::Configuration() : m_players_config(GameTurn::Human, GameTurn::Human) {}
 

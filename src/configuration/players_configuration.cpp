@@ -1,4 +1,4 @@
-#include "headers/players_configuration.h"
+#include "players_configuration.h"
 
 PlayersConfig::PlayersConfig() {}
 PlayersConfig::PlayersConfig(GameTurn::Type t1, GameTurn::Type t2) {

@@ -1,11 +1,11 @@
 #include <iostream>
-#include "headers/uci.h"
-#include "headers/search.h"
+#include "uci.h"
+#include "search.h"
 
-using std::cout;
-using std::cin;
-using std::endl;
-using std::cerr;
+// using std::cout;
+// using std::cin;
+// using std::endl;
+// using std::cerr;
 /*
 argc	-	Non-negative value representing the number of arguments
         passed to the program from the environment in which the
@@ -30,6 +30,9 @@ eg. argv[0] = ./search
  */
 
 int main(int argc, char *argv[]) {
+
+  std::cout << argc << std::endl;
+
   if (argv[1] == nullptr) {
     argv[1] = const_cast<char*>("");
     argc++;

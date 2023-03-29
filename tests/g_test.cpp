@@ -1,8 +1,6 @@
 #include <gmock/gmock.h>
-#include "../src/board/headers/board.h"
+#include "../include/board/board.h"
 #include <gtest/gtest.h>
-// #include "../src/game/headers/string_utils.h"
-// #include "gtest/gtest.h"
 
 using namespace testing;
 

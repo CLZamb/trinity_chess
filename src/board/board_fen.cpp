@@ -1,5 +1,4 @@
-#include "headers/board_fen.h"
-#include "game/headers/string_utils.h"
+#include "board_fen.h"
 
 const unordered_map<char, CastlePermission> BoardFen::m_castle_permision { 
   {'Q', WQCA}, {'K', WKCA}, {'q', BQCA}, {'k', BKCA}, {'-', NO_CASTLING},
@@ -13,7 +12,7 @@ BoardFen::BoardFen(BoardFenInfo &b, const string fen) {
 BoardFen::~BoardFen() {}
 
 void BoardFen::update_fen(BoardFenInfo& board) {
-  m_board_fen.clear();
+  string fen{""};
   Piecetype piece{EMPTY};
   int space{0};
 
@@ -21,37 +20,36 @@ void BoardFen::update_fen(BoardFenInfo& board) {
     for (int file = 0; file <= 7; file++) {
       piece = board.get_piece_at_square(static_cast<unsigned int>(rank * 8 + file));
       if (piece) {
-        add_empty_space(m_board_fen, space);
-        m_board_fen += utils::piecetype_to_char(piece);
+        add_empty_space(fen, space);
+        fen += utils::piecetype_to_char(piece);
       } else {
         space++;
       }
     }
 
     if (rank > 0) {
-      add_empty_space(m_board_fen, space);
-      m_board_fen += "/";
+      add_empty_space(fen, space);
+      fen += "/";
     }
   }
 
-  add_empty_space(m_board_fen, space);
+  add_empty_space(fen, space);
 
-  m_board_fen += ' ';
-  m_board_fen += board.get_side_turn();
-  m_board_fen += ' ';
-  m_board_fen += board.get_castling_rights_string();
-  m_board_fen += ' ';
-  m_board_fen += board.get_en_passant_square_string();
-  m_board_fen += ' ';
-  m_board_fen += board.get_half_moves();
-  m_board_fen += ' ';
-  m_board_fen += board.get_full_moves();
+  fen += ' ';
+  fen += board.get_side_turn();
+  fen += ' ';
+  fen += board.get_castling_rights_string();
+  fen += ' ';
+  fen += board.get_en_passant_square_string();
+  fen += ' ';
+  fen += board.get_half_moves();
+  fen += ' ';
+  fen += board.get_full_moves();
+  set_fen(fen);
 }
 
 // rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 // r3k2r/8/5P2/4p3/8/8/8/R3K2R w KQkq e6 0 1
-
-const string &BoardFen::get_fen() { return m_board_fen; }
 
 void BoardFen::add_empty_space(string& f, int &space) {
   if (space) {

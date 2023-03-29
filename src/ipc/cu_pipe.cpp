@@ -1,4 +1,4 @@
-#include"headers/cu_pipe.h"
+#include"input/cu_pipe.h"
 
 CuPipe::CuPipe() {
   if (pipe(m_handles.data()) < 0) {

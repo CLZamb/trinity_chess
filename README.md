@@ -51,7 +51,7 @@ cmake --build build -j 18
 ## License
 MIT License
 
-Copyright (c) 2023 Cristian L Zambrano
+Copyright (c) 2023 CLZamb 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
