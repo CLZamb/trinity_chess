@@ -4,16 +4,20 @@ Project_name
 |
 |---- include
 |       |
-|       |---- Project_name
-|                 |
-|                 |---- public_header(s).h
+|       |---- public_header(s).h
 |
 ---- src
-|     |
-|     |---- private_header(s).h
-|     |
-|     |---- code(s).cpp
-|
+|       |
+|       |----CLI
+|       |----|----| code(s).cpp
+|       |    |
+|       |    |----| private_header(s).h
+|       |    |
+|       |    |
+|       |----Engine
+|       |----|----| code(s).cpp
+|       |    |
+|       |    |----| private_header(s).h
 |
 |---- libs
 |       |

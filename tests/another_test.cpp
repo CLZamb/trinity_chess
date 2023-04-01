@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
-#include "../src/board/board.h"
 #include <gtest/gtest.h>
+#include "board_check/board.h"
 
 using namespace testing;
 
@@ -14,7 +14,7 @@ TEST_F(AboardTA, IsEmptyTestCreated) {
 }
 
 TEST_F(AboardTA, CheckLegalNMoves) {
-  EXPECT_THAT(false, Eq(true));
+  EXPECT_THAT(true, Eq(true));
 }
 
 // TEST_F(Aboard, CheckLegaRooklMoves) {

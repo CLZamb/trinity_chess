@@ -31,7 +31,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 ######################
 # public headers     # 
 ######################
-include_directories(include)
+# include_directories(include)
+# include_directories(src)
 ######################
 # source files       # 
 ######################

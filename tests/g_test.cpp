@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
-#include "../include/board/board.h"
 #include <gtest/gtest.h>
+#include "board_check/board.h"
 
 using namespace testing;
 
