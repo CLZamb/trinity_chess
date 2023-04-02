@@ -19,7 +19,7 @@ public:
 private:
   static const int players_size = GameTurn::kSize;
   array<PlayerInfo, players_size> players_info;
-  GameTurn::Players m_turn;
+  GameTurn::Players m_turn {GameTurn::player_1};
 };
 
 #endif /* PLAYERS_TURN_CONTROLLER_H */

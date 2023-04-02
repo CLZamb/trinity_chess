@@ -2,7 +2,7 @@
 #define EN_PASSANT_H
 
 #include "special_move.h"
-#include "pieces/pawn.h"
+#include "check/pieces/pawn.h"
 
 class EnPassant : public SpecialMove {
 public:

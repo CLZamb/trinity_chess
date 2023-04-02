@@ -23,4 +23,3 @@ class BoardModel {
 };
 
 #endif /* BOARD_VIEW_H */
-

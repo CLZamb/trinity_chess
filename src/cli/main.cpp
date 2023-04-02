@@ -38,7 +38,7 @@ int main(/*int argc, char *argv[]*/) {
       play(i_config, m_input.get_player_input());
       break;
     case quit_key_num:
-      std::cout << GameDrawing::game_over << std::endl;
+      GameMessages::print_game_over();
     default: break;
   }
 

@@ -6,8 +6,10 @@
 #include "board_controller.h"
 #include "players/players_turn_controller.h"
 #include "players/players.h"
+#include "ui_messages/ui_game_messages.hpp"
 #include "board.h"
 #include "board_fen.h"
+#include "board_check.h"
 
 using std::shared_ptr;
 
@@ -23,10 +25,8 @@ class Game {
   void add_info_pane_to_board();
   void make_move(const Move& m);
   void update_board_view(const Move&);
+  bool is_valid_string_move(const string& str_move);
   bool is_valid_move(const string& str_move, Move& mv);
-  string get_winner_drawing();
-
-  const string start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
   // const string start_fen = "4k3/8/8/4pP2/8/8/8/4K2R w - e6 0 1";
   // const string start_fen = "4k3/8/8/4pP2/8/8/8/4K2R w - e6 0 1";
@@ -34,12 +34,15 @@ class Game {
   // const string start_fen = "k1R5/8/2Q5/8/1q6/2r5/8/K7 b - - 0 1";
   // const string start_fen = "3kq2r/8/8/8/8/8/8/3K1Q2 w - - 0 1";
   // const string start_fen = "2Q5/k7/8/2R5/7r/7r/8/K7 b - - 0 1";
+  const string start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
   PlayersTurnController m_players_turn;
 
   Board m_board;
+  BoardCheck m_board_check;
   BoardFen m_board_fen;
   BoardView m_board_view;
+  BoardController m_board_controller;
   InfoPane m_info_pane;
   BoardModelInfo m_board_model_info;
   Players m_players;

@@ -74,10 +74,6 @@ void BoardFen::parse_fen(const string &c_str_fen, BoardFenInfo &board) {
       board.set_piece_at_square(square, piece);
 
       file++;
-      if (piece == bK || piece == wK) {
-        board.update_king_position(utils::check::get_color_piece(piece), square);
-      }
-
     } else if (is_number(*fen)) {
       file += (*fen - '0');
 
@@ -92,7 +88,6 @@ void BoardFen::parse_fen(const string &c_str_fen, BoardFenInfo &board) {
   }
 
   fen++;
-  // Color side = (*fen == 'w') ? WHITE : BLACK;
   fen += 2;
 
   while (*fen != ' ') {

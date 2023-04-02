@@ -61,8 +61,10 @@ inline Move to_move(const string &str_move) {
   return result;
 }
 
+namespace check {
 inline bool is_valid_move_format(const string &str_mv) {
   return RegexUtils::match(str_mv, format_full_move);
+}
 }
 
 inline string squareindex_to_str(SquareIndices sq) {

@@ -13,7 +13,10 @@ target_link_libraries(
   game_lib 
   PUBLIC
   ui_board_info_lib
+  ui_game_message_lib
   configuration_lib
+  board_check_lib
+  board_fen_lib
 )
 
 message("game library compiled")
