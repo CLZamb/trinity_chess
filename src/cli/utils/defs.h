@@ -1,7 +1,6 @@
 #ifndef DEFS_H
 #define DEFS_H
 
-#include <unistd.h>
 #include <stdint.h>
 
 typedef uint64_t U64;

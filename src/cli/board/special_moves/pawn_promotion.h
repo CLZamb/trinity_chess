@@ -1,7 +1,6 @@
 #ifndef PAWN_PROMITION_H
 #define PAWN_PROMITION_H
 
-#include "check/pieces/pawn.h"
 #include "special_move.h"
 
 class PawnPromition : public SpecialMove {

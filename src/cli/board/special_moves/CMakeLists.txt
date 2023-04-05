@@ -1,5 +1,5 @@
 add_library(
-  special_moves_lib
+  board_special_moves_lib
   castling.cpp
   en_passant.cpp
   pawn_promotion.cpp
@@ -7,15 +7,9 @@ add_library(
 )
 
 target_include_directories(
-  special_moves_lib 
-  PUBLIC 
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-)
-
-target_link_libraries(
-  special_moves_lib 
-  PUBLIC
-  board_lib
+  board_special_moves_lib 
+  PRIVATE
+  "${PROJECT_SOURCE_DIR}/src/cli"
 )
 
 message("special_moves_lib library compiled")

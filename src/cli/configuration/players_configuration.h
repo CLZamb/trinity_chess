@@ -1,10 +1,8 @@
 #ifndef PLAYER_CONFIG_H
 #define PLAYER_CONFIG_H
 
-#include "player_info.hpp"
+#include "game/players/player_info.hpp"
 #include <array>
-
-using std::array;
 
 class PlayersConfig {
 public:
@@ -20,7 +18,7 @@ public:
   PlayerInfo get_player_info(GameTurn::Players);
 
 private:
-  array<PlayerInfo, GameTurn::kSize> player {{
+  std::array<PlayerInfo, GameTurn::kSize> player {{
     {WHITE, GameTurn::Human, GameTurn::player_1},
     {BLACK, GameTurn::Human, GameTurn::player_2}
   }};

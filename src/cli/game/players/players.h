@@ -1,25 +1,27 @@
 #ifndef PLAYERS_H
 #define PLAYERS_H
 
-#include "players_configuration.h"
-#include "input_type.h"
+#include <memory>
+#include <unordered_map>
+#include "configuration/players_configuration.h"
+#include "game/turn/game_turn_observer.h"
 #include "human_player.h"
 
 using std::string;
 using std::array;
-using std::unique_ptr;
+using std::shared_ptr;
 
 class Players : public GameTurnObserver {
 public:
-  Players(PlayersConfig &, PlayerInput&);
+  Players(PlayersConfig &, BoardInput&);
   virtual ~Players();
   void update_turn(const PlayerInfo & p) override;
-  void create_players(PlayersConfig &c, PlayerInput& i);
-  void create_player(GameTurn::Players p, GameTurn::Type t, PlayerInput& i);
-  string get_next_string_move();
+  void create_players(PlayersConfig &c, BoardInput& i);
+  void create_player(GameTurn::Players p, GameTurn::Type t, BoardInput& i);
+  shared_ptr<Player> get_player(GameTurn::Players side);
 
 private:
-  array<unique_ptr<Player>, GameTurn::kSize> m_players;
+  array<shared_ptr<Player>, GameTurn::kSize> m_players;
   PlayerInfo m_turn;
 };
 

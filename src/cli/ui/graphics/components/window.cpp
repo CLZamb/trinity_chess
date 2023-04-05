@@ -1,10 +1,25 @@
 #include "window.h"
+#include <ostream>
 
 Window::Window() {}
 Window::~Window() {}
 
-void Window::add_pane(Displayable *pane, Pane_pos pos) {
-  if (m_panes.size() >= Max_panes_size)
+void Window::add_left_pane(IPane* pane) {
+  add_pane(pane, Window::Left_pane);
+}
+
+void Window::add_right_pane(IPane* pane) {
+  add_pane(pane, Window::Right_pane);
+}
+
+void Window::add_middle_pane(IPane* pane) {
+  add_pane(pane, Window::Middle_pane);
+}
+
+void Window::add_pane(IPane *pane, Pane_pos pos) {
+  if (pane == nullptr) return;
+
+  if (m_panes.size() >= max_panes_size)
     return;
 
   if (pane->size() > m_panes_size_max_height) {
@@ -20,10 +35,10 @@ ostream &operator<<(ostream &os, Window &w) {
 }
 
 void Window::get_formatted_window_drawing(ostream &os) {
-  if (m_panes.size() == 0) return; 
-
-  for (auto &iter : m_panes)  
-    iter.second->draw(); 
+  if (m_panes.size() == 0) {
+    os << "Window.h: Error: no pane(s) added to window";
+    return; 
+  }
 
   for (size_t row = 0; row < m_panes_size_max_height; row++) {
     for (auto &pane : m_panes) {

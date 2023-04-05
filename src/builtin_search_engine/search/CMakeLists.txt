@@ -4,4 +4,3 @@ add_library(
 )
 
 message("search library compiled")
-target_include_directories(search_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

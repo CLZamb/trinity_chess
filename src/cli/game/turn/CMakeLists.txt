@@ -5,12 +5,8 @@ add_library(
 
 target_include_directories(
   game_turn_lib 
-  PUBLIC 
-  "${CMAKE_CURRENT_SOURCE_DIR}"
+  PRIVATE 
+  "${PROJECT_SOURCE_DIR}/src/cli"
 )
 
-target_link_libraries(
-  game_turn_lib 
-  PUBLIC 
-  utils_lib 
-)
+message("game_turn_lib library compiled")

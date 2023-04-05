@@ -1,8 +1,9 @@
 #ifndef BOXSTRUCT_H
 #define BOXSTRUCT_H
 
+#include <cstdio>
+#include <cstdlib>
 #include <initializer_list>
-#include <iostream>
 
 #define snprintf_nowarn(...) (snprintf(__VA_ARGS__) < 0 ? abort() : (void)0)
 

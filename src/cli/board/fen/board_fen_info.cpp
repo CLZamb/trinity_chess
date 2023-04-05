@@ -1,23 +1,49 @@
 #include "board_fen_info.h"
+#include "utils/string_utils.h"
 
-string BoardFenInfo::get_half_moves() { return str_half_moves; }
-string BoardFenInfo::get_full_moves() { return str_full_moves; }
-char BoardFenInfo::get_side_turn() { return side_turn; }
-void BoardFenInfo::update_fen_current_side_turn_color(Color c) {
-  current_side_color = c;
-  side_turn = (current_side_color == BLACK) ? 'b' : 'w';
+BoardFenInfo::BoardFenInfo(Board& b) : m_board(b) {}
+
+void BoardFenInfo::update_turn(const PlayerInfo & p_info) {
+  side_turn = (p_info.color == BLACK) ? 'b' : 'w';
 }
 
-void BoardFenInfo::update_str_half_moves(const int& hm) {
-  str_half_moves = std::to_string(hm);
+Piecetype BoardFenInfo::get_piece_at_square(const size_t &pos) {
+  return m_board.get_piece_at_square(pos);
 }
 
-void BoardFenInfo::update_str_full_moves(const int& fm) {
-  str_full_moves = std::to_string(fm);
+void BoardFenInfo::clear() {
+  m_board.clear();
 }
 
-bool BoardFenInfo::is_king_piece(const Piecetype& pct) {
-  return (pct == wK) || (pct == bK);
+void BoardFenInfo::set_piece_at_square(const SquareIndices &i, const Piecetype& p) {
+  m_board.set_piece_at_square(i, p);
+}
+
+void BoardFenInfo::set_castle_permission(CastlePermission perm) {
+  m_board.set_castle_permission(perm);
+}
+
+void BoardFenInfo::set_en_passant_square(SquareIndices sq) {
+  m_board.set_en_passant_square(sq);
+}
+
+const int &BoardFenInfo::get_castle_permission()  {
+  return m_board.get_castle_permission();
+}
+
+const SquareIndices &BoardFenInfo::get_en_passant_square() {
+  return m_board.get_en_passant_square();
+}
+
+string BoardFenInfo::get_half_moves() { 
+  return std::to_string(m_board.get_half_moves());
+}
+string BoardFenInfo::get_full_moves() { 
+  return std::to_string(m_board.get_full_moves());
+}
+
+char BoardFenInfo::get_side_turn() { 
+  return side_turn;
 }
 
 string BoardFenInfo::get_castling_rights_string() {

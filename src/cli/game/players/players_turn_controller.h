@@ -1,8 +1,8 @@
 #ifndef PLAYERS_TURN_CONTROLLER_H
 #define PLAYERS_TURN_CONTROLLER_H
 
-#include "players_configuration.h"
-#include "game_turn_observable.h"
+#include "configuration/players_configuration.h"
+#include "game/turn/game_turn_observable.h"
 
 using std::array;
 

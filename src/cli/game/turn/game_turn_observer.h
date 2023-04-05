@@ -3,8 +3,8 @@
 
 #pragma once
 
+#include "game/players/player_info.hpp"
 #include "game_turn.h"
-#include "player_info.hpp"
 
 class GameTurnObserver {
  public:

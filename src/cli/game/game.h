@@ -1,28 +1,21 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "board_info_controller.h"
-#include "configuration.h"
-#include "board_controller.h"
-#include "players/players_turn_controller.h"
-#include "players/players.h"
-#include "ui_messages/ui_game_messages.hpp"
-#include "board.h"
-#include "board_fen.h"
-#include "board_check.h"
-
-using std::shared_ptr;
+#include "ui/graphics/board/board_ui.h"
+#include "board/check_move/board_check.h"
+#include "game/players/players_turn_controller.h"
+#include "configuration/IConfiguration.h"
 
 class Game {
  public:
-  Game(Configuration &, PlayerInput &);
+  Game(IConfiguration &, InputType);
+
   virtual ~Game();
   void play();
 
  private:
   void attach_observers_to_players_turn();
   void setup_players_turn();
-  void add_info_pane_to_board();
   void make_move(const Move& m);
   void update_board_view(const Move&);
   bool is_valid_string_move(const string& str_move);
@@ -39,17 +32,12 @@ class Game {
   PlayersTurnController m_players_turn;
 
   Board m_board;
+  BoardUi m_board_ui;
   BoardCheck m_board_check;
+  BoardFenInfo m_board_fen_info;
   BoardFen m_board_fen;
-  BoardView m_board_view;
-  BoardController m_board_controller;
-  InfoPane m_info_pane;
-  BoardModelInfo m_board_model_info;
-  Players m_players;
+  // Players m_players;
   // IpcPipe m_ipc_search;
-
-  PlayerInput &m_player_input;
-  shared_ptr<UIBoard> p_boardview_controller;
 };
 
 #endif /* GAME_H */

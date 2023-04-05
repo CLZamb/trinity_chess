@@ -1,8 +1,9 @@
 #include "players.h"
 
+using std::unordered_map;
 using std::make_unique;
 
-Players::Players(PlayersConfig &p, PlayerInput&i) {
+Players::Players(PlayersConfig &p, BoardInput&i) {
   create_players(p, i);
 }
 
@@ -12,12 +13,12 @@ void Players::update_turn(const PlayerInfo & p) {
   m_turn = p;
 }
 
-void Players::create_players(PlayersConfig &c, PlayerInput& i) {
+void Players::create_players(PlayersConfig &c, BoardInput& i) {
   create_player(GameTurn::player_1, c.get_type(GameTurn::player_1), i);
   create_player(GameTurn::player_2, c.get_type(GameTurn::player_2), i);
 }
 
-void Players::create_player(GameTurn::Players side, GameTurn::Type t, PlayerInput& i) {
+void Players::create_player(GameTurn::Players side, GameTurn::Type t, BoardInput& i) {
   unordered_map<GameTurn::Players, SquareIndices> initial_pos = {
     {GameTurn::player_1, D3},
     {GameTurn::player_2, E6},
@@ -29,6 +30,6 @@ void Players::create_player(GameTurn::Players side, GameTurn::Type t, PlayerInpu
     m_players[side] = make_unique<HumanPlayer>(i, initial_pos[side]);
 }
 
-string Players::get_next_string_move() {
-  return m_players[m_turn.turn]->get_player_string_move();
+shared_ptr<Player> Players::get_player(GameTurn::Players side) {
+  return m_players[side];
 }

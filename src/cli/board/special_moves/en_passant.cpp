@@ -1,4 +1,5 @@
 #include "en_passant.h"
+#include "board/check_move/pieces/pawn.hpp"
 
 EnPassant::EnPassant() {}
 EnPassant::~EnPassant() {}

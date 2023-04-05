@@ -4,7 +4,7 @@ const unordered_map<char, CastlePermission> BoardFen::m_castle_permision {
   {'Q', WQCA}, {'K', WKCA}, {'q', BQCA}, {'k', BKCA}, {'-', NO_CASTLING},
 };
 
-BoardFen::BoardFen(BoardFenInfo &b, const string fen) {
+BoardFen::BoardFen(BoardFenInfo &b, const string fen){
   parse_fen(fen, b);
   update_fen(b);
 }

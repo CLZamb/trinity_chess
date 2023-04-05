@@ -1,4 +1,6 @@
 #include "section.h"
+#include <limits>
+#include <iostream>
 
 Section::Section(string name, size_t size) :
  ISectionComponent(size), m_name(name) {
@@ -16,7 +18,7 @@ void Section::fill(const string& content) {
   }
 }
 
-void Section::set_content_at_index(string content, const size_t& index) {
+void Section::set_drawing_at_index(string content, const size_t& index) {
   if (!is_valid_index(index))
     return;
 
@@ -28,7 +30,7 @@ bool Section::is_valid_index(const size_t& index) {
   return true;
 }
 
-void Section::set_content(std::initializer_list<string> lst) {
+void Section::set_drawing(std::initializer_list<string> lst) {
   if (lst.size() > size())
     return;
 
@@ -38,7 +40,7 @@ void Section::set_content(std::initializer_list<string> lst) {
   }
 }
 
-void Section::set_content(const vector<string>* content) {
+void Section::set_drawing(const vector<string>* content) {
   if (content->size() > size())
     return;
 

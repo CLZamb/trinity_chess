@@ -1,16 +1,16 @@
 add_library(
  ui_graphics_components_lib
- Idisplay.cpp
  ISectionComponent.cpp
- pane.cpp
+ standard_pane.cpp
  section.cpp
  window.cpp
+ view.cpp
 )
 
 target_include_directories(
   ui_graphics_components_lib
-  PUBLIC 
-  "${CMAKE_CURRENT_SOURCE_DIR}"
+  PRIVATE 
+  "${PROJECT_SOURCE_DIR}/src/cli"
 )
 
 message("ui_graphics_components_lib library compiled")

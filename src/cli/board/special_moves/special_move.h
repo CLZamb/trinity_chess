@@ -1,8 +1,7 @@
 #ifndef SPECIAL_MOVE_H
 #define SPECIAL_MOVE_H
 
-#include "squares.h"
-#include "move.hpp"
+#include "board/board_representation/squares.h"
 
 class SpecialMove {
  public:

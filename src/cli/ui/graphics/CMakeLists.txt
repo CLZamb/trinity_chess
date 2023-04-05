@@ -1,14 +1,5 @@
-add_library(
-  ui_graphics_drawings_lib 
-  INTERFACE
-)
-
-target_include_directories(
-  ui_graphics_drawings_lib 
-  INTERFACE 
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-)
-
+add_subdirectory(board)
 add_subdirectory(components)
-
-message("ui_graphics_drawings_lib library compiled")
+add_subdirectory(drawings)
+add_subdirectory(menu)
+add_subdirectory(ui_messages)

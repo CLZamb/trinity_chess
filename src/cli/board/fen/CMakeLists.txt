@@ -6,16 +6,8 @@ add_library(
 
 target_include_directories(
   board_fen_lib 
-  PUBLIC 
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-)
-
-target_link_libraries(
-  board_fen_lib
-  PUBLIC
-  utils_lib
-  ui_board_lib
-  special_moves_lib
+  PRIVATE 
+  "${PROJECT_SOURCE_DIR}/src/cli"
 )
 
 message("board_fen_lib library compiled")

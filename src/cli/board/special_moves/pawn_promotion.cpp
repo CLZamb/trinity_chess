@@ -1,4 +1,5 @@
 #include "pawn_promotion.h"
+#include "board/check_move/pieces/pawn.hpp"
 
 PawnPromition::PawnPromition() {}
 PawnPromition::~PawnPromition() {}

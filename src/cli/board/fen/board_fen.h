@@ -3,9 +3,8 @@
 
 #include <string>
 #include <unordered_map>
-#include "utilities.h"
-#include "board_model.hpp"
-#include "board_fen_info.h"
+#include "ui/graphics/board/board_model.hpp"
+#include "board/fen/board_fen_info.h"
 
 using std::string;
 using std::unordered_map;

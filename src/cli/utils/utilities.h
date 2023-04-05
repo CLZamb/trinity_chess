@@ -2,13 +2,11 @@
 #define UTILITIES_H
 
 #include <map>
-#include <string>
-#include <iostream>
 #include <limits>
 #include "defs.h"
 
 using std::map;
-using std::string;
+using std::size_t;
 
 enum Piecetype : unsigned int {
   EMPTY, bP, bR, bN, bB, bQ, bK, wP, wR, wN, wB, wQ, wK
@@ -29,6 +27,15 @@ namespace check {
     if (type >= wP && type <= wK) return WHITE;
     return NONE;
   }
+
+  inline bool is_king_piece(const Piecetype& pct) {
+    return (pct == wK) || (pct == bK);
+  }
+
+  inline bool is_pawn_piece(const Piecetype& pct) {
+    return (pct == bP) || (pct == wP);
+  }
+
 
   inline bool is_valid_piece(unsigned int pieceType) {
     return (pieceType > EMPTY) && (pieceType < 13);
