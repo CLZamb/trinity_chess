@@ -11,9 +11,10 @@ template<typename T>
 class KeyboardInputMenu : public MenuInput<T>{
  public:
   KeyboardInputMenu(MenuView& v, Options<T> &o) :
-    m_view(v), m_opts(o) {
-      m_view.selected_option(m_opts.begin()->first);
-    }
+    m_view(v), 
+    m_opts(o) {
+    m_view.selected_option(m_opts.begin()->first);
+  }
 
   virtual ~KeyboardInputMenu() {}
 
@@ -22,17 +23,17 @@ class KeyboardInputMenu : public MenuInput<T>{
     bool selected = false;
 
     while (!selected) {
-      switch (InputKeyboardKeys::Key key = m_k_input.read_key(); key) {
-        case InputKeyboardKeys::ARROW_KEY:
+      switch (Keyboard::Key key = m_k_input.read_key(); key) {
+        case Keyboard::ARROW_KEY:
           key = m_k_input.read_arrow_key();
           [[fallthrough]];
-        case InputKeyboardKeys::W:
-        case InputKeyboardKeys::S:
+        case Keyboard::W:
+        case Keyboard::S:
           handle_arrow_key(key);
           m_view.selected_option(p_selection_option->first);
           m_view.print();
           break;
-        case InputKeyboardKeys::ENTER:
+        case Keyboard::ENTER:
           selected = true;
           break;
         default:
@@ -44,15 +45,15 @@ class KeyboardInputMenu : public MenuInput<T>{
   }
 
  private:
-  void handle_arrow_key(InputKeyboardKeys::Key k) {
+  void handle_arrow_key(Keyboard::Key k) {
     switch (k) {
-      case InputKeyboardKeys::UP:
-      case InputKeyboardKeys::W:
+      case Keyboard::UP:
+      case Keyboard::W:
         if(p_selection_option != m_opts.begin())
           --p_selection_option;
         break;
-      case InputKeyboardKeys::DOWN:
-      case InputKeyboardKeys::S:
+      case Keyboard::DOWN:
+      case Keyboard::S:
         if(p_selection_option != (--m_opts.end()))
           ++p_selection_option;
         break;

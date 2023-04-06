@@ -14,8 +14,8 @@ class BoardFen : public BoardModel {
   BoardFen(BoardFenInfo& b, const string fen);
   virtual ~BoardFen();
   void parse_fen(const string &fen, BoardFenInfo& b);
-  const string &get_fen();
   void update_fen(BoardFenInfo& b);
+  const string &get_fen();
 
  private:
   bool is_number(char c);

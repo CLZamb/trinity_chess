@@ -4,7 +4,6 @@ using std::cin;
 using std::cout;
 
 const string TextInputBase::input_space = "\t\t\t\t";
-const string TextInputBase::invalid_option_msg = input_space + "invalid option try again!\n";
 
 TextInputBase::TextInputBase() {}
 TextInputBase::~TextInputBase() {}

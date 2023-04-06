@@ -10,10 +10,10 @@ void BoardModelInfo::update_turn(const PlayerInfo& t){
 }
 
 void BoardModelInfo::save_move(const Move &mv) {
-  m_moves[m_turn.turn] +=  get_move_string(mv) + " ";
+  m_moves[m_turn.color] +=  get_move_string(mv) + " ";
 
   if (Move_Utils::get_captured_piece(mv))
-    m_captures[m_turn.turn] += get_captured_string(mv) + " ";
+    m_captures[m_turn.color] += get_captured_string(mv) + " ";
 }
 
 string BoardModelInfo::get_move_string(const Move &m) {
@@ -31,11 +31,11 @@ void BoardModelInfo::save_info(const string &info) {
 }
 
 string BoardModelInfo::get_moves() {
-  return m_moves[m_turn.turn];
+  return m_moves[m_turn.color];
 }
 
 string BoardModelInfo::get_captures() {
-  return m_captures[m_turn.turn];
+  return m_captures[m_turn.color];
 }
 
 string BoardModelInfo::get_info() {

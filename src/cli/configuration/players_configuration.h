@@ -7,20 +7,21 @@
 class PlayersConfig {
 public:
   PlayersConfig();
-  PlayersConfig(GameTurn::Type, GameTurn::Type);
+  PlayersConfig(PlayerType, PlayerType);
 
-  void set_color(GameTurn::Players, Color c);
-  Color get_color(GameTurn::Players p);
+  void set_initial_color(Color c);
+  Color get_initial_color();
 
-  void  set_type(GameTurn::Players, GameTurn::Type c);
-  GameTurn::Type get_type(GameTurn::Players p);
-
-  PlayerInfo get_player_info(GameTurn::Players);
+  void set_type(Color c, PlayerType t);
+  PlayerType get_type(Color c);
+  PlayerInfo get_player_info(Color);
 
 private:
-  std::array<PlayerInfo, GameTurn::kSize> player {{
-    {WHITE, GameTurn::Human, GameTurn::player_1},
-    {BLACK, GameTurn::Human, GameTurn::player_2}
+  std::array<PlayerInfo, Color::SIZE> player {{
+    {Color::WHITE, PlayerType::Human},
+    {Color::BLACK, PlayerType::Human}
   }};
+
+  Color initial_side{Color::WHITE};
 };
 #endif /* PLAYER_CONFIG_H */

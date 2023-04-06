@@ -6,13 +6,13 @@ using std::make_shared;
 BoardUi::BoardUi(BoardFen& bf, InputType input) : 
   m_board_fen(bf),
   m_board_controller(m_board_view, m_board_fen),
-  p_boardview_controller(&m_board_controller),
-  p_board_input(m_board_input_builder.get_new_board_input(input, m_board_view)) {}
+  p_boardview_controller(
+    make_shared<BoardController>(m_board_view, m_board_fen)),
+  p_board_input(m_board_input_builder.get_new_board_input(input)) {}
 
 BoardUi::~BoardUi() {}
 
 void BoardUi::add_info_pane() {
-  std::cout << "added info pane" << std::endl;
   m_board_view.add_right_pane(&m_info_pane);
   p_boardview_controller = make_shared<UiBoardInfoController>(
       p_boardview_controller, m_info_pane, m_board_model_info);
@@ -42,5 +42,5 @@ void BoardUi::update_board_info(const string &s) {
 }
 
 string BoardUi::get_next_string_move() {
-  return p_board_input->get_next_string_move();
+  return p_board_input->get_next_string_move(m_board_view);
 }

@@ -96,11 +96,11 @@ void BoardFen::parse_fen(const string &c_str_fen, BoardFenInfo &board) {
   }
   fen++;
 
-	if(*fen != '-')
-	{
-		file = *fen - 'a';
+  if(*fen != '-')
+  {
+    file = *fen - 'a';
     fen++;
-		rank = *fen - '1';
+    rank = *fen - '1';
     square = static_cast<SquareIndices>(rank * 8 + file);
     board.set_en_passant_square(square);
   }

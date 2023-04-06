@@ -13,15 +13,15 @@ using std::shared_ptr;
 
 class Players : public GameTurnObserver {
 public:
-  Players(PlayersConfig &, BoardInput&);
+  // Players(PlayersConfig &, BoardInput&);
   virtual ~Players();
-  void update_turn(const PlayerInfo & p) override;
-  void create_players(PlayersConfig &c, BoardInput& i);
-  void create_player(GameTurn::Players p, GameTurn::Type t, BoardInput& i);
-  shared_ptr<Player> get_player(GameTurn::Players side);
+  // void update_turn(const PlayerInfo & p) override;
+  // void create_players(PlayersConfig &c, BoardInput& i);
+  // void create_player(GameTurn::Players p, GameTurn::Type t, BoardInput& i);
+  // shared_ptr<Player> get_player(GameTurn::Players side);
 
 private:
-  array<shared_ptr<Player>, GameTurn::kSize> m_players;
+  array<shared_ptr<Player>, Color::SIZE> m_players;
   PlayerInfo m_turn;
 };
 

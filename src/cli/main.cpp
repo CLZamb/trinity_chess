@@ -1,20 +1,19 @@
 #include <cstdlib>
-#include "game/game.h"
-#include "configuration/input_configuration.hpp"
+#include "configuration/IConfiguration.h"
+#include "ui/graphics/menu/menu.hpp"
 #include "ui/graphics/ui_messages/game_messages.hpp"
+// #include "configuration/input_configuration.hpp"
+#include "configuration/default_configuration.h"
+#include "game/game.h"
+#include "ui/input/input_types/input_types.h"
 
 // TextInput m_input;
 // ArrowInput m_input;
 int main(/*int argc, char *argv[]*/) {
-  InputType type = InputType::Keyboard;
-  // TextInput input;
-  // ArrowInput input;
-  InputConfiguration i_config(type);
-  // InputType type = InputType::Keyboard;
+  DefaultConfiguration config;
 
-  Menu start_menu(type);
-  Game game(i_config, InputType::Text);
-  //
+  Menu start_menu(config.get_input_type());
+
   string title = "Welcome to trinity Chess";
   const int play_key_num = 1, quit_key_num = 3, config_key_num = 2;
   const Options opts = {
@@ -29,10 +28,13 @@ int main(/*int argc, char *argv[]*/) {
 
   switch(start_menu.select_option_by_number_key()) {
     case config_key_num:
-      i_config.get_configuration();
+      config.get_configuration();
       [[fallthrough]];
-    case play_key_num:
-      game.play();
+    case play_key_num: 
+      { // setting local scope explicitly
+        Game game(config);
+        game.play();
+      }
       break;
     case quit_key_num:
       GameMessages::print_game_over();

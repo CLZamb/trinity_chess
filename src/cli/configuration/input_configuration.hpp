@@ -6,7 +6,7 @@
 
 class InputConfiguration : public IConfiguration {
 public:
-  InputConfiguration(InputType& input) : m_menu_input(input) {};
+  InputConfiguration() {};
 
   void get_configuration() {
     get_players_type();
@@ -17,15 +17,19 @@ public:
     return m_players_config;
   }
 
+  virtual InputType get_input_type() override {
+    return m_menu_input;
+  }
+
 private:
-  void get_players_type(){
+  void get_players_type() {
     Menu<PlayersConfig> player_menu(
       m_menu_input,
       "Select Players", 
       {
-        {1, "Human vs Human",       {GameTurn::Human, GameTurn::Human}},
-        {2, "Human vs Computer",    {GameTurn::Human, GameTurn::Cpu}},
-        {3, "Computer vs Computer", {GameTurn::Cpu,   GameTurn::Cpu}},
+        {1, "Human vs Human",       {PlayerType::Human, PlayerType::Human}},
+        {2, "Human vs Computer",    {PlayerType::Human, PlayerType::Cpu}},
+        {3, "Computer vs Computer", {PlayerType::Cpu,   PlayerType::Cpu}},
       }
     );
 
@@ -42,14 +46,11 @@ private:
     );
 
     player_menu.print();
-    Color player = player_menu.select_option();
-    Color opponent = player == BLACK ? WHITE : BLACK;
-
-    m_players_config.set_color(GameTurn::player_1, player);
-    m_players_config.set_color(GameTurn::player_2, opponent);
+    Color initial_color = player_menu.select_option();
+    m_players_config.set_initial_color(initial_color);
   }
 
-  InputType m_menu_input;
+  InputType m_menu_input = InputType::Keyboard;
   PlayersConfig m_players_config;
 };
 

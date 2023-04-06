@@ -3,19 +3,19 @@
 
 #include "ui/graphics/board/board_ui.h"
 #include "board/check_move/board_check.h"
-#include "game/players/players_turn_controller.h"
+#include "game/turn/game_turn.h"
 #include "configuration/IConfiguration.h"
 
 class Game {
  public:
-  Game(IConfiguration &, InputType);
+  Game(IConfiguration &);
 
   virtual ~Game();
   void play();
+  void set_configuration(IConfiguration&);
 
  private:
-  void attach_observers_to_players_turn();
-  void setup_players_turn();
+  void attach_observers_to_game_turn();
   void make_move(const Move& m);
   void update_board_view(const Move&);
   bool is_valid_string_move(const string& str_move);
@@ -29,8 +29,7 @@ class Game {
   // const string start_fen = "2Q5/k7/8/2R5/7r/7r/8/K7 b - - 0 1";
   const string start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-  PlayersTurnController m_players_turn;
-
+  GameTurn m_game_turn;
   Board m_board;
   BoardUi m_board_ui;
   BoardCheck m_board_check;

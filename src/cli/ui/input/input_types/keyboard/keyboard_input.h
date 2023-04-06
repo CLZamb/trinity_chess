@@ -7,8 +7,6 @@ class KeyboardInput : public KeyboardBase {
  public:
   KeyboardInput();
   virtual ~KeyboardInput();
- private:
 };
-
 
 #endif /* KEBOARD_INPUT_H */

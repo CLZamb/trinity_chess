@@ -14,7 +14,7 @@ class BoardUi : public GameTurnObserver {
  public:
   BoardUi(BoardFen& bf, InputType input);
   virtual ~BoardUi();
-
+  //
   void update_turn(const PlayerInfo &turn) override;
   void add_info_pane();
   void update_view();

@@ -9,7 +9,7 @@ class HumanPlayer : public Player {
 public:
   HumanPlayer(BoardInput&, SquareIndices sq);
   virtual ~HumanPlayer();
-  const string &get_player_string_move() override;
+  // const string &get_player_string_move() override;
 
 private:
   void set_initial_pos(SquareIndices sq);

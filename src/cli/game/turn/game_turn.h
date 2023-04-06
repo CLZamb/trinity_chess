@@ -1,22 +1,26 @@
-#ifndef GAME_TURN_H
-#define GAME_TURN_H
+#ifndef PLAYERS_TURN_CONTROLLER_H
+#define PLAYERS_TURN_CONTROLLER_H
 
-#pragma once
+#include "configuration/players_configuration.h"
+#include "game/turn/game_turn_observable.h"
 
-class GameTurn {
- public:
-  enum Type {
-    Cpu = 0,
-    Human = 1,
-  };
+using std::array;
 
-  enum Players : unsigned int {
-    player_1 = 0,
-    player_2 = 1
-  };
-
+class GameTurn : public GameTurnObservable {
+  public:
+  GameTurn(PlayersConfig &config);
   virtual ~GameTurn();
-  static const int kSize = 2;
+  void notify_game_turn() override;
+  void change_turn();
+  void set_inital_side(const Color &p);
+  Color get_turn_color();
+  void set_new_configuration(PlayersConfig &config);
+
+private:
+  void create_players_info(PlayersConfig &config);
+  static const int players_size = Color::SIZE;
+  array<PlayerInfo, players_size> players_info;
+  Color m_turn {Color::WHITE};
 };
 
-#endif /* GAME_TURN_H */
+#endif /* PLAYERS_TURN_CONTROLLER_H */

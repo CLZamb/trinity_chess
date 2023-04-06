@@ -6,7 +6,7 @@ HumanPlayer::HumanPlayer(BoardInput& p, SquareIndices sq) : m_input(p) {
 
 HumanPlayer::~HumanPlayer() {}
 
-const string &HumanPlayer::get_player_string_move() {
-  m_string_player_input = m_input.get_next_string_move();;
-  return m_string_player_input;
-}
+// const string &HumanPlayer::get_player_string_move() {
+//   m_string_player_input = m_input.get_next_string_move();;
+//   return m_string_player_input;
+// }

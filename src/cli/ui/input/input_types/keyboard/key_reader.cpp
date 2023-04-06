@@ -1,17 +1,16 @@
 #include "key_reader.h"
 #include <cstdio>
-// #include <termios.h>
 
-InputKeyboardKeys::Key KeyReader::read_key() {
-  InputKeyboardKeys::Key key = InputKeyboardKeys::NONE;
-  key = InputKeyboardKeys::Key(fgetc(stdin));
+Keyboard::Key KeyReader::read_key() {
+  Keyboard::Key key = Keyboard::NONE;
+  key = Keyboard::Key(fgetc(stdin));
   return key;
 }
 
-InputKeyboardKeys::Key KeyReader::read_arrow_key() {
-  if (fgetc(stdin) != InputKeyboardKeys::LEFT_BRACKET) return InputKeyboardKeys::Quit;
+Keyboard::Key KeyReader::read_arrow_key() {
+  if (fgetc(stdin) != Keyboard::LEFT_BRACKET) return Keyboard::Quit;
 
-  InputKeyboardKeys::Key key_pressed = InputKeyboardKeys::Key(fgetc(stdin));
+  Keyboard::Key key_pressed = Keyboard::Key(fgetc(stdin));
   return key_pressed;
 }
 

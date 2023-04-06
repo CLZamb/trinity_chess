@@ -8,14 +8,14 @@ using std::string;
 
 class TextInputBase {
  public:
-  TextInputBase();
-  virtual ~TextInputBase();
 
   int get_integer_input();
   string get_string_input();
 
+ protected:
+  TextInputBase();
+  virtual ~TextInputBase();
   static const string input_space;
-  static const string invalid_option_msg;
  private:
   void has_player_quit(const string &s);
 };

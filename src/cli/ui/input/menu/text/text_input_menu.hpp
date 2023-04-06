@@ -1,7 +1,7 @@
 #ifndef TEXT_INPUT_MENU_HPP
 #define TEXT_INPUT_MENU_HPP
 
-#include "ui/input/input_types/text/text_input_base.h"
+#include "ui/input/input_types/text/text_input.h"
 #include "ui/input/menu/menu_input.h"
 #include "ui/graphics/menu/options.hpp"
 #include "ui/graphics/menu/menu_view.hpp"
@@ -22,14 +22,15 @@ class TextInputMenu : public MenuInput<T> {
 
       if (!is_valid) {
         m_view.print();
-        std::cout << m_text_input.invalid_option_msg;
+        std::cout << invalid_option_msg;
       }
     }
     return m_opts.at(key);
   }
 
  private:
-  TextInputBase m_text_input;
+  const string invalid_option_msg = "\t\t\t\tinvalid option try again!\n";
+  TextInput m_text_input;
   MenuView& m_view;
   Options<T>& m_opts;
 };

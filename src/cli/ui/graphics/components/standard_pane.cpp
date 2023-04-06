@@ -24,8 +24,8 @@ void StandardPane::add_section(shared_ptr<ISectionComponent> section) {
   }
 }
 
-void StandardPane::add_section(const string &name, const size_t size) {
-  sections.emplace(name, make_unique<Section>(name, size));
+void StandardPane::add_section(const string &name, const size_t row_size) {
+  sections.emplace(name, make_unique<Section>(name, row_size));
   add_section(sections[name]);
 }
 

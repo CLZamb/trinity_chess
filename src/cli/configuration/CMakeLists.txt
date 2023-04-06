@@ -1,6 +1,7 @@
 add_library(
   configuration_lib
   # file_configuration.cpp
+  default_configuration.cpp
   players_configuration.cpp
 )
 

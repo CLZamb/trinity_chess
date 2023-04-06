@@ -4,23 +4,23 @@
 #pragma once
 
 #include <iostream>
-#include "game/turn/game_turn.h"
 #include "ui/graphics/drawings/game_drawings.hpp"
+#include "utils/utilities.h"
 
 using std::cout;
 using std::endl;
-using GameDrawing::player_1_won;
-using GameDrawing::player_2_won;
+using GameDrawing::white_won;
+using GameDrawing::black_won;
 using GameDrawing::game_over;
 
 namespace GameMessages
 {
 
-inline void print_game_winner(GameTurn::Players winner){
+inline void print_game_winner(Color c){
   static const std::string 
-    winner_drawing 
-    = winner == GameTurn::player_1 ? 
-      player_1_won.data() : player_2_won.data();
+    winner_drawing = 
+      c == Color::WHITE ? 
+        white_won.data() : black_won.data();
 
   cout << winner_drawing << endl;
 }

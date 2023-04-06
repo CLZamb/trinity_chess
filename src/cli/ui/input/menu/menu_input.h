@@ -8,7 +8,6 @@ using std::string;
 template<typename T>
 class MenuInput {
  public:
-  virtual ~MenuInput() {}
   virtual const Option<T>& select_menu_option() = 0;
 };
 

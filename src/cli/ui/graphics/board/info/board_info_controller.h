@@ -12,8 +12,8 @@ class UiBoardInfoController : public BoardDecorator {
 
   void print() override;
   void update() override;
-private:
 
+ private:
   BoardModelInfo& p_info;
   InfoPane& p_info_pane;
 };

@@ -7,10 +7,10 @@
 template <typename T = string> 
 class Menu {
 public:
-  Menu(InputType input_type) :
-    p_input(m_menu_input_builder.get_new_menu_input(input_type, m_view, m_opts)) {}
+  // Menu(InputType input_type) :
+  //   p_input(m_menu_input_builder.get_new_menu_input(input_type, m_view, m_opts)) {}
 
-  Menu(InputType input_type, const string title, const Options<T> &opts) : 
+  Menu(InputType input_type, const string title = "", const Options<T> &opts = {}) : 
     m_opts(opts),
     m_view(title, format_options()),
     p_input(m_menu_input_builder.get_new_menu_input(input_type, m_view, m_opts)) {
@@ -57,8 +57,8 @@ private:
 
   Options<T> m_opts;
   MenuView m_view;
-  const std::shared_ptr<MenuInput<T>> p_input;
-  MenuInputBuilder m_menu_input_builder;
+  MenuInputBuilder<T> m_menu_input_builder;
+  std::unique_ptr<MenuInput<T>> p_input;
 };
 
 #endif /* MENU_H */

@@ -17,7 +17,6 @@ InfoPane::~InfoPane() {}
 
 void InfoPane::clear_all_sections() {
   clear();
-  update_banner(GameTurn::player_1);
   format_block(get_section(m_moves_section[BLACK]), "");
   format_block(get_section(m_moves_section[WHITE]), "");
   format_block(get_section(m_captures_section[BLACK]), "");
@@ -73,11 +72,11 @@ string InfoPane::format_line(const string &line) {
 void InfoPane::update_turn(const PlayerInfo &info) {
   m_turn_info = info;
 
-  update_banner(m_turn_info.turn);
+  update_banner(m_turn_info.color);
 }
 
-void InfoPane::update_banner(GameTurn::Players p) {
-  set_content_at_section(m_player_banner_section, p_banners[p]);
+void InfoPane::update_banner(Color c) {
+  set_content_at_section(m_player_banner_section, p_banners[c]);
 }
 
 void InfoPane::update_moves(const string& moves) {

@@ -4,7 +4,6 @@
 #pragma once
 
 #include "game/players/player_info.hpp"
-#include "game_turn.h"
 
 class GameTurnObserver {
  public:

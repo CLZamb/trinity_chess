@@ -24,7 +24,6 @@ private:
   string get_captured_string(const Move &m);
 
   PlayerInfo m_turn;
-  string game_info;
   array<string, Color::SIZE> m_turn_string{"Is white turn", "Is black turn"};
 };
 

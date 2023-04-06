@@ -16,6 +16,11 @@ enum Color {
   WHITE = 0, BLACK = 1, NONE = 3, SIZE = 2, BOTH = 2,
 };
 
+enum PlayerType {
+  Cpu = 0,
+  Human = 1,
+};
+
 namespace utils {
 namespace check {
   inline bool is_black_piece(Piecetype type) {

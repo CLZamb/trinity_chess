@@ -9,9 +9,6 @@ class TextInput : public TextInputBase {
   virtual ~TextInput();
 
  private:
-  // bool check_valid_option(vector<int>& keys, const int key) {
-  //   return std::find(keys.begin(), keys.end(), key) != keys.end();
-  // };
 };
 
-#endif /* CONSOLE_INPUT_H */
+#endif /* TEXT_INPUT_H */

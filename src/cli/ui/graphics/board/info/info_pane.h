@@ -23,7 +23,7 @@ private:
   void clear();
   void clear_block();
   void clear_all_sections();
-  void update_banner(GameTurn::Players p);
+  void update_banner(Color c);
   void set_content_to_block_recursively(shared_ptr<Section> &, string &msg,
                                         size_t cur_row);
   void format_block(shared_ptr<Section> &, string msg);
@@ -42,12 +42,13 @@ private:
   const array<string, Color::SIZE> m_captures_section{"[White Captures]",
     "[Black Captures]"};
 
-  array<const vector<string> *, GameTurn::kSize> p_banners {
-    &InfoDrawings::Banner::player1,
-    &InfoDrawings::Banner::player2
+  array<const vector<string> *, Color::SIZE> p_banners {
+    &InfoDrawings::Banner::white,
+    &InfoDrawings::Banner::black
   };
 
   PlayerInfo m_turn_info;
+  // Color initial_color_side;
 };
 
 #endif /* INFO_VIEW_H */
