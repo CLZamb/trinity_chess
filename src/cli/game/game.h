@@ -31,10 +31,9 @@ class Game {
 
   GameTurn m_game_turn;
   Board m_board;
-  BoardUi m_board_ui;
   BoardCheck m_board_check;
-  BoardFenInfo m_board_fen_info;
-  BoardFen m_board_fen;
+  BoardFenController m_board_fen;
+  BoardUi m_board_ui;
   // Players m_players;
   // IpcPipe m_ipc_search;
 };

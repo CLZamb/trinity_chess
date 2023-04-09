@@ -19,6 +19,7 @@ node_modules/
 .git/
 .cmake
 chess
+chess_tests
 neovim.json
 package.json
 yarn.lock

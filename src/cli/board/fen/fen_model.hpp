@@ -1,20 +1,20 @@
-#ifndef BOARD_MODEL_H
-#define BOARD_MODEL_H
+#ifndef BOARD_FEN_H
+#define BOARD_FEN_H
 
 #include <string>
 
 using std::string;
 
-class BoardModel {
+class BoardFen {
  public:
-  BoardModel() = default;
-  virtual ~BoardModel() = default;
+  BoardFen() = default;
+  virtual ~BoardFen() = default;
 
   void set_fen(string& f) {
     this->_fen = std::move(f);
   }
 
-  const std::string &get_fen() {
+  const std::string &get_fen() const {
     return _fen;
   }
 

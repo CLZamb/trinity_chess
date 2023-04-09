@@ -14,9 +14,19 @@ include(add_google_test)
 add_gtest(${chess_tests})
 
 target_link_libraries(
-  ${chess_tests} PUBLIC
-  board_representation_lib
+  ${chess_tests} 
+  PUBLIC
+  board_board_representation_lib
+  board_check_lib
   board_check_pieces_lib
-  special_moves_lib
+  # board_fen_lib
+  board_special_moves_lib
 )
+
+target_include_directories (
+  ${chess_tests} 
+  PRIVATE 
+  "${PROJECT_SOURCE_DIR}/src/cli"
+)
+
 

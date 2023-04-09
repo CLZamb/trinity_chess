@@ -1,14 +1,14 @@
 #ifndef BOARD_REPRESENTATION_H
 #define BOARD_REPRESENTATION_H
 
-#include <string>
 #include "board/special_moves/special_move_controller.h"
 #include "board_bitboard.hpp"
+#include <string>
 
 using std::string;
 
 class Board {
-public:
+ public:
   Board();
   // GameTurnObsqrver
   // BoardFenInfo
@@ -28,7 +28,7 @@ public:
   const int &get_castle_permission();
   const SquareIndices &get_en_passant_square();
 
-private:
+ private:
   // boardFenInfo
   void update_king_position(const Move &mv);
   void update_king_position(Color c, const SquareIndices &pos);

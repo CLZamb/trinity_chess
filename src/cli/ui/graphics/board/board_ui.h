@@ -6,13 +6,13 @@
 #include "ui/graphics/board/decorators/IUi_board.h"
 #include "ui/graphics/board/decorators/info/board_info_model.h"
 #include "ui/input/board/board_input_builder.h"
-#include "board/fen/board_fen.h"
+#include "board/fen/board_fen_controller.h"
 
 using std::unique_ptr;
 
 class BoardUi : public GameTurnObserver {
  public:
-  BoardUi(BoardFen& bfi, InputType input);
+  BoardUi(const BoardFen& bf, InputType input);
   virtual ~BoardUi();
 
   void update_turn(const PlayerInfo &turn) override;
@@ -26,7 +26,6 @@ class BoardUi : public GameTurnObserver {
  private:
   void wrap_board_view();
   void wrap_board_check(BoardCheck &board_check);
-  BoardFen& m_board_fen;
   BoardView m_board_view;
   BoardModelInfo m_board_model_info;
   unique_ptr<IUIBoard> p_board_view;

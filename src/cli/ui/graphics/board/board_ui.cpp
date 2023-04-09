@@ -5,12 +5,9 @@
 
 using std::make_unique;
 
-BoardUi::BoardUi(BoardFen& bfi, InputType input) : 
-  m_board_fen(bfi),
-  p_board_view(
-    make_unique<BoardController>(m_board_view, m_board_fen)),
-  p_board_input(m_board_input_builder.get_new_board_input(input))
-{}
+BoardUi::BoardUi(const BoardFen& bf, InputType input) : 
+  p_board_view(make_unique<BoardController>(m_board_view, bf)),
+  p_board_input(m_board_input_builder.get_new_board_input(input)) {}
 
 BoardUi::~BoardUi() {}
 

@@ -6,7 +6,7 @@ add_library(
   # view
   board_view.cpp
   # model
-  board_model.hpp
+  # board_model.hpp
   # controller
   board_controller.cpp
 )

@@ -1,7 +1,7 @@
 add_library(
   board_fen_lib
-  board_fen.cpp
-  board_fen_info.cpp
+  board_fen_model.cpp
+  board_fen_controller.cpp
 )
 
 target_include_directories(

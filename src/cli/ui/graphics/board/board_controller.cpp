@@ -1,6 +1,6 @@
 #include "board_controller.h"
 
-BoardController::BoardController(BoardView &v, BoardModel&f)
+BoardController::BoardController(BoardView &v, const BoardFen&f)
   : p_view(v), p_board_fen(f) {
 }
 

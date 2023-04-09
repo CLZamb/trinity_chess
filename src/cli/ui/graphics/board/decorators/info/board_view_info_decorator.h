@@ -19,5 +19,4 @@ class BoardViewInfoDecorator : public BoardDecorator {
   InfoPane m_info_pane;
 };
 
-
 #endif /* UI_BOARD_INFO_CONTROLLER_H */

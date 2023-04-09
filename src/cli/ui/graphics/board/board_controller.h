@@ -1,13 +1,13 @@
 #ifndef UI_BOARD_CONTROLLER_H
 #define UI_BOARD_CONTROLLER_H
 
+#include "board/fen/fen_model.hpp"
 #include "ui/graphics/board/board_view.h"
-#include "board_model.hpp"
 #include "ui/graphics/board/decorators/IUi_board.h"
 
 class BoardController : public IUIBoard {
 public:
-  BoardController(BoardView& v, BoardModel& i);
+  BoardController(BoardView& v, const BoardFen& i);
   virtual ~BoardController();
 
   void print() override;
@@ -15,7 +15,7 @@ public:
 
 private:
   BoardView& p_view;
-  BoardModel& p_board_fen;
+  const BoardFen& p_board_fen;
 };
 
 #endif /* UI_BOARD_CONTROLLER_H */

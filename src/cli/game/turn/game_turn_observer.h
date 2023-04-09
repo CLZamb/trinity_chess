@@ -9,8 +9,6 @@ class GameTurnObserver {
  public:
     virtual ~GameTurnObserver() {}
     virtual void update_turn(const PlayerInfo &) = 0;
- protected:
-    GameTurnObserver() {}
 };
 
 #endif /* GAMETURNOBSERVER_H */
