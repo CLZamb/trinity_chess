@@ -1,19 +1,14 @@
-#include "board_model_info.h"
+#include "board_info_model.h"
 #include "utils/string_utils.h"
 
 BoardModelInfo::BoardModelInfo() {}
 BoardModelInfo::~BoardModelInfo() {}
 
-void BoardModelInfo::update_turn(const PlayerInfo& t){
-  m_turn = t;
-  save_info(m_turn_string[m_turn.color]);
-}
-
 void BoardModelInfo::save_move(const Move &mv) {
-  m_moves[m_turn.color] +=  get_move_string(mv) + " ";
+  m_moves[m_player_info.color] +=  get_move_string(mv) + " ";
 
   if (Move_Utils::get_captured_piece(mv))
-    m_captures[m_turn.color] += get_captured_string(mv) + " ";
+    m_captures[m_player_info.color] += get_captured_string(mv) + " ";
 }
 
 string BoardModelInfo::get_move_string(const Move &m) {
@@ -30,14 +25,23 @@ void BoardModelInfo::save_info(const string &info) {
   m_info = info;
 }
 
-string BoardModelInfo::get_moves() {
-  return m_moves[m_turn.color];
+string BoardModelInfo::get_moves(Color c) {
+  return m_moves[c];
 }
 
-string BoardModelInfo::get_captures() {
-  return m_captures[m_turn.color];
+string BoardModelInfo::get_captures(Color c) {
+  return m_captures[c];
 }
 
 string BoardModelInfo::get_info() {
   return m_info;
 }
+
+void BoardModelInfo::save_player_info(const PlayerInfo& c) {
+  m_player_info = c;
+}
+
+PlayerInfo BoardModelInfo::get_player_info() {
+  return m_player_info;
+}
+

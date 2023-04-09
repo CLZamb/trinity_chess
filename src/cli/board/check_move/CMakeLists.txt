@@ -1,6 +1,7 @@
 add_library(
   board_check_lib
   board_check.cpp
+  standard_board_check_behaviour.cpp
 )
 
 target_include_directories(

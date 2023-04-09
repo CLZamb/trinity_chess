@@ -8,7 +8,7 @@ public:
   DefaultConfiguration();
   virtual ~DefaultConfiguration() {}
 
-  void get_configuration();
+  void get_new_configuration();
   PlayersConfig& get_players_config() override;
   virtual InputType get_input_type() override;
 

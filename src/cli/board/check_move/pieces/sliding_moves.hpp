@@ -1,7 +1,7 @@
 #ifndef SLIDING_MOVES_H
 #define SLIDING_MOVES_H
 
-#include "board/board_representation/board_bitboard.h"
+#include "board/board_representation/board_bitboard.hpp"
 #include "magic_bitboard.h"
 
 template<Color color>

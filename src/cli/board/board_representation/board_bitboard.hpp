@@ -7,7 +7,7 @@
 
 class BoardBitboard {
 public:
-  BoardBitboard() {}
+  BoardBitboard() : m_occupancies{ZERO} {}
   virtual ~BoardBitboard() {}
   void move(const Move& m) {
     Color color = utils::check::get_color_piece(Move_Utils::get_piece(m));
@@ -59,7 +59,7 @@ public:
   }
 
 private:
-  std::array<U64, Color::SIZE + 1> m_occupancies{BLANK};
+  std::array<U64, Color::SIZE + 1> m_occupancies{ZERO};
 };
 
 #endif /* BOARD_BITBOARD_H */

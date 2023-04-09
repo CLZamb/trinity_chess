@@ -1,17 +1,13 @@
 #include <cstdlib>
-#include "configuration/IConfiguration.h"
 #include "ui/graphics/menu/menu.hpp"
 #include "ui/graphics/ui_messages/game_messages.hpp"
-// #include "configuration/input_configuration.hpp"
 #include "configuration/default_configuration.h"
 #include "game/game.h"
-#include "ui/input/input_types/input_types.h"
 
 // TextInput m_input;
 // ArrowInput m_input;
 int main(/*int argc, char *argv[]*/) {
   DefaultConfiguration config;
-
   Menu start_menu(config.get_input_type());
 
   string title = "Welcome to trinity Chess";
@@ -28,7 +24,7 @@ int main(/*int argc, char *argv[]*/) {
 
   switch(start_menu.select_option_by_number_key()) {
     case config_key_num:
-      config.get_configuration();
+      config.get_new_configuration();
       [[fallthrough]];
     case play_key_num: 
       { // setting local scope explicitly

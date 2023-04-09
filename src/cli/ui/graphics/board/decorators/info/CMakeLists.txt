@@ -1,11 +1,11 @@
 add_library(
   ui_graphics_board_info_lib
   # model
-  board_model_info.cpp
+  board_info_model.cpp
   # view
   info_pane.cpp
   # controller
-  board_info_controller.cpp
+  board_view_info_decorator.cpp
 )
 
 target_include_directories(

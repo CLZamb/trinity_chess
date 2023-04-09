@@ -24,12 +24,13 @@ class Window {
     Middle_pane    = 1,
     Right_pane     = 2,
   };
-  void add_pane(IPane *pane, Pane_pos pos);
 
-  size_t m_panes_size_max_height{0};
+  void add_pane(IPane *pane, Pane_pos pos);
   void get_formatted_window_drawing(ostream &os);
-  map<int, IPane *> m_panes;
+
   constexpr static const size_t max_panes_size = 3;
+  size_t m_panes_size_max_height{0};
+  map<int, IPane *> m_panes;
 };
 
 #endif /* WINDOW_H */

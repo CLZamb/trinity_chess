@@ -19,6 +19,5 @@ target_include_directories(
 
 message("ui_graphics_board_lib library compiled")
 
-add_subdirectory(decorator)
-add_subdirectory(info)
+add_subdirectory(decorators)
 add_subdirectory(pieces)

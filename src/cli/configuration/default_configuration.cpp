@@ -5,7 +5,7 @@ DefaultConfiguration::DefaultConfiguration() {
   m_players_config.set_initial_color(Color::WHITE);
 }
 
-void DefaultConfiguration::get_configuration() {
+void DefaultConfiguration::get_new_configuration() {
   get_players_type();
   get_players_color();
 }

@@ -1,6 +1,6 @@
 #include "board_decorator.h"
 
-BoardDecorator::BoardDecorator(shared_ptr<IUIBoard> b) : _p_ui_board(b) {}
+BoardDecorator::BoardDecorator(unique_ptr<IUIBoard> &&b) : _p_ui_board(std::move(b)) {}
 
 BoardDecorator::~BoardDecorator() {}
 

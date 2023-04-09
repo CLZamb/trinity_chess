@@ -2,7 +2,6 @@
 #define GAME_H
 
 #include "ui/graphics/board/board_ui.h"
-#include "board/check_move/board_check.h"
 #include "game/turn/game_turn.h"
 #include "configuration/IConfiguration.h"
 
@@ -27,6 +26,7 @@ class Game {
   // const string start_fen = "k1R5/8/2Q5/8/1q6/2r5/8/K7 b - - 0 1";
   // const string start_fen = "3kq2r/8/8/8/8/8/8/3K1Q2 w - - 0 1";
   // const string start_fen = "2Q5/k7/8/2R5/7r/7r/8/K7 b - - 0 1";
+  // const string start_fen = "6k1/5Q2/8/8/8/8/7R/6K1 b - - 0 1";
   const string start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
   GameTurn m_game_turn;

@@ -30,7 +30,6 @@ void InfoPane::clear() {
   set_content_at_section(m_bottom_section, {InfoDrawings::Borders::kbottom_drawing});
 }
 
-void InfoPane::draw() {}
 void InfoPane::clear_block() { clear(); }
 
 void InfoPane::format_block(shared_ptr<Section>& block, string content) {
@@ -39,7 +38,8 @@ void InfoPane::format_block(shared_ptr<Section>& block, string content) {
   if (!has_block_space_for_content(block, content)) return;
 
   string msg = block->get_name() + ": " + content; 
-  set_content_to_block_recursively(block, msg, 0);
+  size_t start_index = 0;
+  set_content_to_block_recursively(block, msg, start_index);
 }
 
 bool InfoPane::has_block_space_for_content(
@@ -48,17 +48,20 @@ bool InfoPane::has_block_space_for_content(
 }
 
 void InfoPane::set_content_to_block_recursively(shared_ptr<Section>& section,
-    string &msg, size_t current_row) {
+    string &msg, size_t &current_row) {
   if (current_row > section->size()) return;
 
   if (msg.size() < kRowMaxLen) {
     section->set_drawing_at_index(format_line(msg), current_row);
-    section->set_drawing_at_index(InfoDrawings::Borders::krow_divider, section->size() - 1);
+    section->set_drawing_at_index(
+      InfoDrawings::Borders::krow_divider, section->size() - 1
+    );
     return;
   }
 
-  string row_content = msg.substr(0, kRowMaxLen);
-  section->set_drawing_at_index(format_line(row_content), current_row);
+  section->set_drawing_at_index(
+    format_line(msg.substr(0, kRowMaxLen)), current_row
+  );
 
   msg = msg.substr(kRowMaxLen/* to_end */);
   set_content_to_block_recursively(section, msg, ++current_row);
@@ -69,22 +72,16 @@ string InfoPane::format_line(const string &line) {
   return  " ┃ " + line + std::string(num_spaces, ' ') + "┃";
 }
 
-void InfoPane::update_turn(const PlayerInfo &info) {
-  m_turn_info = info;
-
-  update_banner(m_turn_info.color);
-}
-
 void InfoPane::update_banner(Color c) {
   set_content_at_section(m_player_banner_section, p_banners[c]);
 }
 
-void InfoPane::update_moves(const string& moves) {
-  format_block(get_section(m_moves_section[m_turn_info.color]), moves);
+void InfoPane::update_moves(const string& moves, Color c) {
+  format_block(get_section(m_moves_section[c]), moves);
 }
 
-void InfoPane::update_captures(const string& captures) {
-  format_block(get_section(m_captures_section[m_turn_info.color]), captures);
+void InfoPane::update_captures(const string& captures, Color c) {
+  format_block(get_section(m_captures_section[c]), captures);
 }
 
 void InfoPane::update_game_info(const string& info) {

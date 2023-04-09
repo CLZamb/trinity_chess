@@ -3,7 +3,7 @@
 
 #include "ui/graphics/board/board_view.h"
 #include "board_model.hpp"
-#include "IUi_board.h"
+#include "ui/graphics/board/decorators/IUi_board.h"
 
 class BoardController : public IUIBoard {
 public:

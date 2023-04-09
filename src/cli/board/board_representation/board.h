@@ -3,7 +3,7 @@
 
 #include <string>
 #include "board/special_moves/special_move_controller.h"
-#include "board_bitboard.h"
+#include "board_bitboard.hpp"
 
 using std::string;
 
@@ -23,7 +23,7 @@ public:
   BoardBitboard &get_board_bitboard();
   SquareIndices get_king_position(Color c);
   //
-  void make_move(Move mv);
+  void make_move(const Move& mv);
   Move string_to_move(const string &);
   const int &get_castle_permission();
   const SquareIndices &get_en_passant_square();

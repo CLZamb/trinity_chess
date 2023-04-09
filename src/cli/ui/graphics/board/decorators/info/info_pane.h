@@ -2,30 +2,29 @@
 #define INFO_VIEW_H
 
 #include <array>
-#include "game/turn/game_turn_observer.h"
+#include "game/players/player_info.hpp"
 #include "ui/graphics/components/standard_pane.h"
 #include "ui/graphics/drawings/info_drawings.hpp"
 
 using std::string;
 using std::array;
 
-class InfoPane : public GameTurnObserver, public StandardPane {
+class InfoPane : public StandardPane {
 public:
   InfoPane();
   virtual ~InfoPane();
-  void draw();
   void update_turn(const PlayerInfo &info);
-  void update_moves(const string &s);
-  void update_captures(const string &s);
+  void update_moves(const string &s, Color c);
+  void update_captures(const string &s, Color c);
   void update_game_info(const string &i);
+  void update_banner(Color c);
 
 private:
   void clear();
   void clear_block();
   void clear_all_sections();
-  void update_banner(Color c);
   void set_content_to_block_recursively(shared_ptr<Section> &, string &msg,
-                                        size_t cur_row);
+                                        size_t &cur_row);
   void format_block(shared_ptr<Section> &, string msg);
   bool has_block_space_for_content(const shared_ptr<Section> &block,
                                    const string &message);
@@ -46,9 +45,6 @@ private:
     &InfoDrawings::Banner::white,
     &InfoDrawings::Banner::black
   };
-
-  PlayerInfo m_turn_info;
-  // Color initial_color_side;
 };
 
 #endif /* INFO_VIEW_H */

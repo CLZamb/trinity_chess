@@ -1,7 +1,7 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include "board/board_representation/board_bitboard.h"
+#include "board/board_representation/board_bitboard.hpp"
 #include "utils/utilities.h"
 
 using namespace bitUtility;

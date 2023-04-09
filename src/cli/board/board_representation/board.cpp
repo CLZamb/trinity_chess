@@ -3,7 +3,7 @@
 
 Board::Board() {}
 
-void Board::make_move(Move mv) {
+void Board::make_move(const Move& mv) {
   m_board_bitboard.move(mv);
   move_piece_to_square(mv);
   update_king_position(mv);
@@ -58,10 +58,10 @@ Move Board::string_to_move(const string &m) {
   SquareIndices from = Move_Utils::get_from(mv);
   SquareIndices to = Move_Utils::get_to(mv);
 
-  Piecetype piece = m_squares[from].get_piece();
+  Piecetype player_piece = m_squares[from].get_piece();
   Piecetype captured = m_squares[to].get_piece();
 
-  Move_Utils::set_piece(mv, piece);
+  Move_Utils::set_piece(mv, player_piece);
   Move_Utils::set_capture_piece(mv, captured);
 
   m_special_move.set_special_move_to_move(mv, m_squares);

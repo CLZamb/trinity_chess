@@ -8,7 +8,8 @@ class Aboard : public testing::Test {
   public:
     Board board;
 };
-
+/// check that these checkmates are valid
+// https://chessmood.com/blog/checkmate-patterns
 TEST_F(Aboard, IsEmptyWhenCreated) {
   ASSERT_THAT(board.is_checkmate(), Eq(false));
 }

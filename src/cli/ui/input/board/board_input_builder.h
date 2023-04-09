@@ -8,12 +8,11 @@
 
 class BoardInputBuilder {
 public:
-  std::shared_ptr<BoardInput> get_new_board_input(InputType input_type) {
+  std::unique_ptr<BoardInput> get_new_board_input(InputType input_type) {
     if (input_type == InputType::Keyboard)
-      return std::make_shared<KeyboardInputBoard>();
-    // return std::make_shared<TextInputBoard>();
+      return std::make_unique<KeyboardInputBoard>();
 
-    return std::make_shared<KeyboardInputBoard>();
+    return std::make_unique<KeyboardInputBoard>();
   }
 };
 

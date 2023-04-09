@@ -7,7 +7,7 @@ KeyboardInputBoard::KeyboardInputBoard() {}
 string KeyboardInputBoard::get_next_string_move(BoardView& board_view) {
   update_view_select_next_square(m_player_pos.get_last_position(), board_view);
   board_view.update_board_drawing();
-  // board_view.print();
+  board_view.print();
 
   completed = false;
   has_been_selected = false;
@@ -71,11 +71,7 @@ void KeyboardInputBoard::handle_arrow_keys(Keyboard::Key k, size_t &pos) {
 }
 
 string KeyboardInputBoard::select_position(const size_t &pos) {
-  if (has_been_selected) {
-    select_to(pos);
-  } else {
-    select_from(pos);
-  }
+  has_been_selected ? select_to(pos) : select_from(pos);
 
   has_been_selected = !has_been_selected;
   return string_utils::squareindex_to_str(SquareIndices(pos));
