@@ -17,7 +17,6 @@ class BoardFenController : public GameTurnObserver {
   void update_turn(const PlayerInfo &) override;
   void parse_fen(const string &fen);
   void update_fen();
-  const BoardFen& get_fen() { return m_board_fen_info; }
 
  private:
   bool is_number(char c);

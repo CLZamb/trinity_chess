@@ -5,16 +5,18 @@ TextInputBoard::TextInputBoard() {}
 
 TextInputBoard::~TextInputBoard() {}
 
-bool TextInputBoard::is_preselect(const string& s) {
-  std::cout << s << std::endl;
-  return true;
+void TextInputBoard::update_turn(const PlayerInfo &p) {
+  std::cout << p.color << std::endl;
 }
+// bool TextInputBoard::is_preselect(const string& s) {
+//   std::cout << s << std::endl;
+//   return false;
+// }
 
-string TextInputBoard::get_next_string_move(BoardView& bv) {
+BoardInput::InputEvent TextInputBoard::get_next_string_move(string& next_moves) {
   cout << " >> ";
-  string next_moves =  m_text_input.get_string_input();
+  next_moves =  m_text_input.get_string_input();
+  // if (is_preselect(next_moves)) bv.select_next_square(A1);
 
-  if (is_preselect(next_moves)) bv.select_next_square(A1);
-
-  return next_moves;
+  return InputEvent::COMPLETED;
 }

@@ -4,7 +4,6 @@ add_library(
  standard_pane.cpp
  section.cpp
  window.cpp
- view.cpp
 )
 
 target_include_directories(

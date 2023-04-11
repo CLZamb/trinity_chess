@@ -3,17 +3,18 @@
 
 #include <list>
 #include <string>
-#include "ui/graphics/components/view.h"
+#include "ui/graphics/components/standard_pane.h"
+#include "ui/graphics/components/window.h"
 #include "ui/graphics/drawings/menu_drawings.hpp"
 
 using std::string;
 using std::list;
 
-class MenuView : public View {
+class MenuView : public Window {
   public: 
     MenuView() : MenuView({""}) {}
 
-    MenuView(list<string> l_s) : View("Menu"), m_l_options(l_s) {
+    MenuView(list<string> l_s) : m_l_options(l_s) {
       _pane.add_section(m_top_section, 1);
       _pane.add_section(m_title_section, 1);
       _pane.add_section(m_options_section, 1);
@@ -22,7 +23,7 @@ class MenuView : public View {
       _pane.get_section(m_top_section)->set_drawing_at_index(MenuDrawings::menu_top.data(), 0);
       _pane.get_section(m_bottom_section)->set_drawing_at_index(MenuDrawings::menu_bottom.data(), 0);
 
-      _window.add_left_pane(&_pane);
+      add_left_pane(&_pane);
     }
 
     MenuView(string title, list<string> ls) : MenuView(ls) {
@@ -102,6 +103,7 @@ class MenuView : public View {
   const string m_options_section = "options";
   const string m_bottom_section = "bottom";
   const string m_select_signal = ">>";
+  StandardPane _pane;
 };
 
 #endif /* MENU_VIEW_H */

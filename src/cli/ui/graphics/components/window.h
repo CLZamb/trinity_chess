@@ -15,8 +15,7 @@ class Window {
   void add_left_pane(IPane* pane);
   void add_right_pane(IPane* pane);
   void add_middle_pane(IPane* pane);
-
-  friend ostream &operator<<(ostream &os, Window &);
+  void print();
 
  private:
   enum Pane_pos {
@@ -27,6 +26,7 @@ class Window {
 
   void add_pane(IPane *pane, Pane_pos pos);
   void get_formatted_window_drawing(ostream &os);
+  friend ostream &operator<<(ostream &os, Window &);
 
   constexpr static const size_t max_panes_size = 3;
   size_t m_panes_size_max_height{0};

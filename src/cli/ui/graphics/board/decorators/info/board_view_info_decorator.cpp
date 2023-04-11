@@ -1,14 +1,13 @@
 #include "board_view_info_decorator.h"
 
-BoardViewInfoDecorator::BoardViewInfoDecorator(unique_ptr<IUIBoard> &&b, BoardView &bv,
-                                       BoardModelInfo &i)
+BoardViewInfoDecorator::
+  BoardViewInfoDecorator(unique_ptr<IUiPaneComponent> &&b,
+                          BoardModelInfo &i)
     : BoardDecorator(std::move(b)), p_info(i) {
-  bv.add_right_pane(&m_info_pane);
 }
 
 BoardViewInfoDecorator::~BoardViewInfoDecorator() {}
 
-void BoardViewInfoDecorator::print() { BoardDecorator::print(); }
 
 void BoardViewInfoDecorator::update() {
   m_info_pane.update_game_info(p_info.get_info());
@@ -21,3 +20,7 @@ void BoardViewInfoDecorator::update() {
 
   BoardDecorator::update();
 }
+
+IPane* BoardViewInfoDecorator::get_pane() {
+  return &m_info_pane;
+} 

@@ -1,9 +1,8 @@
 #ifndef UI_BOARD_H
 #define UI_BOARD_H
 
-class IUIBoard {
+class IUiPaneComponent {
  public:
-  virtual void print() = 0;
   virtual void update() = 0;
 };
 

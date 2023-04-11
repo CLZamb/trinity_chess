@@ -6,7 +6,7 @@ SquaresDrawings::SquaresDrawings() {
 
   static const int col_size = 7;
   static const int row_size = 8;
-  unsigned int position = 0;
+  SquareIndices position = A1;
       /* 
        * Rows needs to be ordered upside down
        * because the program prints from top to bottom
@@ -21,7 +21,7 @@ SquaresDrawings::SquaresDrawings() {
            * i.e the bottom right position would be  
            * 8 * 0 + 7 = 7
            */
-      position = static_cast<unsigned int> (row * 8 + col);
+      position = static_cast<SquareIndices> (row * 8 + col);
       if (squareColor == 'b') {
         squareColor = 'w';
         m_squares[position].set_base_square_drawing(!is_black_squared);
@@ -36,24 +36,24 @@ SquaresDrawings::SquaresDrawings() {
 
 SquaresDrawings::~SquaresDrawings() {}
 
-SquareDrawing &SquaresDrawings::operator[](size_t i) {
+SquareDrawing &SquaresDrawings::operator[](SquareIndices i) {
   return m_squares[i];
 }
 
-void SquaresDrawings::select_next_square(const size_t &new_pos) {
+void SquaresDrawings::select_next_square(const SquareIndices &new_pos) {
   m_squares[prev_pos].deselect();
   prev_pos = new_pos;
   m_squares[new_pos].select();
 }
 
-void SquaresDrawings::selected_square(const size_t &i) {
+void SquaresDrawings::selected_square(const SquareIndices &i) {
   if (m_squares[i].is_selected()) return;
 
   m_squares[i].select();
   m_squares[i].set_is_selected(true);
 }
 
-void SquaresDrawings::deselected_square(const size_t &i) {
+void SquaresDrawings::deselected_square(const SquareIndices &i) {
   if (!m_squares[i].is_selected())  return;
 
   m_squares[i].set_is_selected(false);

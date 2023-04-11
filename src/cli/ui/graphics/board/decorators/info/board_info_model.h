@@ -6,12 +6,14 @@
 
 using std::string;
 
-class BoardModelInfo : public Savable {
+class BoardModelInfo : public Savable, public GameTurnObserver {
 public:
   BoardModelInfo();
   virtual ~BoardModelInfo();
 
-  void save_player_info(const PlayerInfo& c) override;
+  void update_turn(const PlayerInfo &p) override;
+
+  void save_player_info(const PlayerInfo &c) override;
   void save_move(const Move &move) override;
   void save_info(const string &info) override;
 
@@ -23,6 +25,7 @@ public:
 private:
   string get_move_string(const Move &m);
   string get_captured_string(const Move &m);
+  array<string, Color::SIZE> m_turn_string{"Is white turn", "Is black turn"};
   PlayerInfo m_player_info;
 };
 

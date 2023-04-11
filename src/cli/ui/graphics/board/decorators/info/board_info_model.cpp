@@ -4,6 +4,11 @@
 BoardModelInfo::BoardModelInfo() {}
 BoardModelInfo::~BoardModelInfo() {}
 
+void BoardModelInfo::update_turn(const PlayerInfo &player_info) {
+  save_player_info(player_info);
+  save_info(m_turn_string[player_info.color]);
+}
+
 void BoardModelInfo::save_move(const Move &mv) {
   m_moves[m_player_info.color] +=  get_move_string(mv) + " ";
 

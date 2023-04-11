@@ -1,5 +1,9 @@
 #include "window.h"
 #include <ostream>
+#include <iostream>
+
+using std::cout;
+using std::flush;
 
 Window::Window() {}
 Window::~Window() {}
@@ -10,6 +14,11 @@ void Window::add_left_pane(IPane* pane) {
 
 void Window::add_right_pane(IPane* pane) {
   add_pane(pane, Window::Right_pane);
+}
+
+void Window::print() {
+  // system(CLEAR);
+  cout << *this << flush; 
 }
 
 void Window::add_middle_pane(IPane* pane) {
@@ -36,7 +45,7 @@ ostream &operator<<(ostream &os, Window &w) {
 
 void Window::get_formatted_window_drawing(ostream &os) {
   if (m_panes.size() == 0) {
-    os << "Window.h: Error: no pane(s) added to window";
+    os << "Window.h: Error: no pane(s) added to window\n";
     return; 
   }
 

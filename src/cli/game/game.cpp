@@ -6,18 +6,18 @@ Game::Game(IConfiguration &pc)
     : m_game_turn(pc.get_players_config()),
       m_board_check(m_board),
       m_board_fen(m_board, start_fen),
-      m_board_ui(m_board_fen.get_fen(), pc.get_input_type()) {
+      m_board_ui(start_fen, pc.get_input_type()) {
   // m_players(pc.get_players_config(), input) {
-  m_board_ui.add_info_pane(m_board_check);
+  // m_board_ui.add_info_pane(m_board_check);
   attach_observers_to_game_turn();
 }
 
 Game::~Game() {}
 
 void Game::attach_observers_to_game_turn() { 
-  m_game_turn.attach(&m_board_fen);
-  m_game_turn.attach(&m_board_ui);
+  // m_game_turn.attach(&m_board_fen);
   m_game_turn.attach(&m_board_check);
+  m_board_ui.attach_components_to_game_turn(m_game_turn);
   m_game_turn.notify_game_turn();
 }
 
@@ -47,7 +47,6 @@ void Game::play() {
 
   } while (!m_board_check.is_checkmate());
 
-
   m_board_ui.update_view();
   m_board_ui.print_view();
   GameMessages::print_game_winner(m_game_turn.get_turn_color());
@@ -56,5 +55,5 @@ void Game::play() {
 void Game::make_move(const Move& mv) {
   m_board.make_move(mv);
   m_board_fen.update_fen();
-  m_board_ui.save_move(mv);
+  m_board_ui.make_move(mv);
 }

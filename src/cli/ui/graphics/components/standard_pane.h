@@ -21,10 +21,10 @@ class StandardPane : public IPane {
   void set_content_at_section(const string &section_name, const vector<string>* content);
   shared_ptr<Section>& get_section(const string& key);
 
+ private:
   size_t size() override;
   const string& operator[] (size_t i) override;
 
- private:
   void fill_pane();
   int get_next_index();
   bool is_valid_pane_index(const size_t& index);

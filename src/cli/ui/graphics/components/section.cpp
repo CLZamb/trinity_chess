@@ -26,13 +26,11 @@ void Section::set_drawing_at_index(string content, const size_t& index) {
 }
 
 bool Section::is_valid_index(const size_t& index) {
-  if (index >= size()) return false;
-  return true;
+  return index < size();
 }
 
 void Section::set_drawing(std::initializer_list<string> lst) {
-  if (lst.size() > size())
-    return;
+  if (lst.size() > size()) return;
 
   unsigned long index = 0;
   for (auto i : lst) {
@@ -41,8 +39,7 @@ void Section::set_drawing(std::initializer_list<string> lst) {
 }
 
 void Section::set_drawing(const vector<string>* content) {
-  if (content->size() > size())
-    return;
+  if (content->size() > size()) return;
 
   unsigned long index = 0;
   for (auto i : *content) {

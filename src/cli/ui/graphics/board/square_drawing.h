@@ -10,10 +10,10 @@ public:
   SquareDrawing(bool is_black_squared);
   virtual ~SquareDrawing();
   const Box* get_drawing();
-  const char* at(int i);
+  const char* at_row(int i);
 
   void clear_square();
-  void update_drawing(const Box* drawing);
+  void update_current_drawing(const Box* drawing);
   void set_piece_drawing(const Box* drawing);
   void set_base_square_drawing(bool is_black_square);
   bool is_black_square();
@@ -31,6 +31,7 @@ private:
   bool m_black_square {false};
   bool m_is_selected {false};
   bool m_has_piece {false};
+  bool m_is_next_selected {false};
   static BoxModifier mod;
 };
 

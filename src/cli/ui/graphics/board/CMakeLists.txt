@@ -3,12 +3,7 @@ add_library(
   square_drawing.cpp
   squares_drawings.cpp
   board_ui.cpp
-  # view
   board_view.cpp
-  # model
-  # board_model.hpp
-  # controller
-  board_controller.cpp
 )
 
 target_include_directories(

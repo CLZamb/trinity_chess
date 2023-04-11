@@ -1,36 +1,33 @@
 #ifndef BOARD_VIEW_H
 #define BOARD_VIEW_H
 
-#include "ui/graphics/components/view.h"
-#include "ui/graphics/board/pieces/pieces_drawings.hpp"
-#include "squares_drawing.h"
+#include "board/fen/fen_model.hpp"
+#include "game/players/player_position.h"
+#include "ui/graphics/components/window.h"
+#include "ui/input/board/board_input.h"
+#include "ui/input/input_types/input_types.h"
+#include <memory>
 
-class BoardView : public View {
-  public:
-    BoardView();
-    virtual ~BoardView();
-    void update_board_drawing();
-    void parse_fen(const string& s);
-    void add_left_pane(IPane *v);
-    void add_right_pane(IPane *v);
-    void select_next_square(const size_t &i);
-    void selected_square(const size_t &i);
-    void deselect_square(const size_t &i);
+using std::unique_ptr;
 
-  private:
-    void clear();
-    void clear_square_on_range(const int start, const int end);
-    void set_piece_drawing_at_square_pos(SquareIndices position, Piecetype type);
-    char left_border(const int &row,const int &col);
-    bool is_middle_of_square(const int &i);
-    bool is_number(char c);
+class BoardView : public Window  {
+ public:
+  BoardView(BoardPane &b);
+  virtual ~BoardView();
 
-    const string m_top_section = "top";
-    const string m_board_section = "board";
-    const string m_bottom_section = "bottom";
+  void update();
+  void print();
 
-    PiecesDrawings m_pieces_drawings;
-    SquaresDrawings m_squares_drawings;
+  // void add_left_pane(std::unique_ptr<BoardDecorator> &&pane);
+  // void add_right_pane(std::unique_ptr<BoardDecorator> &&pane);
+  unique_ptr<IUiPaneComponent> &&get_pane_components();
+
+ private:
+  // void add_pane_component(std::unique_ptr<BoardDecorator> &&pane);
+
+  // unique_ptr<IUiPaneComponent> p_board_panes;
+  BoardPane& m_board_pane;
+  const unique_ptr<BoardInput> p_board_input;
 };
 
 #endif /* BOARD_VIEW_H */
