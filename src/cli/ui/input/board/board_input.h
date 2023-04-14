@@ -2,18 +2,13 @@
 #define BOARD_INPUT_H
 
 #include "game/turn/game_turn_observer.h"
-#include "ui/graphics/board/board_pane.hpp"
+#include "ui/input/board/keyboard/key_code.h"
+#include <string>
 
-class BoardInput : public GameTurnObserver {
+class BoardInput {
  public:
-  enum InputEvent {
-    NO_EVENT = 0,
-    COMPLETED = 1,
-    PRINT = 0,
-  };
-
-  virtual InputEvent get_next_string_move(string& callback) = 0;
-  virtual void update_turn(const PlayerInfo &) = 0;
+  virtual ~BoardInput() {}
+  virtual KeyCode::Key get_input_event() = 0;
 };
 
 #endif /* BOARD_INPUT_H */

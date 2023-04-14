@@ -25,7 +25,7 @@ class Window {
   };
 
   void add_pane(IPane *pane, Pane_pos pos);
-  void get_formatted_window_drawing(ostream &os);
+  void get_window_drawing(ostream &os);
   friend ostream &operator<<(ostream &os, Window &);
 
   constexpr static const size_t max_panes_size = 3;

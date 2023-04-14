@@ -3,8 +3,15 @@
 
 #include "game/turn/game_turn_observer.h"
 #include "savable.h"
+#include "utils/string_utils.h"
 
 using std::string;
+using StringDrawingName::Pieces::pawn;
+using StringDrawingName::Pieces::rook;
+using StringDrawingName::Pieces::knight;
+using StringDrawingName::Pieces::bishop;
+using StringDrawingName::Pieces::queen;
+using StringDrawingName::Pieces::king;
 
 class BoardModelInfo : public Savable, public GameTurnObserver {
 public:
@@ -23,9 +30,22 @@ public:
   PlayerInfo get_player_info() override;
 
 private:
+  string get_piece_str_name_from_piecetype(Piecetype piece_type) {
+    const map<Piecetype, string> piece_str_name{
+      {bP, pawn},   {bR, rook},   {bN, knight}, {bB, bishop},
+      {bQ, queen},  {bK, king},   {wP, pawn},   {wR, rook},
+      {wN, knight}, {wB, bishop}, {wQ, queen},  {wK, king}
+    };
+
+    auto search = piece_str_name.find(piece_type);
+    // check if the key exists
+    if (search == piece_str_name.end())
+      return "";
+
+    return search->second;
+  }
   string get_move_string(const Move &m);
   string get_captured_string(const Move &m);
-  array<string, Color::SIZE> m_turn_string{"Is white turn", "Is black turn"};
   PlayerInfo m_player_info;
 };
 

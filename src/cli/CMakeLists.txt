@@ -22,7 +22,6 @@ target_link_libraries (
   game_turn_lib
   ui_graphics_board_lib
   ui_graphics_board_info_lib
-  ui_graphics_board_decorator_lib
   ui_graphics_components_lib
   ui_input_board_keyboard_lib
   ui_input_board_text_lib

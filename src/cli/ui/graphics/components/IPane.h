@@ -7,6 +7,7 @@
 
 class IPane {
  public:
+  virtual ~IPane() {}
   virtual const std::string& operator[] (size_t i) = 0;
   virtual size_t size() = 0;
 };

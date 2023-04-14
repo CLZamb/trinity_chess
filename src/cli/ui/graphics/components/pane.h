@@ -9,19 +9,19 @@
 using std::shared_ptr;
 using std::unordered_map;
 
-class StandardPane : public IPane {
+class Pane : public IPane {
  public:
-  explicit StandardPane(size_t size = 44);
-  virtual ~StandardPane();
+  explicit Pane(size_t size = 44);
+  virtual ~Pane();
   void clear();
   void fill(const string& content);
-  void add_section(shared_ptr<ISectionComponent> section);
   void add_section(const string & section_name, const size_t size);
   void set_content_at_section(const string &section_name, std::initializer_list<string> lst);
   void set_content_at_section(const string &section_name, const vector<string>* content);
   shared_ptr<Section>& get_section(const string& key);
 
  private:
+  void add_section(shared_ptr<ISectionComponent> section);
   size_t size() override;
   const string& operator[] (size_t i) override;
 

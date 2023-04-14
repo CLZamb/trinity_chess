@@ -14,6 +14,7 @@ using std::array;
 
 class Savable {
  public:
+  virtual ~Savable() = default;
   virtual string get_moves(Color c) = 0;
   virtual string get_captures(Color c) = 0;
   virtual string get_info() = 0;

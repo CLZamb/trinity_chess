@@ -14,8 +14,8 @@ PlayersConfig& DefaultConfiguration::get_players_config() {
   return m_players_config;
 }
 
-InputType DefaultConfiguration::get_input_type() {
-  return m_menu_input;
+BoardConfig& DefaultConfiguration::get_board_config() {
+  return m_board_config;
 }
 
 void DefaultConfiguration::get_players_type() {

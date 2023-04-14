@@ -4,6 +4,7 @@ add_library(
   squares_drawings.cpp
   board_ui.cpp
   board_view.cpp
+  board_pane.cpp
 )
 
 target_include_directories(

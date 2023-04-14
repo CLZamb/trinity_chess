@@ -1,18 +1,19 @@
 #ifndef INFO_VIEW_H
 #define INFO_VIEW_H
 
-#include <array>
-#include "game/players/player_info.hpp"
-#include "ui/graphics/components/standard_pane.h"
+#include "ui/graphics/board/decorators/board_decorator.hpp"
+#include "ui/graphics/board/decorators/info/board_info_model.h"
+#include "ui/graphics/components/pane.h"
 #include "ui/graphics/drawings/info_drawings.hpp"
+#include <map>
 
 using std::string;
-using std::array;
 
-class InfoPane : public StandardPane {
+class InfoPane : public BoardDecorator {
 public:
-  InfoPane();
+  InfoPane(shared_ptr<IUiPaneComponent>p, BoardModelInfo& i);
   virtual ~InfoPane();
+  void update() override;
   void update_turn(const PlayerInfo &info);
   void update_moves(const string &s, Color c);
   void update_captures(const string &s, Color c);
@@ -45,6 +46,7 @@ private:
     &InfoDrawings::Banner::white,
     &InfoDrawings::Banner::black
   };
+  BoardModelInfo& m_info;
 };
 
 #endif /* INFO_VIEW_H */

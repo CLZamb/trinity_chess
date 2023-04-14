@@ -22,6 +22,7 @@ private:
     {Color::BLACK, PlayerType::Human}
   }};
 
-  Color initial_side{Color::WHITE};
+  Color m_initial_side{Color::WHITE};
 };
+
 #endif /* PLAYER_CONFIG_H */

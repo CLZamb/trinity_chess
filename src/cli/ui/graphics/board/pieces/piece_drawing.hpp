@@ -4,9 +4,18 @@
 
 #include "ui/graphics/components/box_drawing.hpp"
 
+using StringDrawingName::Pieces::pawn;
+using StringDrawingName::Pieces::rook;
+using StringDrawingName::Pieces::knight;
+using StringDrawingName::Pieces::bishop;
+using StringDrawingName::Pieces::queen;
+using StringDrawingName::Pieces::king;
+
 class PieceDrawing {
  public:
-  explicit PieceDrawing(const string& piece_type) {
+  explicit PieceDrawing(Piecetype pct) {
+    string piece_type =
+        StringDrawingName::Pieces::get_piece_from_piecetype(pct);
     black_square_drawing = new BoxDrawing(piece_type);
     white_square_drawing = new BoxDrawing(piece_type);
   }
@@ -37,6 +46,20 @@ class PieceDrawing {
   }
 
  private:
+  string get_piece_str_name_from_piecetype(Piecetype piece_type) {
+    const map<Piecetype, string> piece_str_name{
+      {bP, pawn},   {bR, rook},   {bN, knight}, {bB, bishop},
+      {bQ, queen},  {bK, king},   {wP, pawn},   {wR, rook},
+      {wN, knight}, {wB, bishop}, {wQ, queen},  {wK, king}
+    };
+
+    auto search = piece_str_name.find(piece_type);
+    // check if the key exists
+    if (search == piece_str_name.end())
+      return "";
+
+    return search->second;
+  }
   BoxDrawing* white_square_drawing = nullptr;
   BoxDrawing* black_square_drawing = nullptr;
 };

@@ -1,7 +1,7 @@
 add_library(
  ui_graphics_components_lib
  ISectionComponent.cpp
- standard_pane.cpp
+ pane.cpp
  section.cpp
  window.cpp
 )

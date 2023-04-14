@@ -5,7 +5,7 @@
 #include "standard_pieces_drawing_builder.hpp"
 
 class PiecesDrawings {
- public:
+public:
   PiecesDrawings() {
     const Piecetype PiecesTypes[] = {
       bP, bR, bN, bB, bQ, bK,
@@ -33,19 +33,22 @@ class PiecesDrawings {
     }
   }
 
-  virtual ~PiecesDrawings() {}
+  virtual ~PiecesDrawings() {
+    for (auto piece : m_pieces)
+      delete piece;
+  }
 
   Box* get_drawing(const Piecetype &m_type, bool is_in_black_square) {
     return m_pieces[m_type]->get_drawing(is_in_black_square);
   }
 
-  private:
-    BoxModifier::Color piece_drawing_mod_fg;  
-    BoxModifier::Color piece_drawing_mod_black_square_bg;  
-    BoxModifier::Color piece_drawing_mod_white_square_bg;  
-    PieceDrawing *drawing; 
-    StandardPiecesDrawing m_piece_drawing_builder;
-    std::array<PieceDrawing*, utils::constant::ktotal_number_pieces> m_pieces;
+private:
+  BoxModifier::Color piece_drawing_mod_fg;  
+  BoxModifier::Color piece_drawing_mod_black_square_bg;  
+  BoxModifier::Color piece_drawing_mod_white_square_bg;  
+  PieceDrawing *drawing; 
+  StandardPiecesDrawing m_piece_drawing_builder;
+  std::array<PieceDrawing*, utils::constant::ktotal_number_pieces> m_pieces;
 };
 
 #endif /* DRAWINGS_H */

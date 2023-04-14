@@ -14,6 +14,7 @@ using std::string;
 using std::unordered_map;
 
 namespace StringDrawingName {
+
 namespace Pieces {
 static const string bishop = "bishop"; 
 static const string king   = "king"; 
@@ -21,13 +22,31 @@ static const string knight = "knight";
 static const string pawn   = "pawn"; 
 static const string queen  = "queen"; 
 static const string rook   = "rook"; 
+
+inline string get_piece_from_piecetype(Piecetype piece_type) {
+
+  const map<Piecetype, string> piece_str_name{
+    {bP, pawn},   {bR, rook},   {bN, knight}, {bB, bishop},
+    {bQ, queen},  {bK, king},   {wP, pawn},   {wR, rook},
+    {wN, knight}, {wB, bishop}, {wQ, queen},  {wK, king}
+  };
+
+  auto search = piece_str_name.find(piece_type);
+
+  if (search == piece_str_name.end())
+    return "";
+
+  return search->second;
 }
+
+} // Pieces
 
 namespace Square {
 static const string white_square = "WhiteSquare";
 static const string black_square = "BlackSquare";
-}
-}
+} // Square
+
+} // StringDrawingName
 
 namespace string_utils {
 inline unsigned int square_str_to_int(string sq) {
@@ -75,30 +94,6 @@ inline string squareindex_to_str(SquareIndices sq) {
   square_str = 'a' + (sq % 8);
   square_str += static_cast<char>('1' + (sq / 8));
   return square_str;
-}
-
-
-inline string get_piece_str_name_from_piecetype(Piecetype piece_type) {
-  static const map<Piecetype, string> piece_str_name{
-      {bP, StringDrawingName::Pieces::pawn},
-      {bR, StringDrawingName::Pieces::rook},
-      {bN, StringDrawingName::Pieces::knight},
-      {bB, StringDrawingName::Pieces::bishop},
-      {bQ, StringDrawingName::Pieces::queen},
-      {bK, StringDrawingName::Pieces::king},
-      {wP, StringDrawingName::Pieces::pawn},
-      {wR, StringDrawingName::Pieces::rook},
-      {wN, StringDrawingName::Pieces::knight},
-      {wB, StringDrawingName::Pieces::bishop},
-      {wQ, StringDrawingName::Pieces::queen},
-      {wK, StringDrawingName::Pieces::king}};
-
-  auto search = piece_str_name.find(piece_type);
-  // check if the key exists
-  if (search == piece_str_name.end())
-    return "";
-
-  return search->second;
 }
 
 inline string get_color_str_from_color(Color c) {

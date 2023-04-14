@@ -1,6 +1,6 @@
 add_library(
   game_turn_lib
-  game_turn.cpp
+  side_to_move.cpp
   game_turn_observable.cpp
 )
 

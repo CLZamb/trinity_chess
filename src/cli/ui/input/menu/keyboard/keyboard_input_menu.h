@@ -1,9 +1,9 @@
 #ifndef KEYBOARD_INPUT_MENU_H
 #define KEYBOARD_INPUT_MENU_H
 
-#include "ui/input/input_types/keyboard/keyboard_input.h"
 #include "ui/graphics/menu/options.hpp"
 #include "ui/graphics/menu/menu_view.hpp"
+#include "ui/input/input_types/keyboard/keyboard_base.h"
 #include "ui/input/menu/menu_input.h"
 #include <iostream>
 
@@ -63,7 +63,7 @@ class KeyboardInputMenu : public MenuInput<T>{
   }
 
   typename Options<T>::iterator p_selection_option;
-  KeyboardInput m_k_input;
+  KeyboardBase m_k_input;
   MenuView& m_view;
   Options<T>& m_opts;
   const string key_not_supported = "key not supported\n";

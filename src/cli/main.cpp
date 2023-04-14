@@ -8,7 +8,7 @@
 // ArrowInput m_input;
 int main(/*int argc, char *argv[]*/) {
   DefaultConfiguration config;
-  Menu start_menu(config.get_input_type());
+  Menu start_menu(config.get_board_config().get_input_type());
 
   string title = "Welcome to trinity Chess";
   const int play_key_num = 1, quit_key_num = 3, config_key_num = 2;

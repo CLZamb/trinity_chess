@@ -7,9 +7,9 @@
 #include "game/players/player_info.hpp"
 #include "utils/string_utils.h"
 
-class StandardCheckBehaviour : public IBoardCheckBehaviour {
+class CheckBehaviour : public IBoardCheckBehaviour {
 public:
-  StandardCheckBehaviour(Board &board, PlayerInfo &turn);
+  CheckBehaviour(Board &board, PlayerInfo &turn);
 
   bool is_legal_move(Move &m) override;
   bool is_string_format_valid(const string &s) override;

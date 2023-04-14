@@ -6,11 +6,11 @@
 
 using std::array;
 
-class GameTurn : public GameTurnObservable {
+class SideToMove : public GameTurnObservable {
   public:
-  GameTurn(PlayersConfig &config);
-  virtual ~GameTurn();
-  void notify_game_turn() override;
+  SideToMove(PlayersConfig &config);
+  virtual ~SideToMove();
+  void notify_turn() override;
   void change_turn();
   void set_inital_side(const Color &p);
   Color get_turn_color();

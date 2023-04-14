@@ -7,11 +7,11 @@ PlayersConfig::PlayersConfig(PlayerType t1, PlayerType t2) {
 }
 
 void PlayersConfig::set_initial_color(Color c) {
-  initial_side = c;
+  m_initial_side = c;
 }
 
 Color PlayersConfig::get_initial_color() {
-  return initial_side;
+  return m_initial_side;
 }
 
 PlayerType PlayersConfig::get_type(Color c) {

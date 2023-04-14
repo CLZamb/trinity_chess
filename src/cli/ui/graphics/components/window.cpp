@@ -12,6 +12,10 @@ void Window::add_left_pane(IPane* pane) {
   add_pane(pane, Window::Left_pane);
 }
 
+void Window::add_middle_pane(IPane* pane) {
+  add_pane(pane, Window::Middle_pane);
+}
+
 void Window::add_right_pane(IPane* pane) {
   add_pane(pane, Window::Right_pane);
 }
@@ -19,10 +23,6 @@ void Window::add_right_pane(IPane* pane) {
 void Window::print() {
   // system(CLEAR);
   cout << *this << flush; 
-}
-
-void Window::add_middle_pane(IPane* pane) {
-  add_pane(pane, Window::Middle_pane);
 }
 
 void Window::add_pane(IPane *pane, Pane_pos pos) {
@@ -39,11 +39,11 @@ void Window::add_pane(IPane *pane, Pane_pos pos) {
 }
 
 ostream &operator<<(ostream &os, Window &w) {
-  w.get_formatted_window_drawing(os);
+  w.get_window_drawing(os);
   return os;
 }
 
-void Window::get_formatted_window_drawing(ostream &os) {
+void Window::get_window_drawing(ostream &os) {
   if (m_panes.size() == 0) {
     os << "Window.h: Error: no pane(s) added to window\n";
     return; 

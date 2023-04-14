@@ -1,12 +1,12 @@
 #include <memory>
-#include "standard_board_check_behaviour.h"
+#include "board_check_behaviour.h"
 #include "board_check.h"
 
 using std::make_unique;
 
 BoardCheck::BoardCheck(Board& b):
   p_behaviour(
-    make_unique<StandardCheckBehaviour>(b, m_turn_info)
+    make_unique<CheckBehaviour>(b, m_turn_info)
   ) {}
 
 void BoardCheck::update_turn(const PlayerInfo &turn) { 

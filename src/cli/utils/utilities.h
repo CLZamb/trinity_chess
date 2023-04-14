@@ -65,7 +65,7 @@ inline Piecetype get_piecetype_from_char_key(const char c) {
 }
 
 inline char piecetype_to_char(Piecetype pct) {
-  constexpr char NotADigit{'*'};
+  static constexpr char NotADigit{'*'};
 
   static const map<Piecetype, char> encodings = {
       {wP, 'P'}, {wR, 'R'}, {wN, 'N'}, {wB, 'B'}, {wQ, 'Q'}, {wK, 'K'},

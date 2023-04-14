@@ -5,7 +5,6 @@ add_library(
   # view
   info_pane.cpp
   # controller
-  board_view_info_decorator.cpp
   board_check_info_decorator.cpp
 )
 

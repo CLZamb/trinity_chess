@@ -39,23 +39,3 @@ SquaresDrawings::~SquaresDrawings() {}
 SquareDrawing &SquaresDrawings::operator[](SquareIndices i) {
   return m_squares[i];
 }
-
-void SquaresDrawings::select_next_square(const SquareIndices &new_pos) {
-  m_squares[prev_pos].deselect();
-  prev_pos = new_pos;
-  m_squares[new_pos].select();
-}
-
-void SquaresDrawings::selected_square(const SquareIndices &i) {
-  if (m_squares[i].is_selected()) return;
-
-  m_squares[i].select();
-  m_squares[i].set_is_selected(true);
-}
-
-void SquaresDrawings::deselected_square(const SquareIndices &i) {
-  if (!m_squares[i].is_selected())  return;
-
-  m_squares[i].set_is_selected(false);
-  m_squares[i].deselect();
-}

@@ -7,7 +7,13 @@ termios KeyboardBase::current;
 string KeyboardBase::hide_cursor  = "\x1b[?25l";
 string KeyboardBase::show_cursor  = "\x1b[?25h";
 
-KeyboardBase::KeyboardBase() {}
+KeyboardBase::KeyboardBase() {
+  set_terminal_new_attributes();
+}
+
+KeyboardBase::~KeyboardBase() {
+  restore_terminal_configuration();
+}
 
 bool KeyboardBase::initialized = false;
 
@@ -41,11 +47,9 @@ Keyboard::Key KeyboardBase::read_key() {
   switch(key) {
     case Keyboard::quit:
     case Keyboard::Quit:
-      restore_terminal_configuration();
-      exit(EXIT_SUCCESS);
+      quit_game();
       break;
-    default:
-      break;
+    default: break;
   }
 
   return key; 
@@ -53,12 +57,11 @@ Keyboard::Key KeyboardBase::read_key() {
 
 Keyboard::Key KeyboardBase::read_arrow_key() {
   if (!initialized) quit_game();
-
   return m_k_reader.read_arrow_key();
 }
 
 void KeyboardBase::quit_game() {
-  std::cerr << "keyboard not initialized"<< std::endl;
+  restore_terminal_configuration();
   exit(EXIT_SUCCESS);
 }
 

@@ -10,14 +10,15 @@ public:
 
   void get_new_configuration();
   PlayersConfig& get_players_config() override;
-  virtual InputType get_input_type() override;
+  BoardConfig& get_board_config() override;
 
 private:
   void get_players_type();
   void get_players_color();
 
-  InputType m_menu_input = InputType::Keyboard;
+  BoardConfig m_board_config;
   PlayersConfig m_players_config;
+  InputType m_menu_input = InputType::Keyboard;
 };
 
 #endif

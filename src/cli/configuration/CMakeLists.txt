@@ -3,6 +3,7 @@ add_library(
   # file_configuration.cpp
   default_configuration.cpp
   players_configuration.cpp
+  board_configuration.cpp
 )
 
 target_include_directories(

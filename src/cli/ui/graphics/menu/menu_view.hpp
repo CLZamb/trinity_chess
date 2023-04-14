@@ -3,7 +3,7 @@
 
 #include <list>
 #include <string>
-#include "ui/graphics/components/standard_pane.h"
+#include "ui/graphics/components/pane.h"
 #include "ui/graphics/components/window.h"
 #include "ui/graphics/drawings/menu_drawings.hpp"
 
@@ -11,56 +11,56 @@ using std::string;
 using std::list;
 
 class MenuView : public Window {
-  public: 
-    MenuView() : MenuView({""}) {}
+public: 
+  MenuView() : MenuView({""}) {}
 
-    MenuView(list<string> l_s) : m_l_options(l_s) {
-      _pane.add_section(m_top_section, 1);
-      _pane.add_section(m_title_section, 1);
-      _pane.add_section(m_options_section, 1);
-      _pane.add_section(m_bottom_section, 1);
+  MenuView(list<string> l_s) : m_l_options(l_s) {
+    m_pane.add_section(m_top_section, 1);
+    m_pane.add_section(m_title_section, 1);
+    m_pane.add_section(m_options_section, 1);
+    m_pane.add_section(m_bottom_section, 1);
 
-      _pane.get_section(m_top_section)->set_drawing_at_index(MenuDrawings::menu_top.data(), 0);
-      _pane.get_section(m_bottom_section)->set_drawing_at_index(MenuDrawings::menu_bottom.data(), 0);
+    m_pane.get_section(m_top_section)->set_drawing_at_index(MenuDrawings::menu_top.data(), 0);
+    m_pane.get_section(m_bottom_section)->set_drawing_at_index(MenuDrawings::menu_bottom.data(), 0);
 
-      add_left_pane(&_pane);
+    add_left_pane(&m_pane);
+  }
+
+  MenuView(string title, list<string> ls) : MenuView(ls) {
+    set_title(title);
+    add_options_to_options_section();
+  }
+
+  virtual ~MenuView() {}
+
+  void set_title(string title = "") {
+    m_pane.set_content_at_section(m_title_section, {left_margin(title) + right_margin(title, false)});
+  }
+
+  void set_options(list<string> l_s) {
+    m_l_options = l_s;
+    add_options_to_options_section();
+  }
+
+  void selected_option(const int &i) {
+    string m_option;
+    int index = 1;
+
+    for (const auto &o : m_l_options) {
+      m_option += left_margin(o, i == index);
+      m_option += right_margin(o);
+      index++;
     }
 
-    MenuView(string title, list<string> ls) : MenuView(ls) {
-      set_title(title);
-      add_options_to_options_section();
-    }
+    m_option += MenuDrawings::empty_row;
 
-    virtual ~MenuView() {}
+    m_pane.set_content_at_section(m_options_section, {m_option});
+  }
 
-    void set_title(string title = "") {
-      _pane.set_content_at_section(m_title_section, {left_margin(title) + right_margin(title, false)});
-    }
-
-    void set_options(list<string> l_s) {
-      m_l_options = l_s;
-      add_options_to_options_section();
-    }
-
-    void selected_option(const int &i) {
-      string m_option;
-      int index = 1;
-
-      for (const auto &o : m_l_options) {
-        m_option += left_margin(o, i == index);
-        m_option += right_margin(o);
-        index++;
-      }
-
-      m_option += MenuDrawings::empty_row;
-
-      _pane.set_content_at_section(m_options_section, {m_option});
-    }
-
- private:
+private:
   void add_options_to_options_section() {
     string s = format_options(m_l_options);
-    _pane.get_section(m_options_section)->set_drawing_at_index(s, 0);
+    m_pane.get_section(m_options_section)->set_drawing_at_index(s, 0);
   }
 
   string format_options(list<string> &options) {
@@ -78,9 +78,9 @@ class MenuView : public Window {
 
   string left_margin(const string &s, bool is_selected = false) {
     return 
-      (is_selected ? MenuDrawings::left_margin_selected.data()
-                   : MenuDrawings::left_margin.data()) 
-                   + s;
+    (is_selected ? MenuDrawings::left_margin_selected.data()
+    : MenuDrawings::left_margin.data()) 
+    + s;
   }
 
   string right_margin(const string &o, bool add_new_line = true) {
@@ -103,7 +103,7 @@ class MenuView : public Window {
   const string m_options_section = "options";
   const string m_bottom_section = "bottom";
   const string m_select_signal = ">>";
-  StandardPane _pane;
+  Pane m_pane;
 };
 
 #endif /* MENU_VIEW_H */
