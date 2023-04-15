@@ -5,10 +5,10 @@ Game::Game(IConfiguration &pc)
     : m_turn(pc.get_players_config()),
       m_board_check(m_board),
       m_board_fen(m_board, start_fen),
-      m_board_ui(start_fen, pc.get_board_config()) {
+      m_board_view(start_fen, pc.get_board_config()) {
+  m_board_view.add_info_pane(m_board_check);
   // m_players(pc.get_players_config(), input) {
   // TODO
-  m_board_ui.add_info_pane(m_board_check);
   // m_board_ui.add_statistics_pane();
   attach_observers_to_game_turn();
 }
@@ -17,7 +17,7 @@ Game::~Game() {}
 
 void Game::attach_observers_to_game_turn() { 
   m_turn.attach(&m_board_check);
-  m_board_ui.attach_ui_elements(m_turn);
+  m_turn.attach(&m_board_view);
   m_turn.notify_turn();
 }
 
@@ -30,10 +30,10 @@ void Game::play() {
   Move mv;
 
   do {
-    m_board_ui.update_view();
-    m_board_ui.print_view();
+    m_board_view.update();
+    m_board_view.print();
 
-    str_move = m_board_ui.get_next_string_move();
+    str_move = m_board_view.get_next_string_move();
 
     if (str_move == "quit") return;
 
@@ -50,13 +50,13 @@ void Game::play() {
 
   } while (!m_board_check.is_checkmate());
 
-  m_board_ui.update_view();
-  m_board_ui.print_view();
+  m_board_view.update();
+  m_board_view.print();
   GameMessages::print_game_winner(m_turn.get_turn_color());
 }
 
 void Game::make_move(const Move& mv) {
   m_board.make_move(mv);
-  m_board_ui.make_move(mv);
+  m_board_view.make_move(mv);
   m_board_fen.update_fen();
 }

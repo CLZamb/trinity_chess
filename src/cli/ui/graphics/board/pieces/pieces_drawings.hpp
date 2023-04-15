@@ -2,7 +2,7 @@
 #define DRAWINGS_H
 
 #include <array>
-#include "standard_pieces_drawing_builder.hpp"
+#include "pieces_drawing_builder.hpp"
 
 class PiecesDrawings {
 public:
@@ -43,11 +43,11 @@ public:
   }
 
 private:
-  BoxModifier::Color piece_drawing_mod_fg;  
-  BoxModifier::Color piece_drawing_mod_black_square_bg;  
-  BoxModifier::Color piece_drawing_mod_white_square_bg;  
-  PieceDrawing *drawing; 
-  StandardPiecesDrawing m_piece_drawing_builder;
+  BoxModifier::Color piece_drawing_mod_fg;
+  BoxModifier::Color piece_drawing_mod_black_square_bg;
+  BoxModifier::Color piece_drawing_mod_white_square_bg;
+  PieceDrawing *drawing;
+  PiecesDrawingBuilder m_piece_drawing_builder;
   std::array<PieceDrawing*, utils::constant::ktotal_number_pieces> m_pieces;
 };
 

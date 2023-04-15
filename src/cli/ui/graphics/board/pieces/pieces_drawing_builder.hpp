@@ -5,11 +5,11 @@
 #include "IPiecesDrawingBuilder.hpp"
 
 using std::list;
-class StandardPiecesDrawing : public IPiecesDrawingBuilder {
+class PiecesDrawingBuilder : public IPiecesDrawingBuilder {
  public:
-  StandardPiecesDrawing() : _pieces_drawings(new std::list<PieceDrawing*>) {}
+  PiecesDrawingBuilder() : _pieces_drawings(new std::list<PieceDrawing*>) {}
 
-  virtual ~StandardPiecesDrawing() {
+  virtual ~PiecesDrawingBuilder() {
     _pieces_drawings->clear();
     delete _pieces_drawings;
   }

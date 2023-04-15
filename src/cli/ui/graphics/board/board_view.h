@@ -1,34 +1,35 @@
 #ifndef BOARD_VIEW_H
 #define BOARD_VIEW_H
 
+#include "board/check_move/board_check.h"
 #include "board/fen/fen_model.hpp"
+#include "configuration/board_configuration.h"
 #include "game/players/player_position.h"
-#include "ui/graphics/board/board_pane.h"
-#include "ui/graphics/board/decorators/board_decorator.hpp"
-#include "ui/graphics/components/window.h"
+#include "ui/graphics/board/panes/board/board_pane.h"
+#include "ui/graphics/board/panes/IUi_board.h"
+#include "ui/graphics/components/board_components.hpp"
+#include "ui/input/board/board_input.h"
 #include "ui/input/input_types/input_handler.h"
-#include <memory>
-#include <list>
+#include "board_window.h"
 
-class BoardView : public Window  {
+class BoardView : public BoardWindow, public GameTurnObserver  {
  public:
-  BoardView();
+  BoardView(const string f, const BoardConfig& b);
   virtual ~BoardView();
 
+  void update_turn(const PlayerInfo &) override;
   void update();
   void print();
-  void add_right_pane(shared_ptr<IUiPaneComponent> p);
-  void add_left_pane(shared_ptr<IUiPaneComponent> p);
-  void add_board_pane(shared_ptr<BoardPane> b) ;
-  void add_input_event_handler(shared_ptr<InputHandler> i);
-  bool handle_input(KeyCode::Key e, string& callback);
-  string get_string_move();
- private:
-  // prevent the use of window_add_middle function
-  using Window::add_middle_pane; 
+  string get_next_string_move();
+  void make_move(const Move& m);
+  void add_info_pane(BoardCheck &b);
+  void add_board_pane(const string& fen);
+  void add_keyboard_pane(const string& fen);
 
-  shared_ptr<IUiPaneComponent> p_panes;
-  shared_ptr<InputHandler> p_input_handler;
+ private:
+  BoardModelInfo m_board_model_info;
+  PlayerInfo m_turn_info;
+  BoardComponents m_components;
 };
 
 #endif /* BOARD_VIEW_H */

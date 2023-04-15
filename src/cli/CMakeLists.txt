@@ -21,6 +21,8 @@ target_link_libraries (
   game_players_lib
   game_turn_lib
   ui_graphics_board_lib
+  ui_graphics_board_squares_lib
+  ui_graphics_board_pane_lib
   ui_graphics_board_info_lib
   ui_graphics_components_lib
   ui_input_board_keyboard_lib

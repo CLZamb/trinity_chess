@@ -1,7 +1,7 @@
 #include "info_pane.h"
 
-InfoPane::InfoPane(shared_ptr<IUiPaneComponent>p, BoardModelInfo& bmi) : 
-  BoardDecorator(p), m_info(bmi) {
+InfoPane::InfoPane(BoardModelInfo& bmi) : 
+   m_info(bmi) {
   add_section(m_top_section, 1);
   add_section(m_player_banner_section, InfoDrawings::Banner::height);
   add_section(m_moves_section[BLACK], 10);
@@ -24,12 +24,11 @@ void InfoPane::update() {
     update_moves(m_info.get_moves(c), c);
     update_captures(m_info.get_captures(c), c);
   }
-
-  BoardDecorator::update();
 }
 
 void InfoPane::clear_all_sections() {
   clear();
+  update_banner(WHITE);
   format_block(get_section(m_moves_section[BLACK]), "");
   format_block(get_section(m_moves_section[WHITE]), "");
   format_block(get_section(m_captures_section[BLACK]), "");

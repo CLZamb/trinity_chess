@@ -8,13 +8,12 @@ using std::string;
 
 class TextInputBase {
  public:
-
   int get_integer_input();
   string get_string_input();
-
- protected:
   TextInputBase();
   virtual ~TextInputBase();
+
+ protected:
   static const string input_space;
  private:
   void has_player_quit(const string &s);

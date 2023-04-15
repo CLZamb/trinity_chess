@@ -1,20 +1,22 @@
 #ifndef BOARD_PANE_H
 #define BOARD_PANE_H
 
-#include "ui/graphics/board/decorators/IUi_board.h"
+#include "ui/graphics/board/panes/IUi_board.h"
+#include "ui/graphics/board/panes/board/IBoard_pane.h"
 #include "ui/graphics/board/pieces/pieces_drawings.hpp"
-#include "ui/graphics/board/squares_drawing.h"
-#include "ui/graphics/board/IBoard_pane.h"
-#include "ui/graphics/components/pane.h"
+#include "ui/graphics/board/squares/squares_drawing.h"
+#include "ui/input/board/text/text_input_event_handler.h"
 #include <memory>
 
-class BoardPane : public IBoardPane, public IUiPaneComponent {
+class BoardPane : public IBoardPane {
 public:
   BoardPane(const string &fen);
   virtual ~BoardPane() = default;
 
   void make_move(const Move &mv) override;
   void update() override;
+  void update_turn(const PlayerInfo&) override {}
+  virtual bool handle_event(KeyCode::Key, std::string& callback) override;
 
 protected:
   void update_board_drawing();
@@ -32,6 +34,7 @@ protected:
 
   SquaresDrawings m_squares_drawings;
   PiecesDrawings m_pieces_drawings;
+  TextInputEventHandler m_text_event_handler;
 };
 
 #endif // !BOARD_PANE_H

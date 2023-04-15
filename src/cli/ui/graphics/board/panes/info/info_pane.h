@@ -1,17 +1,17 @@
 #ifndef INFO_VIEW_H
 #define INFO_VIEW_H
 
-#include "ui/graphics/board/decorators/board_decorator.hpp"
-#include "ui/graphics/board/decorators/info/board_info_model.h"
+#include "ui/graphics/board/panes/IUi_board.h"
+#include "ui/graphics/board/panes/info/board_info_model.h"
 #include "ui/graphics/components/pane.h"
 #include "ui/graphics/drawings/info_drawings.hpp"
 #include <map>
 
 using std::string;
 
-class InfoPane : public BoardDecorator {
+class InfoPane : public IUiPaneComponent {
 public:
-  InfoPane(shared_ptr<IUiPaneComponent>p, BoardModelInfo& i);
+  InfoPane(BoardModelInfo& bmi);
   virtual ~InfoPane();
   void update() override;
   void update_turn(const PlayerInfo &info);
@@ -46,6 +46,7 @@ private:
     &InfoDrawings::Banner::white,
     &InfoDrawings::Banner::black
   };
+
   BoardModelInfo& m_info;
 };
 

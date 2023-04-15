@@ -1,7 +1,7 @@
 #ifndef UI_STATISTICS_PANE_H
 #define UI_STATISTICS_PANE_H
 
-#include "ui/graphics/board/decorators/board_decorator.hpp"
+#include "ui/graphics/board/panes/board_decorator.hpp"
 #include "ui/graphics/components/pane.h"
 #include "ui/graphics/drawings/info_drawings.hpp"
 

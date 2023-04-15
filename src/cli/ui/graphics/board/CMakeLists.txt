@@ -1,10 +1,6 @@
 add_library(
   ui_graphics_board_lib
-  square_drawing.cpp
-  squares_drawings.cpp
-  board_ui.cpp
   board_view.cpp
-  board_pane.cpp
 )
 
 target_include_directories(
@@ -15,5 +11,6 @@ target_include_directories(
 
 message("ui_graphics_board_lib library compiled")
 
-add_subdirectory(decorators)
+add_subdirectory(panes)
 add_subdirectory(pieces)
+add_subdirectory(squares)

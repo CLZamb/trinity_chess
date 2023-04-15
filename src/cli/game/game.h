@@ -1,10 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "board/check_move/board_check.h"
 #include "board/fen/board_fen_controller.h"
-#include "ui/graphics/board/board_ui.h"
 #include "game/turn/side_to_move.h"
 #include "configuration/IConfiguration.h"
+#include "ui/graphics/board/board_view.h"
 
 // TESTS FEN
 // const string start_fen = "4k3/8/8/4pP2/8/8/8/4K2R w - e6 0 1";
@@ -36,7 +37,7 @@ class Game {
   Board m_board;
   BoardCheck m_board_check;
   BoardFenController m_board_fen;
-  BoardUi m_board_ui;
+  BoardView m_board_view;
   // Players m_players;
   // IpcPipe m_ipc_search;
 };

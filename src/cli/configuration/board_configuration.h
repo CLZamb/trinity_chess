@@ -6,11 +6,11 @@ class BoardConfig {
 public:
   BoardConfig();
   virtual ~BoardConfig();
-  InputType get_input_type();
+  InputType get_input_type() const;
   void set_input_type(InputType i);
 
 private:
-  InputType m_input_type {Keyboard};
+  InputType m_input_type {Text};
 };
 
 #endif /* PLAYER_CONFIG_H */
