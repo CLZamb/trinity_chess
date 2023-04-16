@@ -1,15 +1,7 @@
 #ifndef BOARD_VIEW_H
 #define BOARD_VIEW_H
 
-#include "board/check_move/board_check.h"
-#include "board/fen/fen_model.hpp"
 #include "configuration/board_configuration.h"
-#include "game/players/player_position.h"
-#include "ui/graphics/board/panes/board/board_pane.h"
-#include "ui/graphics/board/panes/IUi_board.h"
-#include "ui/graphics/components/board_components.hpp"
-#include "ui/input/board/board_input.h"
-#include "ui/input/input_types/input_handler.h"
 #include "board_window.h"
 
 class BoardView : public BoardWindow, public GameTurnObserver  {

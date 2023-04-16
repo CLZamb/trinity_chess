@@ -1,15 +1,15 @@
 #ifndef TEXT_INPUT_EVENT_HANDLER_H
 #define TEXT_INPUT_EVENT_HANDLER_H
 
-#include "ui/input/input_types/input_handler.h"
 #include "ui/input/input_types/text/text_input_base.h"
+#include "ui/input/board/keyboard/key_code.h"
 
-class TextInputEventHandler : public InputHandler {
+class TextInputEventHandler {
  public:
   TextInputEventHandler () {}
   virtual ~TextInputEventHandler () {}
 
-  bool handle_event(KeyCode::Key e, string &call_back) override {
+  bool handle_event(KeyCode::Key e) {
     call_back = "quit";
     switch (e) {
       case KeyCode::ENTER:
@@ -20,7 +20,12 @@ class TextInputEventHandler : public InputHandler {
     }
   }
 
+  string get_string() {
+    return call_back;
+  }
+
  private:
+  string call_back{""};
   TextInputBase m_text;
 };
 

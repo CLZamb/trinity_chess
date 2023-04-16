@@ -4,6 +4,6 @@ TextInputBoard::TextInputBoard() {}
 
 TextInputBoard::~TextInputBoard() {}
 
-KeyCode::Key TextInputBoard::get_input_event() {
-  return KeyCode::ENTER;
+void TextInputBoard::get_input_event() {
+  m_events.at(Keyboard::ENTER)(KeyCode::ENTER);
 }

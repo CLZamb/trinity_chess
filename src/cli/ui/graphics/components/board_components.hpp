@@ -1,6 +1,7 @@
 #ifndef BOARD_COMPONENTS_H
 #define BOARD_COMPONENTS_H
 
+#include "ui/graphics/board/panes/board/board_text_pane.h"
 #include "ui/graphics/board/panes/info/board_check_info_decorator.h"
 #include "ui/graphics/board/panes/info/info_pane.h"
 #include "ui/graphics/board/panes/board/board_keyboard_pane.h"
@@ -19,14 +20,19 @@ public:
   BoardComponents() {}
   virtual ~BoardComponents() {}
 
-  auto new_board_keyboard_pane(const string &f) {
-    return make_shared<BoardKeyboardPane>(f);
+  auto new_board_keyboard_pane(const string &f, shared_ptr<KeyboardInputBoard> p) {
+    return make_shared<BoardKeyboardPane>(f, p);
   }
 
-  unique_ptr<BoardInput> new_input(InputType type) {
-    if (type == InputType::Keyboard) 
-      return make_unique<KeyboardInputBoard>();
+  // auto new_board_keyboard_pane(const string &f, shared_ptr<KeyboardInputBoard> p) {
+  //   return make_shared<BoardKeyboardPane>(f, p);
+  // }
 
+  shared_ptr<KeyboardInputBoard> new_input_keyboard() {
+    return make_unique<KeyboardInputBoard>();
+  }
+
+  shared_ptr<TextInputBoard> new_input_text() {
     return make_unique<TextInputBoard>();
   }
 
@@ -37,9 +43,11 @@ public:
   auto new_info_check_behaviour(BoardCheck& b, BoardModelInfo& m){
     return make_unique<BoardCheckInfoDecorator>(std::move(b.get_behaviour()), m);
   }
-  auto new_board_pane(const string& fen) {
-    return std::make_shared<BoardPane>(fen);
+
+  auto new_board_pane(const string& fen, shared_ptr<TextInputBoard> p) {
+    return std::make_shared<BoardTextPane>(fen, p);
   }
+
 };
 
 

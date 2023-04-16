@@ -8,10 +8,21 @@ class KeyboardInputBoard : public BoardInput {
 public:
   KeyboardInputBoard();
   virtual ~KeyboardInputBoard();
-  KeyCode::Key get_input_event() override;
+  void get_input_event() override;
 
 private:
-  KeyCode::Key handle_arrow_keys(const Keyboard::Key key);
+  std::unordered_map<Keyboard::Key, KeyCode::Key> m_keycodes {
+    {Keyboard::W, KeyCode::UP},
+    {Keyboard::A, KeyCode::LEFT},
+    {Keyboard::S, KeyCode::DOWN},
+    {Keyboard::D, KeyCode::RIGHT},
+    {Keyboard::UP, KeyCode::UP},
+    {Keyboard::LEFT, KeyCode::LEFT},
+    {Keyboard::DOWN, KeyCode::DOWN},
+    {Keyboard::RIGHT, KeyCode::RIGHT},
+    {Keyboard::ENTER, KeyCode::ENTER},
+  };
+  void handle_arrow_keys(const Keyboard::Key key);
   KeyboardBase m_k_input;
 };
 

@@ -3,7 +3,6 @@
 
 #include "ui/graphics/board/panes/IUi_board.h"
 #include "ui/graphics/board/panes/info/board_info_model.h"
-#include "ui/graphics/components/pane.h"
 #include "ui/graphics/drawings/info_drawings.hpp"
 #include <map>
 
@@ -14,7 +13,7 @@ public:
   InfoPane(BoardModelInfo& bmi);
   virtual ~InfoPane();
   void update() override;
-  void update_turn(const PlayerInfo &info);
+  void update_turn(const PlayerInfo &info) ;
   void update_moves(const string &s, Color c);
   void update_captures(const string &s, Color c);
   void update_game_info(const string &i);

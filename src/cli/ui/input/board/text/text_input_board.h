@@ -8,7 +8,7 @@ class TextInputBoard : public BoardInput {
  public:
   TextInputBoard();
   virtual ~TextInputBoard();
-  KeyCode::Key get_input_event() override;
+  void get_input_event() override;
  private:
   TextInput m_text_input;
 };

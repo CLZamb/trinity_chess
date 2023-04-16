@@ -28,7 +28,7 @@ class Window {
   void get_window_drawing(ostream &os);
   friend ostream &operator<<(ostream &os, Window &);
 
-  constexpr static const size_t max_panes_size = 3;
+  constexpr static int max_panes_size = 3;
   size_t m_panes_size_max_height{0};
   map<int, IPane *> m_panes;
 };

@@ -9,7 +9,7 @@
 using std::shared_ptr;
 using std::unordered_map;
 
-class Pane : public IPane {
+class Pane : public IPane  {
  public:
   explicit Pane(size_t size = 44);
   virtual ~Pane();

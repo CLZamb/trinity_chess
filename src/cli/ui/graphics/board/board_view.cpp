@@ -3,12 +3,11 @@
 BoardView::BoardView(const string fen, const BoardConfig &bc) {
   if (bc.get_input_type() == Keyboard) {
     add_keyboard_pane(fen);
-    add_input(m_components.new_input(Keyboard));
   } else {
     add_board_pane(fen);
-    add_input(m_components.new_input(Text));
   }
 }
+
 BoardView::~BoardView() {}
 
 void BoardView::update_turn(const PlayerInfo &p) {
@@ -22,19 +21,17 @@ void BoardView::update() { BoardWindow::update_panes(); }
 void BoardView::print() { BoardWindow::print(); }
 
 string BoardView::get_next_string_move() {
-  string next_string_move{""};
-  bool is_completed{false};
-  KeyCode::Key e;
 
   do {
-    e = get_input_event();
-    is_completed = get_board_pane()->handle_event(e, next_string_move);
+    get_input()->get_input_event();
 
-    if (!is_completed) print();
+    if (get_board_pane()->has_events())
+      break;
 
-  } while (!is_completed);
+    print();
+  } while (1);
 
-  return next_string_move;
+  return get_board_pane()->get_string();
 }
 
 void BoardView::make_move(const Move &mv) {
@@ -43,18 +40,30 @@ void BoardView::make_move(const Move &mv) {
 }
 
 void BoardView::add_board_pane(const string &fen) {
-  auto board_pane = m_components.new_board_pane(fen);
-  add_middle_pane("board", board_pane);
+  auto text_input = m_components.new_input_text();
+  set_input(text_input);
+
+  auto board_pane = m_components.new_board_pane(fen, text_input);
   set_board_pane(board_pane);
+  add_middle_pane("keyboard board", board_pane);
 }
 
 void BoardView::add_keyboard_pane(const string &fen) {
-  auto board_pane = m_components.new_board_keyboard_pane(fen);
-  add_middle_pane("keyboard board", board_pane);
+  auto keyboard_input = m_components.new_input_keyboard();
+  set_input(keyboard_input);
+
+  auto board_pane = m_components.new_board_keyboard_pane(fen, keyboard_input);
   set_board_pane(board_pane);
+  add_middle_pane("keyboard board", board_pane);
 }
 
 void BoardView::add_info_pane(BoardCheck &b) {
   b.set_behaviour(m_components.new_info_check_behaviour(b, m_board_model_info));
-  add_right_pane("info", m_components.new_info_pane(m_board_model_info));
+
+  auto info_pane = m_components.new_info_pane(m_board_model_info);
+  add_right_pane("info", info_pane);
 }
+
+// void BoardView::add_statistics_pane() {
+//   auto statistics = m_components.new_statistics_components();
+// }

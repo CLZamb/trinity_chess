@@ -4,26 +4,48 @@
 #include "game/players/player.h"
 #include "ui/graphics/board/panes/board/IKeyboard_board_input_selection.h"
 #include "ui/graphics/board/panes/board/board_pane.h"
+#include "ui/input/board/keyboard/keyboard_input_board.h"
 #include "ui/input/board/keyboard/keyboard_input_board_event_handler.hpp"
 // #include "ui/input/board/keyboard/keyboard_input_board_event_handler.hpp"
 
 class BoardKeyboardPane : public BoardPane, public IKeyboardBoardInput {
 public:
-  BoardKeyboardPane(const string &fen)
-      : BoardPane(fen), m_even_handler(*this) {}
+  BoardKeyboardPane(const string &fen, shared_ptr<KeyboardInputBoard> p)
+      : BoardPane(fen), m_event_handler(*this) {
+
+    p->bind(Keyboard::W, &KeyboardEventHandler::handle_event_up, &m_event_handler);
+    p->bind(Keyboard::A, &KeyboardEventHandler::handle_event_left, &m_event_handler);
+    p->bind(Keyboard::S, &KeyboardEventHandler::handle_event_down, &m_event_handler);
+    p->bind(Keyboard::D, &KeyboardEventHandler::handle_event_right, &m_event_handler);
+
+    p->bind(Keyboard::UP, &KeyboardEventHandler::handle_event_up, &m_event_handler);
+    p->bind(Keyboard::DOWN, &KeyboardEventHandler::handle_event_down, &m_event_handler);
+    p->bind(Keyboard::LEFT, &KeyboardEventHandler::handle_event_left, &m_event_handler);
+    p->bind(Keyboard::RIGHT, &KeyboardEventHandler::handle_event_right, &m_event_handler);
+
+    p->bind(Keyboard::ENTER, &KeyboardEventHandler::handle_event_enter, &m_event_handler);
+  }
 
   virtual ~BoardKeyboardPane() {}
 
   void update() override { 
-    BoardPane::update(); 
+    BoardPane::update_board_drawing(); 
+  }
+
+  void make_move(const Move &mv) override {
+    BoardPane::make_move(mv);
   }
 
   void update_turn(const PlayerInfo& p) override {
-    m_even_handler.update_turn(p);
+    m_event_handler.update_turn(p);
   }
 
-  bool handle_event(KeyCode::Key e, string &callback) override {
-    return m_even_handler.handle_event(e, callback);
+  bool has_events() override {
+    return m_event_handler.is_completed();
+  }
+
+  string get_string() override {
+    return m_event_handler.get_string();
   }
 
   void select_next_square(const SquareIndices &new_pos) override {
@@ -50,7 +72,7 @@ public:
 
 private:
   SquareIndices prev_pos{SquareNull};
-  KeyboardEventHandler m_even_handler;
+  KeyboardEventHandler m_event_handler;
 };
 
 #endif /* BOARD_KEYBOARD_PANE_H */

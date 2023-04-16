@@ -17,14 +17,6 @@ void BoardPane::make_move(const Move &mv) {
   set_piece_drawing_at_square_pos(to, piece);
 }
 
-bool BoardPane::handle_event(KeyCode::Key e, std::string &s) {
-  return m_text_event_handler.handle_event(e, s);
-}
-
-void BoardPane::update() { 
-  update_board_drawing(); 
-}
-
 void BoardPane::update_board_drawing() {
   unsigned long row_counter = 0;
   string row_drawing = "";

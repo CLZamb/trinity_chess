@@ -1,6 +1,7 @@
 #include "game.h"
 #include "ui/graphics/ui_messages/game_messages.hpp"
 
+
 Game::Game(IConfiguration &pc)
     : m_turn(pc.get_players_config()),
       m_board_check(m_board),
@@ -9,7 +10,7 @@ Game::Game(IConfiguration &pc)
   m_board_view.add_info_pane(m_board_check);
   // m_players(pc.get_players_config(), input) {
   // TODO
-  // m_board_ui.add_statistics_pane();
+  // m_board_view.add_statistics_pane();
   attach_observers_to_game_turn();
 }
 

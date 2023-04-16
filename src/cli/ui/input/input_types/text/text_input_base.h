@@ -13,9 +13,8 @@ class TextInputBase {
   TextInputBase();
   virtual ~TextInputBase();
 
- protected:
-  static const string input_space;
  private:
+  static const string input_space;
   void has_player_quit(const string &s);
 };
 
