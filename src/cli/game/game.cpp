@@ -1,12 +1,12 @@
 #include "game.h"
-#include "ui/graphics/ui_messages/game_messages.hpp"
+#include "ui/messages/game_messages.hpp"
 
 
 Game::Game(IConfiguration &pc)
     : m_turn(pc.get_players_config()),
       m_board_check(m_board),
       m_board_fen(m_board, start_fen),
-      m_board_view(start_fen, pc.get_board_config()) {
+      m_board_view(start_fen, pc.get_board_config(), m_turn) {
   m_board_view.add_info_pane(m_board_check);
   // m_players(pc.get_players_config(), input) {
   // TODO
@@ -18,7 +18,6 @@ Game::~Game() {}
 
 void Game::attach_observers_to_game_turn() { 
   m_turn.attach(&m_board_check);
-  m_turn.attach(&m_board_view);
   m_turn.notify_turn();
 }
 
@@ -53,7 +52,7 @@ void Game::play() {
 
   m_board_view.update();
   m_board_view.print();
-  GameMessages::print_game_winner(m_turn.get_turn_color());
+  GameMessages::print_game_winner(m_turn.get_color());
 }
 
 void Game::make_move(const Move& mv) {

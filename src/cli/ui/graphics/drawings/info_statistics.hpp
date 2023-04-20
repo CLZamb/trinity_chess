@@ -1,4 +1,0 @@
-#ifndef INFO_STATISTICS_H
-#define INFO_STATISTICS_H
-
-#endif /* INFO_STATISTICS_H */

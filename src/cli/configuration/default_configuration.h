@@ -18,7 +18,6 @@ private:
 
   BoardConfig m_board_config;
   PlayersConfig m_players_config;
-  InputType m_menu_input = InputType::Text;
 };
 
 #endif

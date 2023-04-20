@@ -13,7 +13,7 @@ class SideToMove : public GameTurnObservable {
   void notify_turn() override;
   void change_turn();
   void set_inital_side(const Color &p);
-  Color get_turn_color();
+  Color get_color();
   void set_new_configuration(PlayersConfig &config);
 
 private:

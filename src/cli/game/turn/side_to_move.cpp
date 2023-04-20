@@ -36,6 +36,6 @@ void SideToMove::set_inital_side(const Color &c) {
   m_turn = c;
 }
 
-Color SideToMove::get_turn_color() {
+Color SideToMove::get_color() {
   return m_turn;
 }

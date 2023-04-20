@@ -1,8 +1,9 @@
 #include <cstdlib>
-#include "ui/graphics/menu/menu.hpp"
-#include "ui/graphics/ui_messages/game_messages.hpp"
+#include "ui/menu/menu.hpp"
+#include "ui/messages/game_messages.hpp"
 #include "configuration/default_configuration.h"
 #include "game/game.h"
+#include "ui/input/keyboard/keyboard_base.h"
 
 // TextInput m_input;
 // ArrowInput m_input;

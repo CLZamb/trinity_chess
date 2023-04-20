@@ -20,15 +20,15 @@ target_link_libraries (
   configuration_lib
   game_players_lib
   game_turn_lib
-  ui_graphics_board_lib
-  ui_graphics_board_squares_lib
-  ui_graphics_board_pane_lib
-  ui_graphics_board_info_lib
-  ui_graphics_components_lib
-  ui_input_board_keyboard_lib
-  ui_input_board_text_lib
-  ui_input_inputtype_keyboard_lib
-  ui_input_inputtypes_text_lib
+  #graphics
+  ui_board_lib
+  ui_board_squares_lib
+  ui_board_pane_lib
+  ui_board_info_pane_lib
+  ui_components_lib
+  #input
+  ui_input_keyboard_lib
+  ui_input_text_lib
   #INTERFACE
   # ui_graphics_board_pieces_lib
   # ui_graphics_drawings_lib

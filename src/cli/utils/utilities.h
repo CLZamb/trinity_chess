@@ -1,11 +1,11 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
-#include <map>
+#include <unordered_map>
 #include <limits>
 #include "defs.h"
 
-using std::map;
+using std::unordered_map;
 using std::size_t;
 
 enum Piecetype : unsigned int {
@@ -52,7 +52,7 @@ namespace check {
 }  // namespace check
 
 inline Piecetype get_piecetype_from_char_key(const char c) {
-  static const map<char, Piecetype> piece_map = {
+  static const unordered_map<char, Piecetype> piece_map = {
     {'P', wP}, {'R', wR}, {'N', wN}, {'B', wB}, {'Q', wQ}, {'K', wK},
     {'p', bP}, {'r', bR}, {'n', bN}, {'b', bB}, {'q', bQ}, {'k', bK},
   };
@@ -67,7 +67,7 @@ inline Piecetype get_piecetype_from_char_key(const char c) {
 inline char piecetype_to_char(Piecetype pct) {
   static constexpr char NotADigit{'*'};
 
-  static const map<Piecetype, char> encodings = {
+  static const unordered_map<Piecetype, char> encodings = {
       {wP, 'P'}, {wR, 'R'}, {wN, 'N'}, {wB, 'B'}, {wQ, 'Q'}, {wK, 'K'},
       {bP, 'p'}, {bR, 'r'}, {bN, 'n'}, {bB, 'b'}, {bQ, 'q'}, {bK, 'k'},
   };

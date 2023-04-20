@@ -1,2 +1,5 @@
-add_subdirectory(graphics)
+add_subdirectory(board)
+add_subdirectory(components)
 add_subdirectory(input)
+add_subdirectory(menu)
+add_subdirectory(messages)

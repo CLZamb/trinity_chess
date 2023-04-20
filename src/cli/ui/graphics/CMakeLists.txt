@@ -1,5 +1,0 @@
-add_subdirectory(board)
-add_subdirectory(components)
-add_subdirectory(drawings)
-add_subdirectory(menu)
-add_subdirectory(ui_messages)

@@ -25,7 +25,7 @@ static const string rook   = "rook";
 
 inline string get_piece_from_piecetype(Piecetype piece_type) {
 
-  const map<Piecetype, string> piece_str_name{
+  const unordered_map<Piecetype, string> piece_str_name{
     {bP, pawn},   {bR, rook},   {bN, knight}, {bB, bishop},
     {bQ, queen},  {bK, king},   {wP, pawn},   {wR, rook},
     {wN, knight}, {wB, bishop}, {wQ, queen},  {wK, king}

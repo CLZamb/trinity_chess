@@ -8,8 +8,8 @@
 #include "human_player.h"
 
 using std::string;
-using std::array;
-using std::shared_ptr;
+// using std::array;
+// using std::shared_ptr;
 
 class Players : public GameTurnObserver {
 public:
@@ -21,7 +21,7 @@ public:
   // shared_ptr<Player> get_player(GameTurn::Players side);
 
 private:
-  array<shared_ptr<Player>, Color::SIZE> m_players;
+  // array<shared_ptr<Player>, Color::SIZE> m_players;
   PlayerInfo m_turn;
 };
 
