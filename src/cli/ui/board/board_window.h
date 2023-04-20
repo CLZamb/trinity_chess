@@ -14,17 +14,6 @@ public:
 
   virtual ~BoardWindow() = default;
 
-  void print() { Window::print(); }
-
-  void update_panes() {
-    for (auto pane : panes)
-      pane->update();
-  }
-
-  void make_move(const Move& m) {
-    for (auto pane : panes)
-      pane->make_move(m);
-  }
 
   void add_middle_pane(shared_ptr<IBoardPaneComponent> p) {
     Window::add_middle_pane(p.get());

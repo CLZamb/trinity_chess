@@ -2,7 +2,7 @@
 #define BOARD_PANE_H
 
 #include "ui/board/IBoard_pane_component.h"
-#include "ui/board/board_pane/event_handlers/IBoard_event_handler.hpp"
+#include "ui/board/board_pane/event_handlers/IBoard_event_handler.h"
 #include "ui/board/board_pane/pieces/pieces_drawings.hpp"
 #include "ui/board/board_pane/squares/squares_drawing.h"
 #include <memory>

@@ -11,7 +11,7 @@ BoardPane::BoardPane(const string &fen) {
 void BoardPane::update_board_drawing() {
   unsigned long row_counter = 0;
   string row_drawing = "";
-  // need to be print upside down so that the bottom begins at row 0
+  // need to be print upside down so that the bottom begins at row 1
   for (int row = 7; row >= 0; --row) {
     for (int k = 0; k < Box::kRowSize; ++k, row_counter++) {
 

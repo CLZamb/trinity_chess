@@ -18,6 +18,7 @@ void KeyboardInput::get_input_event() {
 
   m_command_event.update_key_code(key);
 
-  for (auto &&event : Input::_events.at(key))
+  for (auto &&event : Input::_events.at(key)) {
     event(m_command_event);
+  }
 }

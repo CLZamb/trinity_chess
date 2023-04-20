@@ -1,11 +1,11 @@
 add_library(
   ui_board_event_handlers_lib
-  INTERFACE
+  board_keyboard_event_handler.cpp
+  board_text_event_handler.cpp
 )
 
 target_include_directories(
-  ui_board_event_handlers_lib
-  INTERFACE 
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+  ui_board_event_handlers_lib 
+  PRIVATE 
+  "${PROJECT_SOURCE_DIR}/src/cli"
 )
