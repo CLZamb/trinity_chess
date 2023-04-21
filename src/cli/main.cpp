@@ -1,15 +1,12 @@
-#include <cstdlib>
-#include "ui/menu/menu.hpp"
+#include "ui/menu_window/menu_window.hpp"
 #include "ui/messages/game_messages.hpp"
 #include "configuration/default_configuration.h"
 #include "game/game.h"
 #include "ui/input/keyboard/keyboard_base.h"
 
-// TextInput m_input;
-// ArrowInput m_input;
 int main(/*int argc, char *argv[]*/) {
   DefaultConfiguration config;
-  Menu start_menu(config.get_board_config().get_input_type());
+  MenuWindow start_menu(config.get_board_config().get_input_type());
 
   string title = "Welcome to trinity Chess";
   const int play_key_num = 1, quit_key_num = 3, config_key_num = 2;

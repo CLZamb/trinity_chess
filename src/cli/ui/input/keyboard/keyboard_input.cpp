@@ -5,20 +5,25 @@ KeyboardInput::KeyboardInput() {}
 
 KeyboardInput::~KeyboardInput() {}
 
-void KeyboardInput::get_input_event() {
+void KeyboardInput::listen_for_input_events() {
+  if (_events.find(keyboard_event_name) == _events.end()) {
+    std::cout << "event not supported" << std::endl;
+    return;
+  }
+
   Keyboard::Key key = m_k_input.read_key();
 
   if (key == Keyboard::ARROW_KEY)
     key = m_k_input.read_arrow_key();
 
-  if (_events.find(key) == _events.end()) {
+  if (!m_command_event.check_if_is_in_map(key)) { 
     std::cout << "key not supported" << std::endl;
     return;
   }
 
-  m_command_event.update_key_code(key);
+  m_command_event.set_key_code(key);
 
-  for (auto &&event : Input::_events.at(key)) {
-    event(m_command_event);
+  for (auto &&event : InputEvent::_events.at(keyboard_event_name)) {
+    event(&m_command_event);
   }
 }

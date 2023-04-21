@@ -1,6 +1,5 @@
 #include "default_configuration.h"
-#include "ui/menu/menu.hpp"
-
+#include "ui/menu_window/menu_window.hpp"
 
 DefaultConfiguration::DefaultConfiguration() {
   m_players_config.set_initial_color(Color::WHITE);
@@ -20,7 +19,7 @@ BoardConfig& DefaultConfiguration::get_board_config() {
 }
 
 void DefaultConfiguration::get_players_type() {
-  Menu<PlayersConfig> player_menu(
+  MenuWindow<PlayersConfig> player_menu(
     m_board_config.get_input_type(),
     "Select Players", {
       {1, "Human vs Human",       {PlayerType::Human, PlayerType::Human}},
@@ -34,7 +33,7 @@ void DefaultConfiguration::get_players_type() {
 }
 
 void DefaultConfiguration::get_players_color() {
-  Menu<Color> player_menu(
+  MenuWindow<Color> player_menu(
     m_board_config.get_input_type(),
     "Select Color", {
       {1, "WHITE", WHITE},

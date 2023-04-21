@@ -55,3 +55,43 @@ void Pane::set_content_at_section(const string &key, std::initializer_list<strin
 void Pane::set_content_at_section(const string &key, const vector<string>* content) {
   sections[key]->set_drawing(content);
 }
+
+bool Pane::has_block_space_for_content(
+  const shared_ptr<Section>& block, const string& message) {
+  return message.size() < kRowMaxLen * (block->size() - 1);
+}
+
+string Pane::format_line(const string &line) {
+  unsigned long num_spaces = kRowMaxLen - line.size();
+  return  " ┃ " + line + std::string(num_spaces, ' ') + "┃";
+}
+
+void Pane::set_content_to_block_recursively(shared_ptr<Section>& section,
+                                      string &msg, size_t &current_row) {
+  if (current_row > section->size()) return;
+
+  if (msg.size() < kRowMaxLen) {
+    section->set_drawing_at_index(format_line(msg), current_row);
+    section->set_drawing_at_index(
+      InfoDrawings::Borders::krow_divider, section->size() - 1
+    );
+    return;
+  }
+
+  section->set_drawing_at_index(
+    format_line(msg.substr(0, kRowMaxLen)), current_row
+  );
+
+  msg = msg.substr(kRowMaxLen/* to_end */);
+  set_content_to_block_recursively(section, msg, ++current_row);
+}
+
+void Pane::format_section(shared_ptr<Section>& block, string content) {
+  if (block == nullptr) return;
+
+  if (!has_block_space_for_content(block, content)) return;
+
+  string msg = block->get_name() + ": " + content; 
+  size_t start_index = 0;
+  set_content_to_block_recursively(block, msg, start_index);
+}

@@ -3,15 +3,35 @@
 
 #include <unordered_map>
 #include "ui/input/input.h"
-#include "ui/input/command_event.h"
 #include "ui/input/keyboard/keyboard_base.h"
 
-struct CommandEventKeyboard : public CommandEvent {
-  void update_key_code(const Keyboard::Key c) {
-    CommandEvent::m_keycode = m_keycodes.at(c);
+struct KeyCode {
+  enum Key {
+    NONE,
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT,
+    ENTER,
+  };
+};
+
+struct CommandEventKeyboard {
+  void set_key_code(const Keyboard::Key c) {
+    m_keycode = m_keycodes.at(c);
   }
 
-private:
+  KeyCode::Key get_key_code() const { 
+    return m_keycode; 
+  }
+
+  bool check_if_is_in_map(const Keyboard::Key& k) {
+    return m_keycodes.find(k) != m_keycodes.end();
+  }
+
+ private:
+  KeyCode::Key m_keycode{KeyCode::NONE};
+
   std::unordered_map<Keyboard::Key, KeyCode::Key> m_keycodes {
     {Keyboard::W, KeyCode::UP},
     {Keyboard::A, KeyCode::LEFT},
@@ -25,16 +45,17 @@ private:
   };
 };
 
-class KeyboardInput : public Input {
+class KeyboardInput : public InputEvent {
 public:
   KeyboardInput();
   virtual ~KeyboardInput();
-  void get_input_event() override;
+  void listen_for_input_events() override;
 
 private:
 
   KeyboardBase m_k_input;
   CommandEventKeyboard m_command_event;
+  const string keyboard_event_name = typeid(CommandEventKeyboard).name();
 };
 
 #endif /* KEYBOARD_INPUT_H */

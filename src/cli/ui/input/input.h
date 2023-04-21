@@ -1,26 +1,35 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "command_event.h"
 #include <functional>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
-class Input {
- public:
-  virtual ~Input() {}
-  virtual void get_input_event() = 0;
+using std::unordered_map;
 
-  using method = std::function<void(CommandEvent&)>;
+class InputEvent {
+public:
+  template <typename EventType, typename Class>
+  using method_callback = void (Class::*)(EventType &);
 
-  template <typename EventID, typename Class>
-  void bind(EventID key, void (Class::*m)(CommandEvent&), Class *c) {
-    _events[key].push_back(std::bind(m, c, std::placeholders::_1));
+  using method = std::function<void(void *)>;
+
+  virtual ~InputEvent() = default;
+  virtual void listen_for_input_events() = 0;
+
+  template <typename EventType, typename Class>
+  void bind(method_callback<EventType, Class> m, Class *c) {
+    _events[typeid(EventType).name()].push_back(get_method(m, c));
   }
 
 protected:
-  std::unordered_map<int, std::vector<method>> _events;
+  unordered_map<std::string, std::vector<method>> _events;
+
+private:
+  template <typename EventType, typename Class>
+  method get_method(method_callback<EventType, Class> m, Class *c) {
+    return [c, m](void *evt) { (c->*m)(*reinterpret_cast<EventType *>(evt)); };
+  }
 };
 
 #endif /* INPUT_H */
-

@@ -1,6 +1,11 @@
 Version 2 * current
 1. pawn promotion
+  1.0 add a pane to show 
+    'Engine name'
+    'nodes'
+    'ply'
   1.1 fix the pawn promotion to select a piece
+  
 
 Version 3
 1. use FTXUI

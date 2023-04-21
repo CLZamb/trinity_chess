@@ -1,5 +1,5 @@
-add_subdirectory(board)
+add_subdirectory(board_window)
 add_subdirectory(components)
 add_subdirectory(input)
-add_subdirectory(menu)
+add_subdirectory(menu_window)
 add_subdirectory(messages)

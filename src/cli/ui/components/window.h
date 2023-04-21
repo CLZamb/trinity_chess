@@ -7,6 +7,13 @@
 using std::map;
 using std::ostream;
 
+#ifdef _WIN32
+#define CLEAR "cls"
+#else
+// Assume Unix system
+#define CLEAR "clear"
+#endif
+
 class Window {
  public:
   Window();

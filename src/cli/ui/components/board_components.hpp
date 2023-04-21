@@ -2,24 +2,25 @@
 #define BOARD_COMPONENTS_H
 
 #include "game/turn/side_to_move.h"
-#include "ui/board/board_pane/board_pane.h"
-#include "ui/board/board_pane/event_handlers/board_keyboard_event_handler.h"
-#include "ui/board/board_pane/event_handlers/board_text_event_handler.h"
-#include "ui/board/info_pane/board_check_info_decorator.h"
-#include "ui/board/info_pane/info_pane.h"
+#include "ui/board_window/board_pane/board_pane.h"
+#include "ui/board_window/board_pane/event_handlers/board_keyboard_event_handler.h"
+#include "ui/board_window/board_pane/event_handlers/board_text_event_handler.h"
+#include "ui/board_window/info_pane/board_check_info_decorator.h"
+#include "ui/board_window/info_pane/info_pane.h"
+#include "ui/board_window/statistics_pane/statistics_pane.hpp"
 #include <memory>
 
 using std::make_shared;
 using std::make_unique;
 
 namespace BoardComponents {
-inline auto new_keyboard_handler(shared_ptr<BoardPane> b, shared_ptr<Input> p, SideToMove& m_turn) {
+inline auto new_keyboard_handler(shared_ptr<BoardPane> b, shared_ptr<InputEvent> p, SideToMove& m_turn) {
   auto k_event_handler = make_shared<BoardKeyboardEventHandler>(b, p);
   m_turn.attach(k_event_handler.get());
   return k_event_handler;
 }
 
-inline auto new_text_handler(shared_ptr<BoardPane> b, shared_ptr<Input> p) {
+inline auto new_text_handler(shared_ptr<BoardPane> b, shared_ptr<InputEvent> p) {
   return make_shared<BoardTextEventHandler>(b, p);
 }
 
@@ -28,9 +29,10 @@ inline auto new_input_keyboard() {
 }
 
 inline auto new_input_text() {
-  return make_unique<TextInput>();
+  auto text_input = make_unique<TextInput>();
+  text_input->set_string_before_prompt(" >> ");
+  return text_input;
 }
-
 
 inline auto new_info_check_behaviour(BoardCheck &b, shared_ptr<BoardModelInfo> m) {
   return make_unique<BoardCheckInfoDecorator>(std::move(b.get_behaviour()), m);
@@ -50,6 +52,10 @@ inline auto new_info_pane(BoardCheck &board_check) {
 
   board_check.set_behaviour(new_info_check_behaviour(board_check, board_model_info));
   return info_pane;
+}
+
+inline auto new_statistics_pane() {
+  return make_shared<StatisticsPane>();
 }
 
 } // namespace BoardComponents

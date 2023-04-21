@@ -5,13 +5,14 @@
 #include <memory>
 #include "section.h"
 #include "IPane.h"
+#include "ui/board_window/info_pane/info_drawings.hpp"
 
 using std::shared_ptr;
 using std::unordered_map;
 
 class Pane : public IPane  {
  public:
-  explicit Pane(size_t size = 44);
+  explicit Pane(size_t size);
   virtual ~Pane();
   void clear();
   void fill(const string& content);
@@ -19,8 +20,13 @@ class Pane : public IPane  {
   void set_content_at_section(const string &section_name, std::initializer_list<string> lst);
   void set_content_at_section(const string &section_name, const vector<string>* content);
   shared_ptr<Section>& get_section(const string& key);
+  string format_line(const string &line);
+  void set_content_to_block_recursively(shared_ptr<Section>& section,
+                                        string &msg, size_t &current_row);
+  void format_section(shared_ptr<Section>& block, string content);
 
  private:
+  bool has_block_space_for_content(const shared_ptr<Section>& block, const string& message);
   void add_section(shared_ptr<ISectionComponent> section);
   size_t size() override;
   const string& operator[] (size_t i) override;
@@ -32,6 +38,7 @@ class Pane : public IPane  {
   vector<string*> m_pane_drawing;
   unordered_map<string, shared_ptr<Section>> sections;
   string m_empty{};
+  const unsigned int kRowMaxLen = static_cast<unsigned int>(InfoDrawings::Banner::width - 4) /*┃  ┃*/;
 };
 
 #endif /* PANE_H */

@@ -4,25 +4,30 @@
 #include "ui/input/input.h"
 #include "ui/input/text/text_input_base.h"
 
-struct CommandEventText : public CommandEvent {
+struct CommandEventText {
   void udpate_string_input(const std::string &c) {
-    CommandEvent::m_command_string = c;
+    m_command_string = c;
   }
+
+  std::string get_string() const {
+    return m_command_string;
+  }
+ private:
+  std::string m_command_string{""};
 };
 
-class TextInput : public Input {
+class TextInput : public InputEvent {
  public:
-  enum EventIDs {
-    STRING = 0,
-  };
-
   TextInput();
   virtual ~TextInput();
-  void get_input_event() override;
+  void listen_for_input_events() override;
+  void set_string_before_prompt(const string& space);
  private:
+  string m_string_before_prompt{0};
   string m_text;
   TextInputBase m_text_input;
   CommandEventText m_event_command;
+  const string keyboard_event_name = typeid(CommandEventText).name();
 };
 
 #endif /* TEXT_INPUT_BOARD_H */

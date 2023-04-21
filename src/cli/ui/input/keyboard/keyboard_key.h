@@ -1,8 +1,7 @@
 #ifndef KEYBOARD_KEY_H
 #define KEYBOARD_KEY_H
 
-class Keyboard {
-public:
+struct Keyboard {
   enum Key {
     NONE      = 0,
     ARROW_KEY = 27,

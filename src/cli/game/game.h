@@ -5,7 +5,7 @@
 #include "board/fen/board_fen_controller.h"
 #include "game/turn/side_to_move.h"
 #include "configuration/IConfiguration.h"
-#include "ui/board/board_view.h"
+#include "ui/board_window/board_window.h"
 
 // TESTS FEN
 // const string start_fen = "4k3/8/8/4pP2/8/8/8/4K2R w - e6 0 1";
@@ -37,7 +37,7 @@ class Game {
   Board m_board;
   BoardCheck m_board_check;
   BoardFenController m_board_fen;
-  BoardView m_board_view;
+  BoardWindow m_board_ui;
   // Players m_players;
   // IpcPipe m_ipc_search;
 };
