@@ -1,6 +1,7 @@
 #ifndef GAME_CONFIGURATION
 #define GAME_CONFIGURATION
 
+// WIP
 class GameConfiguration {
 public:
   GameConfiguration() = default;

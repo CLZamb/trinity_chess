@@ -24,7 +24,6 @@ private:
   void update_banner(Color c);
 
   void clear();
-  void clear_block();
   void clear_all_sections();
 
   const string m_top_section = "top";

@@ -1,7 +1,7 @@
 #ifndef INPUT_CONFIGURATION_H
 #define INPUT_CONFIGURATION_H
 
-#include "ui/graphics/menu/menu.hpp"
+#include "ui/menu_window/menu_window.hpp"
 #include "IConfiguration.h"
 
 class InputConfiguration : public IConfiguration {
@@ -17,14 +17,14 @@ public:
     return m_players_config;
   }
 
-  virtual InputType get_input_type() override {
-    return m_menu_input;
+  BoardConfig& get_board_config() override {
+    return m_board_config;
   }
 
 private:
   void get_players_type() {
-    Menu<PlayersConfig> player_menu(
-      m_menu_input,
+    MenuWindow<PlayersConfig> player_menu(
+      m_board_config.get_input_type(),
       "Select Players", 
       {
         {1, "Human vs Human",       {PlayerType::Human, PlayerType::Human}},
@@ -38,8 +38,8 @@ private:
    }
 
   void get_players_color() {
-    Menu<Color> player_menu  (
-    m_menu_input,
+    MenuWindow<Color> player_menu  (
+    m_board_config.get_input_type(),
       "Select Color", {
         {1, "WHITE", WHITE},
         {2, "BLACK", BLACK}}
@@ -50,7 +50,7 @@ private:
     m_players_config.set_initial_color(initial_color);
   }
 
-  InputType m_menu_input = InputType::Keyboard;
+  BoardConfig m_board_config;
   PlayersConfig m_players_config;
 };
 

@@ -35,22 +35,16 @@ void InfoPane::update_turn(const PlayerInfo &p)  {
 }
 
 void InfoPane::clear_all_sections() {
-  clear();
-  update_banner(WHITE);
+  Pane::fill(InfoDrawings::Borders::kempty_row);
+  Pane::set_content_at_section(m_top_section, {InfoDrawings::Borders::ktop_drawing});
+  Pane::set_content_at_section(m_bottom_section, {InfoDrawings::Borders::kbottom_drawing});
+  update_banner(p_info->get_player_info().color);
   Pane::format_section(get_section(m_moves_section[BLACK]), "");
   Pane::format_section(get_section(m_moves_section[WHITE]), "");
   Pane::format_section(get_section(m_captures_section[BLACK]), "");
   Pane::format_section(get_section(m_captures_section[WHITE]), "");
   update_game_info("");
 }
-
-void InfoPane::clear() {
-  Pane::fill(InfoDrawings::Borders::kempty_row);
-  Pane::set_content_at_section(m_top_section, {InfoDrawings::Borders::ktop_drawing});
-  Pane::set_content_at_section(m_bottom_section, {InfoDrawings::Borders::kbottom_drawing});
-}
-
-void InfoPane::clear_block() { clear(); }
 
 void InfoPane::update_banner(Color c) {
   Pane::set_content_at_section(m_player_banner_section, p_banners[c]);

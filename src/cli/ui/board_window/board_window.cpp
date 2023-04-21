@@ -1,9 +1,9 @@
 #include "board_window.h"
 #include "ui/components/board_components.hpp"
 
-BoardWindow::BoardWindow(const string f, const BoardConfig &bc, SideToMove &t)
+BoardWindow::BoardWindow(const string fen, const BoardConfig &bc, SideToMove &t)
 : m_turn(t) {
-  auto board_pane = BoardComponents::new_board_pane(f);
+  auto board_pane = BoardComponents::new_board_pane(fen);
 
   InputType type = bc.get_input_type();
 
@@ -16,12 +16,12 @@ BoardWindow::BoardWindow(const string f, const BoardConfig &bc, SideToMove &t)
 
 void BoardWindow::make_move(const Move &m) { 
   for (auto pane : panes)
-  pane->make_move(m);
+    pane->make_move(m);
 }
 
 void BoardWindow::update() { 
   for (auto pane : panes)
-  pane->update();
+    pane->update();
 }
 
 void BoardWindow::print() { 
@@ -36,7 +36,7 @@ void BoardWindow::add_info_pane(BoardCheck &b) {
 
 void BoardWindow::add_statistics_pane() {
   auto stats_pane = BoardComponents::new_statistics_pane();
-  add_middle_pane(stats_pane);
+  add_right_pane(stats_pane);
 }
 
 void BoardWindow::set_keyboard_input(shared_ptr<BoardPane> board_pane, SideToMove& turn) {
