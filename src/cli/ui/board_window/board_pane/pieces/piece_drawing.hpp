@@ -13,7 +13,7 @@ using StringDrawingName::Pieces::king;
 
 class PieceDrawing {
  public:
-  explicit PieceDrawing(Piecetype pct) {
+  explicit PieceDrawing(Piece pct) {
     string piece_type =
         StringDrawingName::Pieces::get_piece_from_piecetype(pct);
     black_square_drawing = new BoxDrawing(piece_type);
@@ -46,8 +46,8 @@ class PieceDrawing {
   }
 
  private:
-  string get_piece_str_name_from_piecetype(Piecetype piece_type) {
-    const unordered_map<Piecetype, string> piece_str_name{
+  string get_piece_str_name_from_piecetype(Piece piece_type) {
+    const unordered_map<Piece, string> piece_str_name{
       {bP, pawn},   {bR, rook},   {bN, knight}, {bB, bishop},
       {bQ, queen},  {bK, king},   {wP, pawn},   {wR, rook},
       {wN, knight}, {wB, bishop}, {wQ, queen},  {wK, king}

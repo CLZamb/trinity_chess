@@ -1,25 +1,23 @@
 #ifndef EN_PASSANT_H
 #define EN_PASSANT_H
 
-#include "special_move.h"
+#include "board/board_representation/position.hpp"
+#include "utils/move.hpp"
 
-class EnPassant : public SpecialMove {
+class EnPassant {
 public:
   EnPassant();
   virtual ~EnPassant();
-  bool is_en_passant_move(const Move &m);
-  void set_en_passant_position(const SquareIndices &sq);
-  const SquareIndices &get_en_passant_position();
-  void assign_special_to_move(Move& m) override;
-  void handle_special_move(const Move& m, Squares& s) override;
+  bool is_en_passant_move(const Move &m, const Square& sq);
+  void set_en_passant_position(const Square &sq);
+  const Square &get_en_passant_position();
+  void capture_en_passant(const Move& m, Position& s);
 
 private:
-  void capture_en_passant(const Move& m, Squares& s);
-  bool is_pawn_piece(const Piecetype pct);
+  bool is_pawn_piece(const Piece pct);
   bool is_first_move(const Move& m);
   bool is_double_forward_move(const Move& m);
 
-  SquareIndices en_passant_pos{SquareNull};
 };
 
 #endif /* EN_PASSANT_H */

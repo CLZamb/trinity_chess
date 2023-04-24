@@ -5,7 +5,7 @@ PawnPromition::PawnPromition() {}
 PawnPromition::~PawnPromition() {}
 
 bool PawnPromition::is_pawn_promotion(const Move& m) {
-  Piecetype piece = Move_Utils::get_piece(m);
+  Piece piece = MoveUtils::get_piece(m);
   if (!is_pawn_piece(piece)) return false;
 
   if (piece == bP) {
@@ -19,27 +19,13 @@ bool PawnPromition::is_pawn_promotion(const Move& m) {
   return false;
 }
 
-bool PawnPromition::is_pawn_piece(const Piecetype pct) {
+bool PawnPromition::is_pawn_piece(const Piece pct) {
   return pct == bP || pct == wP;
 }
 
-void PawnPromition::assign_special_to_move(Move& m) {
-  Piecetype piece = Move_Utils::get_piece(m);
-  Piecetype promotion = Move_Utils::get_piece(m);
+void PawnPromition::handle_promotion(const Move& m, Position &s) {
+  Piece promotion = MoveUtils::get_promoted_piece(m);
+  Square to_pos = MoveUtils::get_to(m);
 
-  if (piece == bP) {
-    if (Pawn<BLACK>::is_promotion(m))
-      promotion = bQ;
-  } else if (piece == wP) {
-    if (Pawn<WHITE>::is_promotion(m))
-      promotion = wQ;
-  }
-  Move_Utils::set_promoted_piece(m, promotion);
-}
-
-void PawnPromition::handle_special_move(const Move& m, Squares &s) {
-  Piecetype promotion = Move_Utils::get_promoted_piece(m);
-  SquareIndices to_pos = Move_Utils::get_to(m);
-
-  s[to_pos].set_piece(promotion);
+  s.set_piece_at_square(promotion, to_pos);
 }

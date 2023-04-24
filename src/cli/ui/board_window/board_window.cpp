@@ -39,14 +39,14 @@ void BoardWindow::add_statistics_pane() {
   add_right_pane(stats_pane);
 }
 
-void BoardWindow::set_keyboard_input(shared_ptr<BoardPane> board_pane, SideToMove& turn) {
+void BoardWindow::set_keyboard_input(shared_ptr<BoardPane> b, SideToMove& t) {
   p_input_event = BoardComponents::new_input_keyboard();
-  p_input_event_handler = BoardComponents::new_keyboard_handler(board_pane, p_input_event, turn);
+  p_input_event_handler = BoardComponents::new_keyboard_handler(b, p_input_event, t);
 }
 
-void BoardWindow::set_text_input(shared_ptr<BoardPane> board_pane) {
+void BoardWindow::set_text_input(shared_ptr<BoardPane> b) {
   p_input_event = BoardComponents::new_input_text();
-  p_input_event_handler = BoardComponents::new_text_handler(board_pane, p_input_event);
+  p_input_event_handler = BoardComponents::new_text_handler(b, p_input_event);
 }
 
 string BoardWindow::get_next_string_move() {

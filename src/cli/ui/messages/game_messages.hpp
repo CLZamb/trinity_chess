@@ -1,11 +1,11 @@
 #ifndef MESSAGES_HPP
 #define MESSAGES_HPP
 
+#include "game/game_typedefs.h"
 #pragma once
 
 #include <iostream>
 #include "messages_drawings.hpp"
-#include "utils/utilities.h"
 
 using std::cout;
 using std::endl;

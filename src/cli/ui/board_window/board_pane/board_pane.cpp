@@ -1,4 +1,5 @@
 #include "board_pane.h"
+#include "board/board_representation/board_utils.h"
 
 BoardPane::BoardPane(const string &fen) {
   add_section(m_top_section, 1);
@@ -19,7 +20,7 @@ void BoardPane::update_board_drawing() {
 
       for (int col = 0; col < 8; col++) {
         row_drawing +=
-            m_squares_drawings[static_cast<SquareIndices>((row * 8) + col)]
+            m_squares_drawings[static_cast<Square>((row * 8) + col)]
                 .at_row(k);
       }
 
@@ -31,9 +32,9 @@ void BoardPane::update_board_drawing() {
 }
 
 void BoardPane::make_move(const Move &mv) {
-  const SquareIndices from = Move_Utils::get_from(mv);
-  const SquareIndices to = Move_Utils::get_to(mv);
-  Piecetype piece = Move_Utils::get_piece(mv);
+  const Square from = MoveUtils::get_from(mv);
+  const Square to = MoveUtils::get_to(mv);
+  Piece piece = MoveUtils::get_piece(mv);
 
   m_squares_drawings[from].clear_square();
   set_piece_drawing_at_square_pos(to, piece);
@@ -44,15 +45,15 @@ void BoardPane::update() {
 }
 
 void BoardPane::clear() {
-  set_content_at_section(m_top_section, {BoardDrawings::Board::ktop_section});
-  set_content_at_section(
+  Pane::set_content_at_section(m_top_section, {BoardDrawings::Board::ktop_section});
+  Pane::set_content_at_section(
     m_bottom_section, &BoardDrawings::Board::kbottom_section_drawing
   );
 }
 
 void BoardPane::parse_fen(const string &fen) {
   int square = A1, rank = 7, file = 0, space = 0;
-  Piecetype piece;
+  Piece piece;
   const char *c = fen.c_str();
 
   while (*c != ' ') {
@@ -60,7 +61,7 @@ void BoardPane::parse_fen(const string &fen) {
     square = rank * 8 + file;
     if (piece) {
       set_piece_drawing_at_square_pos(
-        static_cast<SquareIndices>(square), piece
+        static_cast<Square>(square), piece
       );
       file++;
 
@@ -88,12 +89,12 @@ bool BoardPane::is_middle_of_square(const int &square_row) { return (square_row 
 
 void BoardPane::clear_square_on_range(const int start_pos, const int end_pos) {
   for (int pos = start_pos; pos < end_pos; pos++) {
-    m_squares_drawings[static_cast<SquareIndices>(pos)].clear_square();
+    m_squares_drawings[static_cast<Square>(pos)].clear_square();
   }
 }
 
-void BoardPane::set_piece_drawing_at_square_pos(SquareIndices position,
-                                                Piecetype type) {
+void BoardPane::set_piece_drawing_at_square_pos(Square position,
+                                                Piece type) {
   bool is_black_square = m_squares_drawings[position].is_black_square();
   const Box *piece_drawing =
       m_pieces_drawings.get_drawing(type, is_black_square);
@@ -102,19 +103,19 @@ void BoardPane::set_piece_drawing_at_square_pos(SquareIndices position,
 
 bool BoardPane::is_number(char c) { return c >= '0' && c <= '8'; }
 
-void BoardPane::update_select_next_square(const SquareIndices &next) {
+void BoardPane::update_select_next_square(const Square &next) {
   m_squares_drawings.select_next_square(next);
   update_board_drawing();
 }
 
-void BoardPane::update_selected_square(const SquareIndices &next) {
+void BoardPane::update_selected_square(const Square &next) {
   m_squares_drawings.selected_square(next);
   selected_positions.push_back(next);
   update_board_drawing();
 }
 
 void BoardPane::deselect_all_previous_selected_squares() {
-  for (const SquareIndices &pos : selected_positions)
+  for (const Square &pos : selected_positions)
     m_squares_drawings.deselect_square(pos);
 
   selected_positions.clear();

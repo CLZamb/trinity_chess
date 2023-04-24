@@ -1,23 +1,23 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include "board/board_representation/board_bitboard.hpp"
-#include "utils/utilities.h"
+#include "board/board_representation/position.hpp"
 
 using namespace bitUtility;
 
-class Piece {
+class PieceBase {
 public:
-  virtual ~Piece();
-  Piecetype get_piecetype();
-  virtual bool is_legal_move(Move &, BoardBitboard &) = 0;
+  virtual ~PieceBase();
+  Piece get_piecetype();
+  virtual bool is_legal_move(Move &, Position &) = 0;
+  virtual Bitboard get_attacks(Bitboard bb, Square sq) = 0;
 
 protected:
-  explicit Piece(const Piecetype &);
-  U64 m_attacks[utils::constant::ksquares] = {BLANK};
+  explicit PieceBase(const Piece &);
+  Bitboard m_attacks[utils::constant::ksquares] = {BLANK};
 
 private:
-  Piecetype _m_type;
+  Piece _m_type;
 };
 
 #endif /* PIECE_H */

@@ -3,6 +3,7 @@
 #include "configuration/default_configuration.h"
 #include "game/game.h"
 #include "ui/input/keyboard/keyboard_base.h"
+#include <algorithm>
 
 int main(/*int argc, char *argv[]*/) {
   DefaultConfiguration config;

@@ -7,12 +7,12 @@
 
 // class HumanPlayer : public Player {
 // public:
-//   HumanPlayer(BoardInput&, SquareIndices sq);
+//   HumanPlayer(BoardInput&, Square sq);
 //   virtual ~HumanPlayer();
 //   // const string &get_player_string_move() override;
 //
 // private:
-//   void set_initial_pos(SquareIndices sq);
+//   void set_initial_pos(Square sq);
 //   BoardInput& m_input;
 //   string m_string_player_input = "error";
 // };

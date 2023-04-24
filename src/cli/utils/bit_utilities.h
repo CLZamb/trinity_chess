@@ -1,41 +1,42 @@
 #ifndef BIT_UTILITIES_H
 #define BIT_UTILITIES_H
 
-#include<iostream>
-#include"defs.h"
+#include "board/board_representation/board_typedefs.h"
+#include "defs.h"
+#include <iostream>
 
 namespace bitUtility {
-  inline U64 set_mask_bb(SquareIndices s) {
+  inline Bitboard set_mask_bb(Square s) {
     return SetMask[s];
   }
 
-  inline U64 clear_mask_bb(SquareIndices s) {
+  inline Bitboard clear_mask_bb(Square s) {
     return ClearMask[s];
   }
 
-  inline void set_bit(U64* bb, SquareIndices s) {
+  inline void set_bit(Bitboard* bb, Square s) {
     *bb |= (1ULL << s);
   }
 
-  inline void clear_bit(U64* bb, SquareIndices s) {
+  inline void clear_bit(Bitboard* bb, Square s) {
     *bb &= clear_mask_bb(s);
   }
 
-  inline int count_1s(U64 b) {
+  inline int count_1s(Bitboard b) {
     static int r = 0;
     for (r = 0; b; r++, b &= b - 1) {}
     return r;
   }
 
-  inline int pop_1st_bit(U64* bb) {
-    U64 b = *bb ^ (*bb - 1);
+  inline int pop_1st_bit(Bitboard* bb) {
+    Bitboard b = *bb ^ (*bb - 1);
     unsigned int fold = (unsigned) ((b & 0xffffffff) ^ (b >> 32));
     *bb &= (*bb - 1);
     return BitTable[(fold * 0x783a9b23) >> 26];
   }
 
-  inline void printBitBoard(U64 bb) {
-    U64 shift = 1ULL;
+  inline void printBitBoard(Bitboard bb) {
+    Bitboard shift = 1ULL;
     int rank = 0;
     int file = 0;
     int position = 0;
@@ -82,11 +83,11 @@ namespace bitUtility {
    * Copyright (C) 2015-2019 Marco Costalba, Joona Kiiski, Gary Linscott, Tord Romstad
    * Stockfish, a UCI chess playing engine derived from Glaurung 2.1
    *************************************************************/
-  constexpr U64 FileABB = 0x0101010101010101ULL;
-  constexpr U64 FileHBB = FileABB << 7;
+  constexpr Bitboard FileABB = 0x0101010101010101ULL;
+  constexpr Bitboard FileHBB = FileABB << 7;
   /// shift() moves a bitboard one step along direction D
   template<Direction D>
-    constexpr U64 shift(U64 b) {
+    constexpr Bitboard shift(Bitboard b) {
       return  D == NORTH  ?  b             << 8 : D == SOUTH      ?  b             >> 8
         : D == NORTH+NORTH?  b             <<16 : D == SOUTH+SOUTH?  b             >>16
         : D == EAST       ? (b & ~FileHBB) << 1 : D == WEST       ? (b & ~FileABB) >> 1

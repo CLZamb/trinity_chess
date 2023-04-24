@@ -1,14 +1,14 @@
 #ifndef BOARD_CHECK_H
 #define BOARD_CHECK_H
 
-#include "board/board_representation/board.h"
+#include "board/board_representation/position.hpp"
 #include "board/check_move/IBoard_check_behaviour.h"
 #include "game/turn/game_turn_observer.h"
 #include <memory>
 
 class BoardCheck : public GameTurnObserver {
 public:
-  BoardCheck(Board &b);
+  BoardCheck(Position &b);
 
   void update_turn(const PlayerInfo &turn) override;
   bool is_checkmate();

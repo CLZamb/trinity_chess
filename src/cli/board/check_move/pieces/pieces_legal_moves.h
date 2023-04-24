@@ -8,7 +8,7 @@ class PiecesLegalMoves {
  public:
     PiecesLegalMoves();
     virtual ~PiecesLegalMoves();
-    Piece* operator[](Piecetype type);
+    PieceBase* operator[](Piece type);
     void make_pawn(const Color C);
     void make_rook(const Color C);
     void make_bishop(const Color C);
@@ -22,7 +22,7 @@ class PiecesLegalMoves {
     RookMagicBitboard m_rook_magic_bitboard;
     QueenMagicBitboard m_queen_magic_bitboard;
     BishopMagicBitboard m_bishop_magic_bitboard;
-    std::array<Piece*, 13> m_pieces { nullptr };
+    std::array<PieceBase*, 13> m_pieces { nullptr };
     static const int m_max_size = 13;
 };
 

@@ -22,12 +22,12 @@ target_link_libraries (
   game_turn_lib
   #graphics
   ui_board_lib
-  ui_board_squares_lib
   ui_board_pane_lib
+  ui_board_squares_lib
   ui_board_info_pane_lib
   ui_board_event_handlers_lib
-  ui_components_lib
   ui_menu_lib
+  ui_components_lib
   #input
   ui_input_keyboard_lib
   ui_input_text_lib

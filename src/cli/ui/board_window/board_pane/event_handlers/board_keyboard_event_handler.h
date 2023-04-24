@@ -19,10 +19,10 @@ class BoardKeyboardEventHandler : public IBoardInputEventHandler, public GameTur
 
  private:
   void on_key_pressed(CommandEventKeyboard& e);
-  void update_next_square(const SquareIndices next_pos);
+  void update_next_square(const Square next_pos);
   void handle_event_direction(const int& d);
   void handle_event_enter();
-  string select_position(const SquareIndices &pos);
+  string select_position(const Square &pos);
   bool is_next_position_out_of_bounds(int next_pos);
   bool is_directional_keyCode(KeyCode::Key);
 

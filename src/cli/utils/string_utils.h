@@ -3,12 +3,13 @@
 
 #pragma once
 
-#include "regex_utils.h"
+#include "game/game_typedefs.h"
 #include "move.hpp"
+#include "regex_utils.h"
 #include <regex>
 #include <string>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
 using std::string;
 using std::unordered_map;
@@ -23,9 +24,9 @@ static const string pawn   = "pawn";
 static const string queen  = "queen"; 
 static const string rook   = "rook"; 
 
-inline string get_piece_from_piecetype(Piecetype piece_type) {
+inline string get_piece_from_piecetype(Piece piece_type) {
 
-  const unordered_map<Piecetype, string> piece_str_name{
+  const unordered_map<Piece, string> piece_str_name{
     {bP, pawn},   {bR, rook},   {bN, knight}, {bB, bishop},
     {bQ, queen},  {bK, king},   {wP, pawn},   {wR, rook},
     {wN, knight}, {wB, bishop}, {wQ, queen},  {wK, king}
@@ -34,7 +35,7 @@ inline string get_piece_from_piecetype(Piecetype piece_type) {
   auto search = piece_str_name.find(piece_type);
 
   if (search == piece_str_name.end())
-    return "";
+    return "not piece";
 
   return search->second;
 }
@@ -76,7 +77,7 @@ inline Move to_move(const string &str_move) {
   unsigned int from = square_str_to_int(list_pos[0]);
   unsigned int to = square_str_to_int(list_pos[1]);
 
-  Move_Utils::set_move(result, from, to);
+  MoveUtils::set_move(result, from, to);
   return result;
 }
 
@@ -86,12 +87,13 @@ inline bool is_valid_move_format(const string &str_mv) {
 }
 }
 
-inline string squareindex_to_str(SquareIndices sq) {
+inline string squareindex_to_str(Square sq) {
   if (sq < A1 || sq > H8)
     return "-not a valid position-";
 
   string square_str;
-  square_str = 'a' + (sq % 8);
+  unsigned int square = static_cast<unsigned int>(sq);
+  square_str = 'a' + (square % 8);
   square_str += static_cast<char>('1' + (sq / 8));
   return square_str;
 }
@@ -100,7 +102,7 @@ inline string get_color_str_from_color(Color c) {
   return (c == WHITE) ? "white" : "black";
 }
 
-inline string get_permission_str_from_castle_permission(const int &permissions) {
+inline string get_permission_str_from_castle_permission(const unsigned int &permissions) {
   if (permissions == NO_CASTLING) return "-";
 
   string permissions_str;

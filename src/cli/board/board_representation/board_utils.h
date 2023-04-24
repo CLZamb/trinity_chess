@@ -1,43 +1,30 @@
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#ifndef BOARD_UTILS_H
+#define BOARD_UTILS_H
 
+#include "board_typedefs.h"
+#include "game/game_typedefs.h"
 #include <unordered_map>
 #include <limits>
-#include "defs.h"
 
 using std::unordered_map;
-using std::size_t;
-
-enum Piecetype : unsigned int {
-  EMPTY, bP, bR, bN, bB, bQ, bK, wP, wR, wN, wB, wQ, wK
-};
-
-enum Color {
-  WHITE = 0, BLACK = 1, NONE = 3, SIZE = 2, BOTH = 2,
-};
-
-enum PlayerType {
-  Cpu = 0,
-  Human = 1,
-};
 
 namespace utils {
 namespace check {
-  inline bool is_black_piece(Piecetype type) {
+  inline bool is_black_piece(Piece type) {
     return type >= bP && type <= bK;
   }
 
-  inline Color get_color_piece(Piecetype type) {
+  inline Color get_color_piece(Piece type) {
     if (type >= bP && type <= bK) return BLACK;
     if (type >= wP && type <= wK) return WHITE;
     return NONE;
   }
 
-  inline bool is_king_piece(const Piecetype& pct) {
+  inline bool is_king_piece(const Piece& pct) {
     return (pct == wK) || (pct == bK);
   }
 
-  inline bool is_pawn_piece(const Piecetype& pct) {
+  inline bool is_pawn_piece(const Piece& pct) {
     return (pct == bP) || (pct == wP);
   }
 
@@ -46,13 +33,13 @@ namespace check {
     return (pieceType > EMPTY) && (pieceType < 13);
   }
 
-    inline bool is_square(SquareIndices s) {
+  inline bool is_square(Square s) {
       return s >= A1 && s <= H8;
   }
 }  // namespace check
 
-inline Piecetype get_piecetype_from_char_key(const char c) {
-  static const unordered_map<char, Piecetype> piece_map = {
+inline Piece get_piecetype_from_char_key(const char c) {
+  static const unordered_map<char, Piece> piece_map = {
     {'P', wP}, {'R', wR}, {'N', wN}, {'B', wB}, {'Q', wQ}, {'K', wK},
     {'p', bP}, {'r', bR}, {'n', bN}, {'b', bB}, {'q', bQ}, {'k', bK},
   };
@@ -64,12 +51,12 @@ inline Piecetype get_piecetype_from_char_key(const char c) {
   return search->second;
 }
 
-inline char piecetype_to_char(Piecetype pct) {
-  static constexpr char NotADigit{'*'};
+inline char piecetype_to_char(Piece pct) {
+  const char NotADigit{'*'};
 
-  static const unordered_map<Piecetype, char> encodings = {
-      {wP, 'P'}, {wR, 'R'}, {wN, 'N'}, {wB, 'B'}, {wQ, 'Q'}, {wK, 'K'},
-      {bP, 'p'}, {bR, 'r'}, {bN, 'n'}, {bB, 'b'}, {bQ, 'q'}, {bK, 'k'},
+  const unordered_map<Piece, char> encodings = {
+    {wP, 'P'}, {wR, 'R'}, {wN, 'N'}, {wB, 'B'}, {wQ, 'Q'}, {wK, 'K'},
+    {bP, 'p'}, {bR, 'r'}, {bN, 'n'}, {bB, 'b'}, {bQ, 'q'}, {bK, 'k'},
   };
 
   auto it = encodings.find(pct);
@@ -92,6 +79,7 @@ namespace constant {
   //     /* [KING]  */10000
   //   });
 
+  using std::size_t;
   const size_t ktotal_number_squares = 64;
   const int ksquares = 64;
   const int kMaxDepth = 64;
@@ -99,5 +87,4 @@ namespace constant {
   const size_t ktotal_number_pieces = 13;
 }  // namespace constant
 }  // namespace utils
-
-#endif /* UTILITIES_H  */
+#endif /* BOARD_UTILS_H */

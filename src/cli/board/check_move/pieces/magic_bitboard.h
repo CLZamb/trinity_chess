@@ -6,29 +6,29 @@
 class MagicBitboard {
   private:
     struct SMagic {
-      U64* attacks;  // pointer to attack_table for each particular square
-      U64 mask;  // to mask relevant squares of both lines (no outer squares)
-      U64 magic;  // magic 64-bit factor
+      Bitboard* attacks;  // pointer to attack_table for each particular square
+      Bitboard mask;  // to mask relevant squares of both lines (no outer squares)
+      Bitboard magic;  // magic 64-bit factor
       int shift;  // shift right
     };
 
-    static const U64 RookMagic[64];
-    static const U64 BishopMagic[64];
+    static const Bitboard RookMagic[64];
+    static const Bitboard BishopMagic[64];
 
     SMagic m_rook_tbl[SquareEnd];
     SMagic m_bishop_tbl[SquareEnd];
 
-    U64 m_rook_table[64][4096];
-    U64 m_bishop_table[64][512];
+    Bitboard m_rook_table[64][4096];
+    Bitboard m_bishop_table[64][512];
 
-    U64 m_rook_occupancy[64][4096];
-    U64 m_bishop_occupancy[64][512];
+    Bitboard m_rook_occupancy[64][4096];
+    Bitboard m_bishop_occupancy[64][512];
 
-    constexpr U64 batt(int sq, U64 block);
-    constexpr U64 ratt(int sq, U64 block);
-    constexpr U64 bmask(int sq);
-    constexpr U64 rmask(int sq);
-    U64 set_occupancy(int index, int bits, U64 m);
+    constexpr Bitboard batt(int sq, Bitboard block);
+    constexpr Bitboard ratt(int sq, Bitboard block);
+    constexpr Bitboard bmask(int sq);
+    constexpr Bitboard rmask(int sq);
+    Bitboard set_occupancy(int index, int bits, Bitboard m);
     void _init_bitmasks();
     void _init_slider_masks_shifs_occupancies(int isRook);
     void _init_tables(int isRook);
@@ -37,14 +37,14 @@ class MagicBitboard {
     MagicBitboard();
     virtual ~MagicBitboard();
 
-    U64 rook_attacks(U64 occ, SquareIndices sq) const;
-    U64 bishop_attacks(U64 occ, SquareIndices sq) const;
-    U64 queen_attacks(U64 occ, SquareIndices sq) const;
+    Bitboard rook_attacks(Bitboard occ, Square sq) const;
+    Bitboard bishop_attacks(Bitboard occ, Square sq) const;
+    Bitboard queen_attacks(Bitboard occ, Square sq) const;
 };
 
 class IMagicBitboardAttackType {
   public:
-    virtual U64 get_attacks(U64 occ, SquareIndices sq) const = 0;
+    virtual Bitboard get_attacks(Bitboard occ, Square sq) const = 0;
 
   protected:
     IMagicBitboardAttackType(const MagicBitboard& mb) : m_magic_bitboard(&mb) {};
@@ -55,7 +55,7 @@ class IMagicBitboardAttackType {
 class RookMagicBitboard : public IMagicBitboardAttackType {
   public:
     RookMagicBitboard(const MagicBitboard& mb) : IMagicBitboardAttackType(mb) {}
-    U64 get_attacks(U64 occ, SquareIndices sq) const {
+    Bitboard get_attacks(Bitboard occ, Square sq) const {
       return m_magic_bitboard->rook_attacks(occ, sq);
     }
 };
@@ -63,7 +63,7 @@ class RookMagicBitboard : public IMagicBitboardAttackType {
 class BishopMagicBitboard : public IMagicBitboardAttackType {
   public:
     BishopMagicBitboard(const MagicBitboard& mb) : IMagicBitboardAttackType(mb) {}
-    U64 get_attacks(U64 occ, SquareIndices sq) const {
+    Bitboard get_attacks(Bitboard occ, Square sq) const {
       return m_magic_bitboard->bishop_attacks(occ, sq);
     }
 };
@@ -71,7 +71,7 @@ class BishopMagicBitboard : public IMagicBitboardAttackType {
 class QueenMagicBitboard : public IMagicBitboardAttackType {
   public:
     QueenMagicBitboard(const MagicBitboard& mb) : IMagicBitboardAttackType(mb) {}
-    U64 get_attacks(U64 occ, SquareIndices sq) const {
+    Bitboard get_attacks(Bitboard occ, Square sq) const {
       return m_magic_bitboard->queen_attacks(occ, sq);
     }
 };

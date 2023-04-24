@@ -1,7 +1,7 @@
 #ifndef PLAYER_INFO_H
 #define PLAYER_INFO_H
 
-#include "utils/utilities.h"
+#include "game/game_typedefs.h"
 
 struct PlayerInfo {
   Color color {NONE};

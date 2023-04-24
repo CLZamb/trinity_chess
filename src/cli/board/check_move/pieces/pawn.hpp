@@ -4,7 +4,7 @@
 #include "piece.h"
 
 template<Color C>
-constexpr U64 pawn_attacks_bb(U64 b) {
+constexpr Bitboard pawn_attacks_bb(Bitboard b) {
   return C == WHITE ? shift<NORTH_WEST>(b) | shift<NORTH_EAST>(b)
                     : shift<SOUTH_WEST>(b) | shift<SOUTH_EAST>(b);
 }
@@ -12,25 +12,25 @@ constexpr U64 pawn_attacks_bb(U64 b) {
 class PawnMove {
  public:
     virtual ~PawnMove() {}
-    virtual U64 pawn_attack(int) = 0;
-    virtual U64 pawn_non_attack(int) = 0;
+    virtual Bitboard pawn_attack(int) = 0;
+    virtual Bitboard pawn_non_attack(int) = 0;
 };
 
 class BlackPawn : public PawnMove {
  public:
-  U64 pawn_attack(int sq) override {
-    U64 from_sq = ONE << sq;
-    U64 result = BLANK;
+  Bitboard pawn_attack(int sq) override {
+    Bitboard from_sq = ONE << sq;
+    Bitboard result = BLANK;
 
     result = shift<SOUTH_EAST>(from_sq);
     result |= shift<SOUTH_WEST>(from_sq);
     return result;
   }
-  U64 pawn_non_attack(int sq) override {
-    U64 from_sq = ONE << sq;
-    U64 result = BLANK;
-    U64 forward_one_sq = BLANK;
-    U64 forward_two_sq = BLANK;
+  Bitboard pawn_non_attack(int sq) override {
+    Bitboard from_sq = ONE << sq;
+    Bitboard result = BLANK;
+    Bitboard forward_one_sq = BLANK;
+    Bitboard forward_two_sq = BLANK;
 
     forward_one_sq = shift<SOUTH>(from_sq);
     forward_two_sq |= shift<SOUTH>(forward_one_sq & ROWMASK[5]) ;
@@ -42,18 +42,18 @@ class BlackPawn : public PawnMove {
 class WhitePawn :
     public PawnMove {
  public:
-  U64 pawn_attack(int sq) override {
-    U64 from_sq = ONE << sq;
-    U64 result = BLANK;
+  Bitboard pawn_attack(int sq) override {
+    Bitboard from_sq = ONE << sq;
+    Bitboard result = BLANK;
     result = shift<NORTH_WEST>(from_sq);
     result |= shift<NORTH_EAST>(from_sq);
     return result;
   }
-  U64 pawn_non_attack(int sq) override {
-    U64 from_sq = ONE << sq;
-    U64 result = BLANK;
-    U64 forward_one_sq = BLANK;
-    U64 forward_two_sq = BLANK;
+  Bitboard pawn_non_attack(int sq) override {
+    Bitboard from_sq = ONE << sq;
+    Bitboard result = BLANK;
+    Bitboard forward_one_sq = BLANK;
+    Bitboard forward_two_sq = BLANK;
 
     forward_one_sq = shift<NORTH>(from_sq);
     forward_two_sq |= shift<NORTH>(forward_one_sq & ROWMASK[2]);
@@ -63,9 +63,9 @@ class WhitePawn :
 };
 
 template<Color color>
-class Pawn : public Piece {
+class Pawn : public PieceBase {
  public:
-  Pawn() : Piece(color == BLACK ? bP : wP) {
+  Pawn() : PieceBase(color == BLACK ? bP : wP) {
     if (color == BLACK) {
       pawn_moves = new BlackPawn();
     } else {
@@ -78,34 +78,28 @@ class Pawn : public Piece {
     delete pawn_moves;
   }
 
-  bool is_legal_move(Move &m, BoardBitboard& board) override {
-    if (Move_Utils::is_en_passand(m)) 
+  bool is_legal_move(Move &m, Position& board) override {
+    if (MoveUtils::is_en_passand(m)) 
       return is_legal_en_passant_move(m);
 
-    if (Move_Utils::get_captured_piece(m))
+    if (MoveUtils::get_captured_piece(m))
       return is_legal_attack_move(m, board);
 
     return is_legal_non_attack_move(m, board);
   }
 
-  // U64 get_all_possible_positions(Move& m, BoardBitboard&  board) override {
-  //   SquareIndices from = Move_Utils::get_from(m);
-  //   const U64 free_squares = ~board[BOTH];
-  //   return pawn_non_attack_mask(from) & free_squares;
-  // }
-
   bool is_legal_en_passant_move(const Move &m) {
-    SquareIndices sq = Move_Utils::get_from(m);
-    U64 from_sq = ONE << sq;
-    U64 to_sq = ONE << Move_Utils::get_to(m);
-    U64 attack_moves = pawn_moves->pawn_attack(sq);
-    U64 row_mask = (color == WHITE) ? ROWMASK[4] : ROWMASK[3];
+    Square sq = MoveUtils::get_from(m);
+    Bitboard from_sq = ONE << sq;
+    Bitboard to_sq = ONE << MoveUtils::get_to(m);
+    Bitboard attack_moves = pawn_moves->pawn_attack(sq);
+    Bitboard row_mask = (color == WHITE) ? ROWMASK[4] : ROWMASK[3];
     return (row_mask & from_sq) && (to_sq & attack_moves);
   }
  
   static bool is_first_move(const Move &m) {
-    Piecetype piece = Move_Utils::get_piece(m);
-    U64 from_sq = ONE << Move_Utils::get_from(m);
+    Piece piece = MoveUtils::get_piece(m);
+    Bitboard from_sq = ONE << MoveUtils::get_from(m);
 
     if (piece != bP && piece != wP)
       return false;
@@ -123,8 +117,8 @@ class Pawn : public Piece {
   }
 
   static bool is_promotion(const Move &m) {
-    Piecetype piece = Move_Utils::get_piece(m);
-    U64 to_sq = ONE << Move_Utils::get_to(m);
+    Piece piece = MoveUtils::get_piece(m);
+    Bitboard to_sq = ONE << MoveUtils::get_to(m);
 
     if (piece != bP && piece != wP)
       return false;
@@ -142,8 +136,8 @@ class Pawn : public Piece {
   }
 
   static bool is_double_forward_move(const Move &m) {
-    Piecetype piece = Move_Utils::get_piece(m);
-    U64 to_sq = ONE << Move_Utils::get_to(m);
+    Piece piece = MoveUtils::get_piece(m);
+    Bitboard to_sq = ONE << MoveUtils::get_to(m);
 
     if (piece != bP && piece != wP)
       return false;
@@ -160,22 +154,26 @@ class Pawn : public Piece {
     return false;
   }
 
+  Bitboard get_attacks(Bitboard bb,Square sq) override {
+    return (ONE << sq ) | (m_attacks[sq] & bb) ;
+  }
+
  private:
-  bool is_legal_attack_move(Move& m, BoardBitboard &board)  {
-    U64 all_moves = BLANK;
-    SquareIndices from = Move_Utils::get_from(m);
-    U64 to = ONE << Move_Utils::get_to(m);
-    Piecetype captured = Move_Utils::get_captured_piece(m);
-    const U64 opponent = board[utils::check::get_color_piece(captured)];
+  bool is_legal_attack_move(Move& m, Position &board)  {
+    Bitboard all_moves = BLANK;
+    Square from = MoveUtils::get_from(m);
+    Bitboard to = ONE << MoveUtils::get_to(m);
+    Piece captured = MoveUtils::get_captured_piece(m);
+    const Bitboard opponent = board[utils::check::get_color_piece(captured)];
 
     all_moves |= m_attacks[from] & opponent;  // enemy is in that square
     return all_moves & to;
   }
 
-  bool is_legal_non_attack_move(Move& m, BoardBitboard &board) {
-    SquareIndices from = Move_Utils::get_from(m);
-    U64 to = ONE << Move_Utils::get_to(m);
-    const U64 free_squares = ~board[BOTH];
+  bool is_legal_non_attack_move(Move& m, Position &board) {
+    Square from = MoveUtils::get_from(m);
+    Bitboard to = ONE << MoveUtils::get_to(m);
+    const Bitboard free_squares = ~board[BOTH];
     return pawn_non_attack_mask(from) & free_squares & to;
   }
 
@@ -184,19 +182,19 @@ class Pawn : public Piece {
       m_attacks[sq] = pawn_attack_mask(sq);
   }
 
-  U64 pawn_attack_mask(int sq) {
-    U64 pawn_mask = BLANK;
+  Bitboard pawn_attack_mask(int sq) {
+    Bitboard pawn_mask = BLANK;
     pawn_mask = pawn_moves->pawn_attack(sq);
     return pawn_mask;
   }
 
-  U64 pawn_non_attack_mask(int from_sq) {
-    U64 result = ONE << from_sq;
+  Bitboard pawn_non_attack_mask(int from_sq) {
+    Bitboard result = ONE << from_sq;
     result = pawn_moves->pawn_non_attack(from_sq);
     return result;
   }
 
-  U64 pawn_attacks_bb;
+  Bitboard pawn_attacks_bb;
   PawnMove* pawn_moves;
 };
 

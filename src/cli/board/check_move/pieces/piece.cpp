@@ -1,8 +1,8 @@
 #include "piece.h"
 
-Piece::Piece(const Piecetype &type) : 
+PieceBase::PieceBase(const Piece &type) : 
   _m_type(type) {}
 
-Piece::~Piece() {}
+PieceBase::~PieceBase() {}
 
-Piecetype Piece::get_piecetype() { return _m_type; }
+Piece PieceBase::get_piecetype() { return _m_type; }

@@ -4,30 +4,24 @@
 #include "castling.h"
 #include "pawn_promotion.h"
 #include "en_passant.h"
+#include "board/board_representation/board_typedefs.h"
+#include "board/board_representation/position.hpp"
 
-class SpecialMoveController {
+class SpecialMove {
  public:
-  SpecialMoveController();
-  virtual ~SpecialMoveController();
-  void set_en_passant_square(SquareIndices sq);
-  void set_castle_permission(CastlePermission perm);
-  const int &get_castle_permission();
-  const SquareIndices &get_en_passant_square();
-  void handle_special_move(const Move& m, Squares& squares);
-  bool is_current_move_special_move();
-  void set_special_move_to_move(Move& m, Squares& squares);
+  SpecialMove(Position& p);
+  virtual ~SpecialMove();
+  void handle_special_move(const Move& m, Position& squares);
+  void set_special_move_to_move(Move& m, Position& squares);
 
  private:
-  bool is_pawn_piece(const Piecetype pct);
-  bool is_king_piece(const Piecetype pct);
+  bool is_pawn_piece(const Piece pct);
+  bool is_king_piece(const Piece pct);
 
-  Move m_move;
   Castling m_castling;
   EnPassant m_en_passant;
   PawnPromition m_pawn_promotion;
-  SpecialMove* m_special_move{nullptr};
-
-  int castle_perm{NO_CASTLING};
+  Position& m_position;
 };
 
 #endif /* SPECIAL_MOVE_CONTROLLER_H */

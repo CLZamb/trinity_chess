@@ -1,8 +1,6 @@
 add_library(
   board_board_representation_lib
-  board.cpp
-  square.cpp
-  squares.cpp
+  position.cpp
 )
 
 target_include_directories (

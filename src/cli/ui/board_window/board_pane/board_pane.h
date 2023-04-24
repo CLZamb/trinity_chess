@@ -10,12 +10,12 @@
 class BoardPane : public IBoardPane {
 public:
   BoardPane(const string &fen);
-  virtual ~BoardPane() = default;
+  virtual ~BoardPane() {}
   void make_move(const Move &mv) override;
   void update() override;
-  void update_select_next_square(const SquareIndices &next);
-  void update_selected_square(const SquareIndices &next);
-  void update_deselected_square(const SquareIndices &next);
+  void update_select_next_square(const Square &next);
+  void update_selected_square(const Square &next);
+  void update_deselected_square(const Square &next);
   void deselect_all_previous_selected_squares();
 
 private:
@@ -23,7 +23,7 @@ private:
   void clear();
   void parse_fen(const string &fen);
   void clear_square_on_range(const int start_pos, const int end_pos);
-  void set_piece_drawing_at_square_pos(SquareIndices position, Piecetype type);
+  void set_piece_drawing_at_square_pos(Square position, Piece type);
   bool is_number(char c);
   bool is_middle_of_square(const int &col);
   string left_border(const int &row, const int &col);
@@ -32,7 +32,7 @@ private:
   const string m_board_section = "board";
   const string m_bottom_section = "bottom";
 
-  std::list<SquareIndices> selected_positions;
+  std::list<Square> selected_positions;
   SquaresDrawings m_squares_drawings;
   PiecesDrawings m_pieces_drawings;
   PlayerInfo m_player_info;

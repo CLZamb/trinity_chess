@@ -28,7 +28,7 @@ bool BoardKeyboardEventHandler::is_directional_keyCode(KeyCode::Key keycode) {
 void BoardKeyboardEventHandler::update_turn(const PlayerInfo& p)  {
   m_player_color = p.color;
 
-  SquareIndices last_pos = m_player_pos.get_last_position(m_player_color);
+  Square last_pos = m_player_pos.get_last_position(m_player_color);
   update_next_square(last_pos);
 }
 
@@ -41,7 +41,7 @@ string BoardKeyboardEventHandler::get_string_move()  {
   return std::move(call_back);
 }
 
-void BoardKeyboardEventHandler::update_next_square(const SquareIndices next_pos) {
+void BoardKeyboardEventHandler::update_next_square(const Square next_pos) {
   p_board_pane->update_select_next_square(next_pos);
   m_player_pos.update_next_last_position(next_pos);
 }
@@ -55,11 +55,11 @@ void BoardKeyboardEventHandler::handle_event_direction(const int& dir_value) {
     return;
   }
 
-  update_next_square(static_cast<SquareIndices>(next_pos));
+  update_next_square(static_cast<Square>(next_pos));
 }
 
 void BoardKeyboardEventHandler::handle_event_enter() { 
-  SquareIndices cur_pos = m_player_pos.get_next_last_position();
+  Square cur_pos = m_player_pos.get_next_last_position();
 
   call_back += select_position(cur_pos);
 
@@ -74,8 +74,8 @@ void BoardKeyboardEventHandler::handle_event_enter() {
   }
 }
 
-string BoardKeyboardEventHandler::select_position(const SquareIndices &pos) {
-  return string_utils::squareindex_to_str(SquareIndices(pos));
+string BoardKeyboardEventHandler::select_position(const Square &pos) {
+  return string_utils::squareindex_to_str(Square(pos));
 }
 
 bool BoardKeyboardEventHandler::is_next_position_out_of_bounds(int next_pos) {

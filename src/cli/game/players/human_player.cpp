@@ -1,6 +1,6 @@
 #include "human_player.h"
 
-// HumanPlayer::HumanPlayer(BoardInput& p, SquareIndices sq) : m_input(p) {
+// HumanPlayer::HumanPlayer(BoardInput& p, Square sq) : m_input(p) {
 //   set_initial_pos(sq);
 // }
 //

@@ -4,20 +4,19 @@
 #include <array>
 #include "square_drawing.h"
 #include "utils/move.hpp"
-#include "utils/utilities.h"
 
 class SquaresDrawings {
  public:
   SquaresDrawings();
-  virtual ~SquaresDrawings();
+  virtual ~SquaresDrawings() = default;
 
-  SquareDrawing &operator[](SquareIndices i);
-  void select_next_square(const SquareIndices &n);
-  void selected_square(const SquareIndices &s);
-  void deselect_square(const SquareIndices &d);
+  SquareDrawing &operator[](Square i);
+  void select_next_square(const Square &n);
+  void selected_square(const Square &s);
+  void deselect_square(const Square &d);
 
  private:
-  SquareIndices prev_pos{SquareNull};
+  Square prev_pos{SquareNull};
   std::array<SquareDrawing, SquareEnd> m_squares;
 };
 

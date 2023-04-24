@@ -1,8 +1,8 @@
 #ifndef MOVE_H
 #define MOVE_H
 
-#include "bit_utilities.h"
-#include "utilities.h"
+#include "board/board_representation/board_typedefs.h"
+#include "utils/bit_utilities.h"
 
 /*
   0000 0000 0000 0000 0000 0000 0011 1111 -> From                     >> 0,  0x3F
@@ -16,7 +16,7 @@
 
 typedef unsigned int Move;
 
-namespace Move_Utils {
+namespace MoveUtils {
 namespace {
 inline static const unsigned int designated_space_in_hex_square = 0x3F;
 inline static const unsigned int designated_space_in_hex_piecetype = 0xF;
@@ -52,28 +52,28 @@ constexpr void set_encoded_value(Move &m,
 }
 } // namespace
 
-constexpr SquareIndices get_from(const Move &m) {
-  return SquareIndices(
+constexpr Square get_from(const Move &m) {
+  return Square(
       get_encoded_value(m, shift_from, designated_space_in_hex_square));
 }
 
-constexpr SquareIndices get_to(const Move &m) {
-  return SquareIndices(
+constexpr Square get_to(const Move &m) {
+  return Square(
       get_encoded_value(m, shift_to, designated_space_in_hex_square));
 }
 
-constexpr Piecetype get_piece(const Move &m) {
-  return Piecetype(
+constexpr Piece get_piece(const Move &m) {
+  return Piece(
       get_encoded_value(m, shift_piece, designated_space_in_hex_piecetype));
 }
 
-constexpr Piecetype get_captured_piece(const Move &m) {
-  return Piecetype(
+constexpr Piece get_captured_piece(const Move &m) {
+  return Piece(
       get_encoded_value(m, shift_captured, designated_space_in_hex_piecetype));
 }
 
-constexpr Piecetype get_promoted_piece(const Move &m) {
-  return Piecetype(
+constexpr Piece get_promoted_piece(const Move &m) {
+  return Piece(
       get_encoded_value(m, shift_promoted, designated_space_in_hex_piecetype));
 }
 
@@ -130,11 +130,11 @@ constexpr void set_move(Move &m, unsigned int from, unsigned int to) {
   m = (from & designated_space_in_hex_square) |
       ((to & designated_space_in_hex_square) << shift_to);
 }
-} // namespace Move_Utils
+} // namespace MoveUtils
 
-constexpr SquareIndices operator+(SquareIndices s, bitUtility::Direction d) { return SquareIndices(int(s) + int(d)); }
-constexpr SquareIndices operator-(SquareIndices s, bitUtility::Direction d) { return SquareIndices(int(s) - int(d)); }
-inline SquareIndices& operator+=(SquareIndices& s, bitUtility::Direction d) { return s = s + d; }
-inline SquareIndices& operator-=(SquareIndices& s, bitUtility::Direction d) { return s = s - d; }
+constexpr Square operator+(Square s, bitUtility::Direction d) { return Square(int(s) + int(d)); }
+constexpr Square operator-(Square s, bitUtility::Direction d) { return Square(int(s) - int(d)); }
+inline Square& operator+=(Square& s, bitUtility::Direction d) { return s = s + d; }
+inline Square& operator-=(Square& s, bitUtility::Direction d) { return s = s - d; }
 
 #endif /* MOVE_H */

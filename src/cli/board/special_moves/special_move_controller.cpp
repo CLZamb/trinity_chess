@@ -1,56 +1,37 @@
 #include "special_move_controller.h"
+#include "board/board_representation/board_typedefs.h"
+#include "utils/move.hpp"
 
-SpecialMoveController::SpecialMoveController() {}
-SpecialMoveController::~SpecialMoveController() {}
+SpecialMove::SpecialMove(Position& p) : m_position(p) {}
+SpecialMove::~SpecialMove() {}
 
-void SpecialMoveController::set_castle_permission(CastlePermission perm) {
-  m_castling.set_castle_permission(perm);
-}
-
-const int &SpecialMoveController::get_castle_permission() {
-  return m_castling.get_castle_permission();
-}
-
-const SquareIndices &SpecialMoveController::get_en_passant_square() {
-  return m_en_passant.get_en_passant_position();
-}
-
-void SpecialMoveController::set_en_passant_square(SquareIndices sq) {
-  m_en_passant.set_en_passant_position(sq);
-}
-
-void SpecialMoveController::handle_special_move(const Move& m, Squares& squares) {
-  if (m_special_move) {
-    m_special_move->handle_special_move(m, squares);
+void SpecialMove::handle_special_move(const Move& m, Position& position) {
+  if (MoveUtils::is_en_passand(m)) {
+    m_en_passant.capture_en_passant(m, position);
+  } else if (MoveUtils::can_castle(m)) {
+    m_castling.move_rook(m, position);
+  } else if (MoveUtils::get_promoted_piece(m)  != EMPTY){
+    m_pawn_promotion.handle_promotion(m, position);
   }
 }
 
-bool SpecialMoveController::is_current_move_special_move() {
-  return m_special_move != nullptr;
-}
-
-void SpecialMoveController::set_special_move_to_move(Move& m, Squares &squares) {
-  Piecetype pct = Move_Utils::get_piece(m);
+void SpecialMove::set_special_move_to_move(Move& m, Position &squares) {
+  Piece pct = MoveUtils::get_piece(m);
   if (!is_pawn_piece(pct) && !is_king_piece(pct)) return;
 
   if (m_castling.is_castle_move(m, squares)) {
-    m_special_move = &m_castling;
-  } else if (m_en_passant.is_en_passant_move(m)) {
-    m_special_move = &m_en_passant;
+    MoveUtils::set_castle_permission(m, m_position.get_castle_permission(m));
+  } else if (m_en_passant.is_en_passant_move(m, m_position.get_en_passant_square())) {
+    MoveUtils::set_en_passant(m, m_position.get_en_passant_square());
   } else if (m_pawn_promotion.is_pawn_promotion(m)) {
-    m_special_move = &m_pawn_promotion;
-  } else {
-    m_special_move = nullptr;
-  }  
-
-  if (m_special_move)
-    m_special_move->assign_special_to_move(m);
+    MoveUtils::set_promoted_piece(m, bQ);
+  }
 }
 
-bool SpecialMoveController::is_pawn_piece(const Piecetype pct) {
+bool SpecialMove::is_pawn_piece(const Piece pct) {
   return pct == bP || pct == wP;
 }
 
-bool SpecialMoveController::is_king_piece(const Piecetype pct) {
+bool SpecialMove::is_king_piece(const Piece pct) {
   return pct == bK || pct == wK;
 }

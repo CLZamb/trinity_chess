@@ -4,9 +4,9 @@
 
 using std::make_unique;
 
-BoardCheck::BoardCheck(Board& b):
+BoardCheck::BoardCheck(Position& p):
   p_behaviour(
-    make_unique<CheckBehaviour>(b, m_turn_info)
+    make_unique<CheckBehaviour>(p, m_turn_info)
   ) {}
 
 void BoardCheck::update_turn(const PlayerInfo &turn) { 

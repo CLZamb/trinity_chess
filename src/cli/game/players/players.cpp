@@ -15,7 +15,7 @@ Players::~Players() {}
 // }
 //
 // void Players::create_player(GameTurn::Players side, GameTurn::Type t, BoardInput& i) {
-//   unordered_map<GameTurn::Players, SquareIndices> initial_pos = {
+//   unordered_map<GameTurn::Players, Square> initial_pos = {
 //     {GameTurn::player_1, D3},
 //     {GameTurn::player_2, E6},
 //   };

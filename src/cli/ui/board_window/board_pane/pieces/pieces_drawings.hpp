@@ -2,17 +2,18 @@
 #define DRAWINGS_H
 
 #include <array>
+#include "board/board_representation/board_utils.h"
 #include "pieces_drawing_builder.hpp"
 
 class PiecesDrawings {
 public:
   PiecesDrawings() {
-    const Piecetype PiecesTypes[] = {
+    const Piece PiecesTypes[] = {
       bP, bR, bN, bB, bQ, bK,
       wP, wR, wN, wB, wQ, wK
     };
 
-    for (const Piecetype &pct : PiecesTypes) {
+    for (const Piece &pct : PiecesTypes) {
       drawing = m_piece_drawing_builder.draw_piece(pct);
       piece_drawing_mod_fg = utils::check::is_black_piece(pct)
         ? BoxModifier::BLACK_FG
@@ -38,7 +39,7 @@ public:
       delete piece;
   }
 
-  Box* get_drawing(const Piecetype &m_type, bool is_in_black_square) {
+  Box* get_drawing(const Piece &m_type, bool is_in_black_square) {
     return m_pieces[m_type]->get_drawing(is_in_black_square);
   }
 

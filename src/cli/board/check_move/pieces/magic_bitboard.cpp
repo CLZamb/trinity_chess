@@ -1,7 +1,7 @@
 #include "magic_bitboard.h"
 // extern declaration in defs.h
-U64 SetMask[64];
-U64 ClearMask[64];
+Bitboard SetMask[64];
+Bitboard ClearMask[64];
 // define in magic_bitboard.cpp - _init_bitmasks()
 
 // Magic_Bitboards() computes all rook and bishop attacks at startup. Magic
@@ -19,7 +19,7 @@ MagicBitboard::MagicBitboard() {
 
 MagicBitboard::~MagicBitboard() {}
 
-constexpr U64 MagicBitboard::RookMagic[64] = {
+constexpr Bitboard MagicBitboard::RookMagic[64] = {
   0x2380004000201080ULL, 0x2040100020004001ULL, 0x180086002100080ULL, 0x4080048008021000ULL,
   0xa00086004100200ULL, 0x80018004004200ULL, 0x400640810030082ULL, 0x4280014100102080ULL,
   0x80a002600450080ULL, 0x4005004004802100ULL, 0x81004104102000ULL, 0x3441000921021000ULL,
@@ -38,7 +38,7 @@ constexpr U64 MagicBitboard::RookMagic[64] = {
   0x42060088209c3042ULL, 0x700a604001811ULL, 0x80201100084ULL, 0x168004a21040086ULL
 };
 
-constexpr U64 MagicBitboard::BishopMagic[64] = {
+constexpr Bitboard MagicBitboard::BishopMagic[64] = {
   0x4151002060840ULL, 0x403060403020001ULL, 0x1800c400800010ULL, 0x2848c100080024ULL,
   0x84050420e00001ULL, 0x4406090460180001ULL, 0x4014120846090024ULL, 0x4808150c01044004ULL,
   0x40448020400ULL, 0x100850a2020400b4ULL, 0x4042440800810080ULL, 0x7092440c02805000ULL,
@@ -74,8 +74,8 @@ void MagicBitboard::_init_bitmasks() {
   }
 }
 
-U64 MagicBitboard::rook_attacks(U64 occ, SquareIndices sq) const {
-  // U64* aptr = m_rook_tbl[sq].ptr;
+Bitboard MagicBitboard::rook_attacks(Bitboard occ, Square sq) const {
+  // Bitboard* aptr = m_rook_tbl[sq].ptr;
   occ &= m_rook_tbl[sq].mask;
   occ *=  m_rook_tbl[sq].magic;
   occ >>= m_rook_tbl[sq].shift;
@@ -83,17 +83,17 @@ U64 MagicBitboard::rook_attacks(U64 occ, SquareIndices sq) const {
   return m_rook_table[sq][occ];
 }
 
-U64 MagicBitboard::bishop_attacks(U64 occ, SquareIndices sq) const {
-  // U64* aptr = m_bishop_tbl[sq].ptr;
+Bitboard MagicBitboard::bishop_attacks(Bitboard occ, Square sq) const {
+  // Bitboard* aptr = m_bishop_tbl[sq].ptr;
   occ &= m_bishop_tbl[sq].mask;
   occ *= m_bishop_tbl[sq].magic;
   occ >>=  m_bishop_tbl[sq].shift;
   return m_bishop_table[sq][occ];
 }
 
-U64 MagicBitboard::queen_attacks(U64 occ, SquareIndices sq) const {
-  U64 result = 0ULL;
-  U64 temp_occ = occ;
+Bitboard MagicBitboard::queen_attacks(Bitboard occ, Square sq) const {
+  Bitboard result = 0ULL;
+  Bitboard temp_occ = occ;
 
   occ &= m_bishop_tbl[sq].mask;
   occ *= m_bishop_tbl[sq].magic;
@@ -110,8 +110,8 @@ U64 MagicBitboard::queen_attacks(U64 occ, SquareIndices sq) const {
 }
 
 
-constexpr U64 MagicBitboard::rmask(int sq) {
-  U64 result = 0ULL;
+constexpr Bitboard MagicBitboard::rmask(int sq) {
+  Bitboard result = 0ULL;
   int rk = sq/8, fl = sq%8;
   int r = rk + 1, f = fl + 1;
   for (r = rk+1; r <= 6; r++) result |= (1ULL << (fl + r*8));
@@ -121,8 +121,8 @@ constexpr U64 MagicBitboard::rmask(int sq) {
   return result;
 }
 
-constexpr U64 MagicBitboard::bmask(int sq) {
-  U64 result = 0ULL;
+constexpr Bitboard MagicBitboard::bmask(int sq) {
+  Bitboard result = 0ULL;
   int rk = sq/8, fl = sq%8;
   int r = rk + 1, f = fl + 1;
   for (r = rk+1, f=fl+1; r <= 6 && f <= 6; r++, f++)
@@ -136,8 +136,8 @@ constexpr U64 MagicBitboard::bmask(int sq) {
   return result;
 }
 
-constexpr U64 MagicBitboard::ratt(int sq, U64 block) {
-  U64 result = 0ULL;
+constexpr Bitboard MagicBitboard::ratt(int sq, Bitboard block) {
+  Bitboard result = 0ULL;
   int rk = sq/8, fl = sq%8;
   int r = rk + 1, f = fl + 1;
   for (r = rk+1; r <= 7; r++) {
@@ -159,8 +159,8 @@ constexpr U64 MagicBitboard::ratt(int sq, U64 block) {
   return result;
 }
 
-constexpr U64 MagicBitboard::batt(int sq, U64 block) {
-  U64 result = 0ULL;
+constexpr Bitboard MagicBitboard::batt(int sq, Bitboard block) {
+  Bitboard result = 0ULL;
   int rk = sq/8, fl = sq%8;
   int r = rk + 1, f = fl + 1;
   for (r = rk+1, f = fl+1; r <= 7 && f <= 7; r++, f++) {
@@ -182,9 +182,9 @@ constexpr U64 MagicBitboard::batt(int sq, U64 block) {
   return result;
 }
 
-U64 MagicBitboard::set_occupancy(int index, int bits, U64 m) {
+Bitboard MagicBitboard::set_occupancy(int index, int bits, Bitboard m) {
   int i, j;
-  U64 result = 0ULL;
+  Bitboard result = 0ULL;
 
   for (i = 0; i < bits; i++) {
     j = bitUtility::pop_1st_bit(&m);
@@ -197,7 +197,7 @@ U64 MagicBitboard::set_occupancy(int index, int bits, U64 m) {
 
 void MagicBitboard::_init_slider_masks_shifs_occupancies(int isRook) {
   int i, bitCount, variationCount;
-  U64 mask;
+  Bitboard mask;
 
   for (int bitRef = A1; bitRef < static_cast<int>(SquareEnd); ++bitRef) {
     m_rook_tbl[bitRef].mask = rmask(bitRef);
@@ -220,7 +220,7 @@ void MagicBitboard::_init_slider_masks_shifs_occupancies(int isRook) {
 }
 
 void MagicBitboard::_init_tables(int isRook) {
-  U64 validMoves, mask;
+  Bitboard validMoves, mask;
   int bitCount;
   unsigned long variations; 
   unsigned long i, magicIndex;

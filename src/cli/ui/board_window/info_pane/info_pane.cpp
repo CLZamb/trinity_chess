@@ -1,5 +1,4 @@
 #include "info_pane.h"
-#include "utils/utilities.h"
 
 InfoPane::InfoPane(std::shared_ptr<BoardModelInfo> b) : p_info(b) {
   Pane::add_section(m_top_section, 1);

@@ -38,7 +38,7 @@ void PiecesLegalMoves::create_all_pieces() {
   make_knight(WHITE);
 }
 
-Piece* PiecesLegalMoves::operator[](Piecetype type) {
+PieceBase* PiecesLegalMoves::operator[](Piece type) {
   return m_pieces[type];
 }
 
