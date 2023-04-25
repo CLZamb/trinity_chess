@@ -23,8 +23,6 @@ void Position::move_piece(const Piece p, const Square from, const Square to) {
   set_piece_at_square(p, to);
 }
 
-Bitboard Position::operator[](Color c) { return m_occupancies[c]; }
-
 bool Position::is_occupied_at_square(const Square pos) {
   return m_occupancies[BOTH] & (ONE << pos);
 }
@@ -64,11 +62,6 @@ void Position::clear_square_at_pos(Square sq) {
   clear_piece_at_square(m_pieces_pos[sq], sq);
 }
 
-
-void Position::update_king_position(Color c, const Square &pos) {
-  king_position[c] = pos;
-}
-
 void Position::update_king_position(const Move &mv) {
   Piece pct{MoveUtils::get_piece(mv)};
   if (!utils::check::is_king_piece(pct))
@@ -92,15 +85,9 @@ void Position::update_half_moves(const Move &m) {
   half_moves = 0;
 }
 
-const Piece &Position::get_piece_at_square(Square sq) const { return m_pieces_pos[sq]; }
-Square Position::get_king_position(Color c) { return king_position[c]; }
-const Square &Position::get_en_passant_square() { return en_passant_pos; }
-void Position::set_en_passant_square(Square sq) { en_passant_pos = sq; }
-void Position::update_full_moves() { full_moves++; }
-int Position::get_half_moves() { return half_moves; }
-int Position::get_full_moves() { return half_moves; }
-Color Position::side_to_move() const { return m_side_to_move; }
-const unsigned int &Position::get_castle_permission() { return castle_perm; }
+void Position::update_king_position(Color c, const Square &pos) {
+  king_position[c] = pos;
+}
 
 void Position::set_castle_permission(CastlePermission perm) {
   castle_perm |= perm;
@@ -115,3 +102,14 @@ CastlePermission Position::get_castle_permission(Move &m) {
   CastleSquares to = static_cast<CastleSquares>(MoveUtils::get_to(m));
   return m_castle_permission.at(side).at(to);
 }
+
+Bitboard Position::operator[](Color c) { return m_occupancies[c]; }
+const Piece &Position::get_piece_at_square(Square sq) const { return m_pieces_pos[sq]; }
+Square Position::get_king_position(Color c) { return king_position[c]; }
+const Square &Position::get_en_passant_square() { return en_passant_pos; }
+void Position::set_en_passant_square(Square sq) { en_passant_pos = sq; }
+void Position::update_full_moves() { full_moves++; }
+int Position::get_half_moves() { return half_moves; }
+int Position::get_full_moves() { return half_moves; }
+Color Position::side_to_move() const { return m_side_to_move; }
+const unsigned int &Position::get_castle_permission() { return castle_perm; }
