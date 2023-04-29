@@ -1,14 +1,29 @@
+# Trinity Engine
 A CLI chess game written in C++17.
 The game has two input types, text ie: "a2a4" and 
-Keyboard input listening ie: "w,a,s,d" and "arrows:up,down,left,right" and "enter" to select a square.
+Keyboard input listening ie: "w,a,s,d" and "arrows:up,down,left,right" and "enter" to move pieces.
 Side panes such as info pane and statistics pane can be added to the board window.
 
-
-# Trinity Engine
 [![demo](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY.svg)](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY?autoplay=1)
 ![alt text](https://raw.githubusercontent.com/CLZamb/trinity_engine/dev/chess_screenshot.png)
 
-## Features
+# Features
+## UI
+- UI Components
+    - Window: Each window can contain up to three panaes.
+    - Pane: can contain sub-section
+- Menu
+    - Welcome menu three option: play, configuration and Quit
+- Input
+    - Keyboard: Event driven input listening
+    - Text: Player types each move ie: "a2a4"
+- Board
+    - Main Board Pane: shows the board.
+    - Info Pane: it shows the side to move(black, white), shows the moves, and captures, and general info such as invalid move.
+    - Statistics Pane: WIP
+## Chess Engine
+- Not Implemented yet, Int this vesion the AI needs to be reimplemented so that the AI can beat previous versions and performs better.
+- TODO
 - Board representation
     - [Bitboards](https://en.wikipedia.org/wiki/Bitboard)
 - Move generation

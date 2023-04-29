@@ -19,14 +19,14 @@ string Game::get_start_menu_option_as_string() {
 }
 
 void Game::start() {
-  std::string m_selected = get_start_menu_option_as_string();
+  std::string option_selected = get_start_menu_option_as_string();
 
-  if (m_selected == "Quit") {
+  if (option_selected == "Quit") {
     GameMessages::print_game_over();
     return;
   }
 
-  if (m_selected == "Configuration") {
+  if (option_selected == "Configuration") {
     m_config.get_new_configuration();
   }
 
