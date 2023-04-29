@@ -1,7 +1,7 @@
 #ifndef BIT_UTILITIES_H
 #define BIT_UTILITIES_H
 
-#include "board/board_representation/board_typedefs.h"
+#include "board/position/position_typedefs.h"
 #include "defs.h"
 #include <iostream>
 

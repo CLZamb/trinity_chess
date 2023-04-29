@@ -119,6 +119,25 @@ inline string get_permission_str_from_castle_permission(const unsigned int &perm
 
   return permissions_str;
 }
+
+size_t constexpr length(const char* str) {
+  return *str ? 1 + length(str + 1) : 0;
+}
+
+size_t constexpr utf8_strlen(const char* str) {
+  const size_t len = length(str);
+  size_t c = 0, i = 0, ix = 0, q = 0;
+  for (q=0, i=0, ix=len; i < ix; i++, q++) {
+    c = (unsigned char) str[i];
+    if      (c > 0 && c <= 127) i+=0;
+    else if ((c & 0xE0) == 0xC0) i+=1;
+    else if ((c & 0xF0) == 0xE0) i+=2;
+    else if ((c & 0xF8) == 0xF0) i+=3;
+    else
+      return 0;  // invalid utf8
+  }
+  return q;
+}
 } // namespace string_utils
 
 #endif /* MOVE_UTILS_H */

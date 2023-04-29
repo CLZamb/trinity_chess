@@ -1,7 +1,7 @@
 #ifndef INPUT_CONFIGURATION_H
 #define INPUT_CONFIGURATION_H
 
-#include "ui/menu_window/menu_window.hpp"
+#include "menu/menu_window/menu_window.hpp"
 #include "IConfiguration.h"
 
 class InputConfiguration : public IConfiguration {
@@ -47,7 +47,7 @@ private:
 
     player_menu.print();
     Color initial_color = player_menu.select_option();
-    m_players_config.set_initial_color(initial_color);
+    m_board_config.set_initial_color(initial_color);
   }
 
   BoardConfig m_board_config;

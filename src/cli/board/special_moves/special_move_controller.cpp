@@ -1,5 +1,5 @@
 #include "special_move_controller.h"
-#include "board/board_representation/board_typedefs.h"
+#include "board/position/position_typedefs.h"
 #include "utils/move.hpp"
 
 SpecialMove::SpecialMove(Position& p) : m_position(p) {}
@@ -15,7 +15,7 @@ void SpecialMove::handle_special_move(const Move& m, Position& position) {
   }
 }
 
-void SpecialMove::set_special_move_to_move(Move& m, Position &squares) {
+void SpecialMove::set_special_move(Move& m, Position &squares) {
   Piece pct = MoveUtils::get_piece(m);
   if (!is_pawn_piece(pct) && !is_king_piece(pct)) return;
 

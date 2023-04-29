@@ -5,6 +5,7 @@ add_executable(${chess} main.cpp)
 add_subdirectory(board)
 add_subdirectory(configuration)
 add_subdirectory(game)
+add_subdirectory(menu)
 add_subdirectory(ui)
 add_subdirectory(utils)
 
@@ -12,16 +13,17 @@ target_link_libraries (
   ${chess} 
   PRIVATE
   game_lib
+  board_lib
   board_board_representation_lib
   board_check_lib
   board_check_pieces_lib
-  board_fen_lib
   board_special_moves_lib
   configuration_lib
+  board_configuration
   game_players_lib
   game_turn_lib
   #graphics
-  ui_board_lib
+  board_window_lib
   ui_board_pane_lib
   ui_board_squares_lib
   ui_board_info_pane_lib

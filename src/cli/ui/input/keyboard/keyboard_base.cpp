@@ -36,6 +36,9 @@ Keyboard::Key KeyboardBase::read_key() {
   Keyboard::Key key = m_k_reader.read_key();
 
   switch(key) {
+    case Keyboard::ARROW_KEY:
+      key = read_arrow_key();
+      break;
     case Keyboard::quit:
     case Keyboard::Quit:
       quit_game();

@@ -1,26 +1,27 @@
 #ifndef BOARD_CHECK_H
 #define BOARD_CHECK_H
 
-#include "board/board_representation/position.hpp"
-#include "board/check_move/IBoard_check_behaviour.h"
-#include "game/turn/game_turn_observer.h"
 #include <memory>
 
-class BoardCheck : public GameTurnObserver {
-public:
-  BoardCheck(Position &b);
+#include "board/check_move/IBoard_check_behaviour.h"
+#include "board/position/position.h"
+#include "game/turn/game_turn_observer.h"
 
-  void update_turn(const PlayerInfo &turn) override;
+class BoardCheck : public GameTurnObserver {
+ public:
+  explicit BoardCheck(Position &b);
+
+  void update_turn(const Color &turn) override;
   bool is_checkmate();
 
   bool is_in_check(const Move &m);
-  bool is_string_format_valid(const string &s);
+  bool is_string_move_format_valid(const string &s);
   bool is_legal_move(Move &);
   void set_behaviour(std::unique_ptr<IBoardCheckBehaviour> &&t);
   std::unique_ptr<IBoardCheckBehaviour> &&get_behaviour();
 
-private:
-  PlayerInfo m_turn_info;
+ private:
+  Color m_side;
   std::unique_ptr<IBoardCheckBehaviour> p_behaviour;
 };
 

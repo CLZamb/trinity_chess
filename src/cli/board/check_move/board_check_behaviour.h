@@ -6,12 +6,11 @@
 #include "board/check_move/pieces/knight.hpp"
 #include "board/check_move/pieces/pawn.hpp"
 #include "board/check_move/pieces/pieces_legal_moves.h"
-#include "game/players/player_info.hpp"
 #include "utils/string_utils.h"
 
 class CheckBehaviour : public IBoardCheckBehaviour {
 public:
-  CheckBehaviour(Position &board, PlayerInfo &turn);
+  CheckBehaviour(Position &board, Color &side);
 
   bool is_legal_move(Move &m) override;
   bool is_string_format_valid(const string &s) override;
@@ -30,7 +29,7 @@ private:
   bool can_opponent_attack_square(const Square &to);
 
   PiecesLegalMoves m_pieces;
-  PlayerInfo &m_turn_info;
+  Color &m_side;
   Position &m_position;
 
   MagicBitboard m_magic_bitboard;

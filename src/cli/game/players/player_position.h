@@ -3,7 +3,7 @@
 
 #include <cstddef>
 #include <array>
-#include "board/board_representation/board_typedefs.h"
+#include "board/position/position_typedefs.h"
 #include "game/game_typedefs.h"
 
 class PlayerPosition {
@@ -15,8 +15,8 @@ public:
     last_position[c] = next_last_position; 
   }
 
-  void update_next_last_position(const Square &pos) { 
-    next_last_position = pos; 
+  void update_next_last_position(const Square &p) { 
+    next_last_position = p; 
   }
 
   const Square &get_next_last_position() const {  

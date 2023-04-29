@@ -18,6 +18,9 @@ node_modules/
 .vscode/
 .git/
 .cmake
+.clang-tidy
+.clang-format
+
 chess
 chess_tests
 neovim.json

@@ -3,8 +3,8 @@
 #include "utils/bit_utilities.h"
 #include "utils/defs.h"
 
-CheckBehaviour::CheckBehaviour(Position& position, PlayerInfo& turn) : 
-  m_turn_info(turn),
+CheckBehaviour::CheckBehaviour(Position& position, Color& side) : 
+  m_side(side),
   m_position(position),
   m_bishop_attacks(m_magic_bitboard),
   m_queen_attacks(m_magic_bitboard),
@@ -34,7 +34,7 @@ bool CheckBehaviour::is_in_check(const Move& m)  {
     return true;
   }
 
-  // TODO
+  // TODO(deux): 
   // if (!can_be_block_by_another_piece(m)) {
   //   return true;
   // }
@@ -53,7 +53,7 @@ bool CheckBehaviour::check_checkmate() {
 
   while (all_king_possible_positions) {
     count_possible_king_moves++;
-    position = static_cast<Square>(pop_1st_bit(&all_king_possible_positions));
+    position = static_cast<Square>(bitUtility::pop_1st_bit(&all_king_possible_positions));
     if (can_opponent_attack_square(position)) count_king_moves_blocked++;
   }
 
@@ -61,13 +61,12 @@ bool CheckBehaviour::check_checkmate() {
 }
 
 Bitboard CheckBehaviour::get_all_king_possible_positions() {
-  Color c = m_turn_info.color;
-  Square sq = m_position.get_king_position(c);
+  Square sq = m_position.get_king_position(m_side);
   return King<WHITE>::king_mask(sq);
 }
 
 bool CheckBehaviour::piece_belongs_to_player(const Piece &pc) {
-  return utils::check::get_color_piece(pc) == m_turn_info.color;
+  return utils::check::get_color_piece(pc) == m_side;
 }
 
 bool CheckBehaviour::are_same_color(const Piece &piece,
@@ -95,12 +94,12 @@ bool CheckBehaviour::can_be_block_by_another_piece(const Move& m) {
 }
 
 bool CheckBehaviour::is_king_piece_attacked() {
-  Square sq = m_position.get_king_position(m_turn_info.color);
+  Square sq = m_position.get_king_position(m_side);
   return can_opponent_attack_square(sq);
 }
 
 Color CheckBehaviour::get_opponent_player_color() {
-  return m_turn_info.color == WHITE ? BLACK : WHITE;
+  return m_side == WHITE ? BLACK : WHITE;
 }
 
 bool CheckBehaviour::can_opponent_attack_square(const Square &sq) {

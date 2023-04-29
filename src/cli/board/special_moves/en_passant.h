@@ -1,7 +1,7 @@
 #ifndef EN_PASSANT_H
 #define EN_PASSANT_H
 
-#include "board/board_representation/position.hpp"
+#include "board/position/position.h"
 #include "utils/move.hpp"
 
 class EnPassant {

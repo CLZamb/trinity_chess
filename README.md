@@ -1,4 +1,8 @@
-chess engine written in C++17
+A CLI chess game written in C++17.
+The game has two input types, text ie: "a2a4" and 
+Keyboard input listening ie: "w,a,s,d" and "arrows:up,down,left,right" and "enter" to select a square.
+Side panes such as info pane and statistics pane can be added to the board window.
+
 
 # Trinity Engine
 [![demo](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY.svg)](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY?autoplay=1)

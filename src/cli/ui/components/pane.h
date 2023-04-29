@@ -1,11 +1,14 @@
 #ifndef PANE_H
 #define PANE_H
 
+#include <cstddef>
 #include <unordered_map>
 #include <memory>
+#include "board/board_window/info_pane/info_drawings.hpp"
+#include "ui/components/pane_drawings.hpp"
 #include "section.h"
 #include "IPane.h"
-#include "ui/board_window/info_pane/info_drawings.hpp"
+// #include "board/board_window/info_pane/info_drawings.hpp"
 
 using std::shared_ptr;
 using std::unordered_map;
@@ -38,7 +41,7 @@ class Pane : public IPane  {
   vector<string*> m_pane_drawing;
   unordered_map<string, shared_ptr<Section>> sections;
   string m_empty{};
-  const unsigned int kRowMaxLen = static_cast<unsigned int>(InfoDrawings::Banner::width - 4) /*┃  ┃*/;
+  const size_t kRowMaxWidth = PaneDrawings::Borders::width - 4 /*┃  ┃*/;
 };
 
 #endif /* PANE_H */

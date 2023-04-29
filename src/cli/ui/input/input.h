@@ -5,8 +5,6 @@
 #include <string>
 #include <unordered_map>
 
-using std::unordered_map;
-
 class InputEvent {
 public:
   template <typename EventType, typename Class>
@@ -23,7 +21,7 @@ public:
   }
 
 protected:
-  unordered_map<std::string, std::vector<method>> _events;
+  std::unordered_map<std::string, std::vector<method>> _events;
 
 private:
   template <typename EventType, typename Class>

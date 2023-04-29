@@ -2,7 +2,6 @@ add_library(
   game_players_lib
   ai_player.cpp
   human_player.cpp
-  players.cpp
 )
 
 target_include_directories(

@@ -1,7 +1,7 @@
 #ifndef PAWN_PROMITION_H
 #define PAWN_PROMITION_H
 
-#include "board/board_representation/position.hpp"
+#include "board/position/position.h"
 #include "utils/move.hpp"
 
 class PawnPromition {

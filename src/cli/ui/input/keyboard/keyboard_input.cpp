@@ -13,9 +13,6 @@ void KeyboardInput::listen_for_input_events() {
 
   Keyboard::Key key = m_k_input.read_key();
 
-  if (key == Keyboard::ARROW_KEY)
-    key = m_k_input.read_arrow_key();
-
   if (!m_command_event.check_if_is_in_map(key)) { 
     std::cout << "key not supported" << std::endl;
     return;

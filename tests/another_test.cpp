@@ -1,12 +1,12 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include "board/board_representation/board.h"
+#include "board/board_representation/position.hpp"
 
 using namespace testing;
 
 class AboardTA : public testing::Test {
   public:
-    Board board;
+    Position board;
 };
 
 TEST_F(AboardTA, IsEmptyTestCreated) {

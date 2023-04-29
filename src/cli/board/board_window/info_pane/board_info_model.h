@@ -1,0 +1,59 @@
+#ifndef BOARD_INFO_H
+#define BOARD_INFO_H
+
+#include <array>
+#include <string>
+
+#include "game/turn/game_turn_observer.h"
+#include "utils/string_utils.h"
+
+class BoardModelInfo : public GameTurnObserver {
+ public:
+  BoardModelInfo();
+  virtual ~BoardModelInfo();
+
+  void update_turn(const Color &p) override;
+  void save_move(const Move &m);
+  void save_capture(const Move &m);
+  void save_info(const string &info);
+
+  string get_moves(Color c);
+  string get_captures(Color c);
+  string get_info();
+  Color get_player_color();
+
+ private:
+  string get_piece_str_name_from_piecetype(Piece piece_type) {
+    const unordered_map<Piece, string> piece_str_name{
+        {bP, StringDrawingName::Pieces::pawn},
+        {bR, StringDrawingName::Pieces::rook},
+        {bN, StringDrawingName::Pieces::knight},
+        {bB, StringDrawingName::Pieces::bishop},
+        {bQ, StringDrawingName::Pieces::queen},
+        {bK, StringDrawingName::Pieces::king},
+        {wP, StringDrawingName::Pieces::pawn},
+        {wR, StringDrawingName::Pieces::rook},
+        {wN, StringDrawingName::Pieces::knight},
+        {wB, StringDrawingName::Pieces::bishop},
+        {wQ, StringDrawingName::Pieces::queen},
+        {wK, StringDrawingName::Pieces::king}};
+
+    auto search = piece_str_name.find(piece_type);
+    // check if the key exists
+    if (search == piece_str_name.end()) {
+      return "";
+    }
+
+    return search->second;
+  }
+  string get_move_string(const Move &m);
+  string get_captured_string(const Move &m);
+
+  Color m_side;
+  static const size_t players_size = Color::SIZE;
+  std::array<string, players_size> m_moves;
+  std::array<string, players_size> m_captures;
+  string m_info;
+};
+
+#endif /* BOARD_INFO_H */

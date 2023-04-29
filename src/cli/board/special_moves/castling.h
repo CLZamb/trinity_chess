@@ -1,7 +1,7 @@
 #ifndef CASTLING_H
 #define CASTLING_H
 
-#include "board/board_representation/position.hpp"
+#include "board/position/position.h"
 #include "utils/move.hpp"
 #include <unordered_map>
 

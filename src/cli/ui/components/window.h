@@ -7,15 +7,16 @@
 using std::map;
 using std::ostream;
 
+// Assume Unix system
 #ifdef _WIN32
 #define CLEAR "cls"
 #else
-// Assume Unix system
 #define CLEAR "clear"
 #endif
 
 class Window {
  public:
+
   Window();
   virtual ~Window();
   void add_left_pane(IPane *pane);
@@ -23,14 +24,14 @@ class Window {
   void add_middle_pane(IPane *pane);
   void print();
 
-private:
+protected:
   enum Pane_pos {
     Left_pane = 0,
     Middle_pane = 1,
     Right_pane = 2,
   };
-
   void add_pane(IPane *pane, Pane_pos pos);
+private:
   void get_window_drawing(ostream &os);
   friend ostream &operator<<(ostream &os, Window &);
 

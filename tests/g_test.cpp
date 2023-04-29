@@ -1,6 +1,5 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include "board/board_representation/board.h"
 #include "board/check_move/board_check.h"
 #include "board/fen/fen_model.hpp"
 
@@ -17,8 +16,8 @@ using namespace testing;
 
 class Aboard : public testing::Test {
  public:
-  Board board;
-  BoardCheck board_check{board};
+  Position m_position;
+  BoardCheck board_check{m_position};
   BoardFen m_board_fen;
 };
 

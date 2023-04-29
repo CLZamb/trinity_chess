@@ -1,4 +1,16 @@
-add_subdirectory(special_moves)
-add_subdirectory(board_representation)
+add_library(
+  board_lib
+  board.cpp
+)
+
+target_include_directories(
+  board_lib 
+  PRIVATE
+  "${PROJECT_SOURCE_DIR}/src/cli"
+)
+
+add_subdirectory(board_window)
 add_subdirectory(check_move)
-add_subdirectory(fen)
+add_subdirectory(event_handlers)
+add_subdirectory(position)
+add_subdirectory(special_moves)

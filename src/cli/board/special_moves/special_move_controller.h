@@ -4,15 +4,15 @@
 #include "castling.h"
 #include "pawn_promotion.h"
 #include "en_passant.h"
-#include "board/board_representation/board_typedefs.h"
-#include "board/board_representation/position.hpp"
+#include "board/position/position_typedefs.h"
+#include "board/position/position.h"
 
 class SpecialMove {
  public:
   SpecialMove(Position& p);
   virtual ~SpecialMove();
   void handle_special_move(const Move& m, Position& squares);
-  void set_special_move_to_move(Move& m, Position& squares);
+  void set_special_move(Move& m, Position& squares);
 
  private:
   bool is_pawn_piece(const Piece pct);

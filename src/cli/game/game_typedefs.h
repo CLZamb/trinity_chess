@@ -8,6 +8,7 @@ enum Color {
 enum PlayerType {
   Cpu = 0,
   Human = 1,
+  Total_players_size = 2,
 };
 
 #endif /* GAME_TYPEDEFS_H */

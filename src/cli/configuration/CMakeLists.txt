@@ -1,9 +1,8 @@
 add_library(
   configuration_lib
   # file_configuration.cpp
-  default_configuration.cpp
+  configuration.cpp
   players_configuration.cpp
-  board_configuration.cpp
 )
 
 target_include_directories(
@@ -13,3 +12,9 @@ target_include_directories(
 )
 
 message("configuration_lib library compiled")
+
+add_subdirectory(board)
+# add_subdirectory(game)
+# add_subdirectory(file_configuration)
+
+

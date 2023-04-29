@@ -1,7 +1,7 @@
 #ifndef BOX_DRAWINGS_H
 #define BOX_DRAWINGS_H
 
-#include "ui/board_window/board_pane/board_drawings.hpp"
+#include "board/board_window/board_pane/board_drawings.hpp"
 #include "box_modifier.hpp"
 
 using std::string;

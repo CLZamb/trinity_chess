@@ -1,23 +1,25 @@
-#include <memory>
-#include "board_check_behaviour.h"
 #include "board_check.h"
+
+#include <memory>
+
+#include "board_check_behaviour.h"
 
 using std::make_unique;
 
 BoardCheck::BoardCheck(Position& p):
   p_behaviour(
-    make_unique<CheckBehaviour>(p, m_turn_info)
+    make_unique<CheckBehaviour>(p, m_side)
   ) {}
 
-void BoardCheck::update_turn(const PlayerInfo &turn) { 
-  m_turn_info = turn; 
+void BoardCheck::update_turn(const Color &turn) { 
+  m_side = turn; 
 }
 
 bool BoardCheck::is_checkmate() {
   return p_behaviour->is_checkmate();
 }
 
-bool BoardCheck::is_string_format_valid(const string& s) {
+bool BoardCheck::is_string_move_format_valid(const string& s) {
   return p_behaviour->is_string_format_valid(s);
 }
 
