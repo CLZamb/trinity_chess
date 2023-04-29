@@ -1,11 +1,13 @@
 #include "board_window.h"
-#include "ui/components/input_components.h"
 
-#include "ui/components/board_components.hpp"
+#include "board_components.hpp"
+#include "ui/input/input_components.h"
 
-BoardWindow::BoardWindow(const string fen, const InputType &input_type,
+BoardWindow::BoardWindow(const string fen,
+                         const InputType &input_type,
                          SideToMove &t)
-    : m_turn(t), m_board_pane(fen) {
+    : m_turn(t)
+    , m_board_pane(fen) {
   input_type == Keyboard ? set_keyboard_input(m_board_pane, m_turn)
                          : set_text_input(m_board_pane);
 
@@ -42,21 +44,20 @@ void BoardWindow::add_statistics_pane() {
 }
 
 void BoardWindow::set_keyboard_input(BoardPane &b, SideToMove &t) {
-  p_input_event = InputComponents::new_input_keyboard();
-  p_input_event_handler =
-      BoardComponents::new_keyboard_handler(b, p_input_event, t);
+  p_input = InputComponents::new_input_keyboard();
+  p_input_event_handler = BoardComponents::new_keyboard_handler(b, p_input, t);
 }
 
 void BoardWindow::set_text_input(BoardPane &b) {
-  p_input_event = InputComponents::new_input_text(" >> ");
-  p_input_event_handler = BoardComponents::new_text_handler(b, p_input_event);
+  p_input = InputComponents::new_input_text(" >> ");
+  p_input_event_handler = BoardComponents::new_text_handler(b, p_input);
 }
 
 string BoardWindow::get_player_string_move() {
   do {
-    p_input_event->listen_for_input_events();
+    p_input->listen_for_input_events();
 
-    if (p_input_event_handler->is_string_move_ready()) {
+    if (p_input_event_handler->is_player_string_move_ready()) {
       break;
     }
 

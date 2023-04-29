@@ -21,7 +21,7 @@ private:
 
   BoardConfig m_board_config;
   PlayersConfig m_players_config;
-  InputType m_input_type {Keyboard};
+  InputType m_input_type {Text};
 };
 
 #endif

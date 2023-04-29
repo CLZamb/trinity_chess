@@ -11,6 +11,5 @@ target_include_directories(
 
 add_subdirectory(board_window)
 add_subdirectory(check_move)
-add_subdirectory(event_handlers)
 add_subdirectory(position)
 add_subdirectory(special_moves)

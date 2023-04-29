@@ -4,20 +4,19 @@
 #include <memory>
 #include <string>
 
-#include "menu/event_handlers/menu_keyboard_event_handler.h"
-#include "menu/event_handlers/menu_text_event_handler.h"
-#include "menu_pane.h"
+#include "menu/menu_window/menu_components.hpp"
 #include "options.hpp"
-#include "ui/components/input_components.h"
-#include "ui/input/input.h"
+#include "ui/input/input_components.h"
 #include "ui/input/input_types.h"
 
 template <typename T = string>
 class MenuWindow : public Window {
  public:
-  explicit MenuWindow(InputType input_type, const string title = "",
+  explicit MenuWindow(InputType input_type,
+                      const string title = "",
                       const Options<T> &opts = {})
-      : m_opts(opts), m_pane(title, format_options()) {
+      : m_opts(opts)
+      , m_pane(title, format_options()) {
     input_type == Keyboard ? set_keyboard() : set_text();
     add_left_pane(&m_pane);
   }
@@ -52,22 +51,18 @@ class MenuWindow : public Window {
 
  private:
   void set_keyboard() {
-    auto keyboard_input = InputComponents::new_input_keyboard();
-    p_event_handler = std::make_unique<MenuKeyboardEventHandler<T>>(
-        keyboard_input, m_pane, m_opts);
-    p_input_event = std::move(keyboard_input);
+    p_input = InputComponents::new_input_keyboard();
+    p_event_handler = MenuComponents::new_keyboard_handler(p_input, m_pane, m_opts);
   }
 
   void set_text() {
-    auto text_input = InputComponents::new_input_text("\t\t\t\t>> ");
-    p_event_handler =
-        std::make_unique<MenuTextEventHandler<T>>(text_input, m_pane, m_opts);
-    p_input_event = std::move(text_input);
+    p_input = InputComponents::new_input_text("\t\t\t\t>> ");
+    p_event_handler = MenuComponents::new_text_handler(p_input, m_pane, m_opts);
   }
 
   const Option<T> &get_menu_option() {
     do {
-      p_input_event->listen_for_input_events();
+      p_input->listen_for_input_events();
 
       if (!p_event_handler->has_events()) {
         break;
@@ -95,7 +90,7 @@ class MenuWindow : public Window {
   int cur_index = 1;
   Options<T> m_opts;
   MenuPane m_pane;
-  std::unique_ptr<InputEvent> p_input_event;
+  std::unique_ptr<Input> p_input;
   std::unique_ptr<IMenuEventHandler<T>> p_event_handler;
 };
 

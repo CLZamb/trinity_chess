@@ -9,5 +9,6 @@ target_include_directories(
   "${PROJECT_SOURCE_DIR}/src/cli"
 )
 
-message("game_lib library compiled")
+message("menu_lib library compiled")
 
+add_subdirectory(event_handlers)

@@ -10,7 +10,7 @@
 template <typename T>
 class MenuKeyboardEventHandler : public IMenuEventHandler<T> {
  public:
-  MenuKeyboardEventHandler(const std::unique_ptr<KeyboardInput>& p, MenuPane &v,
+  MenuKeyboardEventHandler(const std::unique_ptr<Input>& p, MenuPane &v,
                            Options<T> &o)
       : m_pane(v), m_opts(o) {
     p->bind<CommandEventKeyboard>(

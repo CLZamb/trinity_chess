@@ -7,8 +7,8 @@
 #include "board/board_window/info_pane/board_check_info_decorator.h"
 #include "board/board_window/info_pane/info_pane.h"
 #include "board/board_window/statistics_pane/statistics_pane.hpp"
-#include "board/event_handlers/board_keyboard_event_handler.h"
-#include "board/event_handlers/board_text_event_handler.h"
+#include "board/board_window/event_handlers/board_keyboard_event_handler.h"
+#include "board/board_window/event_handlers/board_text_event_handler.h"
 #include "game/turn/side_to_move.h"
 
 namespace BoardComponents {
@@ -16,14 +16,14 @@ namespace BoardComponents {
 using std::make_shared;
 using std::make_unique;
 
-inline auto new_keyboard_handler(BoardPane &b, const std::unique_ptr<InputEvent>& p,
+inline auto new_keyboard_handler(BoardPane &b, const std::unique_ptr<Input>& p,
                                  SideToMove &m_turn) {
   auto k_event_handler = make_shared<BoardKeyboardEventHandler>(b, p);
   m_turn.attach(k_event_handler.get());
   return k_event_handler;
 }
 
-inline auto new_text_handler(BoardPane &b, const std::unique_ptr<InputEvent>& p) {
+inline auto new_text_handler(BoardPane &b, const std::unique_ptr<Input>& p) {
   return make_shared<BoardTextEventHandler>(b, p);
 }
 

@@ -1,2 +1,1 @@
-add_subdirectory(event_handlers)
 add_subdirectory(menu_window)

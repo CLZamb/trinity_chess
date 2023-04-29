@@ -38,7 +38,7 @@ struct CommandEventKeyboard {
   };
 };
 
-class KeyboardInput : public InputEvent {
+class KeyboardInput : public Input {
  public:
   KeyboardInput();
   virtual ~KeyboardInput();

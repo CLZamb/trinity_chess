@@ -9,12 +9,12 @@
 
 class BoardKeyboardEventHandler : public IBoardInputEventHandler, public GameTurnObserver  {
  public:
-  BoardKeyboardEventHandler(BoardPane& b, const std::unique_ptr<InputEvent>& p);
+  BoardKeyboardEventHandler(BoardPane& b, const std::unique_ptr<Input>& p);
 
   virtual ~BoardKeyboardEventHandler() = default;
 
   void update_turn(const Color& p) override ;
-  bool is_string_move_ready() override ;
+  bool is_player_string_move_ready() override ;
   string get_player_move_as_string() override;
 
  private:
@@ -43,7 +43,7 @@ class BoardKeyboardEventHandler : public IBoardInputEventHandler, public GameTur
   bool has_been_selected{false};
   PlayerPosition m_player_pos;
 
-  string call_back{""};
+  string m_string_move{""};
   BoardPane m_board_pane;
 };
 

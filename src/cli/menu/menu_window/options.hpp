@@ -3,11 +3,12 @@
 
 #include <iostream>
 #include <map>
+
 #include "option.h"
 
-template <typename T = std::string> 
+template <typename T = std::string>
 class Options {
-public:
+ public:
   using iterator = typename std::map<int, Option<T>>::iterator;
 
   Options() {}
@@ -17,23 +18,38 @@ public:
     }
   }
 
-  void add_option(int key, Option<T> option) {
-    m_options.emplace(key, option);
-  }
+  void add_option(int key, Option<T> option) { m_options.emplace(key, option); }
 
   virtual ~Options() {}
 
   iterator begin() { return m_options.begin(); }
   iterator end() { return m_options.end(); }
 
-  bool check_valid_option(int i) { 
-    return m_options.find(i) != m_options.end(); 
+  bool check_key_option(int key) {
+    return m_options.find(key) != m_options.end();
   }
-  const Option<T>& at(int key) { return m_options.at(key); }
+
+  bool check_description(const std::string &desc) {
+    for (const auto &option : m_options) {
+      if (option.second.desc == desc) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  int get_key_at(std::string desc) {
+    for (const auto &option : m_options) {
+      if (option.second.desc == desc) {
+        return option.second.num;
+      }
+    }
+    return -1;
+  }
+  const Option<T> &at(int key) { return m_options.at(key); }
 
  private:
   std::map<int, Option<T>> m_options;
 };
-
 
 #endif /* OPTIONS_H */

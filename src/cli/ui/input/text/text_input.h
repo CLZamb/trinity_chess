@@ -9,14 +9,14 @@ struct CommandEventText {
     m_command_string = c;
   }
 
-  std::string get_string() const {
+  std::string get_text() const {
     return m_command_string;
   }
  private:
   std::string m_command_string{""};
 };
 
-class TextInput : public InputEvent {
+class TextInput : public Input {
  public:
   TextInput();
   virtual ~TextInput();

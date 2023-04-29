@@ -3,11 +3,10 @@
 #include "utils/move.hpp"
 
 Board::Board(BoardConfig &bc)
-    : m_side_to_move(bc.get_initial_color()),
-      m_special_move(m_position),
-      m_board_check(m_position),
-      m_board_window(bc.get_fen(), bc.get_input_type(), m_side_to_move) {
-
+    : m_side_to_move(bc.get_initial_color())
+    , m_special_move(m_position)
+    , m_board_check(m_position)
+    , m_board_window(bc.get_fen(), bc.get_input_type(), m_side_to_move) {
   m_side_to_move.attach(&m_board_check);
   m_side_to_move.attach(&m_position);
   m_side_to_move.notify_side();

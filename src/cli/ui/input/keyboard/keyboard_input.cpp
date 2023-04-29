@@ -20,7 +20,7 @@ void KeyboardInput::listen_for_input_events() {
 
   m_command_event.set_key_code(key);
 
-  for (auto &&event : InputEvent::_events.at(keyboard_event_name)) {
+  for (auto &&event : Input::_events.at(keyboard_event_name)) {
     event(&m_command_event);
   }
 }
