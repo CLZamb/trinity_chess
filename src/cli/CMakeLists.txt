@@ -14,7 +14,7 @@ target_link_libraries (
   PRIVATE
   game_lib
   board_lib
-  board_board_representation_lib
+  position_lib
   board_check_lib
   board_check_pieces_lib
   board_special_moves_lib

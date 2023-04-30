@@ -15,16 +15,17 @@ namespace BoardComponents {
 
 using std::make_shared;
 using std::make_unique;
+using std::shared_ptr;
 
 inline auto new_keyboard_handler(BoardPane &b, const std::unique_ptr<Input>& p,
                                  SideToMove &m_turn) {
-  auto k_event_handler = make_shared<BoardKeyboardEventHandler>(b, p);
+  auto k_event_handler = make_unique<BoardKeyboardEventHandler>(b, p);
   m_turn.attach(k_event_handler.get());
   return k_event_handler;
 }
 
 inline auto new_text_handler(BoardPane &b, const std::unique_ptr<Input>& p) {
-  return make_shared<BoardTextEventHandler>(b, p);
+  return make_unique<BoardTextEventHandler>(b, p);
 }
 
 inline auto new_info_check_behaviour(BoardCheck &b,

@@ -6,9 +6,9 @@
 BoardWindow::BoardWindow(const string fen,
                          const InputType &input_type,
                          SideToMove &t)
-    : m_turn(t)
+    : m_side_to_move(t)
     , m_board_pane(fen) {
-  input_type == Keyboard ? set_keyboard_input(m_board_pane, m_turn)
+  input_type == Keyboard ? set_keyboard_input(m_board_pane, m_side_to_move)
                          : set_text_input(m_board_pane);
 
   Window::add_middle_pane(&m_board_pane);
@@ -18,6 +18,8 @@ void BoardWindow::make_move(const Move &m) {
   for (auto pane : m_side_panes) {
     pane->make_move(m);
   }
+
+  m_board_pane.make_move(m);
 }
 
 void BoardWindow::parse_fen(const string &fen) { m_board_pane.parse_fen(fen); }
@@ -34,8 +36,8 @@ void BoardWindow::print() { Window::print(); }
 
 void BoardWindow::add_info_pane(BoardCheck &b) {
   auto info_pane = BoardComponents::new_info_pane(b);
-  m_turn.attach(info_pane.get());
   add_side_pane(info_pane, Window::Left_pane);
+  m_side_to_move.attach(info_pane.get());
 }
 
 void BoardWindow::add_statistics_pane() {
@@ -53,7 +55,7 @@ void BoardWindow::set_text_input(BoardPane &b) {
   p_input_event_handler = BoardComponents::new_text_handler(b, p_input);
 }
 
-string BoardWindow::get_player_string_move() {
+string BoardWindow::get_player_move_as_string() {
   do {
     p_input->listen_for_input_events();
 
@@ -67,7 +69,7 @@ string BoardWindow::get_player_string_move() {
   return p_input_event_handler->get_player_move_as_string();
 }
 
-void BoardWindow::add_side_pane(shared_ptr<IBoardSidePane> p,
+void BoardWindow::add_side_pane(std::shared_ptr<IBoardSidePane> p,
                                 Window::Pane_pos pos) {
   Window::add_pane(p.get(), pos);
   m_side_panes.push_back(p);

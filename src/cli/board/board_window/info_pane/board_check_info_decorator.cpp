@@ -20,8 +20,8 @@ bool BoardCheckInfoDecorator::is_string_format_valid(const string &s) {
   return valid_format;
 }
 
-bool BoardCheckInfoDecorator::is_in_check(const Move &m) {
-  bool in_check = BoardCheckDecorator::is_in_check(m);
+bool BoardCheckInfoDecorator::is_player_in_check(const Move &m) {
+  bool in_check = BoardCheckDecorator::is_player_in_check(m);
 
   if (in_check) {
     m_board_model_info->save_info(Kin_check);

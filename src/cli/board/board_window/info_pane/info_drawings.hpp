@@ -9,7 +9,7 @@
 
 namespace InfoDrawings {
 namespace Banner {
-static const std::vector<string> white = {
+static const std::vector<std::string> white = {
     " ┃      ██╗    ██╗██╗  ██╗██╗████████╗███████╗              ┃",
     " ┃      ██║    ██║██║  ██║██║╚══██╔══╝██╔════╝              ┃",
     " ┃      ██║ █╗ ██║███████║██║   ██║   █████╗                ┃",
@@ -18,7 +18,7 @@ static const std::vector<string> white = {
     " ┃       ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝              ┃",
     " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃"};
 
-static const vector<string> black = {
+static const std::vector<std::string> black = {
     " ┃      ██████╗ ██╗      █████╗  ██████╗██╗  ██╗            ┃",
     " ┃      ██╔══██╗██║     ██╔══██╗██╔════╝██║ ██╔╝            ┃",
     " ┃      ██████╔╝██║     ███████║██║     █████╔╝             ┃",

@@ -6,7 +6,7 @@
 
 class SideToMove : public GameTurnObservable {
   public:
-  SideToMove(Color &c);
+  explicit SideToMove(Color &c);
   virtual ~SideToMove();
   void notify_side() override;
   void change_side();

@@ -84,9 +84,9 @@ static const std::unordered_map<std::string, Box> Ksquares = {
 
 namespace Board {
 
-static const string ktop_section = 
+static const std::string ktop_section = 
   " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓";
-static const vector<string> kbottom_section_drawing = {
+static const std::vector<std::string> kbottom_section_drawing = {
   " ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃",
   " ┃    A        B        C        D        E        F        G       H     ┃",
   " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"

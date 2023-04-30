@@ -15,10 +15,10 @@ class Knight : public PieceBase {
     Square from = MoveUtils::get_from(m);
     Bitboard to = ONE << MoveUtils::get_to(m);
     Piece captured = MoveUtils::get_captured_piece(m);
-    Bitboard free_squares = ~board[BOTH];
+    Bitboard free_squares = ~board.get_occupied_squares_as_bitboard();
 
     if (captured) {
-      free_squares |= board[utils::check::get_color_piece(captured)];
+      free_squares |= board.get_king_position(utils::check::get_color_piece(captured));
     }
 
     return m_attacks[from] & to & free_squares;

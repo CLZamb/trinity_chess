@@ -5,8 +5,6 @@
 
 // GLOBALS
 using Bitboard = uint64_t;
-extern Bitboard SetMask[64];
-extern Bitboard ClearMask[64];
 
 #define ENABLE_INCR_OPERATORS_ON(T)                                \
 inline T& operator++(T& d) { return d = T(int(d) + 1); }           \

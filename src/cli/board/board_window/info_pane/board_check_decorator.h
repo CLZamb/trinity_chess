@@ -14,8 +14,8 @@ class BoardCheckDecorator : public IBoardCheckBehaviour {
     return _m_board_check_info_behaviour->is_string_format_valid(s);
   }
 
-  virtual bool is_in_check(const Move &mv) {
-    return _m_board_check_info_behaviour->is_in_check(mv);
+  virtual bool is_player_in_check(const Move &mv) {
+    return _m_board_check_info_behaviour->is_player_in_check(mv);
   }
 
   virtual bool is_legal_move(Move &m) {

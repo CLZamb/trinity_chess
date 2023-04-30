@@ -15,16 +15,16 @@ class BoardModelInfo : public GameTurnObserver {
   void update_turn(const Color &p) override;
   void save_move(const Move &m);
   void save_capture(const Move &m);
-  void save_info(const string &info);
+  void save_info(const std::string &info);
 
-  string get_moves(Color c);
-  string get_captures(Color c);
-  string get_info();
+  std::string get_moves(Color c);
+  std::string get_captures(Color c);
+  std::string get_info();
   Color get_player_color();
 
  private:
-  string get_piece_str_name_from_piecetype(Piece piece_type) {
-    const unordered_map<Piece, string> piece_str_name{
+  std::string get_piece_str_name_from_piecetype(Piece piece_type) {
+    const std::unordered_map<Piece, std::string> piece_str_name{
         {bP, StringDrawingName::Pieces::pawn},
         {bR, StringDrawingName::Pieces::rook},
         {bN, StringDrawingName::Pieces::knight},
@@ -46,14 +46,14 @@ class BoardModelInfo : public GameTurnObserver {
 
     return search->second;
   }
-  string get_move_string(const Move &m);
-  string get_captured_string(const Move &m);
+  std::string get_move_string(const Move &m);
+  std::string get_captured_string(const Move &m);
 
   Color m_side;
   static const size_t players_size = Color::SIZE;
-  std::array<string, players_size> m_moves;
-  std::array<string, players_size> m_captures;
-  string m_info;
+  std::array<std::string, players_size> m_moves;
+  std::array<std::string, players_size> m_captures;
+  std::string m_info;
 };
 
 #endif /* BOARD_INFO_H */

@@ -16,11 +16,8 @@ add_gtest(${chess_tests})
 target_link_libraries(
   ${chess_tests} 
   PUBLIC
-  board_board_representation_lib
-  board_check_lib
-  board_check_pieces_lib
-  # board_fen_lib
-  board_special_moves_lib
+  position_lib
+  utils_lib
 )
 
 target_include_directories (

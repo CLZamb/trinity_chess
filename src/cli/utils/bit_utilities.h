@@ -5,13 +5,14 @@
 #include "defs.h"
 #include <iostream>
 
+
 namespace bitUtility {
-  inline Bitboard set_mask_bb(Square s) {
-    return SetMask[s];
+  constexpr Bitboard set_mask_bb(const Bitboard bitboard, Square square) {
+    return bitboard | (1ULL << square);
   }
 
-  inline Bitboard clear_mask_bb(Square s) {
-    return ClearMask[s];
+  constexpr Bitboard clear_mask_bb(const Bitboard bitboard, Square square) {
+    return bitboard & ~(1ULL << square);
   }
 
   inline void set_bit(Bitboard* bb, Square s) {
@@ -19,7 +20,7 @@ namespace bitUtility {
   }
 
   inline void clear_bit(Bitboard* bb, Square s) {
-    *bb &= clear_mask_bb(s);
+    *bb &= clear_mask_bb(*bb, s);
   }
 
   inline int count_1s(Bitboard b) {
@@ -30,7 +31,7 @@ namespace bitUtility {
 
   inline int pop_1st_bit(Bitboard* bb) {
     Bitboard b = *bb ^ (*bb - 1);
-    unsigned int fold = (unsigned) ((b & 0xffffffff) ^ (b >> 32));
+    unsigned int fold = static_cast<unsigned>((b & 0xffffffff) ^ (b >> 32));
     *bb &= (*bb - 1);
     return BitTable[(fold * 0x783a9b23) >> 26];
   }
@@ -45,11 +46,11 @@ namespace bitUtility {
     for (rank = 7; rank >= 0; --rank) {
       for (file = 0; file <= 7; ++file) {
         position = rank * 8 + file;
-
-        if ((shift << position) & bb)
+        if ((shift << position) & bb) {
           std::cout << "X";
-        else
+        } else {
           std::cout << "-";
+        }
       }
 
       std::cout << '\n';

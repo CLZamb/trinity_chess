@@ -5,11 +5,10 @@
 #include "utils/move.hpp"
 #include <unordered_map>
 
-using std::unordered_map;
-
 class Castling {
 public:
-  Castling ();
+  Castling();
+  virtual ~Castling();
   bool is_castle_move(const Move& m, Position &p);
   CastleSquares get_castle_rook_initial_position(const Move& m, const Color &side);
   void move_rook(const Move& m, Position &s);
@@ -23,7 +22,7 @@ private:
   static const Move m_bkca{MoveUtils::make_move(ROOK_BLACK_CA_KING_SIDE_FROM_POS, ROOK_BLACK_CA_KING_SIDE_TO_POS, wR)};
   static const Move m_bqca{MoveUtils::make_move(ROOK_BLACK_CA_QUEEN_SIDE_FROM_POS, ROOK_BLACK_CA_QUEEN_SIDE_TO_POS, wR)};
 
-  static const unordered_map<CastlePermission, const Move> m_rook_castle_pos;
+  static const std::unordered_map<CastlePermission, const Move> m_rook_castle_pos;
 };
 
 #endif /* CASTLING_H */

@@ -6,8 +6,6 @@
 #include <unordered_map>
 #include <limits>
 
-using std::unordered_map;
-
 namespace utils {
 namespace check {
   inline bool is_black_piece(Piece type) {
@@ -39,7 +37,7 @@ namespace check {
 }  // namespace check
 
 inline Piece get_piecetype_from_char_key(const char c) {
-  static const unordered_map<char, Piece> piece_map = {
+  static const std::unordered_map<char, Piece> piece_map = {
     {'P', wP}, {'R', wR}, {'N', wN}, {'B', wB}, {'Q', wQ}, {'K', wK},
     {'p', bP}, {'r', bR}, {'n', bN}, {'b', bB}, {'q', bQ}, {'k', bK},
   };
@@ -54,7 +52,7 @@ inline Piece get_piecetype_from_char_key(const char c) {
 inline char piecetype_to_char(Piece pct) {
   const char NotADigit{'*'};
 
-  const unordered_map<Piece, char> encodings = {
+  const std::unordered_map<Piece, char> encodings = {
     {wP, 'P'}, {wR, 'R'}, {wN, 'N'}, {wB, 'B'}, {wQ, 'Q'}, {wK, 'K'},
     {bP, 'p'}, {bR, 'r'}, {bN, 'n'}, {bB, 'b'}, {bQ, 'q'}, {bK, 'k'},
   };

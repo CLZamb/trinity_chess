@@ -25,12 +25,12 @@ bool CheckBehaviour::is_legal_move(Move& m) {
   return m_pieces[piece]->is_legal_move(m, m_position);
 }
 
-bool CheckBehaviour::is_string_format_valid(const string& s)   {
+bool CheckBehaviour::is_string_format_valid(const std::string& s)   {
   return string_utils::check::is_valid_move_format(s);
 }
 
-bool CheckBehaviour::is_in_check(const Move& m)  {
-  if (can_check(m)) {
+bool CheckBehaviour::is_player_in_check(const Move&)  {
+  if (is_king_piece_attacked()) {
     return true;
   }
 
@@ -86,7 +86,7 @@ bool CheckBehaviour::can_be_block_by_another_piece(const Move& m) {
 
   bool is_king_in_check{false};
 
-  m_position.move(m);
+  m_position.make_move(m);
   is_king_in_check = can_check(m);
   m_position.undo_move(m);
 
@@ -104,8 +104,8 @@ Color CheckBehaviour::get_opponent_player_color() {
 
 bool CheckBehaviour::can_opponent_attack_square(const Square &sq) {
   Color opposite_color = get_opponent_player_color();
-  Bitboard opposite_player_bitboard_ = m_position[opposite_color];
-  Bitboard temp_iterable_bb = m_position[opposite_color];
+  Bitboard opposite_player_bitboard =  m_position.get_occupied_side_as_bitboard(opposite_color);
+  Bitboard temp_iterable_bb = opposite_player_bitboard;
   Bitboard attack_bitboard{ZERO};
   Piece pt;
   Square position{0};
@@ -115,7 +115,7 @@ bool CheckBehaviour::can_opponent_attack_square(const Square &sq) {
 
     pt = m_position.get_piece_at_square(position);
 
-    attack_bitboard |= m_pieces[pt]->get_attacks(opposite_player_bitboard_, position);
+    attack_bitboard |= m_pieces[pt]->get_attacks(opposite_player_bitboard, position);
   }
 
   Bitboard to_bb = ONE << sq;

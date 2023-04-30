@@ -14,8 +14,8 @@ class BoardCheck : public GameTurnObserver {
   void update_turn(const Color &turn) override;
   bool is_checkmate();
 
-  bool is_in_check(const Move &m);
-  bool is_string_move_format_valid(const string &s);
+  bool is_player_in_check(const Move &m);
+  bool is_string_move_format_valid(const std::string &s);
   bool is_legal_move(Move &);
   void set_behaviour(std::unique_ptr<IBoardCheckBehaviour> &&t);
   std::unique_ptr<IBoardCheckBehaviour> &&get_behaviour();

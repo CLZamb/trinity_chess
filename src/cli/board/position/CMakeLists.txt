@@ -1,10 +1,14 @@
 add_library(
-  board_board_representation_lib
+  position_lib
   position.cpp
+  board_representation.cpp
+  castling_rights.cpp
+  half_move_clock.cpp
+  position_fen.cpp
 )
 
 target_include_directories (
-  board_board_representation_lib 
+  position_lib 
   PRIVATE 
   "${PROJECT_SOURCE_DIR}/src/cli"
 )

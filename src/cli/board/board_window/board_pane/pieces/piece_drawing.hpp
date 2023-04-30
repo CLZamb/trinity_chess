@@ -40,7 +40,7 @@ class PieceDrawing {
 
  private:
   string get_piece_str_name_from_piecetype(Piece piece_type) {
-    const unordered_map<Piece, string> piece_str_name{
+    const std::unordered_map<Piece, string> piece_str_name{
         {bP, StringDrawingName::Pieces::pawn},
         {bR, StringDrawingName::Pieces::rook},
         {bN, StringDrawingName::Pieces::knight},

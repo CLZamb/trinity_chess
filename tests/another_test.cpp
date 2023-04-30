@@ -1,8 +1,6 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include "board/board_representation/position.hpp"
-
-using namespace testing;
+#include "board/position/position.h"
 
 class AboardTA : public testing::Test {
   public:
@@ -10,11 +8,11 @@ class AboardTA : public testing::Test {
 };
 
 TEST_F(AboardTA, IsEmptyTestCreated) {
-  EXPECT_THAT(true, Eq(true));
+  EXPECT_THAT(true, testing::Eq(true));
 }
 
 TEST_F(AboardTA, CheckLegalNMoves) {
-  EXPECT_THAT(true, Eq(true));
+  EXPECT_THAT(true, testing::Eq(true));
 }
 
 // TEST_F(Aboard, CheckLegaRooklMoves) {

@@ -10,19 +10,19 @@ Side panes such as info pane and statistics pane can be added to the board windo
 # Features
 ## UI
 - UI Components
-    - Window: Each window can contain up to three panaes.
-    - Pane: can contain sub-section
+    - Window: Each window can contain up to three panes.
+    - Pane: Panes can contain sub-sections.
 - Menu
-    - Welcome menu three option: play, configuration and Quit
+    - Welcome menu three option: play, configuration and Quit.
 - Input
-    - Keyboard: Event driven input listening
-    - Text: Player types each move ie: "a2a4"
+    - Keyboard: Event driven input listening.
+    - Text: Player types each move ie: "a2a4".
 - Board
     - Main Board Pane: shows the board.
-    - Info Pane: it shows the side to move(black, white), shows the moves, and captures, and general info such as invalid move.
-    - Statistics Pane: WIP
+    - Info Pane: It shows the side to move (black, white), shows previous moves, captures, and general info such as invalid move.
+    - Statistics Pane: WIP.
 ## Chess Engine
-- Not Implemented yet, Int this vesion the AI needs to be reimplemented so that the AI can beat previous versions and performs better.
+- Not Implemented yet, This vesion the AI needs to be reimplemented so that the it can beat previous versions and performs better.
 - TODO
 - Board representation
     - [Bitboards](https://en.wikipedia.org/wiki/Bitboard)

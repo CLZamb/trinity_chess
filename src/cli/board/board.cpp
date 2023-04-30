@@ -1,5 +1,10 @@
 #include "board.h"
 
+#include "board/board_window/board_components.hpp"
+#include "configuration/input_configuration.hpp"
+#include "ui/input/input.h"
+#include "ui/input/input_components.h"
+#include "ui/input/keyboard/keyboard_base.h"
 #include "utils/move.hpp"
 
 Board::Board(BoardConfig &bc)
@@ -11,6 +16,7 @@ Board::Board(BoardConfig &bc)
   m_side_to_move.attach(&m_position);
   m_side_to_move.notify_side();
 
+  m_position_fen.parse_fen(bc.get_fen(), m_position);
   add_info_pane();
 }
 
@@ -29,20 +35,21 @@ void Board::print() {
 
 void Board::parse_fen(const string &fen) {
   m_board_window.parse_fen(fen);
-  m_position.parse_fen(fen);
+  m_position_fen.parse_fen(fen, m_position);
 }
 
 Move Board::get_player_move() {
   Move mv{MoveUtils::INVALID_MOVE};
-  string str_move = m_board_window.get_player_string_move();
+  string s_move = m_board_window.get_player_move_as_string();
 
-  if (!m_board_check.is_string_move_format_valid(str_move)) {
+  if (!m_board_check.is_string_move_format_valid(s_move)) {
     return MoveUtils::INVALID_MOVE;
   }
 
-  mv = convert_string_to_move(str_move);
+  mv = convert_string_to_move(s_move);
 
-  if (m_board_check.is_in_check(mv) || !m_board_check.is_legal_move(mv)) {
+  if (m_board_check.is_player_in_check(mv) ||
+      !m_board_check.is_legal_move(mv)) {
     return MoveUtils::INVALID_MOVE;
   }
 
@@ -54,10 +61,11 @@ bool Board::is_invalid_move(const Move &mv) {
 }
 
 void Board::make_move(const Move &mv) {
-  m_position.move(mv);
+  m_position.make_move(mv);
   m_board_window.make_move(mv);
 
   m_special_move.handle_special_move(mv, m_position);
+  std::cout << m_position_fen.get_fen(m_position) << std::endl;
 }
 
 Move Board::convert_string_to_move(const string &m) {

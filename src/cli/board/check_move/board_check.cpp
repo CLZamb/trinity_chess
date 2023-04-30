@@ -19,7 +19,7 @@ bool BoardCheck::is_checkmate() {
   return p_behaviour->is_checkmate();
 }
 
-bool BoardCheck::is_string_move_format_valid(const string& s) {
+bool BoardCheck::is_string_move_format_valid(const std::string& s) {
   return p_behaviour->is_string_format_valid(s);
 }
 
@@ -27,8 +27,8 @@ bool BoardCheck::is_legal_move(Move& m) {
   return p_behaviour->is_legal_move(m);
 }
 
-bool BoardCheck::is_in_check(const Move& m) {
-  return p_behaviour->is_in_check(m);
+bool BoardCheck::is_player_in_check(const Move& m) {
+  return p_behaviour->is_player_in_check(m);
 }
 
 void BoardCheck::set_behaviour(std::unique_ptr<IBoardCheckBehaviour>&& t) {

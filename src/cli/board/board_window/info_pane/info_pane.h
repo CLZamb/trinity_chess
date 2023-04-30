@@ -9,7 +9,7 @@
 
 class InfoPane : public IBoardSidePane, public GameTurnObserver {
  public:
-  explicit InfoPane(shared_ptr<BoardModelInfo> b);
+  explicit InfoPane(std::shared_ptr<BoardModelInfo> b);
   virtual ~InfoPane();
 
   void update() override;
@@ -25,21 +25,21 @@ class InfoPane : public IBoardSidePane, public GameTurnObserver {
   void clear();
   void clear_all_sections();
 
-  const string m_top_section = "top";
-  const string m_player_banner_section = "Player banner";
-  const string m_board_info_section = "[Board info]";
-  const string m_bottom_section = "bottom";
-  const std::array<string, Color::SIZE> m_moves_section{"[White Moves]",
+  const std::string m_top_section = "top";
+  const std::string m_player_banner_section = "Player banner";
+  const std::string m_board_info_section = "[Board info]";
+  const std::string m_bottom_section = "bottom";
+  const std::array<std::string, Color::SIZE> m_moves_section{"[White Moves]",
                                                         "[Black Moves]"};
-  const std::array<string, Color::SIZE> m_captures_section{"[White Captures]",
+  const std::array<std::string, Color::SIZE> m_captures_section{"[White Captures]",
                                                            "[Black Captures]"};
-  std::array<string, Color::SIZE> m_turn_string{"Is white turn",
+  std::array<std::string, Color::SIZE> m_turn_string{"Is white turn",
                                                 "Is black turn"};
 
-  std::array<const vector<string> *, Color::SIZE> p_banners{
+  std::array<const std::vector<std::string> *, Color::SIZE> p_banners{
       &InfoDrawings::Banner::white, &InfoDrawings::Banner::black};
 
-  shared_ptr<BoardModelInfo> p_info;
+  std::shared_ptr<BoardModelInfo> p_info;
 };
 
 #endif /* INFO_VIEW_H */

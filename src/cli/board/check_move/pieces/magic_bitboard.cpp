@@ -1,7 +1,5 @@
 #include "magic_bitboard.h"
 // extern declaration in defs.h
-Bitboard SetMask[64];
-Bitboard ClearMask[64];
 // define in magic_bitboard.cpp - _init_bitmasks()
 
 // Magic_Bitboards() computes all rook and bishop attacks at startup. Magic
@@ -68,16 +66,6 @@ constexpr Bitboard MagicBitboard::BishopMagic[64] = {
     0x2041000850100ULL};
 
 void MagicBitboard::_init_bitmasks() {
-  for (int i = 0; i < 64; ++i) {
-    SetMask[i] = 0ULL;
-    ClearMask[i] = 0ULL;
-  }
-
-  for (int i = 0; i < 64; ++i) {
-    SetMask[i] |= (1ULL << i);
-    ClearMask[i] = ~SetMask[i];
-  }
-
   for (int sq = 0; sq < 64; ++sq) {
     m_rook_tbl[sq].magic = RookMagic[sq];
     m_bishop_tbl[sq].magic = BishopMagic[sq];

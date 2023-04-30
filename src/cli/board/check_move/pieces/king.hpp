@@ -13,7 +13,7 @@ class King : public PieceBase {
   bool is_legal_move(Move &m, Position &board) override {
     Square from = MoveUtils::get_from(m);
     Bitboard to = ONE << MoveUtils::get_to(m);
-    Bitboard free_squares = ~board[BOTH];
+    Bitboard free_squares = ~board.get_occupied_squares_as_bitboard();
     Piece captured = MoveUtils::get_captured_piece(m);
 
     if (MoveUtils::can_castle(m)) {
@@ -21,7 +21,7 @@ class King : public PieceBase {
     }
 
     if (captured) {
-      free_squares |= board[utils::check::get_color_piece(captured)];
+      free_squares |= board.get_occupied_side_as_bitboard(utils::check::get_color_piece(captured));
     }
 
     return m_attacks[from] & to & free_squares;
@@ -50,10 +50,10 @@ class King : public PieceBase {
   struct KingCastle {
     CastleSquares _from;
     CastleSquares _to;
-    vector<Square> free_squares;
+    std::vector<Square> free_squares;
   };
 
-  const unordered_map<CastlePermission, typename King<color>::KingCastle> m_kc{
+  const std::unordered_map<CastlePermission, typename King<color>::KingCastle> m_kc{
       {NO_CASTLING, {NO_CASTLE_POS, NO_CASTLE_POS, {}}},
       {WKCA, {WK_CA_INITIAL_POS, WK_CA_KING_SIDE_END_POS, {F1, G1}}},
       {WQCA, {WK_CA_INITIAL_POS, WK_CA_QUEEN_SIDE_END_POS, {B1, C1, D1}}},

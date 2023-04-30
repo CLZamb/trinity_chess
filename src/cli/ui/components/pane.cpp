@@ -16,7 +16,7 @@ void Pane::fill(const string& content) {
   }
 }
 
-void Pane::add_section(shared_ptr<ISectionComponent> section) {
+void Pane::add_section(std::shared_ptr<ISectionComponent> section) {
   if (section == nullptr) return;
 
   for (auto& i : *section) {
@@ -29,7 +29,7 @@ void Pane::add_section(const string &name, const size_t row_size) {
   add_section(sections[name]);
 }
 
-shared_ptr<Section>& Pane::get_section(const string& key) {
+std::shared_ptr<Section>& Pane::get_section(const string& key) {
   return sections[key];
 }
 
@@ -57,16 +57,16 @@ void Pane::set_content_at_section(const string &key, const vector<string>* conte
 }
 
 bool Pane::has_block_space_for_content(
-  const shared_ptr<Section>& block, const string& message) {
+  const std::shared_ptr<Section>& block, const string& message) {
   return message.size() < kRowMaxWidth * (block->size() - 1);
 }
 
 string Pane::format_line(const string &line) {
-  unsigned long num_spaces = kRowMaxWidth - line.size();
+  size_t num_spaces = kRowMaxWidth - line.size();
   return  " ┃ " + line + std::string(num_spaces, ' ') + "┃";
 }
 
-void Pane::set_content_to_block_recursively(shared_ptr<Section>& section,
+void Pane::set_content_to_block_recursively(std::shared_ptr<Section>& section,
                                       string &msg, size_t &current_row) {
   if (current_row > section->size()) return;
 
@@ -86,7 +86,7 @@ void Pane::set_content_to_block_recursively(shared_ptr<Section>& section,
   set_content_to_block_recursively(section, msg, ++current_row);
 }
 
-void Pane::format_section(shared_ptr<Section>& block, string content) {
+void Pane::format_section(std::shared_ptr<Section>& block, string content) {
   if (block == nullptr) return;
 
   if (!has_block_space_for_content(block, content)) return;

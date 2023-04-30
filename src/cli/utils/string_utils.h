@@ -11,22 +11,19 @@
 #include <unordered_map>
 #include <vector>
 
-using std::string;
-using std::unordered_map;
-
 namespace StringDrawingName {
 
 namespace Pieces {
-static const string bishop = "bishop"; 
-static const string king   = "king"; 
-static const string knight = "knight"; 
-static const string pawn   = "pawn"; 
-static const string queen  = "queen"; 
-static const string rook   = "rook"; 
+static const std::string bishop = "bishop"; 
+static const std::string king   = "king"; 
+static const std::string knight = "knight"; 
+static const std::string pawn   = "pawn"; 
+static const std::string queen  = "queen"; 
+static const std::string rook   = "rook"; 
 
-inline string get_piece_from_piecetype(Piece piece_type) {
+inline std::string get_piece_from_piecetype(Piece piece_type) {
 
-  const unordered_map<Piece, string> piece_str_name{
+  const std::unordered_map<Piece, std::string> piece_str_name{
     {bP, pawn},   {bR, rook},   {bN, knight}, {bB, bishop},
     {bQ, queen},  {bK, king},   {wP, pawn},   {wR, rook},
     {wN, knight}, {wB, bishop}, {wQ, queen},  {wK, king}
@@ -34,28 +31,30 @@ inline string get_piece_from_piecetype(Piece piece_type) {
 
   auto search = piece_str_name.find(piece_type);
 
-  if (search == piece_str_name.end())
+  if (search == piece_str_name.end()) {
     return "not piece";
+}
 
   return search->second;
 }
 
-} // Pieces
+}  // namespace Pieces
 
 namespace Square {
-static const string white_square = "WhiteSquare";
-static const string black_square = "BlackSquare";
+static const std::string white_square = "WhiteSquare";
+static const std::string black_square = "BlackSquare";
 } // Square
 
-} // StringDrawingName
+}  // namespace StringDrawingName
 
 namespace string_utils {
-inline unsigned int square_str_to_int(string sq) {
+inline unsigned int square_str_to_int(std::string sq) {
   char file = sq[0], rank = sq[1];
   unsigned int square_int = static_cast<unsigned int>((file - 'a') + ((rank - '1') * 8));
 
-  if (square_int < A1 || square_int > H8)
+  if (square_int < A1 || square_int > H8) {
     return 0;
+}
   return square_int;
 }
 
@@ -64,8 +63,8 @@ static const std::regex format_full_move =
 static const std::regex format_single_position =
     std::regex("([a-hA-H]\\s*[1-8])");
 
-inline Move to_move(const string &str_move) {
-  std::vector<string> list_pos;
+inline Move to_move(const std::string &str_move) {
+  std::vector<std::string> list_pos;
   Move result{0};
 
   list_pos = RegexUtils::get_list_of_positions(str_move, format_single_position);
@@ -82,43 +81,27 @@ inline Move to_move(const string &str_move) {
 }
 
 namespace check {
-inline bool is_valid_move_format(const string &str_mv) {
+inline bool is_valid_move_format(const std::string &str_mv) {
   return RegexUtils::match(str_mv, format_full_move);
 }
 }
 
-inline string squareindex_to_str(Square sq) {
-  if (sq < A1 || sq > H8)
+inline std::string squareindex_to_str(Square sq) {
+  if (sq < A1 || sq > H8) {
     return "-not a valid position-";
+}
 
-  string square_str;
+  std::string square_str;
   unsigned int square = static_cast<unsigned int>(sq);
   square_str = 'a' + (square % 8);
   square_str += static_cast<char>('1' + (sq / 8));
   return square_str;
 }
 
-inline string get_color_str_from_color(Color c) {
+inline std::string get_color_str_from_color(Color c) {
   return (c == WHITE) ? "white" : "black";
 }
 
-inline string get_permission_str_from_castle_permission(const unsigned int &permissions) {
-  if (permissions == NO_CASTLING) return "-";
-
-  string permissions_str;
-
-  static const unordered_map<CastlePermission, char> m_castle_permision {
-      {WQCA, 'Q'}, {WKCA, 'K'}, {BQCA, 'q'}, {BKCA, 'k'},
-  };
-
-  for (CastlePermission c : {WQCA, WKCA, BQCA, BKCA, NO_CASTLING}) {
-    if (permissions & c) {
-      permissions_str += m_castle_permision.at(c);
-    }
-  }
-
-  return permissions_str;
-}
 
 size_t constexpr length(const char* str) {
   return *str ? 1 + length(str + 1) : 0;
@@ -128,13 +111,14 @@ size_t constexpr utf8_strlen(const char* str) {
   const size_t len = length(str);
   size_t c = 0, i = 0, ix = 0, q = 0;
   for (q=0, i=0, ix=len; i < ix; i++, q++) {
-    c = (unsigned char) str[i];
-    if      (c > 0 && c <= 127) i+=0;
-    else if ((c & 0xE0) == 0xC0) i+=1;
-    else if ((c & 0xF0) == 0xE0) i+=2;
-    else if ((c & 0xF8) == 0xF0) i+=3;
-    else
+    c = static_cast<unsigned char>(str[i]);
+    if      (c > 0 && c <= 127) { i+=0;
+    } else if ((c & 0xE0) == 0xC0) { i+=1;
+    } else if ((c & 0xF0) == 0xE0) { i+=2;
+    } else if ((c & 0xF8) == 0xF0) { i+=3;
+    } else {
       return 0;  // invalid utf8
+    }
   }
   return q;
 }

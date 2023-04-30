@@ -54,6 +54,6 @@ void EnPassant::capture_en_passant(const Move &m, Position &s) {
            : bitUtility::SOUTH);
   Square piece_capture_position = MoveUtils::get_to(m) + d;
 
-  s.clear_square_at_pos(piece_capture_position);
+  s.clear_square(piece_capture_position);
   s.set_en_passant_square(SquareNull);
 }

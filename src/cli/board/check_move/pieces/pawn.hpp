@@ -171,7 +171,7 @@ class Pawn : public PieceBase {
     Square from = MoveUtils::get_from(m);
     Bitboard to = ONE << MoveUtils::get_to(m);
     Piece captured = MoveUtils::get_captured_piece(m);
-    const Bitboard opponent = board[utils::check::get_color_piece(captured)];
+    const Bitboard opponent = board.get_occupied_side_as_bitboard(utils::check::get_color_piece(captured));
 
     all_moves |= m_attacks[from] & opponent;   // enemy is in that square
     return all_moves & to;
@@ -180,7 +180,7 @@ class Pawn : public PieceBase {
   bool is_legal_non_attack_move(Move &m, Position &board) {
     Square from = MoveUtils::get_from(m);
     Bitboard to = ONE << MoveUtils::get_to(m);
-    const Bitboard free_squares = ~board[BOTH];
+    const Bitboard free_squares = ~board.get_occupied_squares_as_bitboard();
     return pawn_non_attack_mask(from) & free_squares & to;
   }
 
