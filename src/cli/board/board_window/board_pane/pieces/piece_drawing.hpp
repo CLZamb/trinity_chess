@@ -1,7 +1,7 @@
 #ifndef PIECE_DRAWINGS_H
 #define PIECE_DRAWINGS_H
 
-#include "ui/components/box_drawing.hpp"
+#include "ui_components/box_drawing.hpp"
 
 class PieceDrawing {
  public:

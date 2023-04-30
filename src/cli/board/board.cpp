@@ -2,9 +2,6 @@
 
 #include "board/board_window/board_components.hpp"
 #include "configuration/input_configuration.hpp"
-#include "ui/input/input.h"
-#include "ui/input/input_components.h"
-#include "ui/input/keyboard/keyboard_base.h"
 #include "utils/move.hpp"
 
 Board::Board(BoardConfig &bc)

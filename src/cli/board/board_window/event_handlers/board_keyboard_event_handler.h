@@ -4,7 +4,7 @@
 #include "game/players/player_position.h"
 #include "game/turn/game_turn_observer.h"
 #include "board/board_window/board_pane/board_pane.h"
-#include "ui/input/keyboard/keyboard_input.h"
+#include "input/keyboard/keyboard_input.h"
 #include "IBoard_input_event_handler.h"
 
 class BoardKeyboardEventHandler : public IBoardInputEventHandler, public GameTurnObserver  {

@@ -3,7 +3,7 @@
 
 #include "IBoard_input_event_handler.h"
 #include "board/board_window/board_pane/board_pane.h"
-#include "ui/input/text/text_input.h"
+#include "input/text/text_input.h"
 
 class BoardTextEventHandler : public IBoardInputEventHandler {
 public:

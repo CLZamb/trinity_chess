@@ -3,8 +3,8 @@
 
 #include <unordered_map>
 
-#include "ui/input/input.h"
-#include "ui/input/keyboard/keyboard_base.h"
+#include "input/input.h"
+#include "input/keyboard/keyboard_base.h"
 
 struct KeyCode {
   enum Key {

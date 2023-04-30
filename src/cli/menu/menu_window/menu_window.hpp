@@ -6,8 +6,8 @@
 
 #include "menu/menu_window/menu_components.hpp"
 #include "options.hpp"
-#include "ui/input/input_components.h"
-#include "ui/input/input_types.h"
+#include "input/input_components.h"
+#include "input/input_types.h"
 
 template <typename T = string>
 class MenuWindow : public Window {

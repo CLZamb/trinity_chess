@@ -4,7 +4,7 @@
 #include <string>
 
 #include "board/position/position.h"
-#include "ui/components/fen_component_parts.hpp"
+#include "ui_components/fen_component_parts.hpp"
 
 /*
  <FEN> ::=  <Piece Placement>

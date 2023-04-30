@@ -1,7 +1,7 @@
 #include "board_window.h"
 
 #include "board_components.hpp"
-#include "ui/input/input_components.h"
+#include "input/input_components.h"
 
 BoardWindow::BoardWindow(const string fen,
                          const InputType &input_type,

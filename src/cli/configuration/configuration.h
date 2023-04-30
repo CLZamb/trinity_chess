@@ -4,7 +4,7 @@
 #include "IConfiguration.h"
 #include "configuration/IConfiguration.h"
 #include "configuration/players_configuration.h"
-#include "ui/input/input_types.h"
+#include "input/input_types.h"
 
 class Configuration : public IConfiguration {
 public:

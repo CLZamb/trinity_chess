@@ -4,8 +4,8 @@
 #include "IMenu_event_handler.h"
 #include "menu/menu_window/menu_pane.h"
 #include "menu/menu_window/options.hpp"
-#include "ui/input/keyboard/keyboard_base.h"
-#include "ui/input/keyboard/keyboard_input.h"
+#include "input/keyboard/keyboard_base.h"
+#include "input/keyboard/keyboard_input.h"
 
 template <typename T>
 class MenuKeyboardEventHandler : public IMenuEventHandler<T> {

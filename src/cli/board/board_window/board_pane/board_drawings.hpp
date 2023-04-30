@@ -2,7 +2,7 @@
 #define BOARD_DRAWINGS_H
 #pragma once
 
-#include "ui/components/box.h"
+#include "ui_components/box.h"
 #include "utils/string_utils.h"
 
 namespace BoardDrawings {

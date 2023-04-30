@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include "ui/input/keyboard/keyboard_input.h"
-#include "ui/input/text/text_input.h"
+#include "input/keyboard/keyboard_input.h"
+#include "input/text/text_input.h"
 
 namespace InputComponents {
 

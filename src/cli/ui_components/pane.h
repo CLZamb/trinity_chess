@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <memory>
 #include "board/board_window/info_pane/info_drawings.hpp"
-#include "ui/components/pane_drawings.hpp"
+#include "pane_drawings.hpp"
 #include "section.h"
 #include "IPane.h"
 // #include "board/board_window/info_pane/info_drawings.hpp"

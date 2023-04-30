@@ -5,8 +5,9 @@ add_executable(${chess} main.cpp)
 add_subdirectory(board)
 add_subdirectory(configuration)
 add_subdirectory(game)
+add_subdirectory(input)
 add_subdirectory(menu)
-add_subdirectory(ui)
+add_subdirectory(ui_components)
 add_subdirectory(utils)
 
 target_link_libraries (

@@ -5,7 +5,7 @@
 
 #include "board/board_window/board_pane/pieces/pieces_drawings.hpp"
 #include "board/board_window/board_pane/squares/squares_drawing.h"
-#include "ui/components/pane.h"
+#include "ui_components/pane.h"
 
 class BoardPane : public Pane {
  public:

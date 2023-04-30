@@ -6,9 +6,9 @@
 #include "board/board_window/event_handlers/IBoard_input_event_handler.h"
 #include "board/check_move/board_check.h"
 #include "game/turn/side_to_move.h"
-#include "ui/components/window.h"
-#include "ui/input/input.h"
-#include "ui/input/input_types.h"
+#include "ui_components/window.h"
+#include "input/input.h"
+#include "input/input_types.h"
 #include "utils/move.hpp"
 
 class BoardWindow : public Window {

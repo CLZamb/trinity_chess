@@ -1,8 +1,8 @@
 #ifndef TEXT_INPUT_BOARD_H
 #define TEXT_INPUT_BOARD_H
 
-#include "ui/input/input.h"
-#include "ui/input/text/text_input_base.h"
+#include "input/input.h"
+#include "input/text/text_input_base.h"
 
 struct CommandEventText {
   void udpate_string_input(const std::string &c) {

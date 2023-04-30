@@ -3,7 +3,7 @@
 
 #include "board/board_window/info_pane/board_info_model.h"
 #include "board_check_decorator.h"
-#include "ui/components/pane.h"
+#include "ui_components/pane.h"
 #include "utils/string_utils.h"
 
 class BoardCheckInfoDecorator : public BoardCheckDecorator {

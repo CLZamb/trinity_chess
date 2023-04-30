@@ -1,6 +1,6 @@
 #include "info_pane.h"
 
-#include "ui/components/pane_drawings.hpp"
+#include "ui_components/pane_drawings.hpp"
 
 InfoPane::InfoPane(std::shared_ptr<BoardModelInfo> b) : p_info(b) {
   Pane::add_section(m_top_section, 1);

@@ -4,7 +4,7 @@
 #include "IMenu_event_handler.h"
 #include "menu/menu_window/menu_pane.h"
 #include "menu/menu_window/options.hpp"
-#include "ui/input/text/text_input.h"
+#include "input/text/text_input.h"
 
 template <typename T>
 class MenuTextEventHandler : public IMenuEventHandler<T> {

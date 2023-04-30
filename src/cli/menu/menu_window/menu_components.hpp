@@ -5,9 +5,7 @@
 
 #include "menu/menu_window/event_handlers/menu_keyboard_event_handler.h"
 #include "menu/menu_window/event_handlers/menu_text_event_handler.h"
-#include "menu/menu_window/menu_pane.h"
-#include "menu/menu_window/options.hpp"
-#include "ui/input/input.h"
+
 namespace MenuComponents {
 
 template <typename T>

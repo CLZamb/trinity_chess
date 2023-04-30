@@ -1,7 +1,7 @@
 #ifndef IBOARD_PANE_H
 #define IBOARD_PANE_H
 
-#include "ui/components/pane.h"
+#include "ui_components/pane.h"
 #include "utils/move.hpp"
 
 class IBoardSidePane : public Pane {

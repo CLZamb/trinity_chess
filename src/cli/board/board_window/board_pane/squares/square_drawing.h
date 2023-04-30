@@ -1,7 +1,7 @@
 #ifndef SQUARE_DRAWING_H
 #define SQUARE_DRAWING_H
 
-#include "ui/components/box_modifier.hpp"
+#include "ui_components/box_modifier.hpp"
 
 class SquareDrawing {
 public:

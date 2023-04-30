@@ -2,8 +2,8 @@
 #define MENU_VIEW_H
 
 #include "menu_drawings.hpp"
-#include "ui/components/pane.h"
-#include "ui/components/window.h"
+#include "ui_components/pane.h"
+#include "ui_components/window.h"
 #include <list>
 #include <string>
 

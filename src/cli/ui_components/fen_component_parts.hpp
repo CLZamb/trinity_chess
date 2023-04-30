@@ -13,7 +13,7 @@ struct FenComponentParts {
   std::string fullmove;
 
 
-  bool are_valid_fen_componet_pars() {
+  bool are_valid_fen_component_parts() {
   int piece_count = 0;
   int ranks_sum = 0;
   int slash_count = 0;

@@ -6,7 +6,7 @@
 
 #include "board/board_window/IBoard_side_pane.h"
 #include "board/board_window/info_pane/info_drawings.hpp"
-#include "ui/components/pane.h"
+#include "ui_components/pane.h"
 
 class StatisticsPane : public IBoardSidePane {
 public:
