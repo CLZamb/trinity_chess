@@ -1,4 +1,5 @@
 #include "board_pane.h"
+#include "ui_components/fen_component_parts.hpp"
 
 BoardPane::BoardPane(const string &fen) : Pane(Kboard_pane_size) {
   add_section(m_top_section, 1);
@@ -48,23 +49,24 @@ void BoardPane::clear() {
 }
 
 void BoardPane::parse_fen(const string &fen) {
+  FenComponentParts fcp(fen);
+
   int square = A1, rank = 7, file = 0, space = 0;
   Piece piece;
-  const char *c = fen.c_str();
 
-  while (*c != ' ') {
-    piece = utils::get_piecetype_from_char_key(*c);
+  for (char c : fcp.board) {
+    piece = utils::get_piecetype_from_char_key(c);
     square = rank * 8 + file;
     if (piece) {
       set_piece_drawing_at_square_pos(static_cast<Square>(square), piece);
       file++;
 
-    } else if (is_number(*c)) {
-      space = (*c - '0');
+    } else if (is_number(c)) {
+      space = (c - '0');
       file += space;
       clear_square_on_range(square, square + space);
 
-    } else if (*c == '/') {
+    } else if (c == '/') {
       rank--;
       file = 0;
     }

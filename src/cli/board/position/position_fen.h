@@ -21,8 +21,6 @@ class PositionFen {
   virtual ~PositionFen() = default;
   void parse_fen(const std::string &fen, Position &position);
   std::string get_fen(Position &position);
-  void split_fen_into_its_component_parts(const std::string &fen,
-                                          FenComponentParts &fcp);
 
  private:
   void add_empty_space(std::string &fen, int &space);

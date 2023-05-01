@@ -13,7 +13,8 @@ Side panes such as info pane and statistics pane can be added to the board windo
     - Window: Each window can contain up to three panes.
     - Pane: Panes can contain sub-sections.
 - Menu
-    - Welcome menu three option: play, configuration and Quit.
+    - Welcome Menu: has 3 options, play, configuration, quit.
+    - Configuration Menu: if no new configuration is given the default is used to start the game
 - Input
     - Keyboard: Event driven input listening.
     - Text: Player types each move ie: "a2a4".

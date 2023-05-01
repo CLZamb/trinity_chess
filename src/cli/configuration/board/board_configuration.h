@@ -21,7 +21,7 @@ class BoardConfig {
 
  private:
   InputType m_input_type{Keyboard};
-  const std::string m_start_fen = "r3k3/ppp5/8/8/8/8/5PPP/4K2R w Kq - 0 1";
+  const std::string m_start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
   Color m_initial_side{Color::WHITE};
 };
 

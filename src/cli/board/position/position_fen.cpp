@@ -2,24 +2,10 @@
 
 PositionFen::PositionFen() {}
 
-void PositionFen::split_fen_into_its_component_parts(const std::string &str_fen, FenComponentParts& fcp) {
-  std::istringstream ss(str_fen);
-
-  std::getline(ss, fcp.board, ' ');
-  std::getline(ss, fcp.side, ' ');
-  std::getline(ss, fcp.castle, ' ');
-  std::getline(ss, fcp.en_passant, ' ');
-  std::getline(ss, fcp.halfmove, ' ');
-  std::getline(ss, fcp.fullmove, ' ');
-}
-
-void PositionFen::parse_fen(const std::string &str_fen, Position &position) {
+void PositionFen::parse_fen(const std::string &fen, Position &position) {
   position.clear();
 
-  FenComponentParts fcp_as_strs;
-  split_fen_into_its_component_parts(str_fen, fcp_as_strs);
-
-  assert(fcp_as_strs.are_valid_fen_component_parts());
+  FenComponentParts fcp_as_strs(fen);
 
   Square square = A1;
   int rank = 7, file = 0;

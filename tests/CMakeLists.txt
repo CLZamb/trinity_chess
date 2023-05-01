@@ -25,5 +25,3 @@ target_include_directories (
   PRIVATE 
   "${PROJECT_SOURCE_DIR}/src/cli"
 )
-
-
