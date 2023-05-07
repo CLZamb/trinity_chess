@@ -4,6 +4,7 @@
 
 using std::cin;
 using std::cout;
+using std::string;
 
 const string TextInputBase::input_space = "\t\t\t\t";
 

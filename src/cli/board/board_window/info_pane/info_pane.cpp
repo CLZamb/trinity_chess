@@ -2,6 +2,8 @@
 
 #include "ui_components/pane_drawings.hpp"
 
+using std::string;
+
 InfoPane::InfoPane(std::shared_ptr<BoardModelInfo> b) : p_info(b) {
   Pane::add_section(m_top_section, 1);
   Pane::add_section(m_player_banner_section, InfoDrawings::Banner::height);

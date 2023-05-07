@@ -8,7 +8,7 @@
 
 class Board {
  public:
-  explicit Board(BoardInfo &board_config);
+  explicit Board(BoardConfigInfo &board_config);
   virtual ~Board();
 
   void print();
@@ -20,14 +20,14 @@ class Board {
   Color get_winner_side();
 
  private:
-  void build_window(BoardInfo& b_config);
-  Move convert_string_to_move(const string &m);
+  void build_window(BoardConfigInfo& b_config);
+  Move convert_string_to_move(const std::string &m);
   SideToMove m_side_to_move;
   Position m_position;
   PositionFen m_position_fen;
   SpecialMove m_special_move;
-  BoardCheck m_board_check;
-  BoardWindow m_board_window;
+  BoardCheck m_check;
+  BoardWindow m_board_win;
 };
 
 #endif /* BOARD_H */

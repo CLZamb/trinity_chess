@@ -1,8 +1,9 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "IPane.h"
 #include <map>
+
+#include "IPane.h"
 
 // Assume Unix system
 #ifdef _WIN32
@@ -13,23 +14,23 @@
 
 class Window {
  public:
-
   Window();
   virtual ~Window();
   void print();
 
   enum PanePos {
-    Left_pane = 0,
-    Middle_pane = 1,
-    Right_pane = 2,
+    LEFT_PANE = 0,
+    MIDDLE_PANE = 1,
+    RIGHT_PANE = 2,
   };
 
-protected:
+ protected:
   void add_left_pane(IPane *pane);
   void add_right_pane(IPane *pane);
   void add_middle_pane(IPane *pane);
   void add_pane(IPane *pane, PanePos pos);
-private:
+
+ private:
   void get_window_drawing(std::ostream &os);
   friend std::ostream &operator<<(std::ostream &os, Window &);
 

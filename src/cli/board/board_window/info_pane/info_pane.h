@@ -17,9 +17,9 @@ class InfoPane : public IBoardSidePane, public GameTurnObserver {
   void update_turn(const Color &info) override;
 
  private:
-  void update_moves(const string &s, Color c);
-  void update_captures(const string &s, Color c);
-  void update_game_info(const string &i);
+  void update_moves(const std::string &s, Color c);
+  void update_captures(const std::string &s, Color c);
+  void update_game_info(const std::string &i);
   void update_banner(Color c);
 
   void clear();

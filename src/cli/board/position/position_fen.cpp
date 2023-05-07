@@ -2,7 +2,7 @@
 
 #include "ui_components/fen_fields.hpp"
 
-PositionFen::PositionFen(const FenFields& fen, Position &position) {
+PositionFen::PositionFen(const FenFields &fen, Position &position) {
   parse_fen(fen, position);
 }
 
@@ -21,9 +21,9 @@ void PositionFen::parse_fen(const FenFields &fen_fields, Position &position) {
     if (isdigit(c)) {
       file += (c - '0');
     } else {   // is piece
-      piece = utils::get_piecetype_from_char_key(c);
+      piece = utils::get_piecetype_from_char(c);
       square = static_cast<Square>(rank * 8 + file);
-      position.set_piece_at_square(piece, square);
+      position.set_piece(piece, square);
       file++;
     }
   }
@@ -46,15 +46,18 @@ void PositionFen::parse_fen(const FenFields &fen_fields, Position &position) {
   position.set_fullmoves(std::stoi(fen_fields.fullmove_counter));
 };
 
-std::string PositionFen::get_fen(Position &position) {
+Square PositionFen::make_sq(int& rank, int file) {
+  return static_cast<Square>((rank * 8) + file);
+}
+
+std::string PositionFen::get_fen(Position &pos) {
   std::string fen{""};
   Piece piece{EMPTY};
   int space{0};
 
   for (int rank = 7; rank >= 0; rank--) {
     for (int file = 0; file <= 7; file++) {
-      piece =
-          position.get_piece_at_square(static_cast<Square>(rank * 8 + file));
+      piece = pos.get_piece(make_sq(rank, file));
       if (piece) {
         add_empty_space(fen, space);
         fen += utils::piecetype_to_char(piece);
@@ -65,28 +68,18 @@ std::string PositionFen::get_fen(Position &position) {
 
     add_empty_space(fen, space);
 
-    if (rank > 0) {
-      fen += "/";
-    }
+    if (rank > 0) { fen += "/"; }
   }
 
-  fen += ' ';
-  fen += position.get_side_turn_as_char();
-  fen += ' ';
-  fen += position.get_castling_rights_as_string();
-  fen += ' ';
-  fen += position.get_en_passant_square_as_string();
-  fen += ' ';
-  fen += position.get_halfmoves_as_string();
-  fen += ' ';
-  fen += position.get_fullmoves_as_string();
-
+  fen += ' ' + pos.get_side_turn_as_char();
+  fen += ' ' + pos.get_castling_rights_as_string();
+  fen += ' ' + pos.get_en_passant_square_as_string();
+  fen += ' ' + pos.get_halfmoves_as_string();
+  fen += ' ' + pos.get_fullmoves_as_string();
   return fen;
 }
 
 void PositionFen::add_empty_space(std::string &f, int &space) {
-  if (space) {
-    f += std::to_string(space);
-  }
+  if (space) { f += std::to_string(space); }
   space = 0;
 }

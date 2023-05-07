@@ -74,7 +74,7 @@ class King : public PieceBase {
     }
 
     for (const auto pos : kc.free_squares) {
-      if (b.is_occupied_at_square(pos)) {
+      if (b.is_occupied(pos)) {
         return false;
       }
     }

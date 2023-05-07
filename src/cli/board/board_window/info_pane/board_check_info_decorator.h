@@ -13,20 +13,20 @@ class BoardCheckInfoDecorator : public BoardCheckDecorator {
   virtual ~BoardCheckInfoDecorator();
 
   void update_side(Color c) override;
-  bool is_string_format_valid(const string &s) override;
+  bool is_string_format_valid(const std::string &s) override;
   bool is_player_in_check(const Move &m) override;
   bool is_legal_move(Move &m) override;
   bool is_checkmate() override;
 
  private:
-  string str_move;
+  std::string str_move;
 
-  const string Kwrong_format =
+  const std::string Kwrong_format =
       "Move is an not in a recognizable format, please try again";
-  const string Killegal_move = "is an illegal move";
-  const string Kin_check = "cannot make that move, player is in check";
-  const string Kcheckmate = "checkmate ";
-  const string Kwon = " won";
+  const std::string Killegal_move = "is an illegal move";
+  const std::string Kin_check = "cannot make that move, player is in check";
+  const std::string Kcheckmate = "checkmate ";
+  const std::string Kwon = " won";
 
   std::shared_ptr<BoardModelInfo> m_board_model_info;
 };

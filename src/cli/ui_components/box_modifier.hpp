@@ -183,12 +183,12 @@ class BoxModifier {
     drawing->append_const_char_array(modifier_to_str(RESET).c_str());
   }
 
-  static void remove_mod(Box *drawing, ModType mt) {
+  static void remove_mod(ModType mt, Box *drawing) {
     remove_mod(drawing, kMod_regex.at(mt));
   }
 
  private:
-  static void remove_mod_at_row(char* arr, const std::string& mod) {
+  static void remove_mod_at_row(const std::string& mod, char* arr) {
     static std::regex box_mod_regex;
     static std::string str;
 
@@ -201,7 +201,7 @@ class BoxModifier {
 
   static void remove_mod(Box* box, const std::string& mod) {
     for (int i = 0; i < Box::kRowSize; ++i) {
-      remove_mod_at_row(box->content[i], mod);
+      remove_mod_at_row(mod, box->content[i]);
     }
   }
 

@@ -46,7 +46,7 @@ static const std::string black_square = "BlackSquare";
 
 }  // namespace StringDrawingName
 
-namespace string_utils {
+namespace StringUtils {
 inline unsigned int square_str_to_int(std::string sq) {
   char file = sq[0], rank = sq[1];
   unsigned int square_int = static_cast<unsigned int>((file - 'a') + ((rank - '1') * 8));
@@ -121,6 +121,6 @@ size_t constexpr utf8_strlen(const char* str) {
   }
   return q;
 }
-} // namespace string_utils
+}  // namespace StringUtils
 
 #endif /* STRING_UTILS_H */

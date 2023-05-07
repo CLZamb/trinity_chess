@@ -11,7 +11,6 @@ SquareDrawing::SquareDrawing(const SquareDrawingInfo &sdi)
 
 Box *SquareDrawing::get_drawing() {
   if (m_has_piece) return &m_pc_drawing->get_drawing();
-
   return &m_empty;
 }
 
@@ -32,7 +31,7 @@ PtrPieceDrawing &&SquareDrawing::remove_piece_drawing() {
 
   clear();
 
-  BM::remove_mod(&m_pc_drawing->get_drawing(), BM::BGCOLOR);
+  BM::remove_mod(BM::BGCOLOR, &m_pc_drawing->get_drawing());
   return std::move(m_pc_drawing);
 }
 

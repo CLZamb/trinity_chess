@@ -5,6 +5,7 @@
 
 #include "board/board_window/board_pane/pieces/pieces_drawings.hpp"
 #include "board/board_window/board_pane/squares/square_drawing.h"
+#include "ui_components/fen_fields.hpp"
 #include "utils/move.hpp"
 
 class SquaresDrawings {

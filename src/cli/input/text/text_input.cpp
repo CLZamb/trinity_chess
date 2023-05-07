@@ -4,7 +4,7 @@ TextInput::TextInput() {}
 
 TextInput::~TextInput() {}
 
-void TextInput::set_string_before_prompt(const string& str) {
+void TextInput::set_string_before_prompt(const std::string& str) {
   m_string_before_prompt = str;
 }
 

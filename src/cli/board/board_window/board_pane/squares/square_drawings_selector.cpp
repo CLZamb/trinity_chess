@@ -2,56 +2,52 @@
 
 #include "ui_components/box_modifier.hpp"
 
-SquaresDrawingSelector::SquaresDrawingSelector(SquaresDrawings &sq,
-                                               Square initial_selection)
-    : m_squares_drawings(sq) {
-  SquareDrawing *sq_drawing = m_squares_drawings[initial_selection];
+using BM = BoxModifier;
 
-  if (sq_drawing == nullptr) return;
+SquareDrawingSelector::SquareDrawingSelector(SquaresDrawings &sq,
+                                             Square init_selection)
+    : m_squares(sq) {
+  SquareDrawing *init_sq = m_squares[init_selection];
 
-  BoxModifier::add_attribute(BoxModifier::BG_INVERSE,
-                             sq_drawing->get_drawing());
+  set_select_mod(init_sq);
 
-  p_prev_select_square_drawing = sq_drawing;
+  p_prev_select_square = init_sq;
 }
 
-void SquaresDrawingSelector::set_start_pos(SquareDrawing *sq_drawing) {
-  if (sq_drawing == nullptr) return;
+void SquareDrawingSelector::set_selected(SquareDrawing *sq) {
+  if (sq == p_selected_square) return;
 
-  BoxModifier::add_attribute(BoxModifier::BG_INVERSE,
-                             sq_drawing->get_drawing());
+  set_select_mod(sq);
 
-  p_prev_select_square_drawing = sq_drawing;
+  p_selected_square = sq;
 }
 
-void SquaresDrawingSelector::set_selected(SquareDrawing *sq_drawing) {
-  if (sq_drawing == nullptr) return;
-  if (sq_drawing == p_selected_square_drawing) return;
+void SquareDrawingSelector::remove_previous_selected() {
+  if (p_selected_square == nullptr) return;
 
-  BoxModifier::add_attribute(BoxModifier::BG_INVERSE,
-                             sq_drawing->get_drawing());
-  p_selected_square_drawing = sq_drawing;
+  remove_select_mod(p_selected_square);
+
+  p_selected_square = nullptr;
 }
 
-void SquaresDrawingSelector::remove_previous_selected() {
-  if (p_selected_square_drawing == nullptr) return;
+void SquareDrawingSelector::select_next(SquareDrawing *sq) {
+  if (sq == nullptr) return;
+  if (sq == p_selected_square) return;
+  if (sq == p_prev_select_square) return;
 
-  BoxModifier::remove_mod(p_selected_square_drawing->get_drawing(),
-                          BoxModifier::ATTRIBUTE);
+  remove_select_mod(p_prev_select_square);
 
-  p_selected_square_drawing = nullptr;
+  set_select_mod(sq);
+
+  p_prev_select_square = sq;
 }
 
-void SquaresDrawingSelector::select_next(SquareDrawing *sq_drawing) {
-  if (sq_drawing == nullptr) return;
-  if (sq_drawing == p_selected_square_drawing) return;
-  if (sq_drawing == p_prev_select_square_drawing) return;
+void SquareDrawingSelector::set_select_mod(SquareDrawing *sq) {
+  if (sq == nullptr) return;
+  BM::add_attribute(BM::BG_INVERSE, sq->get_drawing());
+}
 
-  BoxModifier::remove_mod(p_prev_select_square_drawing->get_drawing(),
-                          BoxModifier::ATTRIBUTE);
-
-  BoxModifier::add_attribute(BoxModifier::BG_INVERSE,
-                             sq_drawing->get_drawing());
-
-  p_prev_select_square_drawing = sq_drawing;
+void SquareDrawingSelector::remove_select_mod(SquareDrawing *sq) {
+  if (sq == nullptr) return;
+  BM::remove_mod(BM::ATTRIBUTE, sq->get_drawing());
 }

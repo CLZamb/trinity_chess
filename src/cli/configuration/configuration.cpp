@@ -13,7 +13,7 @@ PlayersConfig& Configuration::get_players_config() {
   return m_players_config;
 }
 
-BoardInfo& Configuration::get_board_config() {
+BoardConfigInfo& Configuration::get_board_config() {
   return m_board_config;
 }
 
@@ -48,6 +48,6 @@ void Configuration::get_players_color() {
   m_board_config.initial_side = initial_color;
 }
 
-void Configuration::set_board_configuration(const BoardInfo& board_file_info) {
+void Configuration::set_board_configuration(const BoardConfigInfo& board_file_info) {
   m_board_config = board_file_info;
 }

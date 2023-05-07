@@ -33,11 +33,11 @@ private:
     Pane::set_content_at_section(m_top_section, {PaneDrawings::Borders::ktop_drawing});
     Pane::set_content_at_section(m_bottom_section, {PaneDrawings::Borders::kbottom_drawing});
   }
-  const string m_top_section = "top";
-  const string m_engine_name_section = "engine name";
-  const string m_nodes_section = "nodes";
-  const string m_ply_section = "ply";
-  const string m_bottom_section = "bottom";
+  const std::string m_top_section = "top";
+  const std::string m_engine_name_section = "engine name";
+  const std::string m_nodes_section = "nodes";
+  const std::string m_ply_section = "ply";
+  const std::string m_bottom_section = "bottom";
 };
 
 

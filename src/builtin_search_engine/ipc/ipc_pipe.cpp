@@ -2,6 +2,10 @@
 #include <filesystem>
 #include <sys/wait.h>
 
+using std::cerr;
+using std::endl;
+using std::string;
+
 namespace fs = std::filesystem;
 
 IpcPipe::IpcPipe() {

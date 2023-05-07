@@ -8,7 +8,7 @@
 class IConfiguration {
 public:
   virtual PlayersConfig& get_players_config() = 0;
-  virtual BoardInfo& get_board_config() = 0;
+  virtual BoardConfigInfo& get_board_config() = 0;
   virtual InputType get_input_type() = 0;
   // GameConfig& get_players_config() = 0;
 };

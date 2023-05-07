@@ -32,14 +32,14 @@ class MenuTextEventHandler : public IMenuEventHandler<T> {
   }
 
   void handle_event_string(CommandEventText &e) {
-    string m_string_input = e.get_text();
+    std::string m_string_input = e.get_text();
 
     m_opt_info.m_key = get_option_key(m_string_input);
     m_opt_info.is_valid_option = m_opts.check_key_option(m_opt_info.m_key);
     m_opt_info.m_string_input = m_string_input;
   }
 
-  int get_option_key(const string &m_str_input) {
+  int get_option_key(const std::string &m_str_input) {
     return is_number(m_str_input) ? atoi(m_str_input.c_str())
                                   : m_opts.get_key_at(m_str_input);
   }
@@ -54,7 +54,7 @@ class MenuTextEventHandler : public IMenuEventHandler<T> {
   struct option_info {
     bool is_valid_option{false};
     int m_key;
-    string m_string_input;
+    std::string m_string_input;
   };
 
   option_info m_opt_info;

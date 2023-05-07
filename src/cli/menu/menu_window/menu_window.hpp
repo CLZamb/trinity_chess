@@ -9,11 +9,11 @@
 #include "input/input_components.h"
 #include "input/input_types.h"
 
-template <typename T = string>
+template <typename T = std::string>
 class MenuWindow : public Window {
  public:
   explicit MenuWindow(InputType input_type,
-                      const string title = "",
+                      const std::string title = "",
                       const Options<T> &opts = {})
       : m_opts(opts)
       , m_pane(title, format_options()) {
@@ -25,7 +25,7 @@ class MenuWindow : public Window {
     input_type == InputType::Keyboard ? set_keyboard() : set_text();
   }
 
-  void set_title(const string &title) { m_pane.set_title(title); }
+  void set_title(const std::string &title) { m_pane.set_title(title); }
 
   void add_options(const Options<T> &options) {
     m_opts = options;
@@ -73,12 +73,12 @@ class MenuWindow : public Window {
     return p_event_handler->selected_menu_option();
   };
 
-  string format_option(int index, const string desc) {
+  std::string format_option(int index, const std::string desc) {
     return std::to_string(index) + ". " + desc;
   }
 
   std::list<std::string> format_options() {
-    std::list<string> options_formatted;
+    std::list<std::string> options_formatted;
     for (auto i : m_opts) {
       options_formatted.push_back(format_option(i.second.num, i.second.desc));
     }

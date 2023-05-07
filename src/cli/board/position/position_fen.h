@@ -15,6 +15,7 @@ class PositionFen {
 
  private:
   void add_empty_space(std::string &fen, int &space);
+  Square make_sq(int& rank, int file);
 };
 
 #endif /* POSITION_FEN_H */

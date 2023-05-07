@@ -30,7 +30,7 @@ bool CheckBehaviour::is_legal_move(Move& m) {
 }
 
 bool CheckBehaviour::is_string_format_valid(const std::string& s)   {
-  return string_utils::check::is_valid_move_format(s);
+  return StringUtils::check::is_valid_move_format(s);
 }
 
 bool CheckBehaviour::is_player_in_check(const Move&)  {
@@ -117,7 +117,7 @@ bool CheckBehaviour::can_opponent_attack_square(const Square &sq) {
   while (temp_iterable_bb) {
     position = static_cast<Square>(bitUtility::pop_1st_bit(&temp_iterable_bb));
 
-    pt = m_position.get_piece_at_square(position);
+    pt = m_position.get_piece(position);
 
     attack_bitboard |= m_pieces[pt]->get_attacks(opposite_player_bitboard, position);
   }

@@ -18,17 +18,17 @@ NLOHMANN_JSON_SERIALIZE_ENUM( Color, {
     {Color::WHITE, "white"},
 })
 
-NLOHMANN_JSON_SERIALIZE_ENUM( BoardInfo::SidePane, {
-    {BoardInfo::None, "none"},
-    {BoardInfo::Info, "info"},
-    {BoardInfo::Statitics, "statistics"},
+NLOHMANN_JSON_SERIALIZE_ENUM( BoardConfigInfo::SidePane, {
+    {BoardConfigInfo::None, "none"},
+    {BoardConfigInfo::Info, "info"},
+    {BoardConfigInfo::Statitics, "statistics"},
 })
 
 namespace FileInput {
 
 using json = nlohmann::json;
 
-// inline void to_json(json &j, const BoardInfo &p) {
+// inline void to_json(json &j, const BoardConfigInfo &p) {
 //   j = json{
 //       {       "fen",     p.start_fen},
 //       {       "input",   p.input_type},
@@ -38,7 +38,7 @@ using json = nlohmann::json;
 //   };
 // }
 
-inline void from_json_file(const std::string &file_name, BoardInfo &p) {
+inline void from_json_file(const std::string &file_name, BoardConfigInfo &p) {
   std::ifstream file(file_name);
 
   // Read the file contents into a string
@@ -54,7 +54,7 @@ inline void from_json_file(const std::string &file_name, BoardInfo &p) {
   j.at("left_pane").get_to(p.left_pane);
   j.at("right_pane").get_to(p.right_pane);
 
-  p.start_fen_fields.split_fen_into_its_fields(start_fen);
+  p.fen_fields.split_fen_into_its_fields(start_fen);
 }
 }   // namespace FileInput
 //

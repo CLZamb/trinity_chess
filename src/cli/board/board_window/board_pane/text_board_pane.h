@@ -8,10 +8,10 @@ class TextBoardPane : public IBoardPane {
  public:
   explicit TextBoardPane(const std::unique_ptr<TextInput> &p, const FenFields& fen);
   bool is_player_string_move_ready() override;
-  string get_player_move_as_string() override;
+  std::string get_player_move_as_string() override;
 
  private:
-  string m_string_move{""};
+  std::string m_string_move{""};
   void handle_string_input(CommandEventText &e);
 };
 

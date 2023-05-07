@@ -32,12 +32,12 @@ void Position::undo_move(const Move &move) {
 
 void Position::set_side_to_move(Color c) { m_side_to_move = c; }
 
-char Position::get_side_turn_as_char() {
-  return (m_side_to_move == BLACK) ? 'b' : 'w';
+std::string Position::get_side_turn_as_char() {
+  return (m_side_to_move == BLACK) ? "b" : "w";
 }
 
 std::string Position::get_en_passant_square_as_string() {
-  std::string en_passant = string_utils::squareindex_to_str(m_en_passant_pos);
+  std::string en_passant = StringUtils::squareindex_to_str(m_en_passant_pos);
 
   if ("-not a valid position-" == en_passant) {
     return "-";
@@ -70,7 +70,7 @@ Square Position::get_king_position(Color c) {
   return m_board_representation.get_king_position(c);
 }
 
-const Piece &Position::get_piece_at_square(Square sq) const {
+const Piece &Position::get_piece(Square sq) const {
   return m_board_representation.get_piece_at_square(sq);
 }
 
@@ -82,11 +82,11 @@ Bitboard Position::get_occupied_squares_as_bitboard() {
   return m_board_representation.get_occupied_squares_as_bitboard();
 }
 
-bool Position::is_occupied_at_square(const Square pos) {
+bool Position::is_occupied(const Square pos) {
   return m_board_representation.is_occupied_at_square(pos);
 }
 
-void Position::set_piece_at_square(Piece p, Square position) {
+void Position::set_piece(Piece p, Square position) {
   return m_board_representation.set_piece_at_square(p, position);
 }
 

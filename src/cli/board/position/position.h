@@ -30,14 +30,14 @@ class Position : public GameTurnObserver {
   void set_fullmoves(int halfmoves);
   std::string get_halfmoves_as_string();
   std::string get_fullmoves_as_string();
-  char get_side_turn_as_char();
+  std::string get_side_turn_as_char();
   // Board BoardRepresentation
   Square get_king_position(Color c);
-  const Piece &get_piece_at_square(Square sq) const;
-  bool is_occupied_at_square(const Square position);
+  const Piece &get_piece(Square sq) const;
+  bool is_occupied(const Square position);
   Bitboard get_occupied_side_as_bitboard(Color c);
   Bitboard get_occupied_squares_as_bitboard();
-  void set_piece_at_square(Piece p, Square position);
+  void set_piece(Piece p, Square position);
   void clear_square(Square s);
   // castling rights
   void set_castle_permission(const char c);

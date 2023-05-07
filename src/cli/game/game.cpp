@@ -3,6 +3,8 @@
 #include "game/messages/game_messages.hpp"
 #include "menu/menu_window/menu_window.hpp"
 
+using std::string;
+
 Game::Game() {}
 
 string Game::get_start_menu_option_as_string(InputType i_type) {
@@ -18,7 +20,7 @@ string Game::get_start_menu_option_as_string(InputType i_type) {
 }
 
 void Game::get_config_from_file(Configuration &config) {
-  BoardInfo board_info;
+  BoardConfigInfo board_info;
   FileInput::from_json_file("configuration.json", board_info);
   config.set_board_configuration(board_info);
 }
@@ -27,7 +29,7 @@ void Game::start() {
   Configuration configuration;
   get_config_from_file(configuration);
 
-  std::string option_selected =
+  string option_selected =
       get_start_menu_option_as_string(configuration.get_input_type());
 
   if (option_selected == "Quit") {
@@ -42,7 +44,7 @@ void Game::start() {
   start_game_loop(configuration.get_board_config());
 }
 
-void Game::start_game_loop(BoardInfo &board_config) {
+void Game::start_game_loop(BoardConfigInfo &board_config) {
   Move mv;
   Board board(board_config);
 

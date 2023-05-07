@@ -10,12 +10,11 @@ namespace InputComponents {
 
 inline auto new_input_keyboard() { return std::make_unique<KeyboardInput>(); }
 
-inline auto new_input_text(const string string_before_prompt) {
+inline auto new_input_text(const std::string string_before_prompt) {
   auto text_input = std::make_unique<TextInput>();
   text_input->set_string_before_prompt(string_before_prompt);
   return text_input;
 }
-
 }   // namespace InputComponents
 
 #endif /* INPUT_COMPONENTS_H */

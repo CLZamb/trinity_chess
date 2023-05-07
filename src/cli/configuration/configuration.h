@@ -11,18 +11,18 @@ public:
   Configuration();
   virtual ~Configuration() {}
 
-  void set_board_configuration(const BoardInfo& board_fiel_info);
+  void set_board_configuration(const BoardConfigInfo& board_fiel_info);
   void set_board_configuration();
   void get_new_configuration();
   PlayersConfig& get_players_config() override;
-  BoardInfo& get_board_config() override;
+  BoardConfigInfo& get_board_config() override;
   InputType get_input_type() override;
   
 private:
   void get_players_type();
   void get_players_color();
 
-  BoardInfo m_board_config;
+  BoardConfigInfo m_board_config;
   PlayersConfig m_players_config;
   InputType m_input_type{InputType::Text};
 };

@@ -5,10 +5,6 @@
 #include <iostream>
 #include <string>
 
-using std::cerr;
-using std::endl;
-using std::string;
-
 enum processes_type {
   parent = 1,
   child = 0,
@@ -31,7 +27,7 @@ class IpcPipe {
     CuPipe* child_read_end;
     CuPipe* child_write_end;
 
-    string parent_read();
+    std::string parent_read();
     void parent_write(string message);
 
     string chidl_read();

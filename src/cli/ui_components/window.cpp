@@ -10,13 +10,13 @@ using std::ostream;
 Window::Window() {}
 Window::~Window() {}
 
-void Window::add_left_pane(IPane *pane) { add_pane(pane, Window::Left_pane); }
+void Window::add_left_pane(IPane *pane) { add_pane(pane, Window::LEFT_PANE); }
 
 void Window::add_middle_pane(IPane *pane) {
-  add_pane(pane, Window::Middle_pane);
+  add_pane(pane, Window::MIDDLE_PANE);
 }
 
-void Window::add_right_pane(IPane *pane) { add_pane(pane, Window::Right_pane); }
+void Window::add_right_pane(IPane *pane) { add_pane(pane, Window::RIGHT_PANE); }
 
 void Window::print() {
   // system(CLEAR);
@@ -24,13 +24,9 @@ void Window::print() {
 }
 
 void Window::add_pane(IPane *pane, PanePos pos) {
-  if (pane == nullptr) {
-    return;
-  }
+  if (pane == nullptr) { return; }
 
-  if (m_panes.size() >= max_panes_size) {
-    return;
-  }
+  if (m_panes.size() >= max_panes_size) { return; }
 
   if (pane->size() > m_panes_size_max_height) {
     m_panes_size_max_height = pane->size();
@@ -51,9 +47,7 @@ void Window::get_window_drawing(ostream &os) {
   }
 
   for (size_t row = 0; row < m_panes_size_max_height; row++) {
-    for (auto &pane : m_panes) {
-      os << (*pane.second)[row];
-    }
+    for (auto &pane : m_panes) { os << (*pane.second)[row]; }
     os << "\n";
   }
 }

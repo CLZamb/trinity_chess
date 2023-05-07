@@ -1,11 +1,13 @@
 #include "board_check_info_decorator.h"
 
 using std::shared_ptr;
+using std::string;
 using std::unique_ptr;
 
 BoardCheckInfoDecorator::BoardCheckInfoDecorator(
     unique_ptr<IBoardCheckBehaviour> &&m, shared_ptr<BoardModelInfo> bmi)
-    : BoardCheckDecorator(std::move(m)), m_board_model_info(bmi) {}
+    : BoardCheckDecorator(std::move(m))
+    , m_board_model_info(bmi) {}
 
 BoardCheckInfoDecorator::~BoardCheckInfoDecorator() {}
 
@@ -28,9 +30,7 @@ bool BoardCheckInfoDecorator::is_string_format_valid(const string &s) {
 bool BoardCheckInfoDecorator::is_player_in_check(const Move &m) {
   bool in_check = BoardCheckDecorator::is_player_in_check(m);
 
-  if (in_check) {
-    m_board_model_info->save_info(Kin_check);
-  }
+  if (in_check) { m_board_model_info->save_info(Kin_check); }
 
   return in_check;
 }
@@ -48,8 +48,7 @@ bool BoardCheckInfoDecorator::is_legal_move(Move &m) {
 bool BoardCheckInfoDecorator::is_checkmate() {
   bool checkmate = BoardCheckDecorator::is_checkmate();
   Color player_color = m_board_model_info->get_side_to_move_color();
-  string player_color_str =
-      string_utils::get_color_str_from_color(player_color);
+  string player_color_str = StringUtils::get_color_str_from_color(player_color);
 
   if (checkmate) {
     m_board_model_info->save_info(Kcheckmate + player_color_str + Kwon);

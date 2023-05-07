@@ -15,10 +15,10 @@ class Pane : public IPane  {
   void clear();
   void fill(const std::string& content);
   void add_section(const std::string & section_name, const size_t size);
-  void set_content_at_section(const std::string &section_name, std::initializer_list<string> lst);
-  void set_content_at_section(const std::string &section_name, const std::vector<string>* content);
+  void set_content_at_section(const std::string &section_name, std::initializer_list<std::string> lst);
+  void set_content_at_section(const std::string &section_name, const std::vector<std::string>* content);
   std::shared_ptr<Section>& get_section(const std::string& key);
-  string format_line(const std::string &line);
+  std::string format_line(const std::string &line);
   void set_content_to_block_recursively(std::shared_ptr<Section>& section,
                                         std::string &msg, size_t &current_row);
   void format_section(std::shared_ptr<Section>& block, std::string content);

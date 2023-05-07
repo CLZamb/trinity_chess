@@ -153,4 +153,5 @@ inline Square &operator-=(Square &s, bitUtility::Direction d) {
   return s = s - d;
 }
 
+
 #endif /* MOVE_H */

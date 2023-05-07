@@ -7,7 +7,7 @@ TextBoardPane::TextBoardPane(const std::unique_ptr<TextInput> &p, const FenField
 
 bool TextBoardPane::is_player_string_move_ready() { return true; }
 
-string TextBoardPane::get_player_move_as_string() { return m_string_move; }
+std::string TextBoardPane::get_player_move_as_string() { return m_string_move; }
 
 void TextBoardPane::handle_string_input(CommandEventText &e) {
   m_string_move = e.get_text();

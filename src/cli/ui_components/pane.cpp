@@ -1,6 +1,7 @@
 #include "pane.h"
 
 using std::make_unique;
+using std::string;
 
 Pane::Pane(size_t size /*= 44 */) {
   m_pane_drawing.reserve(size);

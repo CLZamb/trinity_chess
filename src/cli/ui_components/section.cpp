@@ -6,17 +6,19 @@
 using std::vector;
 using std::string;
 
-
 Section::Section(string name, size_t size)
     : ISectionComponent(size)
     , m_name(name) {
-  if (size >= std::numeric_limits<size_t>::max()) {
-    std::cerr << "illegal size length: " << size << " on section " << name
-              << std::endl;
-  }
+  check_valid_size(size);
 }
 
-Section::~Section() {}
+void Section::check_valid_size(size_t& size) {
+  if (size >= std::numeric_limits<size_t>::max()) {
+    std::cerr 
+      << "illegal size length: " << size 
+      << " on section " << m_name << std::endl;
+  }
+}
 
 void Section::fill(const string &content) {
   for (auto &i : m_section_drawing) {
@@ -48,11 +50,11 @@ void Section::set_drawing(std::initializer_list<string> lst) {
 void Section::set_drawing(const vector<string> *content) {
   if (content->size() > size()) {
     return;
-}
+  }
 
   size_t index = 0;
-  for (auto i : *content) {
-    m_section_drawing[index++] = i;
+  for (auto c : *content) {
+    m_section_drawing[index++] = c;
   }
 }
 

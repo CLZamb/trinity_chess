@@ -36,7 +36,7 @@ namespace check {
   }
 }  // namespace check
 
-inline Piece get_piecetype_from_char_key(const char c) {
+inline Piece get_piecetype_from_char(const char c) {
   static const std::unordered_map<char, Piece> piece_map = {
     {'P', wP}, {'R', wR}, {'N', wN}, {'B', wB}, {'Q', wQ}, {'K', wK},
     {'p', bP}, {'r', bR}, {'n', bN}, {'b', bB}, {'q', bQ}, {'k', bK},

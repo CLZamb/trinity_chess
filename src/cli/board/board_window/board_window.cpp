@@ -26,14 +26,16 @@ void BoardWindow::make_move(const Move &m) {
 void BoardWindow::parse_fen(const FenFields &fen) { p_board_pane->parse_fen(fen); }
 
 void BoardWindow::update() {
-  for (const auto &pane : m_side_panes) { pane->update(); }
+  for (const auto &pane : m_side_panes) { 
+    pane->update();
+  }
 
   p_board_pane->update_drawing();
 }
 
 void BoardWindow::print() { Window::print(); }
 
-string BoardWindow::get_player_move_as_string() {
+std::string BoardWindow::get_player_move_as_string() {
   do {
     p_input->listen_for_input_events();
 

@@ -18,7 +18,7 @@ const Move& Castling::get_rook_castle_move(const CastlePermission &cp) const {
 bool Castling::is_rook_is_at_castling_position(const Move& m, const Position &s) {
   Color color = utils::check::get_color_piece(MoveUtils::get_piece(m));
   CastleSquares rook_initial_pos = get_castle_rook_initial_position(m, color);
-  Piece piece_at_rook_initial_pos = s.get_piece_at_square(static_cast<Square>(rook_initial_pos));
+  Piece piece_at_rook_initial_pos = s.get_piece(static_cast<Square>(rook_initial_pos));
   return (piece_at_rook_initial_pos == bR || piece_at_rook_initial_pos == wR);
 }
 

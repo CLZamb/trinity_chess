@@ -41,6 +41,7 @@ class Box {
   }
 
   static const int kRowSize = 5 /*rows*/;
+
   // drawing   7 chars "█████████"
   // color fg  3 chars "\033[38;5;m"
   // color bg  4 chars "\x1B[48;5;m"

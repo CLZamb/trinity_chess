@@ -4,18 +4,16 @@
 #include <string>
 #include <iostream>
 
-using std::string;
-
 class TextInputBase {
  public:
   int get_integer_input();
-  string get_string_input();
+  std::string get_string_input();
   TextInputBase();
   virtual ~TextInputBase();
 
  private:
-  static const string input_space;
-  void has_player_quit(const string &s);
+  static const std::string input_space;
+  void has_player_quit(const std::string &s);
 };
 
 #endif /* TEXT_INPUT_BASE_H */
