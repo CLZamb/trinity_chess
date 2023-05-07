@@ -4,50 +4,42 @@
 #include <unordered_map>
 
 #include "input/input.h"
-#include "input/keyboard/keyboard_base.h"
-
-struct KeyCode {
-  enum Key {
-    NONE,
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-    ENTER,
-  };
-};
+#include "input/keyboard/keyboard.h"
+#include "keyboard_keycode.h"
 
 struct CommandEventKeyboard {
-  void set_key_code(const Keyboard::Key c) { m_keycode = m_keycodes.at(c); }
+  void set_key_code(const ASCIICharEncoding c) { m_keycode = m_keycodes.at(c); }
 
   KeyCode::Key get_key_code() const { return m_keycode; }
 
-  bool check_if_is_in_map(const Keyboard::Key &k) {
+  bool check_is_a_directional_key(const ASCIICharEncoding &k) {
     return m_keycodes.find(k) != m_keycodes.end();
   }
 
  private:
   KeyCode::Key m_keycode{KeyCode::NONE};
 
-  std::unordered_map<Keyboard::Key, KeyCode::Key> m_keycodes{
-      {Keyboard::W, KeyCode::UP},        {Keyboard::A, KeyCode::LEFT},
-      {Keyboard::S, KeyCode::DOWN},      {Keyboard::D, KeyCode::RIGHT},
-      {Keyboard::UP, KeyCode::UP},       {Keyboard::LEFT, KeyCode::LEFT},
-      {Keyboard::DOWN, KeyCode::DOWN},   {Keyboard::RIGHT, KeyCode::RIGHT},
-      {Keyboard::ENTER, KeyCode::ENTER},
+  const std::unordered_map<ASCIICharEncoding, KeyCode::Key> m_keycodes{
+      {          ASCIICharEncoding::W,    KeyCode::UP},
+      {          ASCIICharEncoding::A,  KeyCode::LEFT},
+      {          ASCIICharEncoding::S,  KeyCode::DOWN},
+      {          ASCIICharEncoding::D, KeyCode::RIGHT},
+      {   ASCIICharEncoding::ARROW_UP,    KeyCode::UP},
+      { ASCIICharEncoding::ARROW_LEFT,  KeyCode::LEFT},
+      { ASCIICharEncoding::ARROW_DOWN,  KeyCode::DOWN},
+      {ASCIICharEncoding::ARROW_RIGHT, KeyCode::RIGHT},
+      {      ASCIICharEncoding::ENTER, KeyCode::ENTER},
   };
 };
 
 class KeyboardInput : public Input {
  public:
-  KeyboardInput();
-  virtual ~KeyboardInput();
   void listen_for_input_events() override;
 
  private:
-  KeyboardBase m_k_input;
+  Keyboard m_keyboard;
   CommandEventKeyboard m_command_event;
-  const string keyboard_event_name = typeid(CommandEventKeyboard).name();
+  const std::string keyboard_event_name = typeid(CommandEventKeyboard).name();
 };
 
 #endif /* KEYBOARD_INPUT_H */

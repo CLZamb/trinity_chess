@@ -1,5 +1,5 @@
-#ifndef MOVE_UTILS_H
-#define MOVE_UTILS_H
+#ifndef STRING_UTILS_H
+#define STRING_UTILS_H
 
 #pragma once
 
@@ -21,8 +21,7 @@ static const std::string pawn   = "pawn";
 static const std::string queen  = "queen"; 
 static const std::string rook   = "rook"; 
 
-inline std::string get_piece_from_piecetype(Piece piece_type) {
-
+inline std::string get_name_from_piecetype(Piece piece_type) {
   const std::unordered_map<Piece, std::string> piece_str_name{
     {bP, pawn},   {bR, rook},   {bN, knight}, {bB, bishop},
     {bQ, queen},  {bK, king},   {wP, pawn},   {wR, rook},
@@ -124,4 +123,4 @@ size_t constexpr utf8_strlen(const char* str) {
 }
 } // namespace string_utils
 
-#endif /* MOVE_UTILS_H */
+#endif /* STRING_UTILS_H */

@@ -10,7 +10,6 @@
 class CastlingRights {
  public:
   CastlingRights();
-  virtual ~CastlingRights() = default;
   void set_castle_permission(const char c);
   void remove_castle_permission(const CastlePermission &perm);
   CastlePermission get_castle_permission();

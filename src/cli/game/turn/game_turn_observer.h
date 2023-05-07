@@ -6,7 +6,6 @@
 
 class GameTurnObserver {
  public:
-    virtual ~GameTurnObserver() = default;
     virtual void update_turn(const Color &) = 0;
 };
 

@@ -1,69 +1,33 @@
 #ifndef PIECE_DRAWINGS_H
 #define PIECE_DRAWINGS_H
 
-#include "ui_components/box_drawing.hpp"
+#include <iostream>
+#include "board/board_window/board_pane/pieces/IPiece_drawing.hpp"
+#include "board/position/position_utils.h"
+#include "ui_components/box.h"
+#include "ui_components/box_modifier.hpp"
 
-class PieceDrawing {
+class PieceDrawing : public IPieceDrawing {
  public:
-  explicit PieceDrawing(Piece pct) {
-    string piece_type =
-        StringDrawingName::Pieces::get_piece_from_piecetype(pct);
-    black_square_drawing = new BoxDrawing(piece_type);
-    white_square_drawing = new BoxDrawing(piece_type);
+  virtual ~PieceDrawing() = default;
+  explicit PieceDrawing(Box drawing, Piece piece)
+      : m_drawing(drawing)
+      , m_piece(utils::check::get_color_piece(piece)) {
+    BoxModifier::add_reset_attr(&m_drawing);
   }
 
-  virtual ~PieceDrawing() {
-    delete black_square_drawing;
-    delete white_square_drawing;
+  std::unique_ptr<IPieceDrawing> clone() override {
+    std::cout << "created new piece drawing" << std::endl;
+    return std::make_unique<PieceDrawing>(*this);
   }
 
-  void set_fg_color_modifier(BoxModifier::Color mod) {
-    black_square_drawing->add_fg_color_modifier(mod);
-    white_square_drawing->add_fg_color_modifier(mod);
-  }
-
-  void set_atr_modifier(BoxModifier::CodeAttribute mod) {
-    black_square_drawing->add_attribute(mod);
-    white_square_drawing->add_attribute(mod);
-  }
-
-  void set_bg_color_modifier(BoxModifier::Color white_square,
-                             BoxModifier::Color black_square) {
-    white_square_drawing->add_bg_color_modifier(white_square);
-    black_square_drawing->add_bg_color_modifier(black_square);
-  }
-
-  Box *get_drawing(bool is_in_black_square) {
-    return is_in_black_square ? black_square_drawing->get_drawing()
-                              : white_square_drawing->get_drawing();
-  }
+  Box &get_drawing() override { return m_drawing; }
+  const Box &get_drawing() const { return m_drawing; }
+  const Color &get_color() const override { return m_piece; }
 
  private:
-  string get_piece_str_name_from_piecetype(Piece piece_type) {
-    const std::unordered_map<Piece, string> piece_str_name{
-        {bP, StringDrawingName::Pieces::pawn},
-        {bR, StringDrawingName::Pieces::rook},
-        {bN, StringDrawingName::Pieces::knight},
-        {bB, StringDrawingName::Pieces::bishop},
-        {bQ, StringDrawingName::Pieces::queen},
-        {bK, StringDrawingName::Pieces::king},
-        {wP, StringDrawingName::Pieces::pawn},
-        {wR, StringDrawingName::Pieces::rook},
-        {wN, StringDrawingName::Pieces::knight},
-        {wB, StringDrawingName::Pieces::bishop},
-        {wQ, StringDrawingName::Pieces::queen},
-        {wK, StringDrawingName::Pieces::king}};
-
-    auto search = piece_str_name.find(piece_type);
-    // check if the key exists
-    if (search == piece_str_name.end()) {
-      return "";
-    }
-
-    return search->second;
-  }
-  BoxDrawing *white_square_drawing = nullptr;
-  BoxDrawing *black_square_drawing = nullptr;
+  Box m_drawing;
+  Color m_piece;
 };
 
 #endif /* DRAWINGS_H */

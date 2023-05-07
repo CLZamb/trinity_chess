@@ -20,6 +20,7 @@ void TextInput::listen_for_input_events() {
 
   m_event_command.udpate_string_input(m_text);
 
-  for (auto &&event : Input::_events.at(keyboard_event_name))
+  for (auto &&event : Input::_events.at(keyboard_event_name)) {
     event(&m_event_command);
+}
 }

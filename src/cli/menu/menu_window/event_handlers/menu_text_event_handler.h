@@ -17,8 +17,6 @@ class MenuTextEventHandler : public IMenuEventHandler<T> {
     p->bind<CommandEventText>(&MenuTextEventHandler::handle_event_string, this);
   }
 
-  virtual ~MenuTextEventHandler() = default;
-
   const Option<T> &selected_menu_option() override {
     return m_opts.at(m_opt_info.m_key);
   }

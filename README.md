@@ -8,6 +8,27 @@ Side panes such as info pane and statistics pane can be added to the board windo
 ![alt text](https://raw.githubusercontent.com/CLZamb/trinity_engine/dev/chess_screenshot.png)
 
 # Features
+## Confirguration
+By default the game will read the json file if no configuration is found the default will be use.
+
+- Json File "configuration.json":
+    - At the root there is a configuration.json with the following possible values
+        - Fen {string}:  will be use to setup the board and their pieces
+        - Input {string}: "keyboard", "text"
+        - intial_side {string}: "white", "black"
+        - left_pane {string}: "info", "statistics"
+        - right_pane {string}: "info", statistics"
+
+- Input inside the Menu
+        - Not yet fully implemented
+- Default Configuration:
+    - fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    - Player 1: {Human, White Side}
+    - Player 2: {Human, Black Side}
+    - Initial Side: "White"
+    - Input: "keyboard"
+    - ChessBoard Left Pane: "info"
+    - ChessBoard Right Pane: "none"
 ## UI
 - UI Components
     - Window: Each window can contain up to three panes.

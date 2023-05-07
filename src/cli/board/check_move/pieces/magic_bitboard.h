@@ -50,7 +50,6 @@ class IMagicBitboardAttackType {
  protected:
   explicit IMagicBitboardAttackType(const MagicBitboard &mb)
       : m_magic_bitboard(&mb){};
-  virtual ~IMagicBitboardAttackType() = default;
   const MagicBitboard *const m_magic_bitboard;
 };
 

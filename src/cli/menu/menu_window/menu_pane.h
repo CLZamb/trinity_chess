@@ -12,7 +12,6 @@ public:
   MenuPane();
   explicit MenuPane(std::list<string> l_s);
   MenuPane(string title, std::list<string> ls);
-  virtual ~MenuPane() = default;
 
   void set_title(string title = "");
   void set_options(std::list<string> l_s);

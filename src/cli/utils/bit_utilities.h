@@ -7,13 +7,14 @@
 
 
 namespace bitUtility {
-  constexpr Bitboard set_mask_bb(const Bitboard bitboard, Square square) {
-    return bitboard | (1ULL << square);
-  }
+constexpr Bitboard set_mask_bb(const Bitboard bitboard, Square square) {
+  return bitboard | (1ULL << square);
+}
 
-  constexpr Bitboard clear_mask_bb(const Bitboard bitboard, Square square) {
-    return bitboard & ~(1ULL << square);
-  }
+constexpr Bitboard clear_mask_bb(const Bitboard bitboard, Square square) {
+  return bitboard & ~(1ULL << square);
+}
+
 
   inline void set_bit(Bitboard* bb, Square s) {
     *bb |= (1ULL << s);

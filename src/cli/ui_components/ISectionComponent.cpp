@@ -7,10 +7,10 @@ size_t ISectionComponent::size() {
   return m_size;
 }
 
-vector<string>::iterator ISectionComponent::begin() {
+std::vector<std::string>::iterator ISectionComponent::begin() {
   return m_section_drawing.begin();
 }
 
-vector<string>::iterator ISectionComponent::end() {
+std::vector<std::string>::iterator ISectionComponent::end() {
   return m_section_drawing.end();
 }

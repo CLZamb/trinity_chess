@@ -11,6 +11,10 @@ CheckBehaviour::CheckBehaviour(Position& position, Color& side) :
   m_rook_attacks(m_magic_bitboard)
 {}
 
+void CheckBehaviour::update_side(Color c) {
+  m_side = c;
+}
+
 bool CheckBehaviour::is_legal_move(Move& m) {
   Piece piece = MoveUtils::get_piece(m);
   Piece captured = MoveUtils::get_captured_piece(m);

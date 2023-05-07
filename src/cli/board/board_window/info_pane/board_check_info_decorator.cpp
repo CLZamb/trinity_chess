@@ -9,6 +9,11 @@ BoardCheckInfoDecorator::BoardCheckInfoDecorator(
 
 BoardCheckInfoDecorator::~BoardCheckInfoDecorator() {}
 
+void BoardCheckInfoDecorator::update_side(Color c) {
+  BoardCheckDecorator::update_side(c);
+  m_board_model_info->update_side(c);
+}
+
 bool BoardCheckInfoDecorator::is_string_format_valid(const string &s) {
   bool valid_format = BoardCheckDecorator::is_string_format_valid(s);
   str_move = s;
@@ -42,7 +47,7 @@ bool BoardCheckInfoDecorator::is_legal_move(Move &m) {
 
 bool BoardCheckInfoDecorator::is_checkmate() {
   bool checkmate = BoardCheckDecorator::is_checkmate();
-  Color player_color = m_board_model_info->get_player_color();
+  Color player_color = m_board_model_info->get_side_to_move_color();
   string player_color_str =
       string_utils::get_color_str_from_color(player_color);
 

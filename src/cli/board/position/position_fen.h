@@ -4,22 +4,13 @@
 #include <string>
 
 #include "board/position/position.h"
-#include "ui_components/fen_component_parts.hpp"
-
-/*
- <FEN> ::=  <Piece Placement>
-        ' ' <Side to move>
-        ' ' <Castling ability>
-        ' ' <En passant target square>
-        ' ' <Halfmove clock>
-        ' ' <Fullmove counter>
-*/
+#include "ui_components/fen_fields.hpp"
 
 class PositionFen {
  public:
-  PositionFen();
-  virtual ~PositionFen() = default;
-  void parse_fen(const std::string &fen, Position &position);
+  PositionFen() = default;
+  explicit PositionFen(const FenFields &fen, Position &position);
+  void parse_fen(const FenFields &fen, Position &position);
   std::string get_fen(Position &position);
 
  private:

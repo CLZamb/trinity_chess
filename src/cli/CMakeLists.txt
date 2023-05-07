@@ -12,7 +12,7 @@ add_subdirectory(utils)
 
 target_link_libraries (
   ${chess} 
-  PRIVATE
+  PUBLIC
   game_lib
   board_lib
   position_lib
@@ -20,7 +20,6 @@ target_link_libraries (
   board_check_pieces_lib
   board_special_moves_lib
   configuration_lib
-  board_configuration
   game_players_lib
   game_turn_lib
   #graphics
@@ -28,7 +27,6 @@ target_link_libraries (
   ui_board_pane_lib
   ui_board_squares_lib
   ui_board_info_pane_lib
-  ui_board_event_handlers_lib
   ui_menu_lib
   ui_components_lib
   #input

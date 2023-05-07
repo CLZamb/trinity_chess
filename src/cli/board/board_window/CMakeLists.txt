@@ -12,6 +12,5 @@ target_include_directories(
 message("ui_graphics_board_lib library compiled")
 
 add_subdirectory(board_pane)
-add_subdirectory(event_handlers)
 add_subdirectory(info_pane)
 # add_subdirectory(statistics_pane)

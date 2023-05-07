@@ -1,17 +1,18 @@
 #include "position_fen.h"
 
-PositionFen::PositionFen() {}
+#include "ui_components/fen_fields.hpp"
 
-void PositionFen::parse_fen(const std::string &fen, Position &position) {
+PositionFen::PositionFen(const FenFields& fen, Position &position) {
+  parse_fen(fen, position);
+}
+
+void PositionFen::parse_fen(const FenFields &fen_fields, Position &position) {
   position.clear();
-
-  FenComponentParts fcp_as_strs(fen);
-
   Square square = A1;
   int rank = 7, file = 0;
   Piece piece;
 
-  for (char c : fcp_as_strs.board) {
+  for (char c : fen_fields.piece_placement) {
     if (c == '/') {
       rank--;
       file = 0;
@@ -27,27 +28,22 @@ void PositionFen::parse_fen(const std::string &fen, Position &position) {
     }
   }
 
-  position.set_side_to_move(fcp_as_strs.side == "w" ? Color::WHITE
-                                                    : Color::BLACK);
+  position.set_side_to_move(fen_fields.side_to_move == "w" ? Color::WHITE
+                                                           : Color::BLACK);
 
-  for (char c : fcp_as_strs.castle) {
+  for (char c : fen_fields.castling_ability) {
     position.set_castle_permission(c);
   }
 
-  if (fcp_as_strs.en_passant[0] != '-') {
-    file = fcp_as_strs.en_passant[0] - 'a';
-    rank = fcp_as_strs.en_passant[1] - '1';
+  if (fen_fields.en_passant_target_square[0] != '-') {
+    file = fen_fields.en_passant_target_square[0] - 'a';
+    rank = fen_fields.en_passant_target_square[1] - '1';
     square = static_cast<Square>(rank * 8 + file);
     position.set_en_passant_square(square);
   }
 
-  if (!fcp_as_strs.halfmove.empty()) {
-    position.set_halfmoves(std::stoi(fcp_as_strs.halfmove));
-  }
-
-  if (!fcp_as_strs.fullmove.empty()) {
-    position.set_fullmoves(std::stoi(fcp_as_strs.fullmove));
-  }
+  position.set_halfmoves(std::stoi(fen_fields.halfmove_clock));
+  position.set_fullmoves(std::stoi(fen_fields.fullmove_counter));
 };
 
 std::string PositionFen::get_fen(Position &position) {

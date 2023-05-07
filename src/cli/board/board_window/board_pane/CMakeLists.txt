@@ -1,6 +1,8 @@
 add_library(
   ui_board_pane_lib
   board_pane.cpp
+  keyboard_board_pane.cpp
+  text_board_pane.cpp
 )
 
 target_include_directories(

@@ -4,23 +4,20 @@
 #include <vector>
 #include <string>
 
-using std::string;
-using std::vector;
-
 class ISectionComponent {
  public:
   explicit ISectionComponent(size_t size);
   virtual ~ISectionComponent();
 
-  vector<string>::iterator begin();
-  vector<string>::iterator end();
+  std::vector<std::string>::iterator begin();
+  std::vector<std::string>::iterator end();
   size_t size();
 
  private:
   const size_t m_size;
 
  protected:
-  vector<string> m_section_drawing;
+  std::vector<std::string> m_section_drawing;
 };
 
 #endif /* ISECTIONCOMPONENT_H */

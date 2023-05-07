@@ -1,16 +1,20 @@
 #include "key_reader.h"
+
 #include <cstdio>
 
-Keyboard::Key KeyReader::read_key() {
-  Keyboard::Key key = Keyboard::NONE;
-  key = Keyboard::Key(fgetc(stdin));
+ASCIICharEncoding KeyReader::read_key() {
+  ASCIICharEncoding key =
+      static_cast<ASCIICharEncoding>(fgetc(stdin));
   return key;
 }
 
-Keyboard::Key KeyReader::read_arrow_key() {
-  if (fgetc(stdin) != Keyboard::LEFT_BRACKET) return Keyboard::Quit;
+ASCIICharEncoding KeyReader::read_arrow_key() {
+  if (static_cast<ASCIICharEncoding>(fgetc(stdin)) !=
+      ASCIICharEncoding::LEFT_BRACKET) {
+    return ASCIICharEncoding::Q;
+  }
 
-  Keyboard::Key key_pressed = Keyboard::Key(fgetc(stdin));
+  ASCIICharEncoding key_pressed =
+      static_cast<ASCIICharEncoding>(fgetc(stdin));
   return key_pressed;
 }
-

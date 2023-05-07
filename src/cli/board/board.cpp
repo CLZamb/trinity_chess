@@ -1,25 +1,44 @@
 #include "board.h"
 
 #include "board/board_window/board_components.hpp"
-#include "configuration/input_configuration.hpp"
+#include "board/board_window/board_window.h"
+#include "input/input_components.h"
 #include "utils/move.hpp"
 
-Board::Board(BoardConfig &bc)
-    : m_side_to_move(bc.get_initial_color())
+Board::Board(BoardInfo &b)
+    : m_side_to_move(b.initial_side)
+    , m_position_fen(b.start_fen_fields, m_position)
     , m_special_move(m_position)
-    , m_board_check(m_position)
-    , m_board_window(bc.get_fen(), bc.get_input_type(), m_side_to_move) {
+    , m_board_check(m_position) {
+  build_window(b);
   m_side_to_move.attach(&m_board_check);
   m_side_to_move.attach(&m_position);
   m_side_to_move.notify_side();
-
-  m_position_fen.parse_fen(bc.get_fen(), m_position);
-  add_info_pane();
 }
 
 Board::~Board() {}
 
-void Board::add_info_pane() { m_board_window.add_info_pane(m_board_check); }
+void Board::build_window(BoardInfo &b_info) {
+  // auto input = InputComponents::new_input_text(" >> ");
+  auto input = InputComponents::new_input_keyboard();
+  auto board_pane = BoardComponents::new_board_pane(input, b_info.start_fen_fields,
+                                                    m_side_to_move.get_color());
+  auto left_pane =
+      BoardComponents::new_side_pane(b_info.left_pane, m_board_check);
+  auto right_pane =
+      BoardComponents::new_side_pane(b_info.right_pane, m_board_check);
+
+  m_board_window.set_input(std::move(input));
+  m_board_window.set_board_pane(std::move(board_pane), Window::Middle_pane);
+
+  if (left_pane) {
+    m_board_window.set_side_pane(std::move(left_pane), Window::Left_pane);
+  }
+
+  if (right_pane) {
+    m_board_window.set_side_pane(std::move(right_pane), Window::Right_pane);
+  }
+}
 
 Color Board::get_winner_side() { return m_side_to_move.get_color(); }
 
@@ -28,11 +47,6 @@ void Board::change_side() { m_side_to_move.change_side(); }
 void Board::print() {
   m_board_window.update();
   m_board_window.print();
-}
-
-void Board::parse_fen(const string &fen) {
-  m_board_window.parse_fen(fen);
-  m_position_fen.parse_fen(fen, m_position);
 }
 
 Move Board::get_player_move() {

@@ -24,18 +24,18 @@ void InfoPane::make_move(const Move &mv) {
     p_info->save_capture(mv);
   }
 
-  Color c = p_info->get_player_color();
+  Color c = p_info->get_side_to_move_color();
   update_moves(p_info->get_moves(c), c);
   update_captures(p_info->get_captures(c), c);
 }
 
 void InfoPane::update() {
   update_game_info(p_info->get_info());
-  update_banner(p_info->get_player_color());
+  update_banner(p_info->get_side_to_move_color());
 }
 
 void InfoPane::update_turn(const Color &c) {
-  p_info->update_turn(c);
+  p_info->update_side(c);
   p_info->save_info(m_turn_string[c]);
 }
 
@@ -50,7 +50,6 @@ void InfoPane::clear_all_sections() {
   Pane::format_section(get_section(m_captures_section[BLACK]), "");
   Pane::format_section(get_section(m_captures_section[WHITE]), "");
 
-  update_banner(p_info->get_player_color());
   update_game_info("");
 }
 

@@ -11,8 +11,9 @@ BoardCheck::BoardCheck(Position& p):
     make_unique<CheckBehaviour>(p, m_side)
   ) {}
 
-void BoardCheck::update_turn(const Color &turn) { 
-  m_side = turn; 
+void BoardCheck::update_turn(const Color &side) { 
+  m_side = side; 
+  p_behaviour->update_side(side);
 }
 
 bool BoardCheck::is_checkmate() {

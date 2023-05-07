@@ -5,6 +5,7 @@
 
 using std::cout;
 using std::flush;
+using std::ostream;
 
 Window::Window() {}
 Window::~Window() {}
@@ -22,7 +23,7 @@ void Window::print() {
   cout << *this << flush;
 }
 
-void Window::add_pane(IPane *pane, Pane_pos pos) {
+void Window::add_pane(IPane *pane, PanePos pos) {
   if (pane == nullptr) {
     return;
   }

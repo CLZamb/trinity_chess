@@ -5,24 +5,23 @@
 #include <termios.h>
 #include <string>
 
-using std::string;
-
-class KeyboardBase {
+class Keyboard {
  public:
-  KeyboardBase();
-  virtual ~KeyboardBase();
-  Keyboard::Key read_key();
-  Keyboard::Key read_arrow_key();
+  Keyboard();
+  virtual ~Keyboard();
+  ASCIICharEncoding read_key();
+  ASCIICharEncoding read_arrow_key();
 
  protected:
   void quit_game();
   void set_terminal_new_attributes();
   void restore_terminal_configuration();
  private:
+  void clear_standard_input();
   KeyReader m_k_reader;
   static struct termios old, current;
-  static string hide_cursor, show_cursor;
-  static const string key_not_supported;
+  static char hide_cursor[], show_cursor[];
+  static const std::string key_not_supported;
 };
 
 #endif /* KEYBOARD_BASE_H */

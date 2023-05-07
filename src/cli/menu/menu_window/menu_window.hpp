@@ -17,14 +17,12 @@ class MenuWindow : public Window {
                       const Options<T> &opts = {})
       : m_opts(opts)
       , m_pane(title, format_options()) {
-    input_type == Keyboard ? set_keyboard() : set_text();
+    input_type == InputType::Keyboard ? set_keyboard() : set_text();
     add_left_pane(&m_pane);
   }
 
-  virtual ~MenuWindow() = default;
-
   void set_input(InputType input_type) {
-    input_type == Keyboard ? set_keyboard() : set_text();
+    input_type == InputType::Keyboard ? set_keyboard() : set_text();
   }
 
   void set_title(const string &title) { m_pane.set_title(title); }

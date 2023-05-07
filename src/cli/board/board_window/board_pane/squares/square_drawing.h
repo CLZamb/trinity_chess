@@ -1,37 +1,31 @@
 #ifndef SQUARE_DRAWING_H
 #define SQUARE_DRAWING_H
 
-#include "ui_components/box_modifier.hpp"
+#include <memory>
+
+#include "board/board_window/board_pane/pieces/IPiece_drawing.hpp"
+#include "square_drawing_info.hpp"
 
 class SquareDrawing {
-public:
-  SquareDrawing();
-  explicit SquareDrawing(bool is_black_squared);
-  virtual ~SquareDrawing();
-  const Box* get_drawing();
-  const char* at_row(int i);
+ public:
+  explicit SquareDrawing(const SquareDrawingInfo &square_drawing_info);
+  virtual ~SquareDrawing() = default;
 
-  void clear_square();
-  void update_current_drawing(const Box* drawing);
-  void set_piece_drawing(const Box* drawing);
-  void set_base_square_drawing(bool is_black_square);
-  bool is_black_square();
-  void select();
-  void deselect();
-  bool is_selected();
-  void set_is_selected(const bool&);
+  void set_piece_drawing(std::unique_ptr<IPieceDrawing> &&piece_drawing);
+  std::unique_ptr<IPieceDrawing> &&remove_piece_drawing();
+  void clear();
 
-private:
-  const Box* get_original_drawing();
-  const Box* p_empty_square_drawing {nullptr};
-  const Box* p_piece_square_drawing {nullptr};
-  const Box* p_cur_drawing {nullptr};
-  Box m_select_drawing;
-  bool m_black_square {false};
-  bool m_is_selected {false};
-  bool m_has_piece {false};
-  bool m_is_next_selected {false};
-  static BoxModifier mod;
+  Box *get_drawing();
+  const char *operator[](int row);
+  // char &operator()(int row, int col);
+
+ private:
+  void add_bg_color_mod_to_piece();
+  bool m_has_piece;
+  Box m_empty;
+  BoxModifier::BGColor m_bg_mod;
+  std::unique_ptr<IPieceDrawing> m_pc_drawing;
+  std::array<BoxModifier::BGColor, Color::SIZE> m_side_bg_color_mod;
 };
 
-#endif /* SQUARE__DRAWING_H */
+#endif /* SQUARE_DRAWING_H */

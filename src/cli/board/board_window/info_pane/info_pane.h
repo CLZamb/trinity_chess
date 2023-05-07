@@ -1,5 +1,5 @@
-#ifndef INFO_VIEW_H
-#define INFO_VIEW_H
+#ifndef INFO_PANE_H
+#define INFO_PANE_H
 
 #include <map>
 
@@ -42,4 +42,4 @@ class InfoPane : public IBoardSidePane, public GameTurnObserver {
   std::shared_ptr<BoardModelInfo> p_info;
 };
 
-#endif /* INFO_VIEW_H */
+#endif /* INFO_PANE_H */

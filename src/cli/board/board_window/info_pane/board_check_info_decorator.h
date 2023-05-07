@@ -12,6 +12,7 @@ class BoardCheckInfoDecorator : public BoardCheckDecorator {
                           std::shared_ptr<BoardModelInfo> b);
   virtual ~BoardCheckInfoDecorator();
 
+  void update_side(Color c) override;
   bool is_string_format_valid(const string &s) override;
   bool is_player_in_check(const Move &m) override;
   bool is_legal_move(Move &m) override;

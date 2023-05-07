@@ -1,7 +1,7 @@
 add_library(
   ui_input_keyboard_lib
   key_reader.cpp
-  keyboard_base.cpp
+  keyboard.cpp
   keyboard_input.cpp
 )
 

@@ -2,7 +2,6 @@
 #include "menu/menu_window/menu_window.hpp"
 
 Configuration::Configuration() {
-  m_board_config.set_input_type(m_input_type);
 }
 
 void Configuration::get_new_configuration() {
@@ -14,7 +13,7 @@ PlayersConfig& Configuration::get_players_config() {
   return m_players_config;
 }
 
-BoardConfig& Configuration::get_board_config() {
+BoardInfo& Configuration::get_board_config() {
   return m_board_config;
 }
 
@@ -46,5 +45,9 @@ void Configuration::get_players_color() {
 
   player_menu.print();
   Color initial_color = player_menu.select_option();
-  m_board_config.set_initial_color(initial_color);
+  m_board_config.initial_side = initial_color;
+}
+
+void Configuration::set_board_configuration(const BoardInfo& board_file_info) {
+  m_board_config = board_file_info;
 }

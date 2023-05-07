@@ -8,8 +8,8 @@
 namespace BoardDrawings {
 namespace Pieces {
 
-static const std::unordered_map<std::string, Box> Kpieces = {
-    {StringDrawingName::Pieces::bishop,
+static const std::unordered_map<PieceType, Box> Kpieces = {
+    {PieceType::BISHOP,
      {{
          "   ▗◘▖   ",
          "   ▚/▞   ",
@@ -17,7 +17,7 @@ static const std::unordered_map<std::string, Box> Kpieces = {
          "   ▟█▙   ",
          "         ",
      }}},
-    {StringDrawingName::Pieces::king,
+    {PieceType::KING,
      {{
          "  ▁ ✜ ▁  ",
          " ( ╲|╱ ) ",
@@ -25,7 +25,7 @@ static const std::unordered_map<std::string, Box> Kpieces = {
          " [█████] ",
          "         ",
      }}},
-    {StringDrawingName::Pieces::knight,
+    {PieceType::KNIGHT,
      {{
          "         ",
          "   █ █   ",
@@ -33,7 +33,7 @@ static const std::unordered_map<std::string, Box> Kpieces = {
          "   ███   ",
          "         ",
      }}},
-    {StringDrawingName::Pieces::pawn,
+    {PieceType::PAWN,
      {{
          "   ▗▄▖   ",
          "   ▜█▛   ",
@@ -41,7 +41,7 @@ static const std::unordered_map<std::string, Box> Kpieces = {
          "  ▗███▖  ",
          "         ",
      }}},
-    {StringDrawingName::Pieces::queen,
+    {PieceType::QUEEN,
      {{
          "         ",
          "  █ █ █  ",
@@ -49,7 +49,7 @@ static const std::unordered_map<std::string, Box> Kpieces = {
          "  █████  ",
          "         ",
      }}},
-    {StringDrawingName::Pieces::rook,
+    {PieceType::ROOK,
      {{
          "  ▄ ▄ ▄  ",
          "  ▜███▛  ",

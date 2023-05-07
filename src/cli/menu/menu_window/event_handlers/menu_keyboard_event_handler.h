@@ -4,7 +4,6 @@
 #include "IMenu_event_handler.h"
 #include "menu/menu_window/menu_pane.h"
 #include "menu/menu_window/options.hpp"
-#include "input/keyboard/keyboard_base.h"
 #include "input/keyboard/keyboard_input.h"
 
 template <typename T>
@@ -19,8 +18,6 @@ class MenuKeyboardEventHandler : public IMenuEventHandler<T> {
     p_selection_option = m_opts.begin();
     m_pane.selected_option(p_selection_option->first);
   }
-
-  virtual ~MenuKeyboardEventHandler() = default;
 
   const Option<T> &selected_menu_option() override {
     return p_selection_option->second;

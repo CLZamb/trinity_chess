@@ -9,7 +9,6 @@
 class BoardRepresentation {
  public:
   BoardRepresentation();
-  virtual ~BoardRepresentation() = default;
   void set_piece_at_square(Piece p, Square position);
   void clear_piece_at_square(Piece p, Square position);
   void clear_square(Square s);

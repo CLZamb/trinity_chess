@@ -1,13 +1,12 @@
 #include "game.h"
 
-#include "configuration/input_configuration.hpp"
 #include "game/messages/game_messages.hpp"
 #include "menu/menu_window/menu_window.hpp"
 
 Game::Game() {}
 
-string Game::get_start_menu_option_as_string() {
-  MenuWindow start_menu(m_config.get_input_type());
+string Game::get_start_menu_option_as_string(InputType i_type) {
+  MenuWindow start_menu(i_type);
 
   start_menu.set_title("Welcome to trinity Chess");
   start_menu.add_option("Play");
@@ -18,8 +17,18 @@ string Game::get_start_menu_option_as_string() {
   return start_menu.select_option();
 }
 
+void Game::get_config_from_file(Configuration &config) {
+  BoardInfo board_info;
+  FileInput::from_json_file("configuration.json", board_info);
+  config.set_board_configuration(board_info);
+}
+
 void Game::start() {
-  std::string option_selected = get_start_menu_option_as_string();
+  Configuration configuration;
+  get_config_from_file(configuration);
+
+  std::string option_selected =
+      get_start_menu_option_as_string(configuration.get_input_type());
 
   if (option_selected == "Quit") {
     GameMessages::print_game_over();
@@ -27,15 +36,15 @@ void Game::start() {
   }
 
   if (option_selected == "Configuration") {
-    m_config.get_new_configuration();
+    configuration.get_new_configuration();
   }
 
-  start_game_loop();
+  start_game_loop(configuration.get_board_config());
 }
 
-void Game::start_game_loop() {
+void Game::start_game_loop(BoardInfo &board_config) {
   Move mv;
-  Board board(m_config.get_board_config());
+  Board board(board_config);
 
   do {
     board.print();

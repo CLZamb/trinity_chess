@@ -52,7 +52,7 @@ void Pane::set_content_at_section(const string &key, std::initializer_list<strin
   sections[key]->set_drawing(lst);
 }
 
-void Pane::set_content_at_section(const string &key, const vector<string>* content) {
+void Pane::set_content_at_section(const string &key, const std::vector<string>* content) {
   sections[key]->set_drawing(content);
 }
 

@@ -1,5 +1,6 @@
-#ifndef UI_STATISTICS_PANE_H
-#define UI_STATISTICS_PANE_H
+#ifndef STATISTICS_PANE_H
+#define STATISTICS_PANE_H
+
 /*
  *  WIP
  * */
@@ -23,8 +24,6 @@ public:
     Pane::format_section(get_section(m_ply_section), "some other number");
   }
 
-  virtual ~StatisticsPane() = default;
-
   void update() override {}
   void make_move(const Move &) override {}
 
@@ -42,4 +41,4 @@ private:
 };
 
 
-#endif /* UI_BOARD_INFO_CONTROLLER_H */
+#endif /* STATISTICS_PANE_H */

@@ -1,7 +1,8 @@
 add_library(
   ui_board_squares_lib
   square_drawing.cpp
-  squares_drawings.cpp
+  square_drawings.cpp
+  square_drawings_selector.cpp
 )
 
 target_include_directories(

@@ -1,5 +1,5 @@
-#ifndef BOARD_INFO_H
-#define BOARD_INFO_H
+#ifndef BOARD_INFO_MODEL_H
+#define BOARD_INFO_MODEL_H
 
 #include <array>
 #include <string>
@@ -7,12 +7,12 @@
 #include "game/turn/game_turn_observer.h"
 #include "utils/string_utils.h"
 
-class BoardModelInfo : public GameTurnObserver {
+class BoardModelInfo {
  public:
   BoardModelInfo();
   virtual ~BoardModelInfo();
 
-  void update_turn(const Color &p) override;
+  void update_side(const Color &p);
   void save_move(const Move &m);
   void save_capture(const Move &m);
   void save_info(const std::string &info);
@@ -20,7 +20,7 @@ class BoardModelInfo : public GameTurnObserver {
   std::string get_moves(Color c);
   std::string get_captures(Color c);
   std::string get_info();
-  Color get_player_color();
+  Color get_side_to_move_color();
 
  private:
   std::string get_piece_str_name_from_piecetype(Piece piece_type) {
@@ -56,4 +56,4 @@ class BoardModelInfo : public GameTurnObserver {
   std::string m_info;
 };
 
-#endif /* BOARD_INFO_H */
+#endif /* BOARD_INFO_MODEL_H */

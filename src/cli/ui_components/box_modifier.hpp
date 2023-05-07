@@ -1,10 +1,11 @@
-#ifndef BOARD_COLOR_MODIFIER_H
-#define BOARD_COLOR_MODIFIER_H
+#ifndef BOX_MODIFIER_H
+#define BOX_MODIFIER_H
 
+#include <cstring>
 #include <string>
 #include "box.h"
-
-using std::string;
+#include <regex>
+#include <unordered_map>
 
 /*
    ╔══════════╦════════════════════════════════╦═════════════════════════════════════════════════════════════════════════╗
@@ -86,84 +87,141 @@ using std::string;
    ║ 106      ║  BRIGHT CYAN                   ║  BG CODE ║
    ║ 107      ║  BRIGHT WHITE                  ║  BG CODE ║
    ╚══════════╩════════════════════════════════╩══════════╝
+
+std::string getColorName(int colorCode) {
+    if (colorCode < 16) {
+        // Basic colors
+        switch (colorCode) {
+            case 0:  return "black";
+            case 1:  return "red";
+            case 2:  return "green";
+            case 3:  return "yellow";
+            case 4:  return "blue";
+            case 5:  return "magenta";
+            case 6:  return "cyan";
+            case 7:  return "white";
+            case 8:  return "bright black";
+            case 9:  return "bright red";
+            case 10: return "bright green";
+            case 11: return "bright yellow";
+            case 12: return "bright blue";
+            case 13: return "bright magenta";
+            case 14: return "bright cyan";
+            case 15: return "bright white";
+            default: return "unknown";
+        }
+    }
+    else if (colorCode < 232) {
+        // 6x6x6 cube of colors
+        int cubeIndex = colorCode - 16;
+        int r = cubeIndex / 36;
+        int g = (cubeIndex % 36) / 6;
+        int b = cubeIndex % 6;
+        r = (r == 0) ? 0 : (r * 40 + 55);
+        g = (g == 0) ? 0 : (g * 40 + 55);
+        b = (b == 0) ? 0 : (b * 40 + 55);
+        return "rgb(" + std::to_string(r) + "," + std::to_string(g) + "," + std::to_string(b) + ")";
+    }
+    else {
+        // Gray-scale ramp
+        int grayLevel = (colorCode - 232) * 10 + 8;
+        return "gray(" + std::to_string(grayLevel) + ")";
+    }
+}
+
+void printColorNames() {
+    for (int i = 0; i < 256; i++) {
+        std::cout << "\x1b[38;5;" << i << "m" << " " << i << " " << getColorName(i) << "\x1b[0m" << std::endl;
+    }
+}
 */
 
 class BoxModifier {
-  public:
-    enum CodeAttribute {
-      RESET      = 0,
-      BG_INVERSE = 7,
-      SLOW_BLINK = 100,
-      DEFAULT    = 90,
-    };
+ public:
+  enum ModType {
+    ATTRIBUTE,
+    BGCOLOR,
+    FGCOLOR,
+  };
 
-    enum Color {
-      BLACK_FG                = 232,
-      BLACK_BG_BLACK_SQUARE   = 1,
-      BLACK_BG_WHITE_SQUARE   = 255,
+  enum Attribute {
+    RESET = 0,
+    BG_INVERSE = 7,
+    SLOW_BLINK = 5,
+  };
 
-      WHITE_FG                = 231,
-      WHITE_BG_BLACK_SQUARE   = 35,
-      WHITE_BG_WHITE_SQUARE   = 252,
+  enum BGColor {
+    RED_BG = 1,
+    WHITE_BG = 255,
 
-      WHITE_FG_BG      = 254,
-      GREEN_FG_BG      = 10, 
-    };
+    GREEN_BG = 35,
+    GREY_BG = 252,
+  };
 
-    BoxModifier() {}
-    virtual ~BoxModifier() {}
+  enum FGColor {
+    BLACK_FG = 232,
+    WHITE_FG = 231,
+    GREEN_FG = 32,
+  };
 
-    void add_attribute(CodeAttribute c, Box* drawing) {
-      mod = modifier_to_str(c).c_str();
-      prepend(mod, drawing);
-    };
+  BoxModifier() {}
+  virtual ~BoxModifier() {}
 
-    void add_bg_color(Color c, Box* drawing) {
-      mod = modifier_bg_color_to_str(c).c_str();
-      prepend(mod, drawing);
+  static void add_fg_color(FGColor c, Box *drawing) {
+    drawing->prepend_const_char_array(modifier_fg_color_to_str(c).c_str());
+  }
+
+  static void add_bg_color(BGColor c, Box *drawing) {
+    drawing->prepend_const_char_array(modifier_bg_color_to_str(c).c_str());
+  }
+
+  static void add_attribute(Attribute c, Box *drawing) {
+    drawing->prepend_const_char_array(modifier_to_str(c).c_str());
+  };
+
+  static void add_reset_attr(Box *drawing) {
+    drawing->append_const_char_array(modifier_to_str(RESET).c_str());
+  }
+
+  static void remove_mod(Box *drawing, ModType mt) {
+    remove_mod(drawing, kMod_regex.at(mt));
+  }
+
+ private:
+  static void remove_mod_at_row(char* arr, const std::string& mod) {
+    static std::regex box_mod_regex;
+    static std::string str;
+
+    str = arr;
+    box_mod_regex = mod;
+
+    str = std::regex_replace(str, box_mod_regex, "");
+    std::strcpy(arr, str.c_str());
+  }
+
+  static void remove_mod(Box* box, const std::string& mod) {
+    for (int i = 0; i < Box::kRowSize; ++i) {
+      remove_mod_at_row(box->content[i], mod);
     }
+  }
 
-    void add_fg_color(Color c, Box* drawing) {
-      mod = modifier_fg_color_to_str(c).c_str();
-      prepend(mod, drawing);
-    }
+  static std::string modifier_fg_color_to_str(const FGColor c) {
+    return "\033[38;5;" + std::to_string(c) + "m";
+  }
 
-    void reset(Box* drawing) {
-      mod = modifier_to_str(RESET).c_str();
-      append(mod, drawing);
-    }
+  static std::string modifier_bg_color_to_str(const BGColor c) {
+    return "\x1B[48;5;" + std::to_string(c) + "m";
+  }
 
-  private:
-    void prepend(const char code[] , Box* drawing) {
-      for (int i = 0; i < Box::kRowSize; ++i) {
-        Box::copy_row(temp_copy, drawing->content[i]);
-        Box::copy_row(drawing->content[i], code, temp_copy);
-      }
-    }
+  static std::string modifier_to_str(const Attribute a) {
+    return "\033[" + std::to_string(a) + "m";
+  }
 
-    void append(const char code[] , Box* drawing) {
-      for (int i = 0; i < Box::kRowSize; ++i) {
-        Box::copy_row(temp_copy, drawing->content[i]);
-        Box::copy_row(drawing->content[i], temp_copy, code);
-      }
-    }
-
-    std::string modifier_to_str(const CodeAttribute ca) {
-      return "\033[" + std::to_string(ca) + "m";
-    }
-
-    string modifier_bg_color_to_str(const Color c) {
-      return "\x1B[48;5;" + std::to_string(c) + "m";
-    }
-
-    string modifier_fg_color_to_str(const Color c) {
-      return "\033[38;5;" + std::to_string(c) + "m";
-    }
-
-    static const int kColumnSize = Box::kCharSize;
-    static const int kSizeBox = sizeof(char[kColumnSize]);
-    char temp_copy[kColumnSize];
-    const char* mod;
+  inline static const std::unordered_map<ModType, std::string> kMod_regex{
+      {  ModType::FGCOLOR,  "\033\\[38;5;\\d+m"},
+      {  ModType::BGCOLOR,  "\x1B\\[48;5;\\d+m"},
+      {ModType::ATTRIBUTE, "\033\\[(?!0m)\\d+m"},
+  };
 };
 
-#endif /* BOARD_COLOR_MODIFIER_H */
+#endif /* BOX_MODIFIER_H */

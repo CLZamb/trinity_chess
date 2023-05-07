@@ -2,7 +2,7 @@
 #define INPUT_TYPE_H
 #pragma once
 
-enum InputType {
+enum class InputType {
   Keyboard = 0,
   Text = 1,
 };

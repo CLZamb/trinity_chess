@@ -1,58 +1,63 @@
-#ifndef DRAWINGS_H
-#define DRAWINGS_H
+#ifndef PIECES_DRAWINGS_H
+#define PIECES_DRAWINGS_H
 
 #include <array>
 
+#include "board/board_window/board_pane/board_drawings.hpp"
+#include "board/board_window/board_pane/pieces/piece_drawing.hpp"
 #include "board/position/position_utils.h"
-#include "pieces_drawing_builder.hpp"
+#include "ui_components/box_modifier.hpp"
 
 class PiecesDrawings {
  public:
   PiecesDrawings() {
-    const Piece PiecesTypes[] = {bP, bR, bN, bB, bQ, bK,
-                                 wP, wR, wN, wB, wQ, wK};
+    std::unique_ptr<PieceDrawing> piece_drawing;
+    BoxModifier::FGColor drawing_color_mod_fg;
+    bool is_black_piece;
 
-    for (const Piece &pct : PiecesTypes) {
-      drawing = m_piece_drawing_builder.draw_piece(pct);
-      piece_drawing_mod_fg = utils::check::is_black_piece(pct)
-                                 ? BoxModifier::BLACK_FG
-                                 : BoxModifier::WHITE_FG;
+    for (const Piece &p : {bP, bR, bN, bB, bQ, bK, wP, wR, wN, wB, wQ, wK}) {
+      piece_drawing = draw_piece(p);
+      is_black_piece = utils::check::is_black_piece(p);
+      drawing_color_mod_fg = fg_side_color(is_black_piece);
 
-      piece_drawing_mod_black_square_bg =
-          utils::check::is_black_piece(pct)
-              ? BoxModifier::BLACK_BG_BLACK_SQUARE
-              : BoxModifier::WHITE_BG_BLACK_SQUARE;
-
-      piece_drawing_mod_white_square_bg =
-          utils::check::is_black_piece(pct)
-              ? BoxModifier::BLACK_BG_WHITE_SQUARE
-              : BoxModifier::WHITE_BG_WHITE_SQUARE;
-
-      drawing->set_fg_color_modifier(piece_drawing_mod_fg);
-      drawing->set_bg_color_modifier(piece_drawing_mod_white_square_bg,
-                                     piece_drawing_mod_black_square_bg);
-
-      m_pieces[pct] = drawing;
+      BoxModifier::add_fg_color(drawing_color_mod_fg,
+                                &piece_drawing->get_drawing());
+      m_pieces[p] = std::move(piece_drawing);
     }
   }
 
-  virtual ~PiecesDrawings() {
-    for (auto piece : m_pieces) {
-      delete piece;
-    }
-  }
+  virtual ~PiecesDrawings() = default;
 
-  Box *get_drawing(const Piece &m_type, bool is_in_black_square) {
-    return m_pieces[m_type]->get_drawing(is_in_black_square);
+  std::unique_ptr<IPieceDrawing> new_piece_drawing(const Piece &m_type) { 
+    return m_pieces[m_type]->clone();
   }
 
  private:
-  BoxModifier::Color piece_drawing_mod_fg;
-  BoxModifier::Color piece_drawing_mod_black_square_bg;
-  BoxModifier::Color piece_drawing_mod_white_square_bg;
-  PieceDrawing *drawing;
-  PiecesDrawingBuilder m_piece_drawing_builder;
-  std::array<PieceDrawing *, utils::constant::ktotal_number_pieces> m_pieces;
+  std::map<Piece, PieceType> m_pieces_type{
+      {Piece::wP,   PieceType::PAWN},
+      {Piece::bP,   PieceType::PAWN},
+      {Piece::wR,   PieceType::ROOK},
+      {Piece::bR,   PieceType::ROOK},
+      {Piece::wN,   PieceType::KNIGHT},
+      {Piece::bN,   PieceType::KNIGHT},
+      {Piece::wB, PieceType::BISHOP},
+      {Piece::bB, PieceType::BISHOP},
+      {Piece::wQ,  PieceType::QUEEN},
+      {Piece::bQ,  PieceType::QUEEN},
+      {Piece::wK,   PieceType::KING},
+      {Piece::bK,   PieceType::KING},
+  };
+
+  std::unique_ptr<PieceDrawing> draw_piece(Piece piece) {
+    PieceType pct = m_pieces_type.at(piece);
+    return std::make_unique<PieceDrawing>(BoardDrawings::Pieces::Kpieces.at(pct), piece);
+  }
+
+  BoxModifier::FGColor fg_side_color(bool is_black_piece) {
+    return is_black_piece ? BoxModifier::BLACK_FG : BoxModifier::WHITE_FG;
+  }
+
+  std::array<std::unique_ptr<PieceDrawing>, utils::constant::ktotal_number_pieces> m_pieces;
 };
 
-#endif /* DRAWINGS_H */
+#endif /* PIECES_DRAWINGS_H */

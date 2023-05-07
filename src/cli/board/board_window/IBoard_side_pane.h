@@ -1,5 +1,5 @@
-#ifndef IBOARD_PANE_H
-#define IBOARD_PANE_H
+#ifndef IBOARD_SIDE_PANE_H
+#define IBOARD_SIDE_PANE_H
 
 #include "ui_components/pane.h"
 #include "utils/move.hpp"
@@ -7,7 +7,7 @@
 class IBoardSidePane : public Pane {
  public:
   IBoardSidePane() : Pane(Kboard_pane_size) {}
-  virtual ~IBoardSidePane() {}
+  virtual ~IBoardSidePane() = default;
   virtual void make_move(const Move &mv) = 0;
   virtual void update() = 0;
 
@@ -15,4 +15,4 @@ class IBoardSidePane : public Pane {
   static const size_t Kboard_pane_size{44};
 };
 
-#endif /* UI_BOARD_H */
+#endif /* IBOARD_SIDE_PANE_H */
