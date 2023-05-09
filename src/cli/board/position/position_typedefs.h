@@ -18,7 +18,7 @@ enum Square : unsigned int {
   A7, B7, C7, D7, E7, F7, G7, H7,
   A8, B8, C8, D8, E8, F8, G8, H8,
 
-  Squarebegin = A1, 
+  SquareBegin = A1, 
   SquareEnd = H8 + 1,
   SquareNull = SquareEnd + 1,
 };
@@ -26,13 +26,13 @@ enum Square : unsigned int {
 ENABLE_INCR_OPERATORS_ON(Square)
 
 enum Piece : unsigned int {
-  EMPTY, wP, wR, wN, wB, wQ, wK, bP, bR, bN, bB, bQ, bK,
+  NO_PIECE, wP, wR, wN, wB, wQ, wK, bP, bR, bN, bB, bQ, bK,
 };
 
 using BoardSquares = std::array<Piece, SquareEnd>;
 
 enum PieceType {
-  NO_PIECE = EMPTY, PAWN = wP, ROOK = wR, KNIGHT = wN, BISHOP = wB, QUEEN = wQ, KING = wK,
+  NO_PIECE_TYPE, PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING,
   PIECE_TYPE_SIZE = KING + 1
 };
 

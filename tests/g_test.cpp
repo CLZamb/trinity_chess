@@ -54,7 +54,8 @@ TEST_F(Aboard, IsFullMoveDataCorrect) {
 
 TEST_F(Aboard, IsEmptyWhenCreated) {
   std::string start_fen = "rnbqkbnr/pppppppp/8/8/P7/8/1PPPPPPP/RNBQKBNR b KQkq a3 0 1";
-  m_position_fen.parse_fen(start_fen, m_position);
+  FenFields fen_fields(start_fen);
+  m_position_fen.parse_fen(fen_fields, m_position);
   ASSERT_THAT(m_position_fen.get_fen(m_position), start_fen);
   ASSERT_THAT(m_position_fen.get_fen(m_position), start_fen);
 }

@@ -10,7 +10,7 @@ void SpecialMove::handle_special_move(const Move& m, Position& position) {
     m_en_passant.capture_en_passant(m, position);
   } else if (MoveUtils::can_castle(m)) {
     m_castling.move_rook(m, position);
-  } else if (MoveUtils::get_promoted_piece(m)  != EMPTY){
+  } else if (MoveUtils::get_promoted_piece(m)  != NO_PIECE){
     m_pawn_promotion.handle_promotion(m, position);
   }
 }

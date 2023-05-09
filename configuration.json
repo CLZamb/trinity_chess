@@ -3,5 +3,7 @@
   "input": "keyboard",
   "initial_side": "white",
   "left_pane": "info",
+  "middle_pane": "board",
   "right_pane": "none"
+
 }

@@ -7,7 +7,7 @@
 
 BoardWindow::BoardWindow() {}
 
-void BoardWindow::set_board_pane(std::unique_ptr<IBoardPane> &&board_pane,
+void BoardWindow::set_board_pane(std::unique_ptr<BoardPane> &&board_pane,
                                  Window::PanePos pane_pos) {
   p_board_pane = std::move(board_pane);
   Window::add_pane(p_board_pane.get(), pane_pos);
@@ -23,12 +23,12 @@ void BoardWindow::make_move(const Move &m) {
   p_board_pane->make_move(m);
 }
 
-void BoardWindow::parse_fen(const FenFields &fen) { p_board_pane->parse_fen(fen); }
+void BoardWindow::parse_fen(const FenFields &fen) {
+  p_board_pane->parse_fen(fen);
+}
 
 void BoardWindow::update() {
-  for (const auto &pane : m_side_panes) { 
-    pane->update();
-  }
+  for (const auto &pane : m_side_panes) { pane->update(); }
 
   p_board_pane->update_drawing();
 }
@@ -47,8 +47,8 @@ std::string BoardWindow::get_player_move_as_string() {
   return p_board_pane->get_player_move_as_string();
 }
 
-void BoardWindow::set_side_pane(std::unique_ptr<IBoardSidePane> &&pane,
-                                Window::PanePos pos) {
-  Window::add_pane(pane.get(), pos);
+void BoardWindow::add_pane(std::unique_ptr<IBoardSidePane> &&pane,
+                           Window::PanePos pos) {
+  Window::add_pane(pane->get_pane(), pos);
   m_side_panes.push_back(std::move(pane));
 }

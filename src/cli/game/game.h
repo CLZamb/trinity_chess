@@ -12,7 +12,7 @@ class Game {
 
  private:
   void get_config_from_file(Configuration& config);
-  std::string get_start_menu_option_as_string(InputType input_type);
+  std::string get_menu_option_as_string(InputType input_type);
   void start_game_loop(BoardConfigInfo &board_config);
   // Players m_players;
   // IpcPipe m_ipc_search;

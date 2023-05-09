@@ -20,6 +20,7 @@ class SquaresDrawings {
   void clear_square_at_pos(int position);
 
  private:
+  Square to_sq(int& pos);
   std::array<SquareDrawing*, SquareEnd> m_squares;
   PiecesDrawings m_pieces_drawings;
 };

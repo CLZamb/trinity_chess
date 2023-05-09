@@ -16,6 +16,9 @@ class BoardPane : public Pane {
   void parse_fen(const FenFields &fen);
   void update_drawing();
 
+  virtual bool is_player_string_move_ready() = 0;
+  virtual std::string get_player_move_as_string() = 0;
+
  protected:
   void clear();
   void clear_square_on_range(const int start_pos, const int end_pos);

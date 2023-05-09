@@ -3,15 +3,16 @@
 
 #include <list>
 
-#include "IBoard_pane.h"
+#include "board/board_window/board_pane/board_pane.h"
 #include "board/board_window/board_pane/squares/square_drawings_selector.h"
 #include "board/position/position_fen.h"
+#include "configuration/board_info.h"
 #include "game/players/player_position.h"
 
-class KeyboardBoardPane : public IBoardPane {
+class KeyboardBoardPane : public BoardPane {
  public:
   explicit KeyboardBoardPane(const std::unique_ptr<KeyboardInput> &p,
-                             const FenFields &fen, Color initial_selected_side);
+                             const BoardConfigInfo& b_config);
   virtual ~KeyboardBoardPane();
 
   void make_move(const Move &move) override;

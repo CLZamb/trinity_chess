@@ -8,20 +8,20 @@
 
 #include "board_info.h"
 
-NLOHMANN_JSON_SERIALIZE_ENUM( InputType, {
+NLOHMANN_JSON_SERIALIZE_ENUM(InputType, {
     {InputType::Keyboard, "keyboard"},
     {InputType::Text, "text"},
 })
 
-NLOHMANN_JSON_SERIALIZE_ENUM( Color, {
+NLOHMANN_JSON_SERIALIZE_ENUM(Color, {
     {Color::BLACK, "black"},
     {Color::WHITE, "white"},
 })
 
-NLOHMANN_JSON_SERIALIZE_ENUM( BoardConfigInfo::SidePane, {
-    {BoardConfigInfo::None, "none"},
-    {BoardConfigInfo::Info, "info"},
-    {BoardConfigInfo::Statitics, "statistics"},
+NLOHMANN_JSON_SERIALIZE_ENUM(SidePaneType, {
+    {SidePaneType::None, "none"},
+    {SidePaneType::Info, "info"},
+    {SidePaneType::Statitics, "statistics"},
 })
 
 namespace FileInput {
@@ -51,8 +51,8 @@ inline void from_json_file(const std::string &file_name, BoardConfigInfo &p) {
   j.at("fen").get_to(start_fen);
   j.at("input").get_to(p.input_type);
   j.at("initial_side").get_to(p.initial_side);
-  j.at("left_pane").get_to(p.left_pane);
-  j.at("right_pane").get_to(p.right_pane);
+  j.at("left_pane").get_to(p.left_pane.type);
+  j.at("right_pane").get_to(p.right_pane.type);
 
   p.fen_fields.split_fen_into_its_fields(start_fen);
 }

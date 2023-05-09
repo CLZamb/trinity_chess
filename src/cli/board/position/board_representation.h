@@ -23,7 +23,7 @@ class BoardRepresentation {
   Bitboard get_occupied_squares_as_bitboard();
 
  private:
-  BoardSquares m_pieces_pos{EMPTY};
+  BoardSquares m_pieces_pos{NO_PIECE};
   std::array<Square, Color::SIZE> king_position{SquareNull};
   std::array<Bitboard, Color::SIZE> m_side_occupancies{ZERO};
   Bitboard m_all_occupancies{ZERO};

@@ -24,10 +24,10 @@ class Pane : public IPane  {
   void format_section(std::shared_ptr<Section>& block, std::string content);
 
  private:
+  const std::string& operator[] (size_t i) override;
+  size_t size() override;
   bool has_block_space_for_content(const std::shared_ptr<Section>& block, const std::string& message);
   void add_section(std::shared_ptr<ISectionComponent> section);
-  size_t size() override;
-  const std::string& operator[] (size_t i) override;
 
   void fill_pane();
   int get_next_index();

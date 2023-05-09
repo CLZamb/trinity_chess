@@ -1,10 +1,10 @@
 #ifndef TEXT_BOARD_PANE_H
 #define TEXT_BOARD_PANE_H
 
-#include "board/board_window/board_pane/IBoard_pane.h"
+#include "board/board_window/board_pane/board_pane.h"
 #include "input/text/text_input.h"
 
-class TextBoardPane : public IBoardPane {
+class TextBoardPane : public BoardPane {
  public:
   explicit TextBoardPane(const std::unique_ptr<TextInput> &p, const FenFields& fen);
   bool is_player_string_move_ready() override;

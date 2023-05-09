@@ -6,43 +6,45 @@
 
 #include "game/turn/game_turn_observer.h"
 #include "utils/string_utils.h"
+#include "IBoard_info_updater.h"
+#include "IBoard_info_getter.h"
 
-class BoardModelInfo {
+class BoardInfoModel : public IBoardInfoGetter,
+                       public IBoardSaveInfo {
  public:
-  BoardModelInfo();
-  virtual ~BoardModelInfo();
+  BoardInfoModel();
+  virtual ~BoardInfoModel();
 
-  void update_side(const Color &p);
+  void save_side(const Color &p);
   void save_move(const Move &m);
   void save_capture(const Move &m);
-  void save_info(const std::string &info);
+  void save_info(const std::string &info) override;
 
-  std::string get_moves(Color c);
-  std::string get_captures(Color c);
-  std::string get_info();
-  Color get_side_to_move_color();
+  std::string get_moves(Color c) override;
+  std::string get_captures(Color c) override;
+  std::string get_info() override;
+  Color get_side_to_move_color() override;
 
  private:
   std::string get_piece_str_name_from_piecetype(Piece piece_type) {
     const std::unordered_map<Piece, std::string> piece_str_name{
-        {bP, StringDrawingName::Pieces::pawn},
-        {bR, StringDrawingName::Pieces::rook},
+        {bP,   StringDrawingName::Pieces::pawn},
+        {bR,   StringDrawingName::Pieces::rook},
         {bN, StringDrawingName::Pieces::knight},
         {bB, StringDrawingName::Pieces::bishop},
-        {bQ, StringDrawingName::Pieces::queen},
-        {bK, StringDrawingName::Pieces::king},
-        {wP, StringDrawingName::Pieces::pawn},
-        {wR, StringDrawingName::Pieces::rook},
+        {bQ,  StringDrawingName::Pieces::queen},
+        {bK,   StringDrawingName::Pieces::king},
+        {wP,   StringDrawingName::Pieces::pawn},
+        {wR,   StringDrawingName::Pieces::rook},
         {wN, StringDrawingName::Pieces::knight},
         {wB, StringDrawingName::Pieces::bishop},
-        {wQ, StringDrawingName::Pieces::queen},
-        {wK, StringDrawingName::Pieces::king}};
+        {wQ,  StringDrawingName::Pieces::queen},
+        {wK,   StringDrawingName::Pieces::king}
+    };
 
     auto search = piece_str_name.find(piece_type);
     // check if the key exists
-    if (search == piece_str_name.end()) {
-      return "";
-    }
+    if (search == piece_str_name.end()) { return ""; }
 
     return search->second;
   }
@@ -54,6 +56,8 @@ class BoardModelInfo {
   std::array<std::string, players_size> m_moves;
   std::array<std::string, players_size> m_captures;
   std::string m_info;
+  std::array<std::string, Color::SIZE> m_turn_string{"Is white turn",
+                                                "Is black turn"};
 };
 
 #endif /* BOARD_INFO_MODEL_H */

@@ -52,7 +52,7 @@ Square PositionFen::make_sq(int& rank, int file) {
 
 std::string PositionFen::get_fen(Position &pos) {
   std::string fen{""};
-  Piece piece{EMPTY};
+  Piece piece{NO_PIECE};
   int space{0};
 
   for (int rank = 7; rank >= 0; rank--) {

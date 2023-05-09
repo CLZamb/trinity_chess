@@ -52,14 +52,15 @@ void BoardPane::clear_square_on_range(const int start, const int end) {
 void BoardPane::update_drawing() {
   size_t row_idx = 0;
   std::string row_drawing = "";
-
-  // need to be print upside down so that the bottom begins at row 1
+  /*
+   * Rows needs to be ordered upside down
+   * because the program prints from top to bottom
+   * so that the 8th row should be printed frist
+   */
   for (int row = 7; row >= 0; --row) {
     // each square has 5 indiviual rows
     for (int k = 0; k < Box::kRowSize; ++k, row_idx++) {
       draw_row(row_drawing, row, k);
-      // set row drawing to the corresponding index
-      // inside the board pane section
       get_section(m_board_section)->set_drawing_at_index(row_drawing, row_idx);
     }
   }
@@ -69,7 +70,13 @@ string BoardPane::draw_row(string &drawing, const int &row, const int &k) {
   drawing = left_border(row, k);
 
   Square col_sq{SquareNull};
-  // add each column from left to right to row drawing
+  /*
+   * there are 8*8 (from 0 to 63) squares,
+   * to get a position
+   * we need to multyply row by 8 and add the col
+   * i.e the bottom right position would be
+   *  0 * 8 + 7 = 7
+   */
   for (int col = 0; col < 8; col++) {
     col_sq = static_cast<Square>((row * 8) + col);
     drawing += (*m_square_drawings[col_sq])[k];

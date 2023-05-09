@@ -38,7 +38,7 @@ void BoardRepresentation::set_piece_at_square(Piece p, Square square) {
 }
 
 void BoardRepresentation::clear_piece_at_square(Piece p, Square square) {
-  m_pieces_pos[square] = EMPTY;
+  m_pieces_pos[square] = NO_PIECE;
 
   Color color = utils::check::get_color_piece(p);
   bitUtility::clear_bit(&m_side_occupancies[color], square);
@@ -47,7 +47,7 @@ void BoardRepresentation::clear_piece_at_square(Piece p, Square square) {
 
 void BoardRepresentation::clear() {
   for (Square sq = A1; sq <= A8; ++sq) {
-    m_pieces_pos[sq] = EMPTY;
+    m_pieces_pos[sq] = NO_PIECE;
   }
 
   for (Color c : {WHITE, BLACK}) {

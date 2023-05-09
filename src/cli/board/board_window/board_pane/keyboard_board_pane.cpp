@@ -3,14 +3,13 @@
 using std::string;
 
 KeyboardBoardPane::KeyboardBoardPane(const std::unique_ptr<KeyboardInput> &p,
-                                     const FenFields &fen,
-                                     Color initial_side)
-    : m_player_pos(initial_side)
+                                     const BoardConfigInfo &b_config)
+    : m_player_pos(b_config.initial_side)
     , m_square_selector(BoardPane::m_square_drawings,
                         m_player_pos.get_cur_position()) {
   p->bind<CommandEventKeyboard>(&KeyboardBoardPane::on_key_pressed, this);
 
-  BoardPane::parse_fen(fen);
+  BoardPane::parse_fen(b_config.fen_fields);
   BoardPane::update_drawing();
 }
 
@@ -34,10 +33,12 @@ void KeyboardBoardPane::on_key_pressed(CommandEventKeyboard &e) {
 
   if (keycode == KeyCode::ENTER) {
     handle_enter_key_event();
+    BoardPane::update_drawing();
     return;
   }
 
   handle_direction_key_event(keycode);
+  BoardPane::update_drawing();
 }
 
 void KeyboardBoardPane::handle_direction_key_event(
@@ -67,15 +68,12 @@ string KeyboardBoardPane::get_selected_position_as_string(const Square &pos) {
 
 void KeyboardBoardPane::select_next_square(const Square &next) {
   m_square_selector.select_next(m_square_drawings[next]);
-  BoardPane::update_drawing();
 }
 
 void KeyboardBoardPane::update_selected_square(const Square &next) {
   m_square_selector.set_selected(m_square_drawings[next]);
-  BoardPane::update_drawing();
 }
 
 void KeyboardBoardPane::restore_previous_selected_squares() {
   m_square_selector.remove_previous_selected();
-  BoardPane::update_drawing();
 }

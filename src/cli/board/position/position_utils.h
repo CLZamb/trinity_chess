@@ -28,7 +28,7 @@ namespace check {
 
 
   inline bool is_valid_piece(unsigned int pieceType) {
-    return (pieceType > EMPTY) && (pieceType < 13);
+    return (pieceType > NO_PIECE) && (pieceType < 13);
   }
 
   inline bool is_square(Square s) {
@@ -44,7 +44,7 @@ inline Piece get_piecetype_from_char(const char c) {
 
   auto search = piece_map.find(c);
   // check if the key exists
-  if (search == piece_map.end()) return EMPTY;
+  if (search == piece_map.end()) return NO_PIECE;
 
   return search->second;
 }

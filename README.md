@@ -8,27 +8,23 @@ Side panes such as info pane and statistics pane can be added to the board windo
 ![alt text](https://raw.githubusercontent.com/CLZamb/trinity_engine/dev/chess_screenshot.png)
 
 # Features
-## Confirguration
-By default the game will read the json file if no configuration is found the default will be use.
+## Configuration
+The game will read the json file "configuration.json", if no configuration is found defaults values will be use.
 
 - Json File "configuration.json":
-    - At the root there is a configuration.json with the following possible values
+    - Configuration.json has the following possible values
         - Fen {string}:  will be use to setup the board and their pieces
         - Input {string}: "keyboard", "text"
         - intial_side {string}: "white", "black"
         - left_pane {string}: "info", "statistics"
         - right_pane {string}: "info", statistics"
 
-- Input inside the Menu
-        - Not yet fully implemented
 - Default Configuration:
     - fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-    - Player 1: {Human, White Side}
-    - Player 2: {Human, Black Side}
-    - Initial Side: "White"
     - Input: "keyboard"
-    - ChessBoard Left Pane: "info"
-    - ChessBoard Right Pane: "none"
+    - Initial Side: "White"
+    - Left Pane: "info"
+    - Right Pane: "none"
 ## UI
 - UI Components
     - Window: Each window can contain up to three panes.
@@ -37,11 +33,11 @@ By default the game will read the json file if no configuration is found the def
     - Welcome Menu: has 3 options, play, configuration, quit.
     - Configuration Menu: if no new configuration is given the default is used to start the game
 - Input
-    - Keyboard: Event driven input listening.
-    - Text: Player types each move ie: "a2a4".
+    - Keyboard: Event driven input listening supported keys {up, down, left, right , w, a, s, d, enter}
+    - Text: Each Player has to type each move ie: "a2a4".
 - Board
     - Main Board Pane: shows the board.
-    - Info Pane: It shows the side to move (black, white), shows previous moves, captures, and general info such as invalid move.
+    - Info Pane: It shows the side to move (black, white), shows previous moves, captures, and general info such as invalid moves.
     - Statistics Pane: WIP.
 ## Chess Engine
 - Not Implemented yet, This vesion the AI needs to be reimplemented so that the it can beat previous versions and performs better.
@@ -69,11 +65,14 @@ By default the game will read the json file if no configuration is found the def
     - [Null move pruning](https://www.chessprogramming.org/Null_Move_Pruning)
 
 ## Building
-Unix:
+Linux/MacOs:
 ```
+mkdir build
 cmake -S . -B build 
 cmake --build build -j 18
 
+Windows:
+NOT SUPPORTED
 ```
 ## Run
 ```

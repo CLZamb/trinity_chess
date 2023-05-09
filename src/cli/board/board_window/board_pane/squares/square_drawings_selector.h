@@ -14,8 +14,8 @@ class SquareDrawingSelector {
   void remove_previous_selected();
 
  private:
-  void set_select_mod(SquareDrawing *ptr_sq_drawing);
-  void remove_select_mod(SquareDrawing *ptr_sq_drawing);
+  void set_select_attr(SquareDrawing *ptr_sq_drawing);
+  void remove_select_attr(SquareDrawing *ptr_sq_drawing);
   SquaresDrawings &m_squares;
   SquareDrawing *p_selected_square;
   SquareDrawing *p_prev_select_square;
