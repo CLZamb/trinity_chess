@@ -9,12 +9,12 @@
 template <typename T>
 class MenuTextEventHandler : public IMenuEventHandler<T> {
  public:
-  MenuTextEventHandler(const std::unique_ptr<Input> &p,
+  MenuTextEventHandler(const std::unique_ptr<InputComponent> &p,
                        MenuPane &v,
                        Options<T> &o)
       : m_pane(v)
       , m_opts(o) {
-    p->bind<CommandEventText>(&MenuTextEventHandler::handle_event_string, this);
+    p->bind<EventText>(&MenuTextEventHandler::handle_event_string, this);
   }
 
   const Option<T> &selected_menu_option() override {
@@ -31,7 +31,7 @@ class MenuTextEventHandler : public IMenuEventHandler<T> {
     return !m_opt_info.is_valid_option;
   }
 
-  void handle_event_string(CommandEventText &e) {
+  void handle_event_string(EventText &e) {
     std::string m_string_input = e.get_text();
 
     m_opt_info.m_key = get_option_key(m_string_input);

@@ -2,6 +2,7 @@
 
 #include "game/messages/game_messages.hpp"
 #include "menu/menu_window/menu_window.hpp"
+#include "board/board.h"
 
 using std::string;
 
@@ -9,7 +10,7 @@ Game::Game() {}
 
 void Game::start() {
   Configuration config;
-  get_config_from_file(config);
+  get_config_from_file(config, "configuration.json");
 
   string opt_selected = get_menu_option_as_string(config.get_input_type());
 
@@ -18,14 +19,16 @@ void Game::start() {
     return;
   }
 
-  if (opt_selected == "Configuration") { config.get_new_configuration(); }
+  if (opt_selected == "Configuration") {
+    config.get_new_configuration();
+  }
 
   start_game_loop(config.get_board_config());
 }
 
-void Game::get_config_from_file(Configuration &config) {
-  BoardConfigInfo board_info;
-  FileInput::from_json_file("configuration.json", board_info);
+void Game::get_config_from_file(Configuration &config,
+                                const std::string &file_name) {
+  BoardConfigInfo board_info = FileInput::from_json_file(file_name);
   config.set_board_configuration(board_info);
 }
 
@@ -45,13 +48,14 @@ void Game::start_game_loop(BoardConfigInfo &board_config) {
   Move mv;
   Board board(board_config);
 
-
   do {
     board.print();
 
     mv = board.get_player_move();
 
-    if (board.is_invalid_move(mv)) { continue; }
+    if (board.is_invalid_move(mv)) {
+      continue;
+    }
 
     board.make_move(mv);
     board.change_side();

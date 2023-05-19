@@ -4,7 +4,7 @@
 #include <map>
 
 #include "info_drawings.hpp"
-#include "ui_components/pane.h"
+#include "components/pane.h"
 
 class InfoView : public Pane {
  public:
@@ -32,7 +32,7 @@ class InfoView : public Pane {
                                                      "Is black turn"};
 
   std::array<const std::vector<std::string> *, Color::SIZE> p_banners{
-      &InfoDrawings::Banner::white, &InfoDrawings::Banner::black};
+      &InfoBanners::white, &InfoBanners::black};
 
   static const size_t Kboard_pane_size{44};
 };

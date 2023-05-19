@@ -9,7 +9,7 @@
 namespace MenuComponents {
 
 template <typename T>
-inline auto new_keyboard_handler(const std::unique_ptr<Input> &input,
+inline auto new_keyboard_handler(const std::unique_ptr<InputComponent> &input,
                                  MenuPane &menu_pane,
                                  Options<T> &options) {
   return std::make_unique<MenuKeyboardEventHandler<T>>(input, menu_pane,
@@ -17,7 +17,7 @@ inline auto new_keyboard_handler(const std::unique_ptr<Input> &input,
 }
 
 template <typename T>
-inline auto new_text_handler(const std::unique_ptr<Input> &input,
+inline auto new_text_handler(const std::unique_ptr<InputComponent> &input,
                              MenuPane &menu_pane,
                              Options<T> &options) {
   return std::make_unique<MenuTextEventHandler<T>>(input, menu_pane, options);

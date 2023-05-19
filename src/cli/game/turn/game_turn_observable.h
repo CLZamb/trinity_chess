@@ -1,14 +1,13 @@
 #ifndef GAME_TURN_OBSERVABLE_H
 #define GAME_TURN_OBSERVABLE_H
 
+#include "components/event_emitter.h"
 #pragma once
 
 #include <list>
 #include "game_turn_observer.h"
 
-using std::list;
-
-class GameTurnObservable {
+class GameTurnObservable : public EventEmitter {
  public:
   virtual ~GameTurnObservable();
   virtual void attach(GameTurnObserver*);
@@ -17,7 +16,8 @@ class GameTurnObservable {
  protected:
   GameTurnObservable();
   virtual void notify_side() = 0;
-  list<GameTurnObserver*> *_observers;
+  std::list<GameTurnObserver*> *_observers;
+  const std::string m_event_name_as_string = typeid(Color).name();
 };
 
 #endif /* GAME_TURN_OBSERVABLE_H */

@@ -6,9 +6,7 @@
 
 #include "utils/string_utils.h"
 
-namespace PaneDrawings {
-namespace Borders {
-
+namespace PaneBorders {
 static const std::string ktop_drawing =
     " ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓";
 static const std::string kempty_row =
@@ -18,9 +16,8 @@ static const std::string krow_divider =
 static const std::string kbottom_drawing =
     " ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛";
 
-const size_t height = kempty_row.size();
+static const size_t height = kempty_row.size();
 static const size_t width = StringUtils::utf8_strlen(kempty_row.c_str());
 
-}   // namespace Borders
-}   // namespace PaneDrawings
+}   // namespace PaneBorders
 #endif /* PANE_DRAWINGS_H */

@@ -1,54 +1,40 @@
 #include "board_window.h"
 
-#include "board_components.hpp"
-#include "game/turn/side_to_move.h"
-#include "input/input_components.h"
-#include "ui_components/window.h"
-
-BoardWindow::BoardWindow() {}
-
-void BoardWindow::set_board_pane(std::unique_ptr<BoardPane> &&board_pane,
-                                 Window::PanePos pane_pos) {
-  p_board_pane = std::move(board_pane);
-  Window::add_pane(p_board_pane.get(), pane_pos);
+BoardWindow::BoardWindow(BoardConfigInfo &board_config)
+    : m_board_pane(board_config) {
+  Window::add_pane(m_board_pane.get_view(), Window::MIDDLE_PANE);
+  m_board_pane.bind(&BoardWindow::on_board_updated, this);
 }
 
-void BoardWindow::set_input(std::unique_ptr<Input> &&i) {
-  p_input = std::move(i);
-}
-
-void BoardWindow::make_move(const Move &m) {
-  for (const auto &pane : m_side_panes) { pane->make_move(m); }
-
-  p_board_pane->make_move(m);
-}
-
-void BoardWindow::parse_fen(const FenFields &fen) {
-  p_board_pane->parse_fen(fen);
+void BoardWindow::on_board_updated(PrintWindowEvent &) { 
+  Window::print(); 
 }
 
 void BoardWindow::update() {
-  for (const auto &pane : m_side_panes) { pane->update(); }
+  m_board_pane.update();
 
-  p_board_pane->update_drawing();
+  for (auto side_pane : p_side_panes) {
+    side_pane->update();
+  }
 }
 
-void BoardWindow::print() { Window::print(); }
-
-std::string BoardWindow::get_player_move_as_string() {
-  do {
-    p_input->listen_for_input_events();
-
-    if (p_board_pane->is_player_string_move_ready()) { break; }
-
-    print();
-  } while (true);
-
-  return p_board_pane->get_player_move_as_string();
+void BoardWindow::print() {
+  update();
+  Window::print();
 }
 
-void BoardWindow::add_pane(std::unique_ptr<IBoardSidePane> &&pane,
-                           Window::PanePos pos) {
-  Window::add_pane(pane->get_pane(), pos);
-  m_side_panes.push_back(std::move(pane));
+std::string BoardWindow::get_move_as_string() {
+  return m_board_pane.get_move_as_string();
+}
+
+void BoardWindow::make_move(const Move &mv) { 
+  m_board_pane.make_move(mv); 
+}
+
+void BoardWindow::add_side_pane(std::shared_ptr<IBoardPaneComponent> side_pane,
+                                Window::PanePos pos) {
+  if (!side_pane) return;
+
+  Window::add_pane(side_pane->get_view(), pos);
+  p_side_panes.push_back(side_pane);
 }

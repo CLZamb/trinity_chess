@@ -1,6 +1,6 @@
 #include "board_info_model.h"
-
 #include "board/position/position_utils.h"
+#include "utils/string_utils.h"
 
 using std::string;
 
@@ -20,12 +20,16 @@ void BoardInfoModel::save_capture(const Move &mv) {
   m_captures[m_side] += get_captured_string(mv) + " ";
 }
 
+void BoardInfoModel::update_turn(const Color &side) {
+  m_side = side;
+}
+
 namespace SU = StringUtils;
 namespace MU = MoveUtils;
 string BoardInfoModel::get_move_string(const Move &m) {
   return string(1, utils::piecetype_to_char(MU::get_piece(m))) + "-" +
-         SU::squareindex_to_str(MU::get_from(m)) +
-         SU::squareindex_to_str(MU::get_to(m));
+         SU::square_to_str(MU::get_from(m)) +
+         SU::square_to_str(MU::get_to(m));
 }
 
 string BoardInfoModel::get_captured_string(const Move &m) {

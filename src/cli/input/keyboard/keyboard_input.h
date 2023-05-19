@@ -3,16 +3,16 @@
 
 #include <unordered_map>
 
-#include "input/input.h"
+#include "input/input_component.h"
 #include "input/keyboard/keyboard.h"
 #include "keyboard_keycode.h"
 
-struct CommandEventKeyboard {
+struct EventKeyboard {
   void set_key_code(const ASCIICharEncoding c) { m_keycode = m_keycodes.at(c); }
 
   KeyCode::Key get_key_code() const { return m_keycode; }
 
-  bool check_is_a_directional_key(const ASCIICharEncoding &k) {
+  bool is_the_key_supported(const ASCIICharEncoding &k) {
     return m_keycodes.find(k) != m_keycodes.end();
   }
 
@@ -32,14 +32,14 @@ struct CommandEventKeyboard {
   };
 };
 
-class KeyboardInput : public Input {
+class KeyboardInput : public InputComponent {
  public:
-  void listen_for_input_events() override;
+  KeyboardInput();
+  void send_event_input_to_listeners() override;
 
  private:
+  EventKeyboard m_keyboard_event;
   Keyboard m_keyboard;
-  CommandEventKeyboard m_command_event;
-  const std::string keyboard_event_name = typeid(CommandEventKeyboard).name();
 };
 
 #endif /* KEYBOARD_INPUT_H */

@@ -24,22 +24,6 @@ class Box {
     snprintf_nowarn(dest, kCharSize, "%s%s", src, src2);
   }
 
-  void append_const_char_array(const char code[]) {
-    char temp_copy[Box::kCharSize];
-    for (int i = 0; i < Box::kRowSize; ++i) {
-      Box::copy_row(temp_copy, content[i]);
-      Box::copy_row(content[i], temp_copy, code);
-    }
-  }
-
-  void prepend_const_char_array(const char code[]) {
-    char temp_copy[Box::kCharSize];
-    for (int i = 0; i < Box::kRowSize; ++i) {
-      Box::copy_row(temp_copy, content[i]);
-      Box::copy_row(content[i], code, temp_copy);
-    }
-  }
-
   static const int kRowSize = 5 /*rows*/;
 
   // drawing   7 chars "█████████"

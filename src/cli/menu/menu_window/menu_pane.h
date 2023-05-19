@@ -5,8 +5,8 @@
 #include <string>
 
 #include "menu_drawings.hpp"
-#include "ui_components/pane.h"
-#include "ui_components/window.h"
+#include "components/pane.h"
+#include "components/window.h"
 
 class MenuPane : public Pane {
  public:

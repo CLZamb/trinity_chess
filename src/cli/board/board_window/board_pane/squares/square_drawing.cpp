@@ -1,7 +1,7 @@
 #include "square_drawing.h"
 
 using BM = BoxModifier;
-using PtrPieceDrawing = std::unique_ptr<IPieceDrawing>;
+using PtrPieceDrawing = std::unique_ptr<PieceDrawing>;
 
 SquareDrawing::SquareDrawing() {}
 
@@ -22,7 +22,7 @@ void SquareDrawing::set_piece_drawing(PtrPieceDrawing &&piece_drawing) {
   m_has_piece = true;
 }
 
-PtrPieceDrawing &&SquareDrawing::remove_piece_drawing() {
+SquareDrawing::PtrPieceDrawing &&SquareDrawing::remove_piece_drawing() {
   if (m_pc_drawing.get() == nullptr) return std::move(m_pc_drawing);
 
   clear();
@@ -32,7 +32,7 @@ PtrPieceDrawing &&SquareDrawing::remove_piece_drawing() {
 }
 
 void SquareDrawing::remove_side_piece_bg_mod(
-  const std::unique_ptr<IPieceDrawing> &piece_drawing) {
+    const PtrPieceDrawing &piece_drawing) {
   BM::remove_mod(BM::BGCOLOR, &piece_drawing->get_drawing());
 }
 

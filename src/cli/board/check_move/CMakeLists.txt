@@ -1,6 +1,6 @@
 add_library(
   board_check_lib
-  board_check.cpp
+  chess_validator.cpp
 )
 
 target_include_directories(

@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include "board/check_move/board_check.h"
 #include "board/position/position_fen.h"
-#include "ui_components/fen_fields.hpp"
+#include "components/fen_fields.hpp"
 
 // TESTS FEN
 /// check that these checkmates are valid

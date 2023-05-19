@@ -53,9 +53,10 @@ inline unsigned int square_str_to_int(std::string sq) {
 
   if (square_int < A1 || square_int > H8) {
     return 0;
-}
+  }
   return square_int;
 }
+
 
 static const std::regex format_full_move =
     std::regex("[a-hA-H][1-8]\\s*[a-hA-H][1-8]");
@@ -79,16 +80,10 @@ inline Move to_move(const std::string &str_move) {
   return result;
 }
 
-namespace check {
-inline bool is_valid_move_format(const std::string &str_mv) {
-  return RegexUtils::match(str_mv, format_full_move);
-}
-}
-
-inline std::string squareindex_to_str(Square sq) {
+inline std::string square_to_str(Square sq) {
   if (sq < A1 || sq > H8) {
     return "-not a valid position-";
-}
+  }
 
   std::string square_str;
   unsigned int square = static_cast<unsigned int>(sq);
@@ -96,6 +91,21 @@ inline std::string squareindex_to_str(Square sq) {
   square_str += static_cast<char>('1' + (sq / 8));
   return square_str;
 }
+
+inline std::string move_to_string(Move& m) {
+  std::string mv_str;
+  Square from = MoveUtils::get_from(m);
+  Square to = MoveUtils::get_to(m);
+
+  return square_to_str(from) + " " + square_to_str(to);
+}
+
+namespace check {
+inline bool is_valid_move_format(const std::string &str_mv) {
+  return RegexUtils::match(str_mv, format_full_move);
+}
+}
+
 
 inline std::string get_color_str_from_color(Color c) {
   return (c == WHITE) ? "white" : "black";

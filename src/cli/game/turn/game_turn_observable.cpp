@@ -1,7 +1,7 @@
 #include "game_turn_observable.h"
 
 GameTurnObservable::GameTurnObservable() {
-  _observers = new list<GameTurnObserver*>();
+  _observers = new std::list<GameTurnObserver*>();
 }
 
 GameTurnObservable::~GameTurnObservable() {

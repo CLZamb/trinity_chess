@@ -60,7 +60,7 @@ class MenuWindow : public Window {
 
   const Option<T> &get_menu_option() {
     do {
-      p_input->listen_for_input_events();
+      p_input->send_event_input_to_listeners();
 
       if (!p_event_handler->has_events()) {
         break;
@@ -88,7 +88,7 @@ class MenuWindow : public Window {
   int cur_index = 1;
   Options<T> m_opts;
   MenuPane m_pane;
-  std::unique_ptr<Input> p_input;
+  std::unique_ptr<InputComponent> p_input;
   std::unique_ptr<IMenuEventHandler<T>> p_event_handler;
 };
 

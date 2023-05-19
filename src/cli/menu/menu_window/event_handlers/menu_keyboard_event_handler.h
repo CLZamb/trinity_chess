@@ -9,10 +9,10 @@
 template <typename T>
 class MenuKeyboardEventHandler : public IMenuEventHandler<T> {
  public:
-  MenuKeyboardEventHandler(const std::unique_ptr<Input>& p, MenuPane &v,
+  MenuKeyboardEventHandler(const std::unique_ptr<InputComponent>& p, MenuPane &v,
                            Options<T> &o)
       : m_pane(v), m_opts(o) {
-    p->bind<CommandEventKeyboard>(
+    p->bind<EventKeyboard>(
         &MenuKeyboardEventHandler::handle_keyboard_event, this);
 
     p_selection_option = m_opts.begin();
@@ -31,7 +31,7 @@ class MenuKeyboardEventHandler : public IMenuEventHandler<T> {
   bool has_events() override { return has_more_events; }
 
  private:
-  void handle_keyboard_event(CommandEventKeyboard &e) {
+  void handle_keyboard_event(EventKeyboard &e) {
     KeyCode::Key keycode = e.get_key_code();
 
     switch (keycode) {

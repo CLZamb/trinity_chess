@@ -7,7 +7,7 @@ add_subdirectory(configuration)
 add_subdirectory(game)
 add_subdirectory(input)
 add_subdirectory(menu)
-add_subdirectory(ui_components)
+add_subdirectory(components)
 add_subdirectory(utils)
 
 target_link_libraries (
@@ -15,6 +15,7 @@ target_link_libraries (
   PUBLIC
   game_lib
   board_lib
+  # board_pane_event_handlers_lib
   position_lib
   board_check_lib
   board_check_pieces_lib
@@ -23,15 +24,16 @@ target_link_libraries (
   game_players_lib
   game_turn_lib
   #graphics
-  board_window_lib
-  ui_board_pane_lib
-  ui_board_squares_lib
-  ui_board_info_pane_lib
   ui_menu_lib
+  ui_board_window_lib
+  ui_board_pane_lib
+  ui_board_info_pane_lib
   ui_components_lib
+  ui_board_pane_event_handlers_lib
+  ui_board_squares_lib
   #input
-  ui_input_keyboard_lib
-  ui_input_text_lib
+  input_keyboard_lib
+  input_text_lib
   #INTERFACE
   # ui_graphics_board_pieces_lib
   # ui_graphics_drawings_lib

@@ -9,7 +9,7 @@
 
 class SpecialMove {
  public:
-  SpecialMove(Position& p);
+  explicit SpecialMove(Position& p);
   virtual ~SpecialMove();
   void handle_special_move(const Move& m, Position& squares);
   void set_special_move(Move& m, Position& squares);

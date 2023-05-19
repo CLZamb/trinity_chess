@@ -24,11 +24,12 @@ class Window {
     RIGHT_PANE = 2,
   };
 
+  void add_pane(IPane *pane, PanePos pos);
+
  protected:
   void add_left_pane(IPane *pane);
   void add_right_pane(IPane *pane);
   void add_middle_pane(IPane *pane);
-  void add_pane(IPane *pane, PanePos pos);
 
  private:
   void get_window_drawing(std::ostream &os);

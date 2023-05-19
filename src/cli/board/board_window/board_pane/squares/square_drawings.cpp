@@ -20,8 +20,6 @@ SquaresDrawings::~SquaresDrawings() {
   for (auto square : m_squares) delete square;
 }
 
-SquareDrawing *SquaresDrawings::operator[](Square i) { return m_squares[i]; }
-
 void SquaresDrawings::move_piece(const Square &from, const Square &to) {
   auto moved_piece = m_squares[from]->remove_piece_drawing();
   m_squares[to]->set_piece_drawing(std::move(moved_piece));

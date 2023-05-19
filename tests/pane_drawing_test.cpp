@@ -2,10 +2,9 @@
 #include <gtest/gtest.h>
 #include "board/board_window/board_pane/board_drawings.hpp"
 #include "board/board_window/board_pane/board_pane.h"
-#include "board/check_move/board_check.h"
 #include "board/position/position_fen.h"
-#include "ui_components/box_modifier.hpp"
-#include "ui_components/fen_fields.hpp"
+#include "components/box_modifier.hpp"
+#include "components/fen_fields.hpp"
 
 // TESTS FEN
 /// check that these checkmates are valid

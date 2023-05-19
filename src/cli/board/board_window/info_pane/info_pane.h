@@ -1,24 +1,27 @@
 #ifndef INFO_PANE_H
 #define INFO_PANE_H
 
-#include "board/board_window/IBoard_side_pane.h"
+#include "board/board_window/IBoard_pane_component.h"
 #include "board/board_window/info_pane/board_info_model.h"
+#include "board/board_window/info_pane/game_info_source.h"
 #include "board/board_window/info_pane/info_view.h"
+#include "board/check_move/IChess_validator.h"
+#include "board/chess.h"
+#include "game/turn/side_to_move.h"
 
-class InfoPane : public IBoardSidePane, public GameTurnObserver {
+class InfoPane : public IBoardPaneComponent, public GameTurnObserver {
  public:
-  InfoPane(std::shared_ptr<BoardInfoModel> info,
-           std::shared_ptr<InfoView> view);
+  explicit InfoPane(Chess& chess);
   virtual ~InfoPane() = default;
 
-  void update() override;
-  void make_move(const Move &mv) override;
   void update_turn(const Color &info) override;
-  IPane *get_pane() override;
+  void make_move(const Move &mv) override;
+  void update() override;
+  IPane *get_view() override { return &m_view; }
 
  private:
-  std::shared_ptr<BoardInfoModel> p_info;
-  std::shared_ptr<InfoView> p_view;
+  BoardInfoModel m_info;
+  InfoView m_view;
 };
 
 #endif /* INFO_PANE_H */

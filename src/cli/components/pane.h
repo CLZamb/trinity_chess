@@ -22,10 +22,11 @@ class Pane : public IPane  {
   void set_content_to_block_recursively(std::shared_ptr<Section>& section,
                                         std::string &msg, size_t &current_row);
   void format_section(std::shared_ptr<Section>& block, std::string content);
+  size_t size() override;
+  const std::string& operator[] (size_t i) override;
 
  private:
-  const std::string& operator[] (size_t i) override;
-  size_t size() override;
+
   bool has_block_space_for_content(const std::shared_ptr<Section>& block, const std::string& message);
   void add_section(std::shared_ptr<ISectionComponent> section);
 
@@ -36,7 +37,7 @@ class Pane : public IPane  {
   std::vector<std::string*> m_pane_drawing;
   std::unordered_map<std::string, std::shared_ptr<Section>> sections;
   std::string m_empty{};
-  const size_t kRowMaxWidth = PaneDrawings::Borders::width - 4 /*┃  ┃*/;
+  const size_t kRowMaxWidth = PaneBorders::width - 4 /*┃  ┃*/;
 };
 
 #endif /* PANE_H */

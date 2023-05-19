@@ -3,35 +3,40 @@
 
 #include <memory>
 
-#include "board/board_window/board_pane/squares/square_drawings.h"
-#include "board/position/position_fen.h"
-#include "input/keyboard/keyboard_input.h"
-#include "ui_components/pane.h"
+#include "board/board_window/IBoard_pane_component.h"
+#include "board/board_window/board_pane/IBoard_Pane.h"
+#include "board/board_window/board_pane/board_pane_view.h"
+#include "board/board_window/board_pane/event_handlers/IPane_event_handler.h"
+#include "board/board_window/board_pane/event_handlers/keyboard_event_handler.h"
+#include "board/board_window/board_pane/event_handlers/text_event_handler.h"
+#include "configuration/board_info.h"
+#include "input/input_component.h"
+#include "input/text/text_input.h"
 
-class BoardPane : public Pane {
+struct PrintWindowEvent {};
+
+class BoardPane : public EventEmitter {
  public:
-  BoardPane();
-  explicit BoardPane(const FenFields &fen);
-  virtual void make_move(const Move &mv);
-  void parse_fen(const FenFields &fen);
-  void update_drawing();
+  explicit BoardPane(const BoardConfigInfo &b_info);
+  virtual ~BoardPane() = default;
 
-  virtual bool is_player_string_move_ready() = 0;
-  virtual std::string get_player_move_as_string() = 0;
+  void make_move(const Move &mv);
+  void update();
+  IPane *get_view() { return &m_view; } 
+  std::string get_move_as_string();
 
- protected:
-  void clear();
-  void clear_square_on_range(const int start_pos, const int end_pos);
-  bool is_middle_of_square(const int &col);
-  std::string draw_row(std::string& row_drawing, const int& board_row, const int& square_row);
-  std::string left_border(const int &row, const int &col);
+ private:
+  void setup_player_input_component(const BoardConfigInfo &b_info);
+  void setup_keyboard_input(Color initial_side);
+  void setup_text_input();
 
-  const std::string m_top_section = "top";
-  const std::string m_board_section = "board";
-  const std::string m_bottom_section = "bottom";
+  void on_key_pressed(EventKeyboard &e);
+  void on_text(EventText &e);
 
-  SquaresDrawings m_square_drawings;
-  static const size_t Kboard_pane_size{44};
+  BoardPaneView m_view;
+
+  PrintWindowEvent m_reprint_ui_event;
+  std::unique_ptr<IPaneEventHandler> event_handler;
 };
 
 #endif   // !BOARD_PANE_H

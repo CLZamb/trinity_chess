@@ -2,10 +2,11 @@
 #define BOX_MODIFIER_H
 
 #include <cstring>
-#include <string>
-#include "box.h"
 #include <regex>
+#include <string>
 #include <unordered_map>
+
+#include "box.h"
 
 /*
    ╔══════════╦════════════════════════════════╦═════════════════════════════════════════════════════════════════════════╗
@@ -168,19 +169,19 @@ class BoxModifier {
   virtual ~BoxModifier() {}
 
   static void add_fg_color(FGColor c, Box *drawing) {
-    drawing->prepend_const_char_array(modifier_fg_color_to_str(c).c_str());
+    prepend_mod_as_const_char_array(drawing, modifier_fg_color_to_str(c).c_str());
   }
 
   static void add_bg_color(BGColor c, Box *drawing) {
-    drawing->prepend_const_char_array(modifier_bg_color_to_str(c).c_str());
+    prepend_mod_as_const_char_array(drawing, modifier_bg_color_to_str(c).c_str());
   }
 
   static void add_attribute(Attribute c, Box *drawing) {
-    drawing->prepend_const_char_array(modifier_to_str(c).c_str());
+    prepend_mod_as_const_char_array(drawing, modifier_to_str(c).c_str());
   };
 
   static void add_reset_attr(Box *drawing) {
-    drawing->append_const_char_array(modifier_to_str(RESET).c_str());
+    append_mod_as_const_char_array(drawing, modifier_to_str(RESET).c_str());
   }
 
   static void remove_mod(ModType mt, Box *drawing) {
@@ -202,6 +203,23 @@ class BoxModifier {
   static void remove_mod(Box* box, const std::string& mod) {
     for (int i = 0; i < Box::kRowSize; ++i) {
       remove_mod_at_row(mod, box->content[i]);
+    }
+  }
+
+  static void append_mod_as_const_char_array(Box* box, const char code[]) { char temp_copy[Box::kCharSize];
+    std::string test;
+
+    for (int i = 0; i < Box::kRowSize; ++i) {
+      Box::copy_row(temp_copy, box->content[i]);
+      Box::copy_row(box->content[i], temp_copy, code);
+    }
+  }
+
+  static void prepend_mod_as_const_char_array(Box* box, const char code[]) {
+    char temp_copy[Box::kCharSize];
+    for (int i = 0; i < Box::kRowSize; ++i) {
+      Box::copy_row(temp_copy, box->content[i]);
+      Box::copy_row(box->content[i], code, temp_copy);
     }
   }
 

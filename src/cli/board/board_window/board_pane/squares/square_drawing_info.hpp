@@ -2,9 +2,7 @@
 #define SQUARE_DRAWING_INFO_H
 
 #include "board/board_window/board_pane/board_drawings.hpp"
-#include "board/board_window/board_pane/pieces/IPiece_drawing.hpp"
 #include "board/board_window/board_pane/squares/square_drawing.h"
-#include "ui_components/box_modifier.hpp"
 
 struct WhiteSquareDrawing : public SquareDrawing {
  public:

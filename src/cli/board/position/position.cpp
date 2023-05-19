@@ -37,7 +37,7 @@ std::string Position::get_side_turn_as_char() {
 }
 
 std::string Position::get_en_passant_square_as_string() {
-  std::string en_passant = StringUtils::squareindex_to_str(m_en_passant_pos);
+  std::string en_passant = StringUtils::square_to_str(m_en_passant_pos);
 
   if ("-not a valid position-" == en_passant) {
     return "-";

@@ -1,6 +1,6 @@
 #include "position_fen.h"
 
-#include "ui_components/fen_fields.hpp"
+#include "components/fen_fields.hpp"
 
 PositionFen::PositionFen(const FenFields &fen, Position &position) {
   parse_fen(fen, position);

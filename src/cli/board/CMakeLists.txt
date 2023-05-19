@@ -1,6 +1,7 @@
 add_library(
   board_lib
   board.cpp
+  chess.cpp
 )
 
 target_include_directories(

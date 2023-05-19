@@ -1,16 +1,11 @@
 #include "square_drawings_selector.h"
 
-#include "ui_components/box_modifier.hpp"
+#include "components/box_modifier.hpp"
 
 using BM = BoxModifier;
 
-SquareDrawingSelector::SquareDrawingSelector(SquaresDrawings &sq,
-                                             Square init_selection)
-    : m_squares(sq) {
-  SquareDrawing *init_sq = m_squares[init_selection];
-
+SquareDrawingSelector::SquareDrawingSelector(SquareDrawing *init_sq) {
   set_select_attr(init_sq);
-
   p_prev_select_square = init_sq;
 }
 

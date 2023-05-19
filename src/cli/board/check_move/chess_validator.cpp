@@ -1,12 +1,12 @@
-#include "board_check.h"
+#include "chess_validator.h"
 
-BoardCheck::BoardCheck(Position &p)
+ChessValidator::ChessValidator(Position &p)
     : m_position(p)
     , m_pieces_legal_moves(m_position, m_side) {}
 
-void BoardCheck::update_turn(const Color &side) { m_side = side; }
+void ChessValidator::update_turn(const Color &side) { m_side = side; }
 
-bool BoardCheck::is_player_in_check(const Move &) {
+bool ChessValidator::is_player_in_check(const Move &) {
   if (m_pieces_legal_moves.is_king_piece_attacked()) {
     return true;
   }
@@ -19,11 +19,11 @@ bool BoardCheck::is_player_in_check(const Move &) {
   return false;
 }
 
-bool BoardCheck::is_string_move_format_valid(const std::string &s) {
+bool ChessValidator::is_string_move_format_valid(const std::string &s) {
   return StringUtils::check::is_valid_move_format(s);
 }
 
-bool BoardCheck::is_legal_move(Move &m) {
+bool ChessValidator::is_legal_move(Move &m) {
   Piece piece = MoveUtils::get_piece(m);
   Piece captured = MoveUtils::get_captured_piece(m);
   Square to = MoveUtils::get_to(m);
@@ -39,11 +39,11 @@ bool BoardCheck::is_legal_move(Move &m) {
   return m_pieces_legal_moves.is_legal_move(m);
 }
 
-bool BoardCheck::piece_belongs_to_player(const Piece &pc) {
+bool ChessValidator::piece_belongs_to_player(const Piece &pc) {
   return utils::check::get_color_piece(pc) == m_side;
 }
 
-bool BoardCheck::is_checkmate() {
+bool ChessValidator::is_checkmate() {
   Bitboard all_king_possible_positions{m_pieces_legal_moves.get_all_king_possible_positions()};
   int count_possible_king_moves{0}, count_king_moves_blocked{0};
   Square position;
@@ -58,9 +58,8 @@ bool BoardCheck::is_checkmate() {
   return count_possible_king_moves == count_king_moves_blocked;
 }
 
-bool BoardCheck::are_same_color(const Piece &piece,
+bool ChessValidator::are_same_color(const Piece &piece,
                     const Piece &captured) {
   return utils::check::get_color_piece(piece) ==
   utils::check::get_color_piece(captured);
 }
-

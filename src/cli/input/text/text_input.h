@@ -1,10 +1,10 @@
 #ifndef TEXT_INPUT_BOARD_H
 #define TEXT_INPUT_BOARD_H
 
-#include "input/input.h"
+#include "input/input_component.h"
 #include "input/text/text_input_base.h"
 
-struct CommandEventText {
+struct EventText {
   void udpate_string_input(const std::string &c) {
     m_command_string = c;
   }
@@ -16,18 +16,15 @@ struct CommandEventText {
   std::string m_command_string{""};
 };
 
-class TextInput : public Input {
+class TextInput : public InputComponent {
  public:
-  TextInput();
-  virtual ~TextInput();
-  void listen_for_input_events() override;
+  explicit TextInput(const std::string& str = "");
+  void send_event_input_to_listeners() override;
   void set_string_before_prompt(const std::string& space);
  private:
   std::string m_string_before_prompt{0};
-  std::string m_text;
   TextInputBase m_text_input;
-  CommandEventText m_event_command;
-  const std::string keyboard_event_name = typeid(CommandEventText).name();
+  EventText m_event_text;
 };
 
 #endif /* TEXT_INPUT_BOARD_H */

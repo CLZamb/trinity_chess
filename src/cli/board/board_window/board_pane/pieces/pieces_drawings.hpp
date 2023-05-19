@@ -1,63 +1,53 @@
 #ifndef PIECES_DRAWINGS_H
 #define PIECES_DRAWINGS_H
 
-#include <array>
-
 #include "board/board_window/board_pane/board_drawings.hpp"
 #include "board/board_window/board_pane/pieces/piece_drawing.hpp"
-#include "board/position/position_utils.h"
-#include "ui_components/box_modifier.hpp"
 
 class PiecesDrawings {
  public:
-  PiecesDrawings() {
-    std::unique_ptr<PieceDrawing> piece_drawing;
-    BoxModifier::FGColor drawing_color_mod_fg;
-    bool is_black_piece;
-
-    for (const Piece &p : {bP, bR, bN, bB, bQ, bK, wP, wR, wN, wB, wQ, wK}) {
-      piece_drawing = draw_piece(p);
-      is_black_piece = utils::check::is_black_piece(p);
-      drawing_color_mod_fg = fg_side_color(is_black_piece);
-
-      BoxModifier::add_fg_color(drawing_color_mod_fg,
-                                &piece_drawing->get_drawing());
-      m_pieces[p] = std::move(piece_drawing);
-    }
-  }
-
-  virtual ~PiecesDrawings() = default;
-
-  std::unique_ptr<IPieceDrawing> new_piece_drawing(const Piece &m_type) { 
-    return m_pieces[m_type]->clone();
+  std::unique_ptr<PieceDrawing> new_piece_drawing(const Piece &m_type) {
+    return m_pieces.at(m_type)();
   }
 
  private:
-  std::map<Piece, PieceType> m_pieces_type{
-      {Piece::wP,   PieceType::PAWN},
-      {Piece::bP,   PieceType::PAWN},
-      {Piece::wR,   PieceType::ROOK},
-      {Piece::bR,   PieceType::ROOK},
-      {Piece::wN,   PieceType::KNIGHT},
-      {Piece::bN,   PieceType::KNIGHT},
-      {Piece::wB, PieceType::BISHOP},
-      {Piece::bB, PieceType::BISHOP},
-      {Piece::wQ,  PieceType::QUEEN},
-      {Piece::bQ,  PieceType::QUEEN},
-      {Piece::wK,   PieceType::KING},
-      {Piece::bK,   PieceType::KING},
+  const std::unordered_map<Piece, std::function<std::unique_ptr<PieceDrawing>()>> m_pieces{
+    {Piece::wP, [&]() { return draw_piece(PieceType::PAWN, wP); }},
+    {Piece::bP, [&]() { return draw_piece(PieceType::PAWN, bP); }},
+    {Piece::wR, [&]() { return draw_piece(PieceType::ROOK, wR); }},
+    {Piece::bR, [&]() { return draw_piece(PieceType::ROOK, bR); }},
+    {Piece::wN, [&]() { return draw_piece(PieceType::KNIGHT, wN); }},
+    {Piece::bN, [&]() { return draw_piece(PieceType::KNIGHT, bN); }},
+    {Piece::wB, [&]() { return draw_piece(PieceType::BISHOP, wB); }},
+    {Piece::bB, [&]() { return draw_piece(PieceType::BISHOP, bB); }},
+    {Piece::wQ, [&]() { return draw_piece(PieceType::QUEEN, wQ); }},
+    {Piece::bQ, [&]() { return draw_piece(PieceType::QUEEN, wQ); }},
+    {Piece::wK, [&]() { return draw_piece(PieceType::KING, wK); }},
+    {Piece::bK, [&]() { return draw_piece(PieceType::KING, bK); }},
   };
 
-  std::unique_ptr<PieceDrawing> draw_piece(Piece piece) {
-    PieceType pct = m_pieces_type.at(piece);
-    return std::make_unique<PieceDrawing>(BoardDrawings::Pieces::Kpieces.at(pct), piece);
+  auto draw_piece(PieceType pct, Piece piece) -> std::unique_ptr<PieceDrawing> {
+    auto piece_drawing = new_piece(pct, piece);
+    add_fg_color_based_on_piece_color(piece_drawing, piece);
+    return piece_drawing;
   }
 
-  BoxModifier::FGColor fg_side_color(bool is_black_piece) {
-    return is_black_piece ? BoxModifier::BLACK_FG : BoxModifier::WHITE_FG;
+  auto new_piece(PieceType pct, Piece piece) -> std::unique_ptr<PieceDrawing>{
+    using BoardDrawings::Pieces::Kpieces;
+    using std::make_unique;
+    return make_unique<PieceDrawing>(Kpieces.at(pct), piece);
   }
 
-  std::array<std::unique_ptr<PieceDrawing>, utils::constant::ktotal_number_pieces> m_pieces;
+  void add_fg_color_based_on_piece_color(
+      const std::unique_ptr<PieceDrawing> &drawing, Piece pc) {
+    BoxModifier::FGColor color_fg_mod = fg_side_color(pc);
+    BoxModifier::add_fg_color(color_fg_mod, &drawing->get_drawing());
+  }
+
+  BoxModifier::FGColor fg_side_color(Piece pc) {
+    return utils::check::is_black_piece(pc) ? BoxModifier::BLACK_FG
+                                            : BoxModifier::WHITE_FG;
+  }
 };
 
 #endif /* PIECES_DRAWINGS_H */

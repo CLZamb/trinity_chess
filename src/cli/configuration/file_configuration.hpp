@@ -38,7 +38,8 @@ using json = nlohmann::json;
 //   };
 // }
 
-inline void from_json_file(const std::string &file_name, BoardConfigInfo &p) {
+inline BoardConfigInfo from_json_file(const std::string &file_name) {
+  BoardConfigInfo p;
   std::ifstream file(file_name);
 
   // Read the file contents into a string
@@ -51,10 +52,11 @@ inline void from_json_file(const std::string &file_name, BoardConfigInfo &p) {
   j.at("fen").get_to(start_fen);
   j.at("input").get_to(p.input_type);
   j.at("initial_side").get_to(p.initial_side);
-  j.at("left_pane").get_to(p.left_pane.type);
-  j.at("right_pane").get_to(p.right_pane.type);
+  j.at("left_pane").get_to(p.left_pane);
+  j.at("right_pane").get_to(p.right_pane);
 
   p.fen_fields.split_fen_into_its_fields(start_fen);
+  return p;
 }
 }   // namespace FileInput
 //

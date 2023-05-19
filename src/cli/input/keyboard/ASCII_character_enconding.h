@@ -17,7 +17,7 @@ enum class ASCIICharEncoding {
   D           = 'd',
   LEFT_BRACKET  = '[',
 };
-  // namespace Keyboard
+
 /*
     Arrow keys, Page Up, Page Down, Home, 
     and End all input 3 or 4 bytes to the terminal: 27, '[', 

@@ -7,8 +7,7 @@
 
 class SquareDrawingSelector {
  public:
-  explicit SquareDrawingSelector(SquaresDrawings &sq,
-                                  Square initial_selection);
+  explicit SquareDrawingSelector(SquareDrawing *init_sq);
   void select_next(SquareDrawing *ptr_sq_drawing);
   void set_selected(SquareDrawing *ptr_sq_drawing);
   void remove_previous_selected();
@@ -16,7 +15,6 @@ class SquareDrawingSelector {
  private:
   void set_select_attr(SquareDrawing *ptr_sq_drawing);
   void remove_select_attr(SquareDrawing *ptr_sq_drawing);
-  SquaresDrawings &m_squares;
   SquareDrawing *p_selected_square;
   SquareDrawing *p_prev_select_square;
 

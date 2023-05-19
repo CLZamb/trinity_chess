@@ -1,12 +1,12 @@
-#ifndef BOARD_CHECK_H
-#define BOARD_CHECK_H
+#ifndef CHESS_VALIDATOR_H
+#define CHESS_VALIDATOR_H
 
-#include "board/check_move/IBoard_check.h"
+#include "IChess_validator.h"
 #include "board/check_move/pieces/pieces_legal_moves.h"
 
-class BoardCheck : public IBoardCheck {
+class ChessValidator : public IChessValidator {
  public:
-  explicit BoardCheck(Position &board);
+  explicit ChessValidator(Position &board);
 
   void update_turn(const Color &turn) override;
   bool is_string_move_format_valid(const std::string &s) override;
@@ -22,4 +22,4 @@ class BoardCheck : public IBoardCheck {
   PiecesLegalMoves m_pieces_legal_moves;
 };
 
-#endif /* BOARD_CHECK_H */
+#endif /* CHESS_VALIDATOR_H */

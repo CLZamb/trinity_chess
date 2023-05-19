@@ -1,107 +1,57 @@
 #include "board_pane.h"
 
-#include "ui_components/fen_fields.hpp"
+#include "board/board_window/board_components.hpp"
 
-using std::string;
 namespace BD = BoardDrawings::Board;
+using std::string;
+using BP = BoardPane;
+using PtrIC = std::unique_ptr<InputComponent>;
+using KEH = KeyboardEventHandler;
+namespace BC = BoardComponents;
 
-BoardPane::BoardPane()
-    : Pane(Kboard_pane_size) {
-  add_section(m_top_section, 1);
-  add_section(m_board_section, 40);
-  add_section(m_bottom_section, 3);
-  clear();
+BoardPane::BoardPane(const BoardConfigInfo &b_info){
+  m_view.parse_fen(b_info.fen_fields);
+  setup_player_input_component(b_info);
+  update();
 }
 
-BoardPane::BoardPane(const FenFields &f)
-    : BoardPane() {
-  parse_fen(f);
-}
-
-void BoardPane::parse_fen(const FenFields &fen_fields) {
-  int square = A1, rank = 7, file = 0, space = 0;
-  Piece piece;
-
-  for (char c : fen_fields.piece_placement) {
-    if (c == '/') {
-      rank--;
-      file = 0;
-      continue;
-    }
-
-    square = rank * 8 + file;
-
-    if (isdigit(c)) {
-      space = (c - '0');
-      file += space;
-      clear_square_on_range(square, square + space);
-    } else {
-      piece = utils::get_piecetype_from_char(c);
-      file++;
-      m_square_drawings.set_piece_at_square(piece, square);
-    }
+void BoardPane::setup_player_input_component(const BoardConfigInfo &b_info) {
+  switch (b_info.input_type) {
+    case InputType::Keyboard:
+      setup_keyboard_input(b_info.initial_side);
+      break;
+    case InputType::Text:
+      setup_text_input();
+      break;
+    default:
+      break;
   }
 }
 
-void BoardPane::clear_square_on_range(const int start, const int end) {
-  for (int pos = start; pos < end; pos++) {
-    m_square_drawings.clear_square_at_pos(pos);
-  }
+void BoardPane::setup_keyboard_input(Color side) {
+  event_handler = BC::new_keyboard_event_handler(side, m_view);
+  event_handler->bind(&BoardPane::on_key_pressed, this);
 }
 
-void BoardPane::update_drawing() {
-  size_t row_idx = 0;
-  std::string row_drawing = "";
-  /*
-   * Rows needs to be ordered upside down
-   * because the program prints from top to bottom
-   * so that the 8th row should be printed frist
-   */
-  for (int row = 7; row >= 0; --row) {
-    // each square has 5 indiviual rows
-    for (int k = 0; k < Box::kRowSize; ++k, row_idx++) {
-      draw_row(row_drawing, row, k);
-      get_section(m_board_section)->set_drawing_at_index(row_drawing, row_idx);
-    }
-  }
+void BoardPane::on_key_pressed(EventKeyboard &) {
+  update();
+  send_event(m_reprint_ui_event);
 }
 
-string BoardPane::draw_row(string &drawing, const int &row, const int &k) {
-  drawing = left_border(row, k);
-
-  Square col_sq{SquareNull};
-  /*
-   * there are 8*8 (from 0 to 63) squares,
-   * to get a position
-   * we need to multyply row by 8 and add the col
-   * i.e the bottom right position would be
-   *  0 * 8 + 7 = 7
-   */
-  for (int col = 0; col < 8; col++) {
-    col_sq = static_cast<Square>((row * 8) + col);
-    drawing += (*m_square_drawings[col_sq])[k];
-  }
-
-  drawing += "┃";
-  return drawing;
+void BoardPane::setup_text_input() {
+  event_handler = BC::new_text_event_handler();
+  event_handler->bind(&BoardPane::on_text, this);
 }
+
+void BoardPane::on_text(EventText &) { update(); }
 
 void BoardPane::make_move(const Move &mv) {
-  const Square from = MoveUtils::get_from(mv);
-  const Square to = MoveUtils::get_to(mv);
-
-  m_square_drawings.move_piece(from, to);
+  m_view.make_move(mv);
+  event_handler->change_side();
 }
 
-void BoardPane::clear() {
-  Pane::set_content_at_section(m_top_section, {BD::ktop_section});
-  Pane::set_content_at_section(m_bottom_section, &BD::kbottom_section_drawing);
+std::string BoardPane::get_move_as_string() {
+  return event_handler->get_move_as_string();
 }
 
-string BoardPane::left_border(const int &row, const int &k) {
-  return (is_middle_of_square(k) ? " " : std::to_string(row + 1)) + "┃";
-}
-
-bool BoardPane::is_middle_of_square(const int &square_row) {
-  return (square_row + 1) % 3;
-}
+void BoardPane::update() { m_view.update_drawing(); }

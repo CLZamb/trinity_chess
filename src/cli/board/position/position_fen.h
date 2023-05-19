@@ -4,7 +4,7 @@
 #include <string>
 
 #include "board/position/position.h"
-#include "ui_components/fen_fields.hpp"
+#include "components/fen_fields.hpp"
 
 class PositionFen {
  public:
