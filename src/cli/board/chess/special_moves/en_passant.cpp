@@ -1,7 +1,7 @@
 #include "en_passant.h"
 
-#include "board/check_move/pieces/pawn.hpp"
-#include "board/position/position_typedefs.h"
+#include "board/chess/check_move/pieces/pawn.hpp"
+#include "board/chess/position/position_typedefs.h"
 
 EnPassant::EnPassant() {}
 EnPassant::~EnPassant() {}

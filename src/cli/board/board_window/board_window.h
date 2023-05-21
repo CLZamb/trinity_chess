@@ -5,7 +5,6 @@
 #include <memory>
 #include <vector>
 #include "board/board_window/board_pane/board_pane.h"
-#include "board/chess.h"
 #include "components/window.h"
 
 class BoardWindow : public Window {

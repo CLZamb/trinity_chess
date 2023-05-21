@@ -3,11 +3,11 @@
 
 #include <optional>
 
-#include "board/position/position_typedefs.h"
 #include "board_representation.h"
 #include "castling_rights.h"
 #include "game/turn/game_turn_observer.h"
 #include "half_move_clock.h"
+#include "position_typedefs.h"
 #include "position_utils.h"
 #include "utils/move.hpp"
 #include "utils/string_utils.h"

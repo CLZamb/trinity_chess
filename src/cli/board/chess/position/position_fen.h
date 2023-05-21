@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "board/position/position.h"
+#include "position.h"
 #include "components/fen_fields.hpp"
 
 class PositionFen {

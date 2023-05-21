@@ -21,7 +21,7 @@ node_modules/
 .clang-tidy
 .clang-format
 
-chess
+chess_session
 chess_tests
 neovim.json
 package.json

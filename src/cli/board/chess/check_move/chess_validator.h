@@ -2,7 +2,7 @@
 #define CHESS_VALIDATOR_H
 
 #include "IChess_validator.h"
-#include "board/check_move/pieces/pieces_legal_moves.h"
+#include "board/chess/check_move/pieces/pieces_legal_moves.h"
 
 class ChessValidator : public IChessValidator {
  public:

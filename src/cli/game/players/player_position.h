@@ -4,7 +4,7 @@
 #include <iostream>
 #include <unordered_map>
 
-#include "board/position/position_typedefs.h"
+#include "board/chess/position/position_typedefs.h"
 #include "game/game_typedefs.h"
 #include "input/keyboard/keyboard_keycode.h"
 

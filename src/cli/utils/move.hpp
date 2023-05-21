@@ -1,7 +1,7 @@
 #ifndef MOVE_H
 #define MOVE_H
 
-#include "board/position/position_typedefs.h"
+#include "board/chess/position/position_typedefs.h"
 #include "utils/bit_utilities.h"
 
 /*

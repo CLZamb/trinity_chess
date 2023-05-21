@@ -4,8 +4,8 @@
 #include "castling.h"
 #include "pawn_promotion.h"
 #include "en_passant.h"
-#include "board/position/position_typedefs.h"
-#include "board/position/position.h"
+#include "board/chess/position/position_typedefs.h"
+#include "board/chess/position/position.h"
 
 class SpecialMove {
  public:

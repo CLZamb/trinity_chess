@@ -9,8 +9,8 @@
 #include "board/board_window/info_pane/info_pane.h"
 #include "board/board_window/info_pane/info_view.h"
 #include "board/board_window/statistics_pane/statistics_pane.hpp"
-#include "board/chess.h"
-#include "board/position/position.h"
+#include "board/chess/chess.h"
+#include "board/chess/position/position.h"
 #include "input/input_components.h"
 
 namespace BoardComponents {

@@ -1,5 +1,5 @@
 #include "board_info_model.h"
-#include "board/position/position_utils.h"
+#include "board/chess/position/position_utils.h"
 #include "utils/string_utils.h"
 
 using std::string;

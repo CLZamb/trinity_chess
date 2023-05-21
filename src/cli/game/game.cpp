@@ -51,7 +51,6 @@ void Game::start_game_loop(BoardConfigInfo &board_config) {
 
     board.make_move(mv);
     board.change_side();
-    return;
 
   } while (!board.is_checkmate());
 

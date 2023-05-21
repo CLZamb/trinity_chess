@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "board/check_move/IChess_validator.h"
+#include "board/chess/check_move/IChess_validator.h"
 
 class ChessValidatorDecorator : public IChessValidator {
  public:

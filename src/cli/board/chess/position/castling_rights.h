@@ -3,8 +3,8 @@
 
 #include <unordered_map>
 
-#include "board/position/position_typedefs.h"
 #include "game/game_typedefs.h"
+#include "position_typedefs.h"
 #include "utils/move.hpp"
 
 class CastlingRights {
@@ -28,7 +28,7 @@ class CastlingRights {
       {BQCA, 'q'},
       {BKCA, 'k'},
   };
- 
+
   const std::unordered_map<CastleSquares, CastlePermission> m_white_permission{
       { WK_CA_KING_SIDE_END_POS, WKCA},
       {WK_CA_QUEEN_SIDE_END_POS, WQCA},

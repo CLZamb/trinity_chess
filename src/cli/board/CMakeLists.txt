@@ -1,7 +1,6 @@
 add_library(
   board_lib
   board.cpp
-  chess.cpp
 )
 
 target_include_directories(
@@ -12,6 +11,4 @@ target_include_directories(
 )
 
 add_subdirectory(board_window)
-add_subdirectory(check_move)
-add_subdirectory(position)
-add_subdirectory(special_moves)
+add_subdirectory(chess)

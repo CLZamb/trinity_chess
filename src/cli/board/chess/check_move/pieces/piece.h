@@ -1,7 +1,7 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include "board/position/position.h"
+#include "board/chess/position/position.h"
 
 class PieceBase {
  public:

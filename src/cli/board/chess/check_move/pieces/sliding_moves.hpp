@@ -1,7 +1,7 @@
 #ifndef SLIDING_MOVES_H
 #define SLIDING_MOVES_H
 
-#include "board/position/position.h"
+#include "board/chess/position/position.h"
 #include "magic_bitboard.h"
 #include "utils/defs.h"
 

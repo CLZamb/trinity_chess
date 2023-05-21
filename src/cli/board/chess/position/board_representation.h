@@ -1,8 +1,8 @@
 #ifndef BOARD_REPRESENTATION_H
 #define BOARD_REPRESENTATION_H
 
-#include "board/position/position_typedefs.h"
 #include "game/game_typedefs.h"
+#include "position_typedefs.h"
 #include "utils/defs.h"
 #include "utils/move.hpp"
 

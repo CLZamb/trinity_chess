@@ -2,9 +2,9 @@
 #define BOARD_H
 
 #include "board/board_window/board_window.h"
-#include "board/chess.h"
-#include "board/position/position_fen.h"
-#include "board/special_moves/special_move_controller.h"
+#include "board/chess/chess.h"
+#include "board/chess/position/position_fen.h"
+#include "board/chess/special_moves/special_move_controller.h"
 #include "configuration/file_configuration.hpp"
 #include "game/turn/side_to_move.h"
 

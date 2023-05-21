@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "board/position/position_utils.h"
+#include "board/chess/position/position_utils.h"
 #include "components/box.h"
 #include "components/box_modifier.hpp"
 

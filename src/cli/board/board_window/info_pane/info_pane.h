@@ -5,8 +5,8 @@
 #include "board/board_window/info_pane/board_info_model.h"
 #include "board/board_window/info_pane/game_info_source.h"
 #include "board/board_window/info_pane/info_view.h"
-#include "board/check_move/IChess_validator.h"
-#include "board/chess.h"
+#include "board/chess/check_move/IChess_validator.h"
+#include "board/chess/chess.h"
 #include "game/turn/side_to_move.h"
 
 class InfoPane : public IBoardPaneComponent, public GameTurnObserver {

@@ -1,6 +1,6 @@
 #include "board_representation.h"
 
-#include "board/position/position_utils.h"
+#include "board/chess/position/position_utils.h"
 #include "utils/bit_utilities.h"
 #include "utils/move.hpp"
 

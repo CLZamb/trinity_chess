@@ -1,9 +1,9 @@
 #ifndef CHESS_H
 #define CHESS_H
 
-#include "board/check_move/IChess_validator.h"
-#include "board/position/position_fen.h"
-#include "board/special_moves/special_move_controller.h"
+#include "board/chess/check_move/IChess_validator.h"
+#include "board/chess/position/position_fen.h"
+#include "board/chess/special_moves/special_move_controller.h"
 #include "components/const_event_emitter.h"
 #include "configuration/board_info.h"
 #include "game/turn/side_to_move.h"

@@ -3,12 +3,12 @@
 
 #include <memory>
 
+#include "IBoard_Pane.h"
 #include "board/board_window/IBoard_pane_component.h"
-#include "board/board_window/board_pane/IBoard_Pane.h"
-#include "board/board_window/board_pane/board_pane_view.h"
 #include "board/board_window/board_pane/event_handlers/IPane_event_handler.h"
 #include "board/board_window/board_pane/event_handlers/keyboard_event_handler.h"
 #include "board/board_window/board_pane/event_handlers/text_event_handler.h"
+#include "board_pane_view.h"
 #include "configuration/board_info.h"
 #include "input/input_component.h"
 #include "input/text/text_input.h"
@@ -22,7 +22,7 @@ class BoardPane : public EventEmitter {
 
   void make_move(const Move &mv);
   void update();
-  IPane *get_view() { return &m_view; } 
+  IPane *get_view() { return &m_view; }
   std::string get_move_as_string();
 
  private:

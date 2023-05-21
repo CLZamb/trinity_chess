@@ -1,6 +1,6 @@
 #include "half_move_clock.h"
 
-#include "board/position/position_utils.h"
+#include "board/chess/position/position_utils.h"
 
 HalfMoveClock::HalfMoveClock() {}
 HalfMoveClock::~HalfMoveClock() {}

@@ -1,7 +1,7 @@
 #include "chess.h"
 
 #include "board/board_window/board_components.hpp"
-#include "board/check_move/chess_validator.h"
+#include "board/chess/check_move/chess_validator.h"
 #include "input/input_components.h"
 #include "utils/move.hpp"
 

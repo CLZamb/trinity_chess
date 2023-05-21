@@ -15,6 +15,7 @@ target_link_libraries (
   PUBLIC
   game_lib
   board_lib
+  chess_lib
   # board_pane_event_handlers_lib
   position_lib
   board_check_lib

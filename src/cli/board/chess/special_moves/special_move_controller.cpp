@@ -1,6 +1,6 @@
 #include "special_move_controller.h"
 
-#include "board/position/position_typedefs.h"
+#include "board/chess/position/position_typedefs.h"
 #include "utils/move.hpp"
 
 SpecialMove::SpecialMove(Position &p)
