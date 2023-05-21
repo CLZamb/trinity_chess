@@ -15,8 +15,8 @@ class SquareDrawingSelector {
  private:
   void set_select_attr(SquareDrawing *ptr_sq_drawing);
   void remove_select_attr(SquareDrawing *ptr_sq_drawing);
-  SquareDrawing *p_selected_square;
-  SquareDrawing *p_prev_select_square;
+  SquareDrawing *p_selected_square{nullptr};
+  SquareDrawing *p_prev_select_square{nullptr};
 
   const BoxModifier::Attribute m_select_attr_mod{BoxModifier::BG_INVERSE};
 };

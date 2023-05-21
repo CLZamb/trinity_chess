@@ -5,7 +5,6 @@
 
 #include "components/fen_fields.hpp"
 #include "game/game_typedefs.h"
-#include "components/window.h"
 
 enum class SidePaneType {
   None,

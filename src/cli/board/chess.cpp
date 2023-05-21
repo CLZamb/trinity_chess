@@ -37,6 +37,7 @@ Move Chess::convert_string_to_move(const string &m) {
   Piece piece_captured = m_position.get_piece(to);
 
   MU::set_piece(mv, piece_taken);
+
   if (piece_captured) {
     MU::set_capture_piece(mv, piece_captured);
   }
@@ -57,6 +58,17 @@ bool Chess::is_string_move_format_valid(const std::string &m) {
 
 Color Chess::get_cur_color_side() { return m_side_to_move.get_color(); }
 
-void Chess::change_side() { m_side_to_move.change_side(); }
+void Chess::change_side() {
+  m_side_to_move.change_side();
+  send_event(m_side_to_move.get_color());
+}
 
 bool Chess::is_checkmate() { return p_validator->is_checkmate(); }
+
+void Chess::set_validator(std::unique_ptr<IChessValidator> &&validator) {
+  p_validator = std::move(validator);
+}
+
+std::unique_ptr<IChessValidator> Chess::get_validator() {
+  return std::move(p_validator);
+}

@@ -39,6 +39,7 @@ void KeyboardEventHandler::on_key_pressed(EventKeyboard &e) {
     case KeyCode::RIGHT:
     case KeyCode::LEFT:
       handle_direction(keycode);
+      break;
     default:
       break;
   }

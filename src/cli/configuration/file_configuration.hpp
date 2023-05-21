@@ -1,6 +1,6 @@
 #ifndef FILE_CONFIGURATION_H
 #define FILE_CONFIGURATION_H
-#include <string>
+
 #pragma once
 
 #include <fstream>
@@ -50,12 +50,13 @@ inline BoardConfigInfo from_json_file(const std::string &file_name) {
 
   std::string start_fen;
   j.at("fen").get_to(start_fen);
+  p.fen_fields.split_fen_into_its_fields(start_fen);
+
   j.at("input").get_to(p.input_type);
   j.at("initial_side").get_to(p.initial_side);
   j.at("left_pane").get_to(p.left_pane);
   j.at("right_pane").get_to(p.right_pane);
 
-  p.fen_fields.split_fen_into_its_fields(start_fen);
   return p;
 }
 }   // namespace FileInput

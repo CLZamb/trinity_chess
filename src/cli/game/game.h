@@ -6,11 +6,9 @@
 
 class Game {
  public:
-  Game();
   void start();
 
  private:
-  void get_config_from_file(Configuration& config, const std::string& file_name);
   std::string get_menu_option_as_string(InputType input_type);
   void start_game_loop(BoardConfigInfo &board_config);
   // Players m_players;

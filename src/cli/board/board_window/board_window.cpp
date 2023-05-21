@@ -6,9 +6,7 @@ BoardWindow::BoardWindow(BoardConfigInfo &board_config)
   m_board_pane.bind(&BoardWindow::on_board_updated, this);
 }
 
-void BoardWindow::on_board_updated(PrintWindowEvent &) { 
-  Window::print(); 
-}
+void BoardWindow::on_board_updated(PrintWindowEvent &) { Window::print(); }
 
 void BoardWindow::update() {
   m_board_pane.update();
@@ -27,9 +25,7 @@ std::string BoardWindow::get_move_as_string() {
   return m_board_pane.get_move_as_string();
 }
 
-void BoardWindow::make_move(const Move &mv) { 
-  m_board_pane.make_move(mv); 
-}
+void BoardWindow::make_move(const Move &mv) { m_board_pane.make_move(mv); }
 
 void BoardWindow::add_side_pane(std::shared_ptr<IBoardPaneComponent> side_pane,
                                 Window::PanePos pos) {

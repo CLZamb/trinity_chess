@@ -1,4 +1,5 @@
 #include "configuration.h"
+#include "configuration/file_configuration.hpp"
 #include "menu/menu_window/menu_window.hpp"
 
 Configuration::Configuration() {
@@ -50,4 +51,10 @@ void Configuration::get_players_color() {
 
 void Configuration::set_board_configuration(const BoardConfigInfo& board_file_info) {
   m_board_config = board_file_info;
+}
+
+void Configuration::get_config_from_file(
+                        const std::string &file_name) {
+  BoardConfigInfo board_info = FileInput::from_json_file(file_name);
+  set_board_configuration(board_info);
 }

@@ -6,11 +6,9 @@
 
 using std::string;
 
-Game::Game() {}
-
 void Game::start() {
   Configuration config;
-  get_config_from_file(config, "configuration.json");
+  config.get_config_from_file("configuration.json");
 
   string opt_selected = get_menu_option_as_string(config.get_input_type());
 
@@ -24,12 +22,6 @@ void Game::start() {
   }
 
   start_game_loop(config.get_board_config());
-}
-
-void Game::get_config_from_file(Configuration &config,
-                                const std::string &file_name) {
-  BoardConfigInfo board_info = FileInput::from_json_file(file_name);
-  config.set_board_configuration(board_info);
 }
 
 string Game::get_menu_option_as_string(InputType i_type) {
@@ -59,6 +51,7 @@ void Game::start_game_loop(BoardConfigInfo &board_config) {
 
     board.make_move(mv);
     board.change_side();
+    return;
 
   } while (!board.is_checkmate());
 

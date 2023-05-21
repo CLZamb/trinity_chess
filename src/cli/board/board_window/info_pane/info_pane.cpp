@@ -11,6 +11,7 @@ InfoPane::InfoPane(Chess &m_chess) {
 
   m_chess.set_validator(std::move(validator));
   m_chess.bind(&InfoPane::make_move, this);
+  m_chess.bind(&InfoPane::update_turn, this);
 }
 
 void InfoPane::make_move(const Move &mv) {

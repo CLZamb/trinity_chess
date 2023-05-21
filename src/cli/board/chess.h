@@ -8,7 +8,7 @@
 #include "configuration/board_info.h"
 #include "game/turn/side_to_move.h"
 
-class Chess :public ConstEventEmitter {
+class Chess : public ConstEventEmitter {
  public:
   explicit Chess(BoardConfigInfo &board_config);
 
@@ -18,15 +18,10 @@ class Chess :public ConstEventEmitter {
   bool is_player_in_check(const Move &mv);
   bool is_legal_move(Move &mv);
   bool is_string_move_format_valid(const std::string &m);
-  Move convert_string_to_move(const std::string &m);
   Color get_cur_color_side();
-  void set_validator(std::unique_ptr<IChessValidator> &&validator) {
-    p_validator = std::move(validator);
-  }
-
-  std::unique_ptr<IChessValidator> get_validator() { 
-    return std::move(p_validator); 
-  }
+  Move convert_string_to_move(const std::string &m);
+  void set_validator(std::unique_ptr<IChessValidator> &&validator);
+  std::unique_ptr<IChessValidator> get_validator();
 
  private:
   SideToMove m_side_to_move;

@@ -16,9 +16,9 @@ using W = Window::PanePos;
 Board::Board(BoardConfigInfo &c)
     : m_chess(c)
     , m_window(c) {
-
   m_window.add_side_pane(BC::new_side_pane(m_chess, c.left_pane), W::LEFT_PANE);
-  m_window.add_side_pane(BC::new_side_pane(m_chess, c.right_pane), W::RIGHT_PANE);
+  m_window.add_side_pane(BC::new_side_pane(m_chess, c.right_pane),
+                         W::RIGHT_PANE);
 }
 
 void Board::make_move(const Move &mv) {
@@ -26,9 +26,7 @@ void Board::make_move(const Move &mv) {
   m_window.make_move(mv);
 }
 
-bool Board::is_invalid_move(const Move &mv) { 
-  return mv == MU::INVALID_MOVE; 
-}
+bool Board::is_invalid_move(const Move &mv) { return mv == MU::INVALID_MOVE; }
 
 Move Board::get_player_move() {
   Move mv{MU::INVALID_MOVE};
@@ -54,18 +52,10 @@ std::string Board::get_string_move() {
   return move_str;
 }
 
-void Board::print() {
-  m_window.print();
-}
+void Board::print() { m_window.print(); }
 
-Color Board::get_winner_side() {
-  return m_chess.get_cur_color_side();
-}
+Color Board::get_winner_side() { return m_chess.get_cur_color_side(); }
 
-void Board::change_side() {
-  m_chess.change_side();
-}
+void Board::change_side() { m_chess.change_side(); }
 
-bool Board::is_checkmate() {
-  return m_chess.is_checkmate();
-}
+bool Board::is_checkmate() { return m_chess.is_checkmate(); }
