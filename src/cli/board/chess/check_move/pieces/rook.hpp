@@ -8,8 +8,8 @@
 template<Color color>
 class Rook: public PieceBase {
 public:
-  explicit Rook(IMagicBitboardAttackType& mb) :
-    PieceBase(color == BLACK ? bR : wR), rook_moves(mb) {}
+  explicit Rook(IMagicBitboardAttackType& magic_bitboard) :
+    PieceBase(color == BLACK ? bR : wR), rook_moves(magic_bitboard) {}
   virtual ~Rook() {}
   bool is_legal_move(Move& m, Position& board) override {
     return rook_moves.get_sliding_attacks(m, board);

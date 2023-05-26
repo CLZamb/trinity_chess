@@ -1,9 +1,15 @@
 #include "square_drawing.h"
+#include "board/board_window/board_pane/board_drawings.hpp"
 
 using BM = BoxModifier;
 using PtrPieceDrawing = std::unique_ptr<PieceDrawing>;
+namespace BD = BoardDrawings::Squares;
 
-SquareDrawing::SquareDrawing() {}
+SquareDrawing::SquareDrawing() {
+  m_empty_drawing =
+    BoardDrawings::Squares::Ksq.at(StringDrawingName::Square::square);
+  BM::add_reset_attr(&m_empty_drawing);
+}
 
 Box *SquareDrawing::get_drawing() {
   if (m_has_piece) return &m_pc_drawing->get_drawing();

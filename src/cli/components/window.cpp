@@ -19,11 +19,11 @@ void Window::add_middle_pane(IPane *pane) {
 void Window::add_right_pane(IPane *pane) { add_pane(pane, Window::RIGHT_PANE); }
 
 void Window::print() {
-  // system(CLEAR);
+  system(CLEAR);
   cout << *this << flush;
 }
 
-void Window::add_pane(IPane *pane, PanePos pos) {
+void Window::add_pane(IPane *pane, PanePos pane_position) {
   if (pane == nullptr) { return; }
 
   if (m_panes.size() >= max_panes_size) { return; }
@@ -32,7 +32,7 @@ void Window::add_pane(IPane *pane, PanePos pos) {
     m_panes_size_max_height = pane->size();
   }
 
-  m_panes.emplace(pos, pane);
+  m_panes.emplace(pane_position, pane);
 }
 
 ostream &operator<<(ostream &os, Window &w) {

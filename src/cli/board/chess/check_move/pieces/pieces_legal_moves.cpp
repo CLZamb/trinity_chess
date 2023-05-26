@@ -20,14 +20,14 @@ PiecesLegalMoves::~PiecesLegalMoves() {
 }
 
 void PiecesLegalMoves::create_all_pieces() {
-  // creating black pieces
+  // Black pieces
   m_pieces[bP] = new Pawn<BLACK>;
   m_pieces[bR] = new Rook<BLACK>(m_rook_magic_bitboard);
   m_pieces[bB] = new Bishop<BLACK>(m_bishop_magic_bitboard);
   m_pieces[bQ] = new Queen<BLACK>(m_queen_magic_bitboard);
   m_pieces[bK] = new King<BLACK>;
   m_pieces[bN] = new Knight<BLACK>;
-
+  // White pieces
   m_pieces[wP] = new Pawn<WHITE>;
   m_pieces[wR] = new Rook<WHITE>(m_rook_magic_bitboard);
   m_pieces[wB] = new Bishop<WHITE>(m_bishop_magic_bitboard);

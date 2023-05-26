@@ -29,11 +29,8 @@ void Board::make_move(const Move &mv) {
 bool Board::is_invalid_move(const Move &mv) { return mv == MU::INVALID_MOVE; }
 
 Move Board::get_player_move() {
-  Move mv{MU::INVALID_MOVE};
-
   std::string move_str = get_string_move();
-
-  mv = m_chess.convert_string_to_move(move_str);
+  Move mv = m_chess.convert_string_to_move(move_str);
 
   if (m_chess.is_player_in_check(mv) || !m_chess.is_legal_move(mv)) {
     return MU::INVALID_MOVE;

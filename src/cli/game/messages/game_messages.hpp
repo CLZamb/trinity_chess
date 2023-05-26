@@ -10,10 +10,10 @@
 namespace GameMessages
 {
 
-inline void print_game_winner(Color c){
+inline void print_game_winner(Color color){
   static const std::string 
     winner_drawing = 
-      c == Color::WHITE ? 
+      color == Color::WHITE ? 
         GameDrawing::white_won.data() : GameDrawing::black_won.data();
 
   std::cout << winner_drawing << std::endl;

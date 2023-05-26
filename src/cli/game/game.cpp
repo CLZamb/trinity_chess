@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include "configuration/board_info.h"
 #include "game/messages/game_messages.hpp"
 #include "menu/menu_window/menu_window.hpp"
 #include "board/board.h"
@@ -54,6 +55,5 @@ void Game::start_game_loop(BoardConfigInfo &board_config) {
 
   } while (!board.is_checkmate());
 
-  board.print();
   GameMessages::print_game_winner(board.get_winner_side());
 }

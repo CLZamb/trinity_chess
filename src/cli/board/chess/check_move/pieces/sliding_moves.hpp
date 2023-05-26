@@ -11,14 +11,14 @@ class SlidingMoves {
   explicit SlidingMoves(const IMagicBitboardAttackType &at)
       : m_piece_attacks(at) {}
   virtual ~SlidingMoves() {}
-  virtual Bitboard get_sliding_attacks(const Move &m, Position &position) {
-    Bitboard to = ONE << MoveUtils::get_to(m);
+  virtual Bitboard get_sliding_attacks(const Move &move, Position &position) {
+    Bitboard to = ONE << MoveUtils::get_to(move);
     const Bitboard own_color_pieces =
         position.get_occupied_side_as_bitboard(color);
     return to & ~own_color_pieces &
            m_piece_attacks.get_attacks(
                position.get_occupied_squares_as_bitboard(),
-               MoveUtils::get_from(m));
+               MoveUtils::get_from(move));
   };
   virtual Bitboard get_attacks(Bitboard bb, Square sq) {
     return m_piece_attacks.get_attacks(bb, sq);

@@ -4,8 +4,8 @@
 #include <cassert>
 #include <functional>
 #include <iostream>
-#include <unordered_map>
 #include <typeindex>
+#include <unordered_map>
 
 class EventEmitter {
  public:
@@ -16,8 +16,8 @@ class EventEmitter {
   virtual ~EventEmitter() = default;
 
   template <typename EventType, typename Class>
-  void bind(method_callback<EventType, Class> m, Class *c) {
-    m_events_handlers[typeid(EventType)].push_back(get_method(m, c));
+  void bind(method_callback<EventType, Class> function, Class *class_ptr) {
+    m_events_handlers[typeid(EventType)].push_back(get_method(function, class_ptr));
   }
 
   template <typename EventType>
@@ -44,8 +44,10 @@ class EventEmitter {
 
  private:
   template <typename EventType, typename Class>
-  method get_method(method_callback<EventType, Class> m, Class *c) {
-    return [c, m](void *evt) { (c->*m)(*reinterpret_cast<EventType *>(evt)); };
+  method get_method(method_callback<EventType, Class> function, Class *class_ptr) {
+    return [class_ptr, function](void *evt) {
+      (class_ptr->*function)(*reinterpret_cast<EventType *>(evt));
+    };
   }
 
   std::unordered_map<std::type_index, std::vector<method>> m_events_handlers;

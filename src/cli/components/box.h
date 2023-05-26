@@ -30,6 +30,7 @@ class Box {
   // color fg  3 chars "\033[38;5;m"
   // color bg  4 chars "\x1B[48;5;m"
   // attr      3 chars "\033[7m"
+  // reset     3 chars "\033[0m"
   // 68 bytes aprox
   static const int kCharSize = (17 /*characters*/ * 4 /*bytes*/);
   char content[kRowSize][kCharSize];

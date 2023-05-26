@@ -11,7 +11,6 @@
 class Pane : public IPane  {
  public:
   explicit Pane(size_t size);
-  virtual ~Pane();
   void clear();
   void fill(const std::string& content);
   void add_section(const std::string & section_name, const size_t size);

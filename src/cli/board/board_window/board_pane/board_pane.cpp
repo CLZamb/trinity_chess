@@ -9,7 +9,7 @@ using PtrIC = std::unique_ptr<InputComponent>;
 using KEH = KeyboardEventHandler;
 namespace BC = BoardComponents;
 
-BoardPane::BoardPane(const BoardConfigInfo &b_info){
+BoardPane::BoardPane(const BoardConfigInfo &b_info) {
   m_view.parse_fen(b_info.fen_fields);
   setup_player_input_component(b_info);
   update();

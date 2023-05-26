@@ -47,27 +47,27 @@ constexpr void remove_encoded_value(
   m &= ~(reserved_space_hex_value << bits_shift_to_left);
 }
 
-constexpr void set_encoded_value(Move &m,
+constexpr void set_encoded_value(Move &move,
                                  const unsigned int &value,
                                  const int &bits_shift_to_left,
                                  const unsigned int &reserved_space_hex_value) {
-  remove_encoded_value(m, bits_shift_to_left, reserved_space_hex_value);
-  m |= (value & reserved_space_hex_value) << bits_shift_to_left;
+  remove_encoded_value(move, bits_shift_to_left, reserved_space_hex_value);
+  move |= (value & reserved_space_hex_value) << bits_shift_to_left;
 }
 
-constexpr Square get_from(const Move &m) {
+constexpr Square get_from(const Move &move) {
   return static_cast<Square>(
-      get_encoded_value(m, shift_from, designated_space_in_hex_square));
+      get_encoded_value(move, shift_from, designated_space_in_hex_square));
 }
 
-constexpr Square get_to(const Move &m) {
+constexpr Square get_to(const Move &move) {
   return static_cast<Square>(
-      get_encoded_value(m, shift_to, designated_space_in_hex_square));
+      get_encoded_value(move, shift_to, designated_space_in_hex_square));
 }
 
-constexpr Piece get_piece(const Move &m) {
+constexpr Piece get_piece(const Move &move) {
   return static_cast<Piece>(
-      get_encoded_value(m, shift_piece, designated_space_in_hex_piecetype));
+      get_encoded_value(move, shift_piece, designated_space_in_hex_piecetype));
 }
 
 constexpr Piece get_captured_piece(const Move &m) {

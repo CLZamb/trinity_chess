@@ -4,7 +4,7 @@ The game has two input types, text ie: "a2a4" and
 Keyboard input listening ie: "w,a,s,d" and "arrows:up,down,left,right" and "enter" to move pieces.
 Side panes such as info pane and statistics pane can be added to the board window.
 
-[![demo](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY.svg)](https://asciinema.org/a/rmERXeUQ3NtZV9hqdSLAoO0nY?autoplay=1)
+[![asciicast](https://asciinema.org/a/XVz5SjzMuPLi7k6BUDhEO9AlP.svg)](https://asciinema.org/a/XVz5SjzMuPLi7k6BUDhEO9AlP)
 ![alt text](https://raw.githubusercontent.com/CLZamb/trinity_engine/dev/chess_screenshot.png)
 
 # Features

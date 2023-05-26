@@ -40,8 +40,7 @@ inline std::string get_name_from_piecetype(Piece piece_type) {
 }  // namespace Pieces
 
 namespace Square {
-static const std::string white_square = "WhiteSquare";
-static const std::string black_square = "BlackSquare";
+static const std::string square = "square";
 } // Square
 
 }  // namespace StringDrawingName

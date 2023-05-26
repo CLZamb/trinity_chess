@@ -2,9 +2,12 @@
 #define BOX_MODIFIER_H
 
 #include <cstring>
+#include <list>
 #include <regex>
 #include <string>
 #include <unordered_map>
+#include <array>
+
 
 #include "box.h"
 
@@ -163,6 +166,18 @@ class BoxModifier {
     BLACK_FG = 232,
     WHITE_FG = 231,
     GREEN_FG = 32,
+
+    BLACK_SQ_FG_1 = 233,
+    BLACK_SQ_FG_2 = 234,
+    BLACK_SQ_FG_3 = 235,
+    BLACK_SQ_FG_4 = 236,
+    BLACK_SQ_FG_5 = 237,
+
+    WHITE_SQ_FG_1 = 251,
+    WHITE_SQ_FG_2 = 252,
+    WHITE_SQ_FG_3 = 253,
+    WHITE_SQ_FG_4 = 254,
+    WHITE_SQ_FG_5 = 255,
   };
 
   BoxModifier() {}
@@ -170,6 +185,17 @@ class BoxModifier {
 
   static void add_fg_color(FGColor c, Box *drawing) {
     prepend_mod_as_const_char_array(drawing, modifier_fg_color_to_str(c).c_str());
+  }
+
+  static void add_fg_color(std::array<FGColor, Box::kRowSize>& c, Box *drawing) {
+    std::array<std::string, Box::kRowSize> codes;
+    size_t index = 0;
+
+    for (const FGColor f : c) {
+      codes[index++] = modifier_fg_color_to_str(f);
+    }
+
+    prepend_mods_as_const_char_array(drawing, codes);
   }
 
   static void add_bg_color(BGColor c, Box *drawing) {
@@ -220,6 +246,14 @@ class BoxModifier {
     for (int i = 0; i < Box::kRowSize; ++i) {
       Box::copy_row(temp_copy, box->content[i]);
       Box::copy_row(box->content[i], code, temp_copy);
+    } 
+  }
+
+  static void prepend_mods_as_const_char_array(Box* box, std::array<std::string, Box::kRowSize>& codes) {
+    char temp_copy[Box::kCharSize];
+    for (size_t i = 0; i < Box::kRowSize; ++i) {
+      Box::copy_row(temp_copy, box->content[i]);
+      Box::copy_row(box->content[i], codes[i].c_str(), temp_copy);
     }
   }
 

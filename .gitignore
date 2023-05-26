@@ -18,6 +18,7 @@ node_modules/
 .vscode/
 .git/
 .cmake
+.clangd
 .clang-tidy
 .clang-format
 

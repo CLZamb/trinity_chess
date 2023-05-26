@@ -5,18 +5,20 @@ using std::string;
 
 Pane::Pane(size_t size /*= 44 */) { m_pane_drawing.reserve(size); }
 
-Pane::~Pane() {}
-
 void Pane::clear() { fill(""); }
 
 void Pane::fill(const string &content) {
-  for (auto &i : m_pane_drawing) { *i = content; }
+  for (auto &i : m_pane_drawing) {
+    *i = content;
+  }
 }
 
 void Pane::add_section(std::shared_ptr<ISectionComponent> section) {
   if (section == nullptr) return;
 
-  for (auto &i : *section) { m_pane_drawing.push_back(&i); }
+  for (auto &i : *section) {
+    m_pane_drawing.push_back(&i);
+  }
 }
 
 void Pane::add_section(const string &name, const size_t row_size) {
